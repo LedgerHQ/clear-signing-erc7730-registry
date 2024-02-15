@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "description": "EIP712 typed data schema, restricted to type definitions and primary type only. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information.",
+  "properties": {
+    "types": {
+      "type": "object",
+      "description": "Type definitions for the EIP712 typed data. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information.",
+      "properties": {
+        "EIP712Domain": {
+          "type": "array",
+          "description": "EIP712 domain type definition. The domain is used as a separator between EIP712 messages to avoid reuse of signatures. Actual separator values are contained in a \"domain\" key of the message. Fields are up to the implementer, but must often include at least name, version, chainId and verifyingContract."
+        }
+      },
+      "additionalProperties": {
+        "type": "array",
+        "description": "Type definition for a specific type. Each type is an array of fields, where each field is an object with a name and a type. The type is a string, and may be a reference to another type.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "type"
+          ]
+        }
+      },
+      "required": [
+        "EIP712Domain"
+      ]
+    },
+    "primaryType": {
+      "type": "string",
+      "description": "The primary type of the EIP712 typed data. This is the type that will be used as the top level type for the message field. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information."
+    }
+  },
+  "required": [
+    "types",
+    "primaryType"
+  ]
+}

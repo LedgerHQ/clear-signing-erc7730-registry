@@ -1,0 +1,387 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "title": "Schema",
+            "type": "string",
+            "description": "The schema that the document should conform to. This should be the URL of a version of the clear signing JSON schemas available under https://github.com/LedgerHQ/clear-signing-format-spec/schemas."
+        },
+        "context": {
+            "title": "Binding Context",
+            "type": "object",
+            "description": "The binding context is a set of key-value pairs that are used to bind the document to a specific context. Currently, supported contexts include a specific contract address or a specific EIP712 message domain. Wallets should ensure the correct formatting document is applied to the corresponding context.",
+            "if": {
+                "properties": {
+                    "id": {"$ref": "#/$definitions/id"}
+                }
+            },
+            "then": { "maxProperties": 2 },
+            "else": { "maxProperties": 1 },
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "$refs": "#/$definitions/EIP712DomainBinding"
+                    },
+                    {
+                        "$refs": "#/$definitions/contractBinding"
+                    }
+                ]
+            },
+            "maxProperties": 2
+        },
+        "includes": {
+            "title": "External includes",
+            "type": "array",
+            "description": "An array of URLs that should be included in the document, all includes are merged into this file before analysis. This can be used to manage interfaces definitions without redundancy.",
+            "items": [
+                {
+                    "title": "Include",
+                    "type": "string",
+                    "format": "URL",
+                    "description": "The URL of the external file to merge into this file."
+                }
+            ]
+        },
+        "schemas": {
+            "title": "Schemas",
+            "type": "object",
+            "description": "The schemas describing the complete structure of the structured data being described in this document. It is using the natural schema formats for supported data structure, ie a json abi for smartcontracts and an extract of the message itself for EIP712 messages.",
+            "anyOf" : [
+                {
+                    "$ref": "#/$definitions/abiSchema"
+                },
+                {
+                    "$ref": "#/$definitions/EIP712Schema"
+                }
+            ]
+        },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "owner": {
+                    "title": "Owner display name",
+                    "type": "string",
+                    "description": "The display name of the owner or target of the contract / message to be clear signed."
+                },
+                "info": {
+                    "$ref": "#/$definitions/ownerInfo"
+                },
+                "token": {
+                    "$ref": "#/$definitions/tokenInfo"
+                }
+            },
+            "required": ["owner"]
+        },
+        "display": {
+            "title": "Display Formatting Info",
+            "type": "object",
+            "description": "The display section contains all the information needed to format the data in a human readable way. It contains the constants and formatters used to display the data contained in the bound structure.",
+            "properties": {
+                "definitions": {
+                    "type": "object",
+                    "title": "Common Formatter Definitions",
+                    "description": "A set of definitions that can be used to share formatting information between multiple messages / functions.",
+                    "additionalProperties": {
+                        "type": "object",
+                        "title": "A single definition, shared between formatters",
+                        "$ref": "#/$definitions/field"
+                    }
+                },
+                "constants": {
+                    "title": "Constants",
+                    "type": "object",
+                    "description": "A set of constants that are used to format the data in a human readable way.",
+                    "properties": {
+                        "addressAsEth": {
+                            "title": "Ethereum Address",
+                            "type": "string",
+                            "description": "The address interpreted as Ethereum native currency, when supporing native ETH and tokens in a single parameter."
+                        },
+                        "enums": {
+                            "title": "Enums",
+                            "type": "object",
+                            "description": "A set of enums that are used to format the data in a human readable way.",
+                            "additionalProperties": {
+                                "title": "Enum",
+                                "type": "object",
+                                "description": "A set of values that will be used to replace a constant with a human readable string.",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "formatters": {
+                    "title": "Formatters list",
+                    "description": "List of formatter, including formatting info for each field of a structure. This list is indexed by a key identifying uniquely the message's type in the abi. For smartcontracts, it is the selector of the function, encoded in an hex string; and for EIP712 messages it is the primaryType of the message.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "title": "A single formatter",
+                        "description": "A formatter contains formatting information of fields in a single type of message. Its key is the unique identifier of the message's type in the abi. For smartcontracts, it is the selector of the function, encoded in an hex string; and for EIP712 messages it is the primaryType of the message.",
+                        "type": "object",
+                        "properties": {
+                            "id": { 
+                                "$ref": "#/$definitions/id" 
+                            },
+                            "intent": {
+                                "title": "Intent message",
+                                "description": "A description of the intent of the message, that will be displayed to the user.",
+                                "type": "string"
+                            },
+                            "fields": {
+                                "title": "Fields formatting information",
+                                "description": "A list of fields that are present in the message, and their formatting information.",
+                                "type":"array",
+                                "items": { 
+                                    "type": "object",
+                                    "anyOf" : [
+                                        {
+                                            "$ref": "#/$definitions/field"
+                                        }, 
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "def": {
+                                                    "title": "Internal Definition",
+                                                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
+                                                    "type": "string"
+                                                }
+                                
+                                            }, 
+                                            "required": ["def"],
+                                            "additionalProperties": false
+                                        }   
+                                    ] 
+                                }
+                            },
+                            "required": {
+                                "title": "Required fields",
+                                "description": "A list of fields that are required to be displayed to the user. A field that has a formatter and is not in this list is optional. A field that does not have a formatter should be silent, ie not shown",
+                                "type": "array",
+                                "items": { "type": "string" }
+                            },
+                            "screens": {
+                                "title": "Screens grouping information",
+                                "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc..). See each wallet manufacturer documentatio for more information.",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type":"array",
+                                    "items": { "$ref": "#/$definitions/screen" }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "required": ["formatters"]        
+        }
+    },
+    "additionalProperties": false,
+    "$definitions": {
+        "field": {
+            "title": "Field formatter",
+            "description": "A field formatter contains formatting information of a single field in a message.",
+            "type": "object",
+            "properties": {
+                "path": {
+                    "title": "Field Path",
+                    "description": "The path to the field in the structured data. It is in a format matching the schema of the structured data. See the specification for more details.",
+                    "type": "string"
+                },
+                "label": {
+                    "title": "Field Label",
+                    "description": "The label of the field, that will be displayed to the user in front of the formatted field value.",
+                    "type": "string"
+                },
+                "format": {
+                    "title": "Field Format",
+                    "description": "The format of the field, that will be used to format the field value in a human readable way.",
+                    "type": "string"
+                },
+                "params": {
+                    "title": "Field Format Parameters",
+                    "description": "The parameters of the format, when using a format that requires parameters.",
+                    "type": "object",
+                    "properties": {
+                        "tokenPath": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "id": { 
+                    "$ref": "#/$definitions/id" 
+                }
+            },
+            "required": [
+                "path",
+                "label",
+                "format"
+            ]
+        },
+        "screen" : {
+            "title": "Screen information",
+            "description": "A screen is a group of fields that will be displayed together in a wallet. The format of the screen is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc..). See each wallet manufacturer documentatio for more information.",
+            "type": "object"
+        },
+        "EIP712DomainBinding": {
+            "type": "object",
+            "properties": {
+                "eip712domain": {
+                    "title": "EIP 712 Domain Binding",
+                    "type": "object",
+                    "description": "A description of the EIP 712 domain that the document is bound to. Each property present should be matched with a corresponding property of the \"domain\" property of the EIP712 message in the wallet.",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "string"
+                        },
+                        "chainId": {
+                            "type": "integer",
+                            "format": "eip155"
+                        },
+                        "verifyingContract": {
+                            "type": "string",
+                            "format": "eip55"
+                        }
+                    }
+                }
+            },
+            "required": ["eip712domain"],
+            "additionalProperties": false
+        },
+        "contractBinding": {
+            "type": "object",
+            "properties": {
+                "contract": {
+                    "title": "Contract Binding",
+                    "type": "object",
+                    "description": "A description of the smart contract that the document is bound to. ChainId should match the target chain and address should match the targeted smart contract.",
+                    "properties": {
+                        "chainId": {
+                            "type": "integer",
+                            "format": "eip155"
+                        },
+                        "address": {
+                            "type": "string",
+                            "format": "eip55"
+                        }
+                    },
+                    "required": [
+                        "chainId",
+                        "address"
+                    ]
+                }
+            },
+            "required": ["contract"],
+            "additionalProperties": false
+        },
+        "abiSchema": {
+            "type": "object",
+            "properties": {
+                "abi": {
+                    "anyOf": [ 
+                        {
+                            "title": "An EVM ABI",
+                            "description": "An extract of the ABI of the smart contract to clear sign. It should contain all the function calls that can be clear signed and that appears later in the display section.",
+                            "$ref": "evm-abi-schema.json"
+                        },
+                        {
+                            "title": "An ABI url",
+                            "description": "URL of an ABI bound to this file.",
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    ]
+                    
+                }
+            },
+            "required": ["abi"],
+            "additionalProperties": false
+        },
+        "EIP712Schema": {
+            "type": "object",
+            "properties": {
+                "eip712types": {
+                    "anyOf" : [
+                        {
+                            "title": "An EIP712 Schema",
+                            "description": "An EIP 712 schema contains only the \"types\" and \"primaryType\" keys of the EIP 712 message, sufficient to decribe the full structure of the message.",
+                            "$ref": "eip712-schema.json"
+                        },
+                        {
+                            "title": "An EIP712 Schema url",
+                            "description": "URL of an EIP712 Schema bound to this file.",
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    ]
+                }
+            },
+            "required": ["eip712types"],
+            "additionalProperties": false
+        },
+        "ownerInfo": {
+            "type": "object",
+            "properties": {
+                "legalName": {
+                    "title": "Owner Legal Name",
+                    "type": "string",
+                    "description": "The full legal name of the owner if different from the owner field."
+                },
+                "lastUpdate": {
+                    "title": "Last Update of the contract / message",
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date of the last update of the contract / message."
+                },
+                "url": {
+                    "title": "Owner URL",
+                    "type": "string",
+                    "format": "URL",
+                    "description": "URL with more info on the entity the user interacts with."
+                }
+            },
+            "required": [
+                "lastUpdate",
+                "url"
+            ],
+            "additionalProperties": false
+        },
+        "tokenInfo": {
+            "title": "Token Description",
+            "type": "object",
+            "description": "A description of an ERC20 token exported by this format, that should be trusted. Not mandatory if the corresponding metadata can be fetched from the contract itself.",
+            "properties": {
+                "name": {
+                    "title": "Token Name",
+                    "type": "string"
+                },
+                "ticker": {
+                    "title": "Token Ticker",
+                    "type": "string",
+                    "description": "A short capitalized ticker for the token, that will be displayed in front of corresponding amounts."
+                },
+                "magnitude": {
+                    "title": "Token Magnitude",
+                    "type": "integer",
+                    "description": "The number of decimals of the token ticker, used to display amounts."
+                }
+            },
+            "required": [
+                "name",
+                "ticker",
+                "magnitude"
+            ],
+            "additionalProperties": false
+        },
+        "id": {
+            "title": "ID",
+            "type": "string",
+            "description": "An internal identifier that can be used either for clarity specifying what the element is or as a reference in device specific sections."
+        }
+    }
+}

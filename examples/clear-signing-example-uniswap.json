@@ -1,0 +1,74 @@
+{
+    "context": {
+        "contract": {
+            "address": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
+            "chainId": 1
+        }
+    },
+    "schemas": {
+        "abi": "http://ledger.com/clear-signing-format-spec/examples/evm-abi-example-uniswap.json"
+    },
+    "metadata": {
+        "owner": "Uniswap",
+        "info": {
+            "legalName": "Uniswap Labs",
+            "lastUpdate": "2021-12-14T00:00:00Z",
+            "url": "https://uniswap.org/"
+        }
+    },
+    "display": {
+        "formatters": {
+            "0x04e45aaf": {
+                "intent": "swap",
+                "fields": [
+                    {
+                        "path": "params.amountIn",
+                        "label": "Send",
+                        "format": "amount",
+                        "params": {
+                            "tokenPath": "params.tokenIn"
+                        }
+                    },
+                    {
+                        "path": "params.amountOutMin",
+                        "label": "Receive Mininum",
+                        "format": "amount",
+                        "params": {
+                            "tokenPath": "params.tokenOut"
+                        }
+                    },
+                    {
+                        "path": "fee",
+                        "label": "Uniswap fee",
+                        "format": "percent",
+                        "params": {
+                            "magnitude": 4
+                        }
+                    }, 
+                    {
+                        "path": "deadline",
+                        "label": "Valid Until",
+                        "format": "datetime"
+                    }
+                ],
+                "required": ["params.amountIn", "params.amountOutMin"],
+                "screens": {
+                    "nanox" : [],
+                    "stax" : [
+                        {
+                            "type": "propertyPage",
+                            "label": "Swap",
+                            "content": ["params.amountIn", "params.amountOutMin", "fee", "deadline"]
+                        },
+                        {
+                            "type": "propertyPageVerbose",
+                            "label": "Addiotional Info",
+                            "content": ["fee", "deadline"]
+                        }
+                    ]
+                }
+
+            }
+        }
+    }
+}

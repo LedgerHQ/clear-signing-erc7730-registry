@@ -1,0 +1,85 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+
+    "schemas": {
+        "eip712types": {
+            "types": {
+                "EIP712Domain": [
+                  {
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "name": "version",
+                    "type": "string"
+                  },
+                  {
+                    "name": "chainId",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "verifyingContract",
+                    "type": "address"
+                  }
+                ],
+                "Permit": [
+                  {
+                    "name": "owner",
+                    "type": "address"
+                  },
+                  {
+                    "name": "spender",
+                    "type": "address"
+                  },
+                  {
+                    "name": "value",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "nonce",
+                    "type": "uint256"
+                  },
+                  {
+                    "name": "deadline",
+                    "type": "uint256"
+                  }
+                ]
+              },
+              "primaryType": "Permit"
+        }
+    },
+
+    "display": {
+        "formatters": {
+            "Permit": {
+                "id": "Permit",
+                "intent": "Authorize spending of tokens",
+                "fields": [
+                    {
+                        "path": "spender",
+                        "label": "Spender",
+                        "format": "addressOrName"
+                    },
+                    {
+                        "path": "value",
+                        "label": "Amount",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "@context.eip712domain.verifyingContract"
+                        }
+                    },
+                    {
+                        "path": "deadline",
+                        "label": "Valid Until",
+                        "format": "datetime",
+                        "params": {
+                            "encoding": "timestamp"
+                        }
+                    }
+                ],
+                "required": ["spender","value"],
+                "screens": {}
+            }
+        }
+    }
+}

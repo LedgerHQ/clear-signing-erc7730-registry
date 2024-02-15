@@ -1,0 +1,25 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+
+    "context": {
+        "id": "Tether USD",
+        "contract" : {
+            "chainId": 1,
+            "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        }
+    }, 
+    "includes": ["../examples/clear-signing-example-erc20.json"],
+    "metadata": {
+        "owner": "Tether",
+        "info": {
+            "legalName": "Tether Limited",
+            "url": "https://tether.to/",
+            "lastUpdate": "2017-11-28T12:41:21Z"  
+        },
+        "token": {
+            "ticker": "USDT",
+            "name": "Tether USD",
+            "magnitude": 6
+        }
+    }
+}
