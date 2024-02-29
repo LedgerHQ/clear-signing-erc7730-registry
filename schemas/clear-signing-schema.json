@@ -11,13 +11,9 @@
             "title": "Binding Context",
             "type": "object",
             "description": "The binding context is a set of key-value pairs that are used to bind the document to a specific context. Currently, supported contexts include a specific contract address or a specific EIP712 message domain. Wallets should ensure the correct formatting document is applied to the corresponding context.",
-            "if": {
-                "properties": {
-                    "id": {"$ref": "#/$definitions/id"}
-                }
+            "properties": {
+                "id": {"$ref": "#/$definitions/id"}
             },
-            "then": { "maxProperties": 2 },
-            "else": { "maxProperties": 1 },
             "additionalProperties": {
                 "anyOf": [
                     {
@@ -84,8 +80,12 @@
                     "description": "A set of definitions that can be used to share formatting information between multiple messages / functions.",
                     "additionalProperties": {
                         "type": "object",
-                        "title": "A single definition, shared between formatters",
-                        "$ref": "#/$definitions/field"
+                        "title": "A definition of common format(s)",
+                        "description": "Format definitions that can be reused in multiple messages / functions. Keys are the name of the definition, that can be referenced later. Values are field format definitions, or a set of field formats used to group whole definitions for structures for instance.",
+                        "anyOf" : [
+                            { "$ref": "#/$definitions/field" },
+                            { "$ref": "#/$definitions/fields" }
+                        ]
                     }
                 },
                 "constants": {
@@ -113,9 +113,9 @@
                         }
                     }
                 },
-                "formatters": {
-                    "title": "Formatters list",
-                    "description": "List of formatter, including formatting info for each field of a structure. This list is indexed by a key identifying uniquely the message's type in the abi. For smartcontracts, it is the selector of the function, encoded in an hex string; and for EIP712 messages it is the primaryType of the message.",
+                "formats": {
+                    "title": "List of field formats",
+                    "description": "The list includes formatting info for each field of a structure. This list is indexed by a key identifying uniquely the message's type in the abi. For smartcontracts, it is the selector of the function, encoded in an hex string; and for EIP712 messages it is the primaryType of the message.",
                     "type": "object",
                     "additionalProperties": {
                         "title": "A single formatter",
@@ -131,30 +131,7 @@
                                 "type": "string"
                             },
                             "fields": {
-                                "title": "Fields formatting information",
-                                "description": "A list of fields that are present in the message, and their formatting information.",
-                                "type":"array",
-                                "items": { 
-                                    "type": "object",
-                                    "anyOf" : [
-                                        {
-                                            "$ref": "#/$definitions/field"
-                                        }, 
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "def": {
-                                                    "title": "Internal Definition",
-                                                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
-                                                    "type": "string"
-                                                }
-                                
-                                            }, 
-                                            "required": ["def"],
-                                            "additionalProperties": false
-                                        }   
-                                    ] 
-                                }
+                                "$ref": "#/$definitions/fields"
                             },
                             "required": {
                                 "title": "Required fields",
@@ -175,21 +152,31 @@
                     }
                 }
             },
-            "required": ["formatters"]        
+            "required": ["formats"]        
         }
     },
     "additionalProperties": false,
     "$definitions": {
+        "reference": {
+            "title": "Reference",
+            "type": "object",
+            "description": "A reference to a shared definition that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions. A reference can be either a field format definition or a set of field format definitions, indexed by path.",
+            "properties": {
+                "def": {
+                    "title": "Internal Definition",
+                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
+                    "type": "string"
+                }
+
+            }, 
+            "required": ["def"],
+            "additionalProperties": false
+        },
         "field": {
             "title": "Field formatter",
             "description": "A field formatter contains formatting information of a single field in a message.",
             "type": "object",
             "properties": {
-                "path": {
-                    "title": "Field Path",
-                    "description": "The path to the field in the structured data. It is in a format matching the schema of the structured data. See the specification for more details.",
-                    "type": "string"
-                },
                 "label": {
                     "title": "Field Label",
                     "description": "The label of the field, that will be displayed to the user in front of the formatted field value.",
@@ -198,27 +185,30 @@
                 "format": {
                     "title": "Field Format",
                     "description": "The format of the field, that will be used to format the field value in a human readable way.",
-                    "type": "string"
+                    "type": "string",
+                    "$ref": "#/$definitions/format"
                 },
-                "params": {
-                    "title": "Field Format Parameters",
-                    "description": "The parameters of the format, when using a format that requires parameters.",
-                    "type": "object",
-                    "properties": {
-                        "tokenPath": {
-                            "type": "string"
-                        }
-                    }
-                },
+                "$ref": "#/$definitions/formatParameters",
                 "id": { 
                     "$ref": "#/$definitions/id" 
                 }
             },
             "required": [
-                "path",
                 "label",
                 "format"
             ]
+        },
+        "fields": {
+            "title": "Field Formatters set",
+            "type": "object",
+            "description": "Definitions of fields formatters. Keys are a path of the field(s) to which the formatter applies. The path is in a format matching the schema of the structured data. See the specification for more details.",
+            "additionalProperties": {
+                "anyOf": [
+                    { "$ref": "#/$definitions/reference"}, 
+                    { "$ref": "#/$definitions/field" },
+                    { "$ref": "#/$definitions/fields" }
+                ]
+            }
         },
         "screen" : {
             "title": "Screen information",
@@ -382,6 +372,128 @@
             "title": "ID",
             "type": "string",
             "description": "An internal identifier that can be used either for clarity specifying what the element is or as a reference in device specific sections."
+        },
+        "format": {
+            "anyOf": [
+                {
+                    "title": "Raw format",
+                    "const": "raw",
+                    "description": "The field should be displayed as the natural representation of the underlying structured data type."
+                },
+                {
+                    "title": "address format",
+                    "const": "addressOrName",
+                    "description": "The field should be displayed as an address or replaced by a trusted name."
+                },
+                {
+                    "title": "integer format",
+                    "const": "tokenAmount",
+                    "description": "The field should be displayed as an amount, preceded by the ticker. The magnitude and ticker should be derived from the tokenPath parameter corresponding metadata."
+                },
+                {
+                    "title": "integer format",
+                    "const": "allowanceAmount",
+                    "description": "The field should be displayed as an amount, preceded by the ticker. The magnitude and ticker should be derived from the tokenPath parameter corresponding metadata. In case the amount is above a certain threshold, it should be displayed as Unlimited $TICKER."
+                },
+                {
+                    "title": "integer format",
+                    "const": "percentage",
+                    "description": "The field should be displayed as a percentage. Magnitude of the percentage encoding is specified as a parameter. Example: a value of 3000 with magnitude 4 is displayed as 0.3%."
+                },
+                {
+                    "title": "integer format",
+                    "const": "date",
+                    "description": "The field should be displayed as a date. Suggested RFC3339 representation. Parameter specifies the encoding of the date."
+                }
+            ]
+        },
+        "formatParameters": {
+            "allOf": [
+                {
+                    "if": { "properties": { "format": { "const": "tokenAmount" } } },
+                    "then": {
+                        "properties": {
+                            "params": {
+                                "title": "Token Amount Formatting Parameters",
+                                "type": "object",
+                                "properties": {
+                                    "tokenPath": {
+                                        "title": "Token Path",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["tokenPath"],
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "allowanceAmount" } } },
+                    "then": {
+                        "properties": {
+                            "params": {
+                                "title": "Allowance Amount Formatting Parameters",
+                                "type": "object",
+                                "properties": {
+                                    "tokenPath": {
+                                        "title": "Token Path",
+                                        "type": "string"
+                                    },
+                                    "threshold": {
+                                        "title": "Unlimited Threshold",
+                                        "type": "string",
+                                        "description": "The threshold above which the allowance should be displayed as unlimited."
+                                    }
+                                },
+                                "required": ["tokenPath", "unlimitedThreshold"],
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "percentage" } } },
+                    "then": {
+                        "properties": {
+                            "params": {
+                                "title": "Percentage Formatting Parameters",
+                                "type": "object",
+                                "properties": {
+                                    "magnitude": {
+                                        "title": "Magnitude",
+                                        "type": "integer",
+                                        "description": "The number of decimals of the percentage."
+                                    }
+                                },
+                                "required": ["magnitude"],
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "date" } } },
+                    "then": {
+                        "properties": {
+                            "params": {
+                                "title": "Date Formatting Parameters",
+                                "type": "object",
+                                "properties": {
+                                    "encoding": {
+                                        "title": "Date Encoding",
+                                        "type": "string",
+                                        "description": "The encoding of the date.",
+                                        "enum": ["blockheight", "timestamp"]
+                                    }
+                                },
+                                "required": ["encoding"],
+                                "additionalProperties": false
+                            }
+                        }
+                    }
+                }
+            ]
         }
     }
 }

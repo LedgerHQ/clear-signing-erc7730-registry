@@ -50,33 +50,30 @@
     },
 
     "display": {
-        "formatters": {
+        "formats": {
             "Permit": {
                 "id": "Permit",
                 "intent": "Authorize spending of tokens",
-                "fields": [
-                    {
-                        "path": "spender",
+                "fields": {
+                  "spender" : {
                         "label": "Spender",
                         "format": "addressOrName"
-                    },
-                    {
-                        "path": "value",
-                        "label": "Amount",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "@context.eip712domain.verifyingContract"
-                        }
-                    },
-                    {
-                        "path": "deadline",
-                        "label": "Valid Until",
-                        "format": "datetime",
-                        "params": {
-                            "encoding": "timestamp"
-                        }
-                    }
-                ],
+                  },
+                  "value" : {
+                      "label": "Amount",
+                      "format": "tokenAmount",
+                      "params": {
+                          "tokenPath": "@context.eip712domain.verifyingContract"
+                      }
+                  },
+                  "deadline" : {
+                      "label": "Valid Until",
+                      "format": "date",
+                      "params": {
+                          "encoding": "timestamp"
+                      }
+                  }
+                },
                 "required": ["spender","value"],
                 "screens": {}
             }
