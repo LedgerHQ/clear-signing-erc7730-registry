@@ -17,40 +17,39 @@
         }
     },
     "display": {
-        "formatters": {
+        "formats": {
             "0x04e45aaf": {
                 "intent": "swap",
-                "fields": [
-                    {
-                        "path": "params.amountIn",
+                "fields": {
+                    "params.amountIn": {
                         "label": "Send",
-                        "format": "amount",
+                        "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenIn"
                         }
                     },
-                    {
-                        "path": "params.amountOutMin",
+                    "params.amountOutMin": {
                         "label": "Receive Mininum",
-                        "format": "amount",
+                        "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenOut"
                         }
                     },
-                    {
-                        "path": "fee",
+                    "_fee" : {
                         "label": "Uniswap fee",
-                        "format": "percent",
+                        "format": "percentage",
                         "params": {
                             "magnitude": 4
                         }
                     }, 
-                    {
-                        "path": "deadline",
+                    "deadline": {
                         "label": "Valid Until",
-                        "format": "datetime"
+                        "format": "date",
+                        "params": {
+                            "encoding": "blockheight"
+                        }
                     }
-                ],
+                },
                 "required": ["params.amountIn", "params.amountOutMin"],
                 "screens": {
                     "nanox" : [],
