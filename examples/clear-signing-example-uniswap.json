@@ -1,12 +1,11 @@
 {
     "context": {
+        "$id": "Uniswap v3 Router 2",
         "contract": {
             "address": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
-            "chainId": 1
+            "chainId": 1,
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/uniswap/abis/0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45.abi.json"
         }
-    },
-    "schemas": {
-        "abi": "http://ledger.com/clear-signing-format-spec/examples/evm-abi-example-uniswap.json"
     },
     "metadata": {
         "owner": "Uniswap",

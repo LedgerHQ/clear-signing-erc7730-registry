@@ -1,0 +1,73 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+
+    "context": {
+        "$id": "wstETH",
+        "contract": {
+            "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+            "chainId": 1,
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0.abi.json"
+        }
+    },
+
+    "metadata": {
+        "owner": "Lido",
+        "info": {
+            "url": "https://lido.fi",
+            "legalName": "Lido DAO",
+            "lastUpdate": "2021-02-19T04:37:20Z"
+        },
+        "constants": {
+            "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+        }
+    },
+
+    "display": {
+        "formats": {
+            "0xea598cb0" : {
+                "$id": "wrap",
+                "intent": "Wrap stETH",
+                "fields": {
+                    "_stETHAmount": {
+                        "label": "Amount to Wrap",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "$metadata.constants.stETHaddress"
+                        }
+                    }
+                }
+            },
+            "0xde0e9a3e": {
+                "$id": "unwrap",
+                "intent" : "Unwrap stETH",
+                "fields": {
+                    "_wstETHAmount": {
+                        "label": "Amount to Unwrap",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "$context.contract.address"
+                        }
+                    }
+                }
+            }, 
+            "0x095ea7b3" : {
+                "$id": "approve",
+                "intent" : "Approve",
+                "fields": {
+                    "spender": {
+                        "label": "Address to approve",
+                        "format": "addressOrName"
+                    },
+                    "amount": {
+                        "label": "Amount to approve",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "$context.contract.address"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

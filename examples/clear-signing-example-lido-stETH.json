@@ -1,0 +1,59 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+
+    "context": {
+        "$id": "stETH",
+        "contract": {
+            "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+            "chainId": 1,
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
+        }
+    },
+
+    "metadata": {
+        "owner": "Lido",
+        "info": {
+            "url": "https://lido.fi",
+            "legalName": "Lido DAO",
+            "lastUpdate": "2021-02-19T04:37:20Z"
+        }
+    },
+
+    "display": {
+        "formats": {
+            "0xa1903eab": {
+                "$id": "submit",
+                "intent": "Stake ETH",
+                "fields": {
+                    "@amount" : {
+                        "label" : "Amount to Stake",
+                        "format": "amount"
+                    },
+                    "_referral" : {
+                        "label" : "Referral",
+                        "format": "addressOrName"
+                    }
+                },
+                "required": ["@amount"]
+            },
+            "0x095ea7b3" : {
+                "$id": "approve",
+                "intent": "Approve",
+                "fields": {
+                    "_spender" : {
+                        "label" : "Address to approve",
+                        "format": "addressOrName"
+                    },
+                    "_amount" : {
+                        "label" : "Amount to Approve",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "$context.contract.address"
+                        }
+                    }
+                },
+                "required": ["_spender", "_amount"]
+            }
+        }
+    }
+}

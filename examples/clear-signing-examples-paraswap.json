@@ -1,0 +1,104 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+    "context": {
+        "$id": "AugustusSwapper",
+        "contract": {
+            "chainId": 1,
+            "address": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json"
+        }
+    },
+    "metadata": {
+        "owner": "Paraswap",
+        "info": {
+            "url": "https://www.paraswap.io/",
+            "legalName": "ParaSwap",
+            "lastUpdate": "2021-08-18T12:42:05Z"
+        },
+        "constants": {
+            "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+        }
+    },
+    "display": {
+        "definitions": {
+            "swapFormats" : {
+                "data.fromAmount": { 
+                    "label": "Amount to Send",
+                    "format": "tokenAmount",
+                    "params": {
+                        "tokenPath": "data.fromToken",
+                        "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    }
+                },
+                "data.toAmount": { 
+                    "label": "Minimum to Receive",
+                    "format": "tokenAmount",
+                    "params": {
+                        "tokenPath": "data.toToken",
+                        "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    }
+                },
+                "data.beneficiary": { 
+                    "label": "Beneficiary",
+                    "format": "addressOrName"
+                }
+            }
+        },
+        "formats": {
+            "0x2298207a" : {
+                "$id": "simpleBuy",
+                "intent": "Swap",
+                "fields": {
+                    "$ref": "$display.definitions.swapFormats"
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x54e3f31b" : {
+                "$id": "simpleSwap",
+                "intent": "Swap",
+                "fields": {
+                    "$ref": "$display.definitions.swapFormats"
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x46c67b6d" : {
+                "$id": "megaSwap",
+                "intent": "Swap",
+                "fields": {
+                    "data.fromAmount": { 
+                        "label": "Amount to Send",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "data.fromToken"
+                        }
+                    },
+                    "data.toAmount": { 
+                        "label": "Minimum to Receive",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "data.path.0.path.-1.to"
+                        }
+                    },
+                    "data.beneficiary": { 
+                        "label": "Beneficiary",
+                        "format": "addressOrName"
+                    }
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            }
+
+        }
+    }
+}

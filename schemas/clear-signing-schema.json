@@ -12,45 +12,30 @@
             "type": "object",
             "description": "The binding context is a set of key-value pairs that are used to bind the document to a specific context. Currently, supported contexts include a specific contract address or a specific EIP712 message domain. Wallets should ensure the correct formatting document is applied to the corresponding context.",
             "properties": {
-                "id": {"$ref": "#/$definitions/id"}
+                "$id" : {
+                    "$ref": "#/$definitions/id"
+                }
             },
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "$refs": "#/$definitions/EIP712DomainBinding"
-                    },
-                    {
-                        "$refs": "#/$definitions/contractBinding"
-                    }
-                ]
-            },
-            "maxProperties": 2
+            "oneOf": [
+                {
+                    "$ref": "#/$definitions/contractBinding"
+                },
+                {
+                    "$ref": "#/$definitions/EIP712DomainBinding"
+                }
+            ],
+            "unresolvedProperties": false
         },
         "includes": {
             "title": "External includes",
             "type": "array",
             "description": "An array of URLs that should be included in the document, all includes are merged into this file before analysis. This can be used to manage interfaces definitions without redundancy.",
-            "items": [
-                {
-                    "title": "Include",
-                    "type": "string",
-                    "format": "URL",
-                    "description": "The URL of the external file to merge into this file."
-                }
-            ]
-        },
-        "schemas": {
-            "title": "Schemas",
-            "type": "object",
-            "description": "The schemas describing the complete structure of the structured data being described in this document. It is using the natural schema formats for supported data structure, ie a json abi for smartcontracts and an extract of the message itself for EIP712 messages.",
-            "anyOf" : [
-                {
-                    "$ref": "#/$definitions/abiSchema"
-                },
-                {
-                    "$ref": "#/$definitions/EIP712Schema"
-                }
-            ]
+            "items": {
+                "title": "Include",
+                "type": "string",
+                "format": "URL",
+                "description": "The URL of the external file to merge into this file."
+            }
         },
         "metadata": {
             "type": "object",
@@ -65,9 +50,50 @@
                 },
                 "token": {
                     "$ref": "#/$definitions/tokenInfo"
+                },
+                "constants": {
+                    "title": "Constant values",
+                    "type": "object",
+                    "description": "A set of values that can be used in format parameters. Can be referenced with path $metadata.constants.CONSTANT_NAME",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "enums": {
+                    "title": "Enums",
+                    "type": "object",
+                    "description": "A set of enums that are used to format fields replacing values with human readable strings.",
+                    "additionalProperties": {
+                        "anyOf": [
+                            {
+                                "type": "object",
+                                "title": "A dynamic enum",
+                                "description": "A dynamic enum contains an URL which returns a json file with simple key-values mapping values display name. It is assumed those values can change between two calls to clear sign.",
+                                "properties": {
+                                    "url": {
+                                        "title": "Enum URL",
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "The URL of the json file containing the key-values mapping."
+                                    }
+                                },
+                                "additionalProperties": false
+                            },
+                            {
+                                "title": "Enum",
+                                "type": "object",
+                                "description": "A set of values that will be used to replace a constant with a human readable string.",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    }
                 }
             },
-            "required": ["owner"]
+            "required": [
+                "owner"
+            ]
         },
         "display": {
             "title": "Display Formatting Info",
@@ -82,35 +108,14 @@
                         "type": "object",
                         "title": "A definition of common format(s)",
                         "description": "Format definitions that can be reused in multiple messages / functions. Keys are the name of the definition, that can be referenced later. Values are field format definitions, or a set of field formats used to group whole definitions for structures for instance.",
-                        "anyOf" : [
-                            { "$ref": "#/$definitions/field" },
-                            { "$ref": "#/$definitions/fields" }
-                        ]
-                    }
-                },
-                "constants": {
-                    "title": "Constants",
-                    "type": "object",
-                    "description": "A set of constants that are used to format the data in a human readable way.",
-                    "properties": {
-                        "addressAsEth": {
-                            "title": "Ethereum Address",
-                            "type": "string",
-                            "description": "The address interpreted as Ethereum native currency, when supporing native ETH and tokens in a single parameter."
-                        },
-                        "enums": {
-                            "title": "Enums",
-                            "type": "object",
-                            "description": "A set of enums that are used to format the data in a human readable way.",
-                            "additionalProperties": {
-                                "title": "Enum",
-                                "type": "object",
-                                "description": "A set of values that will be used to replace a constant with a human readable string.",
-                                "additionalProperties": {
-                                    "type": "string"
-                                }
+                        "anyOf": [
+                            {
+                                "$ref": "#/$definitions/field"
+                            },
+                            {
+                                "$ref": "#/$definitions/fields"
                             }
-                        }
+                        ]
                     }
                 },
                 "formats": {
@@ -122,8 +127,8 @@
                         "description": "A formatter contains formatting information of fields in a single type of message. Its key is the unique identifier of the message's type in the abi. For smartcontracts, it is the selector of the function, encoded in an hex string; and for EIP712 messages it is the primaryType of the message.",
                         "type": "object",
                         "properties": {
-                            "id": { 
-                                "$ref": "#/$definitions/id" 
+                            "$id": {
+                                "$ref": "#/$definitions/id"
                             },
                             "intent": {
                                 "title": "Intent message",
@@ -137,39 +142,47 @@
                                 "title": "Required fields",
                                 "description": "A list of fields that are required to be displayed to the user. A field that has a formatter and is not in this list is optional. A field that does not have a formatter should be silent, ie not shown",
                                 "type": "array",
-                                "items": { "type": "string" }
+                                "items": {
+                                    "type": "string"
+                                }
                             },
                             "screens": {
                                 "title": "Screens grouping information",
                                 "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc..). See each wallet manufacturer documentatio for more information.",
                                 "type": "object",
                                 "additionalProperties": {
-                                    "type":"array",
-                                    "items": { "$ref": "#/$definitions/screen" }
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/$definitions/screen"
+                                    }
                                 }
                             }
-                        }
+                        },
+                        "additionalProperties": false
                     }
                 }
             },
-            "required": ["formats"]        
+            "required": [
+                "formats"
+            ],
+            "additionalProperties": false
         }
     },
     "additionalProperties": false,
     "$definitions": {
         "reference": {
             "title": "Reference",
-            "type": "object",
             "description": "A reference to a shared definition that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions. A reference can be either a field format definition or a set of field format definitions, indexed by path.",
             "properties": {
-                "def": {
+                "$ref": {
                     "title": "Internal Definition",
                     "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
                     "type": "string"
                 }
-
-            }, 
-            "required": ["def"],
+            },
+            "required": [
+                "$ref"
+            ],
             "additionalProperties": false
         },
         "field": {
@@ -177,6 +190,9 @@
             "description": "A field formatter contains formatting information of a single field in a message.",
             "type": "object",
             "properties": {
+                "$id": {
+                    "$ref": "#/$definitions/id"
+                },
                 "label": {
                     "title": "Field Label",
                     "description": "The label of the field, that will be displayed to the user in front of the formatted field value.",
@@ -187,30 +203,90 @@
                     "description": "The format of the field, that will be used to format the field value in a human readable way.",
                     "type": "string",
                     "$ref": "#/$definitions/format"
-                },
-                "$ref": "#/$definitions/formatParameters",
-                "id": { 
-                    "$ref": "#/$definitions/id" 
                 }
             },
+            "allOf" : [
+                {
+                    "if": { "properties": { "format": { "const": "tokenAmount" } } },
+                    "then": {
+                        "properties": { 
+                            "params": { "$ref": "#/$definitions/tokenAmountParameters" }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "allowanceAmount" } } },
+                    "then": {
+                        "properties": {
+                            "params": { "$ref": "#/$definitions/allowanceAmountParameters" }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "percentage" } } },
+                    "then": {
+                        "properties": {
+                            "params": { "$ref": "#/$definitions/percentageParameters" }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "date" } } },
+                    "then": {
+                        "properties": {
+                            "params": { "$ref": "#/$definitions/dateParameters" }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "enum" } } },
+                    "then": {
+                        "properties": {
+                            "params": { "$ref": "#/$definitions/enumParameters" }
+                        }
+                    }
+                }
+            ],
             "required": [
                 "label",
                 "format"
-            ]
+            ],
+            "unresolvedProperties": false
+        },
+        "structFormats": {
+            "title": "Struct Field Formats",
+            "description": "A set of field formats used to group whole definitions for structures for instance. This allows nesting definitions of formats, but note that support for deep nesting will be device dependent.",
+            "type": "object",
+            "properties": {
+                "fields": {
+                    "$ref": "#/$definitions/fields"
+                }
+            },
+            "required": [
+                "fields"
+            ],
+            "additionalProperties": false
         },
         "fields": {
             "title": "Field Formatters set",
             "type": "object",
             "description": "Definitions of fields formatters. Keys are a path of the field(s) to which the formatter applies. The path is in a format matching the schema of the structured data. See the specification for more details.",
             "additionalProperties": {
-                "anyOf": [
-                    { "$ref": "#/$definitions/reference"}, 
-                    { "$ref": "#/$definitions/field" },
-                    { "$ref": "#/$definitions/fields" }
+                "oneOf": [
+                    {
+                        "$ref": "#/$definitions/reference"
+                    },
+                    {
+                        "$ref": "#/$definitions/field"
+                    },
+                    {
+                        "$ref": "#/$definitions/structFormats"
+                    }
                 ]
-            }
+            },
+            "unresolvedProperties": false
         },
-        "screen" : {
+        "screen": {
             "title": "Screen information",
             "description": "A screen is a group of fields that will be displayed together in a wallet. The format of the screen is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc..). See each wallet manufacturer documentatio for more information.",
             "type": "object"
@@ -218,30 +294,52 @@
         "EIP712DomainBinding": {
             "type": "object",
             "properties": {
-                "eip712domain": {
-                    "title": "EIP 712 Domain Binding",
+                "eip712" : {
+                    "title": "EIP 712 Binding",
                     "type": "object",
-                    "description": "A description of the EIP 712 domain that the document is bound to. Each property present should be matched with a corresponding property of the \"domain\" property of the EIP712 message in the wallet.",
-                    "properties": {
-                        "name": {
-                            "type": "string"
+                    "description": "A description of the EIP 712 message that the document is bound to. The domain should match the domain of the EIP712 message in the wallet.",
+                    "properties" : {
+                        "domain": {
+                            "title": "EIP 712 Domain Binding",
+                            "type": "object",
+                            "description": "Each value of the domain should match an eip 712 message domain.",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "version": {
+                                    "type": "string"
+                                },
+                                "chainId": {
+                                    "type": "integer",
+                                    "format": "eip155"
+                                },
+                                "verifyingContract": {
+                                    "type": "string",
+                                    "format": "eip55"
+                                }
+                            }
                         },
-                        "version": {
-                            "type": "string"
-                        },
-                        "chainId": {
-                            "type": "integer",
-                            "format": "eip155"
-                        },
-                        "verifyingContract": {
-                            "type": "string",
-                            "format": "eip55"
+                        "schema" : {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/$definitions/eip712-json-schema"
+                                },
+                                {
+                                    "title": "An EIP712 Schema url",
+                                    "description": "URL of an EIP712 Schema bound to this file.",
+                                    "type": "string",
+                                    "format": "uri"
+                                }
+                            ]
                         }
-                    }
+                    },
+                    "additionalProperties": false
                 }
             },
-            "required": ["eip712domain"],
-            "additionalProperties": false
+            "required": [
+                "eip712"
+            ]
         },
         "contractBinding": {
             "type": "object",
@@ -258,61 +356,27 @@
                         "address": {
                             "type": "string",
                             "format": "eip55"
+                        },
+                        "abi": {
+                            "oneOf": [
+                                {
+                                    "$ref": "#/$definitions/abi-json-schema"
+                                },
+                                {
+                                    "title": "An ABI url",
+                                    "description": "URL of an ABI bound to this file.",
+                                    "type": "string",
+                                    "format": "uri"
+                                }
+                            ]
                         }
                     },
-                    "required": [
-                        "chainId",
-                        "address"
-                    ]
+                    "additionalProperties": false
                 }
             },
-            "required": ["contract"],
-            "additionalProperties": false
-        },
-        "abiSchema": {
-            "type": "object",
-            "properties": {
-                "abi": {
-                    "anyOf": [ 
-                        {
-                            "title": "An EVM ABI",
-                            "description": "An extract of the ABI of the smart contract to clear sign. It should contain all the function calls that can be clear signed and that appears later in the display section.",
-                            "$ref": "evm-abi-schema.json"
-                        },
-                        {
-                            "title": "An ABI url",
-                            "description": "URL of an ABI bound to this file.",
-                            "type": "string",
-                            "format": "uri"
-                        }
-                    ]
-                    
-                }
-            },
-            "required": ["abi"],
-            "additionalProperties": false
-        },
-        "EIP712Schema": {
-            "type": "object",
-            "properties": {
-                "eip712types": {
-                    "anyOf" : [
-                        {
-                            "title": "An EIP712 Schema",
-                            "description": "An EIP 712 schema contains only the \"types\" and \"primaryType\" keys of the EIP 712 message, sufficient to decribe the full structure of the message.",
-                            "$ref": "eip712-schema.json"
-                        },
-                        {
-                            "title": "An EIP712 Schema url",
-                            "description": "URL of an EIP712 Schema bound to this file.",
-                            "type": "string",
-                            "format": "uri"
-                        }
-                    ]
-                }
-            },
-            "required": ["eip712types"],
-            "additionalProperties": false
+            "required": [
+                "contract"
+            ]
         },
         "ownerInfo": {
             "type": "object",
@@ -404,95 +468,235 @@
                     "title": "integer format",
                     "const": "date",
                     "description": "The field should be displayed as a date. Suggested RFC3339 representation. Parameter specifies the encoding of the date."
+                },
+                {
+                    "title": "integer format",
+                    "const": "amount",
+                    "description": "The field should be displayed as an amount in underlying currency, converted using the best magnitude / ticker available."
+                },
+                {
+                    "title": "integer format",
+                    "const": "enum",
+                    "description": "The field should be displayed as a human readable string by converting the value using the enum referenced in parameters."
                 }
             ]
         },
-        "formatParameters": {
-            "allOf": [
-                {
-                    "if": { "properties": { "format": { "const": "tokenAmount" } } },
-                    "then": {
-                        "properties": {
-                            "params": {
-                                "title": "Token Amount Formatting Parameters",
-                                "type": "object",
-                                "properties": {
-                                    "tokenPath": {
-                                        "title": "Token Path",
-                                        "type": "string"
-                                    }
-                                },
-                                "required": ["tokenPath"],
-                                "additionalProperties": false
-                            }
+        "tokenAmountParameters": {
+            "title": "Token Amount Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "tokenPath": {
+                    "title": "Token Path",
+                    "type": "string"
+                },
+                "nativeCurrencyAddress": {
+                    "title": "Native Currency Address",
+                    "type": "string",
+                    "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                }
+            },
+            "required": [
+                "tokenPath"
+            ],
+            "additionalProperties": false
+        },
+        "allowanceAmountParameters": {
+            "title": "Allowance Amount Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "tokenPath": {
+                    "title": "Token Path",
+                    "type": "string"
+                },
+                "threshold": {
+                    "title": "Unlimited Threshold",
+                    "type": "string",
+                    "description": "The threshold above which the allowance should be displayed as unlimited."
+                },
+                "nativeCurrencyAddress": {
+                    "title": "Native Currency Address",
+                    "type": "string",
+                    "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                }
+            },
+            "required": [
+                "tokenPath",
+                "threshold"
+            ],
+            "additionalProperties": false
+        },
+        "percentageParameters": {
+            "title": "Percentage Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "magnitude": {
+                    "title": "Magnitude",
+                    "type": "integer",
+                    "description": "The number of decimals of the percentage."
+                }
+            },
+            "required": [
+                "magnitude"
+            ],
+            "additionalProperties": false
+        },
+        "dateParameters": {
+            "title": "Date Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "encoding": {
+                    "title": "Date Encoding",
+                    "type": "string",
+                    "description": "The encoding of the date.",
+                    "enum": [
+                        "blockheight",
+                        "timestamp"
+                    ]
+                }
+            },
+            "required": [
+                "encoding"
+            ],
+            "additionalProperties": false
+        },
+        "enumParameters": {
+            "title": "Enum Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "$ref": {
+                    "title": "Enum reference",
+                    "type": "string",
+                    "description": "The internal path to the enum definition used to convert this value."
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "additionalProperties": false
+        },
+        "eip712-json-schema": {
+            "title": "An EIP712 Schema",
+            "type": "object",
+            "description": "EIP712 typed data schema, restricted to type definitions and primary type only. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information.",
+            "properties": {
+                "types": {
+                    "type": "object",
+                    "description": "Type definitions for the EIP712 typed data. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information.",
+                    "properties": {
+                        "EIP712Domain": {
+                            "type": "array",
+                            "description": "EIP712 domain type definition. The domain is used as a separator between EIP712 messages to avoid reuse of signatures. Actual separator values are contained in a \"domain\" key of the message. Fields are up to the implementer, but must often include at least name, version, chainId and verifyingContract."
                         }
+                    },
+                    "additionalProperties": {
+                        "type": "array",
+                        "description": "Type definition for a specific type. Each type is an array of fields, where each field is an object with a name and a type. The type is a string, and may be a reference to another type.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "type"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "EIP712Domain"
+                    ]
+                },
+                "primaryType": {
+                    "type": "string",
+                    "description": "The primary type of the EIP712 typed data. This is the type that will be used as the top level type for the message field. See https://eips.ethereum.org/EIPS/eip-712#data-structures for more information."
+                }
+            },
+            "required": [
+                "types",
+                "primaryType"
+            ]
+        },
+        "abi-json-schema": {
+            "title": "An EVM ABI",
+            "type": "array",
+            "description": "JSON schema for the json representation of a solidity ABI",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "inputs": {
+                        "type": "array",
+                        "description": "an array of object with input parameters",
+                        "items": {
+                            "$ref": "#/$definitions/abi-parameter"
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "the name of the function"
+                    },
+                    "outputs": {
+                        "type": "array",
+                        "description": "an array of object with output parameters",
+                        "items": {
+                            "$ref": "#/$definitions/abi-parameter"
+                        }
+                    },
+                    "stateMutability": {
+                        "type": "string",
+                        "enum": [
+                            "pure",
+                            "view",
+                            "nonpayable",
+                            "payable"
+                        ]
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "the type of object being described",
+                        "enum": [
+                            "function",
+                            "constructor",
+                            "receive",
+                            "fallback"
+                        ]
                     }
                 },
-                {
-                    "if": { "properties": { "format": { "const": "allowanceAmount" } } },
-                    "then": {
-                        "properties": {
-                            "params": {
-                                "title": "Allowance Amount Formatting Parameters",
-                                "type": "object",
-                                "properties": {
-                                    "tokenPath": {
-                                        "title": "Token Path",
-                                        "type": "string"
-                                    },
-                                    "threshold": {
-                                        "title": "Unlimited Threshold",
-                                        "type": "string",
-                                        "description": "The threshold above which the allowance should be displayed as unlimited."
-                                    }
-                                },
-                                "required": ["tokenPath", "unlimitedThreshold"],
-                                "additionalProperties": false
-                            }
-                        }
-                    }
+                "required": [
+                    "inputs",
+                    "type"
+                ]
+            }
+        },
+        "abi-parameter": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the parameter, used in the selector computation"
                 },
-                {
-                    "if": { "properties": { "format": { "const": "percentage" } } },
-                    "then": {
-                        "properties": {
-                            "params": {
-                                "title": "Percentage Formatting Parameters",
-                                "type": "object",
-                                "properties": {
-                                    "magnitude": {
-                                        "title": "Magnitude",
-                                        "type": "integer",
-                                        "description": "The number of decimals of the percentage."
-                                    }
-                                },
-                                "required": ["magnitude"],
-                                "additionalProperties": false
-                            }
-                        }
-                    }
+                "type": {
+                    "type": "string",
+                    "description": "the canonical type of the parameter"
                 },
-                {
-                    "if": { "properties": { "format": { "const": "date" } } },
-                    "then": {
-                        "properties": {
-                            "params": {
-                                "title": "Date Formatting Parameters",
-                                "type": "object",
-                                "properties": {
-                                    "encoding": {
-                                        "title": "Date Encoding",
-                                        "type": "string",
-                                        "description": "The encoding of the date.",
-                                        "enum": ["blockheight", "timestamp"]
-                                    }
-                                },
-                                "required": ["encoding"],
-                                "additionalProperties": false
-                            }
-                        }
+                "internalType": {
+                    "type": "string",
+                    "description": "fully qualified type name in solidity source code"
+                },
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$definitions/abi-parameter"
                     }
                 }
+            },
+            "required": [
+                "name",
+                "type"
             ]
         }
     }
