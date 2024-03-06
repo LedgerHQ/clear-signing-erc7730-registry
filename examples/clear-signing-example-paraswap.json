@@ -1,0 +1,390 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+    "context": {
+        "$id": "AugustusSwapper",
+        "contract": {
+            "chainId": 1,
+            "address": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json"
+        }
+    },
+    "metadata": {
+        "owner": "Paraswap",
+        "info": {
+            "url": "https://www.paraswap.io/",
+            "legalName": "ParaSwap",
+            "lastUpdate": "2021-08-18T12:42:05Z"
+        },
+        "constants": {
+            "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+        }
+    },
+    "display": {
+        "definitions": {
+            "sendAmount": {
+                "label": "Amount to Send",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "fromToken",
+                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                }
+            },
+            "minReceiveAmount": {
+                "label": "Minimum to Receive",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "toToken",
+                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                }
+            },
+            "maxSendAmount": {
+                "label": "Maximum to Send",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "tokenIn",
+                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                }
+            },
+            "receiveAmount": {
+                "label": "Amount to Receive",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "tokenOut",
+                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                }
+            },
+            "beneficiary": {
+                "label": "Beneficiary",
+                "format": "addressOrName"
+            },
+            "exchange": {
+                "label": "Exchange",
+                "format": "addressOrName"
+            },
+            "factory" : {
+                "label": "Uniswap Factory",
+                "format": "addressOrName"
+            }
+        },
+        "formats": {
+            "0x2298207a" : {
+                "$id": "simpleBuy",
+                "intent": "Swap",
+                "fields": {
+                    "data.fromAmount": { 
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "data.fromToken" }
+                    },
+                    "data.toAmount": { 
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "data.toToken" }
+                    },
+                    "data.beneficiary": { 
+                        "$ref": "$display.definitions.beneficiary",
+                        "params": { "tokenPath": "data.beneficiary" }
+                    }
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x46c67b6d" : {
+                "$id": "megaSwap",
+                "intent": "Swap",
+                "fields": {
+                    "data.fromAmount": { 
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "data.fromToken" }
+                    },
+                    "data.toAmount": { 
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "data.path.0.path.-1.to" }
+                    },
+                    "data.beneficiary": { 
+                        "$ref": "$display.definitions.beneficiary",
+                        "params": { "tokenPath": "data.beneficiary" }
+                    }
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x54840d1a" : {
+                "$id": "swapOnUniswap",
+                "intent": "Swap",
+                "fields": {
+                    "amountIn" : {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "path.0" }
+                    },
+                    "amountOutMin" : {
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "path.-1" }
+                    }
+                },
+                "required": [
+                    "amountIn",
+                    "amountOutMin"
+                ]
+            },
+            "0xf5661034" : {
+                "$id": "swapOnUniswapFork",
+                "intent": "Swap",
+                "fields": {
+                    "amountIn" : {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "path.0" }
+                    },
+                    "amountOutMin" : {
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "path.-1" }
+                    },
+                    "factory" : {
+                        "$ref": "$display.definitions.factory"
+                    }
+                },
+                "required": [
+                    "amountIn",
+                    "amountOutMin"
+                ]
+            },
+            "0x0b86a4c1": {
+                "$id": "swapOnUniswapV2Fork",
+                "intent": "Swap",
+                "fields": {
+                    "amountIn" : {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "tokenIn" }
+                    },
+                    "amountOutMin" : {
+                        "label": "Minimum to Receive",
+                        "format": "raw"
+                    },
+                    "pools.-1" : {
+                        "label": "Last pool",
+                        "format": "raw"
+                    }
+                },
+                "required": [
+                    "amountIn",
+                    "amountOutMin",
+                    "pools"
+                ]
+            },
+            "0x54e3f31b" : {
+                "$id": "simpleSwap",
+                "intent": "Swap",
+                "fields": {
+                    "data.fromAmount": { 
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "data.fromToken" }
+                    },
+                    "data.toAmount": { 
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "data.toToken" }
+                    },
+                    "data.beneficiary": { 
+                        "$ref": "$display.definitions.beneficiary",
+                        "params": { "tokenPath": "data.beneficiary" }
+                    }
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x64466805" : {
+                "$id": "swapOnZeroXv4",
+                "intent": "Swap",
+                "fields": {
+                    "fromAmount": {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "fromToken" } 
+                    },
+                    "toAmount": {
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "toToken" }
+                    },
+                    "exchange": {
+                        "$ref": "$display.definitions.exchange"
+                    }
+                },
+                "required": [
+                    "fromAmount",
+                    "amountOutMin"
+                ]
+            },
+            "0x81033120": {
+                "$id": "swapOnZeroXv2",
+                "intent": "Swap",
+                "fields": {
+                    "fromAmount": {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "fromToken" } 
+                    },
+                    "toAmount": {
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "toToken" }
+                    },
+                    "exchange": {
+                        "$ref": "$display.definitions.exchange"
+                    }
+                },
+                "required": [
+                    "fromAmount",
+                    "amountOutMin"
+                ]
+            },
+            "0x935fb84b": {
+                "$id": "buyOnUniswap",
+                "intent": "Buy",
+                "fields": {
+                    "amountInMax" : {
+                        "$ref": "$display.definitions.maxSendAmount",
+                        "params": { "tokenPath": "path.0" }
+                    },
+                    "amountOut" : {
+                        "$ref": "$display.definition.receiveAmount",
+                        "params": { "tokenPath": "path.-1" }
+                    }
+                },
+                "required": [
+                    "amountInMax",
+                    "amountOut"
+                ]
+            },
+            "0xc03786b0" : {
+                "$id": "buyOnUniswapFork",
+                "intent": "Buy",
+                "fields": {
+                    "amountInMax" : {
+                        "$ref": "$display.definitions.maxSendAmount",
+                        "params": { "tokenPath": "path.0" }
+                    },
+                    "amountOut" : {
+                        "$ref": "$display.definition.receiveAmount",
+                        "params": { "tokenPath": "path.-1" }
+                    },
+                    "factory" : {
+                        "$ref": "$display.definitions.factory"
+                    }
+                },
+                "required": [
+                    "amountInMax",
+                    "amountOut"
+                ]
+            },
+            "0xb2f1e6db": {
+                "$id": "buyOnUniswapV2Fork",
+                "intent": "Buy",
+                "fields": {
+                    "amountInMax" : {
+                        "$ref": "$display.definition.maxSendAmount",
+                        "params": { "tokenPath": "tokenIn" }
+                    },
+                    "amountOut" : {
+                        "label": "Amount to Receive",
+                        "format": "raw"
+                    },
+                    "pools.-1" : {
+                        "label": "Last pool",
+                        "format": "raw"
+                    }
+                },
+                "required": [
+                    "amountInMax",
+                    "amountOut",
+                    "pools"
+                ]
+            },
+            "0x2941a712": {
+                "$id": "buyOnUniswapV2ForkWithPermit",
+                "intent": "Buy",
+                "fields": {
+                    "amountInMax" : {
+                        "$ref": "$display.definition.maxSendAmount",
+                        "params": { "tokenPath": "tokenIn" }
+                    },
+                    "amountOut" : {
+                        "label": "Amount to Receive",
+                        "format": "raw"
+                    },
+                    "pools.-1" : {
+                        "label": "Last pool",
+                        "format": "raw"
+                    }
+                }
+            },
+            "0xa94e78ef" : {
+                "$id": "multiSwap",
+                "intent": "Swap",
+                "fields": {
+                    "data.fromAmount": { 
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "data.fromToken" }
+                    },
+                    "data.toAmount": { 
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "data.path.-1.to" }
+                    },
+                    "data.beneficiary": { 
+                        "$ref": "$display.definitions.beneficiary",
+                        "params": { "tokenPath": "data.beneficiary" }
+                    }
+                },
+                "required": [
+                    "data.fromAmount",
+                    "data.toAmount",
+                    "data.beneficiary"
+                ]
+            },
+            "0x6b4109d3" : {
+                "$id": "swapOnZeroXv4WithPermit",
+                "intent": "Swap",
+                "fields": {
+                    "fromAmount": {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "fromToken" } 
+                    },
+                    "amountOutMin": {
+                        "$ref": "$display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "toToken" }
+                    },
+                    "exchange": {
+                        "$ref": "$display.definitions.exchange"
+                    }
+                },
+                "required": [
+                    "fromAmount",
+                    "amountOutMin",
+                    "exchange"
+                ]
+            },
+            "0x6e91538b" : {
+                "$id": "swapOnUniswapV2ForkWithPermit",
+                "intent": "Swap",
+                "fields": {
+                    "amountIn" : {
+                        "$ref": "$display.definitions.sendAmount",
+                        "params": { "tokenPath": "tokenIn" }
+                    },
+                    "amountOutMin" : {
+                        "label": "Minimum to Receive",
+                        "format": "raw"
+                    },
+                    "pools.-1" : {
+                        "label": "Last pool",
+                        "format": "raw"
+                    }
+                },
+                "required": [
+                ]
+            }
+        }
+    }
+}
