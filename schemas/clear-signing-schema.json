@@ -105,17 +105,7 @@
                     "title": "Common Formatter Definitions",
                     "description": "A set of definitions that can be used to share formatting information between multiple messages / functions.",
                     "additionalProperties": {
-                        "type": "object",
-                        "title": "A definition of common format(s)",
-                        "description": "Format definitions that can be reused in multiple messages / functions. Keys are the name of the definition, that can be referenced later. Values are field format definitions, or a set of field formats used to group whole definitions for structures for instance.",
-                        "anyOf": [
-                            {
-                                "$ref": "#/$definitions/field"
-                            },
-                            {
-                                "$ref": "#/$definitions/fields"
-                            }
-                        ]
+                        "$ref": "#/$definitions/field"
                     }
                 },
                 "formats": {
@@ -178,6 +168,12 @@
                     "title": "Internal Definition",
                     "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
                     "type": "string"
+                },
+                "params": {
+                    "title": "Parameters",
+                    "description": "Parameters override. These values takes precedence over the ones in the definition itself",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
                 }
             },
             "required": [
