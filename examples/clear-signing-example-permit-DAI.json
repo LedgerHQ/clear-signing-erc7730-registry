@@ -1,12 +1,15 @@
 {
     "$schema": "../schemas/clear-signing-schema.json",
     "context": {
-        "eip712domain" : {
-            "name": "Dai Stablecoin",
-            "version": "1",
-            "chainId": 42,
-            "verifyingContract": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
-        }
+        "eip712" : {
+            "domain": {
+                "name": "Dai Stablecoin",
+                "version": "1",
+                "chainId": 42,
+                "verifyingContract": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
+
+            }
+        } 
     },
     "includes": ["clear-signing-example-permit.json"],
     "metadata": {
@@ -29,7 +32,7 @@
                     "stax" : [
                         {
                             "type": "propertyPage",
-                            "label": "Permit",
+                            "label": "DAI Permit",
                             "content": ["spender", "value", "deadline"]
                         }
                     ]

@@ -1,61 +1,63 @@
 {
     "$schema": "../schemas/clear-signing-schema.json",
     
-    "schemas": {
-        "abi": [
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_spender",
-                        "type": "address"
-                    },
-                    {
-                        "name": "_value",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "approve",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "bool"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_to",
-                        "type": "address"
-                    },
-                    {
-                        "name": "_value",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "transfer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "bool"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-            }
-        ]
+    "context": {
+        "contract" : {
+            "abi": [
+                {
+                    "constant": false,
+                    "inputs": [
+                        {
+                            "name": "_spender",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "approve",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "constant": false,
+                    "inputs": [
+                        {
+                            "name": "_to",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "transfer",
+                    "outputs": [
+                        {
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                }
+            ]
+        }
     },
 
     "display": {
         "formats": {
             "0xa9059cbb": {
-                "id" : "transfer",
+                "$id" : "transfer",
                 "intent": "Send",
                 "fields": {
                     "_to" : {
@@ -66,15 +68,14 @@
                         "label": "Amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "@context.contract.address"
+                            "tokenPath": "$context.contract.address"
                         }
                     }
                 },
-                "required": ["_to", "_value"],
-                "screens": {}
+                "required": ["_to", "_value"]
             },
             "0x095ea7b3": {
-                "id" : "approve",
+                "$id" : "approve",
                 "intent": "Approve",
                 "fields": {
                     "_spender" : {
@@ -85,13 +86,12 @@
                         "label": "Amount",
                         "format": "allowanceAmount",
                         "params": {
-                            "tokenPath": "@context.contract.address",
+                            "tokenPath": "$context.contract.address",
                             "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
                         }
                     }
                 },
-                "required": ["_spender", "_value"],
-                "screens": {}
+                "required": ["_spender", "_value"]
             }
 
         }
