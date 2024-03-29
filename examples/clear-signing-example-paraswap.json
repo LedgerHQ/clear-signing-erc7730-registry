@@ -100,7 +100,7 @@
                     },
                     "data.toAmount": { 
                         "$ref": "$display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "data.path.0.path.-1.to" }
+                        "params": { "tokenPath": "data.path[0].path[-1].to" }
                     },
                     "data.beneficiary": { 
                         "$ref": "$display.definitions.beneficiary",
@@ -119,11 +119,11 @@
                 "fields": {
                     "amountIn" : {
                         "$ref": "$display.definitions.sendAmount",
-                        "params": { "tokenPath": "path.0" }
+                        "params": { "tokenPath": "path[0]" }
                     },
                     "amountOutMin" : {
                         "$ref": "$display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "path.-1" }
+                        "params": { "tokenPath": "path[-1]" }
                     }
                 },
                 "required": [
@@ -137,11 +137,11 @@
                 "fields": {
                     "amountIn" : {
                         "$ref": "$display.definitions.sendAmount",
-                        "params": { "tokenPath": "path.0" }
+                        "params": { "tokenPath": "path[0]" }
                     },
                     "amountOutMin" : {
                         "$ref": "$display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "path.-1" }
+                        "params": { "tokenPath": "path[-1]" }
                     },
                     "factory" : {
                         "$ref": "$display.definitions.factory"
@@ -164,7 +164,7 @@
                         "label": "Minimum to Receive",
                         "format": "raw"
                     },
-                    "pools.-1" : {
+                    "pools[-1]" : {
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -246,11 +246,11 @@
                 "fields": {
                     "amountInMax" : {
                         "$ref": "$display.definitions.maxSendAmount",
-                        "params": { "tokenPath": "path.0" }
+                        "params": { "tokenPath": "path[0]" }
                     },
                     "amountOut" : {
                         "$ref": "$display.definition.receiveAmount",
-                        "params": { "tokenPath": "path.-1" }
+                        "params": { "tokenPath": "path[-1]" }
                     }
                 },
                 "required": [
@@ -264,11 +264,11 @@
                 "fields": {
                     "amountInMax" : {
                         "$ref": "$display.definitions.maxSendAmount",
-                        "params": { "tokenPath": "path.0" }
+                        "params": { "tokenPath": "path[0]" }
                     },
                     "amountOut" : {
                         "$ref": "$display.definition.receiveAmount",
-                        "params": { "tokenPath": "path.-1" }
+                        "params": { "tokenPath": "path[-1]" }
                     },
                     "factory" : {
                         "$ref": "$display.definitions.factory"
@@ -291,7 +291,7 @@
                         "label": "Amount to Receive",
                         "format": "raw"
                     },
-                    "pools.-1" : {
+                    "pools[-1]" : {
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -314,7 +314,7 @@
                         "label": "Amount to Receive",
                         "format": "raw"
                     },
-                    "pools.-1" : {
+                    "pools[-1]" : {
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -377,7 +377,7 @@
                         "label": "Minimum to Receive",
                         "format": "raw"
                     },
-                    "pools.-1" : {
+                    "pools[-1]" : {
                         "label": "Last pool",
                         "format": "raw"
                     }
