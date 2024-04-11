@@ -296,9 +296,66 @@ The current version of this specification only supports two types of binding con
 
 ### Metadata section
 
-The `metadata` section contains information 
+The `metadata` section contains information about constant values relevant in the scope of the current contract / message (as defined in the `context` section). 
+
+In the context of wallets and clear signing, these constant values are either used to construct the UI when approving the signing operation, or to provide parameters / checks on the data being signed. But these constant values are relevant outside of the scope of wallets, and should be understood as reference values concerning the bound contract / message.
+
+* `owner` key contains a displayable name of the owner (or target) of the contract or message. Wallet CAN use this value to display the target of the interaction being reviewed.
+* `info` key contains additional structured info about the owner
+  * `legalName` is the legal owner entity name
+  * `lastUpdate` is the date of the contract (or verifying contract) last update 
+  * `url` is the official URL of the owner
+* `token` contains the ERC20 metadata when the contract itself does not support the optional calls to retrieve it. It SHOULD NOT be present if the contract does support the `name()`, `symbol()` and `decimals()` smartcontract calls. Metadata is in the sub-keys `name`, `ticker` and `magnitude`
+* `constants` key contains all the constants that can be re-used as parameters in the formatters, or that make sense in the context of this contract / message. It is a list of key / value pairs, the key being used to reference this constant (as a *path* `$.metadata.constants.KEY_NAME`).
+* `enums` key contains enumeration of displayable values. These enums are used to replace specific paramter value with a human readable. Each key of the `enums` object is an enumeration name, used to refer to this enum in fields format. An enum is a list of key / value pairs, each key being the enumeration value to replace, and the value being the display string to use instead of the enumeration value. 
+
+All values but the `owner` key are optional.
+
+*Examples*
+
+[TBD]
+
+```json
+{
+    "metadata": {
+        "enums": {
+            "interestRateMode" : {
+                "1": "stable",
+                "2": "variable"
+            }
+        }
+    }
+}
+```
 
 ### Display section
+
+The `display` section contains the actual formatting instructions for each field of the bound structured data. It is split into two parts, a `definitions` key that contains common formats reused in the other part and a `formats` key containing the actual format instructions for each call / message bound to the specification file.
+
+The `definitions` key is an object in which each sub-key is a field formats specification (see `formats` for the structure of a field format specification). the sub-key is the name of the common definition and is used to refer to this object in the form of an internal path `$.display.definitions.DEF_NAME`.
+
+The `formats` key is an object containing the actual *field format specifications*. It is an object in which each sub-key is a specific contract call (for contracts) or a specific message type (for EIP-712) being described. The values are each a field formats specification
+* For contracts, the key name MUST be the 4-bytes selector of the function being described, in hex string notation.
+* For EIP-712, the key name MUST be the type name being described. The keys MUST include at least the primary type of the message bound in the `context`.
+
+A *field formats specification* is an object with the following structure:
+* An `$id` key, purely internal and used to specify easily a human readable identifier for this field formats specification
+* An `intent` key, with a displayable string value. Wallets SHOULD use this value to display a clear intent of the interaction when calling this function or signing this message.
+* A list of `required` fields, as an array of *pathes* referring to specific fields. Wallets SHOULD display at least all the fields in the `required` key.
+* Specific device grouping and formatting information, in the `screens` key. The structure of the `screens` sub-keys are wallet maker specific and refered to in the [Wallets](#wallets) section
+* A list of `fields`. Each `fields` key name is a [path](#path-references) in the structured data, and the value is either
+  * A reference to a common definition in the `definitions` section, by using the `$ref` sub-key with a path to the internal definition. A reference can override a specification `params` by including its own `params` sub-key, whose values will take precedence over the common definition
+  * A *field format definition*, described just after
+  * A recursive sub-structure format definition, by including another list of pathes under a `fields` sub-key. This allows structuring the *field format definitions* themselves, but is NOT RECOMMENDED to maximize compatibility with resource limited wallets. Pathes in nested structures are concatenated together to compute the end path used to find a specific field location.  
+
+A *field format definition* is an object specifying how a specific field should be displayed:
+* The `label` is a displayable string that should be shown before displaying this field
+* The `format` key indicates how the value of the field should be formatted before being displayed. The list of supported formats are in the [Reference](#field-formats) section
+* Each field format might have parameters in a `params` sub-key. Available parameters are descried in the [Reference](#field-formats) section
+* Each field definition can have an optional internal `$id` used to identify easily which field is described 
+
+*Examples*
+
 
 ## Reference
 
@@ -351,15 +408,15 @@ Formats useable for uint/int solidity types
 
 ### Rationale / Restrictions
 
-Simple human readable format
+[Simple human readable format]
 
-Flat fields
+[Flat fields]
 
 ## Security Considerations
 
-Binding context
+[Binding context]
 
-Curation model
+[Curation model]
 
 ## Copyright
 
