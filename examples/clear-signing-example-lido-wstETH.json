@@ -32,7 +32,7 @@
                         "label": "Amount to Wrap",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$metadata.constants.stETHaddress"
+                            "tokenPath": "$.metadata.constants.stETHaddress"
                         }
                     }
                 }
@@ -45,7 +45,7 @@
                         "label": "Amount to Unwrap",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address"
+                            "tokenPath": "$.context.contract.address"
                         }
                     }
                 }
@@ -62,7 +62,7 @@
                         "label": "Amount to approve",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address"
+                            "tokenPath": "$.context.contract.address"
                         }
                     }
                 }

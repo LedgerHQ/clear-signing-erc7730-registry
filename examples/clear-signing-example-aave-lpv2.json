@@ -45,7 +45,7 @@
                         "format": "enum",
                         "label": "Interest Rate mode",
                         "params": {
-                            "$ref": "$metadata.enums.interestRateMode"
+                            "$ref": "$.metadata.enums.interestRateMode"
                         }
                     }
                 },
@@ -96,7 +96,7 @@
                         "format": "enum",
                         "label": "Set Interest Rate mode to",
                         "params": {
-                            "$ref": "$metadata.enums.interestRateMode"
+                            "$ref": "$.metadata.enums.interestRateMode"
                         }
                     }
                 },
@@ -121,7 +121,7 @@
                         "format": "enum",
                         "label": "Interest Rate mode",
                         "params": {
-                            "$ref": "$metadata.enums.interestRateMode"
+                            "$ref": "$.metadata.enums.interestRateMode"
                         }
                     }
                 },

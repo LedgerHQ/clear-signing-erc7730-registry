@@ -68,7 +68,7 @@
                         "label": "Amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address"
+                            "tokenPath": "$.context.contract.address"
                         }
                     }
                 },
@@ -86,7 +86,7 @@
                         "label": "Amount",
                         "format": "allowanceAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address",
+                            "tokenPath": "$.context.contract.address",
                             "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
                         }
                     }
