@@ -28,7 +28,10 @@ This specification intends to provide a simple, open standard format to provide 
 
 Providing this additional formatting information requires deep knowledge of the way a smartcontract or message is going to be used, it is expected that DApps developers will be the best placed to write such a file. The intent of an open standard is to write this file only once and have it work with most wallets supporting this standard.
 
-[Reference to deployment model]
+> Deployment model options:
+> - In each dapps repository (discoverability?)
+> - Foundation operated repository
+> - Ledger repository
 
 ## Specification
 
@@ -74,7 +77,7 @@ The following is a simple example of how to clear sign a `transfer` function cal
                         "label": "Amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address"
+                            "tokenPath": "$.context.contract.address"
                         }
                     }
                 },
@@ -137,24 +140,177 @@ It is sometime necessary for formatting of fields of the structured data to refe
 
 #### Path references
 
+This specification uses a limited [json path](https://datatracker.ietf.org/doc/rfc9535/) notation to reference values that are described in multiple json documents. 
 
+Limitation to the json path specification are the following:
+* Pathes MUST use the dot notation 
+* Only name, index and slices selectors are supported.
+* Slices selectors MUST NOT contain the optional step.
+* Additional roots are introduced to support pathes in multiple places.
+* When not ambiguous, the structured data root `#` and subsequent `.` step separator can be omitted
+
+The root node identifier indicates which document or data location this path references, according to the following table:
+
+| Root node identifier | Refers to | Value location |
+| --- | --- | --- |
+| # | Path applies to the structured data *schema* (ABI path for contracts, path in the message types itself for EIP712) | Values can be found in the serialized representation of the structured data | 
+| $ | Path applies to the current file describing the structured data formatting, after includes | Values can be found in the merged file itself | 
+| @ | Path applies to the container of the structured data to be signed | Values can be found in the serialized container to sign, and are uniquely defined per container in the [Reference](#reference) section |
+
+For pathes referring to structured data fields, if a field has a variable length primitive type (like `bytes` or `string` in solidity), a slice selector can be appended to the path, to refer to the specific set of bytes indicated by the slice.
+
+*Examples*
+
+References to values in the serialized data
+* `#.params.amountIn` or `params.amountIn` refers to parameter `amountIn` in top-level structure `params` as defined in the ABI
+* `#.data.path[0].path[-1].to` or `data.path[0].path[-1].to` refers to the field `to` taken from last member of `path` array, itself taken from first member of enclosing `path` array, itself part of top level `data` structure.
+* `#.params.path[0..19]` refers to the first 20 bytes of the `path` byte array
+* `#.params.path[-20:-1]` refers to the last 20 bytes of the `path` byte array
+
+References to values in the format specification file
+* `$.context.contract.address` refers to the value of the contract address this file is bound to
+* `$.metadata.enums.interestRateMode` refers to the values of an enum defined in the specification file (typically to convert an integer into a displayed string)
+* `$.display.definitions.minReceiveAmount` refers to a common definition reused accross fields formatting definition
+
+References to values in the container
+* `@.amount` refers to the enclosing transaction native currency amount
+
+#### Organizing files
+
+Smartcontracts and EIP 712 messages are often re-using common interfaces or types that share similar display formatting. This specification supports a basic inclusion mechanism that enables sharing files describing specific interfaces or types.
+
+The `includes` top-level key is an array of URLs, pointing to files that MUST follow this same specification.
+
+A wallet using a file including other files SHOULD merge those files into the top-level file. When merging, conflicts for unique keys are resolved by prioritizing the including file first, then by each included file in the order they appear in the including file.
+
+It is NOT RECOMMENDED to include files beyond one level of depth, to avoid descriptions that would be too complex to handle for some wallets.
+
+*Example*
+
+This file defines a generic ERC20 interface for a single approve function:
+```json
+{
+    "context": {
+        "contract" : {
+            "abi": [
+                {
+                    "inputs": [
+                        {
+                            "name": "_spender",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_value",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "approve",
+                    "type": "function"
+                }
+            ]
+        }
+    },
+
+    "display": {
+        "formats": {
+            "0x095ea7b3": {
+                "$id" : "approve",
+                "intent": "Approve",
+                "fields": {
+                    "_spender" : {
+                        "label": "Spender",
+                        "format": "addressOrName"
+                    },
+                    "_value" : {
+                        "label": "Amount",
+                        "format": "allowanceAmount",
+                        "params": {
+                            "tokenPath": "$.context.contract.address",
+                            "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
+                        }
+                    }
+                },
+                "required": ["_spender", "_value"]
+            }
+
+        }
+    }
+}
+```
+Note that there are no keys for binding the contract to a specific address or owner, nor any contract specific metadata.
+
+The following file would include this generic interface and bind it to the specific USDT contract:
+```json
+{
+    "context": {
+        "$id": "Tether USD",
+        "contract" : {
+            "chainId": 1,
+            "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        }
+    }, 
+    "includes": ["../examples/clear-signing-example-erc20.json"],
+    "metadata": {
+        "owner": "Tether",
+        "info": {
+            "legalName": "Tether Limited",
+            "url": "https://tether.to/",
+            "lastUpdate": "2017-11-28T12:41:21Z"  
+        },
+        "token": {
+            "ticker": "USDT",
+            "name": "Tether USD",
+            "magnitude": 6
+        }
+    }
+}
+```
+Note that the keys under `context.contract` would be merged together to construct a full contract binding object.
 
 ### Context section
 
+The `context` section describes the context to which this display format description file is bound. A wallet MUST verify that the structured data and container it is trying to sign corresponds to the context in this section.
+
+The current version of this specification only supports two types of binding context, EVM smartcontracts and EIP712 domains. 
+
+* The `$id` sub-key is an internal identifier, not used for formatting the display, only relevant to provide a human readable name to this specification file
+* The `contract` sub-key is used to describe an EVM smartcontract binding context, with:
+  
+  * `chainId`: an [EIP 155 identifier](https://chainid.network/) of the chain the contract described is deployed on
+  * `address`: the address of the bound contract
+  * `abi`: either an URL of the reference ABI (in json representation), or the ABI itself as a json array
+  
+* The `eip712` sub-key is used to describe the EIP 712 message type to bind to:
+
+  * The `schema` key is either an URL pointing to the EIP-712 schema or the json schema itself. An EIP 712 schema consists in the json document with just the `types` and `primaryType` keys of the message. 
+  * The `domain` key is the domain this file should be bound to. Each key in this `domain` binding MUST match the `domain` keys of the message. Note that the message can have more keys in its `domain` than those listed in the formatting file. An EIP-712 domain is a free-form list of keys, but those are very common to include:
+  
+    * `name`: the name of the message verifier
+    * `version`: the version of the message
+    * `chainID`: an [EIP 155 identifier](https://chainid.network/) of the chain the message is bound to 
+    * `verifyingContract`: the address the message is bound to
+
+*Examples*
+
+[TBD]
+
 ### Metadata section
 
-### Display section
+The `metadata` section contains information 
 
-### Organizing files
+### Display section
 
 ## Reference
 
 ### Container structure values
 
+This section describes all container structure supported by this specification and possible references path to relevant values.
+
 #### EVM Transaction container
 
 | Value reference | Value Description | Examples |
-| @amount         | The native currency amount of the transaction containing the structured data | |
+| --- | --- | --- |
+| @.amount        | The native currency amount of the transaction containing the structured data | |
 
 ### Field formats
 
@@ -187,13 +343,15 @@ Formats useable for uint/int solidity types
 | raw            | n/a        | Display address as an EIP55 formatted string  | Value 0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed displayed as `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed` |
 | addressOrName  | n/a     | Display address as a trusted name if a resolution exists, an EIP55 formatted address otherwise   | Value 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 displayed as `vitalik.eth` |
 
-### Devices
+### Wallets
 
-#### Ledger Stax
+#### Ledger
+
+[TBD] Link to ledger specification
 
 ### Rationale / Restrictions
 
-Context / Metadata / Formats
+Simple human readable format
 
 Flat fields
 
@@ -201,7 +359,7 @@ Flat fields
 
 Binding context
 
-Curation
+Curation model
 
 ## Copyright
 

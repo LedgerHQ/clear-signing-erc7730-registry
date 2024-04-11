@@ -63,7 +63,7 @@
             "label": "Amount",
             "format": "tokenAmount",
             "params": {
-              "tokenPath": "$context.eip712domain.verifyingContract"
+              "tokenPath": "$.context.eip712domain.verifyingContract"
             }
           },
           "deadline": {

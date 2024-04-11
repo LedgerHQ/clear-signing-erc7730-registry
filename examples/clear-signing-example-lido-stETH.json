@@ -25,7 +25,7 @@
                 "$id": "submit",
                 "intent": "Stake ETH",
                 "fields": {
-                    "@amount" : {
+                    "@.amount" : {
                         "label" : "Amount to Stake",
                         "format": "amount"
                     },
@@ -34,7 +34,7 @@
                         "format": "addressOrName"
                     }
                 },
-                "required": ["@amount"]
+                "required": ["@.amount"]
             },
             "0x095ea7b3" : {
                 "$id": "approve",
@@ -48,7 +48,7 @@
                         "label" : "Amount to Approve",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$context.contract.address"
+                            "tokenPath": "$.context.contract.address"
                         }
                     }
                 },

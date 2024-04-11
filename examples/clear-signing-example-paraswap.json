@@ -26,7 +26,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "fromToken",
-                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
                 }
             },
             "minReceiveAmount": {
@@ -34,7 +34,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "toToken",
-                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
                 }
             },
             "maxSendAmount": {
@@ -42,7 +42,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenIn",
-                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
                 }
             },
             "receiveAmount": {
@@ -50,7 +50,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenOut",
-                    "nativeCurrencyAddress": "$display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
                 }
             },
             "beneficiary": {
@@ -72,15 +72,15 @@
                 "intent": "Swap",
                 "fields": {
                     "data.fromAmount": { 
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "data.fromToken" }
                     },
                     "data.toAmount": { 
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "data.toToken" }
                     },
                     "data.beneficiary": { 
-                        "$ref": "$display.definitions.beneficiary",
+                        "$ref": "$.display.definitions.beneficiary",
                         "params": { "tokenPath": "data.beneficiary" }
                     }
                 },
@@ -95,15 +95,15 @@
                 "intent": "Swap",
                 "fields": {
                     "data.fromAmount": { 
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "data.fromToken" }
                     },
                     "data.toAmount": { 
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "data.path[0].path[-1].to" }
                     },
                     "data.beneficiary": { 
-                        "$ref": "$display.definitions.beneficiary",
+                        "$ref": "$.display.definitions.beneficiary",
                         "params": { "tokenPath": "data.beneficiary" }
                     }
                 },
@@ -118,11 +118,11 @@
                 "intent": "Swap",
                 "fields": {
                     "amountIn" : {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "path[0]" }
                     },
                     "amountOutMin" : {
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "path[-1]" }
                     }
                 },
@@ -136,15 +136,15 @@
                 "intent": "Swap",
                 "fields": {
                     "amountIn" : {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "path[0]" }
                     },
                     "amountOutMin" : {
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "path[-1]" }
                     },
                     "factory" : {
-                        "$ref": "$display.definitions.factory"
+                        "$ref": "$.display.definitions.factory"
                     }
                 },
                 "required": [
@@ -157,7 +157,7 @@
                 "intent": "Swap",
                 "fields": {
                     "amountIn" : {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "tokenIn" }
                     },
                     "amountOutMin" : {
@@ -180,15 +180,15 @@
                 "intent": "Swap",
                 "fields": {
                     "data.fromAmount": { 
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "data.fromToken" }
                     },
                     "data.toAmount": { 
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "data.toToken" }
                     },
                     "data.beneficiary": { 
-                        "$ref": "$display.definitions.beneficiary",
+                        "$ref": "$.display.definitions.beneficiary",
                         "params": { "tokenPath": "data.beneficiary" }
                     }
                 },
@@ -203,15 +203,15 @@
                 "intent": "Swap",
                 "fields": {
                     "fromAmount": {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "fromToken" } 
                     },
                     "toAmount": {
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "toToken" }
                     },
                     "exchange": {
-                        "$ref": "$display.definitions.exchange"
+                        "$ref": "$.display.definitions.exchange"
                     }
                 },
                 "required": [
@@ -224,15 +224,15 @@
                 "intent": "Swap",
                 "fields": {
                     "fromAmount": {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "fromToken" } 
                     },
                     "toAmount": {
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "toToken" }
                     },
                     "exchange": {
-                        "$ref": "$display.definitions.exchange"
+                        "$ref": "$.display.definitions.exchange"
                     }
                 },
                 "required": [
@@ -245,11 +245,11 @@
                 "intent": "Buy",
                 "fields": {
                     "amountInMax" : {
-                        "$ref": "$display.definitions.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": { "tokenPath": "path[0]" }
                     },
                     "amountOut" : {
-                        "$ref": "$display.definition.receiveAmount",
+                        "$ref": "$.display.definition.receiveAmount",
                         "params": { "tokenPath": "path[-1]" }
                     }
                 },
@@ -263,15 +263,15 @@
                 "intent": "Buy",
                 "fields": {
                     "amountInMax" : {
-                        "$ref": "$display.definitions.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": { "tokenPath": "path[0]" }
                     },
                     "amountOut" : {
-                        "$ref": "$display.definition.receiveAmount",
+                        "$ref": "$.display.definition.receiveAmount",
                         "params": { "tokenPath": "path[-1]" }
                     },
                     "factory" : {
-                        "$ref": "$display.definitions.factory"
+                        "$ref": "$.display.definitions.factory"
                     }
                 },
                 "required": [
@@ -284,7 +284,7 @@
                 "intent": "Buy",
                 "fields": {
                     "amountInMax" : {
-                        "$ref": "$display.definition.maxSendAmount",
+                        "$ref": "$.display.definition.maxSendAmount",
                         "params": { "tokenPath": "tokenIn" }
                     },
                     "amountOut" : {
@@ -307,7 +307,7 @@
                 "intent": "Buy",
                 "fields": {
                     "amountInMax" : {
-                        "$ref": "$display.definition.maxSendAmount",
+                        "$ref": "$.display.definition.maxSendAmount",
                         "params": { "tokenPath": "tokenIn" }
                     },
                     "amountOut" : {
@@ -325,15 +325,15 @@
                 "intent": "Swap",
                 "fields": {
                     "data.fromAmount": { 
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "data.fromToken" }
                     },
                     "data.toAmount": { 
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "data.path.-1.to" }
                     },
                     "data.beneficiary": { 
-                        "$ref": "$display.definitions.beneficiary",
+                        "$ref": "$.display.definitions.beneficiary",
                         "params": { "tokenPath": "data.beneficiary" }
                     }
                 },
@@ -348,15 +348,15 @@
                 "intent": "Swap",
                 "fields": {
                     "fromAmount": {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "fromToken" } 
                     },
                     "amountOutMin": {
-                        "$ref": "$display.definitions.minReceiveAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
                         "params": { "tokenPath": "toToken" }
                     },
                     "exchange": {
-                        "$ref": "$display.definitions.exchange"
+                        "$ref": ".$display.definitions.exchange"
                     }
                 },
                 "required": [
@@ -370,7 +370,7 @@
                 "intent": "Swap",
                 "fields": {
                     "amountIn" : {
-                        "$ref": "$display.definitions.sendAmount",
+                        "$ref": "$.display.definitions.sendAmount",
                         "params": { "tokenPath": "tokenIn" }
                     },
                     "amountOutMin" : {
