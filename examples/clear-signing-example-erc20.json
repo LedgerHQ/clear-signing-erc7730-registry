@@ -62,7 +62,7 @@
                 "fields": {
                     "_to" : {
                         "label": "To",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     },
                     "_value" : {
                         "label": "Amount",
@@ -80,7 +80,7 @@
                 "fields": {
                     "_spender" : {
                         "label": "Spender",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     },
                     "_value" : {
                         "label": "Amount",

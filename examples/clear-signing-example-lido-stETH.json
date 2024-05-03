@@ -31,7 +31,7 @@
                     },
                     "_referral" : {
                         "label" : "Referral",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     }
                 },
                 "required": ["@.amount"]
@@ -42,7 +42,7 @@
                 "fields": {
                     "_spender" : {
                         "label" : "Address to approve",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     },
                     "_amount" : {
                         "label" : "Amount to Approve",

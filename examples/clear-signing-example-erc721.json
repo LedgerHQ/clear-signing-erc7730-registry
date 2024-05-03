@@ -1,0 +1,160 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+    
+    "context": {
+        "contract" : {
+            "abi": [
+                {
+                    "inputs": [
+                        {
+                            "name": "_from",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_to",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_tokenId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "transferFrom",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "name": "_from",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_to",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_tokenId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "safeTransferFrom",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "name": "_approved",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_tokenId",
+                            "type": "uint256"
+                        }
+                    ],
+                    "name": "approve",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "name": "_operator",
+                            "type": "address"
+                        },
+                        {
+                            "name": "_approved",
+                            "type": "bool"
+                        }
+                    ],
+                    "name": "setApprovalForAll",
+                    "type": "function"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "enums": {
+            "rights": {
+                "True": "Grant all",
+                "False": "Deny all"
+            }
+        }
+    },
+
+    "display": {
+        "definitions": {
+            "from" : {
+                "label": "From",
+                "format": "addressName",
+                "params": {
+                    "sources": ["wallet"]
+                }
+            },
+            "to" : {
+                "label": "To",
+                "format": "addressName"
+            },
+            "operator":{ 
+                "label": "Operator",
+                "format": "addressName"
+            },
+            "tokenId" : {
+                "label": "NFT",
+                "format": "nftName",
+                "params": {
+                    "collectionPath": "$.context.contract.address"
+                }
+            }
+        },
+        "formats": {
+            "0x23b872dd": {
+                "$id" : "transferFrom",
+                "intent": "Send NFT",
+                "fields": {
+                    "_from" : { "$ref": "$.display.definitions.from" },
+                    "_to" : { "$ref": "$.display.definitions.to" },
+                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
+                },
+                "required": ["_to", "_tokenId"]
+            },
+            "0x42842e0e": {
+                "$id" : "safeTransferFrom",
+                "intent": "Send NFT",
+                "fields": {
+                    "_from" : { "$ref": "$.display.definitions.from" },
+                    "_to" : { "$ref": "$.display.definitions.to" },
+                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
+                },
+                "required": ["_spender", "_value"]
+            },
+            "0x095ea7b3" : {
+                "$id": "approve",
+                "intent": "Approve operator for NFT",
+                "fields": {
+                    "_approved" : { "$ref": "$.display.definitions.operator" },
+                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
+                }
+            },
+            "0xa22cb465" : {
+                "$id": "setApprovalForAll",
+                "intent": "Manage operator for",
+                "fields": {
+                    "@.to": { 
+                        "label": "Collection",
+                        "format": "addressName",
+                        "params": {
+                            "sources": ["collection"]
+                        }
+                    },
+                    "_operator" : { "$ref": "$.display.definitions.operator" },
+                    "_approved" : { 
+                        "label": "Access rights", 
+                        "format": "enum",
+                        "$params": { "$ref": "$.metadata.enums.rights" }
+                    }
+                }
+            }
+
+        }
+    }
+}
