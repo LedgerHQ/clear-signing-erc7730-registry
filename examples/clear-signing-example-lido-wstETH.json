@@ -56,7 +56,7 @@
                 "fields": {
                     "spender": {
                         "label": "Address to approve",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     },
                     "amount": {
                         "label": "Amount to approve",

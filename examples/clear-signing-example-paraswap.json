@@ -55,15 +55,21 @@
             },
             "beneficiary": {
                 "label": "Beneficiary",
-                "format": "addressOrName"
+                "format": "addressName"
             },
             "exchange": {
                 "label": "Exchange",
-                "format": "addressOrName"
+                "format": "addressName",
+                "params": {
+                    "sources": ["contract"]
+                }
             },
             "factory" : {
                 "label": "Uniswap Factory",
-                "format": "addressOrName"
+                "format": "addressName",
+                "params": {
+                    "sources": ["contract"]
+                }
             }
         },
         "formats": {

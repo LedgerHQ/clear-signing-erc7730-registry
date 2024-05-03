@@ -37,7 +37,7 @@
                     },
                     "params.recipient": {
                         "label": "Beneficiary",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     }
                 },
                 "required": ["params.amountIn", "params.amountOut", "params.recipient"]
@@ -69,7 +69,7 @@
                     },
                     "params.recipient" : {
                         "label": "Beneficiary",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     }
                 },
                 "required": ["params.amountIn", "params.amountOutMininimum", "params.fee", "params.recipient"]
@@ -94,7 +94,7 @@
                     },
                     "params.recipient": {
                         "label": "Beneficiary",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     }
                 },
                 "required": ["params.amountInMaximum", "params.amountOut", "params.recipient"]
@@ -126,7 +126,7 @@
                     },
                     "params.recipient" : {
                         "label": "Beneficiary",
-                        "format": "addressOrName"
+                        "format": "addressName"
                     }
                 }
             },

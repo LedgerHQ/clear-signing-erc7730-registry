@@ -1,0 +1,182 @@
+{
+    "$schema": "../schemas/clear-signing-schema.json",
+    "context": {
+      "eip712": {
+        "domain": {
+          "name": "Permit2"
+        },
+        "schemas": [ 
+          {
+            "types": {
+              "EIP712Domain": [
+                {
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "name": "chainId",
+                  "type": "uint256"
+                },
+                {
+                  "name": "verifyingContract",
+                  "type": "address"
+                }
+              ],
+              "PermitDetails": [
+                  {
+                      "name": "token",
+                      "type": "address"
+                  },
+                  {
+                      "name": "amount",
+                      "type": "uint160"
+                  },
+                  {
+                      "name": "expiration",
+                      "type": "uint48"
+                  },
+                  {
+                      "name": "nonce",
+                      "type": "uint48"
+                  }
+
+              ],
+              "PermitBatch": [
+                {
+                  "name": "details",
+                  "type": "PermitDetails[]"
+                },
+                {
+                  "name": "spender",
+                  "type": "address"
+                },
+                {
+                  "name": "sigDeadline",
+                  "type": "uint256"
+                }
+              ]
+            },
+            "primaryType": "PermitBatch"
+          },
+          {
+            "types": {
+              "EIP712Domain": [
+                {
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "name": "chainId",
+                  "type": "uint256"
+                },
+                {
+                  "name": "verifyingContract",
+                  "type": "address"
+                }
+              ],
+              "PermitDetails": [
+                  {
+                      "name": "token",
+                      "type": "address"
+                  },
+                  {
+                      "name": "amount",
+                      "type": "uint160"
+                  },
+                  {
+                      "name": "expiration",
+                      "type": "uint48"
+                  },
+                  {
+                      "name": "nonce",
+                      "type": "uint48"
+                  }
+
+              ],
+              "PermitSingle": [
+                {
+                  "name": "details",
+                  "type": "PermitDetails"
+                },
+                {
+                  "name": "spender",
+                  "type": "address"
+                },
+                {
+                  "name": "sigDeadline",
+                  "type": "uint256"
+                }
+              ]
+            },
+            "primaryType": "PermitSingle"
+          }
+        ]
+      }
+    },
+    "display": {
+      "formats": {
+        "PermitSingle": {
+          "$id": "Permit2 Permit Single",
+          "intent": "Authorize spending of token",
+          "fields": {
+            "spender": {
+              "label": "Spender",
+              "format": "addressName"
+            },
+            "details.amount": {
+              "label": "Amount",
+              "format": "tokenAmount",
+              "params": {
+                "tokenPath": "details.token"
+              }
+            },
+            "details.expiration": {
+              "label": "Valid Until",
+              "format": "date",
+              "params": {
+                "encoding": "timestamp"
+              }
+            }
+          },
+          "required": [
+            "spender",
+            "details.amount"
+          ],
+          "screens": {}
+        },
+        "PermitBatch": {
+          "$id": "Permit2 Permit Batch",
+          "intent": "Authorize spending of tokens",
+          "fields": {
+            "spender": {
+              "label": "Spender",
+              "format": "addressName"
+            },
+            "details[]":{
+              "fields": {
+                "amount": {
+                  "label": "Amount",
+                  "format": "tokenAmount",
+                  "params": {
+                    "tokenPath": "token"
+                  }
+                },
+                "expiration": {
+                  "label": "Valid Until",
+                  "format": "date",
+                  "params": {
+                    "encoding": "timestamp"
+                  }
+                }
+              }
+            } 
+          },
+          "required": [
+            "spender",
+            "details"
+          ],
+          "screens": {}
+        }
+      }
+    }
+  }

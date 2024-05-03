@@ -9,7 +9,7 @@ status: Draft
 type: Standards Track
 category: Interface
 created: 2024-02-07
-requires: 20, 712 
+requires: 712 
 ---
 
 ## Abstract
@@ -147,9 +147,10 @@ Limitation to the json path specification are the following:
 * Only name, index and slices selectors are supported.
 * Slices selectors MUST NOT contain the optional step.
 * Additional roots are introduced to support pathes in multiple places.
-* When not ambiguous, the structured data root `#` and subsequent `.` step separator can be omitted
 
 The root node identifier indicates which document or data location this path references, according to the following table:
+
+Root nodes and following separators can be omitted, in which case the path is *relative* to the structure being described. In case there is no encapsulating structure, relative pathes refer to the top-level structure described in the current file and are equivalent to `#.` root node. 
 
 | Root node identifier | Refers to | Value location |
 | --- | --- | --- |
@@ -346,10 +347,9 @@ A *field formats specification* is an object with the following structure:
 * A list of `fields`. Each `fields` key name is a [path](#path-references) in the structured data, and the value is either
   * A reference to a common definition in the `definitions` section, by using the `$ref` sub-key with a path to the internal definition. A reference can override a specification `params` by including its own `params` sub-key, whose values will take precedence over the common definition
   * A *field format definition*, described just after
-  * A recursive sub-structure format definition, by including another list of pathes under a `fields` sub-key. This allows structuring the *field format definitions* themselves, but is NOT RECOMMENDED to maximize compatibility with resource limited wallets. Pathes in nested structures are concatenated together to compute the end path used to find a specific field location.  
+  * A recursive sub-structure format definition, by including another list of pathes under a `fields` sub-key. This allows structuring the *field format definitions* themselves, but is NOT RECOMMENDED to maximize compatibility with resource limited wallets. All relative pathes in nested structures (fields but also in format parameters) are relative to the substructure referenced by the path in the key.  
 
-A *field format definition* is an object specifying how a specific field should be displayed:
-* The `label` is a displayable string that should be shown before displaying this field
+A *all relative to the substructure referenced by the path in the key* The `label` is a displayable string that should be shown before displaying this field
 * The `format` key indicates how the value of the field should be formatted before being displayed. The list of supported formats are in the [Reference](#field-formats) section
 * Each field format might have parameters in a `params` sub-key. Available parameters are descried in the [Reference](#field-formats) section
 * Each field definition can have an optional internal `$id` used to identify easily which field is described 
@@ -380,6 +380,7 @@ Formats useable for uint/int solidity types
 | raw         | n/a        | Raw int value      | Value 1000 displayed as `1000` |
 | amount      | n/a        | Display as an amount in native currency, using best ticker / magnitude match.    | Value 0x2c1c986f1c48000is displayed as `0.19866144 Eth` |
 | tokenAmount | tokenPath  | Convert value using magnitude of token, and append ticker name.    | Value 1000000, for ticker DAI, magnitude 6 displayed as `1 DAI` |
+| nftName     | collectionPath  | Display value as a specific NFT in a collection, if found, or fallback to a raw int token ID if not | Token Id `674` of collection `0xaa3a23da22e359bdc49e58e0a4222e56c36884ea` would be displayed as `ETH-USD December 10, 2021 3:48 PM GMT` - on [rarible](https://rarible.com/token/polygon/0xaa3a23da22e359bdc49e58e0a4222e56c36884ea:674) |
 | allowanceAmount | tokenPath <br> threshold | If value >= threshold, display as unlimited allowance appended with ticker, otherwise as tokenAmount  | Value 1000000, for ticker DAI, magnitude 6, threshold 0xFFFFFFFF displayed as `1 DAI`. <br> Value 0xFFFFFFFF, for ticker DAI, magnitude 6, threshold 0xFFFFFFFF displayed as `Unlimited DAI` |
 | date        | encoding  | Display int as a date, using specified encoding. <br>Encoding *timestamp*, value is encoded as a unix timestamp. <br>Encoding *blockheight*, value is a blockheight and is converted to an approximate unix timestamp. <br>Date display RECOMMENDED use of RFC 3339 | Value 1709191632, with encoding timestamp is displayed as `2024-02-29T08:27:12`. <br> Value 19332140, encoding blockheight is displayed as `2024-02-29T09:00:35` |
 | percentage  | magnitude  | Value is converted using magnitude and displayed as a precentage | Value 3000 displayed as `1000` |
@@ -398,7 +399,20 @@ Formats useable for uint/int solidity types
 | Format name    | Parameters | Format Description | Examples |
 | -------------- | ---------- | ------------------ | -------- |
 | raw            | n/a        | Display address as an EIP55 formatted string  | Value 0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed displayed as `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed` |
-| addressOrName  | n/a     | Display address as a trusted name if a resolution exists, an EIP55 formatted address otherwise   | Value 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 displayed as `vitalik.eth` |
+| addressName    | sources    | Display address as a trusted name if a trusted source exists, an EIP55 formatted address otherwise. See [next section](#address-trusted-sources) for a reference of trusted sources | Value 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 displayed as `vitalik.eth` with source `ens` |
+
+#### Address trusted sources
+
+Address names trusted sources specify which source of trusted names SHOULD be used to replace an address with a human readable names. 
+When specified a wallet MUST only use specified sources to resolve address names. When omitted, a wallet MAY use any source to resolve an address.
+
+| Source name   | Description |
+| ---           | --- |
+| wallet        | Address is an account controlled by the wallet and MAY be replaced with a local account name |
+| ens           | Address MAY be replaced with an associated ENS domain |
+| contract      | Address is a well known smartcontract and MAY be replaced with the smart-contract name or owner |
+| token         | Address is a well known ERC20 token and MAY be replaced with the token name or ticker |
+| collection    | Address is a well known NFT colletion and MAY be replaced with the collection name |
 
 ### Wallets
 
@@ -420,4 +434,4 @@ Formats useable for uint/int solidity types
 
 ## Copyright
 
-Copyright and related rights waived via [CC0](../LICENSE.md).
+Copyright and related rights waived via [CC0](LICENSE.md).

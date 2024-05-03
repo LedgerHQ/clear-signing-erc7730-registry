@@ -38,7 +38,7 @@
                         }
                     },
                     "onBehalfOf": {
-                        "format": "addressOrName",
+                        "format": "addressName",
                         "label": "Debt holder"
                     },
                     "rateMode": {
@@ -56,8 +56,11 @@
                 "intent": "Set as collateral",
                 "fields": {
                     "asset": {
-                        "format": "addressOrName",
-                        "label": "Asset"
+                        "format": "addressName",
+                        "label": "Asset",
+                        "params": {
+                            "sources": ["token"]
+                        }
                     },
                     "useAsCollateral": {
                         "format": "raw",
@@ -78,7 +81,7 @@
                         }
                     },
                     "to": {
-                        "format": "addressOrName",
+                        "format": "addressName",
                         "label": "Recipient"
                     }
                 },
@@ -89,8 +92,11 @@
                 "intent": "Swap interest rate mode",
                 "fields": {
                     "asset": {
-                        "format": "addressOrName",
-                        "label": "For Asset"
+                        "format": "addressName",
+                        "label": "For Asset",
+                        "params": {
+                            "sources": ["token"]
+                        }
                     },
                     "rateMode": {
                         "format": "enum",
@@ -114,7 +120,7 @@
                         }
                     },
                     "onBehalfOf": {
-                        "format": "addressOrName",
+                        "format": "addressName",
                         "label": "Debtor"
                     },
                     "interestRateMode": {
@@ -139,7 +145,7 @@
                         }
                     },
                     "onBehalfOf": {
-                        "format": "addressOrName",
+                        "format": "addressName",
                         "label": "Collateral recipient"
                     }
                 },

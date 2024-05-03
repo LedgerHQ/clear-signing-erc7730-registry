@@ -54,7 +54,7 @@
                 "constants": {
                     "title": "Constant values",
                     "type": "object",
-                    "description": "A set of values that can be used in format parameters. Can be referenced with path $metadata.constants.CONSTANT_NAME",
+                    "description": "A set of values that can be used in format parameters. Can be referenced with a path expression like $.metadata.constants.CONSTANT_NAME",
                     "additionalProperties": {
                         "type": "string"
                     }
@@ -90,10 +90,7 @@
                         ]
                     }
                 }
-            },
-            "required": [
-                "owner"
-            ]
+            }
         },
         "display": {
             "title": "Display Formatting Info",
@@ -162,11 +159,11 @@
     "$definitions": {
         "reference": {
             "title": "Reference",
-            "description": "A reference to a shared definition that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions. A reference can be either a field format definition or a set of field format definitions, indexed by path.",
+            "description": "A reference to a shared definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME. It is used to share definitions between multiple messages / functions.",
             "properties": {
                 "$ref": {
                     "title": "Internal Definition",
-                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the @display.definitions section. It is used to share definitions between multiple messages / functions",
+                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
                     "type": "string"
                 },
                 "params": {
@@ -202,6 +199,22 @@
                 }
             },
             "allOf" : [
+                {
+                    "if": { "properties": { "format": { "const": "addressName" } } },
+                    "then": {
+                        "properties": { 
+                            "params": { "$ref": "#/$definitions/addressNameParameters" }
+                        }
+                    }
+                },
+                {
+                    "if": { "properties": { "format": { "const": "nftName" } } },
+                    "then": {
+                        "properties": {
+                            "params": { "$ref": "#/$definitions/nftNameParameters" }
+                        }
+                    }
+                },
                 {
                     "if": { "properties": { "format": { "const": "tokenAmount" } } },
                     "then": {
@@ -316,18 +329,23 @@
                                 }
                             }
                         },
-                        "schema" : {
-                            "oneOf": [
-                                {
-                                    "$ref": "#/$definitions/eip712-json-schema"
-                                },
-                                {
-                                    "title": "An EIP712 Schema url",
-                                    "description": "URL of an EIP712 Schema bound to this file.",
-                                    "type": "string",
-                                    "format": "uri"
-                                }
-                            ]
+                        "schemas" : 
+                        {
+                            "type": "array",
+                            "description": "An array of EIP712 schemas that can be used to validate the message.",
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/$definitions/eip712-json-schema"
+                                    },
+                                    {
+                                        "title": "An EIP712 Schema url",
+                                        "description": "URL of an EIP712 Schema bound to this file.",
+                                        "type": "string",
+                                        "format": "uri"
+                                    }
+                                ]
+                            }
                         }
                     },
                     "additionalProperties": false
@@ -442,8 +460,13 @@
                 },
                 {
                     "title": "address format",
-                    "const": "addressOrName",
-                    "description": "The field should be displayed as an address or replaced by a trusted name."
+                    "const": "addressName",
+                    "description": "The field should be displayed as a trusted name, or as a raw address if no names are found in trusted sources. List of trusted sources can be optionally specified in parameters."
+                },
+                {
+                    "title": "integer format",
+                    "const": "nftName",
+                    "description": "The field should be displayed as a single NFT names, or as a raw token Id if a specific name is not found. Collection is specified by the collectionPath parameter."
                 },
                 {
                     "title": "integer format",
@@ -476,6 +499,36 @@
                     "description": "The field should be displayed as a human readable string by converting the value using the enum referenced in parameters."
                 }
             ]
+        },
+        "addressNameParameters" : {
+            "title": "Address Names Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "sources": {
+                    "title": "Trusted Sources for names, in order of preferences. See specification for more details on sources values.",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "enum": [ "wallet", "ens", "contract", "token", "collection" ]
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "nftNameParameters" : {
+            "title": "NFT Names Formatting Parameters",
+            "type": "object",
+            "properties": {
+                "collectionPath": {
+                    "title": "Collection Path",
+                    "type": "string",
+                    "description": "The path to the collection in the structured data."
+                }
+            },
+            "required": [
+                "collectionPath"
+            ],
+            "additionalProperties": false
         },
         "tokenAmountParameters": {
             "title": "Token Amount Formatting Parameters",
