@@ -3,7 +3,9 @@
     "context": {
       "eip712": {
         "domain": {
-          "name": "Permit2"
+          "name": "Permit2",
+          "chainId": 1,
+          "verifyingContract": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
         },
         "schemas": [ 
           {
@@ -111,6 +113,14 @@
             "primaryType": "PermitSingle"
           }
         ]
+      }
+    },
+    "metadata": {
+      "owner": "Uniswap",
+      "info": {
+        "legalName": "Uniswap Labs",
+        "lastUpdate": "2021-12-14T00:00:00Z",
+        "url": "https://uniswap.org/"
       }
     },
     "display": {
