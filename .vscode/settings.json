@@ -2,21 +2,15 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "evm-abi-example*.json"
+                "eip712*.json"
             ],
-            "url": "./schemas/evm-abi-schema.json"
+            "url": "./specs/erc7730.schema.json"
         },
         {
             "fileMatch": [
-                "eip712-example*.json"
+                "calldata*.json"
             ],
-            "url": "./schemas/eip712-schema.json"
-        },
-        {
-            "fileMatch": [
-                "clear-signing-example*.json"
-            ],
-            "url": "./schemas/clear-signing-schema.json"
+            "url": "./specs/erc7730.schema.json"
         }
     ]
 }

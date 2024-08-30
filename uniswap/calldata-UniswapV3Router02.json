@@ -7,6 +7,7 @@
             "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/uniswap/abis/0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45.abi.json"
         }
     },
+
     "metadata": {
         "owner": "Uniswap",
         "info": {
@@ -15,6 +16,7 @@
             "url": "https://uniswap.org/"
         }
     },
+    
     "display": {
         "formats": {
             "0xb858183f": {

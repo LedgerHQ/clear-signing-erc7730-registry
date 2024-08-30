@@ -1,6 +1,4 @@
 {
-    "$schema": "../schemas/clear-signing-schema.json",
-
     "context": {
         "$id": "stETH",
         "contract": {
