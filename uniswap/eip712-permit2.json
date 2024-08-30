@@ -1,5 +1,4 @@
 {
-    "$schema": "../schemas/clear-signing-schema.json",
     "context": {
       "eip712": {
         "domain": {
@@ -115,6 +114,7 @@
         ]
       }
     },
+
     "metadata": {
       "owner": "Uniswap",
       "info": {
@@ -123,6 +123,7 @@
         "url": "https://uniswap.org/"
       }
     },
+    
     "display": {
       "formats": {
         "PermitSingle": {

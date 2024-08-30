@@ -1,7 +1,4 @@
 {
-
-    "$schema": "../schemas/clear-signing-schema.json",
-
     "context": {
         "$id": "Lending Pool v2",
         "contract" : {
@@ -10,6 +7,7 @@
             "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json"
         }
     },
+
     "metadata": {
         "owner": "Aave",
         "info": {
@@ -24,6 +22,7 @@
             }
         }
     },
+    
     "display": {
         "formats": {
             "0x573ade81" : {

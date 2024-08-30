@@ -1,5 +1,4 @@
 {
-    "$schema": "../schemas/clear-signing-schema.json",
     "context": {
         "eip712" : {
             "domain": {
@@ -11,7 +10,9 @@
             }
         } 
     },
-    "includes": ["clear-signing-example-permit.json"],
+    
+    "includes": ["ercs/calldata-erc20-tokens.json"],
+
     "metadata": {
         "owner": "MakerDAO",
         "info": {
@@ -25,6 +26,7 @@
             "magnitude": 18
         }
     },
+    
     "display": {
         "formats": {
             "Permit": {

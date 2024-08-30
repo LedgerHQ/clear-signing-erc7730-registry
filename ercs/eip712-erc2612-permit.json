@@ -1,5 +1,4 @@
 {
-  "$schema": "../schemas/clear-signing-schema.json",
   "context": {
     "eip712": {
       "schemas": [ 

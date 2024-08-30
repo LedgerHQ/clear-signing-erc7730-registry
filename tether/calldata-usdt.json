@@ -1,6 +1,4 @@
 {
-    "$schema": "../schemas/clear-signing-schema.json",
-
     "context": {
         "$id": "Tether USD",
         "contract" : {
@@ -8,7 +6,9 @@
             "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
         }
     }, 
-    "includes": ["../examples/clear-signing-example-erc20.json"],
+
+    "includes": ["ercs/calldata-erc20-tokens.json"],
+
     "metadata": {
         "owner": "Tether",
         "info": {
