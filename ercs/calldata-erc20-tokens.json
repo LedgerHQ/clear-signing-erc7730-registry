@@ -54,8 +54,7 @@
 
     "display": {
         "formats": {
-            "0xa9059cbb": {
-                "$id" : "transfer",
+            "transfer(address,uint256)": {
                 "intent": "Send",
                 "fields": {
                     "_to" : {
@@ -72,8 +71,7 @@
                 },
                 "required": ["_to", "_value"]
             },
-            "0x095ea7b3": {
-                "$id" : "approve",
+            "approve(address,uint256)": {
                 "intent": "Approve",
                 "fields": {
                     "_spender" : {
@@ -82,7 +80,7 @@
                     },
                     "_value" : {
                         "label": "Amount",
-                        "format": "allowanceAmount",
+                        "format": "tokenAmount",
                         "params": {
                             "tokenPath": "$.context.contract.address",
                             "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
@@ -91,7 +89,6 @@
                 },
                 "required": ["_spender", "_value"]
             }
-
         }
     }
 }

@@ -83,10 +83,7 @@
         "definitions": {
             "from" : {
                 "label": "From",
-                "format": "addressName",
-                "params": {
-                    "sources": ["wallet"]
-                }
+                "format": "addressName"
             },
             "to" : {
                 "label": "To",
@@ -100,13 +97,12 @@
                 "label": "NFT",
                 "format": "nftName",
                 "params": {
-                    "collectionPath": "$.context.contract.address"
+                    "collectionPath": "@.to"
                 }
             }
         },
         "formats": {
-            "0x23b872dd": {
-                "$id" : "transferFrom",
+            "transferFrom(address,address,uint256)": {
                 "intent": "Send NFT",
                 "fields": {
                     "_from" : { "$ref": "$.display.definitions.from" },
@@ -115,8 +111,7 @@
                 },
                 "required": ["_to", "_tokenId"]
             },
-            "0x42842e0e": {
-                "$id" : "safeTransferFrom",
+            "safeTransferFrom(address,address,uint256)": {
                 "intent": "Send NFT",
                 "fields": {
                     "_from" : { "$ref": "$.display.definitions.from" },
@@ -125,23 +120,22 @@
                 },
                 "required": ["_spender", "_value"]
             },
-            "0x095ea7b3" : {
-                "$id": "approve",
+            "approve(address,uint256)" : {
                 "intent": "Approve operator for NFT",
                 "fields": {
                     "_approved" : { "$ref": "$.display.definitions.operator" },
                     "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
                 }
             },
-            "0xa22cb465" : {
+            "setApprovalForAll(address,bool)" : {
                 "$id": "setApprovalForAll",
-                "intent": "Manage operator for",
+                "intent": "Manage operator rights for",
                 "fields": {
                     "@.to": { 
                         "label": "Collection",
                         "format": "addressName",
                         "params": {
-                            "sources": ["collection"]
+                            "type": "nft"
                         }
                     },
                     "_operator" : { "$ref": "$.display.definitions.operator" },

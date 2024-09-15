@@ -2,8 +2,12 @@
     "context": {
         "$id": "stETH",
         "contract": {
-            "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
-            "chainId": 1,
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+                }
+            ],
             "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
         }
     },
@@ -19,8 +23,7 @@
 
     "display": {
         "formats": {
-            "0xa1903eab": {
-                "$id": "submit",
+            "submit(address)": {
                 "intent": "Stake ETH",
                 "fields": {
                     "@.amount" : {
@@ -34,19 +37,18 @@
                 },
                 "required": ["@.amount"]
             },
-            "0x095ea7b3" : {
-                "$id": "approve",
-                "intent": "Approve",
+            "approve(address,uint256)" : {
+                "intent": "Approve a spender",
                 "fields": {
                     "_spender" : {
-                        "label" : "Address to approve",
+                        "label" : "Spender",
                         "format": "addressName"
                     },
                     "_amount" : {
-                        "label" : "Amount to Approve",
+                        "label" : "Max spending amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "$.context.contract.address"
+                            "tokenPath": "@.to"
                         }
                     }
                 },

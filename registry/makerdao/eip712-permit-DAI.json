@@ -3,15 +3,18 @@
         "eip712" : {
             "domain": {
                 "name": "Dai Stablecoin",
-                "version": "1",
-                "chainId": 42,
-                "verifyingContract": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
-
-            }
+                "version": "1"
+            },
+            "deployments": [
+                {
+                    "chainId": 42,
+                    "address": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
+                }
+            ]
         } 
     },
     
-    "includes": ["ercs/calldata-erc20-tokens.json"],
+    "includes": "ercs/eip712-erc2612-permit.json",
 
     "metadata": {
         "owner": "MakerDAO",
@@ -23,7 +26,7 @@
         "token": {
             "name": "Dai Stablecoin",
             "ticker": "DAI",
-            "magnitude": 18
+            "decimals": 18
         }
     },
     

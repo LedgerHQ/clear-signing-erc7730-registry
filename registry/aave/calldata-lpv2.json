@@ -2,9 +2,13 @@
     "context": {
         "$id": "Lending Pool v2",
         "contract" : {
-            "chainId": 1,
-            "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9",
-            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json"
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9"        
+                }
+            ]
         }
     },
 
@@ -20,12 +24,15 @@
                 "1": "stable",
                 "2": "variable"
             }
+        },
+        "constants": {
+            "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
         }
     },
     
     "display": {
         "formats": {
-            "0x573ade81" : {
+            "repay(address,uint256,uint256,address)" : {
                 "$id": "repay",
                 "intent": "Repay loan",
                 "fields": {
@@ -33,73 +40,74 @@
                         "format": "tokenAmount",
                         "label": "Amount to repay",
                         "params": {
-                            "tokenPath": "asset"
+                            "tokenPath": "asset",
+                            "threshold": "$.metadata.constants.max",
+                            "message": "All"
+                        }
+                    },
+                    "rateMode": {
+                        "format": "enum",
+                        "label": "Interest rate mode",
+                        "params": {
+                            "$ref": "$.metadata.enums.interestRateMode"
                         }
                     },
                     "onBehalfOf": {
                         "format": "addressName",
-                        "label": "Debt holder"
-                    },
-                    "rateMode": {
-                        "format": "enum",
-                        "label": "Interest Rate mode",
-                        "params": {
-                            "$ref": "$.metadata.enums.interestRateMode"
-                        }
+                        "label": "For debt holder"
                     }
                 },
-                "required": ["amount", "onBehalfOf", "rateMode"]
+                "required": ["amount", "rateMode", "onBehalfOf"]
             },
-            "0x5a3b74b9": {
-                "$id": "setUserUseReserveAsCollateral",
-                "intent": "Set as collateral",
+            "setUserUseReserveAsCollateral(address,bool)": {
+                "intent": "Manage collateral",
                 "fields": {
                     "asset": {
                         "format": "addressName",
-                        "label": "Asset",
+                        "label": "For asset",
                         "params": {
-                            "sources": ["token"]
+                            "type": "token"
                         }
                     },
                     "useAsCollateral": {
                         "format": "raw",
-                        "label": "Use as collateral"
+                        "label": "Enable use as collateral"
                     }
                 },
                 "required": ["asset", "useAsCollateral"]
             },
-            "0x69328dec": {
-                "$id": "withdraw",
+            "withdraw(address,uint256,address)": {
                 "intent": "Withdraw",
                 "fields": {
                     "amount": {
                         "format": "tokenAmount",
                         "label": "Amount to withdraw",
                         "params": {
-                            "tokenPath": "asset"
+                            "tokenPath": "asset",
+                            "threshold": "$.metadata.constants.max",
+                            "message": "Max"
                         }
                     },
                     "to": {
                         "format": "addressName",
-                        "label": "Recipient"
+                        "label": "To recipient"
                     }
                 },
                 "required": ["amount", "to"]
             },
-            "0x94ba89a2": {
-                "$id": "swapBorrowRateMode",
+            "swapBorrowRateMode(address,uint256)": {
                 "intent": "Swap interest rate mode",
                 "fields": {
                     "asset": {
                         "format": "addressName",
-                        "label": "For Asset",
+                        "label": "For asset",
                         "params": {
-                            "sources": ["token"]
+                            "type": "token"
                         }
                     },
                     "rateMode": {
                         "format": "enum",
-                        "label": "Set Interest Rate mode to",
+                        "label": "Set interest rate mode to",
                         "params": {
                             "$ref": "$.metadata.enums.interestRateMode"
                         }
@@ -107,8 +115,7 @@
                 },
                 "required": ["asset", "rateMode"]
             },
-            "0xa415bcad" : {
-                "$id": "borrow",
+            "borrow(address,uint256,uint256,uint16,address)" : {
                 "intent": "Borrow",
                 "fields": {
                     "amount": {
@@ -118,21 +125,21 @@
                             "tokenPath": "asset"
                         }
                     },
-                    "onBehalfOf": {
-                        "format": "addressName",
-                        "label": "Debtor"
-                    },
                     "interestRateMode": {
                         "format": "enum",
                         "label": "Interest Rate mode",
                         "params": {
                             "$ref": "$.metadata.enums.interestRateMode"
                         }
+                    },
+                    "onBehalfOf": {
+                        "format": "addressName",
+                        "label": "Debtor"
                     }
                 },
                 "required": ["amount", "onBehalfOf", "interestRateMode"]
             },
-            "0xe8eda9df" : {
+            "deposit(address,uint256,address,uint16)" : {
                 "$id": "deposit",
                 "intent": "Supply",
                 "fields": {
