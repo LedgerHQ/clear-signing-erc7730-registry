@@ -2,10 +2,14 @@
     "context": {
       "eip712": {
         "domain": {
-          "name": "Permit2",
-          "chainId": 1,
-          "verifyingContract": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+          "name": "Permit2"
         },
+        "deployments": [
+          {
+            "chainId": 1,
+            "address": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+          }
+        ],
         "schemas": [ 
           {
             "types": {

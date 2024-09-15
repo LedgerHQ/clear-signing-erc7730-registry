@@ -8,14 +8,14 @@
         "$schema": {
             "title": "Schema",
             "type": "string",
-            "format": "uri",
+            "format": "uri-reference",
             "description": "The schema that the document should conform to. This should be the URL of a version of the clear signing JSON schemas available under https://github.com/LedgerHQ/clear-signing-erc7730-registry/tree/master/specs"
         },
 
         "includes": {
             "title": "External includes",
             "type": "string",
-            "format": "uri",
+            "format": "uri-reference",
             "description": "An URL of another ERC 7730 file that should be merged into this one. Includes are merged into this file before analysis. This can be used to manage interfaces definitions without redundancy."
         },
 
@@ -75,7 +75,7 @@
                                     "title": "An ABI url",
                                     "description": "URL of an ABI bound to this file.",
                                     "type": "string",
-                                    "format": "uri"
+                                    "format": "uri-reference"
                                 }
                             ]
                         },
@@ -110,9 +110,6 @@
                         }
                         
                     },
-                    "required": [
-                        "abi"
-                    ],
                     "additionalProperties": false
                 }
             },
@@ -144,7 +141,7 @@
                                         "title": "An EIP712 Schema url",
                                         "description": "URL of an EIP712 Schema bound to this file.",
                                         "type": "string",
-                                        "format": "uri"
+                                        "format": "uri-reference"
                                     }
                                 ]
                             }
@@ -261,7 +258,7 @@
                 "url": {
                     "title": "Owner URL",
                     "type": "string",
-                    "format": "URL",
+                    "format": "uri",
                     "description": "URL with more info on the entity the user interacts with."
                 }
             },
@@ -439,13 +436,13 @@
             "additionalProperties": {
                 "oneOf": [
                     {
-                        "$ref": "#/$definitions/reference"
-                    },
-                    {
                         "$ref": "#/$format/field"
                     },
                     {
                         "$ref": "#/$display/nestedFields"
+                    },
+                    {
+                        "$ref": "#/$definitions/reference"
                     }
                 ]
             },

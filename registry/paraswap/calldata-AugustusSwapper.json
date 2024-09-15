@@ -2,8 +2,12 @@
     "context": {
         "$id": "AugustusSwapper",
         "contract": {
-            "chainId": 1,
-            "address": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0xDEF171Fe48CF0115B1d80b88dc8eAB59176FEe57"
+                }
+            ],
             "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json"
         }
     },
@@ -62,14 +66,14 @@
                 "label": "Exchange",
                 "format": "addressName",
                 "params": {
-                    "sources": ["contract"]
+                    "type": "contract"
                 }
             },
             "factory" : {
                 "label": "Uniswap Factory",
                 "format": "addressName",
                 "params": {
-                    "sources": ["contract"]
+                    "type": "contract"
                 }
             }
         },

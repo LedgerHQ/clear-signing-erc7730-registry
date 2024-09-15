@@ -2,12 +2,17 @@
     "context": {
         "$id": "Tether USD",
         "contract" : {
-            "chainId": 1,
-            "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+        
+                }
+            ]
         }
     }, 
 
-    "includes": ["ercs/calldata-erc20-tokens.json"],
+    "includes": "ercs/calldata-erc20-tokens.json",
 
     "metadata": {
         "owner": "Tether",
@@ -19,7 +24,7 @@
         "token": {
             "ticker": "USDT",
             "name": "Tether USD",
-            "magnitude": 6
+            "decimals": 6
         }
     }
 }

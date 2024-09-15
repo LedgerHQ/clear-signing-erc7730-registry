@@ -2,8 +2,12 @@
     "context": {
         "$id": "Uniswap v3 Router 2",
         "contract": {
-            "address": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45",
-            "chainId": 1,
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45"
+                }
+            ],
             "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/uniswap/abis/0x68b3465833fb72a70ecdf485e0e4c7bd8665fc45.abi.json"
         }
     },
@@ -64,9 +68,11 @@
                     },
                     "params.fee" : {
                         "label": "Uniswap fee",
-                        "format": "percentage",
+                        "format": "unit",
                         "params": {
-                            "magnitude": 4
+                            "decimals": 4,
+                            "base": "%",
+                            "prefix": false
                         }
                     },
                     "params.recipient" : {
@@ -121,9 +127,11 @@
                     },
                     "params.fee" : {
                         "label": "Uniswap fee",
-                        "format": "percentage",
+                        "format": "unit",
                         "params": {
-                            "magnitude": 4
+                            "decimals": 4,
+                            "base": "%",
+                            "prefix": false
                         }
                     },
                     "params.recipient" : {

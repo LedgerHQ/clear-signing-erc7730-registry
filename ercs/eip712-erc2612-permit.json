@@ -53,7 +53,6 @@
   "display": {
     "formats": {
       "Permit": {
-        "$id": "Permit",
         "intent": "Authorize spending of tokens",
         "fields": {
           "spender": {
@@ -61,14 +60,14 @@
             "format": "addressName"
           },
           "value": {
-            "label": "Amount",
+            "label": "Max spending amount",
             "format": "tokenAmount",
             "params": {
-              "tokenPath": "$.context.eip712domain.verifyingContract"
+              "tokenPath": "@.to"
             }
           },
           "deadline": {
-            "label": "Valid Until",
+            "label": "Valid until",
             "format": "date",
             "params": {
               "encoding": "timestamp"
