@@ -4,13 +4,13 @@
             "fileMatch": [
                 "eip712*.json"
             ],
-            "url": "./specs/erc7730.schema.json"
+            "url": "./specs/erc7730-v1.schema.json"
         },
         {
             "fileMatch": [
                 "calldata*.json"
             ],
-            "url": "./specs/erc7730.schema.json"
+            "url": "./specs/erc7730-v1.schema.json"
         }
     ]
 }
