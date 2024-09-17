@@ -1,0 +1,51 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "$id": "Poap Bridge contract",
+        "contract": {
+            "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x0bb4d3e88243f4a057db77341e6916b0e449b158",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x0bb4d3e88243f4a057db77341e6916b0e449b158"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "POAP",
+        "info": {
+            "url": "https://poap.xyz/",
+            "legalName": "Proof of Attendance Protocol",
+            "lastUpdate": "2022-03-03T17:56:02Z"
+        }
+    },
+
+    "display": {
+        "formats": {
+            "mintToken(uint256 eventId, uint256 tokenId, address receiver, uint256 expirationTime, bytes signature)" : {
+                "intent": "Mint POAP",
+                "fields": {
+                    "tokenId": {
+                        "label": "Token",
+                        "format": "raw"
+                    },
+                    "receiver": {
+                        "label": "Beneficiary",
+                        "format": "addressName"
+                    },
+                    "expirationTime": {
+                        "label": "Expiration time",
+                        "format": "date",
+                        "params": {
+                            "encoding": "timestamp"
+                        }
+                    }
+                },
+                "required": ["tokenId", "recipient"]
+            }
+        }
+    }
+}
