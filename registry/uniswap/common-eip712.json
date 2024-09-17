@@ -1,0 +1,26 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "eip712": {
+            "domain": {
+                "name": "Permit2"
+            },
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "Uniswap",
+        "info": {
+            "legalName": "Uniswap Labs",
+            "lastUpdate": "2021-12-14T00:00:00Z",
+            "url": "https://uniswap.org/"
+        }
+    }
+}
