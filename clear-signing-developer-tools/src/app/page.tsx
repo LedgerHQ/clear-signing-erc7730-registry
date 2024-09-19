@@ -1,4 +1,5 @@
 import { type ReactElement } from "react";
+import { type PreviewData } from "~/app/raw-data-example/page";
 
 const UI = {
   BlueLink: ({ children, href }: { children: string; href: string }) => (
@@ -31,6 +32,11 @@ const UI = {
 };
 
 export default function HomePage() {
+  const mockData = {
+    intent: "swap",
+    displays: [{ label: "tx1", displayValue: "0xbe936…e403" }],
+  } satisfies PreviewData;
+
   return (
     <main className="px-16 py-16 text-lg">
       <div className="container">
@@ -62,6 +68,7 @@ export default function HomePage() {
             </UI.Select>
           </div>
         </form>
+        <pre>{JSON.stringify(mockData, null, 2)}</pre>
       </div>
     </main>
   );
