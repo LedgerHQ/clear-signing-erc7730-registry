@@ -104,49 +104,50 @@
         "formats": {
             "transferFrom(address,address,uint256)": {
                 "intent": "Send NFT",
-                "fields": {
-                    "_from" : { "$ref": "$.display.definitions.from" },
-                    "_to" : { "$ref": "$.display.definitions.to" },
-                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
-                },
+                "fields": [
+                    { "path": "_from", "$ref": "$.display.definitions.from" },
+                    { "path": "_to", "$ref": "$.display.definitions.to" },
+                    { "path": "_tokenId", "$ref": "$.display.definitions.tokenId" }
+                ],
                 "required": ["_to", "_tokenId"]
             },
             "safeTransferFrom(address,address,uint256)": {
                 "intent": "Send NFT",
-                "fields": {
-                    "_from" : { "$ref": "$.display.definitions.from" },
-                    "_to" : { "$ref": "$.display.definitions.to" },
-                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
-                },
+                "fields": [
+                    { "path": "_from", "$ref": "$.display.definitions.from" },
+                    { "path": "_to", "$ref": "$.display.definitions.to" },
+                    { "path": "_tokenId", "$ref": "$.display.definitions.tokenId" }
+                ],
                 "required": ["_spender", "_value"]
             },
             "approve(address,uint256)" : {
                 "intent": "Approve operator for NFT",
-                "fields": {
-                    "_approved" : { "$ref": "$.display.definitions.operator" },
-                    "_tokenId" : { "$ref": "$.display.definitions.tokenId" }
-                }
+                "fields": [
+                    { "path": "_approved", "$ref": "$.display.definitions.operator" },
+                    { "path": "_tokenId", "$ref": "$.display.definitions.tokenId" }
+                ]
             },
             "setApprovalForAll(address,bool)" : {
                 "$id": "setApprovalForAll",
                 "intent": "Manage operator rights for",
-                "fields": {
-                    "@.to": { 
+                "fields": [
+                    { 
+                        "path": "@.to",
                         "label": "Collection",
                         "format": "addressName",
                         "params": {
                             "type": "nft"
                         }
                     },
-                    "_operator" : { "$ref": "$.display.definitions.operator" },
-                    "_approved" : { 
+                    { "path": "_operator", "$ref": "$.display.definitions.operator" },
+                    { 
+                        "path": "_approved",
                         "label": "Access rights", 
                         "format": "enum",
                         "$params": { "$ref": "$.metadata.enums.rights" }
                     }
-                }
+                ]
             }
-
         }
     }
 }

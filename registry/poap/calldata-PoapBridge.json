@@ -27,23 +27,26 @@
         "formats": {
             "mintToken(uint256 eventId, uint256 tokenId, address receiver, uint256 expirationTime, bytes signature)" : {
                 "intent": "Mint POAP",
-                "fields": {
-                    "tokenId": {
+                "fields": [
+                    {
+                        "path": "tokenId",
                         "label": "Token",
                         "format": "raw"
                     },
-                    "receiver": {
+                    {
+                        "path": "receiver",
                         "label": "Beneficiary",
                         "format": "addressName"
                     },
-                    "expirationTime": {
+                    {
+                        "path": "expirationTime",
                         "label": "Expiration time",
                         "format": "date",
                         "params": {
                             "encoding": "timestamp"
                         }
                     }
-                },
+                ],
                 "required": ["tokenId", "recipient"]
             }
         }

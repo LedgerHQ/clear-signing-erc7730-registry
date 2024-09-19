@@ -147,48 +147,55 @@
         "formats": {
             "PermitWitnessTransferFrom" : {
                 "intent": "UniswapX Exclusive Dutch Order",
-                "fields": {
-                    "spender": {
+                "fields": [
+                    {
+                        "path": "spender",
                         "label": "Approve to spender",
                         "format": "addressName"
                     },
-                    "permitted.amount": {
+                    {
+                        "path": "permitted.amount",
                         "label": "Approve amount",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "permitted.token"
                         }
                     },
-                    "witness.inputStartAmount": {
+                    {
+                        "path": "witness.inputStartAmount",
                         "label": "Spend max",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "witness.inputToken"
                         }
                     },
-                    "witness.outputs[]": {
-                        "fields": {
-                            "endAmount": {
+                    {
+                        "path": "witness.outputs[]",
+                        "fields": [
+                            {
+                                "path": "endAmount",
                                 "label": "Minimum amounts to receive",
                                 "format": "tokenAmount",
                                 "params": {
                                     "tokenPath": "token"
                                 }
                             },
-                            "recipient": {
+                            {
+                                "path": "recipient",
                                 "label": "On Addresses",
                                 "format": "addressName"
                             }
-                        }
+                        ]
                     },
-                    "deadline": {
+                    {
+                        "path": "deadline",
                         "label": "Approval expire",
                         "format": "date",
                         "params": {
                             "encoding": "timestamp"
                         }
                     }
-                }
+                ]
             }
         }
     }

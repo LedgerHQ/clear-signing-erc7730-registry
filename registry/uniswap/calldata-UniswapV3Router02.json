@@ -26,47 +26,53 @@
             "0xb858183f": {
                 "$id": "exactInput",
                 "intent": "Swap",
-                "fields": {
-                    "params.amountIn": {
+                "fields": [
+                    {
+                        "path": "params.amountIn",
                         "label": "Amount to Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.path[0:19]"
                         }
                     },
-                    "params.amountOut": {
+                    {
+                        "path": "params.amountOut",
                         "label": "Minimum amount to Receive",
                         "format": "tokenAmount",
-                        "params" : {
+                        "params": {
                             "tokenPath": "params.path[-20:-1]"
                         }
                     },
-                    "params.recipient": {
+                    {
+                        "path": "params.recipient",
                         "label": "Beneficiary",
                         "format": "addressName"
                     }
-                },
+                ],
                 "required": ["params.amountIn", "params.amountOut", "params.recipient"]
             },
             "0x04e45aaf": {
                 "$id": "exactInputSingle",
                 "intent": "swap",
-                "fields": {
-                    "params.amountIn": {
+                "fields": [
+                    {
+                        "path": "params.amountIn",
                         "label": "Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenIn"
                         }
                     },
-                    "params.amountOutMinimum": {
+                    {
+                        "path": "params.amountOutMinimum",
                         "label": "Receive Mininum",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenOut"
                         }
                     },
-                    "params.fee" : {
+                    {
+                        "path": "params.fee",
                         "label": "Uniswap fee",
                         "format": "unit",
                         "params": {
@@ -75,57 +81,64 @@
                             "prefix": false
                         }
                     },
-                    "params.recipient" : {
+                    {
+                        "path": "params.recipient",
                         "label": "Beneficiary",
                         "format": "addressName"
                     }
-                },
+                ],
                 "required": ["params.amountIn", "params.amountOutMininimum", "params.fee", "params.recipient"]
             },
             "0x09b81346": {
                 "$id": "exactOutput",
                 "intent": "Swap",
-                "fields": {
-                    "params.amountInMaximum": {
+                "fields": [
+                    {
+                        "path": "params.amountInMaximum",
                         "label": "Maximum Amount to Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.path[0:19]"
                         }
                     },
-                    "params.amountOut": {
+                    {
+                        "path": "params.amountOut",
                         "label": "Amount to Receive",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.path[-20:-1]"
                         }
                     },
-                    "params.recipient": {
+                    {
+                        "path": "params.recipient",
                         "label": "Beneficiary",
                         "format": "addressName"
                     }
-                },
+                ],
                 "required": ["params.amountInMaximum", "params.amountOut", "params.recipient"]
             },
             "0x5023b4df": {
                 "$id": "exactOutputSingle",
                 "intent": "Swap",
-                "fields": {
-                    "params.amountInMaximum": {
+                "fields": [
+                    {
+                        "path": "params.amountInMaximum",
                         "label": "Maximum Amount to Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenIn"
                         }
                     },
-                    "params.amountOut": {
+                    {
+                        "path": "params.amountOut",
                         "label": "Amount to Receive",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenOut"
                         }
                     },
-                    "params.fee" : {
+                    {
+                        "path": "params.fee",
                         "label": "Uniswap fee",
                         "format": "unit",
                         "params": {
@@ -134,51 +147,56 @@
                             "prefix": false
                         }
                     },
-                    "params.recipient" : {
+                    {
+                        "path": "params.recipient",
                         "label": "Beneficiary",
                         "format": "addressName"
                     }
-                }
+                ]
             },
             "0x472b43f3": {
                 "$id": "swapExactTokensForTokens",
                 "intent": "Swap",
-                "fields": {
-                    "amountIn": {
+                "fields": [
+                    {
+                        "path": "amountIn",
                         "label": "Amount to Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "path[0]"
                         }
                     },
-                    "amountOutMin": {
+                    {
+                        "path": "amountOutMin",
                         "label": "Minimum amount to Receive",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "path[-1]"
                         }
                     }
-                }
+                ]
             },
-            "0x42712a67" : {
+            "0x42712a67": {
                 "$id": "swapTokensForExactTokens",
                 "intent": "Swap",
-                "fields": {
-                    "amountOut": {
+                "fields": [
+                    {
+                        "path": "amountOut",
                         "label": "Amount to Receive",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "path[-1]"
                         }
                     },
-                    "amountInMax": {
+                    {
+                        "path": "amountInMax",
                         "label": "Maximum Amount to Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "path[0]"
                         }
                     }
-                }
+                ]
             }
         }
     }

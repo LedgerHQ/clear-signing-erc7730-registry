@@ -28,43 +28,47 @@
         "formats": {
             "wrap(uint256)" : {
                 "intent": "Exchange stETH to wstETH",
-                "fields": {
-                    "_stETHAmount": {
+                "fields": [
+                    {
+                        "path": "_stETHAmount",
                         "label": "Amount to exchange",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "$.metadata.constants.stETHaddress"
                         }
                     }
-                }
+                ]
             },
             "unwrap(uint256)": {
                 "intent" : "Exchange wstETH to stETH",
-                "fields": {
-                    "_wstETHAmount": {
+                "fields": [
+                    {
+                        "path": "_wstETHAmount",
                         "label": "Amount to exchange",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "@.to"
                         }
                     }
-                }
+                ]
             }, 
             "approve(address,uint256)" : {
                 "intent" : "Approve spender",
-                "fields": {
-                    "spender": {
+                "fields": [
+                    {
+                        "path": "spender",
                         "label": "Spender",
                         "format": "addressName"
                     },
-                    "amount": {
+                    {
+                        "path": "amount",
                         "label": "Max spending amount",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "@.to"
                         }
                     }
-                }
+                ]
             }
         }
     }

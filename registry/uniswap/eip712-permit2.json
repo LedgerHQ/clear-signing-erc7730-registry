@@ -118,26 +118,29 @@
             "PermitSingle": {
                 "$id": "Permit2 Permit Single",
                 "intent": "Authorize spending of token",
-                "fields": {
-                    "spender": {
-                        "label": "Spender",
-                        "format": "addressName"
-                    },
-                    "details.amount": {
-                        "label": "Amount allowance",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "details.token"
+                "fields": [
+                        {
+                            "path": "spender",
+                            "label": "Spender",
+                            "format": "addressName"
+                        },
+                        {
+                            "path": "details.amount",
+                            "label": "Amount allowance",
+                            "format": "tokenAmount",
+                            "params": {
+                                "tokenPath": "details.token"
+                            }
+                        },
+                        {
+                            "path": "details.expiration",
+                            "label": "Approval expires",
+                            "format": "date",
+                            "params": {
+                                "encoding": "timestamp"
+                            }
                         }
-                    },
-                    "details.expiration": {
-                        "label": "Approval expires",
-                        "format": "date",
-                        "params": {
-                            "encoding": "timestamp"
-                        }
-                    }
-                },
+                ],
                 "required": [
                     "spender",
                     "details.amount"
@@ -148,30 +151,29 @@
             "PermitBatch": {
                 "$id": "Permit2 Permit Batch",
                 "intent": "Authorize spending of tokens",
-                "fields": {
-                    "spender": {
+                "fields": [
+                    {
+                        "path": "spender",
                         "label": "Spender",
                         "format": "addressName"
                     },
-                    "details[]": {
-                        "fields": {
-                            "amount": {
-                                "label": "Amount allowance",
-                                "format": "tokenAmount",
-                                "params": {
-                                    "tokenPath": "token"
-                                }
-                            },
-                            "expiration": {
-                                "label": "Approval expires",
-                                "format": "date",
-                                "params": {
-                                    "encoding": "timestamp"
-                                }
-                            }
+                    {
+                        "path": "details[].amount",
+                        "label": "Amount allowance",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
+                    },
+                    {
+                        "path": "details[].expiration",
+                        "label": "Approval expires",
+                        "format": "date",
+                        "params": {
+                            "encoding": "timestamp"
                         }
                     }
-                },
+                ],
                 "required": [
                     "spender",
                     "details"

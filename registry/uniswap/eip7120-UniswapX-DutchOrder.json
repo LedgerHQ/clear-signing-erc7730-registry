@@ -134,53 +134,59 @@
             ]
         }
     },
-
     "display": {
         "formats": {
             "PermitWitnessTransferFrom" : {
                 "intent": "UniswapX Dutch Order",
-                "fields": {
-                    "spender": {
+                "fields": [
+                    {
+                        "path": "fields.spender",
                         "label": "Approve to spender",
                         "format": "addressName"
                     },
-                    "permitted.amount": {
+                    {
+                        "path": "fields.permitted.amount",
                         "label": "Approve amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "permitted.token"
+                            "tokenPath": "fields.permitted.token"
                         }
                     },
-                    "witness.inputStartAmount": {
+                    {
+                        "path": "fields.witness.inputStartAmount",
                         "label": "Spend max",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "witness.inputToken"
+                            "tokenPath": "fields.witness.inputToken"
                         }
                     },
-                    "witness.outputs[]": {
-                        "fields": {
-                            "endAmount": {
+                    {
+                        "path": "fields.witness.outputs[]",
+                        "fields": [
+                            {
+                                "path": "fields.endAmount",
                                 "label": "Minimum amounts to receive",
                                 "format": "tokenAmount",
                                 "params": {
-                                    "tokenPath": "token"
+                                    "tokenPath": "fields.token"
                                 }
                             },
-                            "recipient": {
+                            {
+                                "path": "fields.recipient",
                                 "label": "On Addresses",
                                 "format": "addressName"
                             }
-                        }
+                        ]
                     },
-                    "deadline": {
+                    {
+                        "path": "fields.deadline",
                         "label": "Approval expire",
                         "format": "date",
                         "params": {
                             "encoding": "timestamp"
                         }
                     }
-                }
+                ]
             }
         }
     }
