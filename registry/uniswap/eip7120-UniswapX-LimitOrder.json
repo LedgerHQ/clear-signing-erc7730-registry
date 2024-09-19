@@ -1,8 +1,6 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
-
     "includes": "common-eip712.json",
-
     "context": {
         "eip712": {
             "schemas": [
@@ -118,53 +116,59 @@
             ]
         }
     },
-
     "display": {
         "formats": {
-            "PermitWitnessTransferFrom" : {
+            "PermitWitnessTransferFrom": {
                 "intent": "UniswapX Limit Order",
-                "fields": {
-                    "spender": {
+                "fields": [
+                    {
+                        "path": "spender",
                         "label": "Approve to spender",
                         "format": "addressName"
                     },
-                    "permitted.amount": {
+                    {
+                        "path": "permitted.amount",
                         "label": "Amount allowance",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "permitted.token"
                         }
                     },
-                    "witness.inputAmount": {
+                    {
+                        "path": "witness.inputAmount",
                         "label": "Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "witness.inputToken"
                         }
                     },
-                    "witness.outputs[]": {
-                        "fields": {
-                            "amount": {
+                    {
+                        "path": "witness.outputs[]",
+                        "fields": [
+                            {
+                                "path": "amount",
                                 "label": "Min amount to receive",
                                 "format": "tokenAmount",
                                 "params": {
                                     "tokenPath": "token"
                                 }
                             },
-                            "recipient": {
+                            {
+                                "path": "recipient",
                                 "label": "On Address",
                                 "format": "addressName"
                             }
-                        }
+                        ]
                     },
-                    "deadline": {
+                    {
+                        "path": "deadline",
                         "label": "Approval expire",
                         "format": "date",
                         "params": {
                             "encoding": "timestamp"
                         }
                     }
-                }
+                ]
             }
         }
     }
