@@ -75,16 +75,16 @@ interface FieldFormatter {
 }
 
 type FieldFormat =
-  | "raw"
-  | "addressName"
-  | "calldata"
   | "amount"
   | "tokenAmount"
   | "nftName"
   | "date"
   | "duration"
   | "unit"
-  | "enum";
+  | "enum"
+  | "raw"
+  | "calldata"
+  | "addressName";
 
 interface StructuredDataFormat {
   $id?: string;
