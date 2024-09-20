@@ -2,11 +2,17 @@ import { type ReactNode } from "react";
 import { type PreviewData } from "~/types/PreviewData";
 
 const Screen = {
+  Action: ({ children }: { children: string }) => (
+    <div className="font-medium">{children}</div>
+  ),
   BackHeader: ({ children }: { children: string }) => (
     <div className="flex p-1">
       <div> &lt;--</div>
       <div className="text-center font-medium">{children}</div>
     </div>
+  ),
+  Content: ({ children }: { children: string }) => (
+    <div className="">{children}</div>
   ),
   InfoButton: () => (
     <div className="h-5 w-5 self-center rounded-full border-2 border-black text-center align-middle text-xs leading-4">
@@ -47,18 +53,20 @@ const StaxDisplay = ({ children }: { children: ReactNode }) => (
 
 const ReviewIntro = ({
   intent,
-  legalName,
+  owner,
+  type,
 }: {
   intent: string;
-  legalName: string;
+  owner: string;
+  type: string;
 }) => (
   <Screen.Wrapper>
     <Screen.Section>
       <Screen.Logo />
-      <Screen.ReviewTitle>{`Review ${intent}?`}</Screen.ReviewTitle>
+      <Screen.ReviewTitle>{`Review ${type} from ${intent}?`}</Screen.ReviewTitle>
       <Screen.InfoButton />
       <Screen.ReviewSummary>
-        {`You're interacting with a smart contract from ${legalName}.`}
+        {`You're interacting with a smart contract from ${owner}.`}
       </Screen.ReviewSummary>
       <Screen.TapToContinue />
     </Screen.Section>
@@ -68,10 +76,24 @@ const ReviewIntro = ({
   </Screen.Wrapper>
 );
 
-const ContractInformation = () => (
+const ContractInformation = ({
+  info: { legalName, url },
+}: {
+  info: { legalName: string; url: string };
+}) => (
   <Screen.Wrapper>
     <Screen.Section>
       <Screen.BackHeader>Smart contract information</Screen.BackHeader>
+    </Screen.Section>
+    <Screen.Section>
+      <Screen.Action>Contract owner</Screen.Action>
+      <Screen.Content>{legalName}</Screen.Content>
+      <Screen.Content>{url}</Screen.Content>
+    </Screen.Section>
+    <Screen.Section>
+      <Screen.Action>Contract address</Screen.Action>
+      <Screen.Content>{legalName}</Screen.Content>
+      <Screen.Content>{url}</Screen.Content>
     </Screen.Section>
   </Screen.Wrapper>
 );
@@ -90,20 +112,19 @@ const HoldToSign = () => (
 export const DevicesDemo = ({
   data: {
     intent,
-    metadata: {
-      info: { legalName },
-    },
+    type,
+    metadata: { owner, info },
   },
 }: {
   data: PreviewData;
 }) => (
   <div className="flex w-fit space-x-10 bg-neutral-200 p-16 font-inter text-sm">
     <StaxDisplay>
-      <ReviewIntro intent={intent} legalName={legalName} />
+      <ReviewIntro intent={intent} owner={owner} type={type} />
     </StaxDisplay>
 
     <StaxDisplay>
-      <ContractInformation />
+      <ContractInformation info={info} />
     </StaxDisplay>
 
     <StaxDisplay>
