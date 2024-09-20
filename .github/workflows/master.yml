@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  master:
-    name: master
+  ci:
+    name: ci
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
@@ -45,3 +45,19 @@ jobs:
       - name: Validate ERC-7730 descriptors
         timeout-minutes: 10
         run: erc7730 lint registry --gha
+
+  update_cal:
+    runs-on: ledgerhq-shared-small
+    needs: ci
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        repo: ['LedgerHQ/crypto-assets', 'LedgerHQ/crypto-assets-clear-signing-initiative']
+    steps:
+      - name: Trigger update on ${{ matrix.repo }}
+        timeout-minutes: 60
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CI_BOT_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: submodules
