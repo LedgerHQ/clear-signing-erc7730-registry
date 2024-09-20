@@ -21,10 +21,6 @@ jobs:
         timeout-minutes: 10
         uses: actions/checkout@v4
 
-      - name: Add author
-        timeout-minutes: 5
-        uses: toshimaru/auto-author-assign@v2.1.0
-
       - name: Add labels
         timeout-minutes: 30
         uses: actions/labeler@v5
