@@ -1,61 +1,11 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
-
     "includes": "common-eip712.json",
-
     "context": {
         "eip712": {
             "schemas": [
                 {
                     "types": {
-                        "DutchOrder": [
-                            {
-                                "name": "info",
-                                "type": "OrderInfo"
-                            },
-                            {
-                                "name": "decayStartTime",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "decayEndTime",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "inputToken",
-                                "type": "address"
-                            },
-                            {
-                                "name": "inputStartAmount",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "inputEndAmount",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "outputs",
-                                "type": "DutchOutput[]"
-                            }
-                        ],
-                        "DutchOutput": [
-                            {
-                                "name": "token",
-                                "type": "address"
-                            },
-                            {
-                                "name": "startAmount",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "endAmount",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "recipient",
-                                "type": "address"
-                            }
-                        ],
                         "EIP712Domain": [
                             {
                                 "name": "name",
@@ -68,6 +18,24 @@
                             {
                                 "name": "verifyingContract",
                                 "type": "address"
+                            }
+                        ],
+                        "LimitOrder": [
+                            {
+                                "name": "info",
+                                "type": "OrderInfo"
+                            },
+                            {
+                                "name": "inputToken",
+                                "type": "address"
+                            },
+                            {
+                                "name": "inputAmount",
+                                "type": "uint256"
+                            },
+                            {
+                                "name": "outputs",
+                                "type": "OutputToken[]"
                             }
                         ],
                         "OrderInfo": [
@@ -96,6 +64,20 @@
                                 "type": "bytes"
                             }
                         ],
+                        "OutputToken": [
+                            {
+                                "name": "token",
+                                "type": "address"
+                            },
+                            {
+                                "name": "amount",
+                                "type": "uint256"
+                            },
+                            {
+                                "name": "recipient",
+                                "type": "address"
+                            }
+                        ],
                         "PermitWitnessTransferFrom": [
                             {
                                 "name": "permitted",
@@ -115,7 +97,7 @@
                             },
                             {
                                 "name": "witness",
-                                "type": "DutchOrder"
+                                "type": "LimitOrder"
                             }
                         ],
                         "TokenPermissions": [
@@ -127,60 +109,66 @@
                                 "name": "amount",
                                 "type": "uint256"
                             }
-                        ]                    
+                        ]
                     },
                     "primaryType": "PermitWitnessTransferFrom"
                 }
             ]
         }
     },
-
     "display": {
         "formats": {
-            "PermitWitnessTransferFrom" : {
-                "intent": "UniswapX Dutch Order",
-                "fields": {
-                    "spender": {
+            "PermitWitnessTransferFrom": {
+                "intent": "UniswapX Limit Order",
+                "fields": [
+                    {
+                        "path": "spender",
                         "label": "Approve to spender",
                         "format": "addressName"
                     },
-                    "permitted.amount": {
-                        "label": "Approve amount",
+                    {
+                        "path": "permitted.amount",
+                        "label": "Amount allowance",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "permitted.token"
                         }
                     },
-                    "witness.inputStartAmount": {
-                        "label": "Spend max",
+                    {
+                        "path": "witness.inputAmount",
+                        "label": "Send",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "witness.inputToken"
                         }
                     },
-                    "witness.outputs[]": {
-                        "fields": {
-                            "endAmount": {
-                                "label": "Minimum amounts to receive",
+                    {
+                        "path": "witness.outputs[]",
+                        "fields": [
+                            {
+                                "path": "amount",
+                                "label": "Min amount to receive",
                                 "format": "tokenAmount",
                                 "params": {
                                     "tokenPath": "token"
                                 }
                             },
-                            "recipient": {
-                                "label": "On Addresses",
+                            {
+                                "path": "recipient",
+                                "label": "On Address",
                                 "format": "addressName"
                             }
-                        }
+                        ]
                     },
-                    "deadline": {
+                    {
+                        "path": "deadline",
                         "label": "Approval expire",
                         "format": "date",
                         "params": {
                             "encoding": "timestamp"
                         }
                     }
-                }
+                ]
             }
         }
     }

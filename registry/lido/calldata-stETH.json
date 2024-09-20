@@ -25,33 +25,37 @@
         "formats": {
             "submit(address)": {
                 "intent": "Stake ETH",
-                "fields": {
-                    "@.amount" : {
-                        "label" : "Amount to Stake",
+                "fields": [
+                    {
+                        "path": "@.amount",
+                        "label": "Amount to Stake",
                         "format": "amount"
                     },
-                    "_referral" : {
-                        "label" : "Referral",
+                    {
+                        "path": "_referral",
+                        "label": "Referral",
                         "format": "addressName"
                     }
-                },
+                ],
                 "required": ["@.amount"]
             },
             "approve(address,uint256)" : {
                 "intent": "Approve a spender",
-                "fields": {
-                    "_spender" : {
-                        "label" : "Spender",
+                "fields": [
+                    {
+                        "path": "_spender",
+                        "label": "Spender",
                         "format": "addressName"
                     },
-                    "_amount" : {
-                        "label" : "Max spending amount",
+                    {
+                        "path": "_amount",
+                        "label": "Max spending amount",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "@.to"
                         }
                     }
-                },
+                ],
                 "required": ["_spender", "_amount"]
             }
         }

@@ -430,10 +430,10 @@
         },
         "fields": {
             "title": "Field Formats set",
-            "type": "object",
-            "description": "Definitions of fields formats. Keys are a path of the field(s) to which the formatter applies. The path is in a format matching the schema of the structured data. See the specification for more details.",
+            "type": "array",
+            "description": "An array containing the ordered definitions of fields formats. See the specification for more details.",
             
-            "additionalProperties": {
+            "items": {
                 "oneOf": [
                     {
                         "$ref": "#/$format/field"
@@ -442,7 +442,7 @@
                         "$ref": "#/$display/nestedFields"
                     },
                     {
-                        "$ref": "#/$definitions/reference"
+                        "$ref": "#/$display/reference"
                     }
                 ]
             },
@@ -454,6 +454,9 @@
             "type": "object",
 
             "properties": {
+                "path": {
+                    "$ref": "#/$format/path"
+                },
                 "fields": {
                     "$ref": "#/$display/fields"
                 }
@@ -462,10 +465,39 @@
                 "fields"
             ],
             "additionalProperties": false
+        },
+        "reference": {
+            "title": "Reference",
+            "description": "A reference to a shared definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME. It is used to share definitions between multiple messages / functions.",
+            "properties": {
+                "path": {
+                    "$ref": "#/$format/path"
+                },
+                "$ref": {
+                    "title": "Internal Definition",
+                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
+                    "type": "string"
+                },
+                "params": {
+                    "title": "Parameters",
+                    "description": "Parameters override. These values takes precedence over the ones in the definition itself",
+                    "type": "object",
+                    "additionalProperties": { "type": "string" }
+                }
+            },
+            "required": [
+                "$ref"
+            ],
+            "additionalProperties": false
         }
     },
 
     "$format": {
+        "path": {
+            "title": "Path",
+            "type": "string",
+            "description": "A path to the field in the structured data. The path is a JSON path expression that can be used to extract the field value from the structured data."
+        },
         "field": {
             "title": "Field formatter",
             "description": "A field formatter contains formatting information of a single field in a message.",
@@ -474,6 +506,9 @@
             "properties": {
                 "$id": {
                     "$ref": "#/$definitions/id"
+                },
+                "path": {
+                    "$ref": "#/$format/path"
                 },
                 "label": {
                     "title": "Field Label",
@@ -753,28 +788,6 @@
     },
 
     "$definitions": {
-        "reference": {
-            "title": "Reference",
-            "description": "A reference to a shared definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME. It is used to share definitions between multiple messages / functions.",
-            "properties": {
-                "$ref": {
-                    "title": "Internal Definition",
-                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
-                    "type": "string"
-                },
-                "params": {
-                    "title": "Parameters",
-                    "description": "Parameters override. These values takes precedence over the ones in the definition itself",
-                    "type": "object",
-                    "additionalProperties": { "type": "string" }
-                }
-            },
-            "required": [
-                "$ref"
-            ],
-            "additionalProperties": false
-        },
-
         "id": {
             "title": "ID",
             "type": "string",

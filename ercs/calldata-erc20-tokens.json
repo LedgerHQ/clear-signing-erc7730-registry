@@ -56,29 +56,33 @@
         "formats": {
             "transfer(address,uint256)": {
                 "intent": "Send",
-                "fields": {
-                    "_to" : {
+                "fields": [
+                    {
+                        "path": "_to",
                         "label": "To",
                         "format": "addressName"
                     },
-                    "_value" : {
+                    {
+                        "path": "_value",
                         "label": "Amount",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "$.context.contract.address"
                         }
                     }
-                },
+                ],
                 "required": ["_to", "_value"]
             },
             "approve(address,uint256)": {
                 "intent": "Approve",
-                "fields": {
-                    "_spender" : {
+                "fields": [
+                    {
+                        "path": "_spender",
                         "label": "Spender",
                         "format": "addressName"
                     },
-                    "_value" : {
+                    {
+                        "path": "_value",
                         "label": "Amount",
                         "format": "tokenAmount",
                         "params": {
@@ -86,7 +90,7 @@
                             "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
                         }
                     }
-                },
+                ],
                 "required": ["_spender", "_value"]
             }
         }
