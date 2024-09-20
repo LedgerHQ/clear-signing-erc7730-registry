@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { type PreviewData } from "~/app/raw-data-example/page";
+import { type PreviewData } from "~/types/PreviewData";
 
 const Screen = {
   BackHeader: ({ children }: { children: string }) => (
