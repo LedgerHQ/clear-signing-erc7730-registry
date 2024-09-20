@@ -1,5 +1,5 @@
 "use client";
-import { ERC7730Schema, Metadata } from "~/types";
+import { type ERC7730Schema, type Metadata } from "~/types";
 import callData from "../../../../registry/paraswap/calldata-AugustusSwapper.json";
 
 export type PreviewData = {
