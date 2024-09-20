@@ -31,5 +31,5 @@ export function getPreviewData(data: ERC7730Schema): PreviewData {
     }
   }
 
-  return { displays, metadata, intent: "TODO" };
+  return { displays, metadata, intent: "Mint POAP", type: "transaction" };
 }
