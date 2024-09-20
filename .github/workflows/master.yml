@@ -1,0 +1,47 @@
+name: master
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  master:
+    name: master
+    runs-on: public-ledgerhq-shared-small
+    timeout-minutes: 60
+    steps:
+
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        timeout-minutes: 10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Login to Ledger JFrog
+        timeout-minutes: 10
+        uses: LedgerHQ/actions-security/actions/jfrog-login@actions/jfrog-login-1
+
+      - name: Setup pip
+        timeout-minutes: 10
+        run: jf pipc --global --repo-resolve=vault-pypi-prod-green
+
+      - name: Install ERC-7730 library
+        timeout-minutes: 10
+        run: jf pip install erc7730
+
+      - name: Validate ERC-7730 descriptors
+        timeout-minutes: 10
+        run: erc7730 lint registry --gha

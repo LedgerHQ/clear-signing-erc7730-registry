@@ -74,7 +74,7 @@ jobs:
         if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
         run: jf pip install erc7730
 
-      - name: Run step if test file(s) change
+      - name: Validate ERC-7730 descriptors changed in pull requests
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
         run: erc7730 lint ${{ steps.changed-descriptor-files.outputs.test_all_changed_files }} --gha
