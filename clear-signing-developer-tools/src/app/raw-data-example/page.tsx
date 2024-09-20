@@ -1,10 +1,10 @@
 "use client";
-import { ERC7730Schema } from "~/types";
+import { ERC7730Schema, Metadata } from "~/types";
 import callData from "../../../../registry/paraswap/calldata-AugustusSwapper.json";
 
 export type PreviewData = {
-  intent: string;
-  displays: [{ label: string; displayValue: string }];
+  owner: Metadata;
+  displays: DisplayItem[];
 };
 
 interface DisplayItem {
@@ -12,25 +12,20 @@ interface DisplayItem {
   displayValue: string;
 }
 
-function extractDisplayFields(data: ERC7730Schema): DisplayItem[] {
+function extractDisplayFields(data: ERC7730Schema): PreviewData {
   const displays: DisplayItem[] = [];
 
   const displayObject = data.display;
   console.log(displayObject);
 
-  // Iterate through all the formats in display.formats
   for (const formatKey in displayObject.formats) {
-    console.log("formatKey", formatKey);
     const format = displayObject.formats[formatKey];
 
-    console.log("format", format);
-    // Iterate over the fields within each format
     if (format?.fields && Array.isArray(format.fields)) {
       format.fields.forEach((field) => {
         let label: string | undefined;
         const displayValue = field.path;
 
-        // If field has a $ref, extract label from definitions
         if (field.$ref) {
           const definitionKey = field.$ref.split(".").pop();
           if (definitionKey && displayObject.definitions[definitionKey]) {
@@ -40,7 +35,6 @@ function extractDisplayFields(data: ERC7730Schema): DisplayItem[] {
           label = field.label;
         }
 
-        // If both label and displayValue are available, push to displays array
         if (label && displayValue) {
           displays.push({ label, displayValue });
         }
@@ -48,7 +42,7 @@ function extractDisplayFields(data: ERC7730Schema): DisplayItem[] {
     }
   }
 
-  return displays;
+  return { displays, owner: data.metadata };
 }
 
 export default function Page() {
