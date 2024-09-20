@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { type PreviewData } from "~/app/raw-data-example/page";
 
 const Device = {
   BackHeader: ({ children }: { children: string }) => (
@@ -22,13 +23,20 @@ const StaxDisplay = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-const ReviewIntro = () => (
+const ReviewIntro = ({
+  intent,
+  legalName,
+}: {
+  intent: string;
+  legalName: string;
+}) => (
   <Device.Screen>
     <Device.Logo />
+    <Device.ReviewTitle>{`Review ${intent}?`}</Device.ReviewTitle>
     <Device.ReviewTitle>Review swap with Uniswap?</Device.ReviewTitle>
     <Device.InfoButton />
     <Device.ReviewSummary>
-      You&apos;re interacting with a smart contract from Uniswap Labs.
+      {`You're interacting with a smart contract from ${legalName}.`}
     </Device.ReviewSummary>
     <Device.TapToContinue />
     <Device.RejectButton />
@@ -50,10 +58,14 @@ const FieldsReview = () => (
 
 const HoldToSign = () => <div>Sign swap transaction with Uniswap?</div>;
 
-export const DevicesDemo = () => (
-  <div className="flex w-fit space-x-10 bg-neutral-200 p-16">
+export const DevicesDemo = ({
+  data: { intent, legalName },
+}: {
+  data: PreviewData;
+}) => (
+  <div className="flex w-fit space-x-10 bg-neutral-200 p-16 font-inter text-sm">
     <StaxDisplay>
-      <ReviewIntro />
+      <ReviewIntro intent={intent} legalName={legalName} />
     </StaxDisplay>
 
     <StaxDisplay>

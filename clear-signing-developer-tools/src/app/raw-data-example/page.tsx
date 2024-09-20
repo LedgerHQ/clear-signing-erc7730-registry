@@ -2,6 +2,8 @@ import callData from "../../../../registry/paraswap/calldata-AugustusSwapper.jso
 
 export type PreviewData = {
   intent: string;
+  legalName: string;
+  owner: string;
   displays: [{ label: string; displayValue: string }];
 };
 
