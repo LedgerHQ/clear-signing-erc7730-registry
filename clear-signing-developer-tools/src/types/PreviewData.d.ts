@@ -1,5 +1,6 @@
 export type PreviewData = {
   intent: string;
+  type: "transaction" | "message";
   metadata: {
     owner: string;
     info: {
