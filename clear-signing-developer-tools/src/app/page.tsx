@@ -5,9 +5,15 @@ import { UI } from "~/app/UI";
 
 export default function HomePage() {
   const mockData = {
+    metadata: {
+      owner: "POAP",
+      info: {
+        legalName: "Proof of Attendance Protocol",
+        lastUpdate: "2021-09-01",
+        url: "https://poap.xyz",
+      },
+    },
     intent: "Mint POAP",
-    owner: "POAP",
-    legalName: "Proof of Attendance Protocol",
     displays: [{ label: "tx1", displayValue: "0xbe936…e403" }],
   } satisfies PreviewData;
 

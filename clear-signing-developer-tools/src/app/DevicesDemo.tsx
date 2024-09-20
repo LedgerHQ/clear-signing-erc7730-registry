@@ -88,7 +88,12 @@ const HoldToSign = () => (
 );
 
 export const DevicesDemo = ({
-  data: { intent, legalName },
+  data: {
+    intent,
+    metadata: {
+      info: { legalName },
+    },
+  },
 }: {
   data: PreviewData;
 }) => (

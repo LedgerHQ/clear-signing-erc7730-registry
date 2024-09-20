@@ -42,7 +42,7 @@ interface FactoryConstraint {
   deployEvent: string;
 }
 
-export interface Metadata {
+interface Metadata {
   owner: string;
   info: OwnerInfo;
   token: TokenDescription;

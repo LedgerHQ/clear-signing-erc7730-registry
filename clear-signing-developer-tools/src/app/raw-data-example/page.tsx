@@ -1,9 +1,17 @@
 "use client";
-import { type ERC7730Schema, type Metadata } from "~/types";
+import { type ERC7730Schema } from "~/types";
 import callData from "../../../../registry/paraswap/calldata-AugustusSwapper.json";
 
 export type PreviewData = {
-  owner: Metadata;
+  intent: string;
+  metadata: {
+    owner: string;
+    info: {
+      legalName: string;
+      lastUpdate: string;
+      url: string;
+    };
+  };
   displays: DisplayItem[];
 };
 
@@ -15,11 +23,11 @@ interface DisplayItem {
 function extractDisplayFields(data: ERC7730Schema): PreviewData {
   const displays: DisplayItem[] = [];
 
-  const displayObject = data.display;
-  console.log(displayObject);
+  const { display, metadata } = data;
+  console.log(display);
 
-  for (const formatKey in displayObject.formats) {
-    const format = displayObject.formats[formatKey];
+  for (const formatKey in display.formats) {
+    const format = display.formats[formatKey];
 
     if (format?.fields && Array.isArray(format.fields)) {
       format.fields.forEach((field) => {
@@ -28,8 +36,8 @@ function extractDisplayFields(data: ERC7730Schema): PreviewData {
 
         if (field.$ref) {
           const definitionKey = field.$ref.split(".").pop();
-          if (definitionKey && displayObject.definitions[definitionKey]) {
-            label = displayObject.definitions[definitionKey].label;
+          if (definitionKey && display.definitions[definitionKey]) {
+            label = display.definitions[definitionKey].label;
           }
         } else {
           label = field.label;
@@ -42,7 +50,7 @@ function extractDisplayFields(data: ERC7730Schema): PreviewData {
     }
   }
 
-  return { displays, owner: data.metadata };
+  return { displays, metadata, intent: "TODO" };
 }
 
 export default function Page() {
