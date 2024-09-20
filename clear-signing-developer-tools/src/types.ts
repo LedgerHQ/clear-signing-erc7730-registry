@@ -1,4 +1,4 @@
-interface ERC7730Schema {
+export interface ERC7730Schema {
   $schema: string;
   includes?: string;
   context: Context;
@@ -69,8 +69,10 @@ interface Display {
 
 interface FieldFormatter {
   $id?: string;
+  $ref?: string;
   label: string;
   format: FieldFormat;
+  path: string;
   params?: Record<string, unknown>;
 }
 
@@ -89,7 +91,7 @@ type FieldFormat =
 interface StructuredDataFormat {
   $id?: string;
   intent: Intent;
-  fields: Record<string, FieldFormat>;
+  fields: FieldFormatter[];
   required: string[];
   screens?: Record<string, Screen[]>;
 }
