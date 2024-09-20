@@ -7,13 +7,15 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test": "vitest --watch"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.10.1",
     "next": "^14.2.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "vitest": "^2.1.1",
     "zod": "^3.23.3"
   },
   "devDependencies": {
