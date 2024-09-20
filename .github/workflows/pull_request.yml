@@ -22,8 +22,6 @@ jobs:
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Add labels
         timeout-minutes: 30
@@ -47,11 +45,13 @@ jobs:
         id: changed-descriptor-files
         uses: tj-actions/changed-files@v45
         with:
-          files: registry/**
+          files: |
+            registry/**/eip712-*.json
+            registry/**/calldata-*.json
 
       - name: Setup python
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -59,20 +59,20 @@ jobs:
 
       - name: Login to Ledger JFrog
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         uses: LedgerHQ/actions-security/actions/jfrog-login@actions/jfrog-login-1
 
       - name: Setup pip
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         run: jf pipc --global --repo-resolve=vault-pypi-prod-green
 
       - name: Install ERC-7730 library
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         run: jf pip install erc7730
 
       - name: Validate ERC-7730 descriptors changed in pull requests
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
-        run: erc7730 lint ${{ steps.changed-descriptor-files.outputs.test_all_changed_files }} --gha
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
+        run: erc7730 lint ${{ steps.changed-descriptor-files.outputs.all_changed_files }} --gha
