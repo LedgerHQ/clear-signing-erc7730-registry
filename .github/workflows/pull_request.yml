@@ -64,7 +64,7 @@ jobs:
       - name: Setup pip
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        run: jf pipc --global --repo-resolve=vault-pypi-prod-green
+        run: jf pipc --global --repo-resolve=virtual-pypi-prod-green
 
       - name: Install ERC-7730 library
         timeout-minutes: 10
