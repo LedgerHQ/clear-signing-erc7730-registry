@@ -1,3 +1,4 @@
+import { DevicesDemo } from "~/app/DevicesDemo";
 import { PreviewForm } from "~/app/PreviewForm";
 import { type PreviewData } from "~/app/raw-data-example/page";
 import { UI } from "~/app/UI";
@@ -9,12 +10,13 @@ export default function HomePage() {
   } satisfies PreviewData;
 
   return (
-    <main className="px-16 py-16 text-lg">
-      <div className="container">
+    <main>
+      <div className="container p-16 text-lg">
         <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         <PreviewForm />
-        <pre>{JSON.stringify(mockData, null, 2)}</pre>
       </div>
+      <DevicesDemo />
+      <pre className="container p-16">{JSON.stringify(mockData, null, 2)}</pre>
     </main>
   );
 }
