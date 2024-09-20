@@ -13,7 +13,6 @@ export default function HomePage() {
 
   const data = {
     ...wipParsedData,
-    intent: "Mint POAP",
   } satisfies PreviewData;
 
   return (
