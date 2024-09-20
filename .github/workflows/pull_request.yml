@@ -1,0 +1,80 @@
+name: pull request
+
+on:
+  pull_request:
+
+permissions:
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: continuous integration
+    runs-on: ledgerhq-shared-small
+    timeout-minutes: 60
+    steps:
+
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@v4
+
+      - name: Add author
+        timeout-minutes: 5
+        uses: toshimaru/auto-author-assign@v2.1.0
+
+      - name: Add labels
+        timeout-minutes: 30
+        uses: actions/labeler@v5
+
+      - name: Enforce labels
+        timeout-minutes: 5
+        uses: mheap/github-action-required-labels@v5
+        with:
+          mode: minimum
+          count: 1
+          labels: |
+            documentation
+            specifications
+            descriptors
+            ci
+          add_comment: true
+
+      - name: Get all changed descriptor files
+        timeout-minutes: 5
+        id: changed-descriptor-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            registry/**/eip712-*.json
+            registry/**/calldata-*.json
+
+      - name: Setup python
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Login to Ledger JFrog
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        uses: LedgerHQ/actions-security/actions/jfrog-login@actions/jfrog-login-1
+
+      - name: Setup pip
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        run: jf pipc --global --repo-resolve=vault-pypi-prod-green
+
+      - name: Install ERC-7730 library
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        run: jf pip install erc7730
+
+      - name: Run step if test file(s) change
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.test_any_changed == 'true'
+        run: erc7730 lint ${{ steps.changed-descriptor-files.outputs.test_all_changed_files }} --gha
