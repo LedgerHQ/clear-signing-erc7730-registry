@@ -143,7 +143,7 @@
                         }
                     },
                     {
-                        "path": "witness.outputs[]",
+                        "path": "witness.outputs.[]",
                         "fields": [
                             {
                                 "path": "amount",

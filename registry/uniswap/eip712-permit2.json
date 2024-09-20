@@ -158,20 +158,25 @@
                         "format": "addressName"
                     },
                     {
-                        "path": "details[].amount",
-                        "label": "Amount allowance",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "token"
-                        }
-                    },
-                    {
-                        "path": "details[].expiration",
-                        "label": "Approval expires",
-                        "format": "date",
-                        "params": {
-                            "encoding": "timestamp"
-                        }
+                        "path": "details.[]",
+                        "fields": [
+                            {
+                                "path": "amount",
+                                "label": "Amount allowance",
+                                "format": "tokenAmount",
+                                "params": {
+                                    "tokenPath": "token"
+                                }
+                            },
+                            {
+                                "path": "expiration",
+                                "label": "Approval expires",
+                                "format": "date",
+                                "params": {
+                                    "encoding": "timestamp"
+                                }
+                            }
+                        ]
                     }
                 ],
                 "required": [
