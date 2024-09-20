@@ -140,46 +140,46 @@
                 "intent": "UniswapX Dutch Order",
                 "fields": [
                     {
-                        "path": "fields.spender",
+                        "path": "spender",
                         "label": "Approve to spender",
                         "format": "addressName"
                     },
                     {
-                        "path": "fields.permitted.amount",
+                        "path": "permitted.amount",
                         "label": "Approve amount",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "fields.permitted.token"
+                            "tokenPath": "permitted.token"
                         }
                     },
                     {
-                        "path": "fields.witness.inputStartAmount",
+                        "path": "witness.inputStartAmount",
                         "label": "Spend max",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "fields.witness.inputToken"
+                            "tokenPath": "witness.inputToken"
                         }
                     },
                     {
-                        "path": "fields.witness.outputs[]",
+                        "path": "witness.outputs[]",
                         "fields": [
                             {
-                                "path": "fields.endAmount",
+                                "path": "endAmount",
                                 "label": "Minimum amounts to receive",
                                 "format": "tokenAmount",
                                 "params": {
-                                    "tokenPath": "fields.token"
+                                    "tokenPath": "token"
                                 }
                             },
                             {
-                                "path": "fields.recipient",
+                                "path": "recipient",
                                 "label": "On Addresses",
                                 "format": "addressName"
                             }
                         ]
                     },
                     {
-                        "path": "fields.deadline",
+                        "path": "deadline",
                         "label": "Approval expire",
                         "format": "date",
                         "params": {
