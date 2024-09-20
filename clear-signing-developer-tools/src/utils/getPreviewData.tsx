@@ -1,7 +1,7 @@
-import { type PreviewData } from "../../types/PreviewData";
+import { type PreviewData } from "../types/PreviewData";
 import type { ERC7730Schema } from "~/types";
 
-export function extractDisplayFields(data: ERC7730Schema): PreviewData {
+export function getPreviewData(data: ERC7730Schema): PreviewData {
   const displays: PreviewData["displays"] = [];
 
   const { display, metadata } = data;

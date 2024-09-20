@@ -2,12 +2,12 @@ import { DevicesDemo } from "~/app/DevicesDemo";
 import { PreviewForm } from "~/app/PreviewForm";
 import { type PreviewData } from "~/types/PreviewData";
 import { UI } from "~/app/UI";
-import { extractDisplayFields } from "~/app/raw-data-example/extractDisplayFields";
+import { getPreviewData } from "~/utils/getPreviewData";
 import poapMetaDataFile from "../../../registry/poap/calldata-PoapBridge.json";
 import { type ERC7730Schema } from "~/types";
 
 export default function HomePage() {
-  const wipParsedData = extractDisplayFields(
+  const wipParsedData = getPreviewData(
     poapMetaDataFile as unknown as ERC7730Schema,
   );
 
