@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
-    name: continuous integration
+  pull_request:
+    name: pull request
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
