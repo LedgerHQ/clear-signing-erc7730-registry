@@ -1,5 +1,4 @@
 export type PreviewData = {
-  intent: string;
   type: "transaction" | "message";
   metadata: {
     owner: string;
@@ -9,8 +8,13 @@ export type PreviewData = {
       url: string;
     };
   };
-  displays: DisplayItem[];
+  operation: Operation[];
 };
+
+interface Operation {
+  intent: string;
+  displays: DisplayItem[];
+}
 
 interface DisplayItem {
   label: string;
