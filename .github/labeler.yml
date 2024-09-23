@@ -8,7 +8,7 @@ specifications:
 
 descriptors:
   - changed-files:
-      - any-glob-to-any-file: ['specs/**']
+      - any-glob-to-any-file: ['registry/**']
 
 ci:
   - changed-files:
