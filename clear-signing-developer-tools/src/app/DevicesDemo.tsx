@@ -51,20 +51,12 @@ const StaxDisplay = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-const ReviewIntro = ({
-  intent,
-  owner,
-  type,
-}: {
-  intent: string;
-  owner: string;
-  type: string;
-}) => (
+const ReviewIntro = ({ owner, type }: { owner: string; type: string }) => (
   <StaxDisplay>
     <Screen.Wrapper>
       <Screen.Section>
         <Screen.Logo />
-        <Screen.ReviewTitle>{`Review ${type} from ${intent}?`}</Screen.ReviewTitle>
+        <Screen.ReviewTitle>{`Review ${type} from ${owner}?`}</Screen.ReviewTitle>
         <Screen.InfoButton />
         <Screen.ReviewSummary>
           {`You're interacting with a smart contract from ${owner}.`}
@@ -112,9 +104,9 @@ const FieldsToReview = ({ displays }: { displays: DisplayItem[] }) =>
     </StaxDisplay>
   ));
 
-const HoldToSign = () => (
+const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
   <StaxDisplay>
-    <Screen.Wrapper>Sign swap transaction with Uniswap?</Screen.Wrapper>
+    <Screen.Wrapper>{`Sign ${type} from ${owner}?`}</Screen.Wrapper>
   </StaxDisplay>
 );
 
@@ -127,14 +119,14 @@ export const DevicesDemo = ({
 }: {
   data: PreviewData;
 }) => {
-  const [{ displays, intent }] = operations; // TODO: handle multiple operations
+  const [{ displays }] = operations; // TODO: handle multiple operations
   return (
     <div className="overflow-x-scroll bg-neutral-200 p-16">
       <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
-        <ReviewIntro intent={intent} owner={owner} type={type} />
+        <ReviewIntro owner={owner} type={type} />
         <ContractInformation info={info} />
         <FieldsToReview displays={displays} />
-        <HoldToSign />
+        <HoldToSign owner={owner} type={type} />
       </div>
     </div>
   );
