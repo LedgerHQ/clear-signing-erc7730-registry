@@ -29,7 +29,7 @@ export const UI = {
     onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   }) => (
     <select
-      className="border border-neutral-400 bg-white p-2 font-sans text-lg marker:-left-2 marker:hidden"
+      className="border-neutral-400 bg-white font-sans text-lg marker:-left-2 enabled:border enabled:p-2 disabled:appearance-none"
       defaultValue={defaultValue}
       onChange={onChange}
     >
