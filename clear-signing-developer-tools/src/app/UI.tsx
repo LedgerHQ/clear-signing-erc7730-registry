@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 
 export const UI = {
   BlueLink: ({ children, href }: { children: string; href: string }) => (
-    <a className="text-blue-500" href={href}>
+    <a className="text-blue-500" href={href} target="_blank">
       {children}
     </a>
   ),
