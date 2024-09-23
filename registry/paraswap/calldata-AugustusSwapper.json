@@ -29,7 +29,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "fromToken",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "minReceiveAmount": {
@@ -37,7 +37,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "toToken",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "maxSendAmount": {
@@ -45,7 +45,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenIn",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "receiveAmount": {
@@ -53,7 +53,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenOut",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "beneficiary": {
