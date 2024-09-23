@@ -19,9 +19,7 @@ interface ContractBindingContext {
 
 interface EIP712BindingContext {
   schemas: (EIP712Schema | string)[];
-  domain: {
-    name: string;
-  };
+  domain: { name: string };
   domainSeparator: string;
   deployments: Deployment[];
 }
