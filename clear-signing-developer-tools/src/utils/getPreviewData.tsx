@@ -1,8 +1,8 @@
-import { type PreviewData } from "../types/PreviewData";
+import { type DisplayItem, type PreviewData } from "../types/PreviewData";
 import type { ERC7730Schema } from "~/types";
 
 export function getPreviewData(data: ERC7730Schema): PreviewData {
-  const displays: PreviewData["displays"] = [];
+  const displays: DisplayItem[] = [];
 
   const { display, metadata } = data;
 
@@ -32,5 +32,5 @@ export function getPreviewData(data: ERC7730Schema): PreviewData {
 
   const type = data.context?.contract ? "transaction" : "message";
 
-  return { displays, metadata, intent: "Mint POAP", type };
+  return { operations: [{ displays, intent: "Mint POAP" }], metadata, type };
 }
