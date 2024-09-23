@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DevicesDemo } from "~/app/DevicesDemo";
 import { PreviewForm } from "~/app/PreviewForm";
 import { UI } from "~/app/UI";
@@ -10,9 +10,18 @@ import { type ERC7730Schema } from "~/types";
 import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
 
 export default function HomePage() {
-  const [selectedDevice, setSelectedDevice] = useState(
-    localStorage.getItem("selectedDevice") ?? "stax",
-  );
+  const [mounted, setMounted] = useState(false);
+  const [selectedDevice, setSelectedDevice] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+    setSelectedDevice(localStorage.getItem("selectedDevice") ?? "stax");
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   const metaDataFile = poapMetaDataFile as unknown as ERC7730Schema;
   const previewData = getPreviewData(metaDataFile);
   const data = calculateScreensForDevice(selectedDevice, previewData);
