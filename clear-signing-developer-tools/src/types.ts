@@ -7,29 +7,24 @@ export interface ERC7730Schema {
 }
 
 interface Context {
-  main: BindingContext;
+  contract?: ContractBindingContext;
+  eip712?: EIP712BindingContext;
 }
 
-type BindingContext = ContractBindingContext | EIP712BindingContext;
-
 interface ContractBindingContext {
-  contract: {
-    abi: ABI | string;
-    deployments: Deployment[];
-    addressMatcher?: string;
-    factory?: FactoryConstraint;
-  };
+  abi: ABI | string;
+  deployments: Deployment[];
+  addressMatcher?: string;
+  factory?: FactoryConstraint;
 }
 
 interface EIP712BindingContext {
-  eip712: {
-    schemas: (EIP712Schema | string)[];
-    domain: {
-      name: string;
-    };
-    domainSeparator: string;
-    deployments: Deployment[];
+  schemas: (EIP712Schema | string)[];
+  domain: {
+    name: string;
   };
+  domainSeparator: string;
+  deployments: Deployment[];
 }
 
 interface Deployment {
@@ -45,9 +40,9 @@ interface FactoryConstraint {
 interface Metadata {
   owner: string;
   info: OwnerInfo;
-  token: TokenDescription;
-  constants: Record<string, string>;
-  enums: Record<string, Enum>;
+  token?: TokenDescription;
+  constants?: Record<string, string>;
+  enums?: Record<string, Enum>;
 }
 
 interface OwnerInfo {
