@@ -118,25 +118,27 @@ export const DevicesDemo = ({
 }: {
   data: PreviewData;
 }) => (
-  <div className="flex w-fit space-x-10 bg-neutral-200 p-16 font-inter text-sm">
-    <StaxDisplay>
-      <ReviewIntro intent={intent} owner={owner} type={type} />
-    </StaxDisplay>
+  <div className="overflow-x-scroll bg-neutral-200 p-16">
+    <div className="flex w-fit space-x-10 font-inter text-sm">
+      <StaxDisplay>
+        <ReviewIntro intent={intent} owner={owner} type={type} />
+      </StaxDisplay>
 
-    <StaxDisplay>
-      <ContractInformation info={info} />
-    </StaxDisplay>
+      <StaxDisplay>
+        <ContractInformation info={info} />
+      </StaxDisplay>
 
-    <StaxDisplay>
-      <FieldsReview />
-    </StaxDisplay>
+      <StaxDisplay>
+        <FieldsReview />
+      </StaxDisplay>
 
-    <StaxDisplay>
-      <FieldsReview />
-    </StaxDisplay>
+      <StaxDisplay>
+        <FieldsReview />
+      </StaxDisplay>
 
-    <StaxDisplay>
-      <HoldToSign />
-    </StaxDisplay>
+      <StaxDisplay>
+        <HoldToSign />
+      </StaxDisplay>
+    </div>
   </div>
 );
