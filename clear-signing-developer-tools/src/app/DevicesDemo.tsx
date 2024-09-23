@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { type PreviewData } from "~/types/PreviewData";
+import { type DisplayItem, type PreviewData } from "~/types/PreviewData";
 
 const Screen = {
   Action: ({ children }: { children: string }) => (
@@ -60,20 +60,22 @@ const ReviewIntro = ({
   owner: string;
   type: string;
 }) => (
-  <Screen.Wrapper>
-    <Screen.Section>
-      <Screen.Logo />
-      <Screen.ReviewTitle>{`Review ${type} from ${intent}?`}</Screen.ReviewTitle>
-      <Screen.InfoButton />
-      <Screen.ReviewSummary>
-        {`You're interacting with a smart contract from ${owner}.`}
-      </Screen.ReviewSummary>
-      <Screen.TapToContinue />
-    </Screen.Section>
-    <Screen.Section>
-      <Screen.RejectButton />
-    </Screen.Section>
-  </Screen.Wrapper>
+  <StaxDisplay>
+    <Screen.Wrapper>
+      <Screen.Section>
+        <Screen.Logo />
+        <Screen.ReviewTitle>{`Review ${type} from ${intent}?`}</Screen.ReviewTitle>
+        <Screen.InfoButton />
+        <Screen.ReviewSummary>
+          {`You're interacting with a smart contract from ${owner}.`}
+        </Screen.ReviewSummary>
+        <Screen.TapToContinue />
+      </Screen.Section>
+      <Screen.Section>
+        <Screen.RejectButton />
+      </Screen.Section>
+    </Screen.Wrapper>
+  </StaxDisplay>
 );
 
 const ContractInformation = ({
@@ -81,37 +83,45 @@ const ContractInformation = ({
 }: {
   info: { legalName: string; url: string };
 }) => (
-  <Screen.Wrapper>
-    <Screen.Section>
-      <Screen.BackHeader>Smart contract information</Screen.BackHeader>
-    </Screen.Section>
-    <Screen.Section>
-      <Screen.Action>Contract owner</Screen.Action>
-      <Screen.Content>{legalName}</Screen.Content>
-      <Screen.Content>{url}</Screen.Content>
-    </Screen.Section>
-    <Screen.Section>
-      <Screen.Action>Contract address</Screen.Action>
-      <Screen.Content>{legalName}</Screen.Content>
-      <Screen.Content>{url}</Screen.Content>
-    </Screen.Section>
-  </Screen.Wrapper>
+  <StaxDisplay>
+    <Screen.Wrapper>
+      <Screen.Section>
+        <Screen.BackHeader>Smart contract information</Screen.BackHeader>
+      </Screen.Section>
+      <Screen.Section>
+        <Screen.Action>Contract owner</Screen.Action>
+        <Screen.Content>{legalName}</Screen.Content>
+        <Screen.Content>{url}</Screen.Content>
+      </Screen.Section>
+      <Screen.Section>
+        <Screen.Action>Contract address</Screen.Action>
+        <Screen.Content>{legalName}</Screen.Content>
+        <Screen.Content>{url}</Screen.Content>
+      </Screen.Section>
+    </Screen.Wrapper>
+  </StaxDisplay>
 );
 
-const FieldsReview = () => (
-  <Screen.Wrapper>
-    <Screen.Label>Send</Screen.Label>
-    <Screen.Value>2.325196105098179072 ETH</Screen.Value>
-  </Screen.Wrapper>
-);
+const FieldsToReview = ({ displays }: { displays: DisplayItem[] }) =>
+  displays.map(({ displayValue, label }) => (
+    <StaxDisplay key={label}>
+      <Screen.Wrapper>
+        <Screen.Label>{label}</Screen.Label>
+        <Screen.Value>{displayValue}</Screen.Value>
+      </Screen.Wrapper>
+    </StaxDisplay>
+  ));
 
 const HoldToSign = () => (
-  <Screen.Wrapper>Sign swap transaction with Uniswap?</Screen.Wrapper>
+  <StaxDisplay>
+    <Screen.Wrapper>Sign swap transaction with Uniswap?</Screen.Wrapper>
+  </StaxDisplay>
 );
 
 export const DevicesDemo = ({
   data: {
     intent,
+    displays,
     type,
     metadata: { owner, info },
   },
@@ -119,26 +129,11 @@ export const DevicesDemo = ({
   data: PreviewData;
 }) => (
   <div className="overflow-x-scroll bg-neutral-200 p-16">
-    <div className="flex w-fit space-x-10 font-inter text-sm">
-      <StaxDisplay>
-        <ReviewIntro intent={intent} owner={owner} type={type} />
-      </StaxDisplay>
-
-      <StaxDisplay>
-        <ContractInformation info={info} />
-      </StaxDisplay>
-
-      <StaxDisplay>
-        <FieldsReview />
-      </StaxDisplay>
-
-      <StaxDisplay>
-        <FieldsReview />
-      </StaxDisplay>
-
-      <StaxDisplay>
-        <HoldToSign />
-      </StaxDisplay>
+    <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
+      <ReviewIntro intent={intent} owner={owner} type={type} />
+      <ContractInformation info={info} />
+      <FieldsToReview displays={displays} />
+      <HoldToSign />
     </div>
   </div>
 );
