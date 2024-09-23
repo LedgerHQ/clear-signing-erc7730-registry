@@ -55,7 +55,7 @@ interface TokenDescription {
 }
 
 interface Display {
-  definitions: Record<string, FieldFormatter>;
+  definitions?: Record<string, FieldFormatter>;
   formats: Record<string, StructuredDataFormat>;
 }
 
