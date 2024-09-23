@@ -1,7 +1,7 @@
 import type { PreviewData } from "~/types/PreviewData";
 
 export const calculateScreensForDevice = (
-  selectedDevice: "stax",
+  selectedDevice: string,
   data: PreviewData,
 ): PreviewData => {
   if (selectedDevice === "stax") {

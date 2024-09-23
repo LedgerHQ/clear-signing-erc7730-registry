@@ -19,12 +19,20 @@ export const UI = {
   ),
   Select: ({
     children,
+    defaultValue,
+    onChange,
   }: {
     children:
       | ReactElement<HTMLSelectElement>
       | ReactElement<HTMLSelectElement>[];
+    defaultValue?: string;
+    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   }) => (
-    <select className="border border-neutral-400 bg-white p-2 font-sans text-lg marker:-left-2 marker:hidden">
+    <select
+      className="border border-neutral-400 bg-white p-2 font-sans text-lg marker:-left-2 marker:hidden"
+      defaultValue={defaultValue}
+      onChange={onChange}
+    >
       {children}
     </select>
   ),
