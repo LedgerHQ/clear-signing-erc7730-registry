@@ -120,20 +120,22 @@ const HoldToSign = () => (
 
 export const DevicesDemo = ({
   data: {
-    intent,
-    displays,
     type,
     metadata: { owner, info },
+    operations,
   },
 }: {
   data: PreviewData;
-}) => (
-  <div className="overflow-x-scroll bg-neutral-200 p-16">
-    <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
-      <ReviewIntro intent={intent} owner={owner} type={type} />
-      <ContractInformation info={info} />
-      <FieldsToReview displays={displays} />
-      <HoldToSign />
+}) => {
+  const [{ displays, intent }] = operations; // TODO: handle multiple operations
+  return (
+    <div className="overflow-x-scroll bg-neutral-200 p-16">
+      <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
+        <ReviewIntro intent={intent} owner={owner} type={type} />
+        <ContractInformation info={info} />
+        <FieldsToReview displays={displays} />
+        <HoldToSign />
+      </div>
     </div>
-  </div>
-);
+  );
+};

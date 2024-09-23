@@ -8,7 +8,7 @@ export type PreviewData = {
       url: string;
     };
   };
-  operation: Operation[];
+  operations: [Operation, ...Opertaion[]];
 };
 
 interface Operation {
