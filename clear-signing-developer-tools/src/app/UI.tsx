@@ -1,8 +1,13 @@
 import type { ReactElement } from "react";
 
 export const UI = {
-  BlueLink: ({ children, href }: { children: string; href: string }) => (
-    <a className="text-blue-500" href={href} target="_blank">
+  BlueLink: ({
+    children,
+    ...props
+  }: Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
+    children: string;
+  }) => (
+    <a className="text-blue-500" {...props}>
       {children}
     </a>
   ),
@@ -12,26 +17,27 @@ export const UI = {
   Heading1: ({ children }: { children: string }) => (
     <h1 className="mb-10 text-3xl font-medium">{children}</h1>
   ),
-  Option: ({ children, value }: { children: string; value: string }) => (
-    <option className="text-lg" value={value}>
+  Option: ({
+    children,
+    ...props
+  }: Omit<React.OptionHTMLAttributes<HTMLOptionElement>, "className"> & {
+    children: string;
+  }) => (
+    <option className="text-lg" {...props}>
       {children}
     </option>
   ),
   Select: ({
     children,
-    defaultValue,
-    onChange,
-  }: {
+    ...props
+  }: Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "className"> & {
     children:
       | ReactElement<HTMLSelectElement>
       | ReactElement<HTMLSelectElement>[];
-    defaultValue?: string;
-    onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   }) => (
     <select
       className="border-neutral-400 bg-white font-sans text-lg marker:-left-2 enabled:border enabled:p-2 disabled:appearance-none"
-      defaultValue={defaultValue}
-      onChange={onChange}
+      {...props}
     >
       {children}
     </select>
