@@ -5,7 +5,6 @@ export function getPreviewData(data: ERC7730Schema): PreviewData {
   const displays: PreviewData["displays"] = [];
 
   const { display, metadata } = data;
-  console.log(display);
 
   for (const formatKey in display.formats) {
     const format = display.formats[formatKey];
@@ -31,5 +30,7 @@ export function getPreviewData(data: ERC7730Schema): PreviewData {
     }
   }
 
-  return { displays, metadata, intent: "Mint POAP", type: "transaction" };
+  const type = data.context?.contract ? "transaction" : "message";
+
+  return { displays, metadata, intent: "Mint POAP", type };
 }
