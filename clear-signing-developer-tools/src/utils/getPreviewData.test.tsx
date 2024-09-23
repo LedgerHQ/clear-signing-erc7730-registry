@@ -5,7 +5,9 @@ import { getPreviewData } from "./getPreviewData";
 const minimumERC7730Schema: ERC7730Schema = {
   display: {
     format: {},
-    context: {},
+  },
+  context: {
+    contract: {},
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any;
@@ -54,6 +56,63 @@ describe("getPreviewData", () => {
       });
 
       expect(result.type).toBe("message");
+    });
+  });
+
+  describe("operation", () => {
+    it("should map a simple format to operation", () => {
+      const result = getPreviewData({
+        ...minimumERC7730Schema,
+        display: {
+          formats: {
+            "mintToken(uint256 eventId, uint256 tokenId, address receiver, uint256 expirationTime, bytes signature)":
+              {
+                intent: "Mint POAP",
+                fields: [
+                  {
+                    path: "tokenId",
+                    label: "Token",
+                    format: "raw",
+                  },
+                  {
+                    path: "receiver",
+                    label: "Beneficiary",
+                    format: "addressName",
+                  },
+                  {
+                    path: "expirationTime",
+                    label: "Expiration time",
+                    format: "date",
+                    params: {
+                      encoding: "timestamp",
+                    },
+                  },
+                ],
+                required: ["tokenId", "recipient"],
+              },
+          },
+        },
+      });
+
+      expect(result.operations).toEqual([
+        {
+          intent: "Mint POAP",
+          displays: [
+            {
+              label: "Token",
+              displayValue: "raw",
+            },
+            {
+              label: "Beneficiary",
+              displayValue: "addressName",
+            },
+            {
+              label: "Expiration time",
+              displayValue: "date",
+            },
+          ],
+        },
+      ]);
     });
   });
 });

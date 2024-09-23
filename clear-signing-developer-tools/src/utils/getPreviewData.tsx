@@ -1,36 +1,38 @@
-import { type DisplayItem, type PreviewData } from "../types/PreviewData";
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { type Operation, type PreviewData } from "../types/PreviewData";
 import type { ERC7730Schema } from "~/types";
 
+function transformSimpleFormatToOperations(display: any): Operation[] {
+  const formats = display.formats;
+
+  if (!formats) return [];
+
+  return Object.keys(formats).map((key) => {
+    const format = formats[key];
+
+    const displays = format.fields.map((field: any) => {
+      return {
+        label: field.label,
+        displayValue: field.format || "unknown",
+      };
+    });
+
+    return {
+      intent: format.intent,
+      displays,
+    };
+  });
+}
+
 export function getPreviewData(data: ERC7730Schema): PreviewData {
-  const displays: DisplayItem[] = [];
-
   const { display, metadata } = data;
+  const operations = transformSimpleFormatToOperations(display);
 
-  for (const formatKey in display.formats) {
-    const format = display.formats[formatKey];
+  const type = "contract" in data.context ? "transaction" : "message";
 
-    if (format?.fields && Array.isArray(format.fields)) {
-      format.fields.forEach((field) => {
-        let label: string | undefined;
-        const displayValue = field.path;
-
-        if (field.$ref) {
-          const definitionKey = field.$ref.split(".").pop();
-          if (definitionKey && display.definitions[definitionKey]) {
-            label = display.definitions[definitionKey].label;
-          }
-        } else {
-          label = field.label;
-        }
-
-        if (label && displayValue) {
-          displays.push({ label, displayValue });
-        }
-      });
-    }
-  }
-
-  const type = data.context?.contract ? "transaction" : "message";
-
-  return { operations: [{ displays, intent: "Mint POAP" }], metadata, type };
+  return { operations, metadata, type };
 }
