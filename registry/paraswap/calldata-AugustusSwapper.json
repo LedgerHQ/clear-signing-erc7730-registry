@@ -29,7 +29,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "fromToken",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "minReceiveAmount": {
@@ -37,7 +37,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "toToken",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "maxSendAmount": {
@@ -45,7 +45,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenIn",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "receiveAmount": {
@@ -53,7 +53,7 @@
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "tokenOut",
-                    "nativeCurrencyAddress": "$.display.constants.addressAsEth"
+                    "nativeCurrencyAddress": "$.metadata.constants.addressAsEth"
                 }
             },
             "beneficiary": {
@@ -123,7 +123,7 @@
                         "path": "data.toAmount",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
-                            "tokenPath": "data.path[0].path[-1].to"
+                            "tokenPath": "data.path.[0].path.[-1].to"
                         }
                     },
                     {
@@ -148,14 +148,14 @@
                         "path": "amountIn",
                         "$ref": "$.display.definitions.sendAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     },
                     {
                         "path": "amountOutMin",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     }
                 ],
@@ -172,14 +172,14 @@
                         "path": "amountIn",
                         "$ref": "$.display.definitions.sendAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     },
                     {
                         "path": "amountOutMin",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     },
                     {
@@ -209,7 +209,7 @@
                         "format": "raw"
                     },
                     {
-                        "path": "pools[-1]",
+                        "path": "pools.[-1]",
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -316,14 +316,14 @@
                         "path": "amountInMax",
                         "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     },
                     {
                         "path": "amountOut",
                         "$ref": "$.display.definition.receiveAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     }
                 ],
@@ -340,14 +340,14 @@
                         "path": "amountInMax",
                         "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     },
                     {
                         "path": "amountOut",
                         "$ref": "$.display.definition.receiveAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     },
                     {
@@ -377,7 +377,7 @@
                         "format": "raw"
                     },
                     {
-                        "path": "pools[-1]",
+                        "path": "pools.[-1]",
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -385,7 +385,7 @@
                 "required": [
                     "amountInMax",
                     "amountOut",
-                    "pools"
+                    "pools.[-1]"
                 ]
             },
             "0x2941a712": {
@@ -405,7 +405,7 @@
                         "format": "raw"
                     },
                     {
-                        "path": "pools[-1]",
+                        "path": "pools.[-1]",
                         "label": "Last pool",
                         "format": "raw"
                     }
@@ -489,7 +489,7 @@
                         "format": "raw"
                     },
                     {
-                        "path": "pools[-1]",
+                        "path": "pools.[-1]",
                         "label": "Last pool",
                         "format": "raw"
                     }
