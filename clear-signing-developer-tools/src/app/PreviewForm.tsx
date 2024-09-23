@@ -17,22 +17,41 @@ export const PreviewForm = ({
   return (
     <form className="flex flex-col gap-6">
       <div>
+        <UI.HeadingField>Metadata file</UI.HeadingField>
+        <UI.Select onChange={() => null}>
+          <option value="calldata-PoapBridge">calldata-PoapBridge.json</option>
+        </UI.Select>
+      </div>
+      <div>
         <UI.HeadingField>Contract</UI.HeadingField>
         <div>
-          Uniswap_V3 (<UI.BlueLink href="#">0x4c…cbe9de5</UI.BlueLink>)
+          PoapBridge (
+          <UI.BlueLink
+            href="https://etherscan.io/address/0x0bb4d3e88243f4a057db77341e6916b0e449b158"
+            target="_blank"
+          >
+            0x0b…449b158
+          </UI.BlueLink>
+          )
         </div>
       </div>
       <div>
         <UI.HeadingField>Function</UI.HeadingField>
         <div>
-          swap_1: “Swap with Uniswap (
-          <UI.BlueLink href="#">0xfc6f7865</UI.BlueLink>)
+          mintToken: &quot;Mint POAP&quot; (
+          <UI.BlueLink
+            href="https://etherscan.io/address/0x0bb4d3e88243f4a057db77341e6916b0e449b158#writeContract#F1"
+            target="_blank"
+          >
+            0xaf68b302
+          </UI.BlueLink>
+          )
         </div>
       </div>
       <div>
-        <UI.HeadingField>Preview example</UI.HeadingField>
-        <UI.Select onChange={() => null}>
-          <UI.Option value="">tx1 (0xbe936…e403e7b62)</UI.Option>
+        <UI.HeadingField>Preview with</UI.HeadingField>
+        <UI.Select disabled onChange={() => null}>
+          <UI.Option value="">Placeholder values</UI.Option>
         </UI.Select>
       </div>
       <div>
