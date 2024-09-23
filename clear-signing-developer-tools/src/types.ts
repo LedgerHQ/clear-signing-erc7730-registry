@@ -6,10 +6,9 @@ export interface ERC7730Schema {
   display: Display;
 }
 
-interface Context {
-  contract?: ContractBindingContext;
-  eip712?: EIP712BindingContext;
-}
+type Context =
+  | { contract: ContractBindingContext }
+  | { eip712: EIP712BindingContext };
 
 interface ContractBindingContext {
   abi: ABI | string;
