@@ -52,7 +52,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        repo: ['LedgerHQ/crypto-assets', 'LedgerHQ/crypto-assets-clear-signing-initiative']
+        repo: ['LedgerHQ/crypto-assets', 'LedgerHQ/crypto-assets-clear-signing-initiative', 'LedgerHQ/python-erc7730']
     steps:
       - name: Trigger update on ${{ matrix.repo }}
         timeout-minutes: 60
