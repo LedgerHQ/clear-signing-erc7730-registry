@@ -22,7 +22,7 @@ export const SelectMetadataFile = ({
       <UI.HeadingField>Metadata file</UI.HeadingField>
       <UI.Select defaultValue={fileKey} onChange={onChangeFile}>
         {Object.keys(files).map((key) => (
-          <option key={key} value={key}>
+          <option key={key} value={key} disabled={disabled(key)}>
             {key}
           </option>
         ))}
@@ -30,3 +30,7 @@ export const SelectMetadataFile = ({
     </div>
   );
 };
+
+function disabled(key: string): boolean | undefined {
+  return key === "eip712-UniswapX-ExclusiveDutchOrder.json";
+}

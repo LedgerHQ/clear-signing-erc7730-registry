@@ -11,6 +11,7 @@ import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
 import poapBridgeFile from "../../../registry/poap/calldata-PoapBridge.json";
 import paraswapFile from "../../../registry/paraswap/calldata-AugustusSwapper.json";
+import d from "../../../registry/uniswap/eip712-UniswapX-ExclusiveDutchOrder copy.json";
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
@@ -29,6 +30,7 @@ export default function HomePage() {
   const files: Record<string, ERC7730Schema> = {
     "calldata-PoapBridge.json": poapBridgeFile as unknown as ERC7730Schema,
     "calldata-AugustusSwapper.json": paraswapFile as unknown as ERC7730Schema,
+    "eip712-UniswapX-ExclusiveDutchOrder.json": d as unknown as ERC7730Schema,
   } as const;
 
   const metaDataFile = files[fileKey];
