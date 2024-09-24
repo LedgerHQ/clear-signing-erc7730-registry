@@ -5,13 +5,17 @@ import { DevicesDemo } from "~/app/DevicesDemo";
 import { PreviewForm } from "~/app/PreviewForm";
 import { UI } from "~/app/UI";
 import { getPreviewData } from "~/utils/getPreviewData";
-import poapMetaDataFile from "../../../registry/poap/calldata-PoapBridge.json";
 import { type ERC7730Schema } from "~/types";
 import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
+import { SelectMetadataFile } from "~/app/SelectMetadataFile";
+
+import poapBridgeFile from "../../../registry/poap/calldata-PoapBridge.json";
+import paraswapFile from "../../../registry/paraswap/calldata-AugustusSwapper.json";
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState("");
+  const [fileKey, setFileKey] = useState("calldata-PoapBridge.json");
 
   useEffect(() => {
     setMounted(true);
@@ -22,24 +26,34 @@ export default function HomePage() {
     return null;
   }
 
-  const metaDataFile = poapMetaDataFile as unknown as ERC7730Schema;
-  const previewData = getPreviewData(metaDataFile);
+  const files: Record<string, ERC7730Schema> = {
+    "calldata-PoapBridge.json": poapBridgeFile as unknown as ERC7730Schema,
+    "calldata-AugustusSwapper.json": paraswapFile as unknown as ERC7730Schema,
+  } as const;
+
+  const metaDataFile = files[fileKey];
+  const previewData = getPreviewData(metaDataFile!);
   const data = calculateScreensForDevice(selectedDevice, previewData);
 
   return (
     <main>
       <div className="container p-16 text-lg">
         <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
-        <PreviewForm
-          data={data}
-          selectedDevice={selectedDevice}
-          setSelectedDevice={setSelectedDevice}
-        />
+        <form className="flex flex-col gap-6">
+          <SelectMetadataFile
+            files={files}
+            fileKey={fileKey}
+            setFileKey={setFileKey}
+          />
+          <PreviewForm
+            data={data}
+            selectedDevice={selectedDevice}
+            setSelectedDevice={setSelectedDevice}
+          />
+        </form>
       </div>
       <DevicesDemo data={data} />
-      <pre className="container p-16">
-        {JSON.stringify(getPreviewData(metaDataFile), null, 2)}
-      </pre>
+      <pre className="container p-16">{JSON.stringify(data, null, 2)}</pre>
     </main>
   );
 }

@@ -19,19 +19,14 @@ export const PreviewForm = ({
   };
 
   return (
-    <form className="flex flex-col gap-6">
-      <div>
-        <UI.HeadingField>Metadata file</UI.HeadingField>
-        <UI.Select onChange={() => null}>
-          <option value="calldata-PoapBridge">calldata-PoapBridge.json</option>
-        </UI.Select>
-      </div>
+    <>
       <div>
         <UI.HeadingField>Contract</UI.HeadingField>
         <div>
           {data.contract.id} (
           <UI.BlueLink
             href={`https://etherscan.io/address/${data.contract.address}`}
+            title={data.contract.address}
             target="_blank"
           >
             {formatShortAddress(data.contract.address)}
@@ -62,6 +57,6 @@ export const PreviewForm = ({
           <option value="stax">Ledger Stax</option>
         </UI.Select>
       </div>
-    </form>
+    </>
   );
 };
