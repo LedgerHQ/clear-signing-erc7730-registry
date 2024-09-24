@@ -6,9 +6,7 @@ const minimumERC7730Schema: ERC7730Schema = {
   display: {
     format: {},
   },
-  context: {
-    contract: {},
-  },
+  context: { contract: { deployments: [] } },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as any;
 
@@ -30,6 +28,46 @@ describe("getPreviewData", () => {
       });
 
       expect(result.metadata).toBe(metadata);
+    });
+
+    it("should return contract information for a transaction", () => {
+      const exampleTransactionContext = {
+        $id: "Contract name",
+        contract: {
+          abi: "unsused",
+          deployments: [{ address: "0xtestAddress", chainId: 1 }],
+        },
+      };
+
+      const result = getPreviewData({
+        ...minimumERC7730Schema,
+        context: exampleTransactionContext,
+      });
+
+      expect(result.contract).toEqual({
+        name: exampleTransactionContext.$id,
+        deployments: [{ address: "0xtestAddress" }],
+      });
+    });
+
+    it("should return contract information for an eip712 message", () => {
+      const exampleEIP712Context = {
+        eip712: {
+          domain: { name: "EIP 712 name" },
+          deployments: [{ address: "0xtestAddress", chainId: 1 }],
+          schemas: ["unused"],
+        },
+      };
+
+      const result = getPreviewData({
+        ...minimumERC7730Schema,
+        context: exampleEIP712Context,
+      });
+
+      expect(result.contract).toEqual({
+        name: "EIP 712 name",
+        deployments: [{ address: "0xtestAddress" }],
+      });
     });
 
     it("should indicate if it is a transaction", () => {

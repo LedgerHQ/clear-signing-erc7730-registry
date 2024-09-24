@@ -41,16 +41,20 @@ function transformSimpleFormatToOperations(display: any): Operation[] {
 }
 
 export function getPreviewData(data: ERC7730Schema): PreviewData {
-  const { display, metadata } = data;
+  const { context, display, metadata } = data;
   const operations = transformSimpleFormatToOperations(display);
+  const name = "contract" in context ? context.$id : context.eip712.domain.name;
 
-  const type = "contract" in data.context ? "transaction" : "message";
+  const type = "contract" in context ? "transaction" : "message";
+  const inContextDeployments =
+    "contract" in context
+      ? context.contract.deployments
+      : context.eip712.deployments;
+
+  const deployments = inContextDeployments.map(({ address }) => ({ address }));
 
   return {
-    contract: {
-      id: "PoapBridge",
-      address: "0x0bb4d3e88243f4a057db77341e6916b0e449b158",
-    },
+    contract: { name, deployments },
     operations,
     metadata,
     type,

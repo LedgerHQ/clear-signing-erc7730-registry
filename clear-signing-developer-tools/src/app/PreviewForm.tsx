@@ -23,22 +23,31 @@ export const PreviewForm = ({
       <div>
         <UI.HeadingField>Contract</UI.HeadingField>
         <div>
-          {data.contract.id} (
-          <UI.BlueLink
-            href={`https://etherscan.io/address/${data.contract.address}`}
-            title={data.contract.address}
-            target="_blank"
-          >
-            {formatShortAddress(data.contract.address)}
-          </UI.BlueLink>
-          )
+          {data.contract.name}
+          {data.contract.deployments.map(({ address }) => (
+            <span key={address}>
+              {" "}
+              (
+              <UI.BlueLink
+                href={`https://etherscan.io/address/${address}`}
+                title={address}
+                target="_blank"
+              >
+                {formatShortAddress(address)}
+              </UI.BlueLink>
+              )
+            </span>
+          ))}
         </div>
       </div>
       <div>
         <UI.HeadingField>Operation</UI.HeadingField>
         <UI.Select onChange={() => null}>
-          {data.operations.map(({ intent }) => (
-            <UI.Option key={intent} value={intent}>
+          {data.operations.map(({ intent }, index) => (
+            <UI.Option
+              key={`${data.contract.name}${intent}${index}`}
+              value={intent}
+            >
               {intent}
             </UI.Option>
           ))}

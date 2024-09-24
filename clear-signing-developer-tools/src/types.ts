@@ -7,7 +7,7 @@ export interface ERC7730Schema {
 }
 
 type Context =
-  | { contract: ContractBindingContext }
+  | { $id: string; contract: ContractBindingContext }
   | { eip712: EIP712BindingContext };
 
 interface ContractBindingContext {
@@ -20,7 +20,7 @@ interface ContractBindingContext {
 interface EIP712BindingContext {
   schemas: (EIP712Schema | string)[];
   domain: { name: string };
-  domainSeparator: string;
+  domainSeparator?: string;
   deployments: Deployment[];
 }
 

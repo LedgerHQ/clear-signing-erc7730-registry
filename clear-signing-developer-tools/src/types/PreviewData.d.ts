@@ -1,8 +1,8 @@
 export type PreviewData = {
   type: "transaction" | "message";
   contract: {
-    id: string;
-    address: string;
+    name: string;
+    deployments: Deployment[];
   };
   metadata: {
     owner: string;
@@ -14,6 +14,8 @@ export type PreviewData = {
   };
   operations: Operation[];
 };
+
+type Deploymnent = { address: string };
 
 interface Operation {
   intent: string;
