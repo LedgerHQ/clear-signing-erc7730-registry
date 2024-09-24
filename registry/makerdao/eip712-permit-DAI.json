@@ -14,7 +14,7 @@
         } 
     },
     
-    "includes": "ercs/eip712-erc2612-permit.json",
+    "includes": "../../ercs/eip712-erc2612-permit.json",
 
     "metadata": {
         "owner": "MakerDAO",
