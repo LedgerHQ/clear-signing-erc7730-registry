@@ -1,5 +1,9 @@
 export type PreviewData = {
   type: "transaction" | "message";
+  contract: {
+    id: string;
+    address: string;
+  };
   metadata: {
     owner: string;
     info: {
