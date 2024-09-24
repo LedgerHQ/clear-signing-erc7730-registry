@@ -62,9 +62,9 @@ interface Display {
 interface FieldFormatter {
   $id?: string;
   $ref?: string;
-  label: string;
-  format: FieldFormat;
-  path: string;
+  label?: string;
+  format?: FieldFormat;
+  path?: string;
   params?: Record<string, unknown>;
 }
 
