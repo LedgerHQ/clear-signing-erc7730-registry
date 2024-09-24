@@ -31,6 +31,7 @@ export default function HomePage() {
       <div className="container p-16 text-lg">
         <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         <PreviewForm
+          data={data}
           selectedDevice={selectedDevice}
           setSelectedDevice={setSelectedDevice}
         />

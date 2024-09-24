@@ -1,10 +1,14 @@
 import { type Dispatch, type SetStateAction } from "react";
+import { formatShortAddress } from "~/app/formatShortAddress";
 import { UI } from "~/app/UI";
+import { type PreviewData } from "~/types/PreviewData";
 
 export const PreviewForm = ({
+  data,
   selectedDevice,
   setSelectedDevice,
 }: {
+  data: PreviewData;
   selectedDevice: string;
   setSelectedDevice: Dispatch<SetStateAction<string>>;
 }) => {
@@ -25,28 +29,25 @@ export const PreviewForm = ({
       <div>
         <UI.HeadingField>Contract</UI.HeadingField>
         <div>
-          PoapBridge (
+          {data.contract.id} (
           <UI.BlueLink
-            href="https://etherscan.io/address/0x0bb4d3e88243f4a057db77341e6916b0e449b158"
+            href={`https://etherscan.io/address/${data.contract.address}`}
             target="_blank"
           >
-            0x0b…449b158
+            {formatShortAddress(data.contract.address)}
           </UI.BlueLink>
           )
         </div>
       </div>
       <div>
-        <UI.HeadingField>Function</UI.HeadingField>
-        <div>
-          mintToken: &quot;Mint POAP&quot; (
-          <UI.BlueLink
-            href="https://etherscan.io/address/0x0bb4d3e88243f4a057db77341e6916b0e449b158#writeContract#F1"
-            target="_blank"
-          >
-            0xaf68b302
-          </UI.BlueLink>
-          )
-        </div>
+        <UI.HeadingField>Operation</UI.HeadingField>
+        <UI.Select onChange={() => null}>
+          {data.operations.map(({ intent }) => (
+            <UI.Option key={intent} value={intent}>
+              {intent}
+            </UI.Option>
+          ))}
+        </UI.Select>
       </div>
       <div>
         <UI.HeadingField>Preview with</UI.HeadingField>

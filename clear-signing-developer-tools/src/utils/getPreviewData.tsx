@@ -46,5 +46,13 @@ export function getPreviewData(data: ERC7730Schema): PreviewData {
 
   const type = "contract" in data.context ? "transaction" : "message";
 
-  return { operations, metadata, type };
+  return {
+    contract: {
+      id: "PoapBridge",
+      address: "0x0bb4d3e88243f4a057db77341e6916b0e449b158",
+    },
+    operations,
+    metadata,
+    type,
+  };
 }
