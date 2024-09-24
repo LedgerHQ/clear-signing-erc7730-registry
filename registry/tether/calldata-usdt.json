@@ -12,7 +12,7 @@
         }
     }, 
 
-    "includes": "ercs/calldata-erc20-tokens.json",
+    "includes": "../../ercs/calldata-erc20-tokens.json",
 
     "metadata": {
         "owner": "Tether",
