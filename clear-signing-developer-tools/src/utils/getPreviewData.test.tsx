@@ -1,14 +1,31 @@
 import { type ERC7730Schema } from "~/types";
 import { getPreviewData } from "./getPreviewData";
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const minimumERC7730Schema: ERC7730Schema = {
-  display: {
-    format: {},
+const exampleTransactionContext = {
+  $id: "Contract name",
+  contract: {
+    abi: "unsused",
+    deployments: [{ address: "0xtestAddress", chainId: 1 }],
   },
-  context: { contract: { deployments: [] } },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-} as any;
+};
+
+const exampleEIP712Context = {
+  eip712: {
+    domain: { name: "EIP 712 name" },
+    deployments: [{ address: "0xtestEip712Address", chainId: 1 }],
+    schemas: ["unused"],
+  },
+};
+
+const minimumERC7730Schema: ERC7730Schema = {
+  display: { formats: {} },
+  $schema: "unused",
+  metadata: {
+    owner: "",
+    info: { legalName: "", lastUpdate: "", url: "" },
+  },
+  context: exampleTransactionContext,
+};
 
 describe("getPreviewData", () => {
   describe("general information", () => {
@@ -31,14 +48,6 @@ describe("getPreviewData", () => {
     });
 
     it("should return contract information for a transaction", () => {
-      const exampleTransactionContext = {
-        $id: "Contract name",
-        contract: {
-          abi: "unsused",
-          deployments: [{ address: "0xtestAddress", chainId: 1 }],
-        },
-      };
-
       const result = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleTransactionContext,
@@ -51,14 +60,6 @@ describe("getPreviewData", () => {
     });
 
     it("should return contract information for an eip712 message", () => {
-      const exampleEIP712Context = {
-        eip712: {
-          domain: { name: "EIP 712 name" },
-          deployments: [{ address: "0xtestAddress", chainId: 1 }],
-          schemas: ["unused"],
-        },
-      };
-
       const result = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleEIP712Context,
@@ -66,18 +67,14 @@ describe("getPreviewData", () => {
 
       expect(result.contract).toEqual({
         name: "EIP 712 name",
-        deployments: [{ address: "0xtestAddress" }],
+        deployments: [{ address: "0xtestEip712Address" }],
       });
     });
 
     it("should indicate if it is a transaction", () => {
       const result = getPreviewData({
         ...minimumERC7730Schema,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-        context: {
-          contract: {},
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any,
+        context: exampleTransactionContext,
       });
 
       expect(result.type).toBe("transaction");
@@ -86,11 +83,7 @@ describe("getPreviewData", () => {
     it("should indicate if it is a message", () => {
       const result = getPreviewData({
         ...minimumERC7730Schema,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
-        context: {
-          eip712: {},
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any,
+        context: exampleEIP712Context,
       });
 
       expect(result.type).toBe("message");
