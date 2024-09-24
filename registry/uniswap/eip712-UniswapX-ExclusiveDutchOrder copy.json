@@ -170,7 +170,7 @@
                         }
                     },
                     {
-                        "path": "witness.outputs[]",
+                        "path": "witness.outputs.[]",
                         "fields": [
                             {
                                 "path": "endAmount",

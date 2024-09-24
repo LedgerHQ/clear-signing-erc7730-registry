@@ -32,7 +32,7 @@
                         "label": "Amount to Send",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "params.path[0:19]"
+                            "tokenPath": "params.path.[0:19]"
                         }
                     },
                     {
@@ -40,7 +40,7 @@
                         "label": "Minimum amount to Receive",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "params.path[-20:-1]"
+                            "tokenPath": "params.path.[-20:-1]"
                         }
                     },
                     {
@@ -98,7 +98,7 @@
                         "label": "Maximum Amount to Send",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "params.path[0:19]"
+                            "tokenPath": "params.path.[0:19]"
                         }
                     },
                     {
@@ -106,7 +106,7 @@
                         "label": "Amount to Receive",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "params.path[-20:-1]"
+                            "tokenPath": "params.path.[-20:-1]"
                         }
                     },
                     {
@@ -171,7 +171,7 @@
                         "label": "Minimum amount to Receive",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     }
                 ]
@@ -185,7 +185,7 @@
                         "label": "Amount to Receive",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "path[-1]"
+                            "tokenPath": "path.[-1]"
                         }
                     },
                     {
@@ -193,7 +193,7 @@
                         "label": "Maximum Amount to Send",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     }
                 ]
