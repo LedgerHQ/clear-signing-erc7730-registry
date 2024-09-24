@@ -60,6 +60,16 @@ describe("getPreviewData", () => {
   });
 
   describe("operation", () => {
+    it('should return an empty array if "formats" is not present', () => {
+      const result = getPreviewData({
+        ...minimumERC7730Schema,
+        display: {
+          formats: {},
+        },
+      });
+
+      expect(result.operations).toEqual([]);
+    });
     it("should map a simple format to operation", () => {
       const result = getPreviewData({
         ...minimumERC7730Schema,
@@ -109,6 +119,43 @@ describe("getPreviewData", () => {
             {
               label: "Expiration time",
               displayValue: "date",
+            },
+          ],
+        },
+      ]);
+    });
+    it("should look at the $ root identifier to fetch the data elsewhere", () => {
+      const result = getPreviewData({
+        ...minimumERC7730Schema,
+        display: {
+          definitions: {
+            beneficiary: {
+              label: "Beneficiary",
+              format: "addressName",
+            },
+          },
+          formats: {
+            functionName: {
+              intent: "Mint POAP",
+              fields: [
+                {
+                  path: "data.beneficiary",
+                  $ref: "$.display.definitions.beneficiary",
+                },
+              ],
+              required: [],
+            },
+          },
+        },
+      });
+
+      expect(result.operations).toEqual([
+        {
+          intent: "Mint POAP",
+          displays: [
+            {
+              label: "Beneficiary",
+              displayValue: "addressName",
             },
           ],
         },

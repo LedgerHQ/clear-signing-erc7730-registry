@@ -8,6 +8,7 @@ import type { ERC7730Schema } from "~/types";
 
 function transformSimpleFormatToOperations(display: any): Operation[] {
   const formats = display.formats;
+  const definitions = display.definitions || {};
 
   if (!formats) return [];
 
@@ -15,9 +16,20 @@ function transformSimpleFormatToOperations(display: any): Operation[] {
     const format = formats[key];
 
     const displays = format.fields.map((field: any) => {
+      let label = field.label;
+      let displayValue = field.format || "unknown";
+
+      if (field.$ref) {
+        const refPath = field.$ref.split(".").pop();
+        if (refPath && definitions[refPath]) {
+          label = definitions[refPath].label || label;
+          displayValue = definitions[refPath].format || displayValue;
+        }
+      }
+
       return {
-        label: field.label,
-        displayValue: field.format || "unknown",
+        label,
+        displayValue,
       };
     });
 
