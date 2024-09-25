@@ -71,9 +71,11 @@ const ReviewIntro = ({ owner, type }: { owner: string; type: string }) => (
 );
 
 const ContractInformation = ({
-  info: { legalName, url },
+  address,
+  info: { lastUpdate, legalName, url },
 }: {
-  info: { legalName: string; url: string };
+  address: string;
+  info: { lastUpdate: string; legalName: string; url: string };
 }) => (
   <StaxDisplay>
     <Screen.Wrapper>
@@ -86,9 +88,12 @@ const ContractInformation = ({
         <Screen.Content>{url}</Screen.Content>
       </Screen.Section>
       <Screen.Section>
+        <Screen.Action>Last updated</Screen.Action>
+        <Screen.Content>{new Date(lastUpdate).toDateString()}</Screen.Content>
+      </Screen.Section>
+      <Screen.Section>
         <Screen.Action>Contract address</Screen.Action>
-        <Screen.Content>{legalName}</Screen.Content>
-        <Screen.Content>{url}</Screen.Content>
+        <Screen.Content>{address}</Screen.Content>
       </Screen.Section>
     </Screen.Wrapper>
   </StaxDisplay>
@@ -112,6 +117,7 @@ const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
 
 export const DevicesDemo = ({
   data: {
+    contract,
     type,
     metadata: { owner, info },
     operations,
@@ -119,12 +125,17 @@ export const DevicesDemo = ({
 }: {
   data: PreviewData;
 }) => {
-  const [{ displays }] = operations; // TODO: handle multiple operations
+  const chosenOperation = operations[0]; // TODO: handle multiple operations
+  const chosenDeployment = contract.deployments[0]; // TODO: handle multiple deployments
+  if (!chosenOperation || !chosenDeployment) return null;
+
+  const { address } = chosenDeployment;
+  const { displays } = chosenOperation;
   return (
     <div className="overflow-x-scroll bg-neutral-200 p-16">
       <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
         <ReviewIntro owner={owner} type={type} />
-        <ContractInformation info={info} />
+        <ContractInformation info={info} address={address} />
         <FieldsToReview displays={displays} />
         <HoldToSign owner={owner} type={type} />
       </div>
