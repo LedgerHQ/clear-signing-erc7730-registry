@@ -141,7 +141,7 @@ export const DevicesDemo = ({
   const { address } = chosenDeployment;
   const { displays } = chosenOperation;
   return (
-    <div className="overflow-x-scroll bg-neutral-200 p-16">
+    <div className="overflow-x-scroll bg-[#383838] p-16">
       <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
         <ReviewIntro owner={owner} type={type} />
         <ContractInformation info={info} address={address} />
