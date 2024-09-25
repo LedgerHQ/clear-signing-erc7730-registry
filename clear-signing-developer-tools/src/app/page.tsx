@@ -1,5 +1,8 @@
+import listAllJsonInRegistry from "~/app/getAllFiles";
 import PreviewTool from "~/app/PreviewTool";
 
 export default function HomePage() {
-  return <PreviewTool />;
+  const allFiles = listAllJsonInRegistry();
+
+  return <PreviewTool allFiles={allFiles} />;
 }
