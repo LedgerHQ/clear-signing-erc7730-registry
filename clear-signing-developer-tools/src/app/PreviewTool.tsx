@@ -4,14 +4,9 @@ import { useEffect, useState } from "react";
 import { DevicesDemo } from "~/app/DevicesDemo";
 import { PreviewForm } from "~/app/PreviewForm";
 import { UI } from "~/app/UI";
-import { getPreviewData } from "~/utils/getPreviewData";
-import { type ERC7730Schema } from "~/types";
-import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
-import poapBridgeFile from "../../../registry/poap/calldata-PoapBridge.json";
-import paraswapFile from "../../../registry/paraswap/calldata-AugustusSwapper.json";
-import d from "../../../registry/uniswap/eip712-UniswapX-ExclusiveDutchOrder copy.json";
+import { type PreviewData } from "~/types/PreviewData";
 
 interface Props {
   jsonInRegistry: string[];
@@ -21,25 +16,19 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   const [mounted, setMounted] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState("");
   const [fileKey, setFileKey] = useState("calldata-PoapBridge.json");
+  const [previewData, setPreviewData] = useState<PreviewData | null>(null);
 
   useEffect(() => {
     setMounted(true);
     setSelectedDevice(localStorage.getItem("selectedDevice") ?? "stax");
+    setFileKey(
+      localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
+    );
   }, []);
 
   if (!mounted) {
     return null;
   }
-
-  const files: Record<string, ERC7730Schema> = {
-    "calldata-PoapBridge.json": poapBridgeFile as unknown as ERC7730Schema,
-    "calldata-AugustusSwapper.json": paraswapFile as unknown as ERC7730Schema,
-    "eip712-UniswapX-ExclusiveDutchOrder.json": d as unknown as ERC7730Schema,
-  } as const;
-
-  const metaDataFile = files[fileKey];
-  const previewData = getPreviewData(metaDataFile!);
-  const data = calculateScreensForDevice(selectedDevice, previewData);
 
   return (
     <main>
@@ -47,29 +36,24 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
         <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         <form className="flex flex-col gap-6">
           <SelectMetadataFile
-            files={files}
             fileKey={fileKey}
+            jsonInRegistry={jsonInRegistry}
+            setPreviewData={setPreviewData}
             setFileKey={setFileKey}
           />
-          <PreviewForm
-            data={data}
-            selectedDevice={selectedDevice}
-            setSelectedDevice={setSelectedDevice}
-          />
+          {previewData && (
+            <PreviewForm
+              data={previewData}
+              selectedDevice={selectedDevice}
+              setSelectedDevice={setSelectedDevice}
+            />
+          )}
         </form>
       </div>
 
-      <DevicesDemo data={data} />
-
-      <pre className="container p-16">{JSON.stringify(data, null, 2)}</pre>
-
-      <UI.Select onChange={() => null}>
-        {jsonInRegistry.map((labels) => (
-          <option key={labels} value={labels}>
-            {labels}
-          </option>
-        ))}
-      </UI.Select>
+      {previewData && (
+        <DevicesDemo data={previewData} selectedDevice={selectedDevice} />
+      )}
     </main>
   );
 }

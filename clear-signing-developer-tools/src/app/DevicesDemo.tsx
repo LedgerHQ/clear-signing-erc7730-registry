@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
 import {
   type Deploymnent,
   type DisplayItem,
@@ -128,16 +129,20 @@ const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
   </StaxDisplay>
 );
 
-export const DevicesDemo = ({
-  data: {
+interface Props {
+  data: PreviewData;
+  selectedDevice: string;
+}
+
+export const DevicesDemo = ({ data, selectedDevice }: Props) => {
+  const dataForScreens = calculateScreensForDevice(selectedDevice, data);
+  const {
     contract,
     type,
     metadata: { owner, info },
     operations,
-  },
-}: {
-  data: PreviewData;
-}) => {
+  } = dataForScreens;
+
   const chosenOperation = operations[0]; // TODO: handle multiple operations
   const chosenDeployment = contract.deployments[0] as unknown; // TODO: handle multiple deployments
   if (!chosenOperation || !chosenDeployment) return null;
@@ -145,13 +150,17 @@ export const DevicesDemo = ({
   const { address } = chosenDeployment as Deploymnent;
   const { displays } = chosenOperation;
   return (
-    <div className="overflow-x-scroll bg-[#383838] p-16">
-      <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
-        <ReviewIntro owner={owner} type={type} />
-        <ContractInformation info={info} address={address} />
-        <FieldsToReview displays={displays} />
-        <HoldToSign owner={owner} type={type} />
+    <>
+      <div className="overflow-x-scroll bg-[#383838] p-16">
+        <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
+          <ReviewIntro owner={owner} type={type} />
+          <ContractInformation info={info} address={address} />
+          <FieldsToReview displays={displays} />
+          <HoldToSign owner={owner} type={type} />
+        </div>
       </div>
-    </div>
+
+      <pre className="container p-16">{JSON.stringify(data, null, 2)}</pre>
+    </>
   );
 };
