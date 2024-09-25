@@ -1,6 +1,15 @@
 import { type ReactNode } from "react";
 import { type DisplayItem, type PreviewData } from "~/types/PreviewData";
 
+// Dimensions of the area to display the fields:
+// Stax : 400px x 546px
+// Flex : 480px x 464px
+
+// Number of lines for tags & values:
+// Stax : 10
+// Flex : 9
+// If a value exceeds 10 (or 9) lines, it should be automatically truncated with “...” at the end of the last line, along with a “More” button
+
 const Screen = {
   Action: ({ children }: { children: string }) => (
     <div className="font-medium">{children}</div>
