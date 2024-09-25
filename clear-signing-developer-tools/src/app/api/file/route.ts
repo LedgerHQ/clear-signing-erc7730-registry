@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const content: string = fs.readFileSync(absolutePath, "utf-8");
-    const json = parseMetadataFile(content);
+    const json = parseMetadataFile(content, absolutePath);
 
     return new Response(JSON.stringify(json), {
       headers: {
