@@ -1,5 +1,9 @@
 import { type ReactNode } from "react";
-import { type DisplayItem, type PreviewData } from "~/types/PreviewData";
+import {
+  type Deploymnent,
+  type DisplayItem,
+  type PreviewData,
+} from "~/types/PreviewData";
 
 // Dimensions of the area to display the fields:
 // Stax : 400px x 546px
@@ -135,10 +139,10 @@ export const DevicesDemo = ({
   data: PreviewData;
 }) => {
   const chosenOperation = operations[0]; // TODO: handle multiple operations
-  const chosenDeployment = contract.deployments[0]; // TODO: handle multiple deployments
+  const chosenDeployment = contract.deployments[0] as unknown; // TODO: handle multiple deployments
   if (!chosenOperation || !chosenDeployment) return null;
 
-  const { address } = chosenDeployment;
+  const { address } = chosenDeployment as Deploymnent;
   const { displays } = chosenOperation;
   return (
     <div className="overflow-x-scroll bg-[#383838] p-16">
