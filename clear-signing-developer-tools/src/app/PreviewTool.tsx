@@ -13,14 +13,11 @@ import poapBridgeFile from "../../../registry/poap/calldata-PoapBridge.json";
 import paraswapFile from "../../../registry/paraswap/calldata-AugustusSwapper.json";
 import d from "../../../registry/uniswap/eip712-UniswapX-ExclusiveDutchOrder copy.json";
 
-export default function PreviewTool({
-  allFiles,
-}: {
-  allFiles: {
-    fullPath: string;
-    label: string;
-  }[];
-}) {
+interface Props {
+  jsonInRegistry: string[];
+}
+
+export default function PreviewTool({ jsonInRegistry }: Props) {
   const [mounted, setMounted] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState("");
   const [fileKey, setFileKey] = useState("calldata-PoapBridge.json");
@@ -67,9 +64,9 @@ export default function PreviewTool({
       <pre className="container p-16">{JSON.stringify(data, null, 2)}</pre>
 
       <UI.Select onChange={() => null}>
-        {allFiles.map(({ label }) => (
-          <option key={label} value={label}>
-            {label}
+        {jsonInRegistry.map((labels) => (
+          <option key={labels} value={labels}>
+            {labels}
           </option>
         ))}
       </UI.Select>

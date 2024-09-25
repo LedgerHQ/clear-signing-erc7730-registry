@@ -3,25 +3,22 @@ import path from "path";
 
 import { registryPath } from "~/constants";
 
-type Files = Array<{
-  fullPath: string;
-  label: string;
-}>;
-
-function listAllJsonInRegistry(): Files {
-  const files: Files = [];
+function listAllJsonInRegistry() {
+  const files: string[] = [];
   listAllJsonInPath(files, registryPath);
   return files;
 }
 
-function listAllJsonInPath(files: Files, currentPath: string) {
+function listAllJsonInPath(files: string[], currentPath: string) {
   fs.readdirSync(currentPath).forEach((fileOrDir) => {
     const fullPath = path.join(currentPath, fileOrDir);
     if (isDirectory(fullPath)) {
       listAllJsonInPath(files, fullPath);
       return;
     }
-    files.push({ fullPath, label: fullPath.replace(registryPath, "") });
+
+    const fileLabel = fullPath.replace(registryPath, "");
+    files.push(fileLabel);
   });
 }
 function isDirectory(candidatePath: string) {
