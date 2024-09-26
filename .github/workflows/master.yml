@@ -46,7 +46,7 @@ jobs:
         run: erc7730 lint registry --gha
 
   update_cal:
-    name: 🔁 trigger Ledger Crypto Assets List update
+    name: 🔁 trigger updates
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     strategy:
