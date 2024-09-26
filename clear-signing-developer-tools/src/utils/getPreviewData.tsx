@@ -1,37 +1,34 @@
 import { type Operation, type PreviewData } from "../types/PreviewData";
 import type { ERC7730Schema } from "~/types";
 
-function transformSimpleFormatToOperations(display: any): Operation[] {
+function transformSimpleFormatToOperations(
+  display: ERC7730Schema["display"],
+): Operation[] {
   const formats = display.formats;
-  const definitions = display.definitions || {};
+  const definitions = display.definitions ?? {};
 
   if (!formats) return [];
 
-  return Object.keys(formats).map((key) => {
-    const format = formats[key];
-
-    const displays = format.fields.map((field: any) => {
+  return Object.values(formats).map((format) => {
+    // TODO: Handle complex intent messages
+    // https://ledgerhq.atlassian.net/browse/EDEV-7541
+    const { intent } = format;
+    const displays = format.fields.map((field) => {
       let label = field.label;
-      let displayValue = field.format || "unknown";
+      let displayValue = field.format ?? "unknown";
 
       if (field.$ref) {
         const refPath = field.$ref.split(".").pop();
         if (refPath && definitions[refPath]) {
-          label = definitions[refPath].label || label;
-          displayValue = definitions[refPath].format || displayValue;
+          label = definitions[refPath].label ?? label;
+          displayValue = definitions[refPath].format ?? displayValue;
         }
       }
 
-      return {
-        label,
-        displayValue,
-      };
+      return { label, displayValue };
     });
 
-    return {
-      intent: format.intent,
-      displays,
-    };
+    return { intent, displays };
   });
 }
 
