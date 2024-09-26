@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { formatShortAddress } from "~/app/formatShortAddress";
 import { UI } from "~/app/UI";
-import { type PreviewData } from "~/types/PreviewData";
+import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 
 export const PreviewForm = ({
   data,
@@ -24,7 +24,7 @@ export const PreviewForm = ({
         <UI.HeadingField>Contract</UI.HeadingField>
         <div>
           {data.contract.name}
-          {data.contract.deployments.map(({ address }) => (
+          {data.contract.deployments.map(({ address }: Deploymnent) => (
             <span key={address}>
               {" "}
               (
