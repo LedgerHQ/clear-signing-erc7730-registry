@@ -5,9 +5,11 @@ import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 
 export const PreviewForm = ({
   data,
+  selectedDevice,
   setSelectedDevice,
 }: {
   data: PreviewData;
+  selectedDevice: string;
   setSelectedDevice: Dispatch<SetStateAction<string>>;
 }) => {
   const onChangeDevice = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
@@ -59,7 +61,7 @@ export const PreviewForm = ({
       </div>
       <div>
         <UI.HeadingField>Preview on</UI.HeadingField>
-        <UI.Select defaultValue={"flex"} onChange={onChangeDevice} disabled>
+        <UI.Select defaultValue={selectedDevice} onChange={onChangeDevice}>
           <option value="flex">Ledger Flex</option>
           <option value="stax">Ledger Stax</option>
         </UI.Select>
