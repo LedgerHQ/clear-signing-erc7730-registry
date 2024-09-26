@@ -15,7 +15,7 @@ import {
 // Flex : 9
 // If a value exceeds 10 (or 9) lines, it should be automatically truncated with “...” at the end of the last line, along with a “More” button
 
-const Screen = {
+const Flex = {
   Action: ({ children }: { children: string }) => (
     <div className="font-medium">{children}</div>
   ),
@@ -27,6 +27,11 @@ const Screen = {
   ),
   Content: ({ children }: { children: string }) => (
     <div className="">{children}</div>
+  ),
+  Display: ({ children }: { children: ReactNode }) => (
+    <div className="flex h-[342px] w-[220px] rounded-xl rounded-l-none border-8 border-l-0 border-black bg-white">
+      {children}
+    </div>
   ),
   InfoButton: () => (
     <div className="h-5 w-5 self-center rounded-full border-2 border-black text-center align-middle text-xs leading-4">
@@ -59,29 +64,23 @@ const Screen = {
   ),
 };
 
-const StaxDisplay = ({ children }: { children: ReactNode }) => (
-  <div className="flex h-[342px] w-[220px] rounded-xl rounded-l-none border-8 border-l-0 border-black bg-white">
-    {children}
-  </div>
-);
-
 const ReviewIntro = ({ owner, type }: { owner: string; type: string }) => (
-  <StaxDisplay>
-    <Screen.Wrapper>
-      <Screen.Section>
-        <Screen.Logo />
-        <Screen.ReviewTitle>{`Review ${type} from ${owner}?`}</Screen.ReviewTitle>
-        <Screen.InfoButton />
-        <Screen.ReviewSummary>
+  <Flex.Display>
+    <Flex.Wrapper>
+      <Flex.Section>
+        <Flex.Logo />
+        <Flex.ReviewTitle>{`Review ${type} from ${owner}?`}</Flex.ReviewTitle>
+        <Flex.InfoButton />
+        <Flex.ReviewSummary>
           {`You're interacting with a smart contract from ${owner}.`}
-        </Screen.ReviewSummary>
-        <Screen.TapToContinue />
-      </Screen.Section>
-      <Screen.Section>
-        <Screen.RejectButton />
-      </Screen.Section>
-    </Screen.Wrapper>
-  </StaxDisplay>
+        </Flex.ReviewSummary>
+        <Flex.TapToContinue />
+      </Flex.Section>
+      <Flex.Section>
+        <Flex.RejectButton />
+      </Flex.Section>
+    </Flex.Wrapper>
+  </Flex.Display>
 );
 
 const ContractInformation = ({
@@ -91,26 +90,26 @@ const ContractInformation = ({
   address: string;
   info: { lastUpdate: string; legalName: string; url: string };
 }) => (
-  <StaxDisplay>
-    <Screen.Wrapper>
-      <Screen.Section>
-        <Screen.BackHeader>Smart contract information</Screen.BackHeader>
-      </Screen.Section>
-      <Screen.Section>
-        <Screen.Action>Contract owner</Screen.Action>
-        <Screen.Content>{legalName}</Screen.Content>
-        <Screen.Content>{url}</Screen.Content>
-      </Screen.Section>
-      <Screen.Section>
-        <Screen.Action>Last updated</Screen.Action>
-        <Screen.Content>{new Date(lastUpdate).toDateString()}</Screen.Content>
-      </Screen.Section>
-      <Screen.Section>
-        <Screen.Action>Contract address</Screen.Action>
-        <Screen.Content>{address}</Screen.Content>
-      </Screen.Section>
-    </Screen.Wrapper>
-  </StaxDisplay>
+  <Flex.Display>
+    <Flex.Wrapper>
+      <Flex.Section>
+        <Flex.BackHeader>Smart contract information</Flex.BackHeader>
+      </Flex.Section>
+      <Flex.Section>
+        <Flex.Action>Contract owner</Flex.Action>
+        <Flex.Content>{legalName}</Flex.Content>
+        <Flex.Content>{url}</Flex.Content>
+      </Flex.Section>
+      <Flex.Section>
+        <Flex.Action>Last updated</Flex.Action>
+        <Flex.Content>{new Date(lastUpdate).toDateString()}</Flex.Content>
+      </Flex.Section>
+      <Flex.Section>
+        <Flex.Action>Contract address</Flex.Action>
+        <Flex.Content>{address}</Flex.Content>
+      </Flex.Section>
+    </Flex.Wrapper>
+  </Flex.Display>
 );
 
 const FieldsToReview = ({
@@ -123,19 +122,19 @@ const FieldsToReview = ({
   const displays = transformOperationIntoDisplays(operation, selectedDevice);
 
   return displays.map(({ displayValue, label }) => (
-    <StaxDisplay key={label}>
-      <Screen.Wrapper>
-        <Screen.Label>{label}</Screen.Label>
-        <Screen.Value>{displayValue}</Screen.Value>
-      </Screen.Wrapper>
-    </StaxDisplay>
+    <Flex.Display key={label}>
+      <Flex.Wrapper>
+        <Flex.Label>{label}</Flex.Label>
+        <Flex.Value>{displayValue}</Flex.Value>
+      </Flex.Wrapper>
+    </Flex.Display>
   ));
 };
 
 const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
-  <StaxDisplay>
-    <Screen.Wrapper>{`Sign ${type} from ${owner}?`}</Screen.Wrapper>
-  </StaxDisplay>
+  <Flex.Display>
+    <Flex.Wrapper>{`Sign ${type} from ${owner}?`}</Flex.Wrapper>
+  </Flex.Display>
 );
 
 interface Props {
