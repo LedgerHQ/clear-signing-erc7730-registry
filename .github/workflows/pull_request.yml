@@ -1,4 +1,4 @@
-name: pull request
+name: ✨ pull request
 
 on:
   pull_request:
@@ -13,10 +13,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pull_request:
-    name: pull request
+  setup_pull_request:
+    name: 🤖 setup pull request
     runs-on: public-ledgerhq-shared-small
-    timeout-minutes: 60
+    timeout-minutes: 10
     steps:
 
       - name: Checkout
@@ -39,6 +39,33 @@ jobs:
             descriptors
             ci
           add_comment: true
+
+  validate_descriptors:
+    name: 🔎 validate descriptors
+    runs-on: public-ledgerhq-shared-small
+    timeout-minutes: 60
+    steps:
+
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@v4
+
+      - name: Add labels
+        timeout-minutes: 5
+        uses: actions/labeler@v5
+
+      - name: Enforce labels
+        timeout-minutes: 5
+        uses: mheap/github-action-required-labels@v5
+        with:
+          add_comment: true
+          mode: minimum
+          count: 1
+          labels: |
+            documentation
+            specifications
+            descriptors
+            ci
 
       - name: Get all changed descriptor files
         timeout-minutes: 5

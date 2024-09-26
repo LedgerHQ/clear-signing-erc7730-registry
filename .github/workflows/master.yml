@@ -1,4 +1,4 @@
-name: master
+name: ✨ master
 
 on:
   push:
@@ -13,8 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
-    name: ci
+  validate_descriptors:
+    name: 🔎 validate descriptors
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
@@ -47,8 +47,9 @@ jobs:
         run: erc7730 lint registry --gha
 
   update_cal:
+    name: 🔁 trigger Ledger Crypto Assets List update
     runs-on: ledgerhq-shared-small
-    needs: ci
+    needs: validate_descriptors
     timeout-minutes: 60
     strategy:
       matrix:
