@@ -57,11 +57,15 @@ const ContractInformation = ({
 const FieldsToReview = ({ operation }: { operation: Operation }) => {
   const displays = transformOperationIntoDisplays(operation, "flex");
 
-  return displays.map(({ displayValue, label }) => (
-    <Flex.Bezel key={label}>
+  return displays.map((display, index) => (
+    <Flex.Bezel key={`display-${index}`}>
       <Flex.Wrapper>
-        <Flex.Label>{label}</Flex.Label>
-        <Flex.Value>{displayValue}</Flex.Value>
+        {display.map(({ label, displayValue }) => (
+          <div key={label}>
+            <Flex.Label>{label}</Flex.Label>
+            <Flex.Value>{displayValue}</Flex.Value>
+          </div>
+        ))}
       </Flex.Wrapper>
     </Flex.Bezel>
   ));

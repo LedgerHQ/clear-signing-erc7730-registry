@@ -5,7 +5,7 @@ export const transformOperationIntoDisplays = (
   selectedDevice: string,
 ) => {
   if (selectedDevice === "stax") {
-    return operation.displays;
+    return operation.displays.map((display) => [display]);
   }
-  return operation.displays;
+  return operation.displays.map((display) => [display]);
 };
