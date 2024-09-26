@@ -1,15 +1,18 @@
 import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
 import { type PreviewData } from "~/types/PreviewData";
 
-const exampleInput = {
-  displays: [{ displayValue: "displayValue", label: "label" }],
-  intent: "intent",
+const exampleInput: PreviewData = {
   type: "transaction",
   metadata: {
     owner: "owner",
     info: { legalName: "legalName", url: "url", lastUpdate: "lastUpdate" },
   },
-} satisfies PreviewData;
+  contract: {
+    name: "",
+    deployments: [],
+  },
+  operations: [],
+};
 
 describe("given a Stax", () => {
   test("passes the input data out", () => {

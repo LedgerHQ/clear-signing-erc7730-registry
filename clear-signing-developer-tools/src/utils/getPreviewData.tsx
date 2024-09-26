@@ -32,23 +32,38 @@ function transformSimpleFormatToOperations(
   });
 }
 
-export function getPreviewData(data: ERC7730Schema): PreviewData {
-  const { context, display, metadata } = data;
-  const operations = transformSimpleFormatToOperations(display);
-  const name = "contract" in context ? context.$id : context.eip712.domain.name;
+type PreviewDataResponse =
+  | { data: PreviewData; error: null }
+  | { data: null; error: string };
 
-  const type = "contract" in context ? "transaction" : "message";
-  const inContextDeployments =
-    "contract" in context
-      ? context.contract.deployments
-      : context.eip712.deployments;
+export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
+  try {
+    const { context, display, metadata } = data;
+    const operations = transformSimpleFormatToOperations(display);
+    const name =
+      "contract" in context ? context.$id : context.eip712.domain.name;
 
-  const deployments = inContextDeployments.map(({ address }) => ({ address }));
+    const type = "contract" in context ? "transaction" : "message";
+    const inContextDeployments =
+      "contract" in context
+        ? context.contract.deployments
+        : context.eip712.deployments;
 
-  return {
-    contract: { name, deployments },
-    operations,
-    metadata,
-    type,
-  };
+    const deployments = inContextDeployments.map(({ address }) => ({
+      address,
+    }));
+
+    return {
+      data: {
+        contract: { name, deployments },
+        operations,
+        metadata,
+        type,
+      },
+      error: null,
+    };
+  } catch (error) {
+    console.error("Error transforming metadata to preview data:", error);
+    return { error: "Error transforming metadata to preview data", data: null };
+  }
 }

@@ -7,6 +7,8 @@ import { UI } from "~/app/UI";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
 import { type PreviewData } from "~/types/PreviewData";
+import { getPreviewData } from "~/utils/getPreviewData";
+import { type ERC7730Schema } from "~/types";
 
 interface Props {
   jsonInRegistry: string[];
@@ -15,7 +17,7 @@ interface Props {
 export default function PreviewTool({ jsonInRegistry }: Props) {
   const [mounted, setMounted] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState("");
-  const [fileKey, setFileKey] = useState("calldata-PoapBridge.json");
+  const [fileKey, setFileKey] = useState("");
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
 
   useEffect(() => {
@@ -25,6 +27,34 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
       localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
     );
   }, []);
+
+  useEffect(() => {
+    if (fileKey) {
+      fetch("http://localhost:3000/api/file/?label=" + fileKey)
+        .then((res) => {
+          res
+            .json()
+            .then((metadata: ERC7730Schema | null) => {
+              if (!metadata) {
+                setPreviewData(null);
+                return;
+              }
+
+              const { data, error } = getPreviewData(metadata);
+              if (error)
+                throw new Error("Error getting preview data: " + error);
+              setPreviewData(data);
+            })
+            .catch((error) => {
+              console.log("Error parsing JSON: ", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error fetching file: ", error);
+          setPreviewData(null);
+        });
+    }
+  }, [fileKey]);
 
   if (!mounted) {
     return null;
@@ -38,7 +68,6 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
           <SelectMetadataFile
             fileKey={fileKey}
             jsonInRegistry={jsonInRegistry}
-            setPreviewData={setPreviewData}
             setFileKey={setFileKey}
           />
           {previewData && (

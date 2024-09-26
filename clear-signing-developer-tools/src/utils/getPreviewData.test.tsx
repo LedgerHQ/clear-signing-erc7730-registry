@@ -39,70 +39,70 @@ describe("getPreviewData", () => {
         },
       };
 
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         metadata,
       });
 
-      expect(result.metadata).toBe(metadata);
+      expect(data!.metadata).toBe(metadata);
     });
 
     it("should return contract information for a transaction", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleTransactionContext,
       });
 
-      expect(result.contract).toEqual({
+      expect(data!.contract).toEqual({
         name: exampleTransactionContext.$id,
         deployments: [{ address: "0xtestAddress" }],
       });
     });
 
     it("should return contract information for an eip712 message", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleEIP712Context,
       });
 
-      expect(result.contract).toEqual({
+      expect(data!.contract).toEqual({
         name: "EIP 712 name",
         deployments: [{ address: "0xtestEip712Address" }],
       });
     });
 
     it("should indicate if it is a transaction", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleTransactionContext,
       });
 
-      expect(result.type).toBe("transaction");
+      expect(data!.type).toBe("transaction");
     });
 
     it("should indicate if it is a message", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         context: exampleEIP712Context,
       });
 
-      expect(result.type).toBe("message");
+      expect(data!.type).toBe("message");
     });
   });
 
   describe("operation", () => {
     it('should return an empty array if "formats" is not present', () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         display: {
           formats: {},
         },
       });
 
-      expect(result.operations).toEqual([]);
+      expect(data!.operations).toEqual([]);
     });
     it("should map a simple format to operation", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         display: {
           formats: {
@@ -135,7 +135,7 @@ describe("getPreviewData", () => {
         },
       });
 
-      expect(result.operations).toEqual([
+      expect(data!.operations).toEqual([
         {
           intent: "Mint POAP",
           displays: [
@@ -156,7 +156,7 @@ describe("getPreviewData", () => {
       ]);
     });
     it("should look at the $ root identifier to fetch the data elsewhere", () => {
-      const result = getPreviewData({
+      const { data } = getPreviewData({
         ...minimumERC7730Schema,
         display: {
           definitions: {
@@ -180,7 +180,7 @@ describe("getPreviewData", () => {
         },
       });
 
-      expect(result.operations).toEqual([
+      expect(data!.operations).toEqual([
         {
           intent: "Mint POAP",
           displays: [
