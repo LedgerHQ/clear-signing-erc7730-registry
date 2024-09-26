@@ -47,7 +47,7 @@ jobs:
 
   update_cal:
     name: 🔁 trigger Ledger Crypto Assets List update
-    runs-on: ledgerhq-shared-small
+    runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     strategy:
       matrix:
