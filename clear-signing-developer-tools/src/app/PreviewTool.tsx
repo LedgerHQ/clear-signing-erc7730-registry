@@ -78,7 +78,6 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
           {previewData && (
             <PreviewForm
               data={previewData}
-              selectedDevice={selectedDevice}
               setSelectedDevice={setSelectedDevice}
             />
           )}
