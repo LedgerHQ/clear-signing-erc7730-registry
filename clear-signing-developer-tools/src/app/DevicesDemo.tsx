@@ -112,14 +112,8 @@ const ContractInformation = ({
   </Flex.Display>
 );
 
-const FieldsToReview = ({
-  operation,
-  selectedDevice,
-}: {
-  operation: Operation;
-  selectedDevice: string;
-}) => {
-  const displays = transformOperationIntoDisplays(operation, selectedDevice);
+const FieldsToReview = ({ operation }: { operation: Operation }) => {
+  const displays = transformOperationIntoDisplays(operation, "flex");
 
   return displays.map(({ displayValue, label }) => (
     <Flex.Display key={label}>
@@ -142,7 +136,7 @@ interface Props {
   selectedDevice: string;
 }
 
-export const DevicesDemo = ({ data, selectedDevice }: Props) => {
+export const DevicesDemo = ({ data }: Props) => {
   const {
     contract,
     type,
@@ -161,10 +155,7 @@ export const DevicesDemo = ({ data, selectedDevice }: Props) => {
         <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
           <ReviewIntro owner={owner} type={type} />
           <ContractInformation info={info} address={address} />
-          <FieldsToReview
-            operation={chosenOperation}
-            selectedDevice={selectedDevice}
-          />
+          <FieldsToReview operation={chosenOperation} />
           <HoldToSign owner={owner} type={type} />
         </div>
       </div>
