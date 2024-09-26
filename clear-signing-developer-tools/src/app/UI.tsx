@@ -27,6 +27,9 @@ export const UI = {
       {children}
     </option>
   ),
+  Error: ({ children }: { children: string }) => (
+    <div className="inline-block bg-red-400 px-2 py-1">{children}</div>
+  ),
   Select: ({
     children,
     ...props

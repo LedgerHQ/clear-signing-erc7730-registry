@@ -19,6 +19,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   const [selectedDevice, setSelectedDevice] = useState("");
   const [fileKey, setFileKey] = useState("");
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setMounted(true);
@@ -41,9 +42,13 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
               }
 
               const { data, error } = getPreviewData(metadata);
-              if (error)
-                throw new Error("Error getting preview data: " + error);
-              setPreviewData(data);
+              if (error) {
+                setPreviewData(null);
+                setErrorMessage(error);
+              } else {
+                setErrorMessage("");
+                setPreviewData(data);
+              }
             })
             .catch((error) => {
               console.log("Error parsing JSON: ", error);
@@ -78,6 +83,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
             />
           )}
         </form>
+        {errorMessage && <UI.Error>{errorMessage}</UI.Error>}
       </div>
 
       {previewData && (

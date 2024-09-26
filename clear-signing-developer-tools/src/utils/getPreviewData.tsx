@@ -62,8 +62,12 @@ export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
       },
       error: null,
     };
-  } catch (error) {
-    console.error("Error transforming metadata to preview data:", error);
-    return { error: "Error transforming metadata to preview data", data: null };
+  } catch (error: unknown) {
+    const { message } = error as { message: string };
+    console.error("Error parsing selected file: ", message);
+    return {
+      error: "Error parsing selected file (see Browser Console for details)",
+      data: null,
+    };
   }
 }
