@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
-import { calculateScreensForDevice } from "~/app/calculateScreensForDevice";
+import { transformOperationIntoDisplays } from "~/app/transformOperationIntoDisplays";
 import {
+  type Operation,
   type Deploymnent,
-  type DisplayItem,
   type PreviewData,
 } from "~/types/PreviewData";
 
@@ -113,8 +113,16 @@ const ContractInformation = ({
   </StaxDisplay>
 );
 
-const FieldsToReview = ({ displays }: { displays: DisplayItem[] }) =>
-  displays.map(({ displayValue, label }) => (
+const FieldsToReview = ({
+  operation,
+  selectedDevice,
+}: {
+  operation: Operation;
+  selectedDevice: string;
+}) => {
+  const displays = transformOperationIntoDisplays(operation, selectedDevice);
+
+  return displays.map(({ displayValue, label }) => (
     <StaxDisplay key={label}>
       <Screen.Wrapper>
         <Screen.Label>{label}</Screen.Label>
@@ -122,6 +130,7 @@ const FieldsToReview = ({ displays }: { displays: DisplayItem[] }) =>
       </Screen.Wrapper>
     </StaxDisplay>
   ));
+};
 
 const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
   <StaxDisplay>
@@ -135,27 +144,28 @@ interface Props {
 }
 
 export const DevicesDemo = ({ data, selectedDevice }: Props) => {
-  const dataForScreens = calculateScreensForDevice(selectedDevice, data);
   const {
     contract,
     type,
     metadata: { owner, info },
     operations,
-  } = dataForScreens;
+  } = data;
 
   const chosenOperation = operations[0]; // TODO: handle multiple operations
   const chosenDeployment = contract.deployments[0] as unknown; // TODO: handle multiple deployments
   if (!chosenOperation || !chosenDeployment) return null;
 
   const { address } = chosenDeployment as Deploymnent;
-  const { displays } = chosenOperation;
   return (
     <>
       <div className="overflow-x-scroll bg-[#383838] p-16">
         <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
           <ReviewIntro owner={owner} type={type} />
           <ContractInformation info={info} address={address} />
-          <FieldsToReview displays={displays} />
+          <FieldsToReview
+            operation={chosenOperation}
+            selectedDevice={selectedDevice}
+          />
           <HoldToSign owner={owner} type={type} />
         </div>
       </div>
