@@ -1,5 +1,36 @@
 import { type Operation, type PreviewData } from "../types/PreviewData";
-import type { ERC7730Schema } from "~/types";
+import type { ERC7730Schema, FieldFormatter } from "~/types";
+
+const processFields = (
+  fields: FieldFormatter[],
+  definitions: Record<string, { label?: string; format?: string }>,
+): { label: string; displayValue: string }[] => {
+  return fields.flatMap((field) => {
+    let label = field.label ?? "unknown";
+    let displayValue = field.format ?? "unknown";
+
+    if (field.$ref) {
+      const refPath = field.$ref.split(".").pop();
+      if (refPath && definitions[refPath]) {
+        label = definitions[refPath].label ?? label;
+        displayValue = definitions[refPath].format ?? displayValue;
+      }
+    }
+
+    if (field.fields) {
+      if (field.path?.endsWith("[]")) {
+        const simulatedArrayLength = field.fields.length;
+        return Array(simulatedArrayLength)
+          .fill(null)
+          .flatMap(() => processFields(field.fields ?? [], definitions));
+      } else {
+        return processFields(field.fields, definitions);
+      }
+    }
+
+    return { label, displayValue };
+  });
+};
 
 function transformSimpleFormatToOperations(
   display: ERC7730Schema["display"],
@@ -10,27 +41,12 @@ function transformSimpleFormatToOperations(
   if (!formats) return [];
 
   return Object.values(formats).map((format) => {
-    // TODO: Handle complex intent messages
-    // https://ledgerhq.atlassian.net/browse/EDEV-7541
     const intent =
       typeof format.intent === "string"
         ? format.intent
         : JSON.stringify(format.intent);
 
-    const displays = format.fields.map((field) => {
-      let label = field.label ?? "unknown";
-      let displayValue = field.format ?? "unknown";
-
-      if (field.$ref) {
-        const refPath = field.$ref.split(".").pop();
-        if (refPath && definitions[refPath]) {
-          label = definitions[refPath].label ?? label;
-          displayValue = definitions[refPath].format ?? displayValue;
-        }
-      }
-
-      return { label, displayValue };
-    });
+    const displays = processFields(format.fields, definitions);
 
     return { intent, displays };
   });

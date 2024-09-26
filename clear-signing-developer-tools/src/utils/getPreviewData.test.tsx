@@ -192,5 +192,62 @@ describe("getPreviewData", () => {
         },
       ]);
     });
+
+    it("should map nested fields to operations", () => {
+      const { data } = getPreviewData({
+        ...minimumERC7730Schema,
+        display: {
+          formats: {
+            PermitWitnessTransferFrom: {
+              intent: "UniswapX Dutch Order",
+              fields: [
+                {
+                  path: "witness.outputs[]",
+                  fields: [
+                    {
+                      path: "endAmount",
+                      label: "Minimum amounts to receive",
+                      format: "tokenAmount",
+                      params: {
+                        tokenPath: "token",
+                      },
+                    },
+                    {
+                      path: "recipient",
+                      label: "On Addresses",
+                      format: "addressName",
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        },
+      });
+
+      expect(data!.operations).toEqual([
+        {
+          intent: "UniswapX Dutch Order",
+          displays: [
+            {
+              label: "Minimum amounts to receive",
+              displayValue: "tokenAmount",
+            },
+            {
+              label: "On Addresses",
+              displayValue: "addressName",
+            },
+            {
+              label: "Minimum amounts to receive",
+              displayValue: "tokenAmount",
+            },
+            {
+              label: "On Addresses",
+              displayValue: "addressName",
+            },
+          ],
+        },
+      ]);
+    });
   });
 });

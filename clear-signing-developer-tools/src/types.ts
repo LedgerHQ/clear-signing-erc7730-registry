@@ -59,13 +59,14 @@ interface Display {
   formats: Record<string, StructuredDataFormat>;
 }
 
-interface FieldFormatter {
+export interface FieldFormatter {
   $id?: string;
   $ref?: string;
   label?: string;
   format?: FieldFormat;
   path?: string;
   params?: Record<string, unknown>;
+  fields?: FieldFormatter[];
 }
 
 type FieldFormat =
@@ -82,9 +83,9 @@ type FieldFormat =
 
 interface StructuredDataFormat {
   $id?: string;
-  intent: Intent;
+  intent?: Intent;
   fields: FieldFormatter[];
-  required: string[];
+  required?: string[];
   screens?: Record<string, Screen[]>;
 }
 
