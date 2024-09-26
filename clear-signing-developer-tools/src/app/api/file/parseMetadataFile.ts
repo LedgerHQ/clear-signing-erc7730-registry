@@ -2,18 +2,13 @@ import { type ERC7730Schema } from "~/types";
 import path from "path";
 import fs from "fs";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function deepMerge(target: any, source: any) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   for (const key of Object.keys(source)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     if (source[key] instanceof Object && key in target) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       Object.assign(source[key], deepMerge(target[key], source[key]));
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return Object.assign(target || {}, source);
 }
 
