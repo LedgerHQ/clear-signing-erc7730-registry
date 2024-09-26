@@ -12,9 +12,13 @@ function transformSimpleFormatToOperations(
   return Object.values(formats).map((format) => {
     // TODO: Handle complex intent messages
     // https://ledgerhq.atlassian.net/browse/EDEV-7541
-    const { intent } = format;
+    const intent =
+      typeof format.intent === "string"
+        ? format.intent
+        : JSON.stringify(format.intent);
+
     const displays = format.fields.map((field) => {
-      let label = field.label;
+      let label = field.label ?? "unknown";
       let displayValue = field.format ?? "unknown";
 
       if (field.$ref) {
