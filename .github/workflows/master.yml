@@ -28,7 +28,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
 
       - name: Login to Ledger JFrog
         timeout-minutes: 10
@@ -49,7 +48,6 @@ jobs:
   update_cal:
     name: 🔁 trigger Ledger Crypto Assets List update
     runs-on: ledgerhq-shared-small
-    needs: validate_descriptors
     timeout-minutes: 60
     strategy:
       matrix:
