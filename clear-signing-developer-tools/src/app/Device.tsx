@@ -28,7 +28,9 @@ export const Device = {
   ),
   Label: ({ children }: { children: string }) => <div>{children}</div>,
 
-  Logo: () => <div className="h-3 w-2 self-center bg-black p-4"></div>,
+  Logo: () => (
+    <div className="h-[29px] w-[18px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
+  ),
   RejectButton: () => <div className="p-2 text-center">Reject transaction</div>,
   ReviewSummary: ({ children }: { children: string }) => (
     <div className="text-sm">{children}</div>
