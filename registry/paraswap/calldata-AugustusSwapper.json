@@ -25,7 +25,7 @@
     "display": {
         "definitions": {
             "sendAmount": {
-                "label": "Amount to Send",
+                "label": "Amount to send",
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "fromToken",

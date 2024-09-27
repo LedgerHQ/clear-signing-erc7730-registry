@@ -146,7 +146,7 @@
     "display": {
         "formats": {
             "PermitWitnessTransferFrom" : {
-                "intent": "UniswapX Exclusive Dutch Order",
+                "intent": "UniswapX Exclusive dutch Order",
                 "fields": [
                     {
                         "path": "spender",

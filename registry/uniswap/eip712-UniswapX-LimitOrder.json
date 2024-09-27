@@ -123,7 +123,7 @@
                 "fields": [
                     {
                         "path": "spender",
-                        "label": "Approve to spender",
+                        "label": "Approve to Spender",
                         "format": "addressName"
                     },
                     {

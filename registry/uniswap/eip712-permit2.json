@@ -146,7 +146,7 @@
             },
 
             "PermitBatch": {
-                "$id": "Permit2 Permit Batch",
+                "$id": "Permit2 Permit batch",
                 "intent": "Authorize spending of tokens",
                 "fields": [
                     {
