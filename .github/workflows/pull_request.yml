@@ -101,4 +101,4 @@ jobs:
       - name: Validate ERC-7730 descriptors changed in pull request
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        run: erc7730 lint ${{ steps.changed-descriptor-files.outputs.all_changed_files }} --gha
+        run: erc7730 lint --gha ${{ steps.changed-descriptor-files.outputs.all_changed_files }}
