@@ -37,7 +37,7 @@
                     },
                     {
                         "path": "params.amountOut",
-                        "label": "Minimum amount to Receive",
+                        "label": "Minimum amount to receive",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.path.[-20:-1]"

@@ -96,7 +96,7 @@ jobs:
       - name: Install ERC-7730 library
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        run: jf pip install 'erc7730==0.0.8'
+        run: jf pip install erc7730
 
       - name: Validate ERC-7730 descriptors changed in pull request
         timeout-minutes: 10
