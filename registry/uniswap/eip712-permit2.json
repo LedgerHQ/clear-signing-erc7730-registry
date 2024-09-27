@@ -125,19 +125,16 @@
                             "format": "addressName"
                         },
                         {
+                            "path": "spenderrrrrrrr",
+                            "label": "Spender",
+                            "format": "addressName"
+                        },
+                        {
                             "path": "details.amount",
                             "label": "Amount allowance",
                             "format": "tokenAmount",
                             "params": {
                                 "tokenPath": "details.token"
-                            }
-                        },
-                        {
-                            "path": "details.expiration",
-                            "label": "Approval expires",
-                            "format": "date",
-                            "params": {
-                                "encoding": "timestamp"
                             }
                         }
                 ],
