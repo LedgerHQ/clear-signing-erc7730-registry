@@ -108,8 +108,6 @@ export const DevicesDemo = ({ data, selectedDevice }: Props) => {
           </div>
         </div>
       </DeviceContext.Provider>
-
-      <pre className="container p-16">{JSON.stringify(data, null, 2)}</pre>
     </>
   );
 };
