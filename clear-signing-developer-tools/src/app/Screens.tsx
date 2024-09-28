@@ -1,6 +1,7 @@
+import { Device } from "~/app/Device";
 import { getScreensForOperation } from "~/app/getScreensForOperation";
 import { InfoScreen } from "~/app/screens/InfoScreen";
-import { ReviewScreens } from "~/app/screens/ReviewScreens";
+import { ReviewScreen } from "~/app/screens/ReviewScreen";
 import { SignScreen } from "~/app/screens/SignScreen";
 import { TitleScreen } from "~/app/screens/TitleScreen";
 import { type Operation } from "~/types/PreviewData";
@@ -25,10 +26,26 @@ export const Screens = ({
 
   return (
     <>
-      <TitleScreen owner={owner} totalPages={totalPages} type={operationType} />
-      <InfoScreen info={info} address={contractAddress} />
-      <ReviewScreens totalPages={totalPages} screens={screens} />
-      <SignScreen owner={owner} totalPages={totalPages} type={operationType} />
+      <Device.Frame>
+        <TitleScreen owner={owner} type={operationType} />
+        <Device.Pagination current={1} total={totalPages} />
+      </Device.Frame>
+
+      <Device.Frame>
+        <InfoScreen info={info} address={contractAddress} />
+      </Device.Frame>
+
+      {screens.map((screen, index) => (
+        <Device.Frame key={`review-screen-${index}`}>
+          <ReviewScreen screen={screen} />
+          <Device.Pagination current={index + 2} total={totalPages} />
+        </Device.Frame>
+      ))}
+
+      <Device.Frame>
+        <SignScreen owner={owner} type={operationType} />
+        <Device.Pagination current={totalPages} total={totalPages} />
+      </Device.Frame>
     </>
   );
 };

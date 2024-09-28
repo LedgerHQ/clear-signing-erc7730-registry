@@ -7,7 +7,7 @@ export const InfoScreen = ({
   address: string;
   info: { lastUpdate: string; legalName: string; url: string };
 }) => (
-  <Device.Frame>
+  <>
     <Device.Section>
       <Device.BackHeader>Smart contract information</Device.BackHeader>
     </Device.Section>
@@ -24,5 +24,5 @@ export const InfoScreen = ({
       <Device.Action>Contract address</Device.Action>
       <Device.Content>{address}</Device.Content>
     </Device.Section>
-  </Device.Frame>
+  </>
 );
