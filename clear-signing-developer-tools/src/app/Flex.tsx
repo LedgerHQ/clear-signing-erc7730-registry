@@ -6,7 +6,7 @@ import { type ReactNode } from "react";
 export const Flex = {
   Bezel: ({ children }: { children: ReactNode }) => (
     <div className="h-[416.5px] w-[301.5px] bg-[url(/assets/DeviceBezel-Flex.png)] bg-contain p-[29.5px]">
-      <div className="flex h-[320px] w-[240px] overflow-hidden rounded-[8px]">
+      <div className="flex h-[300px] w-[240px] overflow-hidden rounded-[8px]">
         {children}
       </div>
     </div>

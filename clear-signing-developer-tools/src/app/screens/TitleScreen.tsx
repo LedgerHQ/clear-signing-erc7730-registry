@@ -8,12 +8,17 @@ export const TitleScreen = ({
   type: string;
 }) => (
   <>
-    <Device.Logo />
-    <Device.ReviewTitle>{`Review ${type} from ${owner}?`}</Device.ReviewTitle>
-    <Device.InfoButton />
-    <Device.ReviewSummary>
-      {`You're interacting with a smart contract from ${owner}.`}
-    </Device.ReviewSummary>
-    <Device.RejectButton />
+    <div>
+      <Device.Logo />
+      <Device.ReviewTitle>{`Review ${type} from ${owner}?`}</Device.ReviewTitle>
+    </div>
+    <div>
+      <div>
+        {`You're interacting with a smart contract from ${owner}.`}
+        <div className="h-5 w-5 self-center rounded-full border-2 border-black text-center align-middle text-xs leading-4">
+          i
+        </div>
+      </div>
+    </div>
   </>
 );
