@@ -1,8 +1,8 @@
 import { Device } from "~/app/Device";
-import { transformOperationIntoDisplays } from "~/app/transformOperationIntoDisplays";
+import { getScreensForOperation } from "~/app/getScreensForOperation";
 import { type Operation } from "~/types/PreviewData";
 
-const ReviewIntro = ({ owner, type }: { owner: string; type: string }) => (
+const IntroScreen = ({ owner, type }: { owner: string; type: string }) => (
   <Device.Bezel>
     <Device.Wrapper>
       <Device.Section>
@@ -21,7 +21,7 @@ const ReviewIntro = ({ owner, type }: { owner: string; type: string }) => (
   </Device.Bezel>
 );
 
-const ContractInformation = ({
+const InfoScreen = ({
   address,
   info: { lastUpdate, legalName, url },
 }: {
@@ -50,8 +50,8 @@ const ContractInformation = ({
   </Device.Bezel>
 );
 
-const FieldsToReview = ({ operation }: { operation: Operation }) => {
-  const displays = transformOperationIntoDisplays(operation, "flex");
+const ReviewScreens = ({ operation }: { operation: Operation }) => {
+  const displays = getScreensForOperation(operation);
 
   return displays.map((display, index) => (
     <Device.Bezel key={`display-${index}`}>
@@ -67,7 +67,7 @@ const FieldsToReview = ({ operation }: { operation: Operation }) => {
   ));
 };
 
-const HoldToSign = ({ owner, type }: { owner: string; type: string }) => (
+const SignScreen = ({ owner, type }: { owner: string; type: string }) => (
   <Device.Bezel>
     <Device.Wrapper>{`Sign ${type} from ${owner}?`}</Device.Wrapper>
   </Device.Bezel>
@@ -87,11 +87,13 @@ export const Screens = ({
   info,
   owner,
   operationType,
-}: Props) => (
-  <>
-    <ReviewIntro owner={owner} type={operationType} />
-    <ContractInformation info={info} address={contractAddress} />
-    <FieldsToReview operation={chosenOperation} />
-    <HoldToSign owner={owner} type={operationType} />
-  </>
-);
+}: Props) => {
+  return (
+    <>
+      <IntroScreen owner={owner} type={operationType} />
+      <InfoScreen info={info} address={contractAddress} />
+      <ReviewScreens operation={chosenOperation} />
+      <SignScreen owner={owner} type={operationType} />
+    </>
+  );
+};
