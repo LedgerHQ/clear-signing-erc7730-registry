@@ -31,6 +31,11 @@ export const Device = {
   Logo: () => (
     <div className="h-[29px] w-[18px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
   ),
+  Pagination: ({ current, total }: { current: number; total: number }) => (
+    <div>
+      {current} of {total}
+    </div>
+  ),
   RejectButton: () => <div className="p-2 text-center">Reject transaction</div>,
   ReviewSummary: ({ children }: { children: string }) => (
     <div className="text-sm">{children}</div>

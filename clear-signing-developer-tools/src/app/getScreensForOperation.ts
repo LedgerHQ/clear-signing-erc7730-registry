@@ -22,4 +22,4 @@ export const getScreensForOperation = (operation: Operation) => {
   return screens;
 };
 
-type Screen = DisplayItem[];
+export type Screen = DisplayItem[];

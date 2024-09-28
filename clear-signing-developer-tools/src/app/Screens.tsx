@@ -1,5 +1,8 @@
 import { Device } from "~/app/Device";
-import { getScreensForOperation } from "~/app/getScreensForOperation";
+import {
+  getScreensForOperation,
+  type Screen,
+} from "~/app/getScreensForOperation";
 import { type Operation } from "~/types/PreviewData";
 
 const IntroScreen = ({ owner, type }: { owner: string; type: string }) => (
@@ -50,26 +53,50 @@ const InfoScreen = ({
   </Device.Bezel>
 );
 
-const ReviewScreens = ({ operation }: { operation: Operation }) => {
-  const displays = getScreensForOperation(operation);
-
-  return displays.map((display, index) => (
-    <Device.Bezel key={`display-${index}`}>
-      <Device.Wrapper>
-        {display.map(({ label, displayValue }) => (
-          <div key={label}>
-            <Device.Label>{label}</Device.Label>
-            <Device.Value>{displayValue}</Device.Value>
-          </div>
-        ))}
-      </Device.Wrapper>
-    </Device.Bezel>
-  ));
+const ReviewScreens = ({
+  pageTotal,
+  screens,
+}: {
+  pageTotal: number;
+  screens: Screen[];
+}) => {
+  return (
+    <>
+      {screens.map((display, index) => (
+        <Device.Bezel key={`display-${index}`}>
+          <Device.Wrapper>
+            <>
+              {display.map(({ label, displayValue }) => (
+                <div key={label}>
+                  <Device.Label>{label}</Device.Label>
+                  <Device.Value>{displayValue}</Device.Value>
+                </div>
+              ))}
+              <Device.Pagination current={index + 1} total={pageTotal} />
+            </>
+          </Device.Wrapper>
+        </Device.Bezel>
+      ))}
+    </>
+  );
 };
 
-const SignScreen = ({ owner, type }: { owner: string; type: string }) => (
+const SignScreen = ({
+  owner,
+  pageTotal,
+  type,
+}: {
+  owner: string;
+  pageTotal: number;
+  type: string;
+}) => (
   <Device.Bezel>
-    <Device.Wrapper>{`Sign ${type} from ${owner}?`}</Device.Wrapper>
+    <Device.Wrapper>
+      {`Sign ${type} from ${owner}?`}
+      <>
+        <Device.Pagination current={pageTotal} total={pageTotal} />
+      </>
+    </Device.Wrapper>
   </Device.Bezel>
 );
 
@@ -88,12 +115,15 @@ export const Screens = ({
   owner,
   operationType,
 }: Props) => {
+  const screens = getScreensForOperation(chosenOperation);
+  const pageTotal = screens.length + 1;
+
   return (
     <>
       <IntroScreen owner={owner} type={operationType} />
       <InfoScreen info={info} address={contractAddress} />
-      <ReviewScreens operation={chosenOperation} />
-      <SignScreen owner={owner} type={operationType} />
+      <ReviewScreens pageTotal={pageTotal} screens={screens} />
+      <SignScreen owner={owner} pageTotal={pageTotal} type={operationType} />
     </>
   );
 };
