@@ -16,10 +16,14 @@ export const Device = {
   Content: ({ children }: { children: string }) => (
     <div className="">{children}</div>
   ),
-  Bezel: ({ children }: { children: ReactNode }) => {
+  Frame: ({ children }: { children: ReactNode }) => {
     const selectedDevice = useContext(DeviceContext);
     const Component = selectedDevice === "stax" ? Stax : Flex;
-    return <Component.Bezel>{children}</Component.Bezel>;
+    return (
+      <Component.Bezel>
+        <div className="flex flex-col">{children}</div>
+      </Component.Bezel>
+    );
   },
   InfoButton: () => (
     <div className="h-5 w-5 self-center rounded-full border-2 border-black text-center align-middle text-xs leading-4">
@@ -52,7 +56,4 @@ export const Device = {
     <div className="p-1 text-center text-neutral-400">Tap to continue</div>
   ),
   Value: ({ children }: { children: string }) => <div>{children}</div>,
-  Wrapper: ({ children }: { children: ReactNode }) => (
-    <div className="flex flex-col">{children}</div>
-  ),
 };
