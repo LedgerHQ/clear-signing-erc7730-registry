@@ -54,7 +54,7 @@ export const Device = {
   OperationSummary: ({ children }: { children: string }) => (
     <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
       <Device.Logo />
-      <Device.ReviewTitle>{children}</Device.ReviewTitle>
+      <Device.Heading>{children}</Device.Heading>
     </div>
   ),
   Pagination: ({ current, total }: { current: number; total: number }) => {
@@ -82,7 +82,7 @@ export const Device = {
       </div>
     );
   },
-  ReviewTitle: ({ children }: { children: string }) => (
+  Heading: ({ children }: { children: string }) => (
     <div className="text-center text-lg font-medium">{children}</div>
   ),
   Section: ({ children }: { children: ReactNode }) => (
