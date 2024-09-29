@@ -58,10 +58,10 @@ export const Device = {
 
     return (
       <div className="border-light-grey leading-1 flex border-t text-[14px]">
-        <div className="border-light-grey border-r px-[26.5px] py-[14.5px] font-medium">
+        <div className="border-light-grey border-r px-[26.5px] py-[14px] font-medium">
           Reject
         </div>
-        <div className="text-dark-grey flex w-full items-center justify-center gap-4 p-4">
+        <div className="text-dark-grey flex w-full items-center justify-center gap-4 px-4">
           <Image
             src={flexChevronLeft as string}
             alt="left"
@@ -78,7 +78,7 @@ export const Device = {
     );
   },
   HeadingText: ({ children }: { children: ReactNode }) => (
-    <div className="text-lg font-medium">{children}</div>
+    <div className="text-lg font-medium leading-5">{children}</div>
   ),
   Section: ({ children }: { children: ReactNode }) => (
     <div className="border-light-grey flex flex-col gap-[6px] border-b px-4 py-[14px] last:border-0">
