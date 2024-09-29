@@ -6,6 +6,7 @@ import { Stax } from "~/app/Stax";
 import flexChevronLeft from "~/app/screens/assets/flex-chevron-left.svg";
 import flexChevronRight from "../app/screens/assets/flex-chevron-right.svg";
 import info from "~/app/screens/assets/info.svg";
+import signButton from "~/app/screens/assets/sign-button.svg";
 import { cn } from "~/utils/cn";
 
 export const Device = {
@@ -88,6 +89,14 @@ export const Device = {
   Section: ({ children }: { children: ReactNode }) => (
     <div className="flex flex-col gap-2 border-b border-neutral-300 px-4 py-1 last:border-0">
       {children}
+    </div>
+  ),
+  SignButton: () => (
+    <div className="flex items-center justify-between p-4">
+      <Device.Heading>Hold to sign</Device.Heading>
+      <div className="border-light-grey flex h-[44px] w-[44px] items-center justify-center rounded-full border">
+        <Image src={signButton} alt="Sign" width={44} height={44} />
+      </div>
     </div>
   ),
   TapToContinue: () => (
