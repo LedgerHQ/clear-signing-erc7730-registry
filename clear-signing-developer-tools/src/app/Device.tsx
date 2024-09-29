@@ -19,7 +19,7 @@ export const Device = {
       <div className="text-center font-medium">{children}</div>
     </div>
   ),
-  ContentText: ({ children }: { children: string }) => (
+  ContentText: ({ children }: { children: ReactNode }) => (
     <div className="text-[14px] leading-[18px]">{children}</div>
   ),
   Frame: ({ children }: { children: ReactNode }) => {
@@ -47,15 +47,15 @@ export const Device = {
       </div>
     </div>
   ),
-  Label: ({ children }: { children: string }) => <div>{children}</div>,
-
   Logo: () => (
     <div className="h-[29px] w-[18px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
   ),
   OperationSummary: ({ children }: { children: string }) => (
     <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
       <Device.Logo />
-      <Device.Heading>{children}</Device.Heading>
+      <Device.HeadingText>
+        <div className="text-center">{children}</div>
+      </Device.HeadingText>
     </div>
   ),
   Pagination: ({ current, total }: { current: number; total: number }) => {
@@ -83,8 +83,8 @@ export const Device = {
       </div>
     );
   },
-  Heading: ({ children }: { children: string }) => (
-    <div className="text-center text-lg font-medium">{children}</div>
+  HeadingText: ({ children }: { children: ReactNode }) => (
+    <div className="text-lg font-medium">{children}</div>
   ),
   Section: ({ children }: { children: ReactNode }) => (
     <div className="flex flex-col gap-2 border-b border-neutral-300 px-4 py-1 last:border-0">
@@ -93,7 +93,7 @@ export const Device = {
   ),
   SignButton: () => (
     <div className="flex items-center justify-between p-4">
-      <Device.Heading>Hold to sign</Device.Heading>
+      <Device.HeadingText>Hold to sign</Device.HeadingText>
       <div className="border-light-grey flex h-[44px] w-[44px] items-center justify-center rounded-full border">
         <Image src={signButton} alt="Sign" width={44} height={44} />
       </div>
@@ -102,5 +102,4 @@ export const Device = {
   TapToContinue: () => (
     <div className="p-1 text-center text-neutral-400">Tap to continue</div>
   ),
-  Value: ({ children }: { children: string }) => <div>{children}</div>,
 };

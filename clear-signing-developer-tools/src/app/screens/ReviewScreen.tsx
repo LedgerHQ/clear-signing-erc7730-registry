@@ -3,13 +3,15 @@ import { type Screen } from "~/app/getScreensForOperation";
 
 export const ReviewScreen = ({ screen }: { screen: Screen }) => {
   return (
-    <>
+    <div className="flex flex-col items-start gap-3 px-4 py-5">
       {screen.map(({ label, displayValue }) => (
-        <div key={label}>
-          <Device.Label>{label}</Device.Label>
-          <Device.Value>{displayValue}</Device.Value>
+        <div key={`${label}-field`}>
+          <Device.ContentText>
+            <span className="text-dark-grey">{label}</span>
+          </Device.ContentText>
+          <Device.HeadingText>{displayValue}</Device.HeadingText>
         </div>
       ))}
-    </>
+    </div>
   );
 };
