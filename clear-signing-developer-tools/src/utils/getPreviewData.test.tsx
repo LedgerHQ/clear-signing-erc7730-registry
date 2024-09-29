@@ -12,7 +12,7 @@ const exampleTransactionContext = {
 const exampleEIP712Context = {
   eip712: {
     domain: { name: "EIP 712 name" },
-    deployments: [{ address: "0xtestEip712Address", chainId: 1 }],
+    deployments: [{ address: "0xtestEip712Address", chainId: 42 }],
     schemas: ["unused"],
   },
 };
@@ -55,7 +55,7 @@ describe("getPreviewData", () => {
 
       expect(data!.contract).toEqual({
         name: exampleTransactionContext.$id,
-        deployments: [{ address: "0xtestAddress" }],
+        deployments: [{ address: "0xtestAddress", chainId: 1 }],
       });
     });
 
@@ -67,7 +67,7 @@ describe("getPreviewData", () => {
 
       expect(data!.contract).toEqual({
         name: "EIP 712 name",
-        deployments: [{ address: "0xtestEip712Address" }],
+        deployments: [{ address: "0xtestEip712Address", chainId: 42 }],
       });
     });
 

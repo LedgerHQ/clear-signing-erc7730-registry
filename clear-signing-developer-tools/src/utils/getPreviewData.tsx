@@ -69,8 +69,9 @@ export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
         ? context.contract.deployments
         : context.eip712.deployments;
 
-    const deployments = inContextDeployments.map(({ address }) => ({
+    const deployments = inContextDeployments.map(({ address, chainId }) => ({
       address,
+      chainId,
     }));
 
     return {
