@@ -5,12 +5,20 @@ import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 interface Props {
   data: PreviewData;
   selectedDevice: string;
+  selectedOperation: string;
 }
 
-export const DevicesDemo = ({ data, selectedDevice }: Props) => {
+export const DevicesDemo = ({
+  data,
+  selectedDevice,
+  selectedOperation,
+}: Props) => {
   const { contract, metadata, operations, type } = data;
 
-  const chosenOperation = operations[0]; // TODO: handle multiple operations
+  const chosenOperation =
+    operations.find(({ intent }) => selectedOperation === intent) ||
+    operations[0];
+
   if (!chosenOperation || contract.deployments.length < 1) return null;
 
   const { address: contractAddress } = contract.deployments[0] as Deploymnent;

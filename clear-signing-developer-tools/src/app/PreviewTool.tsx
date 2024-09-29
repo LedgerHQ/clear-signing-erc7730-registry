@@ -18,12 +18,14 @@ interface Props {
 export default function PreviewTool({ jsonInRegistry }: Props) {
   const [mounted, setMounted] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState("");
+  const [selectedOperation, setSelectedOperation] = useState("");
   const [fileKey, setFileKey] = useState("");
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setMounted(true);
+    setSelectedOperation(localStorage.getItem("selectedOperation") ?? "");
     setSelectedDevice(localStorage.getItem("selectedDevice") ?? "stax");
     setFileKey(
       localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
@@ -76,10 +78,15 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
             jsonInRegistry={jsonInRegistry}
             setFileKey={setFileKey}
           />
-          {previewData && <PreviewForm data={previewData} />}
+          {previewData && (
+            <PreviewForm
+              data={previewData}
+              selectedOperation={selectedOperation}
+              setSelectedOperation={setSelectedOperation}
+            />
+          )}
           {previewData && (
             <SelectDevice
-              data={previewData}
               selectedDevice={selectedDevice}
               setSelectedDevice={setSelectedDevice}
             />
@@ -89,7 +96,13 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
       </div>
 
       {previewData && (
-        <DevicesDemo data={previewData} selectedDevice={selectedDevice} />
+        <>
+          <DevicesDemo
+            data={previewData}
+            selectedDevice={selectedDevice}
+            selectedOperation={selectedOperation}
+          />
+        </>
       )}
     </main>
   );

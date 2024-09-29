@@ -1,13 +1,10 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { UI } from "~/app/UI";
-import { type PreviewData } from "~/types/PreviewData";
 
 export const SelectDevice = ({
-  data,
   selectedDevice,
   setSelectedDevice,
 }: {
-  data: PreviewData;
   selectedDevice: string;
   setSelectedDevice: Dispatch<SetStateAction<string>>;
 }) => {
