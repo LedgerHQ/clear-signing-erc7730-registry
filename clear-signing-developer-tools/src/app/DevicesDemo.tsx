@@ -16,8 +16,7 @@ export const DevicesDemo = ({
   const { contract, metadata, operations, type } = data;
 
   const chosenOperation =
-    operations.find(({ intent }) => selectedOperation === intent) ||
-    operations[0];
+    operations.find(({ id }) => selectedOperation === id) || operations[0];
 
   if (!chosenOperation || contract.deployments.length < 1) return null;
 

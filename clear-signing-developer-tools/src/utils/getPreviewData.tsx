@@ -41,6 +41,7 @@ function transformSimpleFormatToOperations(
   if (!formats) return [];
 
   return Object.values(formats).map((format) => {
+    const id = typeof format.$id === "string" ? format.$id : "";
     const intent =
       typeof format.intent === "string"
         ? format.intent
@@ -48,7 +49,7 @@ function transformSimpleFormatToOperations(
 
     const displays = processFields(format.fields, definitions);
 
-    return { intent, displays };
+    return { id, intent, displays };
   });
 }
 

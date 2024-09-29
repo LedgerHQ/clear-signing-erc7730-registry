@@ -46,11 +46,8 @@ export const PreviewForm = ({
           defaultValue={selectedOperation}
           onChange={onChangeOperation}
         >
-          {data.operations.map(({ intent }, index) => (
-            <UI.Option
-              key={`${data.contract.name}${intent}${index}`}
-              value={intent}
-            >
+          {data.operations.map(({ id, intent }) => (
+            <UI.Option key={`${data.contract.name}-${id}`} value={id}>
               {intent}
             </UI.Option>
           ))}

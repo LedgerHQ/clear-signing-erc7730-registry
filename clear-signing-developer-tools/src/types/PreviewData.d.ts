@@ -18,6 +18,7 @@ export type PreviewData = {
 type Deploymnent = { address: string };
 
 interface Operation {
+  id: string;
   intent: string;
   displays: DisplayItem[];
 }

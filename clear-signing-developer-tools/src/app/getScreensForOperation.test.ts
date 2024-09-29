@@ -3,6 +3,7 @@ import { type Operation } from "~/types/PreviewData";
 
 test("returns one screen for three display values", () => {
   const input: Operation = {
+    id: "",
     intent: "",
     displays: [
       { displayValue: "test value 1", label: "Field 1" },
@@ -26,6 +27,7 @@ test("returns one screen for three display values", () => {
 
 test("returns two screens for four display values", () => {
   const input: Operation = {
+    id: "",
     intent: "",
     displays: [
       { displayValue: "test value 1", label: "Field 1" },
@@ -51,6 +53,7 @@ test("returns two screens for four display values", () => {
 
 test("returns two screens for six display values", () => {
   const input: Operation = {
+    id: "",
     intent: "",
     displays: [
       { displayValue: "test value 1", label: "Field 1" },
@@ -82,6 +85,7 @@ test("returns two screens for six display values", () => {
 
 test("returns three screens for seven display values", () => {
   const input: Operation = {
+    id: "",
     intent: "",
     displays: [
       { displayValue: "test value 1", label: "Field 1" },

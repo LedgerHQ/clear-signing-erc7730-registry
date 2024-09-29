@@ -108,6 +108,7 @@ describe("getPreviewData", () => {
           formats: {
             "mintToken(uint256 eventId, uint256 tokenId, address receiver, uint256 expirationTime, bytes signature)":
               {
+                $id: "mintToken",
                 intent: "Mint POAP",
                 fields: [
                   {
@@ -137,6 +138,7 @@ describe("getPreviewData", () => {
 
       expect(data!.operations).toEqual([
         {
+          id: "mintToken",
           intent: "Mint POAP",
           displays: [
             {
@@ -167,6 +169,7 @@ describe("getPreviewData", () => {
           },
           formats: {
             functionName: {
+              $id: "functionName",
               intent: "Mint POAP",
               fields: [
                 {
@@ -182,6 +185,7 @@ describe("getPreviewData", () => {
 
       expect(data!.operations).toEqual([
         {
+          id: "functionName",
           intent: "Mint POAP",
           displays: [
             {
@@ -199,6 +203,7 @@ describe("getPreviewData", () => {
         display: {
           formats: {
             PermitWitnessTransferFrom: {
+              $id: "PermitWitnessTransferFrom",
               intent: "UniswapX Dutch Order",
               fields: [
                 {
@@ -227,6 +232,7 @@ describe("getPreviewData", () => {
 
       expect(data!.operations).toEqual([
         {
+          id: "PermitWitnessTransferFrom",
           intent: "UniswapX Dutch Order",
           displays: [
             {
