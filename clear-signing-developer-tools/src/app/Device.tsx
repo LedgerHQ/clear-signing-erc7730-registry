@@ -10,17 +10,11 @@ import signButton from "~/app/screens/assets/sign-button.svg";
 import { cn } from "~/utils/cn";
 
 export const Device = {
-  Action: ({ children }: { children: string }) => (
-    <div className="font-medium">{children}</div>
-  ),
-  BackHeader: ({ children }: { children: string }) => (
-    <div className="flex p-1">
-      <div> &lt;--</div>
-      <div className="text-center font-medium">{children}</div>
-    </div>
+  ActionText: ({ children }: { children: string }) => (
+    <div className="text-[14px] font-semibold leading-[18px]">{children}</div>
   ),
   ContentText: ({ children }: { children: ReactNode }) => (
-    <div className="text-[14px] leading-[18px]">{children}</div>
+    <div className="break-words text-[14px] leading-[18px]">{children}</div>
   ),
   Frame: ({ children }: { children: ReactNode }) => {
     const selectedDevice = useContext(DeviceContext);
@@ -87,7 +81,7 @@ export const Device = {
     <div className="text-lg font-medium">{children}</div>
   ),
   Section: ({ children }: { children: ReactNode }) => (
-    <div className="flex flex-col gap-2 border-b border-neutral-300 px-4 py-1 last:border-0">
+    <div className="border-light-grey flex flex-col gap-[6px] border-b px-4 py-[14px] last:border-0">
       {children}
     </div>
   ),
@@ -98,8 +92,5 @@ export const Device = {
         <Image src={signButton} alt="Sign" width={44} height={44} />
       </div>
     </div>
-  ),
-  TapToContinue: () => (
-    <div className="p-1 text-center text-neutral-400">Tap to continue</div>
   ),
 };
