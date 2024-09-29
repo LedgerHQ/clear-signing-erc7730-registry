@@ -65,13 +65,13 @@ export const Device = {
           <Image
             src={flexChevronLeft as string}
             alt="left"
-            className={cn("inline-block h-[15px]", { "opacity-25": first })}
+            className={cn("inline-block h-[15px]", { "opacity-15": first })}
           />
           {current} of {total}
           <Image
             src={flexChevronRight as string}
             alt="left"
-            className={cn("inline-block h-[15px]", { "opacity-25": last })}
+            className={cn("inline-block h-[15px]", { "opacity-15": last })}
           />
         </div>
       </div>
