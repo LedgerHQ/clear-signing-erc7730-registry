@@ -1,9 +1,11 @@
 import type { DisplayItem, Operation } from "~/types/PreviewData";
 
-const ITEMS_PER_SCREEN = 3;
-
-export const getScreensForOperation = (operation: Operation) => {
+export const getScreensForOperation = (
+  operation: Operation,
+  selectedDevice: string,
+) => {
   const { displays } = operation;
+  const itemsPerScreen = selectedDevice === "stax" ? 4 : 3;
 
   const screens: Screen[] = [];
   let screen: DisplayItem[] = [];
@@ -13,7 +15,7 @@ export const getScreensForOperation = (operation: Operation) => {
 
     screen.push(displays[i]!);
 
-    if (screen.length === ITEMS_PER_SCREEN || isLastItem) {
+    if (screen.length === itemsPerScreen || isLastItem) {
       screens.push(screen);
       screen = [];
     }
