@@ -13,16 +13,18 @@ export const InfoScreen = ({
     </Device.Section>
     <Device.Section>
       <Device.Action>Contract owner</Device.Action>
-      <Device.Content>{legalName}</Device.Content>
-      <Device.Content>{url}</Device.Content>
+      <Device.ContentText>{legalName}</Device.ContentText>
+      <Device.ContentText>{url}</Device.ContentText>
     </Device.Section>
     <Device.Section>
       <Device.Action>Last updated</Device.Action>
-      <Device.Content>{new Date(lastUpdate).toDateString()}</Device.Content>
+      <Device.ContentText>
+        {new Date(lastUpdate).toDateString()}
+      </Device.ContentText>
     </Device.Section>
     <Device.Section>
       <Device.Action>Contract address</Device.Action>
-      <Device.Content>{address}</Device.Content>
+      <Device.ContentText>{address}</Device.ContentText>
     </Device.Section>
   </>
 );

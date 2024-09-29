@@ -17,15 +17,17 @@ export const Device = {
       <div className="text-center font-medium">{children}</div>
     </div>
   ),
-  Content: ({ children }: { children: string }) => (
-    <div className="">{children}</div>
+  ContentText: ({ children }: { children: string }) => (
+    <div className="text-[14px] leading-[18px]">{children}</div>
   ),
   Frame: ({ children }: { children: ReactNode }) => {
     const selectedDevice = useContext(DeviceContext);
     const Component = selectedDevice === "stax" ? Stax : Flex;
     return (
       <Component.Bezel>
-        <div className="flex w-full flex-col justify-between">{children}</div>
+        <div className="flex w-full flex-col justify-between antialiased">
+          {children}
+        </div>
       </Component.Bezel>
     );
   },

@@ -1,4 +1,6 @@
 import { Device } from "~/app/Device";
+import info from "./assets/info.svg";
+import Image from "next/image";
 
 export const TitleScreen = ({
   owner,
@@ -8,15 +10,19 @@ export const TitleScreen = ({
   type: string;
 }) => (
   <>
-    <div>
+    <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
       <Device.Logo />
       <Device.ReviewTitle>{`Review ${type} from ${owner}?`}</Device.ReviewTitle>
     </div>
-    <div>
+    <div className="flex items-center gap-4 px-4 py-3">
       <div>
-        {`You're interacting with a smart contract from ${owner}.`}
-        <div className="h-5 w-5 self-center rounded-full border-2 border-black text-center align-middle text-xs leading-4">
-          i
+        <Device.ContentText>
+          {`You're interacting with a smart contract from ${owner}.`}
+        </Device.ContentText>
+      </div>
+      <div>
+        <div className="border-light-grey flex h-[32px] w-[32px] items-center justify-center rounded-full border">
+          <Image src={info} alt="More info" width={20} height={20} />
         </div>
       </div>
     </div>
