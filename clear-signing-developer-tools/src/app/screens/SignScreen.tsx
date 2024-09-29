@@ -1,2 +1,13 @@
-export const SignScreen = ({ owner, type }: { owner: string; type: string }) =>
-  `Sign ${type} from ${owner}?`;
+import { Device } from "~/app/Device";
+
+export const SignScreen = ({
+  owner,
+  type,
+}: {
+  owner: string;
+  type: string;
+}) => (
+  <Device.OperationSummary>
+    {`Sign ${type} from ${owner}?`}
+  </Device.OperationSummary>
+);

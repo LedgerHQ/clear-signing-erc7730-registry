@@ -10,10 +10,7 @@ export const TitleScreen = ({
   type: string;
 }) => (
   <>
-    <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
-      <Device.Logo />
-      <Device.ReviewTitle>{`Review ${type} from ${owner}?`}</Device.ReviewTitle>
-    </div>
+    <Device.OperationSummary>{`Review ${type} from ${owner}?`}</Device.OperationSummary>
     <div className="flex items-center gap-4 px-4 py-3">
       <div>
         <Device.ContentText>

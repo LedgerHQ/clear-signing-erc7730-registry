@@ -36,6 +36,12 @@ export const Device = {
   Logo: () => (
     <div className="h-[29px] w-[18px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
   ),
+  OperationSummary: ({ children }: { children: string }) => (
+    <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
+      <Device.Logo />
+      <Device.ReviewTitle>{children}</Device.ReviewTitle>
+    </div>
+  ),
   Pagination: ({ current, total }: { current: number; total: number }) => {
     const first = current === 1;
     const last = current === total;
