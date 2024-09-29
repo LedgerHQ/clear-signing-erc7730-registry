@@ -97,7 +97,11 @@ export default function DevFocus({ jsonInRegistry }: Props) {
 
       {previewData && (
         <>
-          <DevicesDemo data={previewData} selectedDevice={selectedDevice} />
+          <DevicesDemo
+            data={previewData}
+            selectedDevice={selectedDevice}
+            selectedOperation=""
+          />
           <pre>{JSON.stringify(previewData, null, 2)}</pre>
         </>
       )}
