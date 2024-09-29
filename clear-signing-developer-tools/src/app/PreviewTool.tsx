@@ -9,6 +9,7 @@ import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 import { type PreviewData } from "~/types/PreviewData";
 import { getPreviewData } from "~/utils/getPreviewData";
 import { type ERC7730Schema } from "~/types";
+import { SelectDevice } from "~/app/SelectDevice";
 
 interface Props {
   jsonInRegistry: string[];
@@ -75,8 +76,9 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
             jsonInRegistry={jsonInRegistry}
             setFileKey={setFileKey}
           />
+          {previewData && <PreviewForm data={previewData} />}
           {previewData && (
-            <PreviewForm
+            <SelectDevice
               data={previewData}
               selectedDevice={selectedDevice}
               setSelectedDevice={setSelectedDevice}
