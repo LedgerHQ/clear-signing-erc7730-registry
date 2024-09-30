@@ -5,7 +5,8 @@ import { Flex } from "~/app/Flex";
 import { Stax } from "~/app/Stax";
 import flexChevronLeft from "~/app/screens/assets/flex-chevron-left.svg";
 import flexChevronRight from "../app/screens/assets/flex-chevron-right.svg";
-import info from "~/app/screens/assets/info.svg";
+import flexInfo from "~/app/screens/assets/flex-info.svg";
+import staxInfo from "~/app/screens/assets/stax-info.svg";
 import signButton from "~/app/screens/assets/sign-button.svg";
 import { cn } from "~/utils/cn";
 
@@ -13,9 +14,21 @@ export const Device = {
   ActionText: ({ children }: { children: string }) => (
     <div className="text-[14px] font-semibold leading-[18px]">{children}</div>
   ),
-  ContentText: ({ children }: { children: ReactNode }) => (
-    <div className="break-words text-[14px] leading-[18px]">{children}</div>
-  ),
+  ContentText: ({ children }: { children: ReactNode }) => {
+    const selectedDevice = useContext(DeviceContext);
+    return (
+      <div
+        className={cn(
+          "break-words text-[14px] leading-[18px]",
+          selectedDevice === "stax"
+            ? "text-[12px] leading-[16px]"
+            : "text-[14px] leading-[18px]",
+        )}
+      >
+        {children}
+      </div>
+    );
+  },
   Frame: ({ children }: { children: ReactNode }) => {
     const selectedDevice = useContext(DeviceContext);
     const Component = selectedDevice === "stax" ? Stax : Flex;
@@ -32,20 +45,32 @@ export const Device = {
     const Component = selectedDevice === "stax" ? Stax : Flex;
     return <Component.HeadingText>{children}</Component.HeadingText>;
   },
-  InfoBlock: ({ owner }: { owner: string }) => (
-    <div className="flex items-center gap-4 px-4 py-3">
-      <div>
-        <Device.ContentText>
-          {`You're interacting with a smart contract from ${owner}.`}
-        </Device.ContentText>
-      </div>
-      <div>
-        <div className="border-light-grey flex h-[32px] w-[32px] items-center justify-center rounded-full border">
-          <Image src={info} alt="More info" width={20} height={20} />
+  InfoBlock: ({ owner }: { owner: string }) => {
+    const selectedDevice = useContext(DeviceContext);
+    return (
+      <div
+        className={cn(
+          "flex items-center",
+          selectedDevice === "stax" ? "gap-3 p-3" : "gap-4 px-4 py-3",
+        )}
+      >
+        <div>
+          <Device.ContentText>
+            {`You're interacting with a smart contract from ${owner}.`}
+          </Device.ContentText>
+        </div>
+        <div>
+          <div className="border-light-grey flex h-[32px] w-[32px] items-center justify-center rounded-full border">
+            {selectedDevice === "stax" ? (
+              <Image src={staxInfo} alt="More info" width={16} height={16} />
+            ) : (
+              <Image src={flexInfo} alt="More info" width={20} height={20} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  ),
+    );
+  },
   IconEth: () => (
     <div className="h-[32px] w-[32px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
   ),
