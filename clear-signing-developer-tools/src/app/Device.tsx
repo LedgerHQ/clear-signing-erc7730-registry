@@ -89,11 +89,13 @@ export const Device = {
       </div>
     );
   },
-  IconEth: () => (
-    <div className="h-[32px] w-[32px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
-  ),
-  IconMessage: () => (
-    <div className="h-[32px] w-[32px] self-center bg-[url(/assets/scroll.svg)] bg-contain bg-no-repeat"></div>
+  Icon: ({ bg }: { bg: string }) => (
+    <div
+      className={cn(
+        "h-[32px] w-[32px] self-center bg-contain bg-no-repeat",
+        bg,
+      )}
+    />
   ),
   OperationSummary: ({
     children,
@@ -103,6 +105,10 @@ export const Device = {
     type: string;
   }) => {
     const isStax = useContext(DeviceContext) === "stax";
+    const iconBg =
+      type === "message"
+        ? "bg-[url(/assets/scroll.svg)]"
+        : "bg-[url(/assets/eth.svg)]";
 
     return (
       <div
@@ -111,7 +117,7 @@ export const Device = {
           isStax ? "p-3" : "p-4",
         )}
       >
-        {type === "message" ? <Device.IconMessage /> : <Device.IconEth />}
+        <Device.Icon bg={iconBg} />
         <Device.HeadingText>
           <div className="text-center">{children}</div>
         </Device.HeadingText>
