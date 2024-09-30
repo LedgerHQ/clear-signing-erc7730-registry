@@ -12,6 +12,7 @@ import { cn } from "~/utils/cn";
 export const Device = {
   ActionText: ({ children }: { children: string }) => {
     const isStax = useContext(DeviceContext) === "stax";
+
     return (
       <div
         className={cn(
@@ -25,6 +26,7 @@ export const Device = {
   },
   ContentText: ({ children }: { children: ReactNode }) => {
     const isStax = useContext(DeviceContext) === "stax";
+
     return (
       <div
         className={cn(
@@ -133,11 +135,20 @@ export const Device = {
       <Flex.Pagination current={current} total={total} />
     );
   },
-  Section: ({ children }: { children: ReactNode }) => (
-    <div className="border-light-grey flex flex-col gap-[6px] border-b px-4 py-[14px] last:border-0">
-      {children}
-    </div>
-  ),
+  Section: ({ children }: { children: ReactNode }) => {
+    const isStax = useContext(DeviceContext) === "stax";
+
+    return (
+      <div
+        className={cn(
+          "border-light-grey flex flex-col border-b py-[14px] last:border-0",
+          isStax ? "gap-[8px] px-3" : "gap-[6px] px-4",
+        )}
+      >
+        {children}
+      </div>
+    );
+  },
   SignButton: () => {
     const isStax = useContext(DeviceContext) === "stax";
 
