@@ -1,4 +1,6 @@
-# Clear Signing Preview Tool
+# Clear Signing Developer Preview Tool
+
+Run this web app locally to preview how Clear Signed messages will appear on device.
 
 ## Getting started
 
