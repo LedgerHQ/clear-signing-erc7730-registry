@@ -24,14 +24,12 @@ export const Device = {
     );
   },
   ContentText: ({ children }: { children: ReactNode }) => {
-    const selectedDevice = useContext(DeviceContext);
+    const isStax = useContext(DeviceContext) === "stax";
     return (
       <div
         className={cn(
           "break-words text-[14px] leading-[18px]",
-          selectedDevice === "stax"
-            ? "text-[12px] leading-[16px]"
-            : "text-[14px] leading-[18px]",
+          isStax ? "text-[12px] leading-[16px]" : "text-[14px] leading-[18px]",
         )}
       >
         {children}
@@ -41,6 +39,7 @@ export const Device = {
   Frame: ({ children }: { children: ReactNode }) => {
     const isStax = useContext(DeviceContext) === "stax";
     const Component = isStax ? Stax : Flex;
+
     return (
       <Component.Bezel>
         <div className="flex w-full flex-col justify-between antialiased">
@@ -65,6 +64,7 @@ export const Device = {
   },
   InfoBlock: ({ owner }: { owner: string }) => {
     const isStax = useContext(DeviceContext) === "stax";
+
     return (
       <div
         className={cn(
@@ -120,6 +120,7 @@ export const Device = {
   },
   Pagination: ({ current, total }: { current: number; total: number }) => {
     const isStax = useContext(DeviceContext) === "stax";
+
     return isStax ? (
       <Stax.Pagination current={current} total={total} />
     ) : (
@@ -133,12 +134,14 @@ export const Device = {
   ),
   SignButton: () => {
     const isStax = useContext(DeviceContext) === "stax";
+
     const Button = () =>
       isStax ? (
         <Image src={staxSignButton} alt="Sign" width={40} height={40} />
       ) : (
         <Image src={flexSignButton} alt="Sign" width={44} height={44} />
       );
+
     return (
       <div
         className={cn(
