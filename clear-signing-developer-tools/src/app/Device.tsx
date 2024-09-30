@@ -27,6 +27,11 @@ export const Device = {
       </Component.Bezel>
     );
   },
+  HeadingText: ({ children }: { children: ReactNode }) => {
+    const selectedDevice = useContext(DeviceContext);
+    const Component = selectedDevice === "stax" ? Stax : Flex;
+    return <Component.HeadingText>{children}</Component.HeadingText>;
+  },
   InfoBlock: ({ owner }: { owner: string }) => (
     <div className="flex items-center gap-4 px-4 py-3">
       <div>
@@ -53,14 +58,23 @@ export const Device = {
   }: {
     children: string;
     type: string;
-  }) => (
-    <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
-      {type === "message" ? <Device.IconMessage /> : <Device.IconEth />}
-      <Device.HeadingText>
-        <div className="text-center">{children}</div>
-      </Device.HeadingText>
-    </div>
-  ),
+  }) => {
+    const selectedDevice = useContext(DeviceContext);
+
+    return (
+      <div
+        className={cn(
+          "align-center border-light-grey flex grow flex-col justify-center gap-3 border-b",
+          selectedDevice === "stax" ? "p-3" : "p-4",
+        )}
+      >
+        {type === "message" ? <Device.IconMessage /> : <Device.IconEth />}
+        <Device.HeadingText>
+          <div className="text-center">{children}</div>
+        </Device.HeadingText>
+      </div>
+    );
+  },
   Pagination: ({ current, total }: { current: number; total: number }) => {
     const first = current === 1;
     const last = current === total;
@@ -86,9 +100,6 @@ export const Device = {
       </div>
     );
   },
-  HeadingText: ({ children }: { children: ReactNode }) => (
-    <div className="text-lg font-medium leading-5">{children}</div>
-  ),
   Section: ({ children }: { children: ReactNode }) => (
     <div className="border-light-grey flex flex-col gap-[6px] border-b px-4 py-[14px] last:border-0">
       {children}

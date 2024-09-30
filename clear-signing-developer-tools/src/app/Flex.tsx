@@ -11,4 +11,7 @@ export const Flex = {
       </div>
     </div>
   ),
+  HeadingText: ({ children }: { children: ReactNode }) => (
+    <div className="text-[18px] font-medium leading-[20px]">{children}</div>
+  ),
 };

@@ -11,4 +11,7 @@ export const Stax = {
       </div>
     </div>
   ),
+  HeadingText: ({ children }: { children: ReactNode }) => (
+    <div className="text-[16px] font-medium leading-[20px]">{children}</div>
+  ),
 };
