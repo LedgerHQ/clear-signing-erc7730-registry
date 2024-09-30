@@ -1,9 +1,19 @@
+import { useContext } from "react";
 import { Device } from "~/app/Device";
+import { DeviceContext } from "~/app/DeviceContext";
 import { type Screen } from "~/app/getScreensForOperation";
+import { cn } from "~/utils/cn";
 
 export const ReviewScreen = ({ screen }: { screen: Screen }) => {
+  const isStax = useContext(DeviceContext) === "stax";
+
   return (
-    <div className="flex flex-col items-start gap-3 px-4 py-5">
+    <div
+      className={cn(
+        "flex flex-col items-start",
+        isStax ? "mt-4 gap-[6px] p-3" : "mt-5 gap-3 px-4",
+      )}
+    >
       {screen.map(({ label, displayValue }, index) => (
         <div key={`${label}-field-${index}`}>
           <Device.ContentText>

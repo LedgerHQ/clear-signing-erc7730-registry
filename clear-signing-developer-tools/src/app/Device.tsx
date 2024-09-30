@@ -30,7 +30,7 @@ export const Device = {
     return (
       <div
         className={cn(
-          "break-words text-[14px] leading-[18px]",
+          "break-words",
           isStax ? "text-[12px] leading-[16px]" : "text-[14px] leading-[18px]",
         )}
       >
