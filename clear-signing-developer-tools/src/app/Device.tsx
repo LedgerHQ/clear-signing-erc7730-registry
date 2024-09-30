@@ -41,9 +41,18 @@ export const Device = {
     );
   },
   HeadingText: ({ children }: { children: ReactNode }) => {
-    const selectedDevice = useContext(DeviceContext);
-    const Component = selectedDevice === "stax" ? Stax : Flex;
-    return <Component.HeadingText>{children}</Component.HeadingText>;
+    const stax = useContext(DeviceContext) === "stax";
+
+    return (
+      <div
+        className={cn(
+          "font-medium leading-[20px]",
+          stax ? "text-[16px]" : "text-[18px]",
+        )}
+      >
+        {children}
+      </div>
+    );
   },
   InfoBlock: ({ owner }: { owner: string }) => {
     const selectedDevice = useContext(DeviceContext);
