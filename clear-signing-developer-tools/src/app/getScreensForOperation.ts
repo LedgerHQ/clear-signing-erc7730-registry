@@ -1,11 +1,8 @@
 import type { DisplayItem, Operation } from "~/types/PreviewData";
 
-export const getScreensForOperation = (
-  operation: Operation,
-  selectedDevice: string,
-) => {
+export const getScreensForOperation = (operation: Operation) => {
   const { displays } = operation;
-  const itemsPerScreen = selectedDevice === "stax" ? 4 : 3;
+  const itemsPerScreen = 4;
 
   const screens: Screen[] = [];
   let screen: DisplayItem[] = [];

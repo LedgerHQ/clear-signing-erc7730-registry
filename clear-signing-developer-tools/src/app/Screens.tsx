@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import { Device } from "~/app/Device";
-import { DeviceContext } from "~/app/DeviceContext";
 import { getScreensForOperation } from "~/app/getScreensForOperation";
 import { InfoScreen } from "~/app/screens/InfoScreen";
 import { ReviewScreen } from "~/app/screens/ReviewScreen";
@@ -23,8 +21,7 @@ export const Screens = ({
   owner,
   operationType,
 }: Props) => {
-  const selectedDevice = useContext(DeviceContext);
-  const screens = getScreensForOperation(chosenOperation, selectedDevice);
+  const screens = getScreensForOperation(chosenOperation);
   const totalPages = screens.length + 2;
 
   return (
