@@ -8,7 +8,7 @@ export const SignScreen = ({
   type: string;
 }) => (
   <>
-    <Device.OperationSummary>
+    <Device.OperationSummary type={type}>
       {`Sign ${type} from ${owner}?`}
     </Device.OperationSummary>
     <Device.SignButton />

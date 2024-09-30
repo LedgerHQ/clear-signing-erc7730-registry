@@ -8,7 +8,9 @@ export const TitleScreen = ({
   type: string;
 }) => (
   <>
-    <Device.OperationSummary>{`Review ${type} from ${owner}?`}</Device.OperationSummary>
+    <Device.OperationSummary
+      type={type}
+    >{`Review ${type} from ${owner}?`}</Device.OperationSummary>
     <Device.InfoBlock owner={owner} />
   </>
 );

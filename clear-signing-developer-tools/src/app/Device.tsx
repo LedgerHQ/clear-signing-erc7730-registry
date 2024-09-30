@@ -41,12 +41,21 @@ export const Device = {
       </div>
     </div>
   ),
-  Logo: () => (
-    <div className="h-[29px] w-[18px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
+  IconEth: () => (
+    <div className="h-[32px] w-[32px] self-center bg-[url(/assets/eth.svg)] bg-contain bg-no-repeat"></div>
   ),
-  OperationSummary: ({ children }: { children: string }) => (
+  IconMessage: () => (
+    <div className="h-[32px] w-[32px] self-center bg-[url(/assets/scroll.svg)] bg-contain bg-no-repeat"></div>
+  ),
+  OperationSummary: ({
+    children,
+    type,
+  }: {
+    children: string;
+    type: string;
+  }) => (
     <div className="align-center border-light-grey flex grow flex-col justify-center gap-3 border-b px-4 py-4">
-      <Device.Logo />
+      {type === "message" ? <Device.IconMessage /> : <Device.IconEth />}
       <Device.HeadingText>
         <div className="text-center">{children}</div>
       </Device.HeadingText>
