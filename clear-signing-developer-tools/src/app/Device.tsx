@@ -3,17 +3,26 @@ import Image from "next/image";
 import { DeviceContext } from "~/app/DeviceContext";
 import { Flex } from "~/app/Flex";
 import { Stax } from "~/app/Stax";
-import flexChevronLeft from "~/app/screens/assets/flex-chevron-left.svg";
-import flexChevronRight from "../app/screens/assets/flex-chevron-right.svg";
 import flexInfo from "~/app/screens/assets/flex-info.svg";
 import staxInfo from "~/app/screens/assets/stax-info.svg";
-import signButton from "~/app/screens/assets/sign-button.svg";
+import flexSignButton from "~/app/screens/assets/flex-sign-button.svg";
+import staxSignButton from "~/app/screens/assets/stax-sign-button.svg";
 import { cn } from "~/utils/cn";
 
 export const Device = {
-  ActionText: ({ children }: { children: string }) => (
-    <div className="text-[14px] font-semibold leading-[18px]">{children}</div>
-  ),
+  ActionText: ({ children }: { children: string }) => {
+    const isStax = useContext(DeviceContext) === "stax";
+    return (
+      <div
+        className={cn(
+          "font-semibold",
+          isStax ? "text-[12px] leading-[16px]" : "text-[14px] leading-[18px]",
+        )}
+      >
+        {children}
+      </div>
+    );
+  },
   ContentText: ({ children }: { children: ReactNode }) => {
     const selectedDevice = useContext(DeviceContext);
     return (
@@ -30,8 +39,8 @@ export const Device = {
     );
   },
   Frame: ({ children }: { children: ReactNode }) => {
-    const selectedDevice = useContext(DeviceContext);
-    const Component = selectedDevice === "stax" ? Stax : Flex;
+    const isStax = useContext(DeviceContext) === "stax";
+    const Component = isStax ? Stax : Flex;
     return (
       <Component.Bezel>
         <div className="flex w-full flex-col justify-between antialiased">
@@ -41,13 +50,13 @@ export const Device = {
     );
   },
   HeadingText: ({ children }: { children: ReactNode }) => {
-    const stax = useContext(DeviceContext) === "stax";
+    const isStax = useContext(DeviceContext) === "stax";
 
     return (
       <div
         className={cn(
           "font-medium leading-[20px]",
-          stax ? "text-[16px]" : "text-[18px]",
+          isStax ? "text-[16px]" : "text-[18px]",
         )}
       >
         {children}
@@ -55,12 +64,12 @@ export const Device = {
     );
   },
   InfoBlock: ({ owner }: { owner: string }) => {
-    const selectedDevice = useContext(DeviceContext);
+    const isStax = useContext(DeviceContext) === "stax";
     return (
       <div
         className={cn(
           "flex items-center",
-          selectedDevice === "stax" ? "gap-3 p-3" : "gap-4 px-4 py-3",
+          isStax ? "gap-3 p-3" : "gap-4 px-4 py-3",
         )}
       >
         <div>
@@ -70,7 +79,7 @@ export const Device = {
         </div>
         <div>
           <div className="border-light-grey flex h-[32px] w-[32px] items-center justify-center rounded-full border">
-            {selectedDevice === "stax" ? (
+            {isStax ? (
               <Image src={staxInfo} alt="More info" width={16} height={16} />
             ) : (
               <Image src={flexInfo} alt="More info" width={20} height={20} />
@@ -93,13 +102,13 @@ export const Device = {
     children: string;
     type: string;
   }) => {
-    const selectedDevice = useContext(DeviceContext);
+    const isStax = useContext(DeviceContext) === "stax";
 
     return (
       <div
         className={cn(
           "align-center border-light-grey flex grow flex-col justify-center gap-3 border-b",
-          selectedDevice === "stax" ? "p-3" : "p-4",
+          isStax ? "p-3" : "p-4",
         )}
       >
         {type === "message" ? <Device.IconMessage /> : <Device.IconEth />}
@@ -110,28 +119,11 @@ export const Device = {
     );
   },
   Pagination: ({ current, total }: { current: number; total: number }) => {
-    const first = current === 1;
-    const last = current === total;
-
-    return (
-      <div className="border-light-grey leading-1 flex border-t text-[14px]">
-        <div className="border-light-grey border-r px-[26.5px] py-[14px] font-medium">
-          Reject
-        </div>
-        <div className="text-dark-grey flex w-full items-center justify-center gap-4 px-4">
-          <Image
-            src={flexChevronLeft as string}
-            alt="left"
-            className={cn("inline-block h-[15px]", { "opacity-15": first })}
-          />
-          {current} of {total}
-          <Image
-            src={flexChevronRight as string}
-            alt="left"
-            className={cn("inline-block h-[15px]", { "opacity-15": last })}
-          />
-        </div>
-      </div>
+    const isStax = useContext(DeviceContext) === "stax";
+    return isStax ? (
+      <Stax.Pagination current={current} total={total} />
+    ) : (
+      <Flex.Pagination current={current} total={total} />
     );
   },
   Section: ({ children }: { children: ReactNode }) => (
@@ -139,12 +131,31 @@ export const Device = {
       {children}
     </div>
   ),
-  SignButton: () => (
-    <div className="flex items-center justify-between p-4">
-      <Device.HeadingText>Hold to sign</Device.HeadingText>
-      <div className="border-light-grey flex h-[44px] w-[44px] items-center justify-center rounded-full border">
-        <Image src={signButton} alt="Sign" width={44} height={44} />
+  SignButton: () => {
+    const isStax = useContext(DeviceContext) === "stax";
+    const Button = () =>
+      isStax ? (
+        <Image src={staxSignButton} alt="Sign" width={40} height={40} />
+      ) : (
+        <Image src={flexSignButton} alt="Sign" width={44} height={44} />
+      );
+    return (
+      <div
+        className={cn(
+          "flex items-center justify-between",
+          isStax ? "px-3 py-[10px]" : "p-4",
+        )}
+      >
+        <Device.HeadingText>Hold to sign</Device.HeadingText>
+        <div
+          className={cn(
+            "border-light-grey flex items-center justify-center rounded-full border",
+            isStax ? "h-[40px] w-[40px]" : "h-[44px] w-[44px]",
+          )}
+        >
+          <Button />
+        </div>
       </div>
-    </div>
-  ),
+    );
+  },
 };
