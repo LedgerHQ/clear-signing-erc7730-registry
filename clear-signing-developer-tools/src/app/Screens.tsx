@@ -34,10 +34,6 @@ export const Screens = ({
         <Device.Pagination current={1} total={totalPages} />
       </Device.Frame>
 
-      <Device.Frame>
-        <InfoScreen info={info} address={contractAddress} />
-      </Device.Frame>
-
       {screens.map((screen, index) => (
         <Device.Frame key={`review-screen-${index}`}>
           <ReviewScreen screen={screen} />
@@ -48,6 +44,10 @@ export const Screens = ({
       <Device.Frame>
         <SignScreen owner={owner} type={operationType} />
         <Device.Pagination current={totalPages} total={totalPages} />
+      </Device.Frame>
+
+      <Device.Frame>
+        <InfoScreen info={info} address={contractAddress} />
       </Device.Frame>
     </>
   );
