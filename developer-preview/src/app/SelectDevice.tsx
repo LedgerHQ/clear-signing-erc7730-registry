@@ -5,13 +5,15 @@ export const SelectDevice = ({
   selectedDevice,
   setSelectedDevice,
 }: {
-  selectedDevice: string;
-  setSelectedDevice: Dispatch<SetStateAction<string>>;
+  selectedDevice: "flex" | "stax";
+  setSelectedDevice: Dispatch<SetStateAction<"flex" | "stax">>;
 }) => {
   const onChangeDevice = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
     const selection = target.value;
     localStorage.setItem("selectedDevice", selection);
-    setSelectedDevice(selection);
+    if (selection === "flex" || selection === "stax") {
+      setSelectedDevice(selection);
+    }
   };
 
   return (

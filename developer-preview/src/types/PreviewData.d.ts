@@ -15,7 +15,7 @@ export type PreviewData = {
   operations: Operation[];
 };
 
-type Deploymnent = { address: string };
+type Deploymnent = { address: string; chainId: number };
 
 interface Operation {
   id: string;

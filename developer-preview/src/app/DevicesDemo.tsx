@@ -4,7 +4,7 @@ import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 
 interface Props {
   data: PreviewData;
-  selectedDevice: string;
+  selectedDevice: "flex" | "stax";
   selectedOperation: string;
 }
 
@@ -20,7 +20,8 @@ export const DevicesDemo = ({
 
   if (!chosenOperation || contract.deployments.length < 1) return null;
 
-  const { address: contractAddress } = contract.deployments[0] as Deploymnent;
+  const { address: contractAddress, chainId } = contract
+    .deployments[0] as Deploymnent;
 
   return (
     <>
@@ -28,6 +29,7 @@ export const DevicesDemo = ({
         <div className="overflow-x-scroll bg-[#383838] p-16">
           <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
             <Screens
+              chainId={chainId}
               contractAddress={contractAddress}
               chosenOperation={chosenOperation}
               info={metadata.info}

@@ -8,6 +8,7 @@ import staxInfo from "~/app/screens/assets/stax-info.svg";
 import flexSignButton from "~/app/screens/assets/flex-sign-button.svg";
 import staxSignButton from "~/app/screens/assets/stax-sign-button.svg";
 import { cn } from "~/utils/cn";
+import { getIconFor } from "~/app/screens/getIconFor";
 
 export const Device = {
   ActionText: ({ children }: { children: string }) => {
@@ -80,7 +81,7 @@ export const Device = {
           </Device.ContentText>
         </div>
         <div>
-          <div className="border-light-grey flex h-[32px] w-[32px] items-center justify-center rounded-full border">
+          <div className="flex h-[32px] w-[32px] items-center justify-center rounded-full border border-light-grey">
             {isStax ? (
               <Image src={staxInfo} alt="More info" width={16} height={16} />
             ) : (
@@ -91,35 +92,35 @@ export const Device = {
       </div>
     );
   },
-  Icon: ({ bg }: { bg: string }) => (
+  Icon: ({ bgUrl }: { bgUrl: string }) => (
     <div
-      className={cn(
-        "h-[32px] w-[32px] self-center bg-contain bg-no-repeat",
-        bg,
-      )}
+      className={cn("h-[32px] w-[32px] self-center bg-contain bg-no-repeat")}
+      style={{ backgroundImage: `url(${bgUrl})` }}
     />
   ),
   OperationSummary: ({
+    chainId,
     children,
     type,
   }: {
+    chainId: number;
     children: string;
     type: string;
   }) => {
-    const isStax = useContext(DeviceContext) === "stax";
-    const iconBg =
-      type === "message"
-        ? "bg-[url(/assets/scroll.svg)]"
-        : "bg-[url(/assets/eth.svg)]";
+    const selectedDevice = useContext(DeviceContext);
+    const chainIcon = getIconFor(selectedDevice, chainId) ?? "/assets/eth.svg";
+    const bgUrl = type === "message" ? "/assets/scroll.svg" : chainIcon;
+
+    const isStax = selectedDevice === "stax";
 
     return (
       <div
         className={cn(
-          "align-center border-light-grey flex grow flex-col justify-center gap-3 border-b",
+          "align-center flex grow flex-col justify-center gap-3 border-b border-light-grey",
           isStax ? "p-3" : "p-4",
         )}
       >
-        <Device.Icon bg={iconBg} />
+        <Device.Icon bgUrl={bgUrl} />
         <Device.HeadingText>
           <div className="text-center">{children}</div>
         </Device.HeadingText>
@@ -141,7 +142,7 @@ export const Device = {
     return (
       <div
         className={cn(
-          "border-light-grey flex flex-col border-b py-[14px] last:border-0",
+          "flex flex-col border-b border-light-grey py-[14px] last:border-0",
           isStax ? "gap-[8px] px-3" : "gap-[6px] px-4",
         )}
       >
@@ -169,7 +170,7 @@ export const Device = {
         <Device.HeadingText>Hold to sign</Device.HeadingText>
         <div
           className={cn(
-            "border-light-grey flex items-center justify-center rounded-full border",
+            "flex items-center justify-center rounded-full border border-light-grey",
             isStax ? "h-[40px] w-[40px]" : "h-[44px] w-[44px]",
           )}
         >

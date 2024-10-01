@@ -17,7 +17,7 @@ interface Props {
 
 export default function PreviewTool({ jsonInRegistry }: Props) {
   const [mounted, setMounted] = useState(false);
-  const [selectedDevice, setSelectedDevice] = useState("");
+  const [selectedDevice, setSelectedDevice] = useState<"flex" | "stax">("flex");
   const [selectedOperation, setSelectedOperation] = useState("");
   const [fileKey, setFileKey] = useState("");
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
@@ -26,7 +26,11 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   useEffect(() => {
     setMounted(true);
     setSelectedOperation(localStorage.getItem("selectedOperation") ?? "");
-    setSelectedDevice(localStorage.getItem("selectedDevice") ?? "stax");
+
+    const storedDevice = localStorage.getItem("selectedDevice");
+    if (storedDevice === "flex" || storedDevice === "stax") {
+      setSelectedDevice(storedDevice);
+    }
     setFileKey(
       localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
     );

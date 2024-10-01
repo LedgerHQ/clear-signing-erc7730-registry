@@ -7,6 +7,7 @@ import { TitleScreen } from "~/app/screens/TitleScreen";
 import { type Operation } from "~/types/PreviewData";
 
 interface Props {
+  chainId: number;
   contractAddress: string;
   chosenOperation: Operation;
   info: { lastUpdate: string; legalName: string; url: string };
@@ -15,6 +16,7 @@ interface Props {
 }
 
 export const Screens = ({
+  chainId,
   contractAddress,
   chosenOperation,
   info,
@@ -27,7 +29,7 @@ export const Screens = ({
   return (
     <>
       <Device.Frame>
-        <TitleScreen owner={owner} type={operationType} />
+        <TitleScreen chainId={chainId} owner={owner} type={operationType} />
         <Device.Pagination current={1} total={totalPages} />
       </Device.Frame>
 
@@ -39,7 +41,7 @@ export const Screens = ({
       ))}
 
       <Device.Frame>
-        <SignScreen owner={owner} type={operationType} />
+        <SignScreen chainId={chainId} owner={owner} type={operationType} />
         <Device.Pagination current={totalPages} total={totalPages} />
       </Device.Frame>
 

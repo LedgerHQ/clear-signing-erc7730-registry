@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const DeviceContext = createContext("flex");
+export const DeviceContext = createContext<"flex" | "stax">("flex");
