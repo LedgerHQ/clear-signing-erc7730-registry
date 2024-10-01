@@ -5,7 +5,6 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-roboto)"],
         inter: ["var(--font-inter)"],
       },
       colors: {

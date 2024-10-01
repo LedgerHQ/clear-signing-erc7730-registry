@@ -39,7 +39,7 @@ export const UI = {
       | ReactElement<HTMLSelectElement>[];
   }) => (
     <select
-      className="border-neutral-400 bg-white font-sans text-lg marker:-left-2 enabled:border enabled:p-2 disabled:appearance-none"
+      className="border-neutral-400 bg-white text-lg marker:-left-2 enabled:border enabled:p-2 disabled:appearance-none"
       {...props}
     >
       {children}
