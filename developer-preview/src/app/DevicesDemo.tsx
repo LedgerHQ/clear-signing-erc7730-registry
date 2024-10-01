@@ -26,7 +26,7 @@ export const DevicesDemo = ({
   return (
     <>
       <DeviceContext.Provider value={selectedDevice}>
-        <div className="overflow-x-scroll bg-[#383838] p-16">
+        <div className="overflow-x-scroll p-16">
           <div className="flex w-fit space-x-10 pe-16 font-inter text-sm">
             <Screens
               chainId={chainId}

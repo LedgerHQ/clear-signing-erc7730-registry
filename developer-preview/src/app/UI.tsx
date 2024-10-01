@@ -1,4 +1,5 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
+import { cn } from "~/utils/cn";
 
 export const UI = {
   BlueLink: ({
@@ -11,11 +12,23 @@ export const UI = {
       {children}
     </a>
   ),
+  Container: ({
+    as = "div",
+    children,
+    className,
+  }: {
+    as?: keyof HTMLElementTagNameMap;
+    children: ReactNode;
+    className?: string;
+  }) => {
+    const El = as;
+    return <El className={cn("p-4", className)}>{children}</El>;
+  },
   HeadingField: ({ children }: { children: string }) => (
     <div className="mb-2 text-sm uppercase text-neutral-400">{children}</div>
   ),
   Heading1: ({ children }: { children: string }) => (
-    <h1 className="mb-10 text-3xl font-medium">{children}</h1>
+    <h1 className="text-sm font-medium">{children}</h1>
   ),
   Option: ({
     children,

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { DevicesDemo } from "~/app/DevicesDemo";
-import { PreviewForm } from "~/app/PreviewForm";
+import { ContractInfo } from "~/app/ContractInfo";
 import { UI } from "~/app/UI";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
@@ -10,6 +10,8 @@ import { type PreviewData } from "~/types/PreviewData";
 import { getPreviewData } from "~/utils/getPreviewData";
 import { type ERC7730Schema } from "~/types";
 import { SelectDevice } from "~/app/SelectDevice";
+import { SelectOperation } from "~/app/SelectOperation";
+import { SelectValues } from "~/app/SelectValues";
 
 interface Props {
   jsonInRegistry: string[];
@@ -73,41 +75,56 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   }
 
   return (
-    <main>
-      <div className="container p-16 text-lg">
-        <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
-        <form className="flex flex-col gap-6">
+    <>
+      <div className="border-b border-[#fff2] bg-[#fff1]">
+        <UI.Container as="header">
+          <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
+        </UI.Container>
+
+        <UI.Container className="flex gap-3">
           <SelectMetadataFile
             fileKey={fileKey}
             jsonInRegistry={jsonInRegistry}
             setFileKey={setFileKey}
           />
+
           {previewData && (
-            <PreviewForm
-              data={previewData}
-              selectedOperation={selectedOperation}
-              setSelectedOperation={setSelectedOperation}
-            />
+            <>
+              <SelectValues />
+              <SelectOperation
+                data={previewData}
+                selectedOperation={selectedOperation}
+                setSelectedOperation={setSelectedOperation}
+              />
+              <ContractInfo data={previewData} />
+            </>
           )}
-          {previewData && (
-            <SelectDevice
-              selectedDevice={selectedDevice}
-              setSelectedDevice={setSelectedDevice}
-            />
-          )}
-        </form>
-        {errorMessage && <UI.Error>{errorMessage}</UI.Error>}
+        </UI.Container>
+
+        {errorMessage && (
+          <UI.Container>
+            <UI.Error>{errorMessage}</UI.Error>
+          </UI.Container>
+        )}
       </div>
 
       {previewData && (
         <>
-          <DevicesDemo
-            data={previewData}
-            selectedDevice={selectedDevice}
-            selectedOperation={selectedOperation}
-          />
+          <div className="bg-tool-background">
+            <UI.Container>
+              <SelectDevice
+                selectedDevice={selectedDevice}
+                setSelectedDevice={setSelectedDevice}
+              />
+            </UI.Container>
+            <DevicesDemo
+              data={previewData}
+              selectedDevice={selectedDevice}
+              selectedOperation={selectedOperation}
+            />
+          </div>
         </>
       )}
-    </main>
+    </>
   );
 }

@@ -10,6 +10,10 @@ export default {
       colors: {
         "light-grey": "#E0E0E0",
         "dark-grey": "#959595",
+        "tool-background": "#131214",
+        "tool-neutral": {
+          70: "#949494",
+        },
       },
     },
   },

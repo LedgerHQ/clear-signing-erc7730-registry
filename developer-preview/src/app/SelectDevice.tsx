@@ -17,12 +17,9 @@ export const SelectDevice = ({
   };
 
   return (
-    <div>
-      <UI.HeadingField>Preview on</UI.HeadingField>
-      <UI.Select defaultValue={selectedDevice} onChange={onChangeDevice}>
-        <option value="flex">Ledger Flex</option>
-        <option value="stax">Ledger Stax</option>
-      </UI.Select>
-    </div>
+    <UI.Select defaultValue={selectedDevice} onChange={onChangeDevice}>
+      <option value="flex">Ledger Flex</option>
+      <option value="stax">Ledger Stax</option>
+    </UI.Select>
   );
 };
