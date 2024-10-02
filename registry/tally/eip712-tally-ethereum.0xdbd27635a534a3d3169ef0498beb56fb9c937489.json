@@ -1,1 +1,69 @@
-{"context":{"eip712":{"domain":{"name":"Tally","chainId":1,"verifyingContract":"0xdbd27635a534a3d3169ef0498beb56fb9c937489"},"schemas":[{"primaryType":"Gitcoin Governor","types":{"Ballot":[{"name":"proposalId","type":"uint256"},{"name":"support","type":"uint8"}],"EIP712Domain":[{"name":"chainId","type":"uint256"},{"name":"name","type":"string"},{"name":"verifyingContract","type":"address"}]}}],"deployments":[{"chainId":1,"address":"0xdbd27635a534a3d3169ef0498beb56fb9c937489"}]}},"metadata":{"owner":"GTC Governor Alpha"},"display":{"formats":{"Gitcoin Governor":{"fields":[{"path":"proposalId","label":"Proposal id","format":"raw"},{"path":"support","label":"Support","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Tally",
+        "chainId": 1,
+        "verifyingContract": "0xdbd27635a534a3d3169ef0498beb56fb9c937489"
+      },
+      "schemas": [
+        {
+          "primaryType": "Gitcoin Governor",
+          "types": {
+            "Ballot": [
+              {
+                "name": "proposalId",
+                "type": "uint256"
+              },
+              {
+                "name": "support",
+                "type": "uint8"
+              }
+            ],
+            "EIP712Domain": [
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xdbd27635a534a3d3169ef0498beb56fb9c937489"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "GTC Governor Alpha"
+  },
+  "display": {
+    "formats": {
+      "Gitcoin Governor": {
+        "fields": [
+          {
+            "path": "proposalId",
+            "label": "Proposal id",
+            "format": "raw"
+          },
+          {
+            "path": "support",
+            "label": "Support",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

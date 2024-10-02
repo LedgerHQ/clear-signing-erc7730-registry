@@ -1,1 +1,178 @@
-{"context":{"eip712":{"domain":{"name":"Permit2","chainId":42161,"verifyingContract":"0x7f069df72b7a39bce9806e3afaf579e54d8cf2b9"},"schemas":[{"primaryType":"1inch Order","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"OrderStructure":[{"name":"salt","type":"uint256"},{"name":"maker","type":"address"},{"name":"receiver","type":"address"},{"name":"makerAsset","type":"address"},{"name":"takerAsset","type":"address"},{"name":"makingAmount","type":"uint256"},{"name":"takingAmount","type":"uint256"},{"name":"makerTraits","type":"uint256"}]}},{"primaryType":"1inch Order","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"OrderStructure":[{"name":"salt","type":"uint256"},{"name":"makerAsset","type":"address"},{"name":"takerAsset","type":"address"},{"name":"maker","type":"address"},{"name":"receiver","type":"address"},{"name":"allowedSender","type":"address"},{"name":"makingAmount","type":"uint256"},{"name":"takingAmount","type":"uint256"},{"name":"offsets","type":"uint256"},{"name":"interactions","type":"bytes"}]}}],"deployments":[{"chainId":42161,"address":"0x7f069df72b7a39bce9806e3afaf579e54d8cf2b9"}]}},"metadata":{"owner":"1inch Limit Order Protocol"},"display":{"formats":{"1inch Order":{"fields":[{"path":"maker","label":"From","format":"raw"},{"path":"makingAmount","label":"Send","format":"tokenAmount","params":{"tokenPath":"makerAsset"}},{"path":"takingAmount","label":"Receive minimum","format":"tokenAmount","params":{"tokenPath":"takerAsset"}},{"path":"receiver","label":"To","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Permit2",
+        "chainId": 42161,
+        "verifyingContract": "0x7f069df72b7a39bce9806e3afaf579e54d8cf2b9"
+      },
+      "schemas": [
+        {
+          "primaryType": "1inch Order",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "OrderStructure": [
+              {
+                "name": "salt",
+                "type": "uint256"
+              },
+              {
+                "name": "maker",
+                "type": "address"
+              },
+              {
+                "name": "receiver",
+                "type": "address"
+              },
+              {
+                "name": "makerAsset",
+                "type": "address"
+              },
+              {
+                "name": "takerAsset",
+                "type": "address"
+              },
+              {
+                "name": "makingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "takingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "makerTraits",
+                "type": "uint256"
+              }
+            ]
+          }
+        },
+        {
+          "primaryType": "1inch Order",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "OrderStructure": [
+              {
+                "name": "salt",
+                "type": "uint256"
+              },
+              {
+                "name": "makerAsset",
+                "type": "address"
+              },
+              {
+                "name": "takerAsset",
+                "type": "address"
+              },
+              {
+                "name": "maker",
+                "type": "address"
+              },
+              {
+                "name": "receiver",
+                "type": "address"
+              },
+              {
+                "name": "allowedSender",
+                "type": "address"
+              },
+              {
+                "name": "makingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "takingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "offsets",
+                "type": "uint256"
+              },
+              {
+                "name": "interactions",
+                "type": "bytes"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0x7f069df72b7a39bce9806e3afaf579e54d8cf2b9"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "1inch Limit Order Protocol"
+  },
+  "display": {
+    "formats": {
+      "1inch Order": {
+        "fields": [
+          {
+            "path": "maker",
+            "label": "From",
+            "format": "raw"
+          },
+          {
+            "path": "makingAmount",
+            "label": "Send",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "makerAsset"
+            }
+          },
+          {
+            "path": "takingAmount",
+            "label": "Receive minimum",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "takerAsset"
+            }
+          },
+          {
+            "path": "receiver",
+            "label": "To",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

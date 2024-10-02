@@ -1,1 +1,113 @@
-{"context":{"eip712":{"domain":{"name":"Permit2","chainId":1,"verifyingContract":"0x111111125421ca6dc452d289314280a0f8842a65"},"schemas":[{"primaryType":"1inch Order","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"Order":[{"name":"salt","type":"uint256"},{"name":"maker","type":"address"},{"name":"receiver","type":"address"},{"name":"makerAsset","type":"address"},{"name":"takerAsset","type":"address"},{"name":"makingAmount","type":"uint256"},{"name":"takingAmount","type":"uint256"},{"name":"makerTraits","type":"uint256"}]}}],"deployments":[{"chainId":1,"address":"0x111111125421ca6dc452d289314280a0f8842a65"}]}},"metadata":{"owner":"1inch Aggregation Router"},"display":{"formats":{"1inch Order":{"fields":[{"path":"maker","label":"From","format":"raw"},{"path":"makingAmount","label":"Send","format":"tokenAmount","params":{"tokenPath":"makerAsset"}},{"path":"takingAmount","label":"Receive minimum","format":"tokenAmount","params":{"tokenPath":"takerAsset"}},{"path":"receiver","label":"To","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Permit2",
+        "chainId": 1,
+        "verifyingContract": "0x111111125421ca6dc452d289314280a0f8842a65"
+      },
+      "schemas": [
+        {
+          "primaryType": "1inch Order",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "Order": [
+              {
+                "name": "salt",
+                "type": "uint256"
+              },
+              {
+                "name": "maker",
+                "type": "address"
+              },
+              {
+                "name": "receiver",
+                "type": "address"
+              },
+              {
+                "name": "makerAsset",
+                "type": "address"
+              },
+              {
+                "name": "takerAsset",
+                "type": "address"
+              },
+              {
+                "name": "makingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "takingAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "makerTraits",
+                "type": "uint256"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "1inch Aggregation Router"
+  },
+  "display": {
+    "formats": {
+      "1inch Order": {
+        "fields": [
+          {
+            "path": "maker",
+            "label": "From",
+            "format": "raw"
+          },
+          {
+            "path": "makingAmount",
+            "label": "Send",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "makerAsset"
+            }
+          },
+          {
+            "path": "takingAmount",
+            "label": "Receive minimum",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "takerAsset"
+            }
+          },
+          {
+            "path": "receiver",
+            "label": "To",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

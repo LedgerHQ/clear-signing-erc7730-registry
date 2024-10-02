@@ -1,1 +1,246 @@
-{"context":{"eip712":{"domain":{"name":"ParaSwap","chainId":10,"verifyingContract":"0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"},"schemas":[{"primaryType":"AugustusRFQ ERC20 order","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"Order":[{"name":"nonceAndMeta","type":"uint256"},{"name":"expiry","type":"uint128"},{"name":"makerAsset","type":"address"},{"name":"takerAsset","type":"address"},{"name":"maker","type":"address"},{"name":"taker","type":"address"},{"name":"makerAmount","type":"uint256"},{"name":"takerAmount","type":"uint256"}]}},{"primaryType":"AugustusRFQ NFT order","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"OrderNFT":[{"name":"nonceAndMeta","type":"uint256"},{"name":"expiry","type":"uint128"},{"name":"makerAsset","type":"uint256"},{"name":"makerAssetId","type":"uint256"},{"name":"takerAsset","type":"uint256"},{"name":"takerAssetId","type":"uint256"},{"name":"maker","type":"address"},{"name":"taker","type":"address"},{"name":"makerAmount","type":"uint256"},{"name":"takerAmount","type":"uint256"}]}}],"deployments":[{"chainId":10,"address":"0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"}]}},"metadata":{"owner":"AugustusRFQ"},"display":{"formats":{"AugustusRFQ ERC20 order":{"fields":[{"path":"nonceAndMeta","label":"Nonce and metadata","format":"raw"},{"path":"expiry","label":"Expiration time","format":"raw"},{"path":"makerAsset","label":"Maker asset address","format":"raw"},{"path":"takerAsset","label":"Taker asset address","format":"raw"},{"path":"maker","label":"Maker address","format":"raw"},{"path":"taker","label":"Taker address","format":"raw"},{"path":"makerAmount","label":"Maker amount","format":"raw"},{"path":"takerAmount","label":"Taker amount","format":"raw"}]},"AugustusRFQ NFT order":{"fields":[{"path":"nonceAndMeta","label":"Nonce and metadata","format":"raw"},{"path":"expiry","label":"Expiration time","format":"raw"},{"path":"makerAsset","label":"Maker asset encoded","format":"raw"},{"path":"makerAssetId","label":"Maker asset NFT ID","format":"raw"},{"path":"takerAsset","label":"Taker asset encoded","format":"raw"},{"path":"takerAssetId","label":"Taker asset NFT ID","format":"raw"},{"path":"maker","label":"Maker address","format":"raw"},{"path":"taker","label":"Taker address","format":"raw"},{"path":"makerAmount","label":"Maker amount","format":"raw"},{"path":"takerAmount","label":"Taker amount","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "ParaSwap",
+        "chainId": 10,
+        "verifyingContract": "0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"
+      },
+      "schemas": [
+        {
+          "primaryType": "AugustusRFQ ERC20 order",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "Order": [
+              {
+                "name": "nonceAndMeta",
+                "type": "uint256"
+              },
+              {
+                "name": "expiry",
+                "type": "uint128"
+              },
+              {
+                "name": "makerAsset",
+                "type": "address"
+              },
+              {
+                "name": "takerAsset",
+                "type": "address"
+              },
+              {
+                "name": "maker",
+                "type": "address"
+              },
+              {
+                "name": "taker",
+                "type": "address"
+              },
+              {
+                "name": "makerAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "takerAmount",
+                "type": "uint256"
+              }
+            ]
+          }
+        },
+        {
+          "primaryType": "AugustusRFQ NFT order",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "OrderNFT": [
+              {
+                "name": "nonceAndMeta",
+                "type": "uint256"
+              },
+              {
+                "name": "expiry",
+                "type": "uint128"
+              },
+              {
+                "name": "makerAsset",
+                "type": "uint256"
+              },
+              {
+                "name": "makerAssetId",
+                "type": "uint256"
+              },
+              {
+                "name": "takerAsset",
+                "type": "uint256"
+              },
+              {
+                "name": "takerAssetId",
+                "type": "uint256"
+              },
+              {
+                "name": "maker",
+                "type": "address"
+              },
+              {
+                "name": "taker",
+                "type": "address"
+              },
+              {
+                "name": "makerAmount",
+                "type": "uint256"
+              },
+              {
+                "name": "takerAmount",
+                "type": "uint256"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 10,
+          "address": "0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "AugustusRFQ"
+  },
+  "display": {
+    "formats": {
+      "AugustusRFQ ERC20 order": {
+        "fields": [
+          {
+            "path": "nonceAndMeta",
+            "label": "Nonce and metadata",
+            "format": "raw"
+          },
+          {
+            "path": "expiry",
+            "label": "Expiration time",
+            "format": "raw"
+          },
+          {
+            "path": "makerAsset",
+            "label": "Maker asset address",
+            "format": "raw"
+          },
+          {
+            "path": "takerAsset",
+            "label": "Taker asset address",
+            "format": "raw"
+          },
+          {
+            "path": "maker",
+            "label": "Maker address",
+            "format": "raw"
+          },
+          {
+            "path": "taker",
+            "label": "Taker address",
+            "format": "raw"
+          },
+          {
+            "path": "makerAmount",
+            "label": "Maker amount",
+            "format": "raw"
+          },
+          {
+            "path": "takerAmount",
+            "label": "Taker amount",
+            "format": "raw"
+          }
+        ]
+      },
+      "AugustusRFQ NFT order": {
+        "fields": [
+          {
+            "path": "nonceAndMeta",
+            "label": "Nonce and metadata",
+            "format": "raw"
+          },
+          {
+            "path": "expiry",
+            "label": "Expiration time",
+            "format": "raw"
+          },
+          {
+            "path": "makerAsset",
+            "label": "Maker asset encoded",
+            "format": "raw"
+          },
+          {
+            "path": "makerAssetId",
+            "label": "Maker asset NFT ID",
+            "format": "raw"
+          },
+          {
+            "path": "takerAsset",
+            "label": "Taker asset encoded",
+            "format": "raw"
+          },
+          {
+            "path": "takerAssetId",
+            "label": "Taker asset NFT ID",
+            "format": "raw"
+          },
+          {
+            "path": "maker",
+            "label": "Maker address",
+            "format": "raw"
+          },
+          {
+            "path": "taker",
+            "label": "Taker address",
+            "format": "raw"
+          },
+          {
+            "path": "makerAmount",
+            "label": "Maker amount",
+            "format": "raw"
+          },
+          {
+            "path": "takerAmount",
+            "label": "Taker amount",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

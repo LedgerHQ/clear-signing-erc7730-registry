@@ -1,1 +1,153 @@
-{"context":{"eip712":{"domain":{"name":"Rarible","chainId":137,"verifyingContract":"0xa2d9ded6115b7b7208459450d676f0127418ae7a"},"schemas":[{"primaryType":"Lazy Mint ERC-1155","types":{"Mint1155":[{"name":"tokenId","type":"uint256"},{"name":"supply","type":"uint256"},{"name":"tokenURI","type":"string"},{"name":"creators","type":"Part[]"},{"name":"royalties","type":"Part[]"}],"Part":[{"name":"account","type":"address"},{"name":"value","type":"uint96"}]}},{"primaryType":"Meta Transaction","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"verifyingContract","type":"address"},{"name":"salt","type":"bytes32"}],"MetaTransaction":[{"name":"nonce","type":"uint256"},{"name":"from","type":"address"},{"name":"functionSignature","type":"bytes"}]}}],"deployments":[{"chainId":137,"address":"0xa2d9ded6115b7b7208459450d676f0127418ae7a"}]}},"metadata":{"owner":"Rarible ERC-1155 Collection"},"display":{"formats":{"Lazy Mint ERC-1155":{"fields":[{"path":"tokenId","label":"Token ID","format":"raw"},{"path":"tokenURI","label":"Token URI","format":"raw"},{"path":"supply","label":"Token Supply","format":"raw"},{"path":"creators.[].account","label":"Creator account address","format":"raw"},{"path":"creators.[].value","label":"Creator value (10000 = 100%)","format":"raw"},{"path":"royalties.[].account","label":"Royalties account address","format":"raw"},{"path":"royalties.[].value","label":"Royalties value (10000 = 100%)","format":"raw"}]},"Meta Transaction":{"fields":[{"path":"from","label":"User Address","format":"raw"},{"path":"nonce","label":"Meta Transaction Nonce","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Rarible",
+        "chainId": 137,
+        "verifyingContract": "0xa2d9ded6115b7b7208459450d676f0127418ae7a"
+      },
+      "schemas": [
+        {
+          "primaryType": "Lazy Mint ERC-1155",
+          "types": {
+            "Mint1155": [
+              {
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
+                "name": "supply",
+                "type": "uint256"
+              },
+              {
+                "name": "tokenURI",
+                "type": "string"
+              },
+              {
+                "name": "creators",
+                "type": "Part[]"
+              },
+              {
+                "name": "royalties",
+                "type": "Part[]"
+              }
+            ],
+            "Part": [
+              {
+                "name": "account",
+                "type": "address"
+              },
+              {
+                "name": "value",
+                "type": "uint96"
+              }
+            ]
+          }
+        },
+        {
+          "primaryType": "Meta Transaction",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              },
+              {
+                "name": "salt",
+                "type": "bytes32"
+              }
+            ],
+            "MetaTransaction": [
+              {
+                "name": "nonce",
+                "type": "uint256"
+              },
+              {
+                "name": "from",
+                "type": "address"
+              },
+              {
+                "name": "functionSignature",
+                "type": "bytes"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0xa2d9ded6115b7b7208459450d676f0127418ae7a"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Rarible ERC-1155 Collection"
+  },
+  "display": {
+    "formats": {
+      "Lazy Mint ERC-1155": {
+        "fields": [
+          {
+            "path": "tokenId",
+            "label": "Token ID",
+            "format": "raw"
+          },
+          {
+            "path": "tokenURI",
+            "label": "Token URI",
+            "format": "raw"
+          },
+          {
+            "path": "supply",
+            "label": "Token Supply",
+            "format": "raw"
+          },
+          {
+            "path": "creators.[].account",
+            "label": "Creator account address",
+            "format": "raw"
+          },
+          {
+            "path": "creators.[].value",
+            "label": "Creator value (10000 = 100%)",
+            "format": "raw"
+          },
+          {
+            "path": "royalties.[].account",
+            "label": "Royalties account address",
+            "format": "raw"
+          },
+          {
+            "path": "royalties.[].value",
+            "label": "Royalties value (10000 = 100%)",
+            "format": "raw"
+          }
+        ]
+      },
+      "Meta Transaction": {
+        "fields": [
+          {
+            "path": "from",
+            "label": "User Address",
+            "format": "raw"
+          },
+          {
+            "path": "nonce",
+            "label": "Meta Transaction Nonce",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

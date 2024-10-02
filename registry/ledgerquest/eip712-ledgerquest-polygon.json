@@ -1,1 +1,82 @@
-{"context":{"eip712":{"domain":{"name":"LedgerQuest","chainId":137,"verifyingContract":"0x33c6eec1723b12c46732f7ab41398de45641fa42"},"schemas":[{"primaryType":"Mint","types":{"EIP712Domain":[{"name":"name","type":"string"},{"name":"version","type":"string"},{"name":"chainId","type":"uint256"},{"name":"verifyingContract","type":"address"}],"mint":[{"name":"receiver","type":"address"},{"name":"categoryId","type":"uint256"},{"name":"collectionId","type":"uint256"}]}}],"deployments":[{"chainId":137,"address":"0x33c6eec1723b12c46732f7ab41398de45641fa42"}]}},"metadata":{"owner":"LedgerQuest"},"display":{"formats":{"Mint":{"fields":[{"path":"receiver","label":"Receiver","format":"raw"},{"path":"categoryId","label":"Quest Type","format":"raw"},{"path":"collectionId","label":"Collection","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "LedgerQuest",
+        "chainId": 137,
+        "verifyingContract": "0x33c6eec1723b12c46732f7ab41398de45641fa42"
+      },
+      "schemas": [
+        {
+          "primaryType": "Mint",
+          "types": {
+            "EIP712Domain": [
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              },
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              }
+            ],
+            "mint": [
+              {
+                "name": "receiver",
+                "type": "address"
+              },
+              {
+                "name": "categoryId",
+                "type": "uint256"
+              },
+              {
+                "name": "collectionId",
+                "type": "uint256"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0x33c6eec1723b12c46732f7ab41398de45641fa42"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "LedgerQuest"
+  },
+  "display": {
+    "formats": {
+      "Mint": {
+        "fields": [
+          {
+            "path": "receiver",
+            "label": "Receiver",
+            "format": "raw"
+          },
+          {
+            "path": "categoryId",
+            "label": "Quest Type",
+            "format": "raw"
+          },
+          {
+            "path": "collectionId",
+            "label": "Collection",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

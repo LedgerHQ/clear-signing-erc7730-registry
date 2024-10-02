@@ -1,1 +1,73 @@
-{"context":{"eip712":{"domain":{"name":"Tally","chainId":42161,"verifyingContract":"0x789fc99093b09ad01c34dc7251d0c89ce743e5a4"},"schemas":[{"primaryType":"Arbitrum Foundation: Treasury Governor","types":{"Ballot":[{"name":"proposalId","type":"uint256"},{"name":"support","type":"uint8"}],"EIP712Domain":[{"name":"chainId","type":"uint256"},{"name":"name","type":"string"},{"name":"verifyingContract","type":"address"},{"name":"version","type":"string"}]}}],"deployments":[{"chainId":42161,"address":"0x789fc99093b09ad01c34dc7251d0c89ce743e5a4"}]}},"metadata":{"owner":"L2ArbitrumGovernor"},"display":{"formats":{"Arbitrum Foundation: Treasury Governor":{"fields":[{"path":"proposalId","label":"Proposal id","format":"raw"},{"path":"support","label":"Support","format":"raw"}]}}}}
+{
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Tally",
+        "chainId": 42161,
+        "verifyingContract": "0x789fc99093b09ad01c34dc7251d0c89ce743e5a4"
+      },
+      "schemas": [
+        {
+          "primaryType": "Arbitrum Foundation: Treasury Governor",
+          "types": {
+            "Ballot": [
+              {
+                "name": "proposalId",
+                "type": "uint256"
+              },
+              {
+                "name": "support",
+                "type": "uint8"
+              }
+            ],
+            "EIP712Domain": [
+              {
+                "name": "chainId",
+                "type": "uint256"
+              },
+              {
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "name": "verifyingContract",
+                "type": "address"
+              },
+              {
+                "name": "version",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      ],
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0x789fc99093b09ad01c34dc7251d0c89ce743e5a4"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "L2ArbitrumGovernor"
+  },
+  "display": {
+    "formats": {
+      "Arbitrum Foundation: Treasury Governor": {
+        "fields": [
+          {
+            "path": "proposalId",
+            "label": "Proposal id",
+            "format": "raw"
+          },
+          {
+            "path": "support",
+            "label": "Support",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}
