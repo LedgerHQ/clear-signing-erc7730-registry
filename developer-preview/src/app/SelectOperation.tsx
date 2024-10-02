@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { UI } from "~/app/UI";
+import { UI } from "~/ui/UI";
 import { type PreviewData } from "~/types/PreviewData";
 
 export const SelectOperation = ({
@@ -11,22 +11,25 @@ export const SelectOperation = ({
   selectedOperation: string;
   setSelectedOperation: Dispatch<SetStateAction<string>>;
 }) => {
-  const onChangeOperation = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selection = e.target.value;
+  const onChangeOperation = (selection: string) => {
     localStorage.setItem("selectedOperation", selection);
     setSelectedOperation(selection);
   };
 
+  const items = data.operations.map(({ id, intent }) => ({
+    value: id || intent,
+    label: intent,
+  }));
+
   return (
     <div>
       <UI.HeadingField>Operation</UI.HeadingField>
-      <UI.Select defaultValue={selectedOperation} onChange={onChangeOperation}>
-        {data.operations.map(({ id, intent }) => (
-          <UI.Option key={`${data.contract.name}-${id}`} value={id}>
-            {intent}
-          </UI.Option>
-        ))}
-      </UI.Select>
+      <UI.Select
+        items={items}
+        onChange={onChangeOperation}
+        placeholder="Operation"
+        value={selectedOperation}
+      ></UI.Select>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { formatShortAddress } from "~/app/formatShortAddress";
-import { UI } from "~/app/UI";
+import { UI } from "~/ui/UI";
 import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 
 export const ContractInfo = ({ data }: { data: PreviewData }) => {

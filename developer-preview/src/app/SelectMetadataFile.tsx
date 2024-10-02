@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { UI } from "~/app/UI";
+import { UI } from "~/ui/UI";
 
 export const SelectMetadataFile = ({
   fileKey,
@@ -10,26 +10,20 @@ export const SelectMetadataFile = ({
   jsonInRegistry: string[];
   setFileKey: Dispatch<SetStateAction<string>>;
 }) => {
-  const onChangeFile = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-    const selection = target.value;
-    localStorage.setItem("selectedFileKey", selection);
-    setFileKey(selection);
+  const onChangeFile = (value: string) => {
+    localStorage.setItem("selectedFileKey", value);
+    setFileKey(value);
   };
 
   return (
     <div>
       <UI.HeadingField>Metadata file</UI.HeadingField>
-      <UI.Select defaultValue={fileKey} onChange={onChangeFile}>
-        {jsonInRegistry.map((key) => (
-          <option key={key} value={key} disabled={disabled(key)}>
-            {key}
-          </option>
-        ))}
-      </UI.Select>
+      <UI.Select
+        value={fileKey}
+        onChange={onChangeFile}
+        items={jsonInRegistry}
+        placeholder="Metadata file"
+      />
     </div>
   );
 };
-
-function disabled(key: string): boolean | undefined {
-  return key === "eip712-UniswapX-ExclusiveDutchOrder.json";
-}

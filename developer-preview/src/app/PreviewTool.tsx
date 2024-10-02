@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DevicesDemo } from "~/app/DevicesDemo";
 import { ContractInfo } from "~/app/ContractInfo";
-import { UI } from "~/app/UI";
+import { UI } from "~/ui/UI";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
 import { type PreviewData } from "~/types/PreviewData";
