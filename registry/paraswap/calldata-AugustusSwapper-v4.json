@@ -1,0 +1,442 @@
+{
+    "context": {
+        "$id": "AugustusSwapper",
+        "contract" : {
+            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/main/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x1bd435f3c054b6e901b7b108a0ab7617c808677b"        
+                },
+                {
+                    "chainId": 1,
+                    "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57"        
+                },
+                {
+                    "chainId": 56,
+                    "address": "0x55a0e3b6579972055faa983482aceb4b251dcf15"        
+                },
+                {
+                    "chainId": 56,
+                    "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57"        
+                },
+                {
+                    "chainId": 137,
+                    "address": "0x90249ed4d69d70e709ffcd8bee2c5a566f65dade"        
+                },
+                {
+                    "chainId": 137,
+                    "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57"        
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "Paraswap"
+    },
+    
+    "display": {
+        "definitions": {
+            "amountIn": {
+                "label": "Income Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountIn"
+                }
+            },
+            "amountOut": {
+                "label": "Outcome Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountOut"
+                }
+            },
+            "amountOutIn": {
+                "label": "Outcome/Income Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountOutIn"
+                }
+            },
+            "amountInMax": {
+                "label": "Maximum Income Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountInMax"
+                }
+            },
+            "amountInMin": {
+                "label": "Minimum Income Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountInMin"
+                }
+            },
+            "factory": {
+                "path": "factory",
+                "label": "Factory",
+                "format": "addressName",
+                "params": {
+                    "type": "contract"
+                }
+            },
+            "tokenIn": {
+                "path": "tokenIn",
+                "label": "Inbound token",
+                "format": "addressName",
+                "params": {
+                    "type": "token"
+                }
+            },
+            "amountOutMin": {
+                "label": "Minimum Outcome Amount",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "amountOutMin"
+                }
+            },
+            "fromToken": {
+                "format": "addressName",
+                "label": "Origin Token",
+                "$ref": "$.display.definitions.fromToken"
+            },
+            "toToken": {
+                "format": "addressName",
+                "label": "Destination Token",
+                "$ref": "$.display.definitions.toToken"
+            },
+            "fromAmount": {
+                "format": "tokenAmount",
+                "label": "Income Amount",
+                "params": {
+                    "tokenPath": "tokenAmount"
+                }
+            },
+            "toAmount": {
+                "format": "tokenAmount",
+                "label": "Outcome Amount",
+                "params": {
+                    "tokenPath": "toAmount"
+                }
+            },
+            "expectedAmount": {
+                "format": "tokenAmount",
+                "label": "Expected Amount",
+                "params": {
+                    "tokenPath": "expectedAmount"
+                }
+            },
+            "beneficiary": {
+                "format": "addressName",
+                "label": "Beneficiary",
+                "params": {
+                    "type": "eoa"
+                }
+            },
+            "partner": {
+                "format": "addressName",
+                "label": "Partner address",
+                "params": {
+                    "type": "wallet"
+                }
+            },
+            "feePercent": {
+                "format": "percentage",
+                "label": "Fee percentage",
+                "params": {
+                    "base": "%"
+                }
+            },
+            "callees": {
+                "format": "addressName",
+                "label": "Callees",
+                "params": {
+                    "type": "wallet"
+                }
+            },
+            "exchange": {
+                "format": "addressName",
+                "label": "Exchange address",
+                "params": {
+                    "type": "wallet"
+                }
+            }
+        },
+        "formats": {
+            "0x58b9d179" : {
+                "$id": "simpleSwap",
+                "fields": [
+                    {
+                        "path": "fromToken",
+                        "$ref": "$.display.definitions.fromToken"
+                    },
+                    {
+                        "path": "toToken",
+                        "$ref": "$.display.definitions.toToken"
+                    },
+                    {
+                        "path": "fromAmount",
+                        "$ref": "$.display.definitions.fromAmount"
+                    },
+                    {
+                        "path": "toAmount",
+                        "$ref": "$.display.definitions.toAmount"
+                    },
+                    {
+                        "path": "expectedAmount",
+                        "$ref": "$.display.definitions.expectedAmount"
+                    },
+                    {
+                        "path": "callees.[]",
+                        "$ref": "$.display.definitions.callees"
+                    },
+                    {
+                        "path": "exchangeData",
+                        "format": "raw",
+                        "label": "exchange data"
+                    },
+                    {
+                        "path": "startIndexes.[]",
+                        "format": "raw",
+                        "label": "array of start indexes"
+                    },
+                    {
+                        "path": "values.[]",
+                        "format": "raw",
+                        "label": "array of values"
+                    },
+                    {
+                        "path": "beneficiary",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer"
+                    },
+                    {
+                        "path": "useReduxToken",
+                        "format": "raw",
+                        "label": "use redux token boolean"
+                    }
+
+                ],
+                "required": ["fromToken", "toToken", "fromAmount", "toAmount", "expectedAmount", "callees", "exchangeData", "startIndexes", "values", "beneficiary", "referrer", "useReduxToken"]
+            },
+            "0x0863b7ac" : {
+                "$id": "swapOnUniswap",
+                "fields": [
+                    {
+                        "path": "amountIn",
+                        "$ref": "$.display.definitions.amountIn"
+                    },
+                    {
+                        "path": "amountOutIn",
+                        "$ref": "$.display.definitions.amountOutIn"
+                    },
+                    {
+                        "path": "path.[]",
+                        "label": "Array of addresses",
+                        "format": "addressName",
+                        "params": {
+                            "type": "wallet"
+                        }
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer uint8"
+                    }
+                ],
+                "required": ["amountIn", "amountOutIn", "path", "referrer"]
+            },
+            "0x8f00eccb" : {
+                "$id": "swapOnUniswapFork",
+                "fields": [
+                    {
+                        "path": "factory",
+                        "$ref": "$.display.definitions.factory"
+                    },
+                    {
+                        "path": "initCode",
+                        "format": "raw",
+                        "label": "init code"
+                    },
+                    {
+                        "path": "amountIn",
+                        "$ref": "$.display.definitions.amountIn"
+                    },
+                    {
+                        "path": "amountOutIn",
+                        "$ref": "$.display.definitions.amountOutIn"
+                    },
+                    {
+                        "path": "path.[]",
+                        "label": "Array of addresses",
+                        "format": "addressName",
+                        "params": {
+                            "type": "wallet"
+                        }
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer uint8"
+                    }
+                ],
+                "required": ["factory", "initCode", "amountIn", "amountOutIn", "path", "referrer"]
+            },
+            "0xec1d21dd" : {
+                "$id": "multiSwap",
+                "fields": [
+                    {
+                        "path": "fromToken",
+                        "$ref": "$.display.definitions.fromToken"
+                    },
+                    {
+                        "path": "fromAmount",
+                        "$ref": "$.display.definitions.fromAmount"
+                    },
+                    {
+                        "path": "toAmount",
+                        "$ref": "$.display.definitions.toAmount"
+                    },
+                    {
+                        "path": "expectedAmount",
+                        "format": "tokenAmount",
+                        "label": "expected amount"
+                    },
+                    {
+                        "path": "beneficiary",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer"
+                    },
+                    {
+                        "path": "useReduxToken",
+                        "format": "raw",
+                        "label": "use redux token boolean"
+                    },
+                    {
+                        "path": "path.[]",
+                        "label": "Array of addresses",
+                        "format": "addressName",
+                        "params": {
+                            "type": "wallet"
+                        }
+                    }
+                ],
+                "required": ["fromToken", "fromAmount", "toAmount", "expectedAmount", "beneficiary", "referrer", "useReduxToken", "path"]
+            },
+            "0xf95a49eb" : {
+                "$id": "buy",
+                "fields": [
+                    {
+                        "path": "fromToken",
+                        "$ref": "$.display.definitions.fromToken"
+                    },
+                    {
+                        "path": "toToken",
+                        "$ref": "$.display.definitions.toToken"
+                    },
+                    {
+                        "path": "fromAmount",
+                        "$ref": "$.display.definitions.fromAmount"
+                    },
+                    {
+                        "path": "toAmount",
+                        "$ref": "$.display.definitions.toAmount"
+                    },
+                    {
+                        "path": "beneficiary",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer"
+                    },
+                    {
+                        "path": "useReduxToken",
+                        "format": "raw",
+                        "label": "use redux token boolean"
+                    },
+                    {
+                        "path": "route.[]",
+                        "format": "raw",
+                        "label": "array of routes"
+                    }
+                ],
+                "required": ["fromToken", "toToken", "fromAmount", "toAmount", "beneficiary", "referrer", "useReduxToken", "route"]
+            },
+            "0xf9355f72" : {
+                "$id": "buyOnUniswap",
+                "fields": [
+                    {
+                        "path": "amountInMax",
+                        "$ref": "$.display.definitions.amountInMax"
+                    },
+                    {
+                        "path": "amountOut",
+                        "$ref": "$.display.definitions.amountOut"
+                    },
+                    {
+                        "path": "path.[]",
+                        "label": "Array of addresses",
+                        "format": "addressName",
+                        "params": {
+                            "type": "wallet"
+                        }
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer"
+                    }
+                ],
+                "required": ["amountInMax", "amountOut", "path", "referrer"]
+            },
+            "0x33635226" : {
+                "$id": "buyOnUniswapFork",
+                "fields": [
+                    {
+                        "path": "factory",
+                        "$ref": "$.display.definitions.factory"
+                    },
+                    {
+                        "path": "initCode",
+                        "format": "raw",
+                        "label": "init code"
+                    },
+                    {
+                        "path": "amountInMax",
+                        "$ref": "$.display.definitions.amountInMax"
+                    },
+                    {
+                        "path": "amountOut",
+                        "$ref": "$.display.definitions.amountOut"
+                    },
+                    {
+                        "path": "path.[]",
+                        "label": "Array of addresses",
+                        "format": "addressName",
+                        "params": {
+                            "type": "wallet"
+                        }
+                    },
+                    {
+                        "path": "referrer",
+                        "format": "raw",
+                        "label": "referrer"
+                    }
+
+                ],
+                "required": ["factory", "initCode", "amountInMax", "amountOut", "path", "referrer"]
+            }
+        }
+    }
+}
