@@ -37,7 +37,7 @@
         "main" : {
             "title": "Binding Context Section",
             "type": "object",
-            "description": "The binding context is a set constraints that are used to bind the ERC7730 file to a specific structured data being displayed. Currently, supported contexts include contract-specific constraints or EIP712 message specific constraints.",
+            "description": "The binding context is a set of constraints that are used to bind the ERC7730 file to a specific structured data being displayed. Currently, supported contexts include contract-specific constraints or EIP712 message specific constraints.",
             
             "properties": {
                 "$id" : {
@@ -475,7 +475,7 @@
                 },
                 "$ref": {
                     "title": "Internal Definition",
-                    "description": "An internal defintion that should be used as the field formatting defintion. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
+                    "description": "An internal definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
                     "type": "string"
                 },
                 "params": {
