@@ -1,0 +1,15 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['*.md']
+
+specifications:
+  - changed-files:
+      - any-glob-to-any-file: ['specs/**']
+
+descriptors:
+  - changed-files:
+      - any-glob-to-any-file: ['registry/**', 'ercs/**']
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**']
