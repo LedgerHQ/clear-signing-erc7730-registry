@@ -81,12 +81,18 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
           <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         </UI.Container>
 
-        <UI.Container className="flex gap-3">
+        <UI.Container className="grid grid-cols-3 grid-rows-2 gap-3">
           <SelectMetadataFile
             fileKey={fileKey}
             jsonInRegistry={jsonInRegistry}
             setFileKey={setFileKey}
           />
+
+          {errorMessage && (
+            <UI.Container>
+              <UI.Error>{errorMessage}</UI.Error>
+            </UI.Container>
+          )}
 
           {previewData && (
             <>
@@ -96,16 +102,12 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
                 selectedOperation={selectedOperation}
                 setSelectedOperation={setSelectedOperation}
               />
-              <ContractInfo data={previewData} />
+              <div className="col-span-3">
+                <ContractInfo data={previewData} />
+              </div>
             </>
           )}
         </UI.Container>
-
-        {errorMessage && (
-          <UI.Container>
-            <UI.Error>{errorMessage}</UI.Error>
-          </UI.Container>
-        )}
       </div>
 
       {previewData && (
