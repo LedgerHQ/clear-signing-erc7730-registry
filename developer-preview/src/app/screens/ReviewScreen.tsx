@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Device } from "~/app/Device";
 import { DeviceContext } from "~/app/DeviceContext";
 import { type Screen } from "~/app/getScreensForOperation";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 
 export const ReviewScreen = ({ screen }: { screen: Screen }) => {
   const isStax = useContext(DeviceContext) === "stax";

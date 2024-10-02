@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { Device } from "~/app/Device";
 import flexChevronLeft from "~/app/screens/assets/flex-chevron-left.svg";
 import flexChevronRight from "../app/screens/assets/flex-chevron-right.svg";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 
 // Dimensions of the area to display the fields: 480px x 464px
 // Number of lines for tags & values: 9

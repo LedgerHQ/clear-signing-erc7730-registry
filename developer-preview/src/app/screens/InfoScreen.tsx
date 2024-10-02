@@ -4,7 +4,7 @@ import { Device } from "~/app/Device";
 import { DeviceContext } from "~/app/DeviceContext";
 import flexBackArrow from "~/app/screens/assets/flex-back-arrow.svg";
 import staxBackArrow from "~/app/screens/assets/stax-back-arrow.svg";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 
 export const InfoScreen = ({
   address,

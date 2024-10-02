@@ -7,7 +7,7 @@ import flexInfo from "~/app/screens/assets/flex-info.svg";
 import staxInfo from "~/app/screens/assets/stax-info.svg";
 import flexSignButton from "~/app/screens/assets/flex-sign-button.svg";
 import staxSignButton from "~/app/screens/assets/stax-sign-button.svg";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 import { getIconFor } from "~/app/screens/getIconFor";
 
 export const Device = {

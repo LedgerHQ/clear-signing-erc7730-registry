@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from "react";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 
 export const UI = {
   BlueLink: ({

@@ -3,7 +3,7 @@ import { type ReactNode } from "react";
 import { Device } from "~/app/Device";
 import staxChevronLeft from "~/app/screens/assets/stax-chevron-left.svg";
 import staxChevronRight from "../app/screens/assets/stax-chevron-right.svg";
-import { cn } from "~/utils/cn";
+import { cn } from "~/lib/utils";
 
 // Dimensions of the area to display the fields: 400px x 546px
 // Number of lines for tags & values: 10

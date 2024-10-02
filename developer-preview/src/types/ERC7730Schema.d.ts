@@ -59,7 +59,7 @@ interface Display {
   formats: Record<string, StructuredDataFormat>;
 }
 
-export interface FieldFormatter {
+interface FieldFormatter {
   $id?: string;
   $ref?: string;
   label?: string;
@@ -119,10 +119,3 @@ interface ABIParameter {
 }
 
 type Enum = Record<string, string>;
-
-interface Metafield {
-  key: string;
-  value: string;
-  type: "string" | "number" | "boolean" | "date" | "json";
-  description?: string;
-}

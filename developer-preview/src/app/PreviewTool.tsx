@@ -7,8 +7,8 @@ import { UI } from "~/app/UI";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
 
 import { type PreviewData } from "~/types/PreviewData";
-import { getPreviewData } from "~/utils/getPreviewData";
-import { type ERC7730Schema } from "~/types";
+import { getPreviewData } from "~/lib/getPreviewData";
+import { type ERC7730Schema } from "~/types/ERC7730Schema";
 import { SelectDevice } from "~/app/SelectDevice";
 import { SelectOperation } from "~/app/SelectOperation";
 import { SelectValues } from "~/app/SelectValues";

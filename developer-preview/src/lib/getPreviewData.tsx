@@ -1,5 +1,5 @@
-import { type Operation, type PreviewData } from "../types/PreviewData";
-import type { ERC7730Schema, FieldFormatter } from "~/types";
+import { type Operation, type PreviewData } from "~/types/PreviewData";
+import type { ERC7730Schema, FieldFormatter } from "~/types/ERC7730Schema";
 
 const processFields = (
   fields: FieldFormatter[],

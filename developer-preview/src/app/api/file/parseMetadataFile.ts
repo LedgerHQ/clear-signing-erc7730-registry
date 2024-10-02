@@ -1,4 +1,4 @@
-import { type ERC7730Schema } from "~/types";
+import { type ERC7730Schema } from "~/types/ERC7730Schema";
 import path from "path";
 import fs from "fs";
 
