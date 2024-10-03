@@ -27,7 +27,13 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
   useEffect(() => {
     setMounted(true);
-    setSelectedOperation(localStorage.getItem("selectedOperation") ?? "");
+
+    const operation =
+      localStorage.getItem("selectedOperation") ??
+      previewData?.operations[0]?.id ??
+      "";
+
+    setSelectedOperation(operation);
 
     const storedDevice = localStorage.getItem("selectedDevice");
     if (storedDevice === "flex" || storedDevice === "stax") {
@@ -36,7 +42,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
     setFileKey(
       localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
     );
-  }, []);
+  }, [previewData?.operations]);
 
   useEffect(() => {
     if (fileKey) {
@@ -76,7 +82,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
   return (
     <>
-      <div className="border-b border-[#fff2] bg-[#fff1]">
+      <div className="border-b border-[#fff2] bg-[#fff1] text-tool-neutral-70 antialiased">
         <UI.Container as="header">
           <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         </UI.Container>

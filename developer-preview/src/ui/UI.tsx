@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { cn } from "~/lib/utils";
 import {
@@ -19,26 +20,26 @@ export const UI = {
     className?: string;
   }) => {
     const El = as;
-    return <El className={cn("p-4", className)}>{children}</El>;
+    return <El className={cn("p-5", className)}>{children}</El>;
   },
   FauxInput: ({
     children,
     error = false,
   }: {
     children: ReactNode;
-    error: boolean;
+    error?: boolean;
   }) => (
     <div
       className={cn(
-        "rounded-md border px-3 py-2 text-sm",
-        error ? "border-red-400" : "border-tool-neutral-20",
+        "rounded-md px-3 py-2 text-sm",
+        error ? "text-red-400" : "bg-[#fff1]",
       )}
     >
       {children}
     </div>
   ),
   InputText: ({ children }: { children: string }) => (
-    <div className="font-medium">{children}</div>
+    <div className="font-medium text-white">{children}</div>
   ),
   GreyLink: ({
     children,
@@ -51,10 +52,22 @@ export const UI = {
     </a>
   ),
   Label: ({ children }: { children: string }) => (
-    <div className="mb-2 text-sm text-tool-neutral-70">{children}</div>
+    <div className="mb-2 text-sm font-medium text-tool-neutral-70">
+      {children}
+    </div>
   ),
   Heading1: ({ children }: { children: string }) => (
-    <h1 className="text-lg font-medium">{children}</h1>
+    <div className="flex items-center gap-3">
+      <div className="rounded-md bg-[#fff1] p-3">
+        <Image
+          src="/assets/Ledger-favicon.svg"
+          width={20}
+          height={17.5}
+          alt="Logo"
+        />
+      </div>
+      <h1 className="text-lg font-medium">{children}</h1>
+    </div>
   ),
   Select: ({
     fullWidth = true,

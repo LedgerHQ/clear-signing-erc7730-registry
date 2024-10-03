@@ -21,6 +21,10 @@ export const SelectOperation = ({
     label: intent,
   }));
 
+  const value = items.some(({ value }) => value === selectedOperation)
+    ? selectedOperation
+    : (items[0]?.value ?? "");
+
   return (
     <div>
       <UI.Label>Operation</UI.Label>
@@ -28,7 +32,7 @@ export const SelectOperation = ({
         items={items}
         onChange={onChangeOperation}
         placeholder="Operation"
-        value={selectedOperation}
+        value={value}
       ></UI.Select>
     </div>
   );

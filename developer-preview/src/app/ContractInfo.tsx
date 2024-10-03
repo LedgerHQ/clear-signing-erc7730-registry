@@ -4,7 +4,7 @@ import { formatShortAddress } from "~/app/formatShortAddress";
 
 export const ContractInfo = ({ data }: { data: PreviewData }) => {
   if (data.contract.deployments.length === 0) {
-    return <UI.Error>No deployments found</UI.Error>;
+    return <UI.FauxInput error>No deployments found</UI.FauxInput>;
   }
 
   return (
