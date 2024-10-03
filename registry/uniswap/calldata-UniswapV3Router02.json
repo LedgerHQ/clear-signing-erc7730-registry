@@ -36,7 +36,7 @@
                         }
                     },
                     {
-                        "path": "params.amountOut",
+                        "path": "params.amountOutMinimum",
                         "label": "Minimum amount to Receive",
                         "format": "tokenAmount",
                         "params": {
@@ -49,7 +49,7 @@
                         "format": "addressName"
                     }
                 ],
-                "required": ["params.amountIn", "params.amountOut", "params.recipient"]
+                "required": ["params.amountIn", "params.amountOutMinimum", "params.recipient"]
             },
             "0x04e45aaf": {
                 "$id": "exactInputSingle",
