@@ -81,7 +81,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
           <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
         </UI.Container>
 
-        <UI.Container className="grid grid-cols-3 grid-rows-2 gap-3">
+        <UI.Container className="grid grid-cols-3 gap-3">
           <SelectMetadataFile
             fileKey={fileKey}
             jsonInRegistry={jsonInRegistry}

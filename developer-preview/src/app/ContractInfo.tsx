@@ -1,28 +1,30 @@
-import { formatShortAddress } from "~/app/formatShortAddress";
 import { UI } from "~/ui/UI";
 import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
+import { formatShortAddress } from "~/app/formatShortAddress";
 
 export const ContractInfo = ({ data }: { data: PreviewData }) => {
+  if (data.contract.deployments.length === 0) {
+    return <UI.Error>No deployments found</UI.Error>;
+  }
+
   return (
     <div>
-      <UI.Label>Contract</UI.Label>
-      <div>
-        {data.contract.name}
-        {data.contract.deployments.map(({ address }: Deploymnent) => (
-          <span key={address}>
-            {" "}
-            (
-            <UI.BlueLink
+      <UI.FauxInput>
+        <div className="flex items-center justify-between">
+          <UI.InputText>{data.contract.name}</UI.InputText>
+
+          {data.contract.deployments.map(({ address }: Deploymnent) => (
+            <UI.GreyLink
               href={`https://etherscan.io/address/${address}`}
+              key={address}
               title={address}
               target="_blank"
             >
               {formatShortAddress(address)}
-            </UI.BlueLink>
-            )
-          </span>
-        ))}
-      </div>
+            </UI.GreyLink>
+          ))}
+        </div>
+      </UI.FauxInput>
     </div>
   );
 };

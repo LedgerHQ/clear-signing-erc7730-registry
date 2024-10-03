@@ -9,16 +9,6 @@ import {
 } from "~/ui/select";
 
 export const UI = {
-  BlueLink: ({
-    children,
-    ...props
-  }: Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
-    children: string;
-  }) => (
-    <a className="text-blue-500" {...props}>
-      {children}
-    </a>
-  ),
   Container: ({
     as = "div",
     children,
@@ -31,13 +21,29 @@ export const UI = {
     const El = as;
     return <El className={cn("p-4", className)}>{children}</El>;
   },
-  Label: ({ children }: { children: string }) => (
-    <div className="mb-2 text-[10px] leading-3 text-tool-neutral-70">
+  FauxInput: ({ children }: { children: ReactNode }) => (
+    <div className="border-tool-neutral-20 rounded-md border px-3 py-2 text-sm">
       {children}
     </div>
   ),
+  InputText: ({ children }: { children: string }) => (
+    <div className="font-medium">{children}</div>
+  ),
+  GreyLink: ({
+    children,
+    ...props
+  }: Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
+    children: string;
+  }) => (
+    <a className="text-sm text-tool-neutral-70" {...props}>
+      {children}
+    </a>
+  ),
+  Label: ({ children }: { children: string }) => (
+    <div className="mb-2 text-sm text-tool-neutral-70">{children}</div>
+  ),
   Heading1: ({ children }: { children: string }) => (
-    <h1 className="text-sm font-medium">{children}</h1>
+    <h1 className="text-lg font-medium">{children}</h1>
   ),
   Error: ({ children }: { children: string }) => (
     <div className="inline-block bg-red-400 px-2 py-1">{children}</div>
