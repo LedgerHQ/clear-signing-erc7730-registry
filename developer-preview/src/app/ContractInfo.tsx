@@ -5,7 +5,7 @@ import { type Deploymnent, type PreviewData } from "~/types/PreviewData";
 export const ContractInfo = ({ data }: { data: PreviewData }) => {
   return (
     <div>
-      <UI.HeadingField>Contract</UI.HeadingField>
+      <UI.Label>Contract</UI.Label>
       <div>
         {data.contract.name}
         {data.contract.deployments.map(({ address }: Deploymnent) => (

@@ -23,7 +23,7 @@ export const SelectOperation = ({
 
   return (
     <div>
-      <UI.HeadingField>Operation</UI.HeadingField>
+      <UI.Label>Operation</UI.Label>
       <UI.Select
         items={items}
         onChange={onChangeOperation}

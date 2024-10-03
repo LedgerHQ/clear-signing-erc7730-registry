@@ -31,8 +31,10 @@ export const UI = {
     const El = as;
     return <El className={cn("p-4", className)}>{children}</El>;
   },
-  HeadingField: ({ children }: { children: string }) => (
-    <div className="mb-2 text-sm uppercase text-neutral-400">{children}</div>
+  Label: ({ children }: { children: string }) => (
+    <div className="mb-2 text-[10px] leading-3 text-tool-neutral-70">
+      {children}
+    </div>
   ),
   Heading1: ({ children }: { children: string }) => (
     <h1 className="text-sm font-medium">{children}</h1>

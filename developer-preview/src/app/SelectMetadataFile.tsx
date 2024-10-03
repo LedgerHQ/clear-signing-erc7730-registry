@@ -17,7 +17,7 @@ export const SelectMetadataFile = ({
 
   return (
     <div>
-      <UI.HeadingField>Metadata file</UI.HeadingField>
+      <UI.Label>Metadata file</UI.Label>
       <UI.Select
         value={fileKey}
         onChange={onChangeFile}
