@@ -89,9 +89,9 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
           />
 
           {errorMessage && (
-            <UI.Container>
-              <UI.Error>{errorMessage}</UI.Error>
-            </UI.Container>
+            <div className="col-span-2 row-start-2">
+              <UI.FauxInput error>{errorMessage}</UI.FauxInput>
+            </div>
           )}
 
           {previewData && (

@@ -88,7 +88,7 @@ export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
     const { message } = error as { message: string };
     console.error("Error parsing selected file: ", message);
     return {
-      error: "Error parsing selected file (see Browser Console for details)",
+      error: "Error parsing selected file. See browser console for details.",
       data: null,
     };
   }

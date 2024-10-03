@@ -21,8 +21,19 @@ export const UI = {
     const El = as;
     return <El className={cn("p-4", className)}>{children}</El>;
   },
-  FauxInput: ({ children }: { children: ReactNode }) => (
-    <div className="border-tool-neutral-20 rounded-md border px-3 py-2 text-sm">
+  FauxInput: ({
+    children,
+    error = false,
+  }: {
+    children: ReactNode;
+    error: boolean;
+  }) => (
+    <div
+      className={cn(
+        "rounded-md border px-3 py-2 text-sm",
+        error ? "border-red-400" : "border-tool-neutral-20",
+      )}
+    >
       {children}
     </div>
   ),
@@ -44,9 +55,6 @@ export const UI = {
   ),
   Heading1: ({ children }: { children: string }) => (
     <h1 className="text-lg font-medium">{children}</h1>
-  ),
-  Error: ({ children }: { children: string }) => (
-    <div className="inline-block bg-red-400 px-2 py-1">{children}</div>
   ),
   Select: ({
     fullWidth = true,
