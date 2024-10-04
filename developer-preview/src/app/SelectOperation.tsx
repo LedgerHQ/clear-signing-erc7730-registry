@@ -16,9 +16,9 @@ export const SelectOperation = ({
     setSelectedOperation(selection);
   };
 
-  const items = data.operations.map(({ id, intent }) => ({
-    value: id || intent,
-    label: intent,
+  const items = data.operations.map(({ id }) => ({
+    value: id,
+    label: id,
   }));
 
   const value = items.some(({ value }) => value === selectedOperation)
