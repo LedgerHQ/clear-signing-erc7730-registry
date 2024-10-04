@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
+        }
+      ],
       "domain": {
         "name": "Permit",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Permit Aave transfers",
+          "primaryType": "Permit",
           "types": {
             "EIP712Domain": [
               {
@@ -52,12 +58,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9"
-        }
       ]
     }
   },
@@ -66,7 +66,7 @@
   },
   "display": {
     "formats": {
-      "Permit Aave transfers": {
+      "Permit": {
         "fields": [
           {
             "path": "owner",

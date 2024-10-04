@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xdbd27635a534a3d3169ef0498beb56fb9c937489"
+        }
+      ],
       "domain": {
         "name": "Tally",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Gitcoin Governor",
+          "primaryType": "Ballot",
           "types": {
             "Ballot": [
               {
@@ -36,12 +42,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xdbd27635a534a3d3169ef0498beb56fb9c937489"
-        }
       ]
     }
   },
@@ -50,7 +50,7 @@
   },
   "display": {
     "formats": {
-      "Gitcoin Governor": {
+      "Ballot": {
         "fields": [
           {
             "path": "proposalId",

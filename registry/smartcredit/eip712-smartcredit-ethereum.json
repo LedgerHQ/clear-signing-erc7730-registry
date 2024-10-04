@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x72e9d9038ce484ee986fea183f8d8df93f9ada13"
+        }
+      ],
       "domain": {
         "name": "SmartCredit.io",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "SmartCredit.io",
+          "primaryType": "LoanRequest",
           "types": {
             "EIP712Domain": [
               {
@@ -60,12 +66,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x72e9d9038ce484ee986fea183f8d8df93f9ada13"
-        }
       ]
     }
   },
@@ -74,7 +74,7 @@
   },
   "display": {
     "formats": {
-      "SmartCredit.io": {
+      "LoanRequest": {
         "fields": [
           {
             "path": "collateralAddress",

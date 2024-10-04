@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d"
+        }
+      ],
       "domain": {
         "name": "LensHub",
         "chainId": 137,
@@ -573,7 +579,7 @@
           }
         },
         {
-          "primaryType": "mirror",
+          "primaryType": "Mirror",
           "types": {
             "EIP712Domain": [
               {
@@ -962,7 +968,7 @@
           }
         },
         {
-          "primaryType": "Set Follow Module",
+          "primaryType": "SetFollowModule",
           "types": {
             "EIP712Domain": [
               {
@@ -1112,12 +1118,6 @@
               }
             ]
           }
-        }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d"
         }
       ]
     }
@@ -1399,7 +1399,7 @@
           }
         ]
       },
-      "mirror": {
+      "Mirror": {
         "fields": [
           {
             "path": "profileId",
@@ -1585,7 +1585,7 @@
           }
         ]
       },
-      "Set Follow Module": {
+      "SetFollowModule": {
         "fields": [
           {
             "path": "profileId",

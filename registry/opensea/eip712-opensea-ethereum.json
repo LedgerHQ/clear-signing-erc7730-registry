@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x7f268357a8c2552623316e2562d90e642bb538e5"
+        }
+      ],
       "domain": {
         "name": "OpenSea",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "OpenSea Listing",
+          "primaryType": "Order",
           "types": {
             "EIP712Domain": [
               {
@@ -128,12 +134,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x7f268357a8c2552623316e2562d90e642bb538e5"
-        }
       ]
     }
   },
@@ -142,7 +142,7 @@
   },
   "display": {
     "formats": {
-      "OpenSea Listing": {
+      "Order": {
         "fields": [
           {
             "path": "exchange",

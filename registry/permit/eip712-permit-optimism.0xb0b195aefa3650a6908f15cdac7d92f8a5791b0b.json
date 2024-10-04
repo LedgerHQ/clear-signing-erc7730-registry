@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 10,
+          "address": "0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b"
+        }
+      ],
       "domain": {
         "name": "Permit",
         "chainId": 10,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Permit BOB transfers",
+          "primaryType": "Permit",
           "types": {
             "EIP712Domain": [
               {
@@ -52,12 +58,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 10,
-          "address": "0xb0b195aefa3650a6908f15cdac7d92f8a5791b0b"
-        }
       ]
     }
   },
@@ -66,7 +66,7 @@
   },
   "display": {
     "formats": {
-      "Permit BOB transfers": {
+      "Permit": {
         "fields": [
           {
             "path": "owner",

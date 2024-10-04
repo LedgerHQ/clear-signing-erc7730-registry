@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d"
+        }
+      ],
       "domain": {
         "name": "Dispatch",
         "chainId": 137,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Dispatch.xyz Follow Profile",
+          "primaryType": "FollowWithSig",
           "types": {
             "EIP712Domain": [
               {
@@ -48,12 +54,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0xdb46d1dc155634fbc732f92e853b10b288ad5a1d"
-        }
       ]
     }
   },
@@ -62,7 +62,7 @@
   },
   "display": {
     "formats": {
-      "Dispatch.xyz Follow Profile": {
+      "FollowWithSig": {
         "fields": [
           {
             "path": "profileIds",

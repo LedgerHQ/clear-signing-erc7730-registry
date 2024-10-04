@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 421614,
+          "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+        }
+      ],
       "domain": {
         "name": "Permit2",
         "chainId": 421614,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Permit2",
+          "primaryType": "PermitSingle",
           "types": {
             "EIP712Domain": [
               {
@@ -59,7 +65,7 @@
           }
         },
         {
-          "primaryType": "UniswapX Limit Order",
+          "primaryType": "OutputToken",
           "types": {
             "EIP712Domain": [
               {
@@ -168,7 +174,7 @@
           }
         },
         {
-          "primaryType": "UniswapX Dutch Order",
+          "primaryType": "DutchOutput",
           "types": {
             "DutchOrder": [
               {
@@ -293,7 +299,7 @@
           }
         },
         {
-          "primaryType": "UniswapX Exclusive Dutch Order",
+          "primaryType": "DutchOutput",
           "types": {
             "DutchOutput": [
               {
@@ -425,12 +431,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 421614,
-          "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
-        }
       ]
     }
   },
@@ -439,7 +439,7 @@
   },
   "display": {
     "formats": {
-      "Permit2": {
+      "PermitSingle": {
         "fields": [
           {
             "path": "details.amount",
@@ -461,7 +461,7 @@
           }
         ]
       },
-      "UniswapX Limit Order": {
+      "OutputToken": {
         "fields": [
           {
             "path": "spender",
@@ -506,52 +506,7 @@
           }
         ]
       },
-      "UniswapX Dutch Order": {
-        "fields": [
-          {
-            "path": "spender",
-            "label": "Approve to spender",
-            "format": "raw"
-          },
-          {
-            "path": "permitted.amount",
-            "label": "Amount allowance",
-            "format": "tokenAmount",
-            "params": {
-              "tokenPath": "permitted.token"
-            }
-          },
-          {
-            "path": "witness.inputStartAmount",
-            "label": "Spend max",
-            "format": "tokenAmount",
-            "params": {
-              "tokenPath": "witness.inputToken"
-            }
-          },
-          {
-            "path": "witness.outputs.[].token",
-            "label": "Tokens to receive",
-            "format": "raw"
-          },
-          {
-            "path": "witness.outputs.[].endAmount",
-            "label": "Minimum amounts to receive",
-            "format": "raw"
-          },
-          {
-            "path": "witness.outputs.[].recipient",
-            "label": "On Addresses",
-            "format": "raw"
-          },
-          {
-            "path": "deadline",
-            "label": "Approval expire",
-            "format": "date"
-          }
-        ]
-      },
-      "UniswapX Exclusive Dutch Order": {
+      "DutchOutput": {
         "fields": [
           {
             "path": "spender",

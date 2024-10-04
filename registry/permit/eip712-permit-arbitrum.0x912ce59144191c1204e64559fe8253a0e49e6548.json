@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0x912ce59144191c1204e64559fe8253a0e49e6548"
+        }
+      ],
       "domain": {
         "name": "Permit",
         "chainId": 42161,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Permit Arbitrum transfers",
+          "primaryType": "Permit",
           "types": {
             "EIP712Domain": [
               {
@@ -52,12 +58,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 42161,
-          "address": "0x912ce59144191c1204e64559fe8253a0e49e6548"
-        }
       ]
     }
   },
@@ -66,7 +66,7 @@
   },
   "display": {
     "formats": {
-      "Permit Arbitrum transfers": {
+      "Permit": {
         "fields": [
           {
             "path": "owner",

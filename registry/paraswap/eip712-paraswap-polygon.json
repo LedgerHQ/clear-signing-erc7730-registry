@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0xf3cd476c3c4d3ac5ca2724767f269070ca09a043"
+        }
+      ],
       "domain": {
         "name": "ParaSwap",
         "chainId": 137,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "AugustusRFQ ERC20 order",
+          "primaryType": "Order",
           "types": {
             "EIP712Domain": [
               {
@@ -65,7 +71,7 @@
           }
         },
         {
-          "primaryType": "AugustusRFQ NFT order",
+          "primaryType": "OrderNFT",
           "types": {
             "EIP712Domain": [
               {
@@ -129,12 +135,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0xf3cd476c3c4d3ac5ca2724767f269070ca09a043"
-        }
       ]
     }
   },
@@ -143,7 +143,7 @@
   },
   "display": {
     "formats": {
-      "AugustusRFQ ERC20 order": {
+      "Order": {
         "fields": [
           {
             "path": "nonceAndMeta",
@@ -187,7 +187,7 @@
           }
         ]
       },
-      "AugustusRFQ NFT order": {
+      "OrderNFT": {
         "fields": [
           {
             "path": "nonceAndMeta",

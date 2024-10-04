@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xed8bdb5895b8b7f9fdb3c087628fd8410e853d48"
+        }
+      ],
       "domain": {
         "name": "Tally",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Hop Governor",
+          "primaryType": "Ballot",
           "types": {
             "Ballot": [
               {
@@ -36,12 +42,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xed8bdb5895b8b7f9fdb3c087628fd8410e853d48"
-        }
       ]
     }
   },
@@ -50,7 +50,7 @@
   },
   "display": {
     "formats": {
-      "Hop Governor": {
+      "Ballot": {
         "fields": [
           {
             "path": "proposalId",

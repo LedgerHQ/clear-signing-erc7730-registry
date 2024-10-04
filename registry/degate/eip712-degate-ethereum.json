@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xe63602a9b3dfe983187525ac985fec4f57b24ed5"
+        }
+      ],
       "domain": {
         "name": "DeGate",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "DeGate AccountUpdate",
+          "primaryType": "AccountUpdate",
           "types": {
             "AccountUpdate": [
               {
@@ -61,7 +67,7 @@
           }
         },
         {
-          "primaryType": "DeGate Withdrawal",
+          "primaryType": "Withdrawal",
           "types": {
             "EIP712Domain": [
               {
@@ -126,7 +132,7 @@
           }
         },
         {
-          "primaryType": "DeGate Transfer",
+          "primaryType": "Transfer",
           "types": {
             "EIP712Domain": [
               {
@@ -186,12 +192,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xe63602a9b3dfe983187525ac985fec4f57b24ed5"
-        }
       ]
     }
   },
@@ -200,7 +200,7 @@
   },
   "display": {
     "formats": {
-      "DeGate AccountUpdate": {
+      "AccountUpdate": {
         "fields": [
           {
             "path": "owner",
@@ -239,7 +239,7 @@
           }
         ]
       },
-      "DeGate Withdrawal": {
+      "Withdrawal": {
         "fields": [
           {
             "path": "owner",
@@ -293,7 +293,7 @@
           }
         ]
       },
-      "DeGate Transfer": {
+      "Transfer": {
         "fields": [
           {
             "path": "owner",

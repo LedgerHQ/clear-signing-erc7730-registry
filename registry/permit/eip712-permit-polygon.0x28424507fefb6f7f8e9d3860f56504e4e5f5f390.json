@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0x28424507fefb6f7f8e9d3860f56504e4e5f5f390"
+        }
+      ],
       "domain": {
         "name": "Permit",
         "chainId": 137,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Permit Aave Matic Market WETH transfers",
+          "primaryType": "Permit",
           "types": {
             "EIP712Domain": [
               {
@@ -52,12 +58,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0x28424507fefb6f7f8e9d3860f56504e4e5f5f390"
-        }
       ]
     }
   },
@@ -66,7 +66,7 @@
   },
   "display": {
     "formats": {
-      "Permit Aave Matic Market WETH transfers": {
+      "Permit": {
         "fields": [
           {
             "path": "owner",

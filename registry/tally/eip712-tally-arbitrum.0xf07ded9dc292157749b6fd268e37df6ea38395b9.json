@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0xf07ded9dc292157749b6fd268e37df6ea38395b9"
+        }
+      ],
       "domain": {
         "name": "Tally",
         "chainId": 42161,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Arbitrum Foundation: Core Governor",
+          "primaryType": "Ballot",
           "types": {
             "Ballot": [
               {
@@ -40,12 +46,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 42161,
-          "address": "0xf07ded9dc292157749b6fd268e37df6ea38395b9"
-        }
       ]
     }
   },
@@ -54,7 +54,7 @@
   },
   "display": {
     "formats": {
-      "Arbitrum Foundation: Core Governor": {
+      "Ballot": {
         "fields": [
           {
             "path": "proposalId",

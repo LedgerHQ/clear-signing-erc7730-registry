@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x323a76393544d5ecca80cd6ef2a560c6a395b7e3"
+        }
+      ],
       "domain": {
         "name": "Tally",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "ENS Governor",
+          "primaryType": "Ballot",
           "types": {
             "Ballot": [
               {
@@ -40,12 +46,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x323a76393544d5ecca80cd6ef2a560c6a395b7e3"
-        }
       ]
     }
   },
@@ -54,7 +54,7 @@
   },
   "display": {
     "formats": {
-      "ENS Governor": {
+      "Ballot": {
         "fields": [
           {
             "path": "proposalId",

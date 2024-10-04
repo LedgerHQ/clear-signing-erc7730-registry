@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0xd4f2f33680fccb36748fa9831851643781608844"
+        }
+      ],
       "domain": {
         "name": "LensHub",
         "chainId": 137,
@@ -84,12 +90,6 @@
               }
             ]
           }
-        }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0xd4f2f33680fccb36748fa9831851643781608844"
         }
       ]
     }

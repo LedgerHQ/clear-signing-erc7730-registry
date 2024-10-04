@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
+        }
+      ],
       "domain": {
         "name": "Tally",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "UNI token",
+          "primaryType": "Delegation",
           "types": {
             "Delegation": [
               {
@@ -40,12 +46,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984"
-        }
       ]
     }
   },
@@ -54,7 +54,7 @@
   },
   "display": {
     "formats": {
-      "UNI token": {
+      "Delegation": {
         "fields": [
           {
             "path": "delegatee",

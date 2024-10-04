@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        }
+      ],
       "domain": {
         "name": "Permit2",
         "chainId": 137,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "1inch Order",
+          "primaryType": "Order",
           "types": {
             "EIP712Domain": [
               {
@@ -64,12 +70,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 137,
-          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
-        }
       ]
     }
   },
@@ -78,7 +78,7 @@
   },
   "display": {
     "formats": {
-      "1inch Order": {
+      "Order": {
         "fields": [
           {
             "path": "maker",

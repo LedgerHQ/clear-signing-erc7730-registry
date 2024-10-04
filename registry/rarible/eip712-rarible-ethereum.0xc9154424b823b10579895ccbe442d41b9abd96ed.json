@@ -1,6 +1,12 @@
 {
   "context": {
     "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xc9154424b823b10579895ccbe442d41b9abd96ed"
+        }
+      ],
       "domain": {
         "name": "Rarible",
         "chainId": 1,
@@ -8,7 +14,7 @@
       },
       "schemas": [
         {
-          "primaryType": "Lazy Mint ERC-721",
+          "primaryType": "Mint721",
           "types": {
             "Mint721": [
               {
@@ -40,12 +46,6 @@
             ]
           }
         }
-      ],
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xc9154424b823b10579895ccbe442d41b9abd96ed"
-        }
       ]
     }
   },
@@ -54,7 +54,7 @@
   },
   "display": {
     "formats": {
-      "Lazy Mint ERC-721": {
+      "Mint721": {
         "fields": [
           {
             "path": "tokenId",
