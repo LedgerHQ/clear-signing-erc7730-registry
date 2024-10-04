@@ -10,6 +10,17 @@ import {
 } from "~/ui/select";
 
 export const UI = {
+  ButtonLink: ({
+    children,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children: string }) => (
+    <a
+      className="rounded-[76px] bg-[#fff1] p-3 px-5 text-sm font-medium text-white"
+      {...props}
+    >
+      {children}
+    </a>
+  ),
   Container: ({
     as = "div",
     children,

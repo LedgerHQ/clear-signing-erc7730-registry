@@ -83,8 +83,22 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   return (
     <>
       <div className="border-b border-[#fff2] bg-[#fff1] text-tool-neutral-70 antialiased">
-        <UI.Container as="header">
+        <UI.Container as="header" className="flex justify-between">
           <UI.Heading1>Open Clear Signing Format preview</UI.Heading1>
+          <div className="flex gap-4">
+            <UI.ButtonLink
+              href="https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/specs/erc-7730.md"
+              target="_blank"
+            >
+              Whitepaper
+            </UI.ButtonLink>
+            <UI.ButtonLink
+              href="https://developers.ledger.com/docs/clear-signing/erc7730"
+              target="_blank"
+            >
+              View documentation
+            </UI.ButtonLink>
+          </div>
         </UI.Container>
 
         <UI.Container className="grid grid-cols-3 gap-3">
