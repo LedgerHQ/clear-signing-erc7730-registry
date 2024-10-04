@@ -10,7 +10,7 @@ This repository maintains records of past and current metadata files in the `reg
 README.md                                    # top-level README file with submission process and how to use the simulation tool
 specs/
   erc7730.md                                 # most advanced version of the spec but reference should be the ERC
-  eip7730.schema.json                        # the json schema of the latest version of the extension 
+  eip7730.schema.json                        # the json schema of the latest version of the extension
 registry/
   $entity_name/                              # official entity name submitting metadata information
     calldata_$contractName1.json             # metadata for contract $contractName1, including the contract version in name
@@ -44,4 +44,4 @@ registry/
 
 ## How to test
 
-TODO: How to use tool to visualize end result of applying metadata to Tx and messages
+- Inside the [developer-preview](/developer-preview/) directory you'll find a README and a Node web application. It runs at localhost:3000 and can be used to preview the results of your clear signing metadata files.
