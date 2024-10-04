@@ -376,7 +376,7 @@
                             },
                             "screens": {
                                 "title": "Screens grouping information",
-                                "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc..). See each wallet manufacturer documentatio for more information.",
+                                "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc...). See each wallet manufacturer documentation for more information.",
                                 "type": "object",
 
                                 "additionalProperties": {
@@ -627,7 +627,7 @@
                 {
                     "title": "integer format",
                     "const": "duration",
-                    "description": "The field should be displayed as a duration in HH:MM:ss form. Value is interpreted as a number of seconds"
+                    "description": "The field should be displayed as a duration in HH:MM:ss form. Value is interpreted as a number of seconds."
                 },
                 {
                     "title": "integer format",
@@ -645,18 +645,21 @@
             "title": "Address Names Formatting Parameters",
             "type": "object",
             "properties": {
-                "type": {
+                "types": {
                     "title": "Address Type",
-                    "type": "string",
-                    "description": "The type of address to display. Restrict allowable sources of names and MAY lead to additional checks from wallets.",
-                    "enum": [ "wallet", "eoa", "contract", "token", "nft" ]
-                },
-                "sources": {
-                    "title": "Trusted Sources for names, in order of preferences. See specification for more details on sources values.",
                     "type": "array",
+                    "description": "The types of address to display. Restrict allowable sources of names and MAY lead to additional checks from wallets.",
                     "items": {
                         "type": "string",
-                        "enum": [ "local", "ens" ]
+                        "enum": [ "wallet", "eoa", "contract", "token", "collection" ]
+                    }
+                },
+                "sources": {
+                    "title": "Trusted Sources",
+                    "description": "Trusted Sources for names, in order of preferences. Sources values are wallet manufacturer specific, example values are \"local\" or \"ens\". See specification for more details on sources values.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
                     }
                 }
             },
@@ -745,7 +748,7 @@
         },
 
         "unitParameters": {
-            "title": "Percentage Formatting Parameters",
+            "title": "Unit Formatting Parameters",
             "type": "object",
             "properties": {
                 "base": {
