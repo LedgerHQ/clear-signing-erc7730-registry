@@ -14,14 +14,17 @@ export const ContractInfo = ({ data }: { data: PreviewData }) => {
           <UI.InputText>{data.contract.name}</UI.InputText>
 
           {data.contract.deployments.map(({ address }: Deploymnent) => (
-            <UI.GreyLink
-              href={`https://etherscan.io/address/${address}`}
-              key={address}
-              title={address}
-              target="_blank"
-            >
-              {formatShortAddress(address)}
-            </UI.GreyLink>
+            <>
+              {" "}
+              <UI.GreyLink
+                href={`https://etherscan.io/address/${address}`}
+                key={address}
+                title={address}
+                target="_blank"
+              >
+                {formatShortAddress(address)}
+              </UI.GreyLink>
+            </>
           ))}
         </div>
       </UI.FauxInput>

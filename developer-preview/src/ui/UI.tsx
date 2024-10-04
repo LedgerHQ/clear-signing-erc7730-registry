@@ -47,8 +47,9 @@ export const UI = {
   }: Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
     children: string;
   }) => (
-    <a className="text-sm text-tool-neutral-70" {...props}>
-      {children}
+    <a className="flex gap-1 text-sm text-tool-neutral-70" {...props}>
+      {children}{" "}
+      <Image alt="" src="/assets/external-link.svg" width={16} height={16} />
     </a>
   ),
   Label: ({ children }: { children: string }) => (
