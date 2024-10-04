@@ -13,9 +13,8 @@ export const ContractInfo = ({ data }: { data: PreviewData }) => {
         <div className="flex items-center justify-between">
           <UI.InputText>{data.contract.name}</UI.InputText>
 
-          {data.contract.deployments.map(({ address }: Deploymnent) => (
-            <>
-              {" "}
+          <div className="flex gap-5">
+            {data.contract.deployments.map(({ address }: Deploymnent) => (
               <UI.GreyLink
                 href={`https://etherscan.io/address/${address}`}
                 key={address}
@@ -24,8 +23,8 @@ export const ContractInfo = ({ data }: { data: PreviewData }) => {
               >
                 {formatShortAddress(address)}
               </UI.GreyLink>
-            </>
-          ))}
+            ))}
+          </div>
         </div>
       </UI.FauxInput>
     </div>
