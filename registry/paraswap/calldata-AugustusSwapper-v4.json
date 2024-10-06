@@ -73,38 +73,12 @@
                     "tokenPath": "amountInMin"
                 }
             },
-            "factory": {
-                "path": "factory",
-                "label": "Factory",
-                "format": "addressName",
-                "params": {
-                    "type": "contract"
-                }
-            },
-            "tokenIn": {
-                "path": "tokenIn",
-                "label": "Inbound token",
-                "format": "addressName",
-                "params": {
-                    "type": "token"
-                }
-            },
             "amountOutMin": {
                 "label": "Minimum Outcome Amount",
                 "format": "tokenAmount",
                 "params": {
                     "tokenPath": "amountOutMin"
                 }
-            },
-            "fromToken": {
-                "format": "addressName",
-                "label": "Origin Token",
-                "$ref": "$.display.definitions.fromToken"
-            },
-            "toToken": {
-                "format": "addressName",
-                "label": "Destination Token",
-                "$ref": "$.display.definitions.toToken"
             },
             "fromAmount": {
                 "format": "tokenAmount",
