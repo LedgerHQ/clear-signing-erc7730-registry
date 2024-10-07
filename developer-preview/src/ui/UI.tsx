@@ -110,7 +110,7 @@ export const UI = {
         value={value}
         onValueChange={onChange}
       >
-        <SelectTrigger className={cn(!fullWidth && "w-auto")}>
+        <SelectTrigger className={cn(!fullWidth && "w-auto gap-2")}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
