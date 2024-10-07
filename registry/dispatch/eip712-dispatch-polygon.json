@@ -63,6 +63,7 @@
   "display": {
     "formats": {
       "FollowWithSig": {
+        "intent": "Dispatch.xyz Follow Profile",
         "fields": [
           {
             "path": "profileIds",

@@ -51,6 +51,7 @@
   "display": {
     "formats": {
       "Ballot": {
+        "intent": "Uniswap Governor",
         "fields": [
           {
             "path": "proposalId",

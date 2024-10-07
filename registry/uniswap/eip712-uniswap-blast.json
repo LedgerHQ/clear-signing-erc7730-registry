@@ -65,7 +65,7 @@
           }
         },
         {
-          "primaryType": "OutputToken",
+          "primaryType": "PermitWitnessTransferFrom",
           "types": {
             "EIP712Domain": [
               {
@@ -174,7 +174,7 @@
           }
         },
         {
-          "primaryType": "DutchOutput",
+          "primaryType": "PermitWitnessTransferFrom",
           "types": {
             "DutchOrder": [
               {
@@ -299,7 +299,7 @@
           }
         },
         {
-          "primaryType": "DutchOutput",
+          "primaryType": "PermitWitnessTransferFrom",
           "types": {
             "DutchOutput": [
               {
@@ -440,6 +440,7 @@
   "display": {
     "formats": {
       "PermitSingle": {
+        "intent": "Permit2",
         "fields": [
           {
             "path": "details.amount",
@@ -457,56 +458,15 @@
           {
             "path": "details.expiration",
             "label": "Approval expire",
-            "format": "date"
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
           }
         ]
       },
-      "OutputToken": {
-        "fields": [
-          {
-            "path": "spender",
-            "label": "Approve to spender",
-            "format": "raw"
-          },
-          {
-            "path": "permitted.amount",
-            "label": "Approve amount",
-            "format": "tokenAmount",
-            "params": {
-              "tokenPath": "permitted.token"
-            }
-          },
-          {
-            "path": "witness.inputAmount",
-            "label": "To swap",
-            "format": "tokenAmount",
-            "params": {
-              "tokenPath": "witness.inputToken"
-            }
-          },
-          {
-            "path": "witness.outputs.[].token",
-            "label": "Tokens to receive",
-            "format": "raw"
-          },
-          {
-            "path": "witness.outputs.[].amount",
-            "label": "Minimum amounts to receive",
-            "format": "raw"
-          },
-          {
-            "path": "witness.outputs.[].recipient",
-            "label": "On Addresses",
-            "format": "raw"
-          },
-          {
-            "path": "deadline",
-            "label": "Approval expire",
-            "format": "date"
-          }
-        ]
-      },
-      "DutchOutput": {
+      "PermitWitnessTransferFrom": {
+        "intent": "UniswapX Exclusive Dutch Order",
         "fields": [
           {
             "path": "spender",
@@ -547,7 +507,10 @@
           {
             "path": "deadline",
             "label": "Approval expire",
-            "format": "date"
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
           }
         ]
       }

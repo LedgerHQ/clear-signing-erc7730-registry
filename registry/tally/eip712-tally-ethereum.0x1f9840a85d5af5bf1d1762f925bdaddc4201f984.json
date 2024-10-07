@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "UNI token",
         "fields": [
           {
             "path": "delegatee",

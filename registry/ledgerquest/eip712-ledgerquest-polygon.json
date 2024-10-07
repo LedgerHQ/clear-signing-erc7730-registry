@@ -59,6 +59,7 @@
   "display": {
     "formats": {
       "mint": {
+        "intent": "Mint",
         "fields": [
           {
             "path": "receiver",

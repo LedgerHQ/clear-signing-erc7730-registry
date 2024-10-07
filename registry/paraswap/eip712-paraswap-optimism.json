@@ -144,6 +144,7 @@
   "display": {
     "formats": {
       "Order": {
+        "intent": "AugustusRFQ ERC20 order",
         "fields": [
           {
             "path": "nonceAndMeta",
@@ -188,6 +189,7 @@
         ]
       },
       "OrderNFT": {
+        "intent": "AugustusRFQ NFT order",
         "fields": [
           {
             "path": "nonceAndMeta",

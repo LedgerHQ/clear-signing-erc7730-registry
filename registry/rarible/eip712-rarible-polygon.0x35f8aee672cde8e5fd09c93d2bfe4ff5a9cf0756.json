@@ -92,6 +92,7 @@
   "display": {
     "formats": {
       "Mint721": {
+        "intent": "Lazy Mint ERC-721",
         "fields": [
           {
             "path": "tokenId",
@@ -126,6 +127,7 @@
         ]
       },
       "MetaTransaction": {
+        "intent": "Meta Transaction",
         "fields": [
           {
             "path": "from",

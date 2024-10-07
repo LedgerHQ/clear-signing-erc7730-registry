@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Ballot": {
+        "intent": "Arbitrum Foundation: Core Governor",
         "fields": [
           {
             "path": "proposalId",

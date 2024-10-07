@@ -67,6 +67,7 @@
   "display": {
     "formats": {
       "Permit": {
+        "intent": "Permit Arbitrum transfers",
         "fields": [
           {
             "path": "owner",
@@ -86,7 +87,10 @@
           {
             "path": "deadline",
             "label": "Aproval expire",
-            "format": "date"
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
           }
         ]
       }

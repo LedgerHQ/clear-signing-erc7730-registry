@@ -59,6 +59,7 @@
   "display": {
     "formats": {
       "Mint1155": {
+        "intent": "Lazy Mint ERC-1155",
         "fields": [
           {
             "path": "tokenId",

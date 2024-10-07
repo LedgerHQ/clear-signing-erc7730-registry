@@ -75,6 +75,7 @@
   "display": {
     "formats": {
       "LoanRequest": {
+        "intent": "SmartCredit.io",
         "fields": [
           {
             "path": "collateralAddress",

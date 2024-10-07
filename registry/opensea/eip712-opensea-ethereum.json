@@ -143,6 +143,7 @@
   "display": {
     "formats": {
       "Order": {
+        "intent": "OpenSea Listing",
         "fields": [
           {
             "path": "exchange",

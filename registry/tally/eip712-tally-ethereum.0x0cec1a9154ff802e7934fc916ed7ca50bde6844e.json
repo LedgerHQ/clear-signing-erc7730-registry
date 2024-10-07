@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "POOL token",
         "fields": [
           {
             "path": "delegatee",

@@ -51,6 +51,7 @@
   "display": {
     "formats": {
       "Ballot": {
+        "intent": "Gitcoin Governor",
         "fields": [
           {
             "path": "proposalId",

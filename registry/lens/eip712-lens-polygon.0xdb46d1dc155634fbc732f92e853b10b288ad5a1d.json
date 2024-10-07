@@ -1128,6 +1128,7 @@
   "display": {
     "formats": {
       "act": {
+        "intent": "act",
         "fields": [
           {
             "path": "pubprofileId",
@@ -1147,6 +1148,7 @@
         ]
       },
       "burn": {
+        "intent": "burn",
         "fields": [
           {
             "path": "tokenId",
@@ -1156,6 +1158,7 @@
         ]
       },
       "ChangeDelegatedExecutorsConfig": {
+        "intent": "ChangeDelegatedExecutorsConfig",
         "fields": [
           {
             "path": "delegatorProfileId",
@@ -1190,6 +1193,7 @@
         ]
       },
       "collect": {
+        "intent": "collect",
         "fields": [
           {
             "path": "publicationCollectedProfileId",
@@ -1209,6 +1213,7 @@
         ]
       },
       "collect_with_sign": {
+        "intent": "collect_with_sign",
         "fields": [
           {
             "path": "publicationCollectedProfileId",
@@ -1233,6 +1238,7 @@
         ]
       },
       "Comment": {
+        "intent": "Comment",
         "fields": [
           {
             "path": "profileId",
@@ -1262,6 +1268,7 @@
         ]
       },
       "comment_with_sign": {
+        "intent": "comment_with_sign",
         "fields": [
           {
             "path": "profile_id",
@@ -1286,6 +1293,7 @@
         ]
       },
       "create_profile": {
+        "intent": "create_profile",
         "fields": [
           {
             "path": "to",
@@ -1300,6 +1308,7 @@
         ]
       },
       "Follow": {
+        "intent": "Follow",
         "fields": [
           {
             "path": "followerProfileId",
@@ -1329,6 +1338,7 @@
         ]
       },
       "follow_with_sign": {
+        "intent": "follow_with_sign",
         "fields": [
           {
             "path": "followerProfileId",
@@ -1343,6 +1353,7 @@
         ]
       },
       "link": {
+        "intent": "link",
         "fields": [
           {
             "path": "handle_id",
@@ -1357,6 +1368,7 @@
         ]
       },
       "link_with_sig": {
+        "intent": "link_with_sig",
         "fields": [
           {
             "path": "handle_id",
@@ -1376,6 +1388,7 @@
         ]
       },
       "mint": {
+        "intent": "mint",
         "fields": [
           {
             "path": "to",
@@ -1400,6 +1413,7 @@
         ]
       },
       "Mirror": {
+        "intent": "mirror",
         "fields": [
           {
             "path": "profileId",
@@ -1424,6 +1438,7 @@
         ]
       },
       "mirror_with_sig": {
+        "intent": "mirror_with_sig",
         "fields": [
           {
             "path": "profile_id",
@@ -1448,6 +1463,7 @@
         ]
       },
       "Post": {
+        "intent": "Post",
         "fields": [
           {
             "path": "profileId",
@@ -1467,6 +1483,7 @@
         ]
       },
       "post_with_sign": {
+        "intent": "post_with_sign",
         "fields": [
           {
             "path": "profile_id",
@@ -1481,6 +1498,7 @@
         ]
       },
       "Quote": {
+        "intent": "Quote",
         "fields": [
           {
             "path": "profileId",
@@ -1515,6 +1533,7 @@
         ]
       },
       "quote_with_sign": {
+        "intent": "quote_with_sign",
         "fields": [
           {
             "path": "profile_id",
@@ -1539,6 +1558,7 @@
         ]
       },
       "set_block_status": {
+        "intent": "set_block_status",
         "fields": [
           {
             "path": "byProfileId",
@@ -1553,6 +1573,7 @@
         ]
       },
       "SetProfileMetadataURI": {
+        "intent": "SetProfileMetadataURI",
         "fields": [
           {
             "path": "profileId",
@@ -1572,6 +1593,7 @@
         ]
       },
       "set_block_status_with_sig": {
+        "intent": "set_block_status_with_sig",
         "fields": [
           {
             "path": "byProfileId",
@@ -1586,6 +1608,7 @@
         ]
       },
       "SetFollowModule": {
+        "intent": "Set Follow Module",
         "fields": [
           {
             "path": "profileId",
@@ -1605,6 +1628,7 @@
         ]
       },
       "set_profile_metadata_with_sign": {
+        "intent": "set_profile_metadata_with_sign",
         "fields": [
           {
             "path": "profileId",
@@ -1619,6 +1643,7 @@
         ]
       },
       "Unfollow": {
+        "intent": "Unfollow",
         "fields": [
           {
             "path": "unfollowerProfileId",
@@ -1643,6 +1668,7 @@
         ]
       },
       "unfollow_with_sign": {
+        "intent": "unfollow_with_sign",
         "fields": [
           {
             "path": "unfollowerProfileId",

@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Ballot": {
+        "intent": "ENS Governor",
         "fields": [
           {
             "path": "proposalId",

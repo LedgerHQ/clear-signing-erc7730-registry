@@ -144,6 +144,7 @@
   "display": {
     "formats": {
       "OrderStructure": {
+        "intent": "1inch Order",
         "fields": [
           {
             "path": "maker",

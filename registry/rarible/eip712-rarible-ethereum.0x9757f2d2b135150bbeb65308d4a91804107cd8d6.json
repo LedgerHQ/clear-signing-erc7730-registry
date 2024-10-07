@@ -103,6 +103,7 @@
   "display": {
     "formats": {
       "Order": {
+        "intent": "List Order",
         "fields": [
           {
             "path": "maker",

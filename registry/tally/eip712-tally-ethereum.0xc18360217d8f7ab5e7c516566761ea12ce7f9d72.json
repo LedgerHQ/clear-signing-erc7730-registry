@@ -59,6 +59,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "ENS token",
         "fields": [
           {
             "path": "delegatee",

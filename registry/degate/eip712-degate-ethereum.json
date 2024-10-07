@@ -201,6 +201,7 @@
   "display": {
     "formats": {
       "AccountUpdate": {
+        "intent": "DeGate AccountUpdate",
         "fields": [
           {
             "path": "owner",
@@ -240,6 +241,7 @@
         ]
       },
       "Withdrawal": {
+        "intent": "DeGate Withdrawal",
         "fields": [
           {
             "path": "owner",
@@ -294,6 +296,7 @@
         ]
       },
       "Transfer": {
+        "intent": "DeGate Transfer",
         "fields": [
           {
             "path": "owner",

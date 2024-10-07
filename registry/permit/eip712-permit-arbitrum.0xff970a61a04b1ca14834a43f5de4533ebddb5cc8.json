@@ -67,6 +67,7 @@
   "display": {
     "formats": {
       "Permit": {
+        "intent": "Permit USDC",
         "fields": [
           {
             "path": "owner",
@@ -86,7 +87,10 @@
           {
             "path": "deadline",
             "label": "Approval expire",
-            "format": "date"
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
           }
         ]
       }

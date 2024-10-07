@@ -59,6 +59,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "ARB token",
         "fields": [
           {
             "path": "delegatee",

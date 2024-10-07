@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "GTK token",
         "fields": [
           {
             "path": "delegatee",

@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Ballot": {
+        "intent": "Arbitrum Foundation: Treasury Governor",
         "fields": [
           {
             "path": "proposalId",

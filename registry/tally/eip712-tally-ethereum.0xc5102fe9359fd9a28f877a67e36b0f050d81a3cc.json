@@ -55,6 +55,7 @@
   "display": {
     "formats": {
       "Delegation": {
+        "intent": "HOP token",
         "fields": [
           {
             "path": "delegatee",
