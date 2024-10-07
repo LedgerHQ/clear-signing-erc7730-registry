@@ -93,10 +93,8 @@ type Intent = string | Record<string, string>;
 
 interface EIP712Schema {
   types: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    EIP712Domain: any[];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any[];
+    EIP712Domain: unknown[];
+    [key: string]: unknown[];
   };
   primaryType: string;
 }
