@@ -93,24 +93,34 @@ export const UI = {
     onChange: (value: string) => void | undefined;
     placeholder: string;
     value: string;
-  }) => (
-    <Select defaultValue={value} onValueChange={onChange}>
-      <SelectTrigger className={cn(!fullWidth && "w-auto")}>
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {items.map((key) =>
-          typeof key === "object" ? (
+  }) => {
+    const content = items.map((key) =>
+      typeof key === "object" ? key : { value: key, label: key },
+    );
+
+    const firstItem = content[0];
+
+    if (!firstItem) {
+      return <div className="p-2">Nothing to select</div>;
+    }
+
+    return (
+      <Select
+        defaultValue={firstItem.value}
+        value={value}
+        onValueChange={onChange}
+      >
+        <SelectTrigger className={cn(!fullWidth && "w-auto")}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {content.map((key) => (
             <SelectItem key={key.value} value={key.value}>
               {key.label}
             </SelectItem>
-          ) : (
-            <SelectItem key={key} value={key}>
-              {key}
-            </SelectItem>
-          ),
-        )}
-      </SelectContent>
-    </Select>
-  ),
+          ))}
+        </SelectContent>
+      </Select>
+    );
+  },
 };
