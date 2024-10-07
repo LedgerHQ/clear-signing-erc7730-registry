@@ -15,17 +15,9 @@ const config = {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
-      {
-        prefer: "type-imports",
-        fixStyle: "inline-type-imports",
-      },
+      { prefer: "type-imports", fixStyle: "inline-type-imports" },
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        argsIgnorePattern: "^_",
-      },
-    ],
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-unsafe-member-access": "warn",
     "@typescript-eslint/no-unsafe-return": "warn",
     "@typescript-eslint/no-unsafe-argument": "warn",
@@ -33,11 +25,7 @@ const config = {
     "@typescript-eslint/no-unsafe-assignment": "warn",
     "@typescript-eslint/no-misused-promises": [
       "error",
-      {
-        checksVoidReturn: {
-          attributes: false,
-        },
-      },
+      { checksVoidReturn: { attributes: false } },
     ],
   },
 };
