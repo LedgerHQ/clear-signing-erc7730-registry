@@ -5,6 +5,13 @@ import { type Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Clear Signing Preview",
+  description: "Preview your Clear Signing JSON files",
+  icons: [
+    {
+      rel: "icon",
+      url: "/assets/icon.svg",
+    },
+  ],
 };
 
 const inter = Inter({
