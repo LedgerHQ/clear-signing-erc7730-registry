@@ -136,7 +136,7 @@ function fetchPreviewData(
   setPreviewData: Dispatch<SetStateAction<PreviewData | null>>,
   setErrorMessage: Dispatch<SetStateAction<string>>,
 ) {
-  fetch("http://localhost:3000/api/file/?label=" + fileKey)
+  fetch("/api/file/?label=" + fileKey)
     .then((res) => {
       res
         .json()
