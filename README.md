@@ -44,4 +44,4 @@ registry/
 
 ## How to test
 
-- Inside the [developer-preview](/developer-preview) directory you'll find a [README](/developer-preview#readme) for a Node web application. It runs at localhost:3000 and can be used to preview the results of your clear signing metadata files.
+- Inside the [developer-preview](/developer-preview) directory you'll find a [README](/developer-preview#readme) for a Node web application. It runs locally and can be used to preview the results of your clear signing metadata files.

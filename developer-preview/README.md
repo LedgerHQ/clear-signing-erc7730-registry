@@ -21,3 +21,5 @@ npm run dev
 ```
 
 Open tool at http://localhost:3000
+
+☝️ _or another port if `3000` is already in use_
