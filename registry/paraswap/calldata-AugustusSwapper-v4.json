@@ -116,7 +116,7 @@
                 }
             },
             "feePercent": {
-                "format": "percentage",
+                "format": "unit",
                 "label": "Fee percentage",
                 "params": {
                     "base": "%"
