@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-permissions:
-  id-token: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -30,17 +27,9 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
-      - name: Login to Ledger JFrog
-        timeout-minutes: 10
-        uses: LedgerHQ/actions-security/actions/jfrog-login@actions/jfrog-login-1
-
-      - name: Setup pip
-        timeout-minutes: 10
-        run: jf pipc --global --repo-resolve=virtual-pypi-prod-green
-
       - name: Install ERC-7730 library
         timeout-minutes: 10
-        run: jf pip install erc7730
+        run: pip install erc7730
 
       - name: Validate ERC-7730 descriptors
         timeout-minutes: 10
