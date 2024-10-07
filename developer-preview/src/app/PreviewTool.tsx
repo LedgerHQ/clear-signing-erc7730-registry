@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import { DevicesDemo } from "~/app/DevicesDemo";
 import { ContractInfo } from "~/app/ContractInfo";
 import { UI } from "~/ui/UI";
@@ -46,33 +46,13 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
   useEffect(() => {
     if (fileKey) {
-      fetch("http://localhost:3000/api/file/?label=" + fileKey)
-        .then((res) => {
-          res
-            .json()
-            .then((metadata: ERC7730Schema | null) => {
-              if (!metadata) {
-                setPreviewData(null);
-                return;
-              }
+      fetchPreviewData(fileKey, setPreviewData, setErrorMessage);
 
-              const { data, error } = getPreviewData(metadata);
-              if (error) {
-                setPreviewData(null);
-                setErrorMessage(error);
-              } else {
-                setErrorMessage("");
-                setPreviewData(data);
-              }
-            })
-            .catch((error) => {
-              console.log("Error parsing JSON: ", error);
-            });
-        })
-        .catch((error) => {
-          console.error("Error fetching file: ", error);
-          setPreviewData(null);
-        });
+      const interval = setInterval(() => {
+        fetchPreviewData(fileKey, setPreviewData, setErrorMessage);
+      }, 2000);
+
+      return () => clearInterval(interval);
     }
   }, [fileKey]);
 
@@ -149,4 +129,38 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
       )}
     </>
   );
+}
+
+function fetchPreviewData(
+  fileKey: string,
+  setPreviewData: Dispatch<SetStateAction<PreviewData | null>>,
+  setErrorMessage: Dispatch<SetStateAction<string>>,
+) {
+  fetch("http://localhost:3000/api/file/?label=" + fileKey)
+    .then((res) => {
+      res
+        .json()
+        .then((metadata: ERC7730Schema | null) => {
+          if (!metadata) {
+            setPreviewData(null);
+            return;
+          }
+
+          const { data, error } = getPreviewData(metadata);
+          if (error) {
+            setPreviewData(null);
+            setErrorMessage(error);
+          } else {
+            setErrorMessage("");
+            setPreviewData(data);
+          }
+        })
+        .catch((error) => {
+          console.log("Error parsing JSON: ", error);
+        });
+    })
+    .catch((error) => {
+      console.error("Error fetching file: ", error);
+      setPreviewData(null);
+    });
 }
