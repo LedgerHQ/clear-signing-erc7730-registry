@@ -8,16 +8,16 @@ import { cn } from "~/lib/utils";
 
 export const InfoScreen = ({
   address,
-  info: { lastUpdate, legalName, url },
+  info: { legalName, url },
 }: {
   address: string;
-  info: { lastUpdate: string; legalName: string; url: string };
+  info: { legalName: string; url: string };
 }) => {
   const isStax = useContext(DeviceContext) === "stax";
 
   return (
     <>
-      <div className="border-light-grey relative border-b">
+      <div className="relative border-b border-light-grey">
         <div
           className={cn(
             "absolute bottom-0 left-0 top-0 flex items-center justify-center",
