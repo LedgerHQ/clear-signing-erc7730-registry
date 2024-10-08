@@ -374,6 +374,9 @@
                             "required": {
                                 "$ref": "#/$display/required"
                             },
+                            "excluded": {
+                                "$ref": "#/$display/excluded"
+                            },
                             "screens": {
                                 "title": "Screens grouping information",
                                 "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc...). See each wallet manufacturer documentation for more information.",
@@ -418,7 +421,14 @@
             "title": "Required fields",
             "description": "A list of fields that are required to be displayed to the user. A field that has a formatter and is not in this list is optional. A field that does not have a formatter should be silent, ie not shown",
             "type": "array",
-
+            "items": {
+                "type": "string"
+            }
+        },
+        "excluded": {
+            "title": "Excluded fields",
+            "description": "A list of fields that are intentionally not shown to the user. A field that has no formatter and is not declared in this list may be considered as an error by the wallet when interpreting the descriptor.",
+            "type": "array",
             "items": {
                 "type": "string"
             }
@@ -693,8 +703,19 @@
                 },
                 "nativeCurrencyAddress": {
                     "title": "Native Currency Address",
-                    "type": "string",
-                    "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                        },
+                        {
+                            "type": "array",
+                            "description": "An array of addresses, any of which are interpreted as an amount in native currency rather than a token.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
                 },
                 "threshold": {
                     "title": "Unlimited Threshold",
@@ -707,9 +728,6 @@
                     "description": "The message to display when the amount is above the threshold."
                 }
             },
-            "required": [
-                "tokenPath"
-            ],
             "additionalProperties": false
         },
         "nftNameParameters" : {
