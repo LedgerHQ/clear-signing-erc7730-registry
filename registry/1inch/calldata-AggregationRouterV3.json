@@ -1,0 +1,118 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "$id": "AggregationRouterV3",
+        "contract": {
+            "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x11111112542d85b3ef69ae05771c2dccff4faa26",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x11111112542D85B3EF69AE05771c2dCCff4fAa26"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "1inch",
+        "info": {
+            "url": "https://1inch.io/",
+            "legalName": "1inch Network",
+            "lastUpdate": "2021-03-14T20:28:50Z"
+        },
+        "constants": {
+            "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+            "addressAsNull": "0x0000000000000000000000000000000000000000"
+        }
+    },
+
+    "display": {
+        "definitions": {
+            "sendAmount": {
+                "label": "Amount to Send",
+                "format": "tokenAmount",
+                "params": {
+                    "nativeCurrencyAddress": [
+                        "$.metadata.constants.addressAsEth",
+                        "$.metadata.constants.addressAsNull"
+                    ]
+                }
+            },
+            "minReceiveAmount": {
+                "label": "Minimum to Receive",
+                "format": "tokenAmount",
+                "params": {
+                    "nativeCurrencyAddress": [
+                        "$.metadata.constants.addressAsEth",
+                        "$.metadata.constants.addressAsNull"
+                    ]
+                }
+            },
+            "beneficiary": {
+                "label": "Beneficiary",
+                "format": "addressName"
+            }
+        },
+        "formats": {
+            "swap(address caller, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags, bytes permit) desc, bytes data)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "desc.amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "desc.srcToken" }
+                    },
+                    {
+                        "path": "desc.minReturnAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "desc.dstToken" }
+                    },
+                    {
+                        "path": "desc.dstReceiver",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"]
+            },
+            "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "@.from"]
+            },
+            "unoswapWithPermit(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "@.from"]
+            }
+        }
+    }
+}
