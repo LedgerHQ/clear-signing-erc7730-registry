@@ -79,7 +79,14 @@ export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
       data: {
         contract: { name, deployments },
         operations,
-        metadata,
+        metadata: {
+          owner: metadata.owner,
+          info: {
+            legalName: metadata.info.legalName,
+            url: metadata.info.url,
+            lastUpdate: metadata.info.lastUpdate,
+          },
+        },
         type,
       },
       error: null,
