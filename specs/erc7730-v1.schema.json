@@ -717,9 +717,6 @@
                     "description": "The message to display when the amount is above the threshold."
                 }
             },
-            "required": [
-                "tokenPath"
-            ],
             "additionalProperties": false
         },
         "nftNameParameters" : {
