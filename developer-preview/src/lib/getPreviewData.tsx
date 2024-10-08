@@ -77,7 +77,10 @@ export function getPreviewData(data: ERC7730Schema): PreviewDataResponse {
 
     return {
       data: {
-        contract: { name, deployments },
+        contract: {
+          name,
+          deployments,
+        },
         operations,
         metadata: {
           owner: metadata.owner,
