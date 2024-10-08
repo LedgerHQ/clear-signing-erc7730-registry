@@ -4,7 +4,7 @@ import { type NextRequest } from "next/server";
 import { registryPath } from "~/constants";
 import { parseMetadataFile } from "~/app/api/file/parseMetadataFile";
 
-export async function GET(request: NextRequest) {
+export function GET(request: NextRequest) {
   const label = new URL(request.url).searchParams.get("label");
 
   if (!label) {
