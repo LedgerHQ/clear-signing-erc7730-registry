@@ -3,7 +3,7 @@ name: ✨ pull request
 on:
   pull_request:
     paths-ignore:
-      - "developer-preview/**"
+      - 'developer-preview/**'
 
 permissions:
   id-token: write

@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths-ignore:
-      - "developer-preview/**"
+      - 'developer-preview/**'
 
 permissions:
   id-token: write
@@ -28,8 +28,8 @@ jobs:
         timeout-minutes: 10
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: "pip"
+          python-version: '3.12'
+          cache: 'pip'
 
       - name: Login to Ledger JFrog
         timeout-minutes: 10
