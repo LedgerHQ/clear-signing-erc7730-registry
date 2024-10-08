@@ -4,12 +4,7 @@ export const SelectValues = () => {
   return (
     <div>
       <UI.Label>Preview with</UI.Label>
-      <UI.Select
-        items={[{ value: "placeholders", label: "Placeholder values" }]}
-        onChange={() => undefined}
-        placeholder="Preview with"
-        value="placeholders"
-      />
+      <UI.FauxInput>Placeholder values</UI.FauxInput>
     </div>
   );
 };
