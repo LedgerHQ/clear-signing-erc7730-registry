@@ -8,7 +8,10 @@ import { cn } from "~/lib/utils";
 
 export const InfoScreen = ({
   address,
-  info: { legalName, url },
+  info: { legalName, url } = {
+    legalName: "{metadata.info.legalName}",
+    url: "{metadata.info.url}",
+  },
 }: {
   address: string;
   info: { legalName: string; url: string };

@@ -6,9 +6,9 @@ export type PreviewData = {
   };
   metadata: {
     owner: string;
-    info: {
+    info?: {
       legalName: string;
-      lastUpdate: string;
+      lastUpdate?: string;
       url: string;
     };
   };
