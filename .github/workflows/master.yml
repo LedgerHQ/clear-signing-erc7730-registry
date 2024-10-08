@@ -20,6 +20,7 @@ jobs:
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
+
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
@@ -52,6 +53,7 @@ jobs:
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
+
       - name: Trigger update on LedgerHQ/crypto-assets
         if: ${{ !cancelled() }}
         timeout-minutes: 60
