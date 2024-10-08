@@ -1,0 +1,411 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "$id": "AggregationRouterV5",
+        "contract": {
+            "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582",
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x1111111254EEB25477B68fb85Ed929f73A960582"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "1inch",
+        "info": {
+            "url": "https://1inch.io/",
+            "legalName": "1inch Network",
+            "lastUpdate": "2022-11-04T06:04:59Z"
+        },
+        "constants": {
+            "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+            "addressAsNull": "0x0000000000000000000000000000000000000000"
+        }
+    },
+
+    "display": {
+        "definitions": {
+            "sendAmount": {
+                "label": "Amount to Send",
+                "format": "tokenAmount",
+                "params": {
+                    "nativeCurrencyAddress": [
+                        "$.metadata.constants.addressAsEth",
+                        "$.metadata.constants.addressAsNull"
+                    ]
+                }
+            },
+            "minReceiveAmount": {
+                "label": "Minimum to Receive",
+                "format": "tokenAmount",
+                "params": {
+                    "nativeCurrencyAddress": [
+                        "$.metadata.constants.addressAsEth",
+                        "$.metadata.constants.addressAsNull"
+                    ]
+                }
+            },
+            "beneficiary": {
+                "label": "Beneficiary",
+                "format": "addressName"
+            },
+            "expirationTime": {
+                "label": "Expiration time",
+                "format": "date",
+                "params": {
+                    "encoding": "timestamp"
+                }
+            }
+        },
+        "formats": {
+            "swap(address executor, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags) desc, bytes permit, bytes data)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "desc.amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "desc.srcToken" }
+                    },
+                    {
+                        "path": "desc.minReturnAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "desc.dstToken" }
+                    },
+                    {
+                        "path": "desc.dstReceiver",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"]
+            },
+            "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "@.from"]
+            },
+            "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "recipient"]
+            },
+            "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "recipient"]
+            },
+            "uniswapV3Swap(uint256 amount, uint256 minReturn, uint256[] pools)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount"
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "@.from"]
+            },
+            "uniswapV3SwapTo(address recipient, uint256 amount, uint256 minReturn, uint256[] pools)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount"
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "recipient"]
+            },
+            "uniswapV3SwapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "amount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "minReturn",
+                        "$ref": "$.display.definitions.minReceiveAmount"
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["amount", "minReturn", "recipient"]
+            },
+            "fillOrder((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+            },
+            "fillOrderTo((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order_, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order_.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order_.takerAsset" }
+                    },
+                    {
+                        "path": "order_.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order_.makerAsset" }
+                    },
+                    {
+                        "path": "target",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order_.takingAmount", "order_.makingAmount", "target"]
+            },
+            "fillOrderToWithPermit((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "target",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "target"]
+            },
+            "fillOrderRFQ((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+            },
+            "fillOrderRFQCompact((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes32 r, bytes32 vs, uint256 flagsAndAmount)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+            },
+            "fillOrderRFQTo((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "target",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "target"]
+            },
+            "fillOrderRFQToWithPermit((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "order.takingAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "order.takerAsset" }
+                    },
+                    {
+                        "path": "order.makingAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "order.makerAsset" }
+                    },
+                    {
+                        "path": "target",
+                        "$ref": "$.display.definitions.beneficiary"
+                    }
+                ],
+                "required": ["order.takingAmount", "order.makingAmount", "target"]
+            },
+            "clipperSwap(address clipperExchange, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "inputAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "outputAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "dstToken" }
+                    },
+                    {
+                        "path": "@.from",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "goodUntil",
+                        "$ref": "$.display.definitions.expirationTime"
+                    }
+                ],
+                "required": ["inputAmount", "outputAmount", "@.from", "goodUntil"]
+            },
+            "clipperSwapTo(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "inputAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "outputAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "dstToken" }
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "goodUntil",
+                        "$ref": "$.display.definitions.expirationTime"
+                    }
+                ],
+                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"]
+            },
+            "clipperSwapToWithPermit(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs, bytes permit)" : {
+                "intent": "Swap",
+                "fields": [
+                    {
+                        "path": "inputAmount",
+                        "$ref": "$.display.definitions.sendAmount",
+                        "params": { "tokenPath": "srcToken" }
+                    },
+                    {
+                        "path": "outputAmount",
+                        "$ref": "$.display.definitions.minReceiveAmount",
+                        "params": { "tokenPath": "dstToken" }
+                    },
+                    {
+                        "path": "recipient",
+                        "$ref": "$.display.definitions.beneficiary"
+                    },
+                    {
+                        "path": "goodUntil",
+                        "$ref": "$.display.definitions.expirationTime"
+                    }
+                ],
+                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"]
+            }
+        }
+    }
+}
