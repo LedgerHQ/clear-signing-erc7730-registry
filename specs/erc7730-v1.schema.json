@@ -374,6 +374,9 @@
                             "required": {
                                 "$ref": "#/$display/required"
                             },
+                            "excluded": {
+                                "$ref": "#/$display/excluded"
+                            },
                             "screens": {
                                 "title": "Screens grouping information",
                                 "description": "Screens section is used to group multiple fields to display into screens. Each key is a wallet type name. The format of the screens is wallet type dependent, as well as what can be done (reordering fields, max number of screens, etc...). See each wallet manufacturer documentation for more information.",
@@ -418,7 +421,14 @@
             "title": "Required fields",
             "description": "A list of fields that are required to be displayed to the user. A field that has a formatter and is not in this list is optional. A field that does not have a formatter should be silent, ie not shown",
             "type": "array",
-
+            "items": {
+                "type": "string"
+            }
+        },
+        "excluded": {
+            "title": "Excluded fields",
+            "description": "A list of fields that are intentionally not shown to the user. A field that has no formatter and is not declared in this list may be considered as an error by the wallet when interpreting the descriptor.",
+            "type": "array",
             "items": {
                 "type": "string"
             }
