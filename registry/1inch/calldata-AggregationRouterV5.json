@@ -81,7 +81,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"]
+                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"],
+                "excluded": ["executor", "desc.srcReceiver", "desc.flags", "permit", "data"]
             },
             "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
                 "$id": "unoswap",
@@ -101,7 +102,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "@.from"]
+                "required": ["amount", "minReturn", "@.from"],
+                "excluded": ["pools"]
             },
             "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
                 "$id": "unoswapTo",
@@ -121,7 +123,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "recipient"]
+                "required": ["amount", "minReturn", "recipient"],
+                "excluded": ["pools"]
             },
             "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
                 "$id": "unoswapToWithPermit",
@@ -141,7 +144,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "recipient"]
+                "required": ["amount", "minReturn", "recipient"],
+                "excluded": ["pools", "permit"]
             },
             "uniswapV3Swap(uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "uniswapV3Swap",
@@ -160,7 +164,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "@.from"]
+                "required": ["amount", "minReturn", "@.from"],
+                "excluded": ["pools"]
             },
             "uniswapV3SwapTo(address recipient, uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "uniswapV3SwapTo",
@@ -179,7 +184,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "recipient"]
+                "required": ["amount", "minReturn", "recipient"],
+                "excluded": ["pools"]
             },
             "uniswapV3SwapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)" : {
                 "$id": "uniswapV3SwapToWithPermit",
@@ -199,7 +205,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "recipient"]
+                "required": ["amount", "minReturn", "recipient"],
+                "excluded": ["pools", "permit"]
             },
             "fillOrder((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount)" : {
                 "$id": "fillOrder",
@@ -220,7 +227,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"],
+                "excluded": ["order.salt", "order.maker", "order.receiver", "order.allowedSender", "order.offsets", "order.interactions", "signature", "interaction", "makingAmount", "takingAmount", "skipPermitAndThresholdAmount"]
             },
             "fillOrderTo((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order_, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target)" : {
                 "$id": "fillOrderTo",
@@ -241,7 +249,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order_.takingAmount", "order_.makingAmount", "target"]
+                "required": ["order_.takingAmount", "order_.makingAmount", "target"],
+                "excluded": ["order_.salt", "order_.maker", "order_.receiver", "order_.allowedSender", "order_.offsets", "order_.interactions", "signature", "interaction", "makingAmount", "takingAmount", "skipPermitAndThresholdAmount"]
             },
             "fillOrderToWithPermit((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target, bytes permit)" : {
                 "$id": "fillOrderToWithPermit",
@@ -262,7 +271,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "target"]
+                "required": ["order.takingAmount", "order.makingAmount", "target"],
+                "excluded": ["order.salt", "order.maker", "order.receiver", "order.allowedSender", "order.offsets", "order.interactions", "signature", "interaction", "makingAmount", "takingAmount", "skipPermitAndThresholdAmount", "permit"]
             },
             "fillOrderRFQ((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount)" : {
                 "$id": "fillOrderRFQ",
@@ -283,7 +293,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"],
+                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "flagsAndAmount"]
             },
             "fillOrderRFQCompact((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes32 r, bytes32 vs, uint256 flagsAndAmount)" : {
                 "$id": "fillOrderRFQCompact",
@@ -304,7 +315,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "@.from"]
+                "required": ["order.takingAmount", "order.makingAmount", "@.from"],
+                "excluded": ["order.info", "order.maker", "order.allowedSender", "r", "vs", "flagsAndAmount"]
             },
             "fillOrderRFQTo((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target)" : {
                 "$id": "fillOrderRFQTo",
@@ -325,7 +337,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "target"]
+                "required": ["order.takingAmount", "order.makingAmount", "target"],
+                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "flagsAndAmount"]
             },
             "fillOrderRFQToWithPermit((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target, bytes permit)" : {
                 "$id": "fillOrderRFQToWithPermit",
@@ -346,7 +359,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["order.takingAmount", "order.makingAmount", "target"]
+                "required": ["order.takingAmount", "order.makingAmount", "target"],
+                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "flagsAndAmount", "permit"]
             },
             "clipperSwap(address clipperExchange, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
                 "$id": "clipperSwap",
@@ -371,7 +385,8 @@
                         "$ref": "$.display.definitions.expirationTime"
                     }
                 ],
-                "required": ["inputAmount", "outputAmount", "@.from", "goodUntil"]
+                "required": ["inputAmount", "outputAmount", "@.from", "goodUntil"],
+                "excluded": ["clipperExchange", "r", "vs"]
             },
             "clipperSwapTo(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
                 "$id": "clipperSwapTo",
@@ -396,7 +411,8 @@
                         "$ref": "$.display.definitions.expirationTime"
                     }
                 ],
-                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"]
+                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"],
+                "excluded": ["clipperExchange", "r", "vs"]
             },
             "clipperSwapToWithPermit(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs, bytes permit)" : {
                 "$id": "clipperSwapToWithPermit",
@@ -421,7 +437,8 @@
                         "$ref": "$.display.definitions.expirationTime"
                     }
                 ],
-                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"]
+                "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"],
+                "excluded": ["clipperExchange", "r", "vs", "permit"]
             }
         }
     }
