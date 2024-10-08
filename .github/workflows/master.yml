@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - "developer-preview/**"
 
 permissions:
   id-token: write
@@ -18,7 +20,6 @@ jobs:
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
-
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
@@ -27,8 +28,8 @@ jobs:
         timeout-minutes: 10
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
+          python-version: "3.12"
+          cache: "pip"
 
       - name: Login to Ledger JFrog
         timeout-minutes: 10
@@ -51,7 +52,6 @@ jobs:
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 60
     steps:
-
       - name: Trigger update on LedgerHQ/crypto-assets
         if: ${{ !cancelled() }}
         timeout-minutes: 60
