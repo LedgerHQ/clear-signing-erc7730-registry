@@ -63,6 +63,7 @@
         },
         "formats": {
             "swap(address executor, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags) desc, bytes permit, bytes data)" : {
+                "$id": "swap",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -83,6 +84,7 @@
                 "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"]
             },
             "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+                "$id": "unoswap",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -102,6 +104,7 @@
                 "required": ["amount", "minReturn", "@.from"]
             },
             "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+                "$id": "unoswapTo",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -121,6 +124,7 @@
                 "required": ["amount", "minReturn", "recipient"]
             },
             "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
+                "$id": "unoswapToWithPermit",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -140,6 +144,7 @@
                 "required": ["amount", "minReturn", "recipient"]
             },
             "uniswapV3Swap(uint256 amount, uint256 minReturn, uint256[] pools)" : {
+                "$id": "uniswapV3Swap",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -158,6 +163,7 @@
                 "required": ["amount", "minReturn", "@.from"]
             },
             "uniswapV3SwapTo(address recipient, uint256 amount, uint256 minReturn, uint256[] pools)" : {
+                "$id": "uniswapV3SwapTo",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -176,6 +182,7 @@
                 "required": ["amount", "minReturn", "recipient"]
             },
             "uniswapV3SwapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)" : {
+                "$id": "uniswapV3SwapToWithPermit",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -195,6 +202,7 @@
                 "required": ["amount", "minReturn", "recipient"]
             },
             "fillOrder((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount)" : {
+                "$id": "fillOrder",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -215,6 +223,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "@.from"]
             },
             "fillOrderTo((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order_, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target)" : {
+                "$id": "fillOrderTo",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -235,6 +244,7 @@
                 "required": ["order_.takingAmount", "order_.makingAmount", "target"]
             },
             "fillOrderToWithPermit((uint256 salt, address makerAsset, address takerAsset, address maker, address receiver, address allowedSender, uint256 makingAmount, uint256 takingAmount, uint256 offsets, bytes interactions) order, bytes signature, bytes interaction, uint256 makingAmount, uint256 takingAmount, uint256 skipPermitAndThresholdAmount, address target, bytes permit)" : {
+                "$id": "fillOrderToWithPermit",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -255,6 +265,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "target"]
             },
             "fillOrderRFQ((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount)" : {
+                "$id": "fillOrderRFQ",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -275,6 +286,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "@.from"]
             },
             "fillOrderRFQCompact((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes32 r, bytes32 vs, uint256 flagsAndAmount)" : {
+                "$id": "fillOrderRFQCompact",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -295,6 +307,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "@.from"]
             },
             "fillOrderRFQTo((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target)" : {
+                "$id": "fillOrderRFQTo",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -315,6 +328,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "target"]
             },
             "fillOrderRFQToWithPermit((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 flagsAndAmount, address target, bytes permit)" : {
+                "$id": "fillOrderRFQToWithPermit",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -335,6 +349,7 @@
                 "required": ["order.takingAmount", "order.makingAmount", "target"]
             },
             "clipperSwap(address clipperExchange, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
+                "$id": "clipperSwap",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -359,6 +374,7 @@
                 "required": ["inputAmount", "outputAmount", "@.from", "goodUntil"]
             },
             "clipperSwapTo(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)" : {
+                "$id": "clipperSwapTo",
                 "intent": "Swap",
                 "fields": [
                     {
@@ -383,6 +399,7 @@
                 "required": ["inputAmount", "outputAmount", "recipient", "goodUntil"]
             },
             "clipperSwapToWithPermit(address clipperExchange, address recipient, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs, bytes permit)" : {
+                "$id": "clipperSwapToWithPermit",
                 "intent": "Swap",
                 "fields": [
                     {
