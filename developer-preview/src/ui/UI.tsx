@@ -42,7 +42,7 @@ export const UI = {
   }) => (
     <div
       className={cn(
-        "rounded-md px-3 py-2 text-sm",
+        "rounded-md border border-[#fff1] px-3 py-2 text-sm",
         error ? "text-red-400" : "bg-[#fff1]",
       )}
     >
