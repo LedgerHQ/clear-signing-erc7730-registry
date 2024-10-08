@@ -74,7 +74,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"]
+                "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"],
+                "excluded": ["caller", "desc.srcReceiver", "desc.flags", "desc.permit", "data"]
             },
             "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
                 "$id": "unoswap",
@@ -94,7 +95,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "@.from"]
+                "required": ["amount", "minReturn", "@.from"],
+                "excluded": ["pools"]
             },
             "unoswapWithPermit(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
                 "$id": "unoswapWithPermit",
@@ -114,7 +116,8 @@
                         "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
-                "required": ["amount", "minReturn", "@.from"]
+                "required": ["amount", "minReturn", "@.from"],
+                "excluded": ["pools", "permit"]
             }
         }
     }
