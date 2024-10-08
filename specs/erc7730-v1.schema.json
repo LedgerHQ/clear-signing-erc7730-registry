@@ -703,8 +703,19 @@
                 },
                 "nativeCurrencyAddress": {
                     "title": "Native Currency Address",
-                    "type": "string",
-                    "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "An address equal to this value is interpreted as an amount in native currency rather than a token."
+                        },
+                        {
+                            "type": "array",
+                            "description": "An array of addresses, any of which are interpreted as an amount in native currency rather than a token.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
                 },
                 "threshold": {
                     "title": "Unlimited Threshold",
