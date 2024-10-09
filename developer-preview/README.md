@@ -33,3 +33,11 @@ Open tool at http://localhost:3000
 <img width="1512" alt="Screenshot 2024-10-09 of Clear Signing Preview" src="https://github.com/user-attachments/assets/9550611d-39a6-4775-ab13-37e29bda14ad">
 
 The above demonstrates how a Clear Signed POAP would appear based on the metadata of [/registry/poap/calldata-PoapBridge.json](/blob/10b0241b5e4ab12f53a06b27f4ecda9fbc94b2d8/registry/poap/calldata-PoapBridge.json) stored in this registry.
+
+## Get instant feedback before submitting your pull request
+
+This tool is here to give you immediate feedback as you make your contributions to the registry.
+
+### Having trouble
+
+Please [create an issue](https://github.com/LedgerHQ/clear-signing-erc7730-registry/issues/new) in this repository if you can't find an existing one.
