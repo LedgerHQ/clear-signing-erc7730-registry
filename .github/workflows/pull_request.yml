@@ -2,6 +2,8 @@ name: ✨ pull request
 
 on:
   pull_request:
+    paths-ignore:
+      - 'developer-preview/**'
 
 permissions:
   id-token: write
@@ -38,6 +40,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
 
       - name: Login to Ledger JFrog
         timeout-minutes: 10
