@@ -1,4 +1,4 @@
-# Clear Signing Developer Preview Tool
+# Clear Signing Developer Preview
 
 Run this web app locally to preview how Clear Signed messages will appear on device.
 
@@ -6,9 +6,13 @@ Run this web app locally to preview how Clear Signed messages will appear on dev
 
 ### Prerequisite
 
-Node: https://nodejs.org/en
+Node.js: https://nodejs.org/en
+
+We recommend using a Node version manager like **nvm** https://github.com/nvm-sh/nvm
 
 ### Install dependencies
+
+From inside this directory `/developer-preview`
 
 ```
 npm i
@@ -23,3 +27,9 @@ npm run dev
 Open tool at http://localhost:3000
 
 ☝️ _or another port if `3000` is already in use_
+
+### Choose your metadata file and preview the results
+
+<img width="1512" alt="Screenshot 2024-10-09 of Clear Signing Preview" src="https://github.com/user-attachments/assets/9550611d-39a6-4775-ab13-37e29bda14ad">
+
+The above demonstrates how a Clear Signed POAP would appear based on the metadata of [/registry/poap/calldata-PoapBridge.json](/blob/10b0241b5e4ab12f53a06b27f4ecda9fbc94b2d8/registry/poap/calldata-PoapBridge.json) stored in this registry.
