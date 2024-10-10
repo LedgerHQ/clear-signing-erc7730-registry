@@ -51,7 +51,7 @@
   "display": {
     "formats": {
       "Ballot": {
-        "intent": "Hop Governor",
+        "intent": "PoolTogether Governor Alpha",
         "fields": [
           {
             "path": "proposalId",
