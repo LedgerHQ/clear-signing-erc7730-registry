@@ -3,14 +3,28 @@
     "eip712": {
       "deployments": [
         {
+          "chainId": 1,
+          "address": "0xe92b586627cca7a83dc919cc7127196d70f55a06"
+        },
+        {
+          "chainId": 10,
+          "address": "0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"
+        },
+        {
+          "chainId": 56,
+          "address": "0x8dcdfe88ef0351f27437284d0710cd65b20288bb"
+        },
+        {
           "chainId": 137,
           "address": "0xf3cd476c3c4d3ac5ca2724767f269070ca09a043"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d"
         }
       ],
       "domain": {
-        "name": "ParaSwap",
-        "chainId": 137,
-        "verifyingContract": "0xf3cd476c3c4d3ac5ca2724767f269070ca09a043"
+        "name": "ParaSwap"
       },
       "schemas": [
         {
