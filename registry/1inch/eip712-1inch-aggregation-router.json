@@ -3,14 +3,28 @@
     "eip712": {
       "deployments": [
         {
+          "chainId": 1,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        },
+        {
+          "chainId": 10,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        },
+        {
           "chainId": 56,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        },
+        {
+          "chainId": 137,
+          "address": "0x111111125421ca6dc452d289314280a0f8842a65"
+        },
+        {
+          "chainId": 42161,
           "address": "0x111111125421ca6dc452d289314280a0f8842a65"
         }
       ],
       "domain": {
-        "name": "Permit2",
-        "chainId": 56,
-        "verifyingContract": "0x111111125421ca6dc452d289314280a0f8842a65"
+        "name": "Permit2"
       },
       "schemas": [
         {
@@ -107,7 +121,11 @@
             "label": "To",
             "format": "raw"
           }
-        ]
+        ],
+          "excluded": [
+            "salt",
+            "makerTraits"
+          ]
       }
     }
   }
