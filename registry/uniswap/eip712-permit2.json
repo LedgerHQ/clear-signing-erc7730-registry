@@ -145,6 +145,9 @@
                     "spender",
                     "details.amount"
                 ],
+                "excluded": [
+                    "sigDeadline"
+                ],
                 "screens": {}
             },
 
@@ -182,6 +185,9 @@
                 "required": [
                     "spender",
                     "details"
+                ],
+                "excluded": [
+                    "sigDeadline"
                 ],
                 "screens": {}
             }

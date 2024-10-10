@@ -186,6 +186,14 @@
                             "encoding": "timestamp"
                         }
                     }
+                ],
+                "excluded": [
+                    "nonce",
+                    "witness.info",
+                    "witness.decayStartTime",
+                    "witness.decayEndTime",
+                    "witness.inputEndAmount",
+                    "witness.outputs.[].startAmount"                    
                 ]
             }
         }
