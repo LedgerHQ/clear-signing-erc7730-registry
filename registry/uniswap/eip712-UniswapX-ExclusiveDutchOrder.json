@@ -195,6 +195,16 @@
                             "encoding": "timestamp"
                         }
                     }
+                ],
+                "excluded": [
+                    "nonce",
+                    "witness.info",
+                    "witness.decayStartTime",
+                    "witness.decayEndTime",
+                    "witness.exclusiveFiller",
+                    "witness.exclusivityOverrideBps",
+                    "witness.inputEndAmount",
+                    "witness.outputs.[].startAmount"
                 ]
             }
         }

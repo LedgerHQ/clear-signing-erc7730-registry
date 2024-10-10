@@ -2,11 +2,8 @@ name: ✨ pull request
 
 on:
   pull_request:
-
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
+    paths-ignore:
+      - 'developer-preview/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -32,27 +29,27 @@ jobs:
             registry/**/eip712-*.json
             registry/**/calldata-*.json
 
+      - name: Get API keys
+        timeout-minutes: 10
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
+        shell: bash
+        run: |
+          cat << EOF | jq -r 'to_entries[] | select(.key|endswith("_API_KEY")) | "\(.key)=\(.value)"' >> "$GITHUB_ENV"
+          ${{ toJSON(secrets) }}
+          EOF
+
       - name: Setup python
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Login to Ledger JFrog
-        timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        uses: LedgerHQ/actions-security/actions/jfrog-login@actions/jfrog-login-1
-
-      - name: Setup pip
-        timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        run: jf pipc --global --repo-resolve=virtual-pypi-prod-green
+          cache: 'pip'
 
       - name: Install ERC-7730 library
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        run: jf pip install erc7730
+        run: pip install erc7730
 
       - name: Validate ERC-7730 descriptors changed in pull request
         timeout-minutes: 10
