@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - demo
     paths-ignore:
       - 'developer-preview/**'
 
@@ -21,6 +22,14 @@ jobs:
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
+
+      - name: Get API keys
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          cat << EOF | jq -r 'to_entries[] | select(.key|endswith("_API_KEY")) | "\(.key)=\(.value)"' >> "$GITHUB_ENV"
+          ${{ toJSON(secrets) }}
+          EOF
 
       - name: Setup python
         timeout-minutes: 10
