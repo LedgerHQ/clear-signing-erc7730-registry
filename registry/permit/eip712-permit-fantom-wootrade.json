@@ -1,0 +1,21 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [
+        {
+          "chainId": 250,
+          "address": "0x6626c47c00f1d87902fc13eecfac3ed06d5e8d8a"
+        }
+      ],
+      "domain": {
+        "name": "Permit",
+        "chainId": 250,
+        "verifyingContract": "0x6626c47c00f1d87902fc13eecfac3ed06d5e8d8a"
+      }
+    }
+  },
+  "metadata": {
+    "owner": "Wootrade Network"
+  }
+}
