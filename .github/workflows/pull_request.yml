@@ -34,6 +34,15 @@ jobs:
             registry/**/eip712-*.json
             registry/**/calldata-*.json
 
+      - name: Get API keys
+        timeout-minutes: 10
+        if: steps.operations.outputs.setup == 'true'
+        shell: bash
+        run: |
+          cat << EOF | jq -r 'to_entries[] | select(.key|endswith("_API_KEY")) | "\(.key)=\(.value)"' >> "$GITHUB_ENV"
+          ${{ toJSON(secrets) }}
+          EOF
+
       - name: Setup python
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
