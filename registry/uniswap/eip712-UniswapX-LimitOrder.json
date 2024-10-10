@@ -168,6 +168,10 @@
                             "encoding": "timestamp"
                         }
                     }
+                ],
+                "excluded": [
+                    "nonce",
+                    "witness.info"
                 ]
             }
         }
