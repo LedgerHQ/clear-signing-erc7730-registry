@@ -1,0 +1,21 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [
+        {
+          "chainId": 43114,
+          "address": "0x60781c2586d68229fde47564546784ab3faca982"
+        }
+      ],
+      "domain": {
+        "name": "Permit",
+        "chainId": 43114,
+        "verifyingContract": "0x60781c2586d68229fde47564546784ab3faca982"
+      }
+    }
+  },
+  "metadata": {
+    "owner": "Pangolin"
+  }
+}
