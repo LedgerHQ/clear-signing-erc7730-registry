@@ -4,7 +4,7 @@
             "deployments": [
                 {
                     "chainId": 1,
-                    "address": "0x4c415552454e5400000000000000000000000000"
+                    "address": "0x4c415552454e5400000000000000000000000001"
                 }
             ],
             "domain": {
@@ -19,10 +19,6 @@
                                 "type": "string"
                             },
                             {
-                                "name": "version",
-                                "type": "string"
-                            },
-                            {
                                 "name": "chainId",
                                 "type": "uint256"
                             },
@@ -31,25 +27,35 @@
                                 "type": "address"
                             }
                         ],
-                        "Permit": [
+                        "PermitDetails": [
                             {
-                                "name": "owner",
+                                "name": "token",
                                 "type": "address"
+                            },
+                            {
+                                "name": "amount",
+                                "type": "uint160"
+                            },
+                            {
+                                "name": "expiration",
+                                "type": "uint48"
+                            },
+                            {
+                                "name": "nonce",
+                                "type": "uint48"
+                            }
+                        ],
+                        "PermitSingle": [
+                            {
+                                "name": "details",
+                                "type": "PermitDetails"
                             },
                             {
                                 "name": "spender",
                                 "type": "address"
                             },
                             {
-                                "name": "value",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "nonce",
-                                "type": "uint256"
-                            },
-                            {
-                                "name": "deadline",
+                                "name": "sigDeadline",
                                 "type": "uint256"
                             }
                         ]
@@ -64,39 +70,39 @@
     },
     "display": {
         "formats": {
-            "Permit": {
-                "intent": "Allow me everything",
+            "PermitSingle": {
+                "intent": "Allow All the things",
                 "fields": [
-                    {
-                        "path": "spender",
-                        "label": "Spender",
-                        "format": "addressName"
-                    },
-                    {
-                        "path": "value",
-                        "label": "Max spending amount",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+                        {
+                            "path": "spender",
+                            "label": "Spender",
+                            "format": "addressName"
+                        },
+                        {
+                            "path": "details.amount",
+                            "label": "Amount allowance",
+                            "format": "tokenAmount",
+                            "params": {
+                                "tokenPath": "details.token"
+                            }
+                        },
+                        {
+                            "path": "details.expiration",
+                            "label": "Approval expires",
+                            "format": "date",
+                            "params": {
+                                "encoding": "timestamp"
+                            }
                         }
-                    },
-                    {
-                        "path": "deadline",
-                        "label": "Valid until",
-                        "format": "date",
-                        "params": {
-                            "encoding": "timestamp"
-                        }
-                    }
                 ],
                 "required": [
                     "spender",
-                    "value"
+                    "details.amount"
                 ],
                 "excluded": [
-                    "owner",
-                    "nonce"
-                ]
+                    "sigDeadline"
+                ],
+                "screens": {}
             }
         }
     }
