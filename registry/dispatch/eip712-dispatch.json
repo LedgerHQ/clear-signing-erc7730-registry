@@ -58,7 +58,7 @@
     }
   },
   "metadata": {
-    "owner": "Lens Protocol Profiles"
+    "owner": "Dispatch.xyz"
   },
   "display": {
     "formats": {
@@ -66,12 +66,12 @@
         "intent": "Dispatch.xyz Follow Profile",
         "fields": [
           {
-            "path": "profileIds",
+            "path": "profileIds.[]",
             "label": "Profile Ids",
             "format": "raw"
           },
           {
-            "path": "datas",
+            "path": "datas.[]",
             "label": "Data",
             "format": "raw"
           },
