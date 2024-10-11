@@ -135,6 +135,15 @@
             "label": "Order end time",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "makeAsset.assetType.assetClass",
+          "dataType",
+          "makeAsset.assetType.data",
+          "takeAsset.assetType.data",
+          "takeAsset.assetType.assetClass",
+          "data",
+          "salt"
         ]
       }
     }
