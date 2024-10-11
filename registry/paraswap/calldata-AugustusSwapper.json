@@ -463,7 +463,7 @@
                     },
                     {
                         "path": "exchange",
-                        "$ref": ".$display.definitions.exchange"
+                        "$ref": "$.display.definitions.exchange"
                     }
                 ],
                 "required": [
