@@ -535,7 +535,7 @@
             }
           },
           {
-            "path": "witness.inputStartAmount",
+            "path": "witness.inputAmount",
             "label": "To swap",
             "format": "tokenAmount",
             "params": {
@@ -548,7 +548,7 @@
             "format": "raw"
           },
           {
-            "path": "witness.outputs.[].endAmount",
+            "path": "witness.outputs.[].amount",
             "label": "Minimum amounts to receive",
             "format": "raw"
           },
