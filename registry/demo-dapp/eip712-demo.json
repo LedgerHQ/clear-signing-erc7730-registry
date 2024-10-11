@@ -76,9 +76,7 @@
                         "path": "value",
                         "label": "Max spending amount",
                         "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "@.to"
-                        }
+                        "params": {}
                     },
                     {
                         "path": "deadline",
