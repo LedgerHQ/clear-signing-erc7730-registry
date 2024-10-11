@@ -513,6 +513,9 @@
               "encoding": "timestamp"
             }
           }
+        ],
+        "excluded": [
+          "sigDeadline"
         ]
       },
       "PermitWitnessTransferFrom": {
@@ -562,6 +565,9 @@
               "encoding": "timestamp"
             }
           }
+        ],
+        "excluded": [
+          "witness"
         ]
       }
     }
