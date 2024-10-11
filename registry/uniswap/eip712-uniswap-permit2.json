@@ -1,7 +1,7 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
 
-    "includes": "common-eip712.json",
+    "includes": "uniswap-common-eip712.json",
 
     "context": {
         "eip712": {

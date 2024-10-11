@@ -1,0 +1,21 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [
+        {
+          "chainId": 137,
+          "address": "0x27f8d03b3a2196956ed754badc28d73be8830a6e"
+        }
+      ],
+      "domain": {
+        "name": "Permit",
+        "chainId": 137,
+        "verifyingContract": "0x27f8d03b3a2196956ed754badc28d73be8830a6e"
+      }
+    }
+  },
+  "metadata": {
+    "owner": "Aave Matic Market DAI"
+  }
+}

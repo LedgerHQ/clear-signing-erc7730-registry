@@ -1,4 +1,5 @@
 {
+    "$schema": "../../specs/erc7730-v1.schema.json",
     "context": {
         "$id": "Lending Pool v2",
         "contract" : {
