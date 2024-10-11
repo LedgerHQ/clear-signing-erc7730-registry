@@ -60,7 +60,7 @@
                             }
                         ]
                     },
-                    "primaryType": "Permit"
+                    "primaryType": "PermitSingle"
                 }
             ]
         }
