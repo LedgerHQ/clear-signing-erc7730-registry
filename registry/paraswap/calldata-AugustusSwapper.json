@@ -322,7 +322,7 @@
                     },
                     {
                         "path": "amountOut",
-                        "$ref": "$.display.definition.receiveAmount",
+                        "$ref": "$.display.definitions.receiveAmount",
                         "params": {
                             "tokenPath": "path.[-1]"
                         }
@@ -346,7 +346,7 @@
                     },
                     {
                         "path": "amountOut",
-                        "$ref": "$.display.definition.receiveAmount",
+                        "$ref": "$.display.definitions.receiveAmount",
                         "params": {
                             "tokenPath": "path.[-1]"
                         }
@@ -367,7 +367,7 @@
                 "fields": [
                     {
                         "path": "amountInMax",
-                        "$ref": "$.display.definition.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
                             "tokenPath": "tokenIn"
                         }
@@ -395,7 +395,7 @@
                 "fields": [
                     {
                         "path": "amountInMax",
-                        "$ref": "$.display.definition.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
                             "tokenPath": "tokenIn"
                         }
