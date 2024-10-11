@@ -160,6 +160,28 @@
             "label": "Offer expiration",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "side",
+          "extra",
+          "saleKind",
+          "staticTarget",
+          "target",
+          "howToCall",
+          "makerRelayerFee",
+          "feeMethod",
+          "replacementPattern",
+          "takerRelayerFee",
+          "taker",
+          "listingTime",
+          "staticExtradata",
+          "makerProtocolFee",
+          "takerProtocolFee",
+          "paymentToken",
+          "calldata",
+          "salt",
+          "feeRecipient",
+          "maker"
         ]
       }
     }

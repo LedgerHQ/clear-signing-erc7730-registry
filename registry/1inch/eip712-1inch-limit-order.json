@@ -186,6 +186,13 @@
             "label": "To",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "salt",
+          "makerTraits",
+          "interactions",
+          "allowedSender",
+          "offsets"
         ]
       }
     }

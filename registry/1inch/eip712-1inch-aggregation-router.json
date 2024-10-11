@@ -122,10 +122,10 @@
             "format": "raw"
           }
         ],
-          "excluded": [
-            "salt",
-            "makerTraits"
-          ]
+        "excluded": [
+          "salt",
+          "makerTraits"
+        ]
       }
     }
   }

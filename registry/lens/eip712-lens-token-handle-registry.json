@@ -133,10 +133,13 @@
             "format": "raw"
           },
           {
-            "path": "uint256",
+            "path": "nonce",
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline"
         ]
       }
     }
