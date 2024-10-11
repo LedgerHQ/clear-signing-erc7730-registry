@@ -1131,20 +1131,27 @@
         "intent": "act",
         "fields": [
           {
-            "path": "pubprofileId",
-            "label": "pubprofileId",
+            "path": "actorProfileId",
+            "label": "actorProfileId",
             "format": "raw"
           },
           {
-            "path": "publicationId",
-            "label": "publicationId",
+            "path": "publicationActedId",
+            "label": "publicationActedId",
             "format": "raw"
           },
           {
-            "path": "actorprofileId",
-            "label": "actorprofileId",
+            "path": "publicationActedProfileId",
+            "label": "publicationActedProfileId",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline",
+          "actionModuleAddress",
+          "referrerProfileIds.[]",
+          "actionModuleData",
+          "referrerPubIds.[]"
         ]
       },
       "burn": {
@@ -1190,6 +1197,9 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline"
         ]
       },
       "collect": {
@@ -1265,6 +1275,16 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "referenceModuleInitData",
+          "referenceModuleData",
+          "actionModules",
+          "deadline",
+          "referrerProfileIds",
+          "referenceModule",
+          "actionModulesInitDatas",
+          "referrerPubIds"
         ]
       },
       "comment_with_sign": {
@@ -1326,7 +1346,7 @@
             "format": "raw"
           },
           {
-            "path": "datas",
+            "path": "datas.[]",
             "label": "datas",
             "format": "raw"
           },
@@ -1335,6 +1355,9 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline"
         ]
       },
       "follow_with_sign": {
@@ -1435,6 +1458,13 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline",
+          "pointedPubId",
+          "referenceModuleData",
+          "referrerProfileIds",
+          "referrerPubIds"
         ]
       },
       "mirror_with_sig": {
@@ -1480,6 +1510,13 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "referenceModuleInitData",
+          "actionModules",
+          "deadline",
+          "referenceModule",
+          "actionModulesInitDatas"
         ]
       },
       "post_with_sign": {
@@ -1590,6 +1627,9 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline"
         ]
       },
       "set_block_status_with_sig": {
@@ -1625,6 +1665,10 @@
             "label": "nonce",
             "format": "raw"
           }
+        ],
+        "excluded": [
+          "deadline",
+          "followModuleInitData"
         ]
       },
       "set_profile_metadata_with_sign": {
