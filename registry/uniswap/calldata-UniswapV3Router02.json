@@ -65,7 +65,7 @@
                     },
                     {
                         "path": "params.amountOutMinimum",
-                        "label": "Receive Mininum",
+                        "label": "Receive Minimum",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenOut"
