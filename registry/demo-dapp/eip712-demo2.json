@@ -12,8 +12,48 @@
             "domain": {
                 "name": "LedgerClearSigning"
             },
-            "schemas": [
-                "./demo2-schema.json"
+            "schemas": [ 
+                {
+                    "primaryType": "PermitLike",
+                    "types": {
+                        "EIP712Domain": [
+                            {
+                                "name": "name",
+                                "type": "string"
+                            },
+                            {
+                                "name": "chainId",
+                                "type": "uint256"
+                            },
+                            {
+                                "name": "verifyingContract",
+                                "type": "address"
+                            }
+                        ],
+                        "PermitLike": [
+                            {
+                                "name": "token",
+                                "type": "address"
+                            },
+                            {
+                                "name": "amount",
+                                "type": "uint160"
+                            },
+                            {
+                                "name": "expiration",
+                                "type": "uint48"
+                            },
+                            {
+                                "name": "nonce",
+                                "type": "uint48"
+                            },
+                            {
+                                "name": "spender",
+                                "type": "address"
+                            }
+                        ]
+                    }
+                }
             ]
         }
     },
