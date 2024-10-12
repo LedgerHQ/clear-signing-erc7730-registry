@@ -1,0 +1,46 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context" : {
+        "eip712" : {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "{verifying_contract_address}"
+                }
+            ],
+            "domain": {
+                "name": "{message_domain}"
+            },
+            "schemas": [
+                "{local_link_to_schema}"
+            ]
+        }
+    },
+
+    "metadata" : {
+        "owner": "{verifying_contract_owner}",
+        "info": {
+            "legalName": "{verifying_contract_legal_name}",
+            "url": "https://{verifying_contract_url}"
+        }
+    },
+
+    "display": {
+        "formats": {
+            "{message_primary_type}": {
+                "intent": "{Message intent}",
+                "required": [
+                    "{list of required paths}"
+                ],
+                "fields": [
+                    {
+                        "path": "{path_to_displayed_param}",
+                        "label": "{param display label}",
+                        "format": "{param_format}"
+                    }
+                ]
+            }
+        }
+    }
+}
