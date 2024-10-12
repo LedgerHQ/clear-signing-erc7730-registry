@@ -1,4 +1,6 @@
 {
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
     "context": {
         "$id": "Uniswap v3 Router 2",
         "contract": {
@@ -65,7 +67,7 @@
                     },
                     {
                         "path": "params.amountOutMinimum",
-                        "label": "Receive Mininum",
+                        "label": "Receive Minimum",
                         "format": "tokenAmount",
                         "params": {
                             "tokenPath": "params.tokenOut"

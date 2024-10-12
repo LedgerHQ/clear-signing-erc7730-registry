@@ -1,0 +1,95 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "eip712": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xc9154424b823b10579895ccbe442d41b9abd96ed"
+        }
+      ],
+      "domain": {
+        "name": "Rarible",
+        "chainId": 1,
+        "verifyingContract": "0xc9154424b823b10579895ccbe442d41b9abd96ed"
+      },
+      "schemas": [
+        {
+          "primaryType": "Mint721",
+          "types": {
+            "Mint721": [
+              {
+                "name": "tokenId",
+                "type": "uint256"
+              },
+              {
+                "name": "tokenURI",
+                "type": "string"
+              },
+              {
+                "name": "creators",
+                "type": "Part[]"
+              },
+              {
+                "name": "royalties",
+                "type": "Part[]"
+              }
+            ],
+            "Part": [
+              {
+                "name": "account",
+                "type": "address"
+              },
+              {
+                "name": "value",
+                "type": "uint96"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Rarible ERC-721 Collection"
+  },
+  "display": {
+    "formats": {
+      "Mint721": {
+        "intent": "Lazy Mint ERC-721",
+        "fields": [
+          {
+            "path": "tokenId",
+            "label": "Token ID",
+            "format": "raw"
+          },
+          {
+            "path": "tokenURI",
+            "label": "Token URI",
+            "format": "raw"
+          },
+          {
+            "path": "creators.[].account",
+            "label": "Creator account address",
+            "format": "raw"
+          },
+          {
+            "path": "creators.[].value",
+            "label": "Creator value (10000 = 100%)",
+            "format": "raw"
+          },
+          {
+            "path": "royalties.[].account",
+            "label": "Royalties account address",
+            "format": "raw"
+          },
+          {
+            "path": "royalties.[].value",
+            "label": "Royalties value (10000 = 100%)",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}

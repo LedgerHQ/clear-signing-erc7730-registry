@@ -1,4 +1,5 @@
 {
+    "$schema": "../../specs/erc7730-v1.schema.json",
     "context": {
         "$id": "AugustusSwapper",
         "contract": {
@@ -321,7 +322,7 @@
                     },
                     {
                         "path": "amountOut",
-                        "$ref": "$.display.definition.receiveAmount",
+                        "$ref": "$.display.definitions.receiveAmount",
                         "params": {
                             "tokenPath": "path.[-1]"
                         }
@@ -345,7 +346,7 @@
                     },
                     {
                         "path": "amountOut",
-                        "$ref": "$.display.definition.receiveAmount",
+                        "$ref": "$.display.definitions.receiveAmount",
                         "params": {
                             "tokenPath": "path.[-1]"
                         }
@@ -366,7 +367,7 @@
                 "fields": [
                     {
                         "path": "amountInMax",
-                        "$ref": "$.display.definition.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
                             "tokenPath": "tokenIn"
                         }
@@ -394,7 +395,7 @@
                 "fields": [
                     {
                         "path": "amountInMax",
-                        "$ref": "$.display.definition.maxSendAmount",
+                        "$ref": "$.display.definitions.maxSendAmount",
                         "params": {
                             "tokenPath": "tokenIn"
                         }
@@ -463,7 +464,7 @@
                     },
                     {
                         "path": "exchange",
-                        "$ref": ".$display.definitions.exchange"
+                        "$ref": "$.display.definitions.exchange"
                     }
                 ],
                 "required": [
