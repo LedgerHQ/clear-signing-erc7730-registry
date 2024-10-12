@@ -1,0 +1,66 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context" : {
+        "eip712" : {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x4c415552454e5400000000000000000000000002"
+                }
+            ],
+            "domain": {
+                "name": "LedgerClearSigning"
+            },
+            "schemas": [
+                "./demo2-schema.json"
+            ]
+        }
+    },
+
+    "metadata" : {
+        "owner": "Ledger",
+        "info": {
+            "legalName": "Ledger SAS",
+            "url": "https://ledger.com"
+        }
+    },
+
+    "display": {
+        "formats": {
+            "PermitLike": {
+                "intent": "Authorize something",
+                "required": [
+                    "amount",
+                    "spender"
+                ],
+                "excluded": [
+                    "nonce"
+                ],
+                "fields": [
+                    {
+                        "path": "amount",
+                        "label": "Amount to authorize",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
+                    },
+                    {
+                        "path": "expiration",
+                        "label": "Authorization expiration",
+                        "format": "date",
+                        "params": {
+                            "encoding": "timestamp"
+                        }
+                    },
+                    {
+                        "path": "spender",
+                        "label": "Authorized recipient",
+                        "format": "addressName"
+                    }
+                ]
+            }
+        }
+    }
+}
