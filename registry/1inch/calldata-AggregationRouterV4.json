@@ -9,6 +9,14 @@
                 {
                     "chainId": 1,
                     "address": "0x1111111254fb6c44bAC0beD2854e76F90643097d"
+                },
+                {
+                    "chainId": 56,
+                    "address": "0x1111111254fb6c44bAC0beD2854e76F90643097d"
+                },
+                {
+                    "chainId": 137,
+                    "address": "0x1111111254fb6c44bAC0beD2854e76F90643097d"
                 }
             ]
         }
