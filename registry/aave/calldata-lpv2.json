@@ -71,7 +71,7 @@
                         "format": "addressName",
                         "label": "For asset",
                         "params": {
-                            "type": "token"
+                            "types": ["token"]
                         }
                     },
                     {
@@ -111,7 +111,7 @@
                         "format": "addressName",
                         "label": "For asset",
                         "params": {
-                            "type": "token"
+                            "types": ["token"]
                         }
                     },
                     {
