@@ -65,14 +65,14 @@
                 "label": "Exchange",
                 "format": "addressName",
                 "params": {
-                    "type": "contract"
+                    "types": ["contract"]
                 }
             },
             "factory": {
                 "label": "Uniswap Factory",
                 "format": "addressName",
                 "params": {
-                    "type": "contract"
+                    "types": ["contract"]
                 }
             }
         },
