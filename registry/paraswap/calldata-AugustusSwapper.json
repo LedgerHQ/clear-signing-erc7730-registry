@@ -65,14 +65,18 @@
                 "label": "Exchange",
                 "format": "addressName",
                 "params": {
-                    "types": ["contract"]
+                    "types": [
+                        "contract"
+                    ]
                 }
             },
             "factory": {
                 "label": "Uniswap Factory",
                 "format": "addressName",
                 "params": {
-                    "types": ["contract"]
+                    "types": [
+                        "contract"
+                    ]
                 }
             }
         },
@@ -265,7 +269,7 @@
                         }
                     },
                     {
-                        "path": "toAmount",
+                        "path": "amountOutMin",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
                             "tokenPath": "toToken"
@@ -293,7 +297,7 @@
                         }
                     },
                     {
-                        "path": "toAmount",
+                        "path": "amountOutMin",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
                             "tokenPath": "toToken"
@@ -427,7 +431,7 @@
                         "path": "data.toAmount",
                         "$ref": "$.display.definitions.minReceiveAmount",
                         "params": {
-                            "tokenPath": "data.path.-1.to"
+                            "tokenPath": "data.path.[-1].to"
                         }
                     },
                     {

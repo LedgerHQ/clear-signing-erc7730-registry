@@ -165,7 +165,7 @@
                         "label": "Amount to Send",
                         "format": "tokenAmount",
                         "params": {
-                            "tokenPath": "path[0]"
+                            "tokenPath": "path.[0]"
                         }
                     },
                     {
