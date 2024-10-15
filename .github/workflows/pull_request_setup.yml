@@ -37,4 +37,5 @@ jobs:
             specifications
             descriptors
             ci
+            preview-tool
           add_comment: true
