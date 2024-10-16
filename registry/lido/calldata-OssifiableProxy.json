@@ -87,7 +87,7 @@
                 ],
                 "required": ["_amounts", "_owner"]
             },
-            "requestWithdrawalsWithPermit(uint256[] _amounts, address _owner, (uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) _permit))": {
+            "requestWithdrawalsWithPermit(uint256[] _amounts, address _owner, (uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) _permit)": {
                 "intent": "Request withdrawals",
                 "fields": [
                     {
