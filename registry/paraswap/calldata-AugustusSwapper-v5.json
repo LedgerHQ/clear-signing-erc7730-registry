@@ -73,6 +73,20 @@
                     "tokenPath": "amountInMin"
                 }
             },
+            "factory": {
+                "label": "Factory",
+                "format": "addressName",
+                "params": {
+                    "types": ["contract"]
+                }
+            },
+            "tokenIn": {
+                "label": "Inbound token",
+                "format": "addressName",
+                "params": {
+                    "types": ["token"]
+                }
+            },
             "amountOutMin": {
                 "label": "Minimum Outcome Amount",
                 "format": "tokenAmount",
