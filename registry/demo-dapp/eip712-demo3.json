@@ -96,7 +96,7 @@
                         }
                     },
                     {
-                        "path": "Spend",
+                        "path": "spender",
                         "label": "Allowed Spender",
                         "format": "addressName"
                     },
