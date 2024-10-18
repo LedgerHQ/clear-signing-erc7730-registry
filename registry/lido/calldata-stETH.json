@@ -29,7 +29,7 @@
                 "intent": "Stake ETH",
                 "fields": [
                     {
-                        "path": "@.amount",
+                        "path": "@.value",
                         "label": "Amount to Stake",
                         "format": "amount"
                     },
@@ -39,7 +39,7 @@
                         "format": "addressName"
                     }
                 ],
-                "required": ["@.amount"]
+                "required": ["@.value"]
             },
             "approve(address,uint256)" : {
                 "intent": "Approve a spender",
