@@ -68,7 +68,7 @@
             "legalName": "Ledger Inc",
             "url": "https://ledger.com"
         },
-        "enum": {
+        "enums": {
             "mode": {
                 "0": "Strict",
                 "1": "Allow Delegation"
