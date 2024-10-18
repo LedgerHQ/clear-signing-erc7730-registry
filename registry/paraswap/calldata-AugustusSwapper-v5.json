@@ -80,6 +80,20 @@
                     "tokenPath": "amountOutMin"
                 }
             },
+            "fromToken": {
+                "format": "addressName",
+                "label": "Origin Token",
+                "params": {
+                    "types": ["token"]
+                }
+            },
+            "toToken": {
+                "format": "addressName",
+                "label": "Destination Token",
+                "params": {
+                    "types": ["token"]
+                }
+            },
             "fromAmount": {
                 "format": "tokenAmount",
                 "label": "Income Amount",
@@ -105,14 +119,14 @@
                 "format": "addressName",
                 "label": "Beneficiary",
                 "params": {
-                    "type": "eoa"
+                    "types": ["eoa"]
                 }
             },
             "partner": {
                 "format": "addressName",
                 "label": "Partner address",
                 "params": {
-                    "type": "wallet"
+                    "types": ["wallet"]
                 }
             },
             "feePercent": {
@@ -126,14 +140,14 @@
                 "format": "addressName",
                 "label": "Callees",
                 "params": {
-                    "type": "wallet"
+                    "types": ["wallet"]
                 }
             },
             "exchange": {
                 "format": "addressName",
                 "label": "Exchange address",
                 "params": {
-                    "type": "wallet"
+                    "types": ["wallet"]
                 }
             }
         },
@@ -154,7 +168,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     }
                 ],
@@ -185,7 +199,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     }
                 ],
@@ -207,7 +221,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     }
                 ],
@@ -238,7 +252,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     }
                 ],
@@ -264,7 +278,7 @@
                         "format": "addressName",
                         "label": "weth",
                         "params": {
-                            "type": "token"
+                            "types": ["token"]
                         }
                     },
                     {
@@ -376,7 +390,7 @@
                         "format": "addressName",
                         "label": "beneficiary",
                         "params": {
-                            "type": "eoa"
+                            "types": ["eoa"]
                         }
                     },
                     {
@@ -384,7 +398,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     },
                     {
@@ -446,7 +460,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "type": "wallet"
+                            "types": ["wallet"]
                         }
                     },
                     {
