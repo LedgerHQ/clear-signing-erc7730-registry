@@ -304,7 +304,7 @@
             "type": "object",
             "description": "A set of values that can be used in format parameters. Can be referenced with a path expression like $.metadata.constants.CONSTANT_NAME",
             "additionalProperties": {
-                "type": "string"
+                "type": ["string", "integer", "number", "boolean", "null"]
             }
         }, 
 
