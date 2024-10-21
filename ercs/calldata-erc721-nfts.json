@@ -136,15 +136,15 @@
                         "label": "Collection",
                         "format": "addressName",
                         "params": {
-                            "type": "nft"
+                            "types": ["collection"]
                         }
                     },
                     { "path": "_operator", "$ref": "$.display.definitions.operator" },
-                    { 
+                    {
                         "path": "_approved",
-                        "label": "Access rights", 
+                        "label": "Access rights",
                         "format": "enum",
-                        "$params": { "$ref": "$.metadata.enums.rights" }
+                        "params": { "$ref": "$.metadata.enums.rights" }
                     }
                 ]
             }
