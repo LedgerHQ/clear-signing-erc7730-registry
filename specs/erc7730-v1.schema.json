@@ -129,22 +129,32 @@
                     "properties" : {
                         "schemas" : 
                         {
-                            "title": "EIP 712 Schemas constraint",
-                            "type": "array",
-                            "description": "An array of EIP712 schemas that can be used to validate the message. The message types should match exactly one of those schema.",
-                            "items": {
-                                "oneOf": [
-                                    {
-                                        "$ref": "#/$definitions/eip712-json-schema"
-                                    },
-                                    {
-                                        "title": "An EIP712 Schema url",
-                                        "description": "URL of an EIP712 Schema bound to this file.",
-                                        "type": "string",
-                                        "format": "uri-reference"
+                            "oneOf": [
+                                {
+                                    "title": "An EIP712 Schemas url",
+                                    "description": "URL of an array of EIP712 schemas that can be used to validate the message. The message types should match exactly one of those schema.",
+                                    "type": "string",
+                                    "format": "uri-reference"
+                                },
+                                {
+                                    "title": "EIP 712 Schemas constraint",
+                                    "type": "array",
+                                    "description": "An array of EIP712 schemas that can be used to validate the message. The message types should match exactly one of those schema.",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/$definitions/eip712-json-schema"
+                                            },
+                                            {
+                                                "title": "An EIP712 Schema url",
+                                                "description": "URL of an EIP712 Schema bound to this file.",
+                                                "type": "string",
+                                                "format": "uri-reference"
+                                            }
+                                        ]
                                     }
-                                ]
-                            }
+                                }
+                            ]
                         },
                         "domain": {
                             "title": "EIP 712 Domain Binding constraint",
