@@ -59,7 +59,16 @@
             },
             "beneficiary": {
                 "label": "Beneficiary",
-                "format": "addressName"
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "eoa"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
             },
             "exchange": {
                 "label": "Exchange",
@@ -67,6 +76,10 @@
                 "params": {
                     "types": [
                         "contract"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
                     ]
                 }
             },
@@ -76,6 +89,10 @@
                 "params": {
                     "types": [
                         "contract"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
                     ]
                 }
             }
