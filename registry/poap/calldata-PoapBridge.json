@@ -36,7 +36,16 @@
                     {
                         "path": "receiver",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "expirationTime",
