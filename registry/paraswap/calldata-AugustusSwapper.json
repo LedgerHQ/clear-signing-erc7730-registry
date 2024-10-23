@@ -118,10 +118,7 @@
                     },
                     {
                         "path": "data.beneficiary",
-                        "$ref": "$.display.definitions.beneficiary",
-                        "params": {
-                            "tokenPath": "data.beneficiary"
-                        }
+                        "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
                 "required": [
@@ -150,10 +147,7 @@
                     },
                     {
                         "path": "data.beneficiary",
-                        "$ref": "$.display.definitions.beneficiary",
-                        "params": {
-                            "tokenPath": "data.beneficiary"
-                        }
+                        "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
                 "required": [
@@ -262,10 +256,7 @@
                     },
                     {
                         "path": "data.beneficiary",
-                        "$ref": "$.display.definitions.beneficiary",
-                        "params": {
-                            "tokenPath": "data.beneficiary"
-                        }
+                        "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
                 "required": [
@@ -453,10 +444,7 @@
                     },
                     {
                         "path": "data.beneficiary",
-                        "$ref": "$.display.definitions.beneficiary",
-                        "params": {
-                            "tokenPath": "data.beneficiary"
-                        }
+                        "$ref": "$.display.definitions.beneficiary"
                     }
                 ],
                 "required": [
