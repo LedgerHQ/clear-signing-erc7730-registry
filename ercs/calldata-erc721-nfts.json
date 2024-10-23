@@ -1,4 +1,5 @@
 {
+    "$schema": "../specs/erc7730-v1.schema.json",
     "context": {
         "contract" : {
             "abi": [
@@ -83,15 +84,42 @@
         "definitions": {
             "from" : {
                 "label": "From",
-                "format": "addressName"
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "eoa"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
             },
             "to" : {
                 "label": "To",
-                "format": "addressName"
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "eoa"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
             },
-            "operator":{ 
+            "operator":{
                 "label": "Operator",
-                "format": "addressName"
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "contract"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
             },
             "tokenId" : {
                 "label": "NFT",
@@ -131,12 +159,18 @@
                 "$id": "setApprovalForAll",
                 "intent": "Manage operator rights for",
                 "fields": [
-                    { 
+                    {
                         "path": "@.to",
                         "label": "Collection",
                         "format": "addressName",
                         "params": {
-                            "types": ["collection"]
+                            "types": [
+                                "collection"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
                         }
                     },
                     { "path": "_operator", "$ref": "$.display.definitions.operator" },

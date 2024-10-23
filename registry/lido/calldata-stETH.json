@@ -36,7 +36,16 @@
                     {
                         "path": "_referral",
                         "label": "Referral",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["@.value"]
@@ -47,7 +56,16 @@
                     {
                         "path": "_spender",
                         "label": "Spender",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "contract"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "_amount",
