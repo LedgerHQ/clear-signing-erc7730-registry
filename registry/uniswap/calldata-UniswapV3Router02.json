@@ -48,7 +48,16 @@
                     {
                         "path": "params.recipient",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["params.amountIn", "params.amountOutMinimum", "params.recipient"]
@@ -86,7 +95,16 @@
                     {
                         "path": "params.recipient",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["params.amountIn", "params.amountOutMininimum", "params.fee", "params.recipient"]
@@ -114,7 +132,16 @@
                     {
                         "path": "params.recipient",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["params.amountInMaximum", "params.amountOut", "params.recipient"]
@@ -152,7 +179,16 @@
                     {
                         "path": "params.recipient",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ]
             },

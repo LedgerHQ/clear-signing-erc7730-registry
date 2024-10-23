@@ -1,4 +1,5 @@
 {
+    "$schema": "../specs/erc7730-v1.schema.json",
     "context": {
         "eip712": {
             "schemas": [
@@ -58,7 +59,16 @@
                     {
                         "path": "spender",
                         "label": "Spender",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "contract"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "value",

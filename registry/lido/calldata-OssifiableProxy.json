@@ -43,7 +43,16 @@
                     {
                         "path": "_owner",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_amounts", "_owner"]
@@ -62,7 +71,16 @@
                     {
                         "path": "_owner",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_amounts", "_owner"],
@@ -82,7 +100,16 @@
                     {
                         "path": "_owner",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_amounts", "_owner"]
@@ -101,7 +128,16 @@
                     {
                         "path": "_owner",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_amounts", "_owner"],
@@ -118,7 +154,16 @@
                     {
                         "path": "@.from",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_requestId", "@.from"]
@@ -134,7 +179,16 @@
                     {
                         "path": "@.from",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_requestIds", "@.from"],
@@ -151,7 +205,16 @@
                     {
                         "path": "_recipient",
                         "label": "Beneficiary",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["_requestIds", "_recipient"],
