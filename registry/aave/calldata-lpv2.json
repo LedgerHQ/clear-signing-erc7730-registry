@@ -58,7 +58,16 @@
                     {
                         "path": "onBehalfOf",
                         "format": "addressName",
-                        "label": "For debt holder"
+                        "label": "For debt holder",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["amount", "rateMode", "onBehalfOf"]
@@ -71,7 +80,13 @@
                         "format": "addressName",
                         "label": "For asset",
                         "params": {
-                            "types": ["token"]
+                            "types": [
+                                "token"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
                         }
                     },
                     {
@@ -98,7 +113,16 @@
                     {
                         "path": "to",
                         "format": "addressName",
-                        "label": "To recipient"
+                        "label": "To recipient",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["amount", "to"]
@@ -111,7 +135,13 @@
                         "format": "addressName",
                         "label": "For asset",
                         "params": {
-                            "types": ["token"]
+                            "types": [
+                                "token"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
                         }
                     },
                     {
@@ -147,7 +177,16 @@
                     {
                         "path": "onBehalfOf",
                         "format": "addressName",
-                        "label": "Debtor"
+                        "label": "Debtor",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["amount", "onBehalfOf", "interestRateMode"]
@@ -167,7 +206,16 @@
                     {
                         "path": "onBehalfOf",
                         "format": "addressName",
-                        "label": "Collateral recipient"
+                        "label": "Collateral recipient",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     }
                 ],
                 "required": ["amount", "onBehalfOf"]
