@@ -1,4 +1,5 @@
 {
+    "$schema": "../specs/erc7730-v1.schema.json",
     "context": {
         "contract" : {
             "abi": [
@@ -60,7 +61,16 @@
                     {
                         "path": "_to",
                         "label": "To",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "_value",
@@ -79,7 +89,16 @@
                     {
                         "path": "_spender",
                         "label": "Spender",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "eoa"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "_value",

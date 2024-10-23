@@ -142,7 +142,16 @@
                     {
                         "path": "spender",
                         "label": "Approve to spender",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "contract"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "permitted.amount",
@@ -174,7 +183,16 @@
                             {
                                 "path": "recipient",
                                 "label": "On Addresses",
-                                "format": "addressName"
+                                "format": "addressName",
+                                "params": {
+                                    "types": [
+                                        "contract"
+                                    ],
+                                    "sources": [
+                                        "local",
+                                        "ens"
+                                    ]
+                                }
                             }
                         ]
                     },
