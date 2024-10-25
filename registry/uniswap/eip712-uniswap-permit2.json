@@ -122,7 +122,16 @@
                         {
                             "path": "spender",
                             "label": "Spender",
-                            "format": "addressName"
+                            "format": "addressName",
+                            "params": {
+                                "types": [
+                                    "contract"
+                                ],
+                                "sources": [
+                                    "local",
+                                    "ens"
+                                ]
+                            }
                         },
                         {
                             "path": "details.amount",
@@ -158,7 +167,16 @@
                     {
                         "path": "spender",
                         "label": "Spender",
-                        "format": "addressName"
+                        "format": "addressName",
+                        "params": {
+                            "types": [
+                                "contract"
+                            ],
+                            "sources": [
+                                "local",
+                                "ens"
+                            ]
+                        }
                     },
                     {
                         "path": "details.[]",

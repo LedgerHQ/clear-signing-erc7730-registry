@@ -72,15 +72,6 @@ jobs:
           repository: LedgerHQ/crypto-assets
           event-type: submodules
 
-      - name: Trigger update on LedgerHQ/crypto-assets-clear-signing-initiative
-        if: ${{ !cancelled() }}
-        timeout-minutes: 60
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.CI_BOT_TOKEN }}
-          repository: LedgerHQ/crypto-assets-clear-signing-initiative
-          event-type: submodules
-
       - name: Trigger update on LedgerHQ/python-erc7730
         if: ${{ !cancelled() }}
         timeout-minutes: 60
