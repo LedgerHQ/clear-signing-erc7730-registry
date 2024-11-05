@@ -100,7 +100,7 @@
                 "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"],
                 "excluded": ["executor", "desc.srcReceiver", "desc.flags", "permit", "data"]
             },
-            "unoswap(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+            "unoswap(address srcToken, uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "unoswap",
                 "intent": "Swap",
                 "fields": [
@@ -121,7 +121,7 @@
                 "required": ["amount", "minReturn", "@.from"],
                 "excluded": ["pools"]
             },
-            "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools)" : {
+            "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "unoswapTo",
                 "intent": "Swap",
                 "fields": [
@@ -142,7 +142,7 @@
                 "required": ["amount", "minReturn", "recipient"],
                 "excluded": ["pools"]
             },
-            "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
+            "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)" : {
                 "$id": "unoswapToWithPermit",
                 "intent": "Swap",
                 "fields": [
