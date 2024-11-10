@@ -1,0 +1,53 @@
+{
+    "$schema": "https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "MyAsset",
+      "contract": {
+        "name": "MyAsset",
+        "version": "1.0",
+        "description": "A contract for managing ownership and setting/retrieving a value.",
+        "abi": [
+          {
+            "inputs": [],
+            "name": "getValue",
+            "outputs": [{ "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [{ "name": "_value", "type": "uint256" }],
+            "name": "setValue",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          },
+          {
+            "inputs": [{ "name": "newOwner", "type": "address" }],
+            "name": "transferOwnership",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ],
+        "events": [
+          {
+            "name": "OwnershipTransferred",
+            "inputs": [
+              { "indexed": true, "name": "previousOwner", "type": "address" },
+              { "indexed": true, "name": "newOwner", "type": "address" }
+            ],
+            "type": "event"
+          },
+          {
+            "name": "ValueSet",
+            "inputs": [
+              { "indexed": false, "name": "_newValue", "type": "uint256" }
+            ],
+            "type": "event"
+          }
+        ],
+ 
+        "address": "0xf8e81D47203A594245E36C48e151709F0C19fBe8"
+      }
+    }
+  }
