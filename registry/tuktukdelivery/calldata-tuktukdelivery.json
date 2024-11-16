@@ -1,0 +1,46 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "$id": "TukTuk Delivery tracker",
+        "contract": {
+            "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x87a13908Fb3443ec2b317F1b0702dF66a7e1cd17",
+            "deployments": [
+                {
+                    "chainId": 11155111,
+                    "address": "0x87a13908Fb3443ec2b317F1b0702dF66a7e1cd17"
+                }
+            ]
+        }
+    },
+
+    "metadata": {
+        "owner": "TukTuk Delivery",
+        "info": {
+            "url": "https://tuktuk-delivery.com/",
+            "legalName": "TukTuk Delivery labs",
+            "lastUpdate": "2024-11-16T08:56:48Z" 
+        }
+    },
+
+    "display": {
+        "formats": {
+            "updateStatus(address user, uint statusIndex)" : {
+                "intent": "update delivery status",
+                "fields": [
+                    {
+                        "path": "user",
+                        "label": "Signer",
+                        "format": "addressName"
+                    },
+                    {
+                        "path": "statusIndex",
+                        "label": "Delivery step",
+                        "format": "raw"
+                    }
+                ],
+                "required": ["user", "statusIndex"]
+            }
+        }
+    }
+}
