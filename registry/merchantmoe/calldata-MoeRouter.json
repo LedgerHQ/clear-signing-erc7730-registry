@@ -9,7 +9,7 @@
                     "address": "0x1e2098BaD83241A1327Ff205c5521C39Ca9A754c"
                 }
             ],
-            "abi": ""
+            "abi": "https://raw.githubusercontent.com/kamalbuilds/ledger-asset-dapps/refs/heads/main/mantle/merchant-moe/merchantmoerouter.json"
         }
     },
     "metadata": {
