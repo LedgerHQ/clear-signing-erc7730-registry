@@ -1,0 +1,228 @@
+{
+    "$schema": "../specs/erc7730-v1.schema.json",
+    "context": {
+        "contract" : {
+            "abi": [
+                {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "assets",
+                        "type": "uint256"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "receiver",
+                        "type": "address"
+                      }
+                    ],
+                    "name": "deposit",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "assets",
+                        "type": "uint256"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "receiver",
+                        "type": "address"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                      }
+                    ],
+                    "name": "withdraw",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "shares",
+                        "type": "uint256"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "receiver",
+                        "type": "address"
+                      }
+                    ],
+                    "name": "mint",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                  },
+                  {
+                    "inputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "shares",
+                        "type": "uint256"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "receiver",
+                        "type": "address"
+                      },
+                      {
+                        "internalType": "address",
+                        "name": "owner",
+                        "type": "address"
+                      }
+                    ],
+                    "name": "redeem",
+                    "outputs": [
+                      {
+                        "internalType": "uint256",
+                        "name": "",
+                        "type": "uint256"
+                      }
+                    ],
+                    "payable": false,
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                  }
+            ]
+        }
+    },
+
+    "display": {
+        "definitions": {
+            "asset_deposit": {
+                "label": "Deposit",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "$.context.contract.deployments.[0].address"
+                }
+            },
+            "asset_withdraw": {
+                "label": "Withdraw",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "$.context.contract.deployments.[0].address"
+                }
+            },
+            "shares_mint": {
+                "label": "Mint shares",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "$.context.contract.deployments.[0].address"
+                }
+            },
+            "shares_redeem": {
+                "label": "Withdraw shares",
+                "format": "tokenAmount",
+                "params": {
+                    "tokenPath": "$.context.contract.deployments.[0].address"
+                }
+            },
+            "from" : {
+                "label": "From",
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "eoa"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
+            },
+            "receiver" : {
+                "label": "Receiver",
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "eoa"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
+            },
+            "vault":{
+                "label": "Vault",
+                "format": "addressName",
+                "params": {
+                    "types": [
+                        "contract"
+                    ],
+                    "sources": [
+                        "local",
+                        "ens"
+                    ]
+                }
+            }
+        },
+        "formats": {
+            "deposit(uint256 assets, address receiver)": {
+                "intent": "Deposit",
+                "fields": [
+                    { "path": "_to", "$ref": "$.display.definitions.vault" },
+                    { "path": "_assets", "$ref": "$.display.definitions.asset_deposit" },
+                    { "path": "_receiver", "$ref": "$.display.definitions.receiver" }
+                ],
+                "required": ["_to", "_assets", "_receiver"]
+            },
+            "withdraw(uint256 assets, address receiver, address owner)":{
+                "intent": "Withdraw",
+                "fields": [
+                    { "path": "_to", "$ref": "$.display.definitions.vault" },
+                    { "path": "_assets", "$ref": "$.display.definitions.asset_withdraw" },
+                    { "path": "_receiver", "$ref": "$.display.definitions.receiver" }
+                ],
+                "required": ["_to", "_assets", "_receiver"]
+            },
+            "mint(uint256 shares, address receiver)":{
+                "intent": "Mint shares",
+                "fields": [
+                    { "path": "_to", "$ref": "$.display.definitions.vault" },
+                    { "path": "_shares", "$ref": "$.display.definitions.shares_mint" },
+                    { "path": "_receiver", "$ref": "$.display.definitions.receiver" }
+                ],
+                "required": ["_to", "_assets", "_receiver"]
+            },
+            "redeem(uint256 shares, address receiver, address owner)":{
+                "intent": "Withdraw from shares",
+                "fields": [
+                    { "path": "_to", "$ref": "$.display.definitions.vault" },
+                    { "path": "_shares", "$ref": "$.display.definitions.shares_redeem" },
+                    { "path": "_receiver", "$ref": "$.display.definitions.receiver" }
+                ],
+                "required": ["_to", "_assets", "_receiver"]
+            }
+        }
+    }
+}
