@@ -1,83 +1,41 @@
 {
-    "$schema": "../../specs/erc7730-v1.schema.json",
-
-    "context": {
-        "$id": "stETH",
-        "contract": {
-            "deployments": [
-                {
-                    "chainId": 1,
-                    "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-                }
-            ],
-            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
-        }
-    },
-
-    "metadata": {
-        "owner": "Lido",
-        "info": {
-            "url": "https://lido.fi",
-            "legalName": "Lido DAO",
-            "lastUpdate": "2021-02-19T04:37:20Z"
-        }
-    },
-
-    "display": {
-        "formats": {
-            "submit(address)": {
-                "intent": "Stake ETH",
-                "fields": [
-                    {
-                        "path": "@.value",
-                        "label": "Amount to Stake",
-                        "format": "amount"
-                    },
-                    {
-                        "path": "_referral",
-                        "label": "Referral",
-                        "format": "addressName",
-                        "params": {
-                            "types": [
-                                "eoa"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    }
-                ],
-                "required": ["@.value"]
-            },
-            "approve(address,uint256)" : {
-                "intent": "Approve a spender",
-                "fields": [
-                    {
-                        "path": "_spender",
-                        "label": "Spender",
-                        "format": "addressName",
-                        "params": {
-                            "types": [
-                                "contract"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    },
-                    {
-                        "path": "_amount",
-                        "label": "Max spending amount",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "@.to"
-                        }
-                    }
-                ],
-                "required": ["_spender", "_amount"]
-            }
-        }
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "stETH",
+    "contract": {
+      "deployments": [{ "chainId": 1, "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }],
+      "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
     }
+  },
+  "metadata": { "owner": "Lido", "info": { "url": "https://lido.fi", "legalName": "Lido DAO", "lastUpdate": "2021-02-19T04:37:20Z" } },
+  "display": {
+    "formats": {
+      "submit(address)": {
+        "intent": "Stake ETH",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Stake", "format": "amount" },
+          {
+            "path": "_referral",
+            "label": "Referral",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["@.value"]
+      },
+      "approve(address,uint256)": {
+        "intent": "Approve a spender",
+        "fields": [
+          {
+            "path": "_spender",
+            "label": "Spender",
+            "format": "addressName",
+            "params": { "types": ["contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "_amount", "label": "Max spending amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } }
+        ],
+        "required": ["_spender", "_amount"]
+      }
+    }
+  }
 }
