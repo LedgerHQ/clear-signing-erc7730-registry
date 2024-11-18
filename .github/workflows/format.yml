@@ -65,15 +65,14 @@ jobs:
         run: erc7730 format
 
       - name: Check changes
-        id: assets_changes
-        if: ${{ !cancelled() && steps.submodules_changes.outputs.changes == 'true' }}
+        id: changes
         timeout-minutes: 10
         shell: bash
         run: |
           [[ -n "$(git status -s)" ]] && echo "changes=true" >> $GITHUB_OUTPUT || true
 
       - name: Open pull request
-        if: ${{ !cancelled() && steps.assets_changes.outputs.changes == 'true' }}
+        if: ${{ !cancelled() && steps.changes.outputs.changes == 'true' }}
         timeout-minutes: 10
         uses: peter-evans/create-pull-request@v6
         with:
@@ -85,6 +84,5 @@ jobs:
           commit-message: 'chore: format descriptors - ${{ env.CURRENT_DATE }}'
           title: 'chore: format descriptors - ${{ env.CURRENT_DATE }}'
           body: ${{ steps.submodules.outputs.prBody }}
-          labels: assets
-          draft: ${{ steps.update.outcome != 'success' }}
+          draft: false
           signoff: false
