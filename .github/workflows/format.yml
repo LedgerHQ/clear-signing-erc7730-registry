@@ -24,19 +24,6 @@ jobs:
         timeout-minutes: 10
         uses: actions/checkout@v4
 
-      - name: Checkout ${{ env.BRANCH }} branch
-        timeout-minutes: 10
-        run: |
-          git fetch origin +refs/heads/*:refs/remotes/origin/*
-          if git show-ref --quiet refs/remotes/origin/${{ env.BRANCH }}; then
-            echo "${{ env.BRANCH }} branch already exists."
-            git checkout ${{ env.BRANCH }}
-          else
-            echo "${{ env.BRANCH }} branch does not exist."
-            git checkout -b ${{ env.BRANCH }}
-            git push origin ${{ env.BRANCH }}
-          fi
-
       - name: Get date
         timeout-minutes: 10
         run: echo "CURRENT_DATE=$(date +"%Y-%m-%d %H:%M")" >> $GITHUB_ENV
