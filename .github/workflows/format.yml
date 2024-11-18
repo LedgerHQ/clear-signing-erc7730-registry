@@ -6,6 +6,9 @@ on:
     - cron: '0 7 * * *'
   workflow_dispatch:
 
+permissions:
+  id-token: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
