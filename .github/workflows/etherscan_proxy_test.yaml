@@ -1,0 +1,16 @@
+name: Curl URL
+
+on: 
+    workflow_dispatch:
+    push:
+        branches:
+            - etherscan-proxy-test
+
+jobs:
+  curl-job:
+      runs-on: public-ledgerhq-shared-small
+
+      steps:
+
+      - name: Curl URL
+        run: curl -L -vvv https://etherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582
