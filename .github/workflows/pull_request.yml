@@ -9,6 +9,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  ETHERSCAN_API_HOST: etherscan.api.live.ledger.com
+
 jobs:
   validate_descriptors:
     name: 🔎 validate descriptors
