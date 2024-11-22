@@ -174,7 +174,7 @@
                         "label": "Array of addresses",
                         "format": "addressName",
                         "params": {
-                            "types": ["wallet"]
+                            "types": ["contract"]
                         }
                     }
                 ],
@@ -183,15 +183,6 @@
             "0xc03786b0": {
                 "$id": "buyOnUniswapFork",
                 "fields": [
-                    {
-                        "path": "factory",
-                        "$ref": "$.display.definitions.factory"
-                    },
-                    {
-                        "path": "initCode",
-                        "format": "raw",
-                        "label": "init code"
-                    },
                     {
                         "path": "amountOut",
                         "$ref": "$.display.definitions.amountOut"
@@ -228,19 +219,6 @@
                     {
                         "path": "amountOutMin",
                         "$ref": "$.display.definitions.amountOutMin"
-                    },
-                    {
-                        "path": "weth",
-                        "format": "addressName",
-                        "label": "weth",
-                        "params": {
-                            "types": ["token"]
-                        }
-                    },
-                    {
-                        "path": "pools.[]",
-                        "format": "raw",
-                        "label": "pools"
                     }
                 ],
                 "required": ["tokenIn", "amountIn", "amountOutMin", "weth", "pools"]
