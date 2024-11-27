@@ -4,12 +4,7 @@
     "contract": {
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/main/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json",
       "deployments": [
-        { "chainId": 1, "address": "0x1bd435f3c054b6e901b7b108a0ab7617c808677b" },
-        { "chainId": 1, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
-        { "chainId": 56, "address": "0x55a0e3b6579972055faa983482aceb4b251dcf15" },
-        { "chainId": 56, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
-        { "chainId": 137, "address": "0x90249ed4d69d70e709ffcd8bee2c5a566f65dade" },
-        { "chainId": 137, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" }
+        { "chainId": 1, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" }
       ]
     }
   },
@@ -19,13 +14,15 @@
       "amountIn": { "label": "Income Amount", "format": "amount" },
       "amountOut": { "label": "Outcome Amount", "format": "amount" },
       "amountInMax": { "label": "Maximum Income Amount", "format": "amount" },
-      "factory": { "label": "Factory", "format": "addressName", "params": { "types": ["contract"] } },
       "tokenIn": { "label": "Inbound token", "format": "addressName", "params": { "types": ["token"] } },
       "amountOutMin": { "label": "Minimum Outcome Amount", "format": "amount" },
       "fromToken": { "format": "addressName", "label": "Origin Token", "params": { "types": ["token"] } },
       "toToken": { "format": "addressName", "label": "Destination Token", "params": { "types": ["token"] } },
       "fromAmount": { "format": "tokenAmount", "label": "Income Amount", "params": { "tokenPath": "fromToken" } },
-      "exchange": { "format": "addressName", "label": "Exchange address", "params": { "types": ["wallet"] } }
+      "exchange": { "format": "addressName", "label": "Exchange address", "params": { "types": ["wallet"] } },
+      "beneficiary": { "format": "addressName", "label": "Beneficiary address", "params": { "types": ["eoa"] } },
+      "toAmount": { "format": "tokenAmount", "label": "Outcome Amount", "params": { "tokenPath": "toToken" } },
+      "expectedAmount": { "label": "Expected Amount", "format": "amount" }
     },
     "formats": {
       "0x54840d1a": {
@@ -33,27 +30,25 @@
         "fields": [
           { "path": "amountIn", "$ref": "$.display.definitions.amountIn" },
           { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
-          { "path": "path.[]", "label": "Array of addresses", "format": "addressName", "params": { "types": ["wallet"] } }
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
         ],
         "required": ["amountIn", "amountOutMin", "path"]
       },
       "0xf5661034": {
         "$id": "swapOnUniswapFork",
         "fields": [
-          { "path": "factory", "$ref": "$.display.definitions.factory" },
-          { "path": "initCode", "format": "raw", "label": "init code" },
           { "path": "amountIn", "$ref": "$.display.definitions.amountIn" },
           { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
-          { "path": "path.[]", "label": "Array of addresses", "format": "addressName", "params": { "types": ["wallet"] } }
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
         ],
-        "required": ["factory", "initCode", "amountIn", "amountOutMin", "path"]
+        "required": ["amountIn", "amountOutMin", "path"]
       },
       "0x935fb84b": {
         "$id": "buyOnUniswap",
         "fields": [
           { "path": "amountOut", "$ref": "$.display.definitions.amountOut" },
           { "path": "amountInMax", "$ref": "$.display.definitions.amountInMax" },
-          { "path": "path.[]", "label": "Array of addresses", "format": "addressName", "params": { "types": ["contract"] } }
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
         ],
         "required": ["amountOut", "amountInMax", "path"]
       },
@@ -62,9 +57,9 @@
         "fields": [
           { "path": "amountOut", "$ref": "$.display.definitions.amountOut" },
           { "path": "amountInMax", "$ref": "$.display.definitions.amountInMax" },
-          { "path": "path.[]", "label": "Array of addresses", "format": "addressName", "params": { "types": ["wallet"] } }
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
         ],
-        "required": ["factory", "initCode", "amountOut", "amountInMax", "path"]
+        "required": ["amountOut", "amountInMax", "path"]
       },
       "0x0b86a4c1": {
         "$id": "swapOnUniswapV2Fork",
@@ -73,7 +68,7 @@
           { "path": "amountIn", "$ref": "$.display.definitions.amountIn", "params": { "tokenPath": "tokenIn" } },
           { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" }
         ],
-        "required": ["tokenIn", "amountIn", "amountOutMin", "weth", "pools"]
+        "required": ["tokenIn", "amountIn", "amountOutMin"]
       },
       "0x64466805": {
         "$id": "swapOnZeroXv4",
@@ -82,10 +77,63 @@
           { "path": "toToken", "$ref": "$.display.definitions.toToken" },
           { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
           { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
-          { "path": "exchange", "$ref": "$.display.definitions.exchange" },
-          { "path": "payload", "format": "raw", "label": "payload" }
+          { "path": "exchange", "$ref": "$.display.definitions.exchange" }
         ],
-        "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange", "payload"]
+        "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange"]
+      },
+      "0x2298207a": {
+        "$id": "simpleBuy",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken"},
+          { "path": "data.toToken", "$ref": "$.display.definitions.toToken"},
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
+       ],
+        "required": ["data.fromToken", "data.toToken", "data.fromAmount", "data.toAmount", "data.beneficiary"]
+      },
+      "0x46c67b6d": {
+        "$id": "megaSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken"},
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+       ],
+        "required": ["data.fromAmount", "data.fromToken", "data.beneficiary", "data.path"]
+      },
+      "0x54e3f31b": {
+        "$id": "simpleSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
+       ],
+        "required": ["data.fromToken", "data.toToken", "fromAmount", "toAmount", "beneficiary"]
+      },
+      "0xa94e78ef": {
+        "$id": "multiSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.expectedAmount", "$ref": "$.display.definitions.expectedAmount" },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["data.fromToken", "data.fromAmount", "data.toAmount", "data.expectedAmount", "data.beneficiary", "data.path"]
+      },
+      "0x81033120": {
+        "$id": "swapOnZeroXv2",
+        "fields": [
+          { "path": "fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
+          { "path": "exchange", "$ref": "$.display.definitions.exchange" }
+       ],
+        "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange"]
       }
     }
   }
