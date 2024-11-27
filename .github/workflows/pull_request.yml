@@ -19,6 +19,10 @@ jobs:
     timeout-minutes: 60
     steps:
 
+      - name: Debug
+        shell: bash
+        run: curl -v 'https://etherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x11111112542d85b3ef69ae05771c2dccff4faa26'
+
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
