@@ -18,7 +18,6 @@
     "definitions": {
       "amountIn": { "label": "Income Amount", "format": "amount" },
       "amountOut": { "label": "Outcome Amount", "format": "amount" },
-      "amountOutIn": { "label": "Outcome/Income Amount", "format": "tokenAmount", "params": { "tokenPath": "fromToken" } },
       "amountInMax": { "label": "Maximum Income Amount", "format": "amount" },
       "factory": { "label": "Factory", "format": "addressName", "params": { "types": ["contract"] } },
       "tokenIn": { "label": "Inbound token", "format": "addressName", "params": { "types": ["token"] } },
