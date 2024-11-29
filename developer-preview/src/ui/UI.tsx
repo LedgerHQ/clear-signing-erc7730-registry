@@ -33,6 +33,18 @@ export const UI = {
     const El = as;
     return <El className={cn("p-5", className)}>{children}</El>;
   },
+  Input: ({
+    error = false,
+    ...props
+  }: React.InputHTMLAttributes<HTMLInputElement> & { error?: boolean }) => (
+    <input
+      className={cn(
+        "w-full rounded-md border border-[#fff1] px-3 py-2 text-sm",
+        error ? "text-red-400" : "bg-[#fff1]",
+      )}
+      {...props}
+    />
+  ),
   FauxInput: ({
     children,
     error = false,

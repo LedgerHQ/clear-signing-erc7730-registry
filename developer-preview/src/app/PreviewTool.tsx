@@ -1,6 +1,8 @@
 "use client";
 
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { isHex } from "viem";
+
 import { DevicesDemo } from "~/app/DevicesDemo";
 import { ContractInfo } from "~/app/ContractInfo";
 import { UI } from "~/ui/UI";
@@ -22,6 +24,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
   const [selectedDevice, setSelectedDevice] = useState<"flex" | "stax">("flex");
   const [selectedOperation, setSelectedOperation] = useState("");
   const [fileKey, setFileKey] = useState("");
+  const [callData, setCallData] = useState("");
   const [previewData, setPreviewData] = useState<PreviewData | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -42,6 +45,11 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
     setFileKey(
       localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
     );
+
+    const storedCallData =
+      localStorage.getItem("callData") ??
+      "0xaf68b302000000000000000000000000000000000000000000000000000000000002be020000000000000000000000000000000000000000000000000000000000003039000000000000000000000000d8dA6BF26964aF9D7eEd9e03E53415D37aA96045000000000000000000000000000000000000000000000000000000006621029400000000000000000000000000000000000000000000000000000000000000a00000000000000000000000000000000000000000000000000000000000000041824039082e9e95f951a1d565ac04942486aa88e5fd0d66adf6e1c1ca1230f45f7954a560ab1a309127ff9b4ace4201d977cfddd801e308dafbaa4b9ddfa5413c1c00000000000000000000000000000000000000000000000000000000000000";
+    if (isHex(storedCallData)) setCallData(storedCallData);
   }, [previewData?.operations]);
 
   useEffect(() => {
@@ -96,7 +104,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
           {previewData && (
             <>
-              <SelectValues />
+              <SelectValues callData={callData} setCallData={setCallData} />
               <SelectOperation
                 data={previewData}
                 selectedOperation={selectedOperation}
