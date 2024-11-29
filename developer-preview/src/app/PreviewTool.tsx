@@ -149,13 +149,13 @@ function fetchPreviewData(
     .then((res) => {
       res
         .json()
-        .then((metadata: ERC7730Schema | null) => {
+        .then(async (metadata: ERC7730Schema | null) => {
           if (!metadata) {
             setPreviewData(null);
             return;
           }
 
-          const { data, error } = getPreviewData(metadata, callData);
+          const { data, error } = await getPreviewData(metadata, callData);
           if (error) {
             setPreviewData(null);
             setErrorMessage(error);
