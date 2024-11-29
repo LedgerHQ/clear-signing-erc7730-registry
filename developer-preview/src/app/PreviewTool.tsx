@@ -54,15 +54,15 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
   useEffect(() => {
     if (fileKey) {
-      fetchPreviewData(fileKey, setPreviewData, setErrorMessage);
+      fetchPreviewData(fileKey, callData, setPreviewData, setErrorMessage);
 
       const interval = setInterval(() => {
-        fetchPreviewData(fileKey, setPreviewData, setErrorMessage);
+        fetchPreviewData(fileKey, callData, setPreviewData, setErrorMessage);
       }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [fileKey]);
+  }, [fileKey, callData]);
 
   if (!mounted) {
     return null;
@@ -141,6 +141,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
 
 function fetchPreviewData(
   fileKey: string,
+  callData: string,
   setPreviewData: Dispatch<SetStateAction<PreviewData | null>>,
   setErrorMessage: Dispatch<SetStateAction<string>>,
 ) {
@@ -154,7 +155,7 @@ function fetchPreviewData(
             return;
           }
 
-          const { data, error } = getPreviewData(metadata);
+          const { data, error } = getPreviewData(metadata, callData);
           if (error) {
             setPreviewData(null);
             setErrorMessage(error);
