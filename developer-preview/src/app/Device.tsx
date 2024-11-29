@@ -57,7 +57,7 @@ export const Device = {
     return (
       <div
         className={cn(
-          "font-medium leading-[20px]",
+          "break-words font-medium leading-[20px]",
           isStax ? "text-[16px]" : "text-[18px]",
         )}
       >
