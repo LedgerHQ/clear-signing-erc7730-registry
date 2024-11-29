@@ -29,6 +29,14 @@ const processFields = (
       const value = values[field.path];
       if (value) {
         switch (field.format) {
+          case "date":
+            if (field.params?.encoding === "timestamp") {
+              displayValue = new Date(Number(value) * 1000).toLocaleString(
+                "fr",
+                { timeZone: "UTC" },
+              );
+              break;
+            }
           default:
             displayValue = value;
         }
