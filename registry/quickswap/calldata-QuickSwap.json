@@ -2,7 +2,7 @@
   "context": {
     "$id": "QuickSwap",
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff" }],
+      "deployments": [{ "chainId": 137, "address": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff" }],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/polygon/quickswap/abis/0xa5e0829caced8ffdd4de3c43696c57f7d7a678ff.abi.json"
     }
   },
@@ -19,7 +19,7 @@
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           {
             "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[1]" }
           },
@@ -33,7 +33,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
-          { "path": "amountOutMin", "label": "Minimum amount to Receive", "format": "amount" },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "amount" },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -45,7 +45,7 @@
         "fields": [
           {
             "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[1]" }
           },
@@ -59,7 +59,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountOut", "label": "Amount to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[1]" } },
-          { "path": "amountInMax", "label": "Maximum Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
+          { "path": "amountInMax", "label": "Maximum to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -72,7 +72,7 @@
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           {
             "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[1]" }
           },
@@ -86,7 +86,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountOut", "label": "Amount to Receive", "format": "amount" },
-          { "path": "amountInMax", "label": "Maximum Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
+          { "path": "amountInMax", "label": "Maximum to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -98,7 +98,7 @@
         "fields": [
           {
             "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[1]" }
           },
