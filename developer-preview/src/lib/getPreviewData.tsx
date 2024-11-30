@@ -2,6 +2,7 @@ import {
   type AbiFunction,
   createPublicClient,
   decodeFunctionData,
+  erc20Abi,
   getAbiItem,
   http,
   isAddress,
@@ -56,6 +57,28 @@ const processFields = (
                 Number(value) / 10 ** Number(field.params?.decimals ?? 0)
               }${field.params?.base ? ` ${String(field.params.base)}` : ""}`;
               break;
+            case "tokenAmount":
+              if (typeof field.params?.tokenPath === "string") {
+                const token = get(values, field.params.tokenPath);
+                if (isHex(token) && isAddress(token)) {
+                  try {
+                    const [decimals, symbol] = await Promise.all([
+                      publicClient.readContract({
+                        abi: erc20Abi,
+                        address: token,
+                        functionName: "decimals",
+                      }),
+                      publicClient.readContract({
+                        abi: erc20Abi,
+                        address: token,
+                        functionName: "symbol",
+                      }),
+                    ]);
+                    displayValue = `${Number(value) / 10 ** decimals}${symbol ? ` ${symbol}` : ""}`;
+                    break;
+                  } catch {}
+                }
+              }
             case "addressName":
               if (
                 typeof value === "string" &&
