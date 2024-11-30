@@ -51,6 +51,11 @@ const processFields = (
                 );
                 break;
               }
+            case "unit":
+              displayValue = `${
+                Number(value) / 10 ** Number(field.params?.decimals ?? 0)
+              }${field.params?.base ? ` ${String(field.params.base)}` : ""}`;
+              break;
             case "addressName":
               if (
                 typeof value === "string" &&
