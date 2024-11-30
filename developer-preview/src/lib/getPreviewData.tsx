@@ -14,10 +14,15 @@ import type { ERC7730Schema, FieldFormatter } from "~/types/ERC7730Schema";
 
 const publicClient = createPublicClient({ chain: mainnet, transport: http() });
 
+const get = (values: unknown, path: string) =>
+  path
+    .split(".")
+    .reduce((acc, key) => acc && (acc as Record<string, unknown>)[key], values);
+
 const processFields = (
   fields: FieldFormatter[],
   definitions: Record<string, { label?: string; format?: string }>,
-  values: Record<string, string>,
+  values: Record<string, unknown>,
 ): Promise<{ label: string; displayValue: string }[]> =>
   Promise.all(
     fields.map(async (field) => {
@@ -33,7 +38,7 @@ const processFields = (
       }
 
       if (field.path) {
-        const value = values[field.path];
+        const value = get(values, field.path);
         if (value) {
           switch (field.format) {
             case "date":
@@ -46,6 +51,7 @@ const processFields = (
               }
             case "addressName":
               if (
+                typeof value === "string" &&
                 Array.isArray(field.params?.sources) &&
                 field.params.sources.includes("ens") &&
                 isAddress(value)
@@ -57,7 +63,7 @@ const processFields = (
                 }
               }
             default:
-              displayValue = value;
+              displayValue = String(value);
           }
         }
       }
@@ -98,7 +104,7 @@ async function transformSimpleFormatToOperations(
           ? format.intent
           : JSON.stringify(format.intent);
 
-      const values: Record<string, string> = {};
+      const values: Record<string, unknown> = {};
       if (isHex(callData) && !isHex(signature)) {
         const abiItem = parseAbiItem(`function ${signature}`) as AbiFunction;
         try {
@@ -107,7 +113,7 @@ async function transformSimpleFormatToOperations(
             data: callData,
           });
           for (const [index, { name }] of abiItem.inputs.entries()) {
-            if (name) values[name] = String(args[index]);
+            if (name) values[name] = args[index];
           }
         } catch {}
       }
