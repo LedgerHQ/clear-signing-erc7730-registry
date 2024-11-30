@@ -2,15 +2,17 @@ import {
   type AbiFunction,
   createPublicClient,
   decodeFunctionData,
+  getAbiItem,
   http,
   isAddress,
   isHex,
   parseAbiItem,
+  toFunctionSelector,
 } from "viem";
 import { mainnet } from "viem/chains";
 
 import { type Operation, type PreviewData } from "~/types/PreviewData";
-import type { ERC7730Schema, FieldFormatter } from "~/types/ERC7730Schema";
+import type { ABI, ERC7730Schema, FieldFormatter } from "~/types/ERC7730Schema";
 
 const publicClient = createPublicClient({ chain: mainnet, transport: http() });
 
@@ -90,11 +92,29 @@ const processFields = (
 async function transformSimpleFormatToOperations(
   display: ERC7730Schema["display"],
   callData?: string,
+  abiOrURL?: ABI | string,
 ): Promise<Operation[]> {
   const formats = display.formats;
   const definitions = display.definitions ?? {};
 
   if (!formats) return [];
+
+  const abi =
+    typeof abiOrURL === "string"
+      ? await fetch(
+          abiOrURL.replace(
+            /^https:\/\/github\.com\/([^/]+\/[^/]+\/)blob\//,
+            "https://raw.githubusercontent.com/$1",
+          ),
+        )
+          .then(async (response) => {
+            if (!response.ok) throw new Error();
+            const json: unknown = await response.json();
+            if (!Array.isArray(json)) throw new Error();
+            return json as ABI;
+          })
+          .catch(() => undefined)
+      : abiOrURL;
 
   return Promise.all(
     Object.entries(formats).map(async ([signature, format]) => {
@@ -105,9 +125,15 @@ async function transformSimpleFormatToOperations(
           : JSON.stringify(format.intent);
 
       const values: Record<string, unknown> = {};
-      if (isHex(callData) && !isHex(signature)) {
-        const abiItem = parseAbiItem(`function ${signature}`) as AbiFunction;
+      if (isHex(callData)) {
         try {
+          const abiItem = (abi &&
+            getAbiItem({
+              abi: abi ?? [parseAbiItem(`function ${signature}`)],
+              name: isHex(signature)
+                ? signature
+                : toFunctionSelector(`function ${signature}`),
+            })) as AbiFunction;
           const { args } = decodeFunctionData({
             abi: [abiItem],
             data: callData,
@@ -138,6 +164,7 @@ export async function getPreviewData(
     const operations = await transformSimpleFormatToOperations(
       display,
       callData,
+      "contract" in context ? context.contract.abi : undefined,
     );
     const name =
       "contract" in context ? context.$id : context.eip712.domain.name;
