@@ -22,6 +22,12 @@ const get = (values: unknown, path: string) =>
     .split(".")
     .reduce((acc, key) => acc && (acc as Record<string, unknown>)[key], values);
 
+const fetchAndParse = async (url: string, parse: (json: unknown) => ABI) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error();
+  return parse(await response.json());
+};
+
 const processFields = (
   fields: FieldFormatter[],
   definitions: Record<string, { label?: string; format?: string }>,
@@ -129,19 +135,30 @@ async function transformSimpleFormatToOperations(
 
   const abi =
     typeof abiOrURL === "string"
-      ? await fetch(
-          abiOrURL.replace(
-            /^https:\/\/github\.com\/([^/]+\/[^/]+\/)blob\//,
-            "https://raw.githubusercontent.com/$1",
-          ),
-        )
-          .then(async (response) => {
-            if (!response.ok) throw new Error();
-            const json: unknown = await response.json();
-            if (!Array.isArray(json)) throw new Error();
-            return json as ABI;
-          })
-          .catch(() => undefined)
+      ? await (
+          abiOrURL.startsWith("https://api.etherscan.io/")
+            ? fetchAndParse(
+                abiOrURL.replace(
+                  /^https:\/\/api\.etherscan\.io\/(.*)$/,
+                  `https://api.etherscan.io/$1&apikey=${process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY}`,
+                ),
+                (json) => {
+                  const data = json as { message?: string; result?: string };
+                  if (!data?.result || data.message !== "OK") throw new Error();
+                  return JSON.parse(data.result) as ABI;
+                },
+              )
+            : fetchAndParse(
+                abiOrURL.replace(
+                  /^https:\/\/github\.com\/([^/]+\/[^/]+\/)blob\//,
+                  "https://raw.githubusercontent.com/$1",
+                ),
+                (json) => {
+                  if (!Array.isArray(json)) throw new Error();
+                  return json as ABI;
+                },
+              )
+        ).catch(() => undefined)
       : abiOrURL;
 
   return Promise.all(
