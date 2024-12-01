@@ -1,9 +1,11 @@
 import {
   type AbiFunction,
+  bytesToHex,
   createPublicClient,
   decodeFunctionData,
   erc20Abi,
   getAbiItem,
+  hexToBytes,
   http,
   isAddress,
   isHex,
@@ -18,9 +20,25 @@ import type { ABI, ERC7730Schema, FieldFormatter } from "~/types/ERC7730Schema";
 const publicClient = createPublicClient({ chain: mainnet, transport: http() });
 
 const get = (values: unknown, path: string) =>
-  path
-    .split(".")
-    .reduce((acc, key) => acc && (acc as Record<string, unknown>)[key], values);
+  path.split(".").reduce((acc, key) => {
+    if (!acc) return;
+    const slice = /^\[(-?\d+)?(?::(-?\d+))?\]$/.exec(key);
+    if (slice && isHex(acc)) {
+      return bytesToHex(
+        hexToBytes(acc).slice(
+          Number(slice[1]),
+          slice[2]
+            ? Number(slice[2]) >= 0
+              ? Number(slice[2]) + 1
+              : Number(slice[2]) === -1
+                ? undefined
+                : Number(slice[2])
+            : undefined,
+        ),
+      );
+    }
+    return (acc as Record<string, unknown>)[key];
+  }, values);
 
 const fetchAndParse = async (url: string, parse: (json: unknown) => ABI) => {
   const response = await fetch(url);
