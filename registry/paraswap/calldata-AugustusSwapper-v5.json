@@ -4,7 +4,9 @@
     "contract": {
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/main/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json",
       "deployments": [
-        { "chainId": 1, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" }
+        { "chainId": 56, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
+        { "chainId": 1, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
+        { "chainId": 137, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" }
       ]
     }
   },
