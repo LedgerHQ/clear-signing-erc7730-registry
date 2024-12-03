@@ -20,3 +20,6 @@ jobs:
           for i in {1..100}; do
             curl -L -vvv "https://proxyetherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582"
           done
+      - name: Generate some traffic to proxy
+        run: |
+          curl -L -vvv "https://proxyetherscan.api.live.ledger.com/v2/api?module=contract&action=getabi&chainid=56&address=0x1111111254fb6c44bac0bed2854e76f90643097d"
