@@ -2,7 +2,7 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "includes": "common-AggregationRouterV4.json",
   "context": {
-    "$id": "AggregationRouterV4",
+    "$id": "AggregationRouterV4TEST",
     "contract": {
       "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x1111111254fb6c44bac0bed2854e76f90643097d",
       "deployments": [{ "chainId": 1, "address": "0x1111111254fb6c44bAC0beD2854e76F90643097d" }]
