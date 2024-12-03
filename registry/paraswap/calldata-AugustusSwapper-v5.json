@@ -86,22 +86,22 @@
       "0x2298207a": {
         "$id": "simpleBuy",
         "fields": [
-          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken"},
-          { "path": "data.toToken", "$ref": "$.display.definitions.toToken"},
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.toToken", "$ref": "$.display.definitions.toToken" },
           { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
           { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
           { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
-       ],
+        ],
         "required": ["data.fromToken", "data.toToken", "data.fromAmount", "data.toAmount", "data.beneficiary"]
       },
       "0x46c67b6d": {
         "$id": "megaSwap",
         "fields": [
-          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken"},
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
           { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
           { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
           { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
-       ],
+        ],
         "required": ["data.fromAmount", "data.fromToken", "data.beneficiary", "data.path"]
       },
       "0x54e3f31b": {
@@ -112,7 +112,7 @@
           { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
           { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
           { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
-       ],
+        ],
         "required": ["data.fromToken", "data.toToken", "fromAmount", "toAmount", "beneficiary"]
       },
       "0xa94e78ef": {
@@ -134,7 +134,7 @@
           { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
           { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
           { "path": "exchange", "$ref": "$.display.definitions.exchange" }
-       ],
+        ],
         "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange"]
       }
     }

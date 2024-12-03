@@ -3,9 +3,7 @@
     "$id": "AugustusSwapper",
     "contract": {
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/main/ethereum/paraswap/abis/0x1bd435f3c054b6e901b7b108a0ab7617c808677b.abi.json",
-      "deployments": [
-        { "chainId": 1, "address": "0x1bd435f3c054b6e901b7b108a0ab7617c808677b" }
-      ]
+      "deployments": [{ "chainId": 1, "address": "0x1bd435f3c054b6e901b7b108a0ab7617c808677b" }]
     }
   },
   "metadata": { "owner": "Paraswap" },
@@ -78,7 +76,7 @@
           { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
           { "path": "toAmount", "$ref": "$.display.definitions.toAmount" },
           { "path": "beneficiary", "$ref": "$.display.definitions.beneficiary" }
-       ],
+        ],
         "required": ["fromToken", "fromAmount", "toAmount", "beneficiary"]
       },
       "0xcfc0afeb": {
@@ -89,7 +87,7 @@
           { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
           { "path": "toAmount", "$ref": "$.display.definitions.toAmount" },
           { "path": "beneficiary", "$ref": "$.display.definitions.beneficiary" }
-       ],
+        ],
         "required": ["fromToken", "fromAmount", "toAmount", "beneficiary"]
       },
       "0xec1d21dd": {
@@ -100,17 +98,18 @@
           { "path": "data.expectedAmount", "$ref": "$.display.definitions.expectedAmount" },
           { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
           { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
-       ],
+        ],
         "required": ["data.fromToken", "data.fromAmount", "data.beneficiary", "data.path", "data.expectedAmount"]
       },
       "0xf95a49eb": {
         "$id": "buy",
         "fields": [
-          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken"},
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
           { "path": "data.toToken", "$ref": "$.display.definitions.toToken" },
           { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
           { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
-          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }       ],
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
+        ],
         "required": ["data.fromToken", "data.toToken", "data.fromAmount", "data.toAmount", "data.beneficiary"]
       }
     }
