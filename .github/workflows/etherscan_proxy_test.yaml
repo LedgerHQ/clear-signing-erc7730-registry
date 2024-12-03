@@ -11,6 +11,12 @@ jobs:
       runs-on: public-ledgerhq-shared-small
 
       steps:
-
-      - name: Curl URL
-        run: curl -L -vvv https://etherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582
+      - name: Get ip - ifconfig
+        run: ifconfig
+      - name: Get ip
+        run: ip a
+      - name: Generate some traffic to proxy
+        run: |
+          for i in {1..100}; do
+            curl -L -vvv "https://proxyetherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582"
+          done
