@@ -1,7 +1,7 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": "AggregationRouterV5",
+    "$id": "AggregationRouterV5TEST",
     "contract": {
       "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x1111111254eeb25477b68fb85ed929f73a960582",
       "deployments": [
