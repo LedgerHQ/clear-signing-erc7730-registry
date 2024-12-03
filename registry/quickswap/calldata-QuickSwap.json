@@ -17,12 +17,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
-          {
-            "path": "amountOutMin",
-            "label": "Minimum to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[1]" }
-          },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[1]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -43,12 +38,7 @@
         "$id": "swapExactETHForTokens",
         "intent": "Swap",
         "fields": [
-          {
-            "path": "amountOutMin",
-            "label": "Minimum to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[1]" }
-          },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[1]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -70,12 +60,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
-          {
-            "path": "amountOutMin",
-            "label": "Minimum to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[1]" }
-          },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[1]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -96,12 +81,7 @@
         "$id": "swapExactETHForTokensSupportingFeeOnTransferTokens",
         "intent": "Swap",
         "fields": [
-          {
-            "path": "amountOutMin",
-            "label": "Minimum to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[1]" }
-          },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[1]" } },
           { "path": "to", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
