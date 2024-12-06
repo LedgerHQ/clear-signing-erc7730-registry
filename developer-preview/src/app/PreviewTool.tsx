@@ -1,7 +1,6 @@
 "use client";
 
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
-import { DevicesDemo } from "~/app/DevicesDemo";
 import { ContractInfo } from "~/app/ContractInfo";
 import { UI } from "~/ui/UI";
 import { SelectMetadataFile } from "~/app/SelectMetadataFile";
@@ -12,6 +11,7 @@ import { type ERC7730Schema } from "~/types/ERC7730Schema";
 import { SelectDevice } from "~/app/SelectDevice";
 import { SelectOperation } from "~/app/SelectOperation";
 import { SelectValues } from "~/app/SelectValues";
+import { DevicesDemoInteractive } from "./DevicesDemoInteractive";
 
 interface Props {
   jsonInRegistry: string[];
@@ -119,7 +119,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
                 setSelectedDevice={setSelectedDevice}
               />
             </UI.Container>
-            <DevicesDemo
+            <DevicesDemoInteractive
               data={previewData}
               selectedDevice={selectedDevice}
               selectedOperation={selectedOperation}
