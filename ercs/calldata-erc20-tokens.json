@@ -53,7 +53,7 @@
             "label": "Amount",
             "format": "tokenAmount",
             "params": {
-              "tokenPath": "$.context.contract.deployments.[0].address",
+              "token": "$.context.contract.deployments.[0].address",
               "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
             }
           }
