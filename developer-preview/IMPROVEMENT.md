@@ -19,4 +19,6 @@
 - Accurate representation of device displays and interactions
 - Support for message signing workflows
 
-[Video demonstration of device simulation]
+### Demo Video
+https://github.com/user-attachments/assets/e1db3f5c-5fa6-43e6-a8e5-26307fbd7a19
+
