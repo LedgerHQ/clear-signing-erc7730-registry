@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "description": "ERC7730 Clear Signing Specification Schema. Specification located at https://github.com/LedgerHQ/clear-signing-erc7730-registry/tree/master/specs",
-    
+
     "properties": {
 
         "$schema": {
@@ -38,13 +38,13 @@
             "title": "Binding Context Section",
             "type": "object",
             "description": "The binding context is a set of constraints that are used to bind the ERC7730 file to a specific structured data being displayed. Currently, supported contexts include contract-specific constraints or EIP712 message specific constraints.",
-            
+
             "properties": {
                 "$id" : {
                     "$ref": "#/$definitions/id"
                 }
             },
-            
+
             "oneOf": [
                 {
                     "$ref": "#/$context/contract"
@@ -58,7 +58,7 @@
 
         "contract": {
             "type": "object",
-            
+
             "properties": {
                 "contract": {
                     "title": "Contract Binding Context",
@@ -83,7 +83,7 @@
                             "$ref": "#/$context/deployments"
                         },
                         "addressMatcher": {
-                            "title": "Address Matcher constraint", 
+                            "title": "Address Matcher constraint",
                             "type": "string",
                             "format": "uri",
                             "description": "An URL of a contract address matcher that should be used to match the contract address."
@@ -108,7 +108,7 @@
                             ],
                             "additionalProperties": false
                         }
-                        
+
                     },
                     "additionalProperties": false
                 }
@@ -127,8 +127,7 @@
                     "description": "The EIP-712 binding context is a set of constraints that must be verified by the message being signed.",
 
                     "properties" : {
-                        "schemas" : 
-                        {
+                        "schemas" : {
                             "oneOf": [
                                 {
                                     "title": "An EIP712 Schemas url",
@@ -276,14 +275,14 @@
                 "legalName",
                 "url"
             ],
-            "additionalProperties": false            
+            "additionalProperties": false
         },
 
         "token" : {
             "title": "Token Description",
             "type": "object",
             "description": "A description of an ERC20 token exported by this format, that should be trusted. Not mandatory if the corresponding metadata can be fetched from the contract itself.",
-            
+
             "properties": {
                 "name": {
                     "title": "Token Name",
@@ -316,7 +315,7 @@
             "additionalProperties": {
                 "type": ["string", "integer", "number", "boolean", "null"]
             }
-        }, 
+        },
 
         "enums" : {
             "title": "Enums",
@@ -349,7 +348,7 @@
             "title": "Display Formatting Info Section",
             "type": "object",
             "description": "The display section contains all the information needed to format the data in a human readable way. It contains the constants and formatters used to display the data contained in the bound structure.",
-            
+
             "properties": {
 
                 "definitions": {
@@ -414,7 +413,7 @@
                 {
                     "title": "Simple intent message",
                     "description": "A description of the intent of the structured data signing, that will be displayed to the user.",
-                    "type": "string"        
+                    "type": "string"
                 },
                 {
                     "title": "Complex intent message",
@@ -452,7 +451,7 @@
             "title": "Field Formats set",
             "type": "array",
             "description": "An array containing the ordered definitions of fields formats. See the specification for more details.",
-            
+
             "items": {
                 "oneOf": [
                     {
@@ -493,6 +492,9 @@
                 "path": {
                     "$ref": "#/$format/path"
                 },
+                "value": {
+                    "$ref": "#/$format/value"
+                },
                 "$ref": {
                     "title": "Internal Definition",
                     "description": "An internal definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
@@ -505,8 +507,11 @@
                     "additionalProperties": { "type": "string" }
                 }
             },
-            "required": [
-                "$ref"
+            "required": [ "$ref" ],
+            "allOf": [
+                {
+                    "not": { "required": [ "path", "value" ] }
+                }
             ],
             "additionalProperties": false
         }
@@ -517,6 +522,11 @@
             "title": "Path",
             "type": "string",
             "description": "A path to the field in the structured data. The path is a JSON path expression that can be used to extract the field value from the structured data."
+        },
+        "value": {
+            "title": "Value",
+            "type": ["string", "integer", "number", "boolean"],
+            "description": "A literal value on which the format should be applied instead of looking up a field in the structured data."
         },
         "field": {
             "title": "Field formatter",
@@ -530,6 +540,9 @@
                 "path": {
                     "$ref": "#/$format/path"
                 },
+                "value": {
+                    "$ref": "#/$format/value"
+                },
                 "label": {
                     "title": "Field Label",
                     "description": "The label of the field, that will be displayed to the user in front of the formatted field value.",
@@ -542,11 +555,15 @@
                     "$ref": "#/$format/names"
                 }
             },
+            "required": [ "label", "format" ],
             "allOf" : [
+                {
+                    "not": { "required": [ "path", "value" ] }
+                },
                 {
                     "if": { "properties": { "format": { "const": "addressName" } } },
                     "then": {
-                        "properties": { 
+                        "properties": {
                             "params": { "$ref": "#/$format/addressNameParameters" }
                         }
                     }
@@ -554,7 +571,7 @@
                 {
                     "if": { "properties": { "format": { "const": "calldata" } } },
                     "then": {
-                        "properties": { 
+                        "properties": {
                             "params": { "$ref": "#/$format/calldataParameters" }
                         }
                     }
@@ -562,7 +579,7 @@
                 {
                     "if": { "properties": { "format": { "const": "tokenAmount" } } },
                     "then": {
-                        "properties": { 
+                        "properties": {
                             "params": { "$ref": "#/$format/tokenAmountParameters" }
                         }
                     }
@@ -600,12 +617,8 @@
                     }
                 }
             ],
-            "required": [
-                "label",
-                "format"
-            ],
-            "unresolvedProperties": false    
-        }, 
+            "unresolvedProperties": false
+        },
         "names": {
             "anyOf": [
                 {
@@ -632,12 +645,12 @@
                 {
                     "title": "integer format",
                     "const": "tokenAmount",
-                    "description": "The field should be displayed as an amount, preceded by the ticker. The magnitude and ticker should be derived from the tokenPath parameter corresponding metadata."
+                    "description": "The field should be displayed as an amount, preceded by the ticker. The magnitude and ticker should be derived from the token or tokenPath parameter corresponding metadata."
                 },
                 {
                     "title": "integer format",
                     "const": "nftName",
-                    "description": "The field should be displayed as a single NFT names, or as a raw token Id if a specific name is not found. Collection is specified by the collectionPath parameter."
+                    "description": "The field should be displayed as a single NFT names, or as a raw token Id if a specific name is not found. Collection is specified by the collection or collectionPath parameter."
                 },
                 {
                     "title": "integer format",
@@ -694,11 +707,23 @@
                     "type": "string",
                     "description": "The selector being called, if not contained in the calldata. Hex string representation."
                 },
+                "callee": {
+                    "title": "Callee Address",
+                    "type": "string",
+                    "description": "The address of the contract being called by this embedded calldata."
+                },
                 "calleePath": {
                     "title": "Callee Path",
                     "type": "string",
                     "description": "The path to the address of the contract being called by this embedded calldata."
                 }
+            },
+            "anyOf": [
+                {"required": ["callee"]},
+                {"required": ["calleePath"]}
+            ],
+            "not": {
+                "required": ["callee", "calleePath"]
             },
             "additionalProperties": false
         },
@@ -706,10 +731,15 @@
             "title": "Token Amount Formatting Parameters",
             "type": "object",
             "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "description": "The token address, or a path to a constant in the ERC 7730 file."
+                },
                 "tokenPath": {
                     "title": "Token Path",
                     "type": "string",
-                    "description": "The path to the token address in the structured data, or in the ERC 7730 file."
+                    "description": "The path to the token address in the structured data."
                 },
                 "nativeCurrencyAddress": {
                     "title": "Native Currency Address",
@@ -738,21 +768,37 @@
                     "description": "The message to display when the amount is above the threshold."
                 }
             },
+            "anyOf": [
+                {"required": ["token"]},
+                {"required": ["tokenPath"]}
+            ],
+            "not": {
+                "required": ["token", "tokenPath"]
+            },
             "additionalProperties": false
         },
         "nftNameParameters" : {
             "title": "NFT Names Formatting Parameters",
             "type": "object",
             "properties": {
+                "collection": {
+                    "title": "Collection Address",
+                    "type": "string",
+                    "description": "The collection address, or a path to a constant in the ERC 7730 file."
+                },
                 "collectionPath": {
                     "title": "Collection Path",
                     "type": "string",
                     "description": "The path to the collection in the structured data."
                 }
             },
-            "required": [
-                "collectionPath"
+            "anyOf": [
+                {"required": ["collection"]},
+                {"required": ["collectionPath"]}
             ],
+            "not": {
+                "required": ["collection", "collectionPath"]
+            },
             "additionalProperties": false
         },
         "dateParameters": {

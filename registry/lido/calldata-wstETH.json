@@ -21,7 +21,7 @@
             "path": "_stETHAmount",
             "label": "Amount to exchange",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.stETHaddress" }
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           }
         ]
       },

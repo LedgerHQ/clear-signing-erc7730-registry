@@ -24,7 +24,7 @@
             "path": "_amounts.[]",
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.wstETHaddress" }
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           },
           {
             "path": "_owner",
@@ -42,7 +42,7 @@
             "path": "_amounts.[]",
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.wstETHaddress" }
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           },
           {
             "path": "_owner",
@@ -61,7 +61,7 @@
             "path": "_amounts.[]",
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.stETHaddress" }
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           },
           {
             "path": "_owner",
@@ -79,7 +79,7 @@
             "path": "_amounts.[]",
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.stETHaddress" }
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           },
           {
             "path": "_owner",
