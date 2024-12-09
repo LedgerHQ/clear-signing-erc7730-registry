@@ -10,7 +10,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  DEBUG: true
   ETHERSCAN_API_HOST: proxyetherscan.api.live.ledger.com
 
 jobs:
