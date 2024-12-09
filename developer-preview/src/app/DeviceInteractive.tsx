@@ -10,6 +10,7 @@ import flexSignButton from "~/app/screens/assets/flex-sign-button.svg";
 import staxSignButton from "~/app/screens/assets/stax-sign-button.svg";
 import { cn } from "~/lib/utils";
 import { getIconFor } from "~/app/screens/getIconFor";
+import { FlexInteractive } from "./FlexInteractive";
 
 export const Device = {
   ActionText: ({ children }: { children: string }) => {
@@ -158,7 +159,7 @@ export const Device = {
         onPrevious={onPrevious}
       />
     ) : (
-      <Flex.Pagination
+      <FlexInteractive.Pagination
         current={current}
         total={total}
         onNext={onNext}

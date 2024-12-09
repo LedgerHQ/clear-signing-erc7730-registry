@@ -6,9 +6,9 @@ Run this web app locally to preview how Clear Signed messages will appear on dev
 
 ### Prerequisite
 
-Node.js: https://nodejs.org/en
+Node.js: <https://nodejs.org/en>
 
-We recommend using a Node version manager like **nvm** https://github.com/nvm-sh/nvm
+We recommend using a Node version manager like **nvm** <https://github.com/nvm-sh/nvm>
 
 ### Install dependencies
 
@@ -24,7 +24,7 @@ npm i
 npm run dev
 ```
 
-Open tool at http://localhost:3000
+Open tool at <http://localhost:3000>
 
 ☝️ _or another port if `3000` is already in use_
 
