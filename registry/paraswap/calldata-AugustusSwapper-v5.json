@@ -1,0 +1,142 @@
+{
+  "context": {
+    "$id": "AugustusSwapper",
+    "contract": {
+      "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/main/ethereum/paraswap/abis/0xdef171fe48cf0115b1d80b88dc8eab59176fee57.abi.json",
+      "deployments": [
+        { "chainId": 56, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
+        { "chainId": 1, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" },
+        { "chainId": 137, "address": "0xdef171fe48cf0115b1d80b88dc8eab59176fee57" }
+      ]
+    }
+  },
+  "metadata": { "owner": "Paraswap" },
+  "display": {
+    "definitions": {
+      "amountIn": { "label": "Income Amount", "format": "amount" },
+      "amountOut": { "label": "Outcome Amount", "format": "amount" },
+      "amountInMax": { "label": "Maximum Income Amount", "format": "amount" },
+      "tokenIn": { "label": "Inbound token", "format": "addressName", "params": { "types": ["token"] } },
+      "amountOutMin": { "label": "Minimum Outcome Amount", "format": "amount" },
+      "fromToken": { "format": "addressName", "label": "Origin Token", "params": { "types": ["token"] } },
+      "toToken": { "format": "addressName", "label": "Destination Token", "params": { "types": ["token"] } },
+      "fromAmount": { "format": "tokenAmount", "label": "Income Amount", "params": { "tokenPath": "fromToken" } },
+      "exchange": { "format": "addressName", "label": "Exchange address", "params": { "types": ["wallet"] } },
+      "beneficiary": { "format": "addressName", "label": "Beneficiary address", "params": { "types": ["eoa"] } },
+      "toAmount": { "format": "tokenAmount", "label": "Outcome Amount", "params": { "tokenPath": "toToken" } },
+      "expectedAmount": { "label": "Expected Amount", "format": "amount" }
+    },
+    "formats": {
+      "0x54840d1a": {
+        "$id": "swapOnUniswap",
+        "fields": [
+          { "path": "amountIn", "$ref": "$.display.definitions.amountIn" },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["amountIn", "amountOutMin", "path"]
+      },
+      "0xf5661034": {
+        "$id": "swapOnUniswapFork",
+        "fields": [
+          { "path": "amountIn", "$ref": "$.display.definitions.amountIn" },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["amountIn", "amountOutMin", "path"]
+      },
+      "0x935fb84b": {
+        "$id": "buyOnUniswap",
+        "fields": [
+          { "path": "amountOut", "$ref": "$.display.definitions.amountOut" },
+          { "path": "amountInMax", "$ref": "$.display.definitions.amountInMax" },
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["amountOut", "amountInMax", "path"]
+      },
+      "0xc03786b0": {
+        "$id": "buyOnUniswapFork",
+        "fields": [
+          { "path": "amountOut", "$ref": "$.display.definitions.amountOut" },
+          { "path": "amountInMax", "$ref": "$.display.definitions.amountInMax" },
+          { "path": "path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["amountOut", "amountInMax", "path"]
+      },
+      "0x0b86a4c1": {
+        "$id": "swapOnUniswapV2Fork",
+        "fields": [
+          { "path": "tokenIn", "$ref": "$.display.definitions.tokenIn" },
+          { "path": "amountIn", "$ref": "$.display.definitions.amountIn", "params": { "tokenPath": "tokenIn" } },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" }
+        ],
+        "required": ["tokenIn", "amountIn", "amountOutMin"]
+      },
+      "0x64466805": {
+        "$id": "swapOnZeroXv4",
+        "fields": [
+          { "path": "fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
+          { "path": "exchange", "$ref": "$.display.definitions.exchange" }
+        ],
+        "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange"]
+      },
+      "0x2298207a": {
+        "$id": "simpleBuy",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
+        ],
+        "required": ["data.fromToken", "data.toToken", "data.fromAmount", "data.toAmount", "data.beneficiary"]
+      },
+      "0x46c67b6d": {
+        "$id": "megaSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["data.fromAmount", "data.fromToken", "data.beneficiary", "data.path"]
+      },
+      "0x54e3f31b": {
+        "$id": "simpleSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.toAmount", "$ref": "$.display.definitions.toAmount", "params": { "tokenPath": "data.toToken" } },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" }
+        ],
+        "required": ["data.fromToken", "data.toToken", "fromAmount", "toAmount", "beneficiary"]
+      },
+      "0xa94e78ef": {
+        "$id": "multiSwap",
+        "fields": [
+          { "path": "data.fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "data.fromAmount", "$ref": "$.display.definitions.fromAmount", "params": { "tokenPath": "data.fromToken" } },
+          { "path": "data.expectedAmount", "$ref": "$.display.definitions.expectedAmount" },
+          { "path": "data.beneficiary", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "data.path.[]", "label": "Assets paths", "format": "addressName", "params": { "types": ["token"] } }
+        ],
+        "required": ["data.fromToken", "data.fromAmount", "data.toAmount", "data.expectedAmount", "data.beneficiary", "data.path"]
+      },
+      "0x81033120": {
+        "$id": "swapOnZeroXv2",
+        "fields": [
+          { "path": "fromToken", "$ref": "$.display.definitions.fromToken" },
+          { "path": "toToken", "$ref": "$.display.definitions.toToken" },
+          { "path": "fromAmount", "$ref": "$.display.definitions.fromAmount" },
+          { "path": "amountOutMin", "$ref": "$.display.definitions.amountOutMin" },
+          { "path": "exchange", "$ref": "$.display.definitions.exchange" }
+        ],
+        "required": ["fromToken", "toToken", "fromAmount", "amountOutMin", "exchange"]
+      }
+    }
+  }
+}

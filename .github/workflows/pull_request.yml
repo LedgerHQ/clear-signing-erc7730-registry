@@ -9,6 +9,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  ETHERSCAN_API_HOST: proxyetherscan.api.live.ledger.com
+
 jobs:
   validate_descriptors:
     name: 🔎 validate descriptors
@@ -28,15 +31,6 @@ jobs:
           files: |
             registry/**/eip712-*.json
             registry/**/calldata-*.json
-
-      - name: Get API keys
-        timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        shell: bash
-        run: |
-          cat << EOF | jq -r 'to_entries[] | select(.key|endswith("_API_KEY")) | "\(.key)=\(.value)"' >> "$GITHUB_ENV"
-          ${{ toJSON(secrets) }}
-          EOF
 
       - name: Setup python
         timeout-minutes: 10

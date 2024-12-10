@@ -1,87 +1,46 @@
 {
-    "$schema": "../../specs/erc7730-v1.schema.json",
-
-    "context": {
-        "$id": "wstETH",
-        "contract": {
-            "deployments": [
-                {
-                    "chainId": 1,
-                    "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
-                }
-            ],
-            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0.abi.json"
-        }
-    },
-
-    "metadata": {
-        "owner": "Lido",
-        "info": {
-            "url": "https://lido.fi",
-            "legalName": "Lido DAO",
-            "lastUpdate": "2021-02-19T04:37:20Z"
-        },
-        "constants": {
-            "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
-        }
-    },
-
-    "display": {
-        "formats": {
-            "wrap(uint256)" : {
-                "intent": "Exchange stETH to wstETH",
-                "fields": [
-                    {
-                        "path": "_stETHAmount",
-                        "label": "Amount to exchange",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "$.metadata.constants.stETHaddress"
-                        }
-                    }
-                ]
-            },
-            "unwrap(uint256)": {
-                "intent" : "Exchange wstETH to stETH",
-                "fields": [
-                    {
-                        "path": "_wstETHAmount",
-                        "label": "Amount to exchange",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "@.to"
-                        }
-                    }
-                ]
-            }, 
-            "approve(address,uint256)" : {
-                "intent" : "Approve spender",
-                "fields": [
-                    {
-                        "path": "spender",
-                        "label": "Spender",
-                        "format": "addressName",
-                        "params": {
-                            "types": [
-                                "contract"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    },
-                    {
-                        "path": "amount",
-                        "label": "Max spending amount",
-                        "format": "tokenAmount",
-                        "params": {
-                            "tokenPath": "@.to"
-                        }
-                    }
-                ]
-            }
-        }
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "wstETH",
+    "contract": {
+      "deployments": [{ "chainId": 1, "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0" }],
+      "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0.abi.json"
     }
-
+  },
+  "metadata": {
+    "owner": "Lido",
+    "info": { "url": "https://lido.fi", "legalName": "Lido DAO", "lastUpdate": "2021-02-19T04:37:20Z" },
+    "constants": { "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }
+  },
+  "display": {
+    "formats": {
+      "wrap(uint256)": {
+        "intent": "Exchange stETH to wstETH",
+        "fields": [
+          {
+            "path": "_stETHAmount",
+            "label": "Amount to exchange",
+            "format": "tokenAmount",
+            "params": { "tokenPath": "$.metadata.constants.stETHaddress" }
+          }
+        ]
+      },
+      "unwrap(uint256)": {
+        "intent": "Exchange wstETH to stETH",
+        "fields": [{ "path": "_wstETHAmount", "label": "Amount to exchange", "format": "tokenAmount", "params": { "tokenPath": "@.to" } }]
+      },
+      "approve(address,uint256)": {
+        "intent": "Approve spender",
+        "fields": [
+          {
+            "path": "spender",
+            "label": "Spender",
+            "format": "addressName",
+            "params": { "types": ["contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "amount", "label": "Max spending amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } }
+        ]
+      }
+    }
+  }
 }
