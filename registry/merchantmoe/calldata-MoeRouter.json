@@ -1,0 +1,119 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+        "$id": "Merchant Moe Router",
+        "contract": {
+            "deployments": [
+                {
+                    "chainId": 5000,
+                    "address": "0x1e2098BaD83241A1327Ff205c5521C39Ca9A754c"
+                }
+            ],
+            "abi": "https://raw.githubusercontent.com/kamalbuilds/ledger-asset-dapps/refs/heads/main/mantle/merchant-moe/merchantmoerouter.json"
+        }
+    },
+    "metadata": {
+        "owner": "Merchant Moe",
+        "info": {
+            "legalName": "Merchant Moe DEX",
+            "lastUpdate": "2024-11-16",
+            "url": "https://merchantmoe.com"
+        }
+    },
+    "display": {
+        "formats": {
+            "swapExactTokensForTokens": {
+                "intent": "Swap Tokens",
+                "fields": [
+                    {
+                        "path": "amountIn",
+                        "label": "Amount to Send",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "path.[0]"
+                        }
+                    },
+                    {
+                        "path": "amountOutMin",
+                        "label": "Minimum to Receive",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "path.[-1]"
+                        }
+                    },
+                    {
+                        "path": "to",
+                        "label": "Recipient",
+                        "format": "addressName",
+                        "params": {
+                            "types": ["eoa"],
+                            "sources": ["local", "ens"]
+                        }
+                    },
+                    {
+                        "path": "deadline",
+                        "label": "Valid Until",
+                        "format": "date",
+                        "params": {
+                            "encoding": "timestamp"
+                        }
+                    }
+                ],
+                "required": ["amountIn", "amountOutMin", "to", "deadline"]
+            },
+            "addLiquidity": {
+                "intent": "Add Liquidity",
+                "fields": [
+                    {
+                        "path": "tokenA",
+                        "label": "First Token",
+                        "format": "addressName"
+                    },
+                    {
+                        "path": "tokenB",
+                        "label": "Second Token",
+                        "format": "addressName"
+                    },
+                    {
+                        "path": "amountADesired",
+                        "label": "Desired Amount A",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "tokenA"
+                        }
+                    },
+                    {
+                        "path": "amountBDesired",
+                        "label": "Desired Amount B",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "tokenB"
+                        }
+                    },
+                    {
+                        "path": "amountAMin",
+                        "label": "Minimum Amount A",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "tokenA"
+                        }
+                    },
+                    {
+                        "path": "amountBMin",
+                        "label": "Minimum Amount B",
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "tokenB"
+                        }
+                    }
+                ],
+                "required": [
+                    "amountADesired",
+                    "amountBDesired",
+                    "amountAMin",
+                    "amountBMin"
+                ]
+            }
+        }
+    }
+}
