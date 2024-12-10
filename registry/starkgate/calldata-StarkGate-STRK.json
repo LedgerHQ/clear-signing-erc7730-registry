@@ -17,9 +17,9 @@
         "$id": "deposit",
         "intent": "Bridge",
         "fields": [
-          { "path": "token", "label": "Token", "format": "addressName", "params": { "types": ["token"] } },
-          { "path": "amount", "label": "Amount", "format": "amount" },
-          { "path": "l2Recipient", "label": "Recipient", "format": "raw" }
+          { "path": "amount", "label": "Amount to deposit", "format": "tokenAmount", "params": { "tokenPath": "token" } },
+          { "path": "l2Recipient", "label": "Recipient", "format": "raw" },
+          { "path": "@.value", "label": "Deposit fee", "format": "amount" }
         ],
         "required": ["token", "amount", "l2Recipient"]
       }
