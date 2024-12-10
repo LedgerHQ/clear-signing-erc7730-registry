@@ -29,7 +29,7 @@ const minimumERC7730Schema: ERC7730Schema = {
 
 describe("getPreviewData", () => {
   describe("general information", () => {
-    it("should return the metadata", () => {
+    it("should return the metadata", async () => {
       const metadata = {
         owner: "POAP",
         info: {
@@ -39,7 +39,7 @@ describe("getPreviewData", () => {
         },
       };
 
-      const { data } = getPreviewData({
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         metadata,
       });
@@ -47,8 +47,8 @@ describe("getPreviewData", () => {
       expect(data!.metadata).toBe(metadata);
     });
 
-    it("should return contract information for a transaction", () => {
-      const { data } = getPreviewData({
+    it("should return contract information for a transaction", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         context: exampleTransactionContext,
       });
@@ -59,8 +59,8 @@ describe("getPreviewData", () => {
       });
     });
 
-    it("should return contract information for an eip712 message", () => {
-      const { data } = getPreviewData({
+    it("should return contract information for an eip712 message", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         context: exampleEIP712Context,
       });
@@ -71,8 +71,8 @@ describe("getPreviewData", () => {
       });
     });
 
-    it("should indicate if it is a transaction", () => {
-      const { data } = getPreviewData({
+    it("should indicate if it is a transaction", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         context: exampleTransactionContext,
       });
@@ -80,8 +80,8 @@ describe("getPreviewData", () => {
       expect(data!.type).toBe("transaction");
     });
 
-    it("should indicate if it is a message", () => {
-      const { data } = getPreviewData({
+    it("should indicate if it is a message", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         context: exampleEIP712Context,
       });
@@ -91,8 +91,8 @@ describe("getPreviewData", () => {
   });
 
   describe("operation", () => {
-    it('should return an empty array if "formats" is not present', () => {
-      const { data } = getPreviewData({
+    it('should return an empty array if "formats" is not present', async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         display: {
           formats: {},
@@ -101,8 +101,8 @@ describe("getPreviewData", () => {
 
       expect(data!.operations).toEqual([]);
     });
-    it("should map a simple format to operation", () => {
-      const { data } = getPreviewData({
+    it("should map a simple format to operation", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         display: {
           formats: {
@@ -157,8 +157,8 @@ describe("getPreviewData", () => {
         },
       ]);
     });
-    it("should look at the $ root identifier to fetch the data elsewhere", () => {
-      const { data } = getPreviewData({
+    it("should look at the $ root identifier to fetch the data elsewhere", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         display: {
           definitions: {
@@ -197,8 +197,8 @@ describe("getPreviewData", () => {
       ]);
     });
 
-    it("should map nested fields to operations", () => {
-      const { data } = getPreviewData({
+    it("should map nested fields to operations", async () => {
+      const { data } = await getPreviewData({
         ...minimumERC7730Schema,
         display: {
           formats: {
