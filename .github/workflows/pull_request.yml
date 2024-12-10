@@ -19,14 +19,6 @@ jobs:
     timeout-minutes: 60
     steps:
 
-      - name: Debug 1
-        shell: bash
-        run: curl 'https://proxyetherscan.api.live.ledger.com/api?module=contract&action=getabi&address=0x11111112542d85b3ef69ae05771c2dccff4faa26'
-
-      - name: Debug 1
-        shell: bash
-        run: curl 'https://proxyetherscan.api.live.ledger.com/v2/api?module=contract&action=getabi&chainid=56&address=0x1111111254fb6c44bac0bed2854e76f90643097d'
-
       - name: Checkout
         timeout-minutes: 10
         uses: actions/checkout@v4
