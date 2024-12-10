@@ -1,225 +1,127 @@
 {
-    "$schema": "../../specs/erc7730-v1.schema.json",
-    "context": {
-        "$id": "Lending Pool v2",
-        "contract" : {
-            "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json",
-            "deployments": [
-                {
-                    "chainId": 1,
-                    "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9"        
-                }
-            ]
-        }
-    },
-
-    "metadata": {
-        "owner": "Aave",
-        "info": {
-            "url": "https://aave.com",
-            "legalName": "Aave DAO",
-            "lastUpdate": "2020-11-30T09:25:48Z"
-        },
-        "enums": {
-            "interestRateMode" : {
-                "1": "stable",
-                "2": "variable"
-            }
-        },
-        "constants": {
-            "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-        }
-    },
-    
-    "display": {
-        "formats": {
-            "repay(address,uint256,uint256,address)" : {
-                "$id": "repay",
-                "intent": "Repay loan",
-                "fields": [
-                    {
-                        "path": "amount",
-                        "format": "tokenAmount",
-                        "label": "Amount to repay",
-                        "params": {
-                            "tokenPath": "asset",
-                            "threshold": "$.metadata.constants.max",
-                            "message": "All"
-                        }
-                    },
-                    {
-                        "path": "rateMode",
-                        "format": "enum",
-                        "label": "Interest rate mode",
-                        "params": {
-                            "$ref": "$.metadata.enums.interestRateMode"
-                        }
-                    },
-                    {
-                        "path": "onBehalfOf",
-                        "format": "addressName",
-                        "label": "For debt holder",
-                        "params": {
-                            "types": [
-                                "eoa"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    }
-                ],
-                "required": ["amount", "rateMode", "onBehalfOf"]
-            },
-            "setUserUseReserveAsCollateral(address,bool)": {
-                "intent": "Manage collateral",
-                "fields": [
-                    {
-                        "path": "asset",
-                        "format": "addressName",
-                        "label": "For asset",
-                        "params": {
-                            "types": [
-                                "token"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    },
-                    {
-                        "path": "useAsCollateral",
-                        "format": "raw",
-                        "label": "Enable use as collateral"
-                    }
-                ],
-                "required": ["asset", "useAsCollateral"]
-            },
-            "withdraw(address,uint256,address)": {
-                "intent": "Withdraw",
-                "fields": [
-                    {
-                        "path": "amount",
-                        "format": "tokenAmount",
-                        "label": "Amount to withdraw",
-                        "params": {
-                            "tokenPath": "asset",
-                            "threshold": "$.metadata.constants.max",
-                            "message": "Max"
-                        }
-                    },
-                    {
-                        "path": "to",
-                        "format": "addressName",
-                        "label": "To recipient",
-                        "params": {
-                            "types": [
-                                "eoa"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    }
-                ],
-                "required": ["amount", "to"]
-            },
-            "swapBorrowRateMode(address,uint256)": {
-                "intent": "Swap interest rate mode",
-                "fields": [
-                    {
-                        "path": "asset",
-                        "format": "addressName",
-                        "label": "For asset",
-                        "params": {
-                            "types": [
-                                "token"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    },
-                    {
-                        "path": "rateMode",
-                        "format": "enum",
-                        "label": "Set interest rate mode to",
-                        "params": {
-                            "$ref": "$.metadata.enums.interestRateMode"
-                        }
-                    }
-                ],
-                "required": ["asset", "rateMode"]
-            },
-            "borrow(address,uint256,uint256,uint16,address)" : {
-                "intent": "Borrow",
-                "fields": [
-                    {
-                        "path": "amount",
-                        "format": "tokenAmount",
-                        "label": "Amount to borrow",
-                        "params": {
-                            "tokenPath": "asset"
-                        }
-                    },
-                    {
-                        "path": "interestRateMode",
-                        "format": "enum",
-                        "label": "Interest Rate mode",
-                        "params": {
-                            "$ref": "$.metadata.enums.interestRateMode"
-                        }
-                    },
-                    {
-                        "path": "onBehalfOf",
-                        "format": "addressName",
-                        "label": "Debtor",
-                        "params": {
-                            "types": [
-                                "eoa"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    }
-                ],
-                "required": ["amount", "onBehalfOf", "interestRateMode"]
-            },
-            "deposit(address,uint256,address,uint16)" : {
-                "$id": "deposit",
-                "intent": "Supply",
-                "fields": [
-                    {
-                        "path": "amount",
-                        "format": "tokenAmount",
-                        "label": "Amount to supply",
-                        "params": {
-                            "tokenPath": "asset"
-                        }
-                    },
-                    {
-                        "path": "onBehalfOf",
-                        "format": "addressName",
-                        "label": "Collateral recipient",
-                        "params": {
-                            "types": [
-                                "eoa"
-                            ],
-                            "sources": [
-                                "local",
-                                "ens"
-                            ]
-                        }
-                    }
-                ],
-                "required": ["amount", "onBehalfOf"]
-            }
-        }
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Lending Pool v2",
+    "contract": {
+      "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json",
+      "deployments": [{ "chainId": 1, "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9" }]
     }
+  },
+  "metadata": {
+    "owner": "Aave",
+    "info": { "url": "https://aave.com", "legalName": "Aave DAO", "lastUpdate": "2020-11-30T09:25:48Z" },
+    "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
+    "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
+  },
+  "display": {
+    "formats": {
+      "repay(address,uint256,uint256,address)": {
+        "$id": "repay",
+        "intent": "Repay loan",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to repay",
+            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "All" }
+          },
+          {
+            "path": "rateMode",
+            "format": "enum",
+            "label": "Interest rate mode",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "For debt holder",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "rateMode", "onBehalfOf"]
+      },
+      "setUserUseReserveAsCollateral(address,bool)": {
+        "intent": "Manage collateral",
+        "fields": [
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "For asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          { "path": "useAsCollateral", "format": "raw", "label": "Enable use as collateral" }
+        ],
+        "required": ["asset", "useAsCollateral"]
+      },
+      "withdraw(address,uint256,address)": {
+        "intent": "Withdraw",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "Max" }
+          },
+          {
+            "path": "to",
+            "format": "addressName",
+            "label": "To recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "to"]
+      },
+      "swapBorrowRateMode(address,uint256)": {
+        "intent": "Swap interest rate mode",
+        "fields": [
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "For asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "rateMode",
+            "format": "enum",
+            "label": "Set interest rate mode to",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          }
+        ],
+        "required": ["asset", "rateMode"]
+      },
+      "borrow(address,uint256,uint256,uint16,address)": {
+        "intent": "Borrow",
+        "fields": [
+          { "path": "amount", "format": "tokenAmount", "label": "Amount to borrow", "params": { "tokenPath": "asset" } },
+          {
+            "path": "interestRateMode",
+            "format": "enum",
+            "label": "Interest Rate mode",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Debtor",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf", "interestRateMode"]
+      },
+      "deposit(address,uint256,address,uint16)": {
+        "$id": "deposit",
+        "intent": "Supply",
+        "fields": [
+          { "path": "amount", "format": "tokenAmount", "label": "Amount to supply", "params": { "tokenPath": "asset" } },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Collateral recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf"]
+      }
+    }
+  }
 }
