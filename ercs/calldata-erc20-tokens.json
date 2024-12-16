@@ -34,7 +34,7 @@
             "path": "_value",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.context.contract.deployments.[0].address" }
+            "params": { "token": "$.context.contract.deployments.[0].address" }
           }
         ],
         "required": ["_to", "_value"]
