@@ -768,10 +768,6 @@
                     "description": "The message to display when the amount is above the threshold."
                 }
             },
-            "anyOf": [
-                {"required": ["token"]},
-                {"required": ["tokenPath"]}
-            ],
             "not": {
                 "required": ["token", "tokenPath"]
             },
