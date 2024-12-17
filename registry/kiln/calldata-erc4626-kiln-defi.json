@@ -1,0 +1,32 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+
+    "context": {
+        "$id": "Kiln DeFi",
+        "contract" : {
+            "deployments": [
+                {
+                    "chainId": 1,
+                    "address": "0x9c57487a16923dC8EE719c7A9940dE78c605967C",
+                    "asset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+                },
+                {
+                    "chainId": 11155111,
+                    "address": "0xf3a9A790f84B2E0301069BE589fc976Cf3eB5661",
+                    "asset": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+                }
+            ]
+        }
+    }, 
+
+    "includes": "../../ercs/calldata-erc4626-vaults.json",
+
+    "metadata": {
+        "owner": "Kiln",
+        "info": {
+            "legalName": "Kiln",
+            "url": "https://kiln.fi/",
+            "lastUpdate": "2024-10-16T12:41:21Z"  
+        }
+    }
+}

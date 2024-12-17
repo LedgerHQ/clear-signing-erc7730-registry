@@ -40,7 +40,7 @@ export default function PreviewTool({ jsonInRegistry }: Props) {
       setSelectedDevice(storedDevice);
     }
     setFileKey(
-      localStorage.getItem("selectedFileKey") ?? "calldata-PoapBridge.json",
+      localStorage.getItem("selectedFileKey") ?? "/poap/calldata-PoapBridge.json",
     );
   }, [previewData?.operations]);
 
