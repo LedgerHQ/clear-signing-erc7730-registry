@@ -694,6 +694,22 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "senderAddress": {
+                    "title": "Sender Address",
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "An address equal to this value is interpreted as the sender referenced by `@.from`."
+                        },
+                        {
+                            "type": "array",
+                            "description": "An array of addresses, any of which are interpreted as the sender referenced by `@.from`.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
                 }
             },
             "additionalProperties": false
