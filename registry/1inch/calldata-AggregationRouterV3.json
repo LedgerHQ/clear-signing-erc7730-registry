@@ -13,7 +13,7 @@
   },
   "metadata": {
     "owner": "1inch",
-    "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "lastUpdate": "2021-03-14T20:28:50Z" },
+    "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "deploymentDate": "2021-03-14T20:28:50Z" },
     "constants": {
       "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
       "addressAsNull": "0x0000000000000000000000000000000000000000"

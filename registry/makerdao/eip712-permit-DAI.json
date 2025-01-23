@@ -9,7 +9,7 @@
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "metadata": {
     "owner": "MakerDAO",
-    "info": { "legalName": "Maker Foundation", "url": "https://makerdao.com/", "lastUpdate": "2017-12-18T00:00:00Z" },
+    "info": { "legalName": "Maker Foundation", "url": "https://makerdao.com/", "deploymentDate": "2017-12-18T00:00:00Z" },
     "token": { "name": "Dai Stablecoin", "ticker": "DAI", "decimals": 18 }
   },
   "display": {
