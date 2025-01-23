@@ -44,7 +44,7 @@ interface Metadata {
 
 interface OwnerInfo {
   legalName: string;
-  lastUpdate: string;
+  deploymentDate: string;
   url: string;
 }
 

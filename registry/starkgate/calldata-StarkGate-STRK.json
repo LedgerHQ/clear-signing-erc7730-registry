@@ -9,7 +9,7 @@
   },
   "metadata": {
     "owner": "Starknet",
-    "info": { "url": "https://starkgate.starknet.io/", "legalName": "StarkWare", "lastUpdate": "2024-10-01T00:00:00Z" }
+    "info": { "url": "https://starkgate.starknet.io/", "legalName": "StarkWare", "deploymentDate": "2024-10-01T00:00:00Z" }
   },
   "display": {
     "formats": {

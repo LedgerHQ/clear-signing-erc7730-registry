@@ -258,11 +258,11 @@
                     "type": "string",
                     "description": "The full legal name of the owner if different from the owner field."
                 },
-                "lastUpdate": {
-                    "title": "Last Update of the contract / message",
+                "deploymentDate": {
+                    "title": "Deployment date of the contract / message",
                     "type": "string",
                     "format": "date-time",
-                    "description": "The date of the last update of the contract / message."
+                    "description": "The date of deployment of the contract / message."
                 },
                 "url": {
                     "title": "Owner URL",
