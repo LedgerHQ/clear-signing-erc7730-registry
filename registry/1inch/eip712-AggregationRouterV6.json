@@ -46,7 +46,7 @@
   "display": {
     "formats": {
       "Order": {
-        "intent": "1inch Limit Order",
+        "intent": "1inch Order",
         "fields": [
           { "path": "maker", "label": "From", "format": "raw" },
           { "path": "makingAmount", "label": "Send", "format": "tokenAmount", "params": { "tokenPath": "makerAsset" } },
