@@ -22,7 +22,7 @@ const minimumERC7730Schema: ERC7730Schema = {
   $schema: "unused",
   metadata: {
     owner: "",
-    info: { legalName: "", lastUpdate: "", url: "" },
+    info: { legalName: "", deploymentDate: "", url: "" },
   },
   context: exampleTransactionContext,
 };
@@ -35,7 +35,7 @@ describe("getPreviewData", () => {
         info: {
           url: "https://poap.xyz/",
           legalName: "legalName",
-          lastUpdate: "2022-03-03T17:56:02Z",
+          deploymentDate: "2022-03-03T17:56:02Z",
         },
       };
 
