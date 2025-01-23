@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ETHERSCAN_API_HOST: etherscan.api.live.ledger.com
+  ETHERSCAN_API_HOST: proxyetherscan-ci.api.live.ledger.com
 
 jobs:
   validate_descriptors:
