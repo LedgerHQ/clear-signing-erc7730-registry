@@ -6,7 +6,7 @@
         "info": {
             "url": "https://1inch.io/",
             "legalName": "1inch Network",
-            "lastUpdate": "2021-11-05T10:18:09Z"
+            "deploymentDate": "2021-11-05T10:18:09Z"
         },
         "constants": {
             "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
