@@ -31,6 +31,7 @@
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
+      "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "beneficiary": { "label": "Beneficiary", "format": "addressName" }
     },
     "formats": {
@@ -66,10 +67,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken" } },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "@.from"],
-        "excluded": ["pools", "permit"]
+        "required": ["amount", "minReturn", "@.from", "pools"],
+        "excluded": ["permit"]
       }
     }
   }
