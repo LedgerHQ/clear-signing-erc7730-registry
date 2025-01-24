@@ -33,6 +33,7 @@
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
+      "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "beneficiary": { "label": "Beneficiary", "format": "addressName" },
       "expirationTime": { "label": "Expiration time", "format": "date", "params": { "encoding": "timestamp" } }
     },
@@ -58,10 +59,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken" } },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "@.from"],
-        "excluded": ["pools"]
+        "required": ["amount", "minReturn", "@.from", "pools"],
+        "excluded": []
       },
       "unoswapTo(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools)": {
         "$id": "unoswapTo",
@@ -69,10 +71,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken" } },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "recipient"],
-        "excluded": ["pools"]
+        "required": ["amount", "minReturn", "recipient", "pools"],
+        "excluded": []
       },
       "unoswapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)": {
         "$id": "unoswapToWithPermit",
@@ -80,10 +83,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken" } },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "recipient"],
-        "excluded": ["pools", "permit"]
+        "required": ["amount", "minReturn", "recipient", "pools"],
+        "excluded": ["permit"]
       },
       "uniswapV3Swap(uint256 amount, uint256 minReturn, uint256[] pools)": {
         "$id": "uniswapV3Swap",
@@ -91,10 +95,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount" },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "@.from"],
-        "excluded": ["pools"]
+        "required": ["amount", "minReturn", "@.from", "pools"],
+        "excluded": []
       },
       "uniswapV3SwapTo(address recipient, uint256 amount, uint256 minReturn, uint256[] pools)": {
         "$id": "uniswapV3SwapTo",
@@ -102,10 +107,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount" },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "recipient"],
-        "excluded": ["pools"]
+        "required": ["amount", "minReturn", "recipient", "pools"],
+        "excluded": []
       },
       "uniswapV3SwapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)": {
         "$id": "uniswapV3SwapToWithPermit",
@@ -113,10 +119,11 @@
         "fields": [
           { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken" } },
           { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
-          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" }
+          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
-        "required": ["amount", "minReturn", "recipient"],
-        "excluded": ["pools", "permit"]
+        "required": ["amount", "minReturn", "recipient", "pools"],
+        "excluded": ["permit"]
       },
       "clipperSwap(address clipperExchange, address srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)": {
         "$id": "clipperSwap",
