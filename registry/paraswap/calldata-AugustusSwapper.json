@@ -34,6 +34,7 @@
         "format": "tokenAmount",
         "params": { "tokenPath": "tokenOut", "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
+      "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "beneficiary": { "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
       "exchange": { "label": "Exchange", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } },
       "factory": { "label": "Uniswap Factory", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } }
@@ -88,7 +89,7 @@
         "fields": [
           { "path": "amountIn", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "tokenIn" } },
           { "path": "amountOutMin", "label": "Minimum to Receive", "format": "raw" },
-          { "path": "pools.[-1]", "label": "Last pool", "format": "raw" }
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
         "required": ["amountIn", "amountOutMin", "pools"]
       },
@@ -147,7 +148,7 @@
         "fields": [
           { "path": "amountInMax", "$ref": "$.display.definitions.maxSendAmount", "params": { "tokenPath": "tokenIn" } },
           { "path": "amountOut", "label": "Amount to Receive", "format": "raw" },
-          { "path": "pools.[-1]", "label": "Last pool", "format": "raw" }
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
         "required": ["amountInMax", "amountOut", "pools.[-1]"]
       },
@@ -157,7 +158,7 @@
         "fields": [
           { "path": "amountInMax", "$ref": "$.display.definitions.maxSendAmount", "params": { "tokenPath": "tokenIn" } },
           { "path": "amountOut", "label": "Amount to Receive", "format": "raw" },
-          { "path": "pools.[-1]", "label": "Last pool", "format": "raw" }
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ]
       },
       "0xa94e78ef": {
@@ -186,7 +187,7 @@
         "fields": [
           { "path": "amountIn", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "tokenIn" } },
           { "path": "amountOutMin", "label": "Minimum to Receive", "format": "raw" },
-          { "path": "pools.[-1]", "label": "Last pool", "format": "raw" }
+          { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
         ],
         "required": []
       }
