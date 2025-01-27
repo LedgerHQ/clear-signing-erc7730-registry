@@ -10,7 +10,7 @@ interface Props {
   chainId: number;
   contractAddress: string;
   chosenOperation: Operation;
-  info: { lastUpdate: string; legalName: string; url: string };
+  info: { deploymentDate: string; legalName: string; url: string };
   owner: string;
   operationType: string;
 }

@@ -71,7 +71,7 @@
         "owner": "Uniswap",
         "info": {
             "legalName": "Uniswap Labs",
-            "lastUpdate": "2021-12-14T00:00:00Z",
+            "deploymentDate": "2021-12-14T00:00:00Z",
             "url": "https://uniswap.org/"
         }
     }

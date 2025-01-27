@@ -8,7 +8,7 @@ export type PreviewData = {
     owner: string;
     info?: {
       legalName: string;
-      lastUpdate?: string;
+      deploymentDate?: string;
       url: string;
     };
   };

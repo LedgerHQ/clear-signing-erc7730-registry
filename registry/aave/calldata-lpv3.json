@@ -9,7 +9,7 @@
   },
   "metadata": {
     "owner": "Aave",
-    "info": { "url": "https://aave.com", "legalName": "Aave DAO", "lastUpdate": "2024-10-09T21:46:47Z" },
+    "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2024-10-09T21:46:47Z" },
     "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
     "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
   },

@@ -7,7 +7,7 @@
   "includes": "../../ercs/calldata-erc20-tokens.json",
   "metadata": {
     "owner": "Tether",
-    "info": { "legalName": "Tether Limited", "url": "https://tether.to/", "lastUpdate": "2017-11-28T12:41:21Z" },
+    "info": { "legalName": "Tether Limited", "url": "https://tether.to/", "deploymentDate": "2017-11-28T12:41:21Z" },
     "token": { "ticker": "USDT", "name": "Tether USD", "decimals": 6 }
   }
 }
