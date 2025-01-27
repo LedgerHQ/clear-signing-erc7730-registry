@@ -15,7 +15,7 @@ export const ReviewScreen = ({ screen }: { screen: Screen }) => {
       )}
     >
       {screen.map(({ label, displayValue }, index) => (
-        <div key={`${label}-field-${index}`}>
+        <div className="w-full" key={`${label}-field-${index}`}>
           <Device.ContentText>
             <span className="text-dark-grey">{label}</span>
           </Device.ContentText>
