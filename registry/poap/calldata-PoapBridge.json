@@ -350,17 +350,17 @@
     }
   },
   "metadata": {
-    "owner": "toto",
+    "owner": "POAP",
     "info": {
-      "legalName": "toto",
-      "url": "toto"
+      "url": "https://poap.xyz/", 
+      "legalName": "Proof of Attendance Protocol"
     }
   },
   "display": {
     "formats": {
       "mintToken(uint256,uint256,address,uint256,bytes)": {
         "$id": null,
-        "intent": "Mint Token",
+        "intent": "Mint POAP",
         "screens": null,
         "fields": [
           {
