@@ -352,7 +352,7 @@
   "metadata": {
     "owner": "POAP",
     "info": {
-      "url": "https://poap.xyz/", 
+      "url": "https://poap.xyz/",
       "legalName": "Proof of Attendance Protocol"
     }
   },
@@ -364,46 +364,30 @@
         "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Token Id",
             "format": "raw",
-            "params": {},
-            "path": "#.tokenId",
-            "value": null
+            "path": "#.tokenId"
           },
           {
-            "$id": null,
             "label": "Receiver",
             "format": "addressName",
             "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
+              "types": ["eoa", "wallet"],
               "sources": null
             },
-            "path": "#.receiver",
-            "value": null
+            "path": "#.receiver"
           },
           {
-            "$id": null,
             "label": "Expiration Time",
             "format": "date",
             "params": {
               "encoding": "timestamp"
             },
-            "path": "#.expirationTime",
-            "value": null
+            "path": "#.expirationTime"
           }
         ],
-        "required": [
-          "#.tokenId",
-          "#.receiver"
-        ],
-        "excluded": [
-          "#.eventId",
-          "#.signature"
-        ]
+        "required": ["#.tokenId", "#.receiver"],
+        "excluded": ["#.eventId", "#.signature"]
       }
     }
   }
