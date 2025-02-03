@@ -1,0 +1,51 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-AggregationRouterV6.json",
+  "context": {
+    "$id": "AggregationRouterV6",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x111111125421cA6dc452d289314280a0f8842A65",
+      "deployments": [
+        { "chainId": 1, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 10, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 56, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 100, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 137, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 250, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 8217, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 8453, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 42161, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 43114, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 1313161554, "address": "0x111111125421cA6dc452d289314280a0f8842A65" }
+      ]
+    }
+  },
+  "display": {
+    "formats": {
+      "clipperSwap(address clipperExchange, uint256 srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)": {
+        "$id": "clipperSwap",
+        "intent": "Swap",
+        "fields": [
+          { "path": "inputAmount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken.[-20:]" } },
+          { "path": "outputAmount", "$ref": "$.display.definitions.minReceiveAmount", "params": { "tokenPath": "dstToken" } },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "goodUntil", "$ref": "$.display.definitions.expirationTime" }
+        ],
+        "required": ["srcToken", "dstToken", "inputAmount", "outputAmount", "@.from", "goodUntil"],
+        "excluded": ["clipperExchange", "r", "vs"]
+      },
+      "clipperSwapTo(address clipperExchange, address recipient, uint256 srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)": {
+        "$id": "clipperSwapTo",
+        "intent": "Swap",
+        "fields": [
+          { "path": "inputAmount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken.[-20:]" } },
+          { "path": "outputAmount", "$ref": "$.display.definitions.minReceiveAmount", "params": { "tokenPath": "dstToken" } },
+          { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "goodUntil", "$ref": "$.display.definitions.expirationTime" }
+        ],
+        "required": ["srcToken", "dstToken", "inputAmount", "outputAmount", "recipient", "goodUntil"],
+        "excluded": ["clipperExchange", "r", "vs"]
+      }
+    }
+  }
+}

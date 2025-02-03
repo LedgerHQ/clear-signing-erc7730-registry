@@ -36,6 +36,7 @@
                     ]
                 }
             },
+            "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
             "beneficiary": {
                 "label": "Beneficiary",
                 "format": "addressName"
@@ -80,10 +81,11 @@
                     {
                         "path": "@.from",
                         "$ref": "$.display.definitions.beneficiary"
-                    }
+                    },
+                    { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
                 ],
-                "required": ["amount", "minReturn", "@.from"],
-                "excluded": ["pools"]
+                "required": ["amount", "minReturn", "@.from", "pools"],
+                "excluded": []
             },
             "unoswapWithPermit(address srcToken, uint256 amount, uint256 minReturn, bytes32[] pools, bytes permit)" : {
                 "$id": "unoswapWithPermit",
@@ -101,10 +103,11 @@
                     {
                         "path": "@.from",
                         "$ref": "$.display.definitions.beneficiary"
-                    }
+                    },
+                    { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
                 ],
-                "required": ["amount", "minReturn", "@.from"],
-                "excluded": ["pools", "permit"]
+                "required": ["amount", "minReturn", "@.from", "pools"],
+                "excluded": ["permit"]
             },
             "uniswapV3Swap(uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "uniswapV3Swap",
@@ -121,10 +124,11 @@
                     {
                         "path": "@.from",
                         "$ref": "$.display.definitions.beneficiary"
-                    }
+                    },
+                    { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
                 ],
-                "required": ["amount", "minReturn", "@.from"],
-                "excluded": ["pools"]
+                "required": ["amount", "minReturn", "@.from", "pools"],
+                "excluded": []
             },
             "uniswapV3SwapTo(address recipient, uint256 amount, uint256 minReturn, uint256[] pools)" : {
                 "$id": "uniswapV3SwapTo",
@@ -141,10 +145,11 @@
                     {
                         "path": "recipient",
                         "$ref": "$.display.definitions.beneficiary"
-                    }
+                    },
+                    { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
                 ],
-                "required": ["amount", "minReturn", "recipient"],
-                "excluded": ["pools"]
+                "required": ["amount", "minReturn", "recipient", "pools"],
+                "excluded": []
             },
             "uniswapV3SwapToWithPermit(address recipient, address srcToken, uint256 amount, uint256 minReturn, uint256[] pools, bytes permit)" : {
                 "$id": "uniswapV3SwapToWithPermit",
@@ -162,76 +167,11 @@
                     {
                         "path": "recipient",
                         "$ref": "$.display.definitions.beneficiary"
-                    }
+                    },
+                    { "path": "pools.[-1]", "$ref": "$.display.definitions.lastPool" }
                 ],
-                "required": ["amount", "minReturn", "recipient"],
-                "excluded": ["pools", "permit"]
-            },
-            "fillOrderRFQ((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 makingAmount, uint256 takingAmount)" : {
-                "$id": "fillOrderRFQ",
-                "intent": "Swap",
-                "fields": [
-                    {
-                        "path": "order.takingAmount",
-                        "$ref": "$.display.definitions.sendAmount",
-                        "params": { "tokenPath": "order.takerAsset" }
-                    },
-                    {
-                        "path": "order.makingAmount",
-                        "$ref": "$.display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "order.makerAsset" }
-                    },
-                    {
-                        "path": "@.from",
-                        "$ref": "$.display.definitions.beneficiary"
-                    }
-                ],
-                "required": ["order.takingAmount", "order.makingAmount", "@.from"],
-                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "makingAmount", "takingAmount"]
-            },
-            "fillOrderRFQTo((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 makingAmount, uint256 takingAmount, address target)" : {
-                "$id": "fillOrderRFQTo",
-                "intent": "Swap",
-                "fields": [
-                    {
-                        "path": "order.takingAmount",
-                        "$ref": "$.display.definitions.sendAmount",
-                        "params": { "tokenPath": "order.takerAsset" }
-                    },
-                    {
-                        "path": "order.makingAmount",
-                        "$ref": "$.display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "order.makerAsset" }
-                    },
-                    {
-                        "path": "target",
-                        "$ref": "$.display.definitions.beneficiary"
-                    }
-                ],
-                "required": ["order.takingAmount", "order.makingAmount", "target"],
-                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "makingAmount", "takingAmount"]
-            },
-            "fillOrderRFQToWithPermit((uint256 info, address makerAsset, address takerAsset, address maker, address allowedSender, uint256 makingAmount, uint256 takingAmount) order, bytes signature, uint256 makingAmount, uint256 takingAmount, address target, bytes permit)" : {
-                "$id": "fillOrderRFQToWithPermit",
-                "intent": "Swap",
-                "fields": [
-                    {
-                        "path": "order.takingAmount",
-                        "$ref": "$.display.definitions.sendAmount",
-                        "params": { "tokenPath": "order.takerAsset" }
-                    },
-                    {
-                        "path": "order.makingAmount",
-                        "$ref": "$.display.definitions.minReceiveAmount",
-                        "params": { "tokenPath": "order.makerAsset" }
-                    },
-                    {
-                        "path": "target",
-                        "$ref": "$.display.definitions.beneficiary"
-                    }
-                ],
-                "required": ["order.takingAmount", "order.makingAmount", "target"],
-                "excluded": ["order.info", "order.maker", "order.allowedSender", "signature", "makingAmount", "takingAmount", "permit"]
+                "required": ["amount", "minReturn", "recipient", "pools"],
+                "excluded": ["permit"]
             }
         }
     }
