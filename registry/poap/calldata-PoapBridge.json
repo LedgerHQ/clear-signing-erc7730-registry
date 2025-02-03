@@ -364,26 +364,32 @@
         "screens": null,
         "fields": [
           {
+            "$id": null,
             "label": "Token Id",
             "format": "raw",
-            "path": "#.tokenId"
+            "path": "#.tokenId",
+            "value": null
           },
           {
+            "$id": null,
             "label": "Receiver",
             "format": "addressName",
             "params": {
               "types": ["eoa", "wallet"],
               "sources": null
             },
-            "path": "#.receiver"
+            "path": "#.receiver",
+            "value": null
           },
           {
+            "$id": null,
             "label": "Expiration Time",
             "format": "date",
             "params": {
               "encoding": "timestamp"
             },
-            "path": "#.expirationTime"
+            "path": "#.expirationTime",
+            "value": null
           }
         ],
         "required": ["#.tokenId", "#.receiver"],
