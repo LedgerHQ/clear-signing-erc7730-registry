@@ -35,8 +35,8 @@ export const DevicesDemo = ({
               chainId={chainId}
               contractAddress={contractAddress}
               chosenOperation={chosenOperation}
-              info={metadata.info}
-              owner={metadata.owner}
+              info={metadata?.info ?? {}}
+              owner={metadata?.owner ?? ""}
               operationType={type}
             />
           </div>
