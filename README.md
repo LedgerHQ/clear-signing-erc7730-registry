@@ -42,6 +42,6 @@ registry/
 - All EIP-7730 compatible files are correctly validated against the schema file located at `specs/eip7730.schema.json`.
 - Do not use the `calldata` or `eip712` prefixes for common files which are included by the EIP-7730 files and placed at the top level of the entity folder.
 
-## How to test
+## How to validate
 
-- Inside the [developer-preview](/developer-preview) directory you'll find a [README](/developer-preview#readme) for a Node web application. It runs locally and can be used to preview the results of your clear signing metadata files.
+Ledger is actively working in providing developer tools to ease adoption. This repository will be updated when tools become publicly available.
