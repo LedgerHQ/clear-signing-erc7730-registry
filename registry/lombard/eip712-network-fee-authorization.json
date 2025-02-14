@@ -53,7 +53,7 @@
         "intent": "Lombard Network Fee Authorization",
         "fields": [
           { "path": "chainId", "label": "Chain ID", "format": "raw" },
-          { "path": "fee", "label": "Network Fee", "format": "raw" },
+          { "path": "fee", "label": "Network Fee", "format": "amount" },
           {
             "path": "expiry",
             "label": "Expiry",
