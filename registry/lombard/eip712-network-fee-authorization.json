@@ -54,7 +54,12 @@
         "fields": [
           { "path": "chainId", "label": "Chain ID", "format": "raw" },
           { "path": "fee", "label": "Network Fee", "format": "raw" },
-          { "path": "expiry", "label": "Expiry", "format": "date" }
+          {
+            "path": "expiry",
+            "label": "Expiry",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          }
         ]
       }
     }
