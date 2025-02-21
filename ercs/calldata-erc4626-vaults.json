@@ -1,0 +1,72 @@
+{
+  "$schema": "../specs/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "abi": [
+        {
+          "inputs": [{ "name": "assets", "type": "uint256" }, { "name": "receiver", "type": "address" }],
+          "name": "deposit",
+          "type": "function"
+        },
+        {
+          "inputs": [{ "name": "shares", "type": "uint256" }, { "name": "receiver", "type": "address" }],
+          "name": "mint",
+          "type": "function"
+        },
+        {
+          "inputs": [{ "name": "assets", "type": "uint256" }, { "name": "receiver", "type": "address" }, { "name": "owner", "type": "address" }],
+          "name": "withdraw",
+          "type": "function"
+        },
+        {
+          "inputs": [{ "name": "shares", "type": "uint256" }, { "name": "receiver", "type": "address" }, { "name": "owner", "type": "address" }],
+          "name": "redeem",
+          "type": "function"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "constants": {
+      "underlyingToken": "0x0"
+    }
+  },
+  "display": {
+    "formats": {
+      "deposit(uint256 assets, address receiver)": {
+        "intent": "Deposit",
+        "fields": [
+          { "path": "assets", "label": "Deposit asset", "format": "tokenAmount", "params": { "token": "$.metadata.constants.underlyingToken" } },
+          { "path": "receiver", "label": "Send shares to", "format": "addressName" }
+        ],
+        "required": ["assets", "receiver"]
+      },
+      "mint(uint256 shares, address receiver)": {
+        "intent": "Mint",
+        "fields": [
+          { "path": "shares", "label": "Minted shares", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
+          { "path": "receiver", "label": "Mint shares to", "format": "addressName" }
+        ],
+        "required": ["assets", "receiver"]
+      },
+      "withdraw(uint256 assets,address receiver,address owner)": {
+        "intent": "Withdraw",
+        "fields": [
+          { "path": "assets", "label": "Withdraw exactly", "format": "tokenAmount", "params": { "token": "$.metadata.constants.underlyingToken" } },
+          { "path": "receiver", "label": "To", "format": "addressName" },
+          { "path": "owner", "label": "Owner", "format": "addressName" }
+        ],
+        "required": ["assets", "receiver", "owner"]
+      },
+      "redeem(uint256 shares,address receiver,address owner)": {
+        "intent": "Redeem",
+        "fields": [
+          { "path": "shares", "label": "Redeem exactly", "format": "tokenAmount", "params": { "token": "@.to" } },
+          { "path": "receiver", "label": "To", "format": "addressName" },
+          { "path": "owner", "label": "Owner", "format": "addressName" }
+        ],
+        "required": ["assets", "receiver", "owner"]
+      }
+    }
+  }
+}
