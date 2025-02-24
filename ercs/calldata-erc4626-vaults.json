@@ -37,6 +37,7 @@
         "intent": "Deposit",
         "fields": [
           { "path": "assets", "label": "Deposit asset", "format": "tokenAmount", "params": { "token": "$.metadata.constants.underlyingToken" } },
+          { "label": "Receive shares", "format":"raw", "value": "$.metadata.constants.vaultTicker" },
           { "path": "receiver", "label": "Send shares to", "format": "addressName" }
         ],
         "required": ["assets", "receiver"]
@@ -44,6 +45,7 @@
       "mint(uint256 shares, address receiver)": {
         "intent": "Mint",
         "fields": [
+          { "label": "Deposit asset", "format":"raw",  "value": "$.metadata.constants.underlyingTicker" },
           { "path": "shares", "label": "Minted shares", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
           { "path": "receiver", "label": "Mint shares to", "format": "addressName" }
         ],
