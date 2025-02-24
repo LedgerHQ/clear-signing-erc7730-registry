@@ -6,6 +6,10 @@
     "contract": { "deployments": [ { "chainId": 42161, "address": "0xFf131917E1D6751e4d1B17612751Db521b1403c5" } ] }
   },
   "metadata": {
-    "constants": { "underlyingToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831" }
+    "constants": { 
+      "underlyingToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      "underlyingTicker": "USDC",
+      "vaultTicker": "skUSDC"
+    }
   }
 }
