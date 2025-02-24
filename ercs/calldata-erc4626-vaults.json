@@ -38,7 +38,7 @@
         "fields": [
           { "path": "assets", "label": "Deposit asset", "format": "tokenAmount", "params": { "token": "$.metadata.constants.underlyingToken" } },
           { "label": "Receive shares", "format":"raw", "value": "$.metadata.constants.vaultTicker" },
-          { "path": "receiver", "label": "Send shares to", "format": "addressName" }
+          { "path": "receiver", "label": "Send shares to", "format": "addressName", "params": { "types": ["eoa","contract"] } }
         ],
         "required": ["assets", "receiver"]
       },
@@ -47,7 +47,7 @@
         "fields": [
           { "label": "Deposit asset", "format":"raw",  "value": "$.metadata.constants.underlyingTicker" },
           { "path": "shares", "label": "Minted shares", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
-          { "path": "receiver", "label": "Mint shares to", "format": "addressName" }
+          { "path": "receiver", "label": "Mint shares to", "format": "addressName", "params": { "types": ["eoa","contract"] } }
         ],
         "required": ["assets", "receiver"]
       },
@@ -55,8 +55,8 @@
         "intent": "Withdraw",
         "fields": [
           { "path": "assets", "label": "Withdraw exactly", "format": "tokenAmount", "params": { "token": "$.metadata.constants.underlyingToken" } },
-          { "path": "receiver", "label": "To", "format": "addressName" },
-          { "path": "owner", "label": "Owner", "format": "addressName" }
+          { "path": "receiver", "label": "To", "format": "addressName", "params": { "types": ["eoa","contract"] } },
+          { "path": "owner", "label": "Owner", "format": "addressName", "params": { "types": ["eoa","contract"] } }
         ],
         "required": ["assets", "receiver", "owner"]
       },
@@ -64,8 +64,8 @@
         "intent": "Redeem",
         "fields": [
           { "path": "shares", "label": "Redeem exactly", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
-          { "path": "receiver", "label": "To", "format": "addressName" },
-          { "path": "owner", "label": "Owner", "format": "addressName" }
+          { "path": "receiver", "label": "To", "format": "addressName", "params": { "types": ["eoa","contract"] } },
+          { "path": "owner", "label": "Owner", "format": "addressName", "params": { "types": ["eoa","contract"] } }
         ],
         "required": ["assets", "receiver", "owner"]
       }
