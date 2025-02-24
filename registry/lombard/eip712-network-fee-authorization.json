@@ -6,10 +6,6 @@
         {
           "chainId": 1,
           "address": "0x8236a87084f8B84306f72007F36F2618A5634494"
-        },
-        {
-          "chainId": 17000,
-          "address": "0xED7bfd5C1790576105Af4649817f6d35A75CD818"
         }
       ],
       "domain": {
