@@ -3,16 +3,30 @@
   "context": {
     "eip712": {
       "deployments": [
-        { "chainId": 1, "address": "0x8236a87084f8B84306f72007F36F2618A5634494" },
-        { "chainId": 17000, "address": "0xED7bfd5C1790576105Af4649817f6d35A75CD818" },
-        { "chainId": 17000, "address": "0x38A13AB20D15ffbE5A7312d2336EF1552580a4E2" }
+        {
+          "chainId": 1,
+          "address": "0x8236a87084f8B84306f72007F36F2618A5634494"
+        },
+        {
+          "chainId": 17000,
+          "address": "0xED7bfd5C1790576105Af4649817f6d35A75CD818"
+        }
       ],
-      "domain": { "name": "Lombard Staked Bitcoin", "version": "1" },
+      "domain": {
+        "name": "Lombard Staked Bitcoin",
+        "version": "1",
+        "chainId": 1,
+        "verifyingContract": "0x8236a87084f8B84306f72007F36F2618A5634494"
+      },
       "schemas": [
         {
           "primaryType": "feeApproval",
           "types": {
-            "feeApproval": [{ "name": "chainId", "type": "uint256" }, { "name": "fee", "type": "uint256" }, { "name": "expiry", "type": "uint256" }],
+            "feeApproval": [
+              { "name": "chainId", "type": "uint256" },
+              { "name": "fee", "type": "uint256" },
+              { "name": "expiry", "type": "uint256" }
+            ],
             "EIP712Domain": [
               { "name": "name", "type": "string" },
               { "name": "version", "type": "string" },
@@ -24,7 +38,13 @@
       ]
     }
   },
-  "metadata": { "owner": "Lombard Finance", "info": { "legalName": "Lombard Finance", "url": "https://www.lombard.finance/" } },
+  "metadata": {
+    "owner": "Lombard Finance",
+    "info": {
+      "legalName": "Lombard Finance",
+      "url": "https://www.lombard.finance/"
+    }
+  },
   "display": {
     "formats": {
       "feeApproval": {
@@ -32,7 +52,12 @@
         "fields": [
           { "path": "chainId", "label": "Chain ID", "format": "raw" },
           { "path": "fee", "label": "Network Fee", "format": "amount" },
-          { "path": "expiry", "label": "Expiry", "format": "date", "params": { "encoding": "timestamp" } }
+          {
+            "path": "expiry",
+            "label": "Expiry",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          }
         ]
       }
     }
