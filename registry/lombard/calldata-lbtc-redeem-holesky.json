@@ -1,0 +1,1494 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "LBTC",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 17000,
+          "address": "0xED7bfd5C1790576105Af4649817f6d35A75CD818"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "Bascule",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "contract IBascule",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "DOMAIN_SEPARATOR",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "acceptOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "addClaimer",
+          "inputs": [
+            {
+              "name": "newClaimer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "addMinter",
+          "inputs": [
+            {
+              "name": "newMinter",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "allowance",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "approve",
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "account",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "batchMint",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address[]",
+              "internalType": "address[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "batchMint",
+          "inputs": [
+            {
+              "name": "payload",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "proof",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "batchMintWithFee",
+          "inputs": [
+            {
+              "name": "mintPayload",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "proof",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "feePayload",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "userSignature",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "burn",
+          "inputs": [
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "burn",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "calcUnstakeRequestAmount",
+          "inputs": [
+            {
+              "name": "scriptPubkey",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "amountAfterFee",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "isAboveDust",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeBascule",
+          "inputs": [
+            {
+              "name": "newVal",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeBurnCommission",
+          "inputs": [
+            {
+              "name": "newValue",
+              "type": "uint64",
+              "internalType": "uint64",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeConsortium",
+          "inputs": [
+            {
+              "name": "newVal",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeDustFeeRate",
+          "inputs": [
+            {
+              "name": "newRate",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeNameAndSymbol",
+          "inputs": [
+            {
+              "name": "name_",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "symbol_",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeTreasuryAddress",
+          "inputs": [
+            {
+              "name": "newValue",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "consortium",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "decimals",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint8",
+              "internalType": "uint8",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "eip712Domain",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "fields",
+              "type": "bytes1",
+              "internalType": "bytes1",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "version",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "chainId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "verifyingContract",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "salt",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "extensions",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getBurnCommission",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint64",
+              "internalType": "uint64",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getDustFeeRate",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getMintFee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getTreasury",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "initialize",
+          "inputs": [
+            {
+              "name": "consortium_",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "burnCommission_",
+              "type": "uint64",
+              "internalType": "uint64",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "treasury",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "owner_",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "isClaimer",
+          "inputs": [
+            {
+              "name": "claimer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "isMinter",
+          "inputs": [
+            {
+              "name": "minter",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mint",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mint",
+          "inputs": [
+            {
+              "name": "payload",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "proof",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mintWithFee",
+          "inputs": [
+            {
+              "name": "mintPayload",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "proof",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "feePayload",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "userSignature",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "name",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "nonces",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "operator",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "pause",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "paused",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "pauser",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "pendingOwner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "permit",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "deadline",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "v",
+              "type": "uint8",
+              "internalType": "uint8",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "r",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "s",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeem",
+          "inputs": [
+            {
+              "name": "scriptPubkey",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "reinitialize",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "removeClaimer",
+          "inputs": [
+            {
+              "name": "oldClaimer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "removeMinter",
+          "inputs": [
+            {
+              "name": "oldMinter",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setMintFee",
+          "inputs": [
+            {
+              "name": "fee",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "symbol",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "toggleWithdrawals",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transfer",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferFrom",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOperatorRole",
+          "inputs": [
+            {
+              "name": "newOperator",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferPauserRole",
+          "inputs": [
+            {
+              "name": "newPauser",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "unpause",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Lombard",
+    "info": {
+      "legalName": "Lombard Finance",
+      "url": "https://www.lombard.finance/"
+    }
+  },
+  "display": {
+    "formats": {
+      "redeem(bytes,uint256)": {
+        "intent": "Redeem LBTC",
+        "fields": [
+          {
+            "label": "Script Pubkey",
+            "format": "raw",
+            "path": "#.scriptPubkey"
+          },
+          {
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "0xED7bfd5C1790576105Af4649817f6d35A75CD818",
+              "nativeCurrencyAddress": "0xED7bfd5C1790576105Af4649817f6d35A75CD818"
+            },
+            "path": "#.amount"
+          }
+        ],
+        "required": ["#.scriptPubkey", "#.amount"]
+      }
+    }
+  }
+}
