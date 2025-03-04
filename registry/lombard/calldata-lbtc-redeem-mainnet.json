@@ -62,8 +62,7 @@
             "label": "Amount",
             "format": "tokenAmount",
             "params": {
-              "token": "0x8236a87084f8B84306f72007F36F2618A5634494",
-              "nativeCurrencyAddress": "0x8236a87084f8B84306f72007F36F2618A5634494"
+              "token": "0x8236a87084f8B84306f72007F36F2618A5634494"
             },
             "path": "#.amount"
           }
