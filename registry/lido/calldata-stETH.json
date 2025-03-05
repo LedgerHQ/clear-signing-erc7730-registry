@@ -3,38 +3,71 @@
   "context": {
     "$id": "stETH",
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+        }
+      ],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
     }
   },
-  "metadata": { "owner": "Lido", "info": { "url": "https://lido.fi", "legalName": "Lido DAO", "deploymentDate": "2021-02-19T04:37:20Z" } },
+  "metadata": {
+    "owner": "Lido DAO",
+    "info": {
+      "legalName": "Lido DAO",
+      "url": "https://lido.fi"
+    }
+  },
   "display": {
     "formats": {
-      "submit(address)": {
-        "intent": "Stake ETH",
-        "fields": [
-          { "path": "@.value", "label": "Amount to Stake", "format": "amount" },
-          {
-            "path": "_referral",
-            "label": "Referral",
-            "format": "addressName",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["@.value"]
-      },
       "approve(address,uint256)": {
-        "intent": "Approve a spender",
+        "intent": "authorize stETH spending",
         "fields": [
           {
-            "path": "_spender",
             "label": "Spender",
             "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": ["contract"],
+              "sources": []
+            },
+            "path": "#._spender"
           },
-          { "path": "_amount", "label": "Max spending amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } }
+          {
+            "label": "Amount",
+            "format": "tokenAmount",
+            "path": "#._amount"
+          }
         ],
-        "required": ["_spender", "_amount"]
+        "required": ["#._spender", "#._amount"],
+        "excluded": []
+      },
+      "submit(address)": {
+        "intent": "stake ETH",
+        "fields": [],
+        "required": [],
+        "excluded": ["#._referral"]
+      },
+      "transfer(address,uint256)": {
+        "intent": "transfer stETH",
+        "fields": [
+          {
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._recipient"
+          },
+          {
+            "label": "Amount",
+            "format": "tokenAmount",
+            "path": "#._amount"
+          }
+        ],
+        "required": ["#._recipient", "#._amount"],
+        "excluded": []
       }
     }
   }
