@@ -67,7 +67,8 @@
             "path": "#.amount"
           }
         ],
-        "required": ["#.scriptPubkey", "#.amount"]
+        "required": ["#.scriptPubkey", "#.amount"],
+        "excluded": ["#.scriptPubkey.[]"]
       }
     }
   }
