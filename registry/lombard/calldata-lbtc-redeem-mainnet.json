@@ -56,7 +56,7 @@
           {
             "label": "Script Pubkey",
             "format": "raw",
-            "path": "#.scriptPubkey.[]"
+            "path": "#.scriptPubkey"
           },
           {
             "label": "Amount",
@@ -67,7 +67,7 @@
             "path": "#.amount"
           }
         ],
-        "required": ["#.scriptPubkey.[]", "#.amount"]
+        "required": ["#.scriptPubkey.", "#.amount"]
       }
     }
   }
