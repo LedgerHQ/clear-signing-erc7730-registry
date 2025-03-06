@@ -1,0 +1,25 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "SparkDAO",
+    "info": {
+      "legalName": "SparkDAO",
+      "url": "https://spark.fi/"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x73e65DBD630f90604062f6E02fAb9138e713edD9"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x7BfA7C4f149E7415b73bdeDfe609237e29CBF34A"
+        }
+      ]
+    }
+  }
+}

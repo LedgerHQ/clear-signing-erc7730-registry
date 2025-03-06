@@ -1,0 +1,49 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "MEV Capital",
+    "info": {
+      "legalName": "MEV Capital",
+      "url": "https://mevcapital.com/"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xd63070114470f685b75B74D60EEc7c1113d33a3D"
+        },
+        {
+          "chainId": 1,
+          "address": "0x9a8bC3B04b7f3D87cfC09ba407dCED575f2d61D8"
+        },
+        {
+          "chainId": 1,
+          "address": "0x2f1aBb81ed86Be95bcf8178bA62C8e72D6834775"
+        },
+        {
+          "chainId": 1,
+          "address": "0x98cF0B67Da0F16E1F8f1a1D23ad8Dc64c0c70E0b"
+        },
+        {
+          "chainId": 1,
+          "address": "0x749794E985Af5a9A384B9cEe6D88DaB4CE1576A1"
+        },
+        {
+          "chainId": 1,
+          "address": "0xD50DA5F859811A91fD1876C9461fD39c23C747Ad"
+        },
+        {
+          "chainId": 1,
+          "address": "0x1c530D6de70c05A81bF1670157b9d928e9699089"
+        },
+        {
+          "chainId": 1,
+          "address": "0x1265a81d42d513Df40d0031f8f2e1346954d665a"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "LlamaRisk",
+    "info": {
+      "legalName": "LlamaRisk",
+      "url": "https://www.llamarisk.com/"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x67315dd969B8Cd3a3520C245837Bf71f54579C75"
+        }
+      ]
+    }
+  }
+}

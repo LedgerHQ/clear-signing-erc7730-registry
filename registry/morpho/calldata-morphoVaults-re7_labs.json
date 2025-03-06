@@ -1,0 +1,97 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "RE7 Labs",
+    "info": {
+      "legalName": "RE7 Labs",
+      "url": "https://www.re7.capital"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x78Fc2c2eD1A4cDb5402365934aE5648aDAd094d0"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xbb819D845b573B5D7C538F5b85057160cfb5f313"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xA2Cac0023a4797b4729Db94783405189a4203AFc"
+        },
+        {
+          "chainId": 1,
+          "address": "0xE0C98605f279e4D7946d25B75869c69802823763"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x12AFDeFb2237a5963e7BAb3e2D46ad0eee70406e"
+        },
+        {
+          "chainId": 1,
+          "address": "0x95EeF579155cd2C5510F312c8fA39208c3Be01a8"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x80D9964fEb4A507dD697b4437Fc5b25b618CE446"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xB7890CEE6CF4792cdCC13489D36D9d42726ab863"
+        },
+        {
+          "chainId": 1,
+          "address": "0xA02F5E93f783baF150Aa1F8b341Ae90fe0a772f7"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x6e37C95b43566E538D8C278eb69B00FC717a001b"
+        },
+        {
+          "chainId": 1,
+          "address": "0x4F460bb11cf958606C69A963B4A17f9DaEEea8b6"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x0FaBfEAcedf47e890c50C8120177fff69C6a1d9B"
+        },
+        {
+          "chainId": 1,
+          "address": "0xBE40491F3261Fd42724F1AEb465796eb11c06ddF"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x74B6EA9BFee07C3756969b0139CFacBBa5845969"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x30B8A2c8E7Fa41e77b54b8FaF45c610e7aD909E3"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x8c3A6B12332a6354805Eb4b72ef619aEdd22BcdD"
+        },
+        {
+          "chainId": 1,
+          "address": "0x89D80f5e9BC88d8021b352064ae73F0eAf79EBd8"
+        },
+        {
+          "chainId": 1,
+          "address": "0x60d715515d4411f7F43e4206dc5d4a3677f0eC78"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xdB90A4e973B7663ce0Ccc32B6FbD37ffb19BfA83"
+        },
+        {
+          "chainId": 1,
+          "address": "0xE87ed29896B91421ff43f69257ABF78300e40c7a"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "LeadBlock",
+    "info": {
+      "legalName": "LeadBlock",
+      "url": "https://leadblockpartners.com/"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x4cA0E178c94f039d7F202E09d8d1a655Ed3fb6b6"
+        }
+      ]
+    }
+  }
+}

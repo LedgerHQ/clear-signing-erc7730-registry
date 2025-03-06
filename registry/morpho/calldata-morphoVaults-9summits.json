@@ -1,0 +1,37 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "9Summits",
+    "info": {
+      "legalName": "9Summits",
+      "url": "https://9summits.io/"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 8453,
+          "address": "0x5496b42ad0deCebFab0db944D83260e60D54f667"
+        },
+        {
+          "chainId": 1,
+          "address": "0x00B6f2C15E4439749f192D10c70f65354848Cf4b"
+        },
+        {
+          "chainId": 1,
+          "address": "0x1E2aAaDcF528b9cC08F43d4fd7db488cE89F5741"
+        },
+        {
+          "chainId": 1,
+          "address": "0xD5Ac156319f2491d4ad1Ec4aA5ed0ED48C0fa173"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xF540D790413FCFAedAC93518Ae99EdDacE82cb78"
+        }
+      ]
+    }
+  }
+}

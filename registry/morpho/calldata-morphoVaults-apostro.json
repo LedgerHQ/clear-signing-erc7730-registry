@@ -1,0 +1,33 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "Apostro",
+    "info": {
+      "legalName": "Apostro",
+      "url": "https://apostro.xyz"
+    }
+  },
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x214B47C50057eFaa7adc1B1C2608C3751Cd77D78"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xcdDCDd18A16ED441F6CB10c3909e5e7ec2B9e8f3"
+        },
+        {
+          "chainId": 1,
+          "address": "0x5085Dd6FAd07c12e38fae01bc2a4938d2C08B1Bc"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xC484D83F667b779cc9907248101214235642258B"
+        }
+      ]
+    }
+  }
+}
