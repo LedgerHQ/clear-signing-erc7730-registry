@@ -236,7 +236,8 @@
           {
             "path": "unlockTime",
             "label": "Unlock Time",
-            "format": "date"
+            "format": "date",
+            "params": { "encoding": "timestamp" }
           }
         ],
         "required": ["amount", "unlockTime"]
@@ -284,7 +285,8 @@
           {
             "path": "newUnlockTime",
             "label": "New Unlock Time",
-            "format": "date"
+            "format": "date",
+            "params": { "encoding": "timestamp" }
           }
         ],
         "required": ["newUnlockTime"]
@@ -303,7 +305,8 @@
           {
             "path": "unlockTime",
             "label": "Unlock Time",
-            "format": "date"
+            "format": "date",
+            "params": { "encoding": "timestamp" }
           }
         ],
         "required": ["amount", "unlockTime"]
