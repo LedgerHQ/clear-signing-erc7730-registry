@@ -309,7 +309,9 @@
         "required": ["amount", "unlockTime"]
       },
       "withdrawAll()": {
-        "intent": "Withdraw All"
+        "intent": "Withdraw All",
+        "fields": [],
+        "required": []
       }
     }
   }
