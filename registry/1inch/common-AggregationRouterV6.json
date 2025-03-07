@@ -2,7 +2,7 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "metadata": {
     "owner": "1inch",
-    "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "lastUpdate": "2024-02-12T03:44:35Z" },
+    "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "deploymentDate": "2024-02-12T03:44:35Z" },
     "constants": {
       "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
       "addressAsNull": "0x0000000000000000000000000000000000000000"
