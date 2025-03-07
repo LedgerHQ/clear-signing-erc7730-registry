@@ -7,7 +7,7 @@
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
     }
   },
-  "metadata": { "owner": "Lido", "info": { "url": "https://lido.fi", "legalName": "Lido DAO", "lastUpdate": "2021-02-19T04:37:20Z" } },
+  "metadata": { "owner": "Lido", "info": { "url": "https://lido.fi", "legalName": "Lido DAO", "deploymentDate": "2021-02-19T04:37:20Z" } },
   "display": {
     "formats": {
       "submit(address)": {

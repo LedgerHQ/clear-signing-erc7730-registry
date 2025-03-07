@@ -1,0 +1,212 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "metadata": {
+    "owner": "1inch",
+    "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "deploymentDate": "2024-02-12T03:44:35Z" },
+    "constants": {
+      "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
+      "addressAsNull": "0x0000000000000000000000000000000000000000"
+    }
+  },
+  "display": {
+    "definitions": {
+      "sendAmount": {
+        "label": "Amount to Send",
+        "format": "tokenAmount",
+        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+      },
+      "minReceiveAmount": {
+        "label": "Minimum to Receive",
+        "format": "tokenAmount",
+        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+      },
+      "beneficiary": { "label": "Beneficiary", "format": "addressName" },
+      "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
+      "expirationTime": { "label": "Expiration time", "format": "date", "params": { "encoding": "timestamp" } }
+    },
+    "formats": {
+      "swap(address executor, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags) desc, bytes data)": {
+        "$id": "swap",
+        "intent": "Swap",
+        "fields": [
+          { "path": "desc.amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "desc.srcToken" } },
+          {
+            "path": "desc.minReturnAmount",
+            "$ref": "$.display.definitions.minReceiveAmount",
+            "params": { "tokenPath": "desc.dstToken" }
+          },
+          { "path": "desc.dstReceiver", "$ref": "$.display.definitions.beneficiary" }
+        ],
+        "required": ["desc.amount", "desc.minReturnAmount", "desc.dstReceiver"],
+        "excluded": ["executor", "desc.srcReceiver", "desc.flags", "data"]
+      },
+      "unoswap(uint256 token, uint256 amount, uint256 minReturn, uint256 dex)": {
+        "$id": "unoswap",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "@.from", "dex"]
+      },
+      "unoswap2(uint256 token, uint256 amount, uint256 minReturn, uint256 dex, uint256 dex2)": {
+        "$id": "unoswap2",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "@.from", "dex2"],
+        "excluded": ["dex"]
+      },
+      "unoswap3(uint256 token, uint256 amount, uint256 minReturn, uint256 dex, uint256 dex2, uint256 dex3)": {
+        "$id": "unoswap3",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "@.from", "dex3"],
+        "excluded": ["dex", "dex2"]
+      },
+      "unoswapTo(uint256 to, uint256 token, uint256 amount, uint256 minReturn, uint256 dex)": {
+        "$id": "unoswapTo",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "to", "dex"]
+      },
+      "unoswapTo2(uint256 to, uint256 token, uint256 amount, uint256 minReturn, uint256 dex, uint256 dex2)": {
+        "$id": "unoswapTo2",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "to", "dex2"],
+        "excluded": ["dex"]
+      },
+      "unoswapTo3(uint256 to, uint256 token, uint256 amount, uint256 minReturn, uint256 dex, uint256 dex2, uint256 dex3)": {
+        "$id": "unoswapTo3",
+        "intent": "Swap",
+        "fields": [
+          { "path": "amount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "token.[-20:]" } },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["amount", "minReturn", "to", "dex3"],
+        "excluded": ["dex", "dex2"]
+      },
+      "ethUnoswap(uint256 minReturn, uint256 dex)" : {
+        "$id": "ethUnoswap",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "@.value", "@.from", "dex"]
+      },
+      "ethUnoswap2(uint256 minReturn, uint256 dex, uint256 dex2)" : {
+        "$id": "ethUnoswap2",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "@.value", "@.from", "dex2"],
+        "excluded": ["dex"]
+      },
+      "ethUnoswap3(uint256 minReturn, uint256 dex, uint256 dex2, uint256 dex3)" : {
+        "$id": "ethUnoswap3",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "@.value", "@.from", "dex3"],
+        "excluded": ["dex", "dex2"]
+      },
+      "ethUnoswapTo(uint256 to, uint256 minReturn, uint256 dex)" : {
+        "$id": "ethUnoswapTo",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "to", "@.value", "dex"]
+      },
+      "ethUnoswapTo2(uint256 to, uint256 minReturn, uint256 dex, uint256 dex2)" : {
+        "$id": "ethUnoswapTo2",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "to", "@.value", "dex2"],
+        "excluded": ["dex"]
+      },
+      "ethUnoswapTo3(uint256 to, uint256 minReturn, uint256 dex, uint256 dex2, uint256 dex3)" : {
+        "$id": "ethUnoswapTo3",
+        "intent": "Swap",
+        "fields": [
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
+          { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
+        ],
+        "required": ["minReturn", "to", "@.value", "dex3"],
+        "excluded": ["dex", "dex2"]
+      },
+      "cancelOrder(uint256 makerTraits, bytes32 orderHash)" : {
+        "$id": "cancelOrder",
+        "intent": "Cancel limit order",
+        "fields": [
+          { "path": "orderHash", "label": "Order", "format": "raw" }
+        ],
+        "required": ["orderHash"],
+        "excluded": ["makerTraits"]
+      },
+      "cancelOrders(uint256[] makerTraits, bytes32[] orderHashes)" : {
+        "$id": "cancelOrders",
+        "intent": "Cancel limit orders",
+        "fields": [
+          { "path": "orderHashes.[]", "label": "Order", "format": "raw" }
+        ],
+        "required": ["orderHashes"],
+        "excluded": ["makerTraits"]
+      },
+      "increaseEpoch(uint96 series)" : {
+        "$id": "increaseEpoch",
+        "intent": "Cancel all limit orders",
+        "fields": [
+          { "path": "@.from", "label": "Orders maker", "format": "raw" }
+        ],
+        "required": ["@.from"],
+        "excluded": ["series"]
+      }
+    }
+  }
+}
