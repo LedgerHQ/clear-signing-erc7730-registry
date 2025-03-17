@@ -17,14 +17,6 @@
                 { "name": "chainId", "type": "uint256" },
                 { "name": "verifyingContract", "type": "address" }
               ],
-              "V2DutchOrder": [
-                { "name": "info", "type": "OrderInfo" },
-                { "name": "cosigner", "type": "address" },
-                { "name": "baseInputToken", "type": "address" },
-                { "name": "baseInputStartAmount", "type": "uint256" },
-                { "name": "baseInputEndAmount", "type": "uint256" },
-                { "name": "baseOutputs", "type": "DutchOutput[]" }
-              ],
               "OrderInfo": [
                 { "name": "reactor", "type": "address" },
                 { "name": "swapper", "type": "address" },
@@ -43,6 +35,14 @@
               "TokenPermissions": [
                 { "name": "token", "type": "address" },
                 { "name": "amount", "type": "uint256" }
+              ],
+              "V2DutchOrder": [
+                { "name": "info", "type": "OrderInfo" },
+                { "name": "cosigner", "type": "address" },
+                { "name": "baseInputToken", "type": "address" },
+                { "name": "baseInputStartAmount", "type": "uint256" },
+                { "name": "baseInputEndAmount", "type": "uint256" },
+                { "name": "baseOutputs", "type": "DutchOutput[]" }
               ]
             },
             "primaryType": "PermitWitnessTransferFrom"
