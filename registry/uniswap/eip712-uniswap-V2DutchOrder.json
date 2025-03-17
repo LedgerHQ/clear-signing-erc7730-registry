@@ -1,0 +1,111 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "includes": "uniswap-common-eip712.json",
+    "context": {
+      "eip712": {
+        "schemas": [
+          {
+            "types": {
+              "DutchOutput": [
+                { "name": "token", "type": "address" },
+                { "name": "startAmount", "type": "uint256" },
+                { "name": "endAmount", "type": "uint256" },
+                { "name": "recipient", "type": "address" }
+              ],
+              "EIP712Domain": [
+                { "name": "name", "type": "string" },
+                { "name": "chainId", "type": "uint256" },
+                { "name": "verifyingContract", "type": "address" }
+              ],
+              "OrderInfo": [
+                { "name": "reactor", "type": "address" },
+                { "name": "swapper", "type": "address" },
+                { "name": "nonce", "type": "uint256" },
+                { "name": "deadline", "type": "uint256" },
+                { "name": "additionalValidationContract", "type": "address" },
+                { "name": "additionalValidationData", "type": "bytes" }
+              ],
+              "PermitWitnessTransferFrom": [
+                { "name": "permitted", "type": "TokenPermissions" },
+                { "name": "spender", "type": "address" },
+                { "name": "nonce", "type": "uint256" },
+                { "name": "deadline", "type": "uint256" },
+                { "name": "witness", "type": "V2DutchOrder" }
+              ],
+              "TokenPermissions": [
+                { "name": "token", "type": "address" },
+                { "name": "amount", "type": "uint256" }
+              ],
+              "V2DutchOrder": [
+                { "name": "info", "type": "OrderInfo" },
+                { "name": "cosigner", "type": "address" },
+                { "name": "baseInputToken", "type": "address" },
+                { "name": "baseInputStartAmount", "type": "uint256" },
+                { "name": "baseInputEndAmount", "type": "uint256" },
+                { "name": "baseOutputs", "type": "DutchOutput[]" }
+              ]
+            },
+            "primaryType": "PermitWitnessTransferFrom"
+          }
+        ]
+      }
+    },
+    "display": {
+      "formats": {
+        "PermitWitnessTransferFrom": {
+          "intent": "UniswapX V2 Dutch Order",
+          "fields": [
+            {
+              "path": "spender",
+              "label": "Approve to spender",
+              "format": "addressName",
+              "params": { "types": ["contract"], "sources": ["local", "ens"] }
+            },
+            {
+              "path": "permitted.amount",
+              "label": "Approve amount",
+              "format": "tokenAmount",
+              "params": { "tokenPath": "permitted.token" }
+            },
+            {
+              "path": "witness.baseInputStartAmount",
+              "label": "Spend max",
+              "format": "tokenAmount",
+              "params": { "tokenPath": "witness.baseInputToken" }
+            },
+            {
+              "path": "witness.baseOutputs.[]",
+              "fields": [
+                {
+                  "path": "endAmount",
+                  "label": "Minimum amounts to receive",
+                  "format": "tokenAmount",
+                  "params": { "tokenPath": "token" }
+                },
+                {
+                  "path": "recipient",
+                  "label": "On Addresses",
+                  "format": "addressName",
+                  "params": { "types": ["contract"], "sources": ["local", "ens"] }
+                }
+              ]
+            },
+            {
+              "path": "deadline",
+              "label": "Approval expire",
+              "format": "date",
+              "params": { "encoding": "timestamp" }
+            }
+          ],
+          "excluded": [
+            "nonce",
+            "witness.info",
+            "witness.cosigner",
+            "witness.baseInputEndAmount",
+            "witness.baseOutputs.[].startAmount"
+          ]
+        }
+      }
+    }
+  }
+  
