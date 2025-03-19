@@ -2323,7 +2323,7 @@
               "format": "unit",
               "params": {
                 "base": "%",
-                "decimals": "2",
+                "decimals": "",
                 "prefix": null
               },
               "path": "#.fraction",

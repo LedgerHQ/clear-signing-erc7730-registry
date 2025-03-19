@@ -2372,12 +2372,8 @@
             {
               "$id": null,
               "label": "Value",
-              "format": "unit",
-              "params": {
-                "base": "CELO",
-                "decimals": "18",
-                "prefix": null
-              },
+              "format": "amount",
+              "params": null,
               "path": "#.value",
               "value": null
             },
@@ -2517,9 +2513,9 @@
               "label": "Value",
               "format": "unit",
               "params": {
-                "base": "CELO",
+                "base": "",
                 "decimals": "18",
-                "prefix": null
+                "prefix": "CELO"
               },
               "path": "#.value",
               "value": null
@@ -2668,12 +2664,8 @@
             {
               "$id": null,
               "label": "Value",
-              "format": "unit",
-              "params": {
-                "base": "",
-                "decimals": "18",
-                "prefix": "CELO"
-              },
+              "format": "amount",
+              "params": null,
               "path": "#.value",
               "value": null
             },
