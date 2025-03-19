@@ -55,12 +55,7 @@
         "$id": "Permit2 Permit Single",
         "intent": "Authorize spending of token",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Spender",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "spender", "label": "Spender", "format": "raw" },
           { "path": "details.amount", "label": "Amount allowance", "format": "tokenAmount", "params": { "tokenPath": "details.token" } },
           { "path": "details.expiration", "label": "Approval expires", "format": "date", "params": { "encoding": "timestamp" } }
         ],
@@ -72,12 +67,7 @@
         "$id": "Permit2 Permit Batch",
         "intent": "Authorize spending of tokens",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Spender",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "spender", "label": "Spender", "format": "raw" },
           {
             "path": "details.[]",
             "fields": [

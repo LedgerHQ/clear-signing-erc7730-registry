@@ -52,12 +52,7 @@
       "PermitWitnessTransferFrom": {
         "intent": "UniswapX V2 Dutch Order",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Approve to spender",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "spender", "label": "Approve to spender", "format": "raw" },
           {
             "path": "permitted.amount",
             "label": "Approve amount",
@@ -74,12 +69,7 @@
             "path": "witness.baseOutputs.[]",
             "fields": [
               { "path": "endAmount", "label": "Minimum amounts to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
-              {
-                "path": "recipient",
-                "label": "On Addresses",
-                "format": "addressName",
-                "params": { "types": ["contract"], "sources": ["local", "ens"] }
-              }
+              { "path": "recipient", "label": "On Addresses", "format": "raw" }
             ]
           },
           { "path": "deadline", "label": "Approval expire", "format": "date", "params": { "encoding": "timestamp" } }
