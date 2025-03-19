@@ -3,27 +3,14 @@
   "context": {
     "$id": "WalletConnect StakeWeight",
     "contract": {
-      "deployments": [
-        {
-          "chainId": 10,
-          "address": "0x521B4C065Bbdbe3E20B3727340730936912DfA46"
-        }
-      ],
+      "deployments": [{ "chainId": 10, "address": "0x521B4C065Bbdbe3E20B3727340730936912DfA46" }],
       "abi": [
         {
           "inputs": [
             {
               "components": [
-                {
-                  "internalType": "address",
-                  "name": "admin",
-                  "type": "address"
-                },
-                {
-                  "internalType": "address",
-                  "name": "config",
-                  "type": "address"
-                }
+                { "internalType": "address", "name": "admin", "type": "address" },
+                { "internalType": "address", "name": "config", "type": "address" }
               ],
               "internalType": "struct StakeWeight.Init",
               "name": "init",
@@ -37,16 +24,8 @@
         },
         {
           "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "unlockTime",
-              "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "amount", "type": "uint256" },
+            { "internalType": "uint256", "name": "unlockTime", "type": "uint256" }
           ],
           "name": "createLock",
           "outputs": [],
@@ -55,21 +34,9 @@
         },
         {
           "inputs": [
-            {
-              "internalType": "address",
-              "name": "for_",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "unlockTime",
-              "type": "uint256"
-            }
+            { "internalType": "address", "name": "for_", "type": "address" },
+            { "internalType": "uint256", "name": "amount", "type": "uint256" },
+            { "internalType": "uint256", "name": "unlockTime", "type": "uint256" }
           ],
           "name": "createLockFor",
           "outputs": [],
@@ -78,16 +45,8 @@
         },
         {
           "inputs": [
-            {
-              "internalType": "address",
-              "name": "for_",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
+            { "internalType": "address", "name": "for_", "type": "address" },
+            { "internalType": "uint256", "name": "amount", "type": "uint256" }
           ],
           "name": "depositFor",
           "outputs": [],
@@ -95,13 +54,7 @@
           "type": "function"
         },
         {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
-          ],
+          "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }],
           "name": "increaseLockAmount",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -109,16 +62,8 @@
         },
         {
           "inputs": [
-            {
-              "internalType": "address",
-              "name": "for_",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            }
+            { "internalType": "address", "name": "for_", "type": "address" },
+            { "internalType": "uint256", "name": "amount", "type": "uint256" }
           ],
           "name": "increaseLockAmountFor",
           "outputs": [],
@@ -126,13 +71,7 @@
           "type": "function"
         },
         {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "newUnlockTime",
-              "type": "uint256"
-            }
-          ],
+          "inputs": [{ "internalType": "uint256", "name": "newUnlockTime", "type": "uint256" }],
           "name": "increaseUnlockTime",
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -140,75 +79,37 @@
         },
         {
           "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "amount",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "unlockTime",
-              "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "amount", "type": "uint256" },
+            { "internalType": "uint256", "name": "unlockTime", "type": "uint256" }
           ],
           "name": "updateLock",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
         },
+        { "inputs": [], "name": "withdrawAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
         {
-          "inputs": [],
-          "name": "withdrawAll",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            }
-          ],
+          "inputs": [{ "internalType": "address", "name": "user", "type": "address" }],
           "name": "withdrawAllFor",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
         },
         {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            }
-          ],
+          "inputs": [{ "internalType": "address", "name": "to", "type": "address" }],
           "name": "forceWithdrawAll",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
         },
         {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "newMaxLock",
-              "type": "uint256"
-            }
-          ],
+          "inputs": [{ "internalType": "uint256", "name": "newMaxLock", "type": "uint256" }],
           "name": "setMaxLock",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
         },
-        {
-          "inputs": [],
-          "name": "checkpoint",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
+        { "inputs": [], "name": "checkpoint", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
       ]
     }
   },
@@ -229,38 +130,21 @@
             "path": "amount",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": {
-              "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945"
-            }
+            "params": { "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945" }
           },
-          {
-            "path": "unlockTime",
-            "label": "Unlock Time",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
+          { "path": "unlockTime", "label": "Unlock Time", "format": "date", "params": { "encoding": "timestamp" } }
         ],
         "required": ["amount", "unlockTime"]
       },
       "depositFor(address,uint256)": {
         "intent": "Deposit tokens for a period for a given address",
         "fields": [
-          {
-            "path": "for_",
-            "label": "For",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa"],
-              "sources": ["local", "ens"]
-            }
-          },
+          { "path": "for_", "label": "For", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           {
             "path": "amount",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": {
-              "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945"
-            }
+            "params": { "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945" }
           }
         ],
         "required": ["for_", "amount"]
@@ -272,23 +156,14 @@
             "path": "amount",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": {
-              "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945"
-            }
+            "params": { "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945" }
           }
         ],
         "required": ["amount"]
       },
       "increaseUnlockTime(uint256)": {
         "intent": "Increase Unlock Time",
-        "fields": [
-          {
-            "path": "newUnlockTime",
-            "label": "New Unlock Time",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
-        ],
+        "fields": [{ "path": "newUnlockTime", "label": "New Unlock Time", "format": "date", "params": { "encoding": "timestamp" } }],
         "required": ["newUnlockTime"]
       },
       "updateLock(uint256,uint256)": {
@@ -298,24 +173,13 @@
             "path": "amount",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": {
-              "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945"
-            }
+            "params": { "token": "0xeF4461891DfB3AC8572cCf7C794664A8DD927945" }
           },
-          {
-            "path": "unlockTime",
-            "label": "Unlock Time",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
+          { "path": "unlockTime", "label": "Unlock Time", "format": "date", "params": { "encoding": "timestamp" } }
         ],
         "required": ["amount", "unlockTime"]
       },
-      "withdrawAll()": {
-        "intent": "Withdraw All",
-        "fields": [],
-        "required": []
-      }
+      "withdrawAll()": { "intent": "Withdraw All", "fields": [], "required": [] }
     }
   }
 }
