@@ -1,0 +1,2376 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "Celo Accounts",
+      "contract": {
+        "deployments": [
+          {
+            "chainId": 42220,
+            "address": "0x7d21685C17607338b313a7174bAb6620baD0aaB7"
+          },
+          {
+            "chainId": 44787,
+            "address": "0xed7f51A34B4e71fbE69B3091FcF879cD14bD73A9"
+          }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "EIP712_AUTHORIZE_SIGNER_TYPEHASH",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizedBy",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "eip712DomainSeparator",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialized",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isOwner",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "offchainStorageRoots",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "owner",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "registry",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IRegistry",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "renounceOwnership",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setRegistry",
+            "inputs": [
+              {
+                "name": "registryAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferOwnership",
+            "inputs": [
+              {
+                "name": "newOwner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialize",
+            "inputs": [
+              {
+                "name": "registryAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setEip712DomainSeparator",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setAccount",
+            "inputs": [
+              {
+                "name": "name",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "dataEncryptionKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "walletAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setMetadataURL",
+            "inputs": [
+              {
+                "name": "metadataURL",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "addStorageRoot",
+            "inputs": [
+              {
+                "name": "url",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeStorageRoot",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeVoteSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeValidatorSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeValidatorSignerWithPublicKey",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "ecdsaPublicKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeValidatorSignerWithKeys",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "ecdsaPublicKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "blsPublicKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "blsPop",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "batchGetMetadataURL",
+            "inputs": [
+              {
+                "name": "accountsToQuery",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getOffchainStorageRoots",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getPaymentDelegation",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "attestationSignerToAccount",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "voteSignerToAccount",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "signerToAccount",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasAuthorizedSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasAuthorizedVoteSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasAuthorizedValidatorSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasAuthorizedAttestationSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getName",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getMetadataURL",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getDataEncryptionKey",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getWalletAddress",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isAuthorizedSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getVersionNumber",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "createAccount",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setName",
+            "inputs": [
+              {
+                "name": "name",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setWalletAddress",
+            "inputs": [
+              {
+                "name": "walletAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setAccountDataEncryptionKey",
+            "inputs": [
+              {
+                "name": "dataEncryptionKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setPaymentDelegation",
+            "inputs": [
+              {
+                "name": "beneficiary",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "fraction",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "deletePaymentDelegation",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setIndexedSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeSignerWithSignature",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeAttestationSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "authorizeSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "completeSignerAuthorization",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeDefaultSigner",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeIndexedSigner",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeSigner",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeVoteSigner",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeValidatorSigner",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeAttestationSigner",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isLegacySigner",
+            "inputs": [
+              {
+                "name": "_account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isDefaultSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isIndexedSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "validatorSignerToAccount",
+            "inputs": [
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getLegacySigner",
+            "inputs": [
+              {
+                "name": "_account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getDefaultSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getIndexedSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getVoteSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getValidatorSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getAttestationSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasLegacySigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasDefaultSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasIndexedSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isAccount",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRoleAuthorizationSigner",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "signer",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "v",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "r",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "s",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isLegacyRole",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          }
+        ]
+      }
+    },
+    "includes": "common-Celo.json",
+    "display": {
+      "formats": {
+        "setMetadataURL(string)": {
+          "$id": "setMetadataURL",
+          "intent": "Set Metdata URL",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Metadata URL",
+              "format": "raw",
+              "params": null,
+              "path": "#.metadataURL",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.metadataURL"
+          ],
+          "excluded": null
+        },
+        "authorizeVoteSigner(address,uint8,bytes32,bytes32)": {
+          "$id": "authorizeVoteSigner",
+          "intent": "Authorize Vote Signer",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Signer",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.signer",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "V - recovery id of ECDSA",
+              "format": "unit",
+              "params": {
+                "base": null,
+                "decimals": null,
+                "prefix": null
+              },
+              "path": "#.v",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "R",
+              "format": "raw",
+              "params": null,
+              "path": "#.r",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "S",
+              "format": "raw",
+              "params": null,
+              "path": "#.s",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.signer",
+            "#.v",
+            "#.r",
+            "#.s"
+          ],
+          "excluded": null
+        },
+        "setName(string)": {
+          "$id": "setName",
+          "intent": "Set Name ",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Name",
+              "format": "raw",
+              "params": null,
+              "path": "#.name",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.name"
+          ],
+          "excluded": null
+        },
+        "setPaymentDelegation(address,uint256)": {
+          "$id": "setPaymentDelegation",
+          "intent": "Delegate Payment",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Beneficiary",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.beneficiary",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Fraction",
+              "format": "unit",
+              "params": {
+                "base": "%",
+                "decimals": "2",
+                "prefix": null
+              },
+              "path": "#.fraction",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.beneficiary",
+            "#.fraction"
+          ],
+          "excluded": null
+        },
+        "authorizeSigner(address,bytes32)": {
+          "$id": "authorizeSigner",
+          "intent": "Authorize Signer",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Signer",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.signer",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Role",
+              "format": "raw",
+              "params": null,
+              "path": "#.role",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.signer",
+            "#.role"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }

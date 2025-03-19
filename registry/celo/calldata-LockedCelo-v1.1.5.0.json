@@ -1,0 +1,365 @@
+{
+"$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "LockedCelo",
+      "contract": {
+        "deployments": [
+          {
+            "chainId": 42220,
+            "address": "0x6cC083Aed9e3ebe302A6336dBC7c921C9f03349E"
+          },
+          {
+            "chainId": 44787,
+            "address": "0x6a4CC5693DC5BFA3799C699F3B941bA2Cb00c341"
+          }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "lock",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": false,
+            "payable": true,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "unlock",
+            "inputs": [
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "relock",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "withdraw",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "delegateGovernanceVotes",
+            "inputs": [
+              {
+                "name": "delegatee",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "delegateFraction",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "revokeDelegatedGovernanceVotes",
+            "inputs": [
+              {
+                "name": "delegatee",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "revokeFraction",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "updateDelegatedAmount",
+            "inputs": [
+              {
+                "name": "delegator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "delegatee",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "updateDelegatedAmount",
+            "inputs": [
+              {
+                "name": "delegator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          }
+        ]
+      }
+    },
+    "includes": "common-Celo.json",
+    "display": {
+      "formats": {
+        "unlock(uint256)": {
+          "$id": "unlock",
+          "intent": "Unlock",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "amount",
+              "params": null,
+              "path": "#.value",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "relock(uint256,uint256)": {
+          "$id": "relock",
+          "intent": "Relock",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "amount",
+              "params": null,
+              "path": "#.value",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "withdraw(uint256)": {
+          "$id": "withdraw",
+          "intent": "Withdraw",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.index"
+          ],
+          "excluded": null
+        },
+        "delegateGovernanceVotes(address,uint256)": {
+          "$id": "delegateGovernanceVotes",
+          "intent": "Delegate Governance Votes",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Delegatee",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.delegatee",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Delegate Percentage",
+              "format": "unit",
+              "params": {
+                "base": "%",
+                "decimals": null,
+                "prefix": null
+              },
+              "path": "#.delegateFraction",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.delegatee",
+            "#.delegateFraction"
+          ],
+          "excluded": null
+        },
+        "revokeDelegatedGovernanceVotes(address,uint256)": {
+          "$id": "revokeDelegatedGovernanceVotes",
+          "intent": "Revoke Delegation",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Delegatee",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "collection",
+                  "token"
+                ],
+                "sources": null
+              },
+              "path": "#.delegatee",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Revoke %",
+              "format": "unit",
+              "params": {
+                "base": "%",
+                "decimals": null,
+                "prefix": null
+              },
+              "path": "#.revokeFraction",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.delegatee",
+            "#.revokeFraction"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }

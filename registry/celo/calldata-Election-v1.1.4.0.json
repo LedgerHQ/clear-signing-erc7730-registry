@@ -1,0 +1,2731 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    
+    "context": {
+      "$id": "Celo Election",
+      "contract": {
+        "deployments": [
+            {
+                "chainId": 42220,
+                "address": "0x8D6677192144292870907E3Fa8A5527fE55A7ff6"
+              },
+              {
+                "chainId": 44787,
+                "address": "0x1c3eDf937CFc2F6F51784D20DEB1af1F9a8655fA"
+              }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "allowedToVoteOverMaxNumberOfGroups",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cachedVotesByAccount",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "totalVotes",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "checkProofOfPossession",
+            "inputs": [
+              {
+                "name": "sender",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "blsKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "blsPop",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electabilityThreshold",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electableValidators",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "min",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "max",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "fractionMulExp",
+            "inputs": [
+              {
+                "name": "aNumerator",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "aDenominator",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "bNumerator",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "bDenominator",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "exponent",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_decimals",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getBlockNumberFromHeader",
+            "inputs": [
+              {
+                "name": "header",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getBlockedByContract",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "blockedBy",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getEpochNumber",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getEpochNumberOfBlock",
+            "inputs": [
+              {
+                "name": "blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getEpochSize",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getParentSealBitmap",
+            "inputs": [
+              {
+                "name": "blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getVerifiedSealBitmapFromHeader",
+            "inputs": [
+              {
+                "name": "header",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hashHeader",
+            "inputs": [
+              {
+                "name": "header",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialized",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isBlocked",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isOwner",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "maxNumGroupsVotedFor",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "minQuorumSize",
+            "inputs": [
+              {
+                "name": "blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "minQuorumSizeInCurrentSet",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "numberValidatorsInCurrentSet",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "numberValidatorsInSet",
+            "inputs": [
+              {
+                "name": "blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "owner",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "registry",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IRegistry",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "renounceOwnership",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setRegistry",
+            "inputs": [
+              {
+                "name": "registryAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferOwnership",
+            "inputs": [
+              {
+                "name": "newOwner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "validatorAddressFromCurrentSet",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "validatorSignerAddressFromCurrentSet",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "validatorSignerAddressFromSet",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialize",
+            "inputs": [
+              {
+                "name": "registryAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "minElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "maxElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_maxNumGroupsVotedFor",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_electabilityThreshold",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "vote",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "activate",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "activateForAccount",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "revokePending",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "revokeAllActive",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "revokeActive",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "distributeEpochRewards",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "markGroupIneligible",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "markGroupEligible",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "forceDecrementVotes",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lessers",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greaters",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "indices",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setBlockedByContract",
+            "inputs": [
+              {
+                "name": "_blockedBy",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getGroupsVotedForByAccount",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getNumVotesReceivable",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getEligibleValidatorGroups",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTotalVotesForEligibleValidatorGroups",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "groups",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "values",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electValidatorSigners",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electValidatorAccounts",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTotalVotesByAccount",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getActiveVoteUnitsForGroupByAccount",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getActiveVoteUnitsForGroup",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getGroupEligibility",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getGroupEpochRewards",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "totalEpochRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "uptimes",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getGroupEpochRewardsBasedOnScore",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "totalEpochRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "groupScore",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasActivatablePendingVotes",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getElectabilityThreshold",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getElectableValidators",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getVersionNumber",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setElectableValidators",
+            "inputs": [
+              {
+                "name": "min",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "max",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setMaxNumGroupsVotedFor",
+            "inputs": [
+              {
+                "name": "_maxNumGroupsVotedFor",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setElectabilityThreshold",
+            "inputs": [
+              {
+                "name": "threshold",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "updateTotalVotesByAccountForGroup",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setAllowedToVoteOverMaxNumberOfGroups",
+            "inputs": [
+              {
+                "name": "flag",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": false,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "canReceiveVotes",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "value",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTotalVotes",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getActiveVotes",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electNValidatorSigners",
+            "inputs": [
+              {
+                "name": "minElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "maxElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "electNValidatorAccounts",
+            "inputs": [
+              {
+                "name": "minElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "maxElectableValidators",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getCurrentValidatorSigners",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getPendingVotesForGroupByAccount",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getActiveVotesForGroupByAccount",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTotalVotesForGroupByAccount",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTotalVotesForGroup",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getActiveVotesForGroup",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getPendingVotesForGroup",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": true,
+            "payable": false,
+            "gas": null,
+            "signature": null
+          }
+        ]
+      }
+    },
+    "includes": "common-Celo.json",
+    "display": {
+      "formats": {
+        "vote(address,uint256,address,address)": {
+          "$id": "vote",
+          "intent": "Vote",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.group",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "unit",
+              "params": {
+                "base": "CELO",
+                "decimals": "18",
+                "prefix": null
+              },
+              "path": "#.value",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.lesser",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.greater",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group",
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "activate(address)": {
+          "$id": "activate",
+          "intent": "Activate Votes",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.group",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group"
+          ],
+          "excluded": null
+        },
+        "activateForAccount(address,address)": {
+          "$id": "activateForAccount",
+          "intent": "Activate Votes For",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.group",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Account",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.account",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group",
+            "#.account"
+          ],
+          "excluded": null
+        },
+        "revokePending(address,uint256,address,address,uint256)": {
+          "$id": "revokePending",
+          "intent": "Revoke Pending Votes",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.group",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "unit",
+              "params": {
+                "base": "CELO",
+                "decimals": "18",
+                "prefix": null
+              },
+              "path": "#.value",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.lesser",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.greater",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group",
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "revokeAllActive(address,address,address,uint256)": {
+          "$id": "revokeAllActive",
+          "intent": "Revoke All Votes",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.group",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": [
+                  "local",
+                  "ens"
+                ]
+              },
+              "path": "#.lesser",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.greater",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group"
+          ],
+          "excluded": null
+        },
+        "revokeActive(address,uint256,address,address,uint256)": {
+          "$id": "revokeActive",
+          "intent": "Revoke Active Votes",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.group",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "unit",
+              "params": {
+                "base": "",
+                "decimals": "18",
+                "prefix": "CELO"
+              },
+              "path": "#.value",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.lesser",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.greater",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group",
+            "#.value"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }

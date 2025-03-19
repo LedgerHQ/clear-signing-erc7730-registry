@@ -1,0 +1,627 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "Celo Accounts",
+      "contract": {
+        "deployments": [
+          {
+            "chainId": 42220,
+            "address": "0xaEb865bCa93DdC8F47b8e29F40C5399cE34d0C58"
+          },
+          {
+            "chainId": 44787,
+            "address": "0x9acF2A99914E083aD0d610672E93d14b0736BBCc"
+          }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "registerValidatorNoBls",
+            "inputs": [
+              {
+                "name": "ecdsaPublicKey",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "deregisterValidator",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "affiliate",
+            "inputs": [
+              {
+                "name": "group",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "deaffiliate",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "deregisterValidatorGroup",
+            "inputs": [
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "registerValidatorGroup",
+            "inputs": [
+              {
+                "name": "commission",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "addMember",
+            "inputs": [
+              {
+                "name": "validator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "addFirstMember",
+            "inputs": [
+              {
+                "name": "validator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesser",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "removeMember",
+            "inputs": [
+              {
+                "name": "validator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "reorderMember",
+            "inputs": [
+              {
+                "name": "validator",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "lesserMember",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "greaterMember",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          }
+        ]
+      }
+    },
+    "includes": "common-Celo.json",
+    "display": {
+      "formats": {
+        "registerValidatorNoBls(bytes)": {
+          "$id": "registerValidatorNoBls",
+          "intent": "Register ",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Ecdsa Public Key",
+              "format": "raw",
+              "params": null,
+              "path": "#.ecdsaPublicKey",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.ecdsaPublicKey"
+          ],
+          "excluded": null
+        },
+        "deregisterValidator(uint256)": {
+          "$id": "deregisterValidator",
+          "intent": "Unregister",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.index"
+          ],
+          "excluded": null
+        },
+        "affiliate(address)": {
+          "$id": "affiliate",
+          "intent": "Affiliate With Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Group",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.group",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.group"
+          ],
+          "excluded": null
+        },
+        "deregisterValidatorGroup(uint256)": {
+          "$id": "deregisterValidatorGroup",
+          "intent": "Unregister Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Index",
+              "format": "raw",
+              "params": null,
+              "path": "#.index",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.index"
+          ],
+          "excluded": null
+        },
+        "registerValidatorGroup(uint256)": {
+          "$id": "registerValidatorGroup",
+          "intent": "Register Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Commission",
+              "format": "raw",
+              "params": null,
+              "path": "#.commission",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.commission"
+          ],
+          "excluded": null
+        },
+        "addMember(address)": {
+          "$id": "addMember",
+          "intent": "Add Member To Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Member",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.validator",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.validator"
+          ],
+          "excluded": null
+        },
+        "addFirstMember(address,address,address)": {
+          "$id": "addFirstMember",
+          "intent": "Add 1st Member to Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Member ",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.validator",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.lesser",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.greater",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.validator"
+          ],
+          "excluded": null
+        },
+        "removeMember(address)": {
+          "$id": "removeMember",
+          "intent": "Remove Member",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Member",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.validator",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.validator"
+          ],
+          "excluded": null
+        },
+        "reorderMember(address,address,address)": {
+          "$id": "reorderMember",
+          "intent": "Reorder Member in Group",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Member",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet",
+                  "contract"
+                ],
+                "sources": [
+                  "ens",
+                  "local"
+                ]
+              },
+              "path": "#.validator",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Lesser Member",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.lesserMember",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Greater Member",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.greaterMember",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.validator",
+            "#.lesserMember",
+            "#.greaterMember"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }
