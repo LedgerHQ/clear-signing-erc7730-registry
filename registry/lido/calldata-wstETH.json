@@ -43,7 +43,7 @@
         "excluded": []
       },
       "wrap(uint256)": {
-        "intent": "exchange stETH to wstETH",
+        "intent": "wrap stETH to wstETH",
         "fields": [
           {
             "label": "stETH amount",
@@ -55,7 +55,7 @@
         "excluded": []
       },
       "unwrap(uint256)": {
-        "intent": "exchange wstETH to stETH",
+        "intent": "unwrap wstETH to stETH",
         "fields": [
           {
             "label": "wstETH amount",
