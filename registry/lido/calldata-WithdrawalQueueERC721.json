@@ -163,6 +163,96 @@
         ],
         "required": ["#._requestIds.[]", "#._recipient"],
         "excluded": ["#._hints.[]"]
+      },
+      "approve(address,uint256)": {
+        "intent": "allow to transfer stETH Withdrawal NFT (unstETH)",
+        "fields": [
+          {
+            "label": "Operator address",
+            "format": "addressName",
+            "params": {
+              "types": ["contract"],
+              "sources": []
+            },
+            "path": "#._to"
+          },
+          {
+            "label": "Request ID",
+            "format": "raw",
+            "path": "#._requestId"
+          }
+        ]
+      },
+      "safeTransferFrom(address,address,uint256)": {
+        "intent": "transfer stETH Withdrawal NFT (unstETH)",
+        "fields": [
+          {
+            "label": "From",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._from"
+          },
+          {
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._to"
+          }
+        ],
+        "required": ["#._from", "#._to"],
+        "excluded": ["#._requestId"]
+      },
+      "transferFrom(address,address,uint256)": {
+        "intent": "transfer stETH Withdrawal NFT (unstETH)",
+        "fields": [
+          {
+            "label": "From",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._from"
+          },
+          {
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._to"
+          }
+        ],
+        "required": ["#._from", "#._to"],
+        "excluded": ["#._requestId"]
+      },
+      "setApprovalForAll(address, bool)": {
+        "intent": "approve operating on all unstETH tokens",
+        "fields": [
+          {
+            "label": "Operator",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#._operator"
+          },
+          {
+            "label": "Approved",
+            "format": "raw",
+            "path": "#._approved"
+          }
+        ],
+        "required": ["#._operator", "#._approved"],
+        "excluded": []
       }
     }
   }
