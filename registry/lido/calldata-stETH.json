@@ -29,7 +29,7 @@
             "format": "addressName",
             "params": {
               "types": ["contract"],
-              "sources": []
+              "sources": ["local"]
             },
             "path": "#._spender"
           },
