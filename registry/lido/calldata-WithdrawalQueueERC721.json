@@ -70,11 +70,11 @@
         ],
         "required": ["#._amounts.[]", "#._owner"],
         "excluded": [
-          "#._permitvalue",
-          "#._permitdeadline",
-          "#._permitv",
-          "#._permitr",
-          "#._permits"
+          "#._permit.value",
+          "#._permit.deadline",
+          "#._permit.v",
+          "#._permit.r",
+          "#._permit.s"
         ]
       },
       "requestWithdrawalsWstETH(uint256[],address)": {
