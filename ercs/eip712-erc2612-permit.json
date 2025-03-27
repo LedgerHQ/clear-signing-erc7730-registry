@@ -29,12 +29,7 @@
       "Permit": {
         "intent": "Authorize spending of tokens",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Spender",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "spender", "label": "Spender", "format": "raw" },
           { "path": "value", "label": "Max spending amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
           { "path": "deadline", "label": "Valid until", "format": "date", "params": { "encoding": "timestamp" } }
         ],

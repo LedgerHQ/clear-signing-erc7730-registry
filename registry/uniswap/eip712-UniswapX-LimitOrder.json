@@ -45,12 +45,7 @@
       "PermitWitnessTransferFrom": {
         "intent": "UniswapX Limit Order",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Approve to spender",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "spender", "label": "Approve to spender", "format": "raw" },
           {
             "path": "permitted.amount",
             "label": "Amount allowance",
@@ -62,12 +57,7 @@
             "path": "witness.outputs.[]",
             "fields": [
               { "path": "amount", "label": "Min amount to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
-              {
-                "path": "recipient",
-                "label": "On Address",
-                "format": "addressName",
-                "params": { "types": ["contract"], "sources": ["local", "ens"] }
-              }
+              { "path": "recipient", "label": "On Address", "format": "raw" }
             ]
           },
           { "path": "deadline", "label": "Approval expire", "format": "date", "params": { "encoding": "timestamp" } }

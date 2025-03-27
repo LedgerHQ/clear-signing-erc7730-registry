@@ -17,17 +17,6 @@
               { "name": "chainId", "type": "uint256" },
               { "name": "verifyingContract", "type": "address" }
             ],
-            "ExclusiveDutchOrder": [
-              { "name": "info", "type": "OrderInfo" },
-              { "name": "decayStartTime", "type": "uint256" },
-              { "name": "decayEndTime", "type": "uint256" },
-              { "name": "exclusiveFiller", "type": "address" },
-              { "name": "exclusivityOverrideBps", "type": "uint256" },
-              { "name": "inputToken", "type": "address" },
-              { "name": "inputStartAmount", "type": "uint256" },
-              { "name": "inputEndAmount", "type": "uint256" },
-              { "name": "outputs", "type": "DutchOutput[]" }
-            ],
             "OrderInfo": [
               { "name": "reactor", "type": "address" },
               { "name": "swapper", "type": "address" },
@@ -41,9 +30,17 @@
               { "name": "spender", "type": "address" },
               { "name": "nonce", "type": "uint256" },
               { "name": "deadline", "type": "uint256" },
-              { "name": "witness", "type": "ExclusiveDutchOrder" }
+              { "name": "witness", "type": "V2DutchOrder" }
             ],
-            "TokenPermissions": [{ "name": "token", "type": "address" }, { "name": "amount", "type": "uint256" }]
+            "TokenPermissions": [{ "name": "token", "type": "address" }, { "name": "amount", "type": "uint256" }],
+            "V2DutchOrder": [
+              { "name": "info", "type": "OrderInfo" },
+              { "name": "cosigner", "type": "address" },
+              { "name": "baseInputToken", "type": "address" },
+              { "name": "baseInputStartAmount", "type": "uint256" },
+              { "name": "baseInputEndAmount", "type": "uint256" },
+              { "name": "baseOutputs", "type": "DutchOutput[]" }
+            ]
           },
           "primaryType": "PermitWitnessTransferFrom"
         }
@@ -53,7 +50,7 @@
   "display": {
     "formats": {
       "PermitWitnessTransferFrom": {
-        "intent": "UniswapX Exclusive Dutch Order",
+        "intent": "UniswapX V2 Dutch Order",
         "fields": [
           { "path": "spender", "label": "Approve to spender", "format": "raw" },
           {
@@ -63,13 +60,13 @@
             "params": { "tokenPath": "permitted.token" }
           },
           {
-            "path": "witness.inputStartAmount",
+            "path": "witness.baseInputStartAmount",
             "label": "Spend max",
             "format": "tokenAmount",
-            "params": { "tokenPath": "witness.inputToken" }
+            "params": { "tokenPath": "witness.baseInputToken" }
           },
           {
-            "path": "witness.outputs.[]",
+            "path": "witness.baseOutputs.[]",
             "fields": [
               { "path": "endAmount", "label": "Minimum amounts to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
               { "path": "recipient", "label": "On Addresses", "format": "raw" }
@@ -77,16 +74,7 @@
           },
           { "path": "deadline", "label": "Approval expire", "format": "date", "params": { "encoding": "timestamp" } }
         ],
-        "excluded": [
-          "nonce",
-          "witness.info",
-          "witness.decayStartTime",
-          "witness.decayEndTime",
-          "witness.exclusiveFiller",
-          "witness.exclusivityOverrideBps",
-          "witness.inputEndAmount",
-          "witness.outputs.[].startAmount"
-        ]
+        "excluded": ["nonce", "witness.info", "witness.cosigner", "witness.baseInputEndAmount", "witness.baseOutputs.[].startAmount"]
       }
     }
   }
