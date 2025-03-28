@@ -4,30 +4,15 @@
     "$id": null,
     "contract": {
       "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb"
-        },
-        {
-          "chainId": 8453,
-          "address": "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb"
-        }
+        { "chainId": 1, "address": "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb" },
+        { "chainId": 8453, "address": "0xBBBBBbbBBb9cC5e90e3b3Af64bdAF62C37EEFFCb" }
       ],
       "abi": [
         {
           "type": "function",
           "name": "DOMAIN_SEPARATOR",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -43,36 +28,11 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -94,90 +54,23 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "shares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "shares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -194,36 +87,11 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -239,16 +107,7 @@
         {
           "type": "function",
           "name": "enableIrm",
-          "inputs": [
-            {
-              "name": "irm",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "irm", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -259,16 +118,7 @@
         {
           "type": "function",
           "name": "enableLltv",
-          "inputs": [
-            {
-              "name": "lltv",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -279,26 +129,8 @@
         {
           "type": "function",
           "name": "extSloads",
-          "inputs": [
-            {
-              "name": "slots",
-              "type": "bytes32[]",
-              "internalType": "bytes32[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "res",
-              "type": "bytes32[]",
-              "internalType": "bytes32[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "slots", "type": "bytes32[]", "internalType": "bytes32[]", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "res", "type": "bytes32[]", "internalType": "bytes32[]", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -309,16 +141,7 @@
           "type": "function",
           "name": "feeRecipient",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -329,30 +152,9 @@
           "type": "function",
           "name": "flashLoan",
           "inputs": [
-            {
-              "name": "token",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "data",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "token", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -364,25 +166,9 @@
         {
           "type": "function",
           "name": "idToMarketParams",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "Id",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "bytes32", "internalType": "Id", "components": null, "indexed": null, "unit": null }],
           "outputs": [
-            {
-              "name": "loanToken",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "loanToken", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "collateralToken",
               "type": "address",
@@ -391,30 +177,9 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "oracle",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "irm",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "lltv",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "oracle", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "irm", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -426,33 +191,10 @@
           "type": "function",
           "name": "isAuthorized",
           "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -462,26 +204,8 @@
         {
           "type": "function",
           "name": "isIrmEnabled",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -491,26 +215,8 @@
         {
           "type": "function",
           "name": "isLltvEnabled",
-          "inputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -526,90 +232,23 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "borrower",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "seizedAssets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "repaidShares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "data",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "borrower", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "seizedAssets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "repaidShares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -620,16 +259,7 @@
         {
           "type": "function",
           "name": "market",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "Id",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "bytes32", "internalType": "Id", "components": null, "indexed": null, "unit": null }],
           "outputs": [
             {
               "name": "totalSupplyAssets",
@@ -663,22 +293,8 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "lastUpdate",
-              "type": "uint128",
-              "internalType": "uint128",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "fee",
-              "type": "uint128",
-              "internalType": "uint128",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "lastUpdate", "type": "uint128", "internalType": "uint128", "components": null, "indexed": null, "unit": null },
+            { "name": "fee", "type": "uint128", "internalType": "uint128", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -689,26 +305,8 @@
         {
           "type": "function",
           "name": "nonce",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -719,16 +317,7 @@
           "type": "function",
           "name": "owner",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -739,48 +328,13 @@
           "type": "function",
           "name": "position",
           "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "Id",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "bytes32", "internalType": "Id", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "supplyShares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "borrowShares",
-              "type": "uint128",
-              "internalType": "uint128",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "collateral",
-              "type": "uint128",
-              "internalType": "uint128",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "supplyShares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "borrowShares", "type": "uint128", "internalType": "uint128", "components": null, "indexed": null, "unit": null },
+            { "name": "collateral", "type": "uint128", "internalType": "uint128", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -797,90 +351,23 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "shares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "data",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "shares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -892,22 +379,8 @@
           "type": "function",
           "name": "setAuthorization",
           "inputs": [
-            {
-              "name": "authorized",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "newIsAuthorized",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "authorized", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "newIsAuthorized", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -925,36 +398,11 @@
               "type": "tuple",
               "internalType": "struct Authorization",
               "components": [
-                {
-                  "name": "authorizer",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "authorized",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "isAuthorized",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "nonce",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadline",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "authorizer", "type": "address", "internalType": "address", "components": null },
+                { "name": "authorized", "type": "address", "internalType": "address", "components": null },
+                { "name": "isAuthorized", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "nonce", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadline", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -964,24 +412,9 @@
               "type": "tuple",
               "internalType": "struct Signature",
               "components": [
-                {
-                  "name": "v",
-                  "type": "uint8",
-                  "internalType": "uint8",
-                  "components": null
-                },
-                {
-                  "name": "r",
-                  "type": "bytes32",
-                  "internalType": "bytes32",
-                  "components": null
-                },
-                {
-                  "name": "s",
-                  "type": "bytes32",
-                  "internalType": "bytes32",
-                  "components": null
-                }
+                { "name": "v", "type": "uint8", "internalType": "uint8", "components": null },
+                { "name": "r", "type": "bytes32", "internalType": "bytes32", "components": null },
+                { "name": "s", "type": "bytes32", "internalType": "bytes32", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -1003,48 +436,16 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "newFee",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "newFee", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -1076,16 +477,7 @@
         {
           "type": "function",
           "name": "setOwner",
-          "inputs": [
-            {
-              "name": "newOwner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "newOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -1102,90 +494,23 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "shares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "data",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "shares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -1202,64 +527,18 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "data",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -1277,90 +556,23 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "shares",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "shares", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -1377,64 +589,18 @@
               "type": "tuple",
               "internalType": "struct MarketParams",
               "components": [
-                {
-                  "name": "loanToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "collateralToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "oracle",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "irm",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "lltv",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "loanToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "collateralToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "oracle", "type": "address", "internalType": "address", "components": null },
+                { "name": "irm", "type": "address", "internalType": "address", "components": null },
+                { "name": "lltv", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "assets",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "onBehalf",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "assets", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "onBehalf", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -1450,10 +616,7 @@
   },
   "metadata": {
     "owner": "Morpho DAO",
-    "info": {
-      "legalName": "Morpho DAO",
-      "url": "https://docs.morpho.org/governance/organization/multisigs-and-addresses"
-    }
+    "info": { "legalName": "Morpho DAO", "url": "https://docs.morpho.org/governance/organization/multisigs-and-addresses" }
   },
   "display": {
     "formats": {
@@ -1486,10 +649,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -1497,47 +657,20 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Shares",
-            "format": "raw",
-            "params": null,
-            "path": "#.shares",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
+          { "$id": null, "label": "Shares", "format": "raw", "params": null, "path": "#.shares", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },
@@ -1592,10 +725,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -1603,58 +733,24 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Shares",
-            "format": "raw",
-            "params": null,
-            "path": "#.shares",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
+          { "$id": null, "label": "Shares", "format": "raw", "params": null, "path": "#.shares", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Data",
-            "format": "raw",
-            "params": null,
-            "path": "#.data",
-            "value": null
-          }
+          { "$id": null, "label": "Data", "format": "raw", "params": null, "path": "#.data", "value": null }
         ],
         "required": [
           "#.marketParamsloanToken",
@@ -1698,10 +794,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -1709,58 +802,24 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Shares",
-            "format": "raw",
-            "params": null,
-            "path": "#.shares",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
+          { "$id": null, "label": "Shares", "format": "raw", "params": null, "path": "#.shares", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Data",
-            "format": "raw",
-            "params": null,
-            "path": "#.data",
-            "value": null
-          }
+          { "$id": null, "label": "Data", "format": "raw", "params": null, "path": "#.data", "value": null }
         ],
         "required": [
           "#.marketParamsloanToken",
@@ -1804,10 +863,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -1815,50 +871,23 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Data",
-            "format": "raw",
-            "params": null,
-            "path": "#.data",
-            "value": null
-          }
+          { "$id": null, "label": "Data", "format": "raw", "params": null, "path": "#.data", "value": null }
         ],
         "required": [
           "#.marketParamsloanToken",
@@ -1901,10 +930,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -1912,47 +938,20 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Shares",
-            "format": "raw",
-            "params": null,
-            "path": "#.shares",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
+          { "$id": null, "label": "Shares", "format": "raw", "params": null, "path": "#.shares", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },
@@ -2007,10 +1006,7 @@
                 "$id": null,
                 "label": "Oracle",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "oracle",
                 "value": null
               },
@@ -2018,39 +1014,19 @@
                 "$id": null,
                 "label": "Irm",
                 "format": "addressName",
-                "params": {
-                  "types": ["wallet", "eoa", "contract", "token", "collection"],
-                  "sources": null
-                },
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
                 "path": "irm",
                 "value": null
               },
-              {
-                "$id": null,
-                "label": "Lltv",
-                "format": "raw",
-                "params": null,
-                "path": "lltv",
-                "value": null
-              }
+              { "$id": null, "label": "Lltv", "format": "raw", "params": null, "path": "lltv", "value": null }
             ]
           },
-          {
-            "$id": null,
-            "label": "Assets",
-            "format": "raw",
-            "params": null,
-            "path": "#.assets",
-            "value": null
-          },
+          { "$id": null, "label": "Assets", "format": "raw", "params": null, "path": "#.assets", "value": null },
           {
             "$id": null,
             "label": "On Behalf",
             "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#.onBehalf",
             "value": null
           },

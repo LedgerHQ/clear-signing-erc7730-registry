@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Steakhouse Financial",
-    "info": {
-      "legalName": "Steakhouse Financial",
-      "url": "https://www.steakhouse.financial"
-    },
-    "constants": {
-      "underlyingToken": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-      "underlyingTicker": "DAI",
-      "vaultTicker": "bbqDAI"
-    }
+    "info": { "legalName": "Steakhouse Financial", "url": "https://www.steakhouse.financial" },
+    "constants": { "underlyingToken": "0x6B175474E89094C44Da98b954EedeAC495271d0F", "underlyingTicker": "DAI", "vaultTicker": "bbqDAI" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xbeeFfF68CC520D68f82641EFF84330C631E2490E"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xbeeFfF68CC520D68f82641EFF84330C631E2490E" }] } }
 }

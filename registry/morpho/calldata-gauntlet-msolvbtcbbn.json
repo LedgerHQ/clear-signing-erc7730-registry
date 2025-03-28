@@ -3,24 +3,12 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Gauntlet",
-    "info": {
-      "legalName": "Gauntlet",
-      "url": "https://www.gauntlet.xyz/"
-    },
+    "info": { "legalName": "Gauntlet", "url": "https://www.gauntlet.xyz/" },
     "constants": {
       "underlyingToken": "0xd9D920AA40f578ab794426F5C90F6C731D159DEf",
       "underlyingTicker": "SolvBTC.BBN",
       "vaultTicker": "msolvbtcbbn"
     }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xdBB316375B4dC992B2c8827D120c09dFB1d3455D"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xdBB316375B4dC992B2c8827D120c09dFB1d3455D" }] } }
 }

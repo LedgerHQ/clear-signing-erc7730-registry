@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "RE7 Labs",
-    "info": {
-      "legalName": "RE7 Labs",
-      "url": "https://www.re7.capital"
-    },
-    "constants": {
-      "underlyingToken": "0x4200000000000000000000000000000000000006",
-      "underlyingTicker": "WETH",
-      "vaultTicker": "Re7WETH"
-    }
+    "info": { "legalName": "RE7 Labs", "url": "https://www.re7.capital" },
+    "constants": { "underlyingToken": "0x4200000000000000000000000000000000000006", "underlyingTicker": "WETH", "vaultTicker": "Re7WETH" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 8453,
-          "address": "0xA2Cac0023a4797b4729Db94783405189a4203AFc"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 8453, "address": "0xA2Cac0023a4797b4729Db94783405189a4203AFc" }] } }
 }

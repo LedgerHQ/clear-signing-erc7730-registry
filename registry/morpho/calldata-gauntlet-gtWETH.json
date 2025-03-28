@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Gauntlet",
-    "info": {
-      "legalName": "Gauntlet",
-      "url": "https://www.gauntlet.xyz/"
-    },
-    "constants": {
-      "underlyingToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-      "underlyingTicker": "WETH",
-      "vaultTicker": "gtWETH"
-    }
+    "info": { "legalName": "Gauntlet", "url": "https://www.gauntlet.xyz/" },
+    "constants": { "underlyingToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "underlyingTicker": "WETH", "vaultTicker": "gtWETH" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x2371e134e3455e0593363cBF89d3b6cf53740618"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x2371e134e3455e0593363cBF89d3b6cf53740618" }] } }
 }

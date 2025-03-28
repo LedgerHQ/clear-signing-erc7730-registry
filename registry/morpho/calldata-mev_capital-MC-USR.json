@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "MEV Capital",
-    "info": {
-      "legalName": "MEV Capital",
-      "url": "https://mevcapital.com/"
-    },
-    "constants": {
-      "underlyingToken": "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110",
-      "underlyingTicker": "USR",
-      "vaultTicker": "MC-USR"
-    }
+    "info": { "legalName": "MEV Capital", "url": "https://mevcapital.com/" },
+    "constants": { "underlyingToken": "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110", "underlyingTicker": "USR", "vaultTicker": "MC-USR" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xD50DA5F859811A91fD1876C9461fD39c23C747Ad"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xD50DA5F859811A91fD1876C9461fD39c23C747Ad" }] } }
 }

@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Steakhouse Financial",
-    "info": {
-      "legalName": "Steakhouse Financial",
-      "url": "https://www.steakhouse.financial"
-    },
-    "constants": {
-      "underlyingToken": "0x4200000000000000000000000000000000000006",
-      "underlyingTicker": "WETH",
-      "vaultTicker": "steakETH"
-    }
+    "info": { "legalName": "Steakhouse Financial", "url": "https://www.steakhouse.financial" },
+    "constants": { "underlyingToken": "0x4200000000000000000000000000000000000006", "underlyingTicker": "WETH", "vaultTicker": "steakETH" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 8453,
-          "address": "0xbEEf050a7485865A7a8d8Ca0CC5f7536b7a3443e"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 8453, "address": "0xbEEf050a7485865A7a8d8Ca0CC5f7536b7a3443e" }] } }
 }
