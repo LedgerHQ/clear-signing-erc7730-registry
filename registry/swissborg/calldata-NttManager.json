@@ -1387,14 +1387,14 @@
               "label": "Encoded Destination Address",
               "format": "raw",
               "params": null,
-              "path": "#.recipient",
+              "path": "#.recipient"
             }
           ],
           "required": [
             "#.amount",
             "#.recipientChain",
             "#.recipient"
-          ],
+          ]
         },
         "transfer(uint256,uint16,bytes32,bytes32,bool,bytes)": {
           "$id": "transfer2",
@@ -1406,7 +1406,7 @@
               "format": "tokenAmount",
               "params": {
                 "tokenPath": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba",
-                "nativeCurrencyAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba",
+                "nativeCurrencyAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba"
               },
               "path": "#.amount"
             },
