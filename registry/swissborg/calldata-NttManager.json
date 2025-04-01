@@ -1368,8 +1368,8 @@
               "label": "Amount",
               "format": "tokenAmount",
               "params": {
-                "tokenPath": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba",
-                "nativeCurrencyAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba"
+                "tokenPath": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224",
+                "nativeCurrencyAddress": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224"
               },
               "path": "#.amount"
             },
