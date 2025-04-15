@@ -1,16 +1,12 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": "Flare WNAT",
+    "$id": "WFLR",
     "contract": {
       "deployments": [
         {
           "chainId": 14,
           "address": "0x1D80c49BbBCd1C0911346656B529DF9E5c2F783d"
-        },
-        {
-          "chainId": 114,
-          "address": "0xC67DCE33D7A8efA5FfEB961899C73fe01bCe9273"
         }
       ],
       "abi": [
@@ -1735,7 +1731,7 @@
     "formats": {
       "depositTo(address)": {
         "$id": null,
-        "intent": "Deposit FLR to create WFLR",
+        "intent": "Deposit FLR to mint WNAT",
         "screens": null,
         "fields": [
           {
