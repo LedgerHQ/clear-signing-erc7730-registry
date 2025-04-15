@@ -1,0 +1,84 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+
+  "context": {
+    "eip712": {
+      "domain": {
+        "name": "Bebop"
+      },
+
+      "deployments": [
+        [
+          {
+            "chainId": 1,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 137,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 42161,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 56,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 81457,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 324,
+            "address": "0x0000000000225e31D15943971F47aD3022F714Fa"
+          },
+          {
+            "chainId": 34443,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 10,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 8453,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 534352,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 167000,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 10143,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 80094,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 6342,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          },
+          {
+            "chainId": 5330,
+            "address": "0x000000000022d473030f116ddee9f6b43ac78ba3"
+          }
+        ]
+      ]
+    }
+  },
+
+  "metadata": {
+    "owner": "Bebop",
+    "info": {
+      "legalName": "Bebop Trading Limited",
+      "url": "https://bebop.xyz"
+    }
+  }
+}
