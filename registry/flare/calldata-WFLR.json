@@ -1731,7 +1731,7 @@
     "formats": {
       "depositTo(address)": {
         "$id": null,
-        "intent": "Deposit FLR to mint WNAT",
+        "intent": "Deposit FLR to create WNAT",
         "screens": null,
         "fields": [
           {
@@ -1739,14 +1739,19 @@
             "label": "Recipient",
             "format": "addressName",
             "params": {
-              "types": ["eoa", "wallet"],
+              "types": [
+                "eoa",
+                "wallet"
+              ],
               "sources": null
             },
             "path": "#.recipient",
             "value": null
           }
         ],
-        "required": ["#.recipient"],
+        "required": [
+          "#.recipient"
+        ],
         "excluded": null
       },
       "withdraw(uint256)": {
@@ -1763,7 +1768,9 @@
             "value": null
           }
         ],
-        "required": ["#.amount"],
+        "required": [
+          "#.amount"
+        ],
         "excluded": null
       },
       "withdrawFrom(address,uint256)": {
@@ -1776,7 +1783,10 @@
             "label": "Owner",
             "format": "addressName",
             "params": {
-              "types": ["eoa", "wallet"],
+              "types": [
+                "eoa",
+                "wallet"
+              ],
               "sources": null
             },
             "path": "#.owner",
@@ -1791,7 +1801,246 @@
             "value": null
           }
         ],
-        "required": ["#.owner", "#.amount"],
+        "required": [
+          "#.owner",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "delegate(address,uint256)": {
+        "$id": null,
+        "intent": "Delegate all governance vote power to address",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#._to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "bips",
+            "format": "raw",
+            "params": null,
+            "path": "#._bips",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._to",
+          "#._bips"
+        ],
+        "excluded": null
+      },
+      "votePowerOfAt(address,uint256)": {
+        "$id": null,
+        "intent": "Get the governance vote power of an address at block number",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#._owner",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Block Number",
+            "format": "raw",
+            "params": null,
+            "path": "#._blockNumber",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._owner",
+          "#._blockNumber"
+        ],
+        "excluded": null
+      },
+      "batchDelegate(address[],uint256[])": {
+        "$id": null,
+        "intent": "Delegate governance to list of Delegatees",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Delegatees",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#._delegatees.[]",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Bips",
+            "format": "raw",
+            "params": null,
+            "path": "#._bips.[]",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._delegatees.[]",
+          "#._bips.[]"
+        ],
+        "excluded": null
+      },
+      "balanceOf(address)": {
+        "$id": null,
+        "intent": "Check the amount of tokens an account owns",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Account",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.account",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.account"
+        ],
+        "excluded": null
+      },
+      "transfer(address,uint256)": {
+        "$id": null,
+        "intent": "Send tokens to another wallet",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.recipient",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.recipient",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "allowance(address,address)": {
+        "$id": null,
+        "intent": "Show how many tokens a spender is still allowed to use from the owner's account",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.owner",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": null
+            },
+            "path": "#.spender",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.owner",
+          "#.spender"
+        ],
+        "excluded": null
+      },
+      "approve(address,uint256)": {
+        "$id": null,
+        "intent": "Let someone spend a set amount of your tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": null
+            },
+            "path": "#.spender",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.spender",
+          "#.amount"
+        ],
         "excluded": null
       }
     }
