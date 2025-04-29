@@ -1,0 +1,2410 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "rFLR-Flare",
+      "contract": {
+        "deployments": [
+          {
+            "chainId": 14,
+            "address": "0x26d460c3Cf931Fb2014FA436a49e3Af08619810e"
+          }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "MONTH",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "addProjects",
+            "inputs": [
+              {
+                "name": "_names",
+                "type": "string[]",
+                "internalType": "string[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_distributors",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_currentMonthDistributionEnabledList",
+                "type": "bool[]",
+                "internalType": "bool[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "allowance",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "approve",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "assignRewards",
+            "inputs": [
+              {
+                "name": "_month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amountsWei",
+                "type": "uint128[]",
+                "internalType": "uint128[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "balanceOf",
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cancelGovernanceCall",
+            "inputs": [
+              {
+                "name": "_selector",
+                "type": "bytes4",
+                "internalType": "bytes4",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "claimRewards",
+            "inputs": [
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_claimedRewardsWei",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "claimSetupManager",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IIClaimSetupManager",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "decimals",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "disableClaiming",
+            "inputs": [
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "disableDistribution",
+            "inputs": [
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "distributeRewards",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_recipients",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amountsWei",
+                "type": "uint128[]",
+                "internalType": "uint128[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "enableClaiming",
+            "inputs": [
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "enableDistribution",
+            "inputs": [
+              {
+                "name": "_projectIds",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "enableIncentivePool",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "executeGovernanceCall",
+            "inputs": [
+              {
+                "name": "_selector",
+                "type": "bytes4",
+                "internalType": "bytes4",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "firstMonthStartTs",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "fundingAddress",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getAddressUpdater",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "_addressUpdater",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getBalancesOf",
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_wNatBalance",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_rNatBalance",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_lockedBalance",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getClaimableRewards",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getContractName",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getCurrentMonth",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getExpectedBalance",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getIncentivePoolAddress",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getIncentivePoolReceiverInfo",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "_totalIncentiveAuthorizedWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalIncentiveReceivedWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_lastIncentiveAuthorizationReceivedTs",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_dailyAuthorizedIncentive",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getOwnerRewardsInfo",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_assignedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_claimedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_claimable",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getProjectInfo",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_name",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_distributor",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_currentMonthDistributionEnabled",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_distributionDisabled",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_claimingDisabled",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalAssignedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalDistributedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalClaimedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalUnassignedUnclaimedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_monthsWithRewards",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getProjectRewardsInfo",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_assignedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_distributedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_claimedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_unassignedUnclaimedRewards",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getProjectsBasicInfo",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "_names",
+                "type": "string[]",
+                "internalType": "string[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_claimingDisabled",
+                "type": "bool[]",
+                "internalType": "bool[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getProjectsCount",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRNatAccount",
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IRNatAccount",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRewardsInfo",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "_totalAssignableRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalAssignedRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalClaimedRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalWithdrawnRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalWithdrawnAssignableRewards",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getTokenPoolSupplyData",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "_lockedFundsWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalInflationAuthorizedWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_totalClaimedWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "governance",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "governanceSettings",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IGovernanceSettings",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "incentivePoolEnabled",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialise",
+            "inputs": [
+              {
+                "name": "_governanceSettings",
+                "type": "address",
+                "internalType": "contract IGovernanceSettings",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_initialGovernance",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "isExecutor",
+            "inputs": [
+              {
+                "name": "_address",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "libraryAddress",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "manager",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "name",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "productionMode",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "receiveIncentive",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "receiveRewards",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setClaimExecutors",
+            "inputs": [
+              {
+                "name": "_executors",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setDailyAuthorizedIncentive",
+            "inputs": [
+              {
+                "name": "_toAuthorizeWei",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setFundingAddress",
+            "inputs": [
+              {
+                "name": "_fundingAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setLibraryAddress",
+            "inputs": [
+              {
+                "name": "_libraryAddress",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setManager",
+            "inputs": [
+              {
+                "name": "_manager",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "switchToProductionMode",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "symbol",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "timelockedCalls",
+            "inputs": [
+              {
+                "name": "selector",
+                "type": "bytes4",
+                "internalType": "bytes4",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "allowedAfterTimestamp",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "encodedCall",
+                "type": "bytes",
+                "internalType": "bytes",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalSupply",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transfer",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferExternalToken",
+            "inputs": [
+              {
+                "name": "_token",
+                "type": "address",
+                "internalType": "contract IERC20",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferFrom",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "unassignRewards",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_months",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "unassignUnclaimedRewards",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_months",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "updateContractAddresses",
+            "inputs": [
+              {
+                "name": "_contractNameHashes",
+                "type": "bytes32[]",
+                "internalType": "bytes32[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_contractAddresses",
+                "type": "address[]",
+                "internalType": "address[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "updateProject",
+            "inputs": [
+              {
+                "name": "_projectId",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_name",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_distributor",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_currentMonthDistributionEnabled",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "wNat",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IWNat",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "withdraw",
+            "inputs": [
+              {
+                "name": "_amount",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_wrap",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "withdrawAll",
+            "inputs": [
+              {
+                "name": "_wrap",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "withdrawUnassignedRewards",
+            "inputs": [
+              {
+                "name": "_recipient",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint128",
+                "internalType": "uint128",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          }
+        ],
+        "addressMatcher": null,
+        "factory": null
+      }
+    },
+    "metadata": {
+      "owner": "Flare Network",
+      "info": {
+        "legalName": "Flare Labs",
+        "url": "https://flare.network/"
+      }
+    },
+    "display": {
+      "formats": {
+        "balanceOf(address)": {
+          "$id": null,
+          "intent": "Display the number of USDX held by the specified address.​",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Account",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.account",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.account"
+          ],
+          "excluded": null
+        },
+        "transfer(address,uint256)": {
+          "$id": null,
+          "intent": "Send a specified amount of USDX from your wallet to another address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "To",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.to",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "amount",
+              "params": null,
+              "path": "#.value",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.to",
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "approve(address,uint256)": {
+          "$id": null,
+          "intent": "Authorizes another address to spend a specified amount of your USDX on your behalf.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Spender",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.spender",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "amount",
+              "params": null,
+              "path": "#.value",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.spender",
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "allowance(address,address)": {
+          "$id": null,
+          "intent": "Check the remaining amount of USDX that the spender is permitted to spend from the owner's balance.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.owner",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Spender",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.spender",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.owner",
+            "#.spender"
+          ],
+          "excluded": null
+        },
+        "transferFrom(address,address,uint256)": {
+          "$id": null,
+          "intent": " Transfer a specified amount of USDX from one address to another.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "From",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.from",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "To",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.to",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Value",
+              "format": "amount",
+              "params": null,
+              "path": "#.value",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.from",
+            "#.to",
+            "#.value"
+          ],
+          "excluded": null
+        },
+        "distributeRewards(uint256,uint256,address[],uint128[])": {
+          "$id": null,
+          "intent": "Send project rewards to recipients for a specific month (only callable by the project’s distributor).",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Recipients",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._recipients.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amounts Wei",
+              "format": "amount",
+              "params": null,
+              "path": "#._amountsWei.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._recipients.[]",
+            "#._amountsWei.[]"
+          ],
+          "excluded": null
+        },
+        "claimRewards(uint256[],uint256)": {
+          "$id": null,
+          "intent": "Claim your unclaimed rewards for specified projects up to a given month.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Ids",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectIds.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectIds.[]",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "setClaimExecutors(address[])": {
+          "$id": null,
+          "intent": "Replace current executors with new ones for managing reward claims.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Executors",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._executors.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._executors.[]"
+          ],
+          "excluded": null
+        },
+        "withdraw(uint128,bool)": {
+          "$id": null,
+          "intent": "Withdraw tokens from your RNat account to your main address. Optionally wrap them in WNat.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._amount",
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "withdrawAll(bool)": {
+          "$id": null,
+          "intent": "Withdraw all available tokens from RNat. Locked tokens are penalized by burning half.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "transferExternalToken(address,uint256)": {
+          "$id": null,
+          "intent": "Move non-WNat ERC-20 tokens sent to your RNat account back to your main account.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Token",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "token"
+                ],
+                "sources": null
+              },
+              "path": "#._token",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._token",
+            "#._amount"
+          ],
+          "excluded": null
+        },
+        "getRNatAccount(address)": {
+          "$id": null,
+          "intent": "Get your associated RNat account address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getProjectInfo(uint256)": {
+          "$id": null,
+          "intent": "View full details about a specific project, including reward and claim statuses.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId"
+          ],
+          "excluded": null
+        },
+        "getProjectRewardsInfo(uint256,uint256)": {
+          "$id": null,
+          "intent": "View monthly reward details for a specific project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "getOwnerRewardsInfo(uint256,uint256,address)": {
+          "$id": null,
+          "intent": "View monthly reward status for a specific project and wallet.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getClaimableRewards(uint256,address)": {
+          "$id": null,
+          "intent": "View how much reward a specific address can currently claim for a project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getBalancesOf(address)": {
+          "$id": null,
+          "intent": "View your RNat, WNat, and locked token balances.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }
