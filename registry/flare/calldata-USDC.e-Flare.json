@@ -1,12 +1,12 @@
 {
-    "$schema": null,
+    "$schema": "../../specs/erc7730-v1.schema.json",
     "context": {
-      "$id": null,
+      "$id": "USDC.e-Flare",
       "contract": {
         "deployments": [
           {
-            "chainId": 1,
-            "address": "0xdeadbeef00000000000000000000000000000000"
+            "chainId": 14,
+            "address": "0x3AdAE7Ad0449e26ad2e95059e08CC29ECB93E194"
           }
         ],
         "abi": [
