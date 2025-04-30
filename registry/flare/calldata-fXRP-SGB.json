@@ -1,115 +1,15 @@
 {
     "$schema": "../../specs/erc7730-v1.schema.json",
     "context": {
-      "$id": "USDT0-Flare",
+      "$id": "fXRP-SGB",
       "contract": {
         "deployments": [
           {
-            "chainId": 14,
-            "address": "0xe7cd86e13AC4309349F30B3435a9d337750fC82D"
+            "chainId": 19,
+            "address": "0xF9a84f4ec903F4EaB117A9c1098BeC078BA7027d"
           }
         ],
         "abi": [
-          {
-            "type": "function",
-            "name": "CANCEL_AUTHORIZATION_TYPEHASH",
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "DOMAIN_SEPARATOR",
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "RECEIVE_WITH_AUTHORIZATION_TYPEHASH",
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "TRANSFER_WITH_AUTHORIZATION_TYPEHASH",
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "addToBlockedList",
-            "inputs": [
-              {
-                "name": "_user",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
           {
             "type": "function",
             "name": "allowance",
@@ -186,10 +86,70 @@
           },
           {
             "type": "function",
-            "name": "authorizationState",
+            "name": "assetManager",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "assetName",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "assetSymbol",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "balanceHistoryCleanup",
             "inputs": [
               {
-                "name": "authorizer",
+                "name": "_owner",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -197,9 +157,9 @@
                 "unit": null
               },
               {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
+                "name": "_count",
+                "type": "uint256",
+                "internalType": "uint256",
                 "components": null,
                 "indexed": null,
                 "unit": null
@@ -208,14 +168,14 @@
             "outputs": [
               {
                 "name": "",
-                "type": "bool",
-                "internalType": "bool",
+                "type": "uint256",
+                "internalType": "uint256",
                 "components": null,
                 "indexed": null,
                 "unit": null
               }
             ],
-            "stateMutability": "view",
+            "stateMutability": "nonpayable",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -252,10 +212,47 @@
           },
           {
             "type": "function",
+            "name": "balanceOfAt",
+            "inputs": [
+              {
+                "name": "_owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_balance",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
             "name": "burn",
             "inputs": [
               {
-                "name": "_from",
+                "name": "_owner",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -280,51 +277,19 @@
           },
           {
             "type": "function",
-            "name": "cancelAuthorization",
-            "inputs": [
+            "name": "cleanerContract",
+            "inputs": [],
+            "outputs": [
               {
-                "name": "authorizer",
+                "name": "",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
                 "indexed": null,
                 "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "v",
-                "type": "uint8",
-                "internalType": "uint8",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "r",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "s",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
               }
             ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
+            "stateMutability": "view",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -332,35 +297,39 @@
           },
           {
             "type": "function",
-            "name": "cancelAuthorization",
-            "inputs": [
+            "name": "cleanupBlockNumber",
+            "inputs": [],
+            "outputs": [
               {
-                "name": "authorizer",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "signature",
-                "type": "bytes",
-                "internalType": "bytes",
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
                 "components": null,
                 "indexed": null,
                 "unit": null
               }
             ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cleanupBlockNumberManager",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -425,10 +394,117 @@
           },
           {
             "type": "function",
-            "name": "destroyBlockedFunds",
+            "name": "getReceivedAmount",
             "inputs": [
               {
-                "name": "_blockedUser",
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_sentAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_receivedAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_feeAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getSendAmount",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_receivedAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "_sendAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_feeAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "implementation",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -436,8 +512,7 @@
                 "unit": null
               }
             ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
+            "stateMutability": "view",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -485,7 +560,7 @@
             "name": "initialize",
             "inputs": [
               {
-                "name": "_name",
+                "name": "name_",
                 "type": "string",
                 "internalType": "string",
                 "components": null,
@@ -493,7 +568,7 @@
                 "unit": null
               },
               {
-                "name": "_symbol",
+                "name": "symbol_",
                 "type": "string",
                 "internalType": "string",
                 "components": null,
@@ -501,7 +576,23 @@
                 "unit": null
               },
               {
-                "name": "_decimals",
+                "name": "assetName_",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "assetSymbol_",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "decimals_",
                 "type": "uint8",
                 "internalType": "uint8",
                 "components": null,
@@ -518,68 +609,10 @@
           },
           {
             "type": "function",
-            "name": "isBlocked",
-            "inputs": [
-              {
-                "name": "",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bool",
-                "internalType": "bool",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "isTrusted",
-            "inputs": [
-              {
-                "name": "",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [
-              {
-                "name": "",
-                "type": "bool",
-                "internalType": "bool",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
             "name": "mint",
             "inputs": [
               {
-                "name": "_destination",
+                "name": "_owner",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -590,34 +623,6 @@
                 "name": "_amount",
                 "type": "uint256",
                 "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "multiTransfer",
-            "inputs": [
-              {
-                "name": "_recipients",
-                "type": "address[]",
-                "internalType": "address[]",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "_values",
-                "type": "uint256[]",
-                "internalType": "uint256[]",
                 "components": null,
                 "indexed": null,
                 "unit": null
@@ -652,22 +657,13 @@
           },
           {
             "type": "function",
-            "name": "nonces",
-            "inputs": [
-              {
-                "name": "owner",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
+            "name": "proxiableUUID",
+            "inputs": [],
             "outputs": [
               {
                 "name": "",
-                "type": "uint256",
-                "internalType": "uint256",
+                "type": "bytes32",
+                "internalType": "bytes32",
                 "components": null,
                 "indexed": null,
                 "unit": null
@@ -681,382 +677,108 @@
           },
           {
             "type": "function",
-            "name": "oftContract",
-            "inputs": [],
+            "name": "setAssetManager",
+            "inputs": [
+              {
+                "name": "_assetManager",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setCleanerContract",
+            "inputs": [
+              {
+                "name": "_cleanerContract",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setCleanupBlockNumber",
+            "inputs": [
+              {
+                "name": "_blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setCleanupBlockNumberManager",
+            "inputs": [
+              {
+                "name": "_cleanupBlockNumberManager",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "supportsInterface",
+            "inputs": [
+              {
+                "name": "_interfaceId",
+                "type": "bytes4",
+                "internalType": "bytes4",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
             "outputs": [
               {
                 "name": "",
-                "type": "address",
-                "internalType": "address",
+                "type": "bool",
+                "internalType": "bool",
                 "components": null,
                 "indexed": null,
                 "unit": null
               }
             ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "owner",
-            "inputs": [],
-            "outputs": [
-              {
-                "name": "",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "stateMutability": "view",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "permit",
-            "inputs": [
-              {
-                "name": "owner_",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "spender",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "deadline",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "signature",
-                "type": "bytes",
-                "internalType": "bytes",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "permit",
-            "inputs": [
-              {
-                "name": "owner_",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "spender",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "deadline",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "v",
-                "type": "uint8",
-                "internalType": "uint8",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "r",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "s",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "receiveWithAuthorization",
-            "inputs": [
-              {
-                "name": "from",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "to",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validAfter",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validBefore",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "signature",
-                "type": "bytes",
-                "internalType": "bytes",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "receiveWithAuthorization",
-            "inputs": [
-              {
-                "name": "from",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "to",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validAfter",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validBefore",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "v",
-                "type": "uint8",
-                "internalType": "uint8",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "r",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "s",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "redeem",
-            "inputs": [
-              {
-                "name": "_amount",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "removeFromBlockedList",
-            "inputs": [
-              {
-                "name": "_user",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "renounceOwnership",
-            "inputs": [],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "setOFTContract",
-            "inputs": [
-              {
-                "name": "_oftContract",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
+            "stateMutability": "pure",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -1071,6 +793,57 @@
                 "name": "",
                 "type": "string",
                 "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "terminate",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "terminated",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "terminatedAt",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint64",
+                "internalType": "uint64",
                 "components": null,
                 "indexed": null,
                 "unit": null
@@ -1104,18 +877,39 @@
           },
           {
             "type": "function",
-            "name": "transfer",
+            "name": "totalSupplyAt",
             "inputs": [
               {
-                "name": "recipient",
-                "type": "address",
-                "internalType": "address",
+                "name": "_blockNumber",
+                "type": "uint256",
+                "internalType": "uint256",
                 "components": null,
                 "indexed": null,
                 "unit": null
-              },
+              }
+            ],
+            "outputs": [
               {
-                "name": "amount",
+                "name": "_totalSupply",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalSupplyHistoryCleanup",
+            "inputs": [
+              {
+                "name": "_count",
                 "type": "uint256",
                 "internalType": "uint256",
                 "components": null,
@@ -1126,8 +920,8 @@
             "outputs": [
               {
                 "name": "",
-                "type": "bool",
-                "internalType": "bool",
+                "type": "uint256",
+                "internalType": "uint256",
                 "components": null,
                 "indexed": null,
                 "unit": null
@@ -1141,18 +935,10 @@
           },
           {
             "type": "function",
-            "name": "transferFrom",
+            "name": "transfer",
             "inputs": [
               {
-                "name": "_sender",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "_recipient",
+                "name": "_to",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -1186,10 +972,165 @@
           },
           {
             "type": "function",
-            "name": "transferOwnership",
+            "name": "transferExactDest",
             "inputs": [
               {
-                "name": "newOwner",
+                "name": "_to",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferExactDestFrom",
+            "inputs": [
+              {
+                "name": "_from",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_to",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferFrom",
+            "inputs": [
+              {
+                "name": "_from",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_to",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferInternally",
+            "inputs": [
+              {
+                "name": "_to",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "upgradeTo",
+            "inputs": [
+              {
+                "name": "newImplementation",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -1206,10 +1147,10 @@
           },
           {
             "type": "function",
-            "name": "transferWithAuthorization",
+            "name": "upgradeToAndCall",
             "inputs": [
               {
-                "name": "from",
+                "name": "newImplementation",
                 "type": "address",
                 "internalType": "address",
                 "components": null,
@@ -1217,47 +1158,7 @@
                 "unit": null
               },
               {
-                "name": "to",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validAfter",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validBefore",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "signature",
+                "name": "data",
                 "type": "bytes",
                 "internalType": "bytes",
                 "components": null,
@@ -1266,119 +1167,7 @@
               }
             ],
             "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "transferWithAuthorization",
-            "inputs": [
-              {
-                "name": "from",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "to",
-                "type": "address",
-                "internalType": "address",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "value",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validAfter",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "validBefore",
-                "type": "uint256",
-                "internalType": "uint256",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "nonce",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "v",
-                "type": "uint8",
-                "internalType": "uint8",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "r",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "s",
-                "type": "bytes32",
-                "internalType": "bytes32",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "constant": null,
-            "payable": null,
-            "gas": null,
-            "signature": null
-          },
-          {
-            "type": "function",
-            "name": "updateNameAndSymbol",
-            "inputs": [
-              {
-                "name": "_name",
-                "type": "string",
-                "internalType": "string",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              },
-              {
-                "name": "_symbol",
-                "type": "string",
-                "internalType": "string",
-                "components": null,
-                "indexed": null,
-                "unit": null
-              }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable",
+            "stateMutability": "payable",
             "constant": null,
             "payable": null,
             "gas": null,
@@ -1400,7 +1189,7 @@
       "formats": {
         "balanceOf(address)": {
           "$id": null,
-          "intent": "Display the number USDT0 held by address",
+          "intent": "Display the number of fXRP held by the specified address.​",
           "screens": null,
           "fields": [
             {
@@ -1425,12 +1214,12 @@
         },
         "transfer(address,uint256)": {
           "$id": null,
-          "intent": "Send a specified amount of USDT0 from your wallet to another address",
+          "intent": "Send a specified amount of fXRP from your wallet to another address.",
           "screens": null,
           "fields": [
             {
               "$id": null,
-              "label": "Recipient",
+              "label": "To",
               "format": "addressName",
               "params": {
                 "types": [
@@ -1439,7 +1228,7 @@
                 ],
                 "sources": null
               },
-              "path": "#.recipient",
+              "path": "#._to",
               "value": null
             },
             {
@@ -1447,19 +1236,19 @@
               "label": "Amount",
               "format": "amount",
               "params": null,
-              "path": "#.amount",
+              "path": "#._amount",
               "value": null
             }
           ],
           "required": [
-            "#.recipient",
-            "#.amount"
+            "#._to",
+            "#._amount"
           ],
           "excluded": null
         },
         "approve(address,uint256)": {
           "$id": null,
-          "intent": "Authorize another address to spend a specified amount of your USDT0 on your behalf.",
+          "intent": "Authorize another address to spend a specified amount of your fXRP on your behalf.",
           "screens": null,
           "fields": [
             {
@@ -1492,7 +1281,7 @@
         },
         "allowance(address,address)": {
           "$id": null,
-          "intent": "Check the remaining amount of USDT0 that the spender is permitted to spend from the owner's balance",
+          "intent": "Check the remaining amount of fXRP that the spender is permitted to spend from the owner's balance.",
           "screens": null,
           "fields": [
             {
@@ -1531,29 +1320,12 @@
         },
         "transferFrom(address,address,uint256)": {
           "$id": null,
-          "intent": " Transfer a specified amount of USDT0 tokens from one address to another.",
+          "intent": "Transfer a specified amount of fXRP from one address to another.",
           "screens": null,
           "fields": [
             {
               "$id": null,
-              "label": "Sender",
-              "format": "addressName",
-              "params": {
-                "types": [
-                  "wallet",
-                  "eoa",
-                  "contract",
-                  "token",
-                  "collection"
-                ],
-                "sources": null
-              },
-              "path": "#._sender",
-              "value": null
-            },
-            {
-              "$id": null,
-              "label": "Recipient",
+              "label": "From",
               "format": "addressName",
               "params": {
                 "types": [
@@ -1562,7 +1334,21 @@
                 ],
                 "sources": null
               },
-              "path": "#._recipient",
+              "path": "#._from",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "To",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._to",
               "value": null
             },
             {
@@ -1575,9 +1361,396 @@
             }
           ],
           "required": [
-            "#._sender",
-            "#._recipient",
+            "#._from",
+            "#._to",
             "#._amount"
+          ],
+          "excluded": null
+        },
+        "distributeRewards(uint256,uint256,address[],uint128[])": {
+          "$id": null,
+          "intent": "Send project rewards to recipients for a specific month (only callable by the project’s distributor).",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Recipients",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._recipients.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amounts Wei",
+              "format": "amount",
+              "params": null,
+              "path": "#._amountsWei.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._recipients.[]",
+            "#._amountsWei.[]"
+          ],
+          "excluded": null
+        },
+        "claimRewards(uint256[],uint256)": {
+          "$id": null,
+          "intent": "Claim your unclaimed rewards for specified projects up to a given month.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Ids",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectIds.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectIds.[]",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "setClaimExecutors(address[])": {
+          "$id": null,
+          "intent": "Replace current executors with new ones for managing reward claims.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Executors",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._executors.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._executors.[]"
+          ],
+          "excluded": null
+        },
+        "withdraw(uint128,bool)": {
+          "$id": null,
+          "intent": "Withdraw tokens from your RNat account to your main address. Optionally wrap them in WNat.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._amount",
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "withdrawAll(bool)": {
+          "$id": null,
+          "intent": "Withdraw all available tokens from RNat. Locked tokens are penalized by burning half.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "transferExternalToken(address,uint256)": {
+          "$id": null,
+          "intent": "Move non-WNat ERC-20 tokens sent to your RNat account back to your main account.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Token",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "token"
+                ],
+                "sources": null
+              },
+              "path": "#._token",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._token",
+            "#._amount"
+          ],
+          "excluded": null
+        },
+        "getRNatAccount(address)": {
+          "$id": null,
+          "intent": "Get your associated RNat account address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getProjectInfo(uint256)": {
+          "$id": null,
+          "intent": "View full details about a specific project, including reward and claim statuses.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId"
+          ],
+          "excluded": null
+        },
+        "getProjectRewardsInfo(uint256,uint256)": {
+          "$id": null,
+          "intent": "View monthly reward details for a specific project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "getOwnerRewardsInfo(uint256,uint256,address)": {
+          "$id": null,
+          "intent": "View monthly reward status for a specific project and wallet.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getClaimableRewards(uint256,address)": {
+          "$id": null,
+          "intent": "View how much reward a specific address can currently claim for a project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getBalancesOf(address)": {
+          "$id": null,
+          "intent": "View your RNat, WNat, and locked token balances.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "castVote(uint256,uint8)": {
+          "$id": null,
+          "intent": "Cast vote on a proposal.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Proposal Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._proposalId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Support",
+              "format": "raw",
+              "params": null,
+              "path": "#._support",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._proposalId",
+            "#._support"
           ],
           "excluded": null
         }

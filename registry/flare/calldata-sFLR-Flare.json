@@ -1,0 +1,2259 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",
+    "context": {
+      "$id": "sFLR-Flare",
+      "contract": {
+        "deployments": [
+          {
+            "chainId": 14,
+            "address": "0x12e605bc104e93B45e1aD99F9e555f659051c2BB"
+          }
+        ],
+        "abi": [
+          {
+            "type": "function",
+            "name": "DEFAULT_ADMIN_ROLE",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_ACCRUE_REWARDS",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_DEPOSIT",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_PAUSE",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_PAUSE_MINTING",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_RESUME",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_RESUME_MINTING",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_SET_TOTAL_POOLED_FLR_CAP",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "ROLE_WITHDRAW",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "accrueRewards",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "accrueRewardsExt",
+            "inputs": [
+              {
+                "name": "rewardType",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "allowance",
+            "inputs": [
+              {
+                "name": "owner",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "spender",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "approve",
+            "inputs": [
+              {
+                "name": "spender",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "balanceOf",
+            "inputs": [
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "buyInStakingFee",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cancelPendingUnlockRequests",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cancelRedeemableUnlockRequests",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cancelUnlockRequest",
+            "inputs": [
+              {
+                "name": "unlockIndex",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "claimReward",
+            "inputs": [
+              {
+                "name": "month",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "cooldownPeriod",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "decimals",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint8",
+                "internalType": "uint8",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "deposit",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "disableBuyInStaking",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getPaginatedUnlockRequests",
+            "inputs": [
+              {
+                "name": "user",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "from",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "to",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "tuple[]",
+                "internalType": "struct StakedFlrStorage.UnlockRequest[]",
+                "components": [
+                  {
+                    "name": "startedAt",
+                    "type": "uint256",
+                    "internalType": "uint256",
+                    "components": null
+                  },
+                  {
+                    "name": "shareAmount",
+                    "type": "uint256",
+                    "internalType": "uint256",
+                    "components": null
+                  }
+                ],
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256[]",
+                "internalType": "uint256[]",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getPooledFlrByShares",
+            "inputs": [
+              {
+                "name": "shareAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRoleAdmin",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRoleMember",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "index",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getRoleMemberCount",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getSharesByPooledFlr",
+            "inputs": [
+              {
+                "name": "flrAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "getUnlockRequestCount",
+            "inputs": [
+              {
+                "name": "user",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "grantRole",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "hasRole",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "historicalExchangeRateTimestamps",
+            "inputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "historicalExchangeRatesByTimestamp",
+            "inputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "initialize",
+            "inputs": [
+              {
+                "name": "_cooldownPeriod",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_redeemPeriod",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "_wrappedToken",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "mintingPaused",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "name",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "pause",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "pauseMinting",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "paused",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "pendingBuyInFees",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "protocolRewardShare",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "protocolRewardShareRecipient",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address payable",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "redeem",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "redeem",
+            "inputs": [
+              {
+                "name": "unlockIndex",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "redeemOverdueShares",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "redeemOverdueShares",
+            "inputs": [
+              {
+                "name": "unlockIndex",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "redeemPeriod",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "renounceRole",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "requestUnlock",
+            "inputs": [
+              {
+                "name": "shareAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "resume",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "resumeMinting",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "revokeRole",
+            "inputs": [
+              {
+                "name": "role",
+                "type": "bytes32",
+                "internalType": "bytes32",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "account",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setBuyInStakingFee",
+            "inputs": [
+              {
+                "name": "newBuyInStakingFee",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setCooldownPeriod",
+            "inputs": [
+              {
+                "name": "newCooldownPeriod",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setProtocolRewardData",
+            "inputs": [
+              {
+                "name": "newProtocolRewardShareRecipient",
+                "type": "address",
+                "internalType": "address payable",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "newProtocolRewardShare",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setRedeemPeriod",
+            "inputs": [
+              {
+                "name": "newRedeemPeriod",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "setTotalPooledFlrCap",
+            "inputs": [
+              {
+                "name": "newTotalPooledFlrCap",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "stakerCount",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "submit",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "payable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "submitWrapped",
+            "inputs": [
+              {
+                "name": "amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "symbol",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "string",
+                "internalType": "string",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "pure",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalPooledFlr",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalPooledFlrCap",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalShares",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "totalSupply",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transfer",
+            "inputs": [
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "transferFrom",
+            "inputs": [
+              {
+                "name": "sender",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "recipient",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "bool",
+                "internalType": "bool",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "userSharesInCustody",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "userUnlockRequests",
+            "inputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "address",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [
+              {
+                "name": "startedAt",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              },
+              {
+                "name": "shareAmount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "withdraw",
+            "inputs": [
+              {
+                "name": "amount",
+                "type": "uint256",
+                "internalType": "uint256",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          },
+          {
+            "type": "function",
+            "name": "wrappedToken",
+            "inputs": [],
+            "outputs": [
+              {
+                "name": "",
+                "type": "address",
+                "internalType": "contract IWrappedToken",
+                "components": null,
+                "indexed": null,
+                "unit": null
+              }
+            ],
+            "stateMutability": "view",
+            "constant": null,
+            "payable": null,
+            "gas": null,
+            "signature": null
+          }
+        ],
+        "addressMatcher": null,
+        "factory": null
+      }
+    },
+    "metadata": {
+      "owner": "Flare Network",
+      "info": {
+        "legalName": "Flare Labs",
+        "url": "https://flare.network/"
+      }
+    },
+    "display": {
+      "formats": {
+        "balanceOf(address)": {
+          "$id": null,
+          "intent": "Displays the number of sFLR held by the specified address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Account",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.account",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.account"
+          ],
+          "excluded": null
+        },
+        "transfer(address,uint256)": {
+          "$id": null,
+          "intent": "Send a specified amount of sFLR from your wallet to another address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Recipient",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.recipient",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#.amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.recipient",
+            "#.amount"
+          ],
+          "excluded": null
+        },
+        "approve(address,uint256)": {
+          "$id": null,
+          "intent": "Authorize another address to spend a specified amount of your sFLR on your behalf.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Spender",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.spender",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#.amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.spender",
+            "#.amount"
+          ],
+          "excluded": null
+        },
+        "allowance(address,address)": {
+          "$id": null,
+          "intent": "Check the remaining amount of sFLR that the spender is permitted to spend from the owner's balance.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.owner",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Spender",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "contract"
+                ],
+                "sources": null
+              },
+              "path": "#.spender",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.owner",
+            "#.spender"
+          ],
+          "excluded": null
+        },
+        "transferFrom(address,address,uint256)": {
+          "$id": null,
+          "intent": "Transfer a specified amount of sFLR from one address to another.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Sender",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "wallet",
+                  "eoa",
+                  "contract",
+                  "token",
+                  "collection"
+                ],
+                "sources": null
+              },
+              "path": "#.sender",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Recipient",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#.recipient",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#.amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#.sender",
+            "#.recipient",
+            "#.amount"
+          ],
+          "excluded": null
+        },
+        "distributeRewards(uint256,uint256,address[],uint128[])": {
+          "$id": null,
+          "intent": "Send project rewards to recipients for a specific month (only callable by the project’s distributor).",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Recipients",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._recipients.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amounts Wei",
+              "format": "amount",
+              "params": null,
+              "path": "#._amountsWei.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._recipients.[]",
+            "#._amountsWei.[]"
+          ],
+          "excluded": null
+        },
+        "claimRewards(uint256[],uint256)": {
+          "$id": null,
+          "intent": "Claim your unclaimed rewards for specified projects up to a given month.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Ids",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectIds.[]",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectIds.[]",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "setClaimExecutors(address[])": {
+          "$id": null,
+          "intent": "Replace current executors with new ones for managing reward claims.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Executors",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._executors.[]",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._executors.[]"
+          ],
+          "excluded": null
+        },
+        "withdraw(uint128,bool)": {
+          "$id": null,
+          "intent": "Withdraw tokens from your RNat account to your main address. Optionally wrap them in WNat.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._amount",
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "withdrawAll(bool)": {
+          "$id": null,
+          "intent": "Withdraw all available tokens from RNat. Locked tokens are penalized by burning half.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Wrap",
+              "format": "raw",
+              "params": null,
+              "path": "#._wrap",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._wrap"
+          ],
+          "excluded": null
+        },
+        "transferExternalToken(address,uint256)": {
+          "$id": null,
+          "intent": "Move non-WNat ERC-20 tokens sent to your RNat account back to your main account.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Token",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "token"
+                ],
+                "sources": null
+              },
+              "path": "#._token",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Amount",
+              "format": "amount",
+              "params": null,
+              "path": "#._amount",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._token",
+            "#._amount"
+          ],
+          "excluded": null
+        },
+        "getRNatAccount(address)": {
+          "$id": null,
+          "intent": "Get your associated RNat account address.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getProjectInfo(uint256)": {
+          "$id": null,
+          "intent": "View full details about a specific project, including reward and claim statuses.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId"
+          ],
+          "excluded": null
+        },
+        "getProjectRewardsInfo(uint256,uint256)": {
+          "$id": null,
+          "intent": "View monthly reward details for a specific project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month"
+          ],
+          "excluded": null
+        },
+        "getOwnerRewardsInfo(uint256,uint256,address)": {
+          "$id": null,
+          "intent": "View monthly reward status for a specific project and wallet.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Month",
+              "format": "raw",
+              "params": null,
+              "path": "#._month",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._month",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getClaimableRewards(uint256,address)": {
+          "$id": null,
+          "intent": "View how much reward a specific address can currently claim for a project.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Project Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._projectId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._projectId",
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "getBalancesOf(address)": {
+          "$id": null,
+          "intent": "View your RNat, WNat, and locked token balances.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Owner",
+              "format": "addressName",
+              "params": {
+                "types": [
+                  "eoa",
+                  "wallet"
+                ],
+                "sources": null
+              },
+              "path": "#._owner",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._owner"
+          ],
+          "excluded": null
+        },
+        "castVote(uint256,uint8)": {
+          "$id": null,
+          "intent": "Cast vote on a proposal.",
+          "screens": null,
+          "fields": [
+            {
+              "$id": null,
+              "label": "Proposal Id",
+              "format": "raw",
+              "params": null,
+              "path": "#._proposalId",
+              "value": null
+            },
+            {
+              "$id": null,
+              "label": "Support",
+              "format": "raw",
+              "params": null,
+              "path": "#._support",
+              "value": null
+            }
+          ],
+          "required": [
+            "#._proposalId",
+            "#._support"
+          ],
+          "excluded": null
+        }
+      }
+    }
+  }
