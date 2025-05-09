@@ -1,9 +1,9 @@
 {
-  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
     "$id": "LiFi Diamond Contract",
     "contract": {
-      "abi": "/home/space_cowboy/Workspace/lifi-contracts/diamond.json",
+      "abi": "https://raw.githubusercontent.com/lifinance/lifi-contract-types/refs/heads/main/dist/diamond.json",
       "deployments": [
         {
           "chainId": 1,
