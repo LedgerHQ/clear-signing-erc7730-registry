@@ -1,0 +1,408 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  
+  "context": {
+    "$id": "LiFi Diamond Contract",
+    "contract": {
+      "abi": "https://raw.githubusercontent.com/lifinance/lifi-contracts/main/diamond.json",
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 137,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 10,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 56,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 43114,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 100,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 250,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 324,
+          "address": "0x341e94069f53234fE6DabeF707aD424830525715"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 59144,
+          "address": "0xDE1E598b81620773454588B85D6b5D4eEC32573e"
+        },
+        {
+          "chainId": 5000,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 534352,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 42220,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 1284,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 1285,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 1313161554,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 1088,
+          "address": "0x24ca98fB6972F5eE05f0dB00595c7f68D9FaFd68"
+        },
+        {
+          "chainId": 25,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 1666600000,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 122,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 288,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 106,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 9001,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 42170,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 167004,
+          "address": "0x3A9A5dBa8FE1C4Da98187cE4755701BCA182f63b"
+        },
+        {
+          "chainId": 204,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 81457,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 252,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        },
+        {
+          "chainId": 34443,
+          "address": "0x1231DEB6f5749EF6cE6943a275A1D3E7486F4EaE"
+        }
+      ]
+    }
+  },
+  
+  "metadata": {
+    "owner": "LiFi",
+    "info": {
+      "legalName": "LI.FI GmbH",
+      "url": "https://li.fi/"
+    },
+    "constants": {
+      "nativeAssetAddress": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    }
+  },
+  
+  "display": {
+    "formats": {
+      "startBridgeTokensViaAcross(tuple,tuple)": {
+        "intent": "Bridge tokens via Across Protocol",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_bridgeData.sendingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          },
+          {
+            "path": "_acrossData.relayerFeePct",
+            "label": "Relayer Fee",
+            "format": "raw"
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      },
+      
+      "swapAndStartBridgeTokensViaAcross(tuple,tuple[],tuple)": {
+        "intent": "Swap and bridge tokens via Across Protocol",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Source Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_swapData[0].receivingAssetId",
+            "label": "Destination Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Minimum Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_swapData[0].receivingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          },
+          {
+            "path": "_acrossData.relayerFeePct",
+            "label": "Relayer Fee",
+            "format": "raw"
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_swapData[0].receivingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      },
+      
+      "startBridgeTokensViaHop(tuple,tuple)": {
+        "intent": "Bridge tokens via Hop Protocol",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_bridgeData.sendingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          },
+          {
+            "path": "_hopData.bonderFee",
+            "label": "Bonder Fee",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_bridgeData.sendingAssetId"
+            }
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      },
+      
+      "swapAndStartBridgeTokensViaHop(tuple,tuple[],tuple)": {
+        "intent": "Swap and bridge tokens via Hop Protocol",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Source Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_swapData[0].receivingAssetId",
+            "label": "Destination Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Minimum Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_swapData[0].receivingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          },
+          {
+            "path": "_hopData.bonderFee",
+            "label": "Bonder Fee",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_swapData[0].receivingAssetId"
+            }
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_swapData[0].receivingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      },
+      
+      "startBridgeTokensViaMayan(tuple,tuple)": {
+        "intent": "Bridge tokens via Mayan Protocol",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_mayanData.nonEVMReceiver",
+            "label": "Non-EVM Receiver",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_bridgeData.sendingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      },
+      
+      "startBridgeTokensViaGasZip(tuple,tuple)": {
+        "intent": "Bridge tokens via GasZip",
+        "fields": [
+          {
+            "path": "_bridgeData.transactionId",
+            "label": "Transaction ID",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.sendingAssetId",
+            "label": "Token",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_bridgeData.receiver",
+            "label": "Recipient",
+            "format": "addressOrName"
+          },
+          {
+            "path": "_gasZipData.receiverAddress",
+            "label": "Receiver Address",
+            "format": "raw"
+          },
+          {
+            "path": "_bridgeData.minAmount",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_bridgeData.sendingAssetId"
+            }
+          },
+          {
+            "path": "_bridgeData.destinationChainId",
+            "label": "Destination Chain",
+            "format": "raw"
+          },
+          {
+            "path": "_gasZipData.destinationChains",
+            "label": "Destination Chains",
+            "format": "raw"
+          }
+        ],
+        "required": ["_bridgeData.transactionId", "_bridgeData.sendingAssetId", "_bridgeData.receiver", "_bridgeData.minAmount", "_bridgeData.destinationChainId"]
+      }
+    }
+  }
+}
