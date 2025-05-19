@@ -365,7 +365,8 @@
       "info": {
         "legalName": "SwissBorg",
         "url": "https://migration.swissborg.com"
-      }
+      },
+      "constants": { "chsbAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba" }
     },
     "display": {
       "formats": {
@@ -378,14 +379,13 @@
               "label": "CHSB Amount",
               "format": "tokenAmount",
               "params": {
-                "tokenPath": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba",
-                "nativeCurrencyAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba"
+                "token": "$.metadata.constants.chsbAddress"
               },
               "path": "#._amount"
             }
           ],
           "required": [
-            "amount"
+            "_amount"
           ]
         }
       }
