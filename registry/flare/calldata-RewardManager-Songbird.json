@@ -1588,510 +1588,82 @@
   },
   "display": {
     "formats": {
-      "depositTo(address)": {
+      "initialiseWeightBasedClaims((bytes32[],(uint24,bytes20,uint120,uint8))[])": {
         "$id": null,
-        "intent": "Deposit SGB to create WNAT",
+        "intent": "initialise weight-based reward claims",
         "screens": null,
         "fields": [
           {
-            "$id": null,
-            "label": "Recipient",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#.recipient",
-            "value": null
-          }
-        ],
-        "required": ["#.recipient"],
-        "excluded": null
-      },
-      "withdraw(uint256)": {
-        "$id": null,
-        "intent": "Withdraw to SGB",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#.amount",
-            "value": null
-          }
-        ],
-        "required": ["#.amount"],
-        "excluded": null
-      },
-      "withdrawFrom(address,uint256)": {
-        "$id": null,
-        "intent": "Unwrap WNAT from another user into native tokens",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#.owner",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#.amount",
-            "value": null
-          }
-        ],
-        "required": ["#.owner", "#.amount"],
-        "excluded": null
-      },
-      "delegate(address,uint256)": {
-        "$id": null,
-        "intent": "Delegate all governance vote power to address",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "To",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._to",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "bips",
-            "format": "raw",
-            "params": null,
-            "path": "#._bips",
-            "value": null
-          }
-        ],
-        "required": ["#._to", "#._bips"],
-        "excluded": null
-      },
-      "votePowerOfAt(address,uint256)": {
-        "$id": null,
-        "intent": "Get the governance vote power of an address at block number",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._owner",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Block Number",
-            "format": "raw",
-            "params": null,
-            "path": "#._blockNumber",
-            "value": null
-          }
-        ],
-        "required": ["#._owner", "#._blockNumber"],
-        "excluded": null
-      },
-      "batchDelegate(address[],uint256[])": {
-        "$id": null,
-        "intent": "Delegate governance to list of Delegatees",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Delegatees",
-            "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
-            "path": "#._delegatees.[]",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Bips",
-            "format": "raw",
-            "params": null,
-            "path": "#._bips.[]",
-            "value": null
-          }
-        ],
-        "required": ["#._delegatees.[]", "#._bips.[]"],
-        "excluded": null
-      },
-      "balanceOf(address)": {
-        "$id": null,
-        "intent": "Check the amount of tokens an account owns",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Account",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#.account",
-            "value": null
-          }
-        ],
-        "required": ["#.account"],
-        "excluded": null
-      },
-      "transfer(address,uint256)": {
-        "$id": null,
-        "intent": "Send tokens to another wallet",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Recipient",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#.recipient",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#.amount",
-            "value": null
-          }
-        ],
-        "required": ["#.recipient", "#.amount"],
-        "excluded": null
-      },
-      "allowance(address,address)": {
-        "$id": null,
-        "intent": "Show how many tokens a spender is still allowed to use from the owner's account",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#.owner",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Spender",
-            "format": "addressName",
-            "params": {
-              "types": ["contract"],
-              "sources": null
-            },
-            "path": "#.spender",
-            "value": null
-          }
-        ],
-        "required": ["#.owner", "#.spender"],
-        "excluded": null
-      },
-      "approve(address,uint256)": {
-        "$id": null,
-        "intent": "Let someone spend a set amount of your tokens",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Spender",
-            "format": "addressName",
-            "params": {
-              "types": ["contract"],
-              "sources": null
-            },
-            "path": "#.spender",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#.amount",
-            "value": null
-          }
-        ],
-        "required": ["#.spender", "#.amount"],
-        "excluded": null
-      },
-      "claim(address,address,uint256,bool)": {
-        "$id": null,
-        "intent": "Claim rewards on someone’s behalf (with their approval), and send them to a specific address",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._rewardOwner",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Recipient",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._recipient",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Reward Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#._rewardAmount",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Wrap",
-            "format": "raw",
-            "params": null,
-            "path": "#._wrap",
-            "value": null
+            "path": "#._proofs.[]",
+            "value": null,
+            "fields": [
+              {
+                "path": "",
+                "value": null,
+                "fields": [
+                  {
+                    "$id": null,
+                    "label": "Merkle Proof",
+                    "format": "raw",
+                    "params": null,
+                    "path": "merkleProof.[]",
+                    "value": null
+                  },
+                  {
+                    "path": "body",
+                    "value": null,
+                    "fields": [
+                      {
+                        "$id": null,
+                        "label": "Reward Epoch Id",
+                        "format": "raw",
+                        "params": null,
+                        "path": "rewardEpochId",
+                        "value": null
+                      },
+                      {
+                        "$id": null,
+                        "label": "Beneficiary",
+                        "format": "raw",
+                        "params": null,
+                        "path": "beneficiary",
+                        "value": null
+                      },
+                      {
+                        "$id": null,
+                        "label": "Amount",
+                        "format": "amount",
+                        "params": null,
+                        "path": "amount",
+                        "value": null
+                      },
+                      {
+                        "$id": null,
+                        "label": "Claim Type",
+                        "format": "raw",
+                        "params": null,
+                        "path": "claimType",
+                        "value": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ],
         "required": [
-          "#._rewardOwner",
-          "#._recipient",
-          "#._rewardAmount",
-          "#._wrap"
+          "#._proofs.[]merkleProof.[]",
+          "#._proofs.[]bodyrewardEpochId",
+          "#._proofs.[]bodybeneficiary",
+          "#._proofs.[]bodyamount",
+          "#._proofs.[]bodyclaimType"
         ],
-        "excluded": null
-      },
-      "autoClaim(address[],uint256)": {
-        "$id": null,
-        "intent": "Claim and wrap rewards for multiple accounts (if you're allowed)",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Owners",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._rewardOwners.[]",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Month",
-            "format": "raw",
-            "params": null,
-            "path": "#._month",
-            "value": null
-          }
-        ],
-        "required": ["#._rewardOwners.[]", "#._month"],
-        "excluded": null
-      },
-      "confirmOptOutOfAirdrop(address[])": {
-        "$id": null,
-        "intent": "Opt-out of airdrop",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Opt Out Addresses",
-            "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
-            "path": "#._optOutAddresses.[]",
-            "value": null
-          }
-        ],
-        "required": ["#._optOutAddresses.[]"],
-        "excluded": null
-      },
-      "nextClaimableMonth(address)": {
-        "$id": null,
-        "intent": "View the next month this address can claim rewards for",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._rewardOwner",
-            "value": null
-          }
-        ],
-        "required": ["#._rewardOwner"],
-        "excluded": null
-      },
-      "getClaimableAmount(uint256)": {
-        "$id": null,
-        "intent": "Check how much you can claim for a specific month",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Month",
-            "format": "raw",
-            "params": null,
-            "path": "#._month",
-            "value": null
-          }
-        ],
-        "required": ["#._month"],
-        "excluded": null
-      },
-      "getClaimableAmountOf(address,uint256)": {
-        "$id": null,
-        "intent": "Check how much an address can claim for a specific month",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Account",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._account",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Month",
-            "format": "raw",
-            "params": null,
-            "path": "#._month",
-            "value": null
-          }
-        ],
-        "required": ["#._account", "#._month"],
-        "excluded": null
-      },
-      "setClaimExecutors(address[])": {
-        "$id": null,
-        "intent": "Choose who’s allowed to claim your rewards on your behalf. This replaces any previous choices.",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Executors",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._executors.[]",
-            "value": null
-          }
-        ],
-        "required": ["#._executors.[]"],
-        "excluded": null
-      },
-      "setAllowedClaimRecipients(address[])": {
-        "$id": null,
-        "intent": "Choose which addresses can receive your rewards when someone claims on your behalf. This replaces any previous list.",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Recipients",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._recipients.[]",
-            "value": null
-          }
-        ],
-        "required": ["#._recipients.[]"],
-        "excluded": null
-      },
-      "getStateOfRewards(address)": {
-        "$id": null,
-        "intent": "View the total rewards and how much has already been claimed for a specific address",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Beneficiary",
-            "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
-            "path": "#._beneficiary",
-            "value": null
-          }
-        ],
-        "required": ["#._beneficiary"],
-        "excluded": null
-      },
-      "claimExecutors(address)": {
-        "$id": null,
-        "intent": "Check the list of addresses allowed to call `claim` for a reward owner and the list of allowed claim recipients for that reward owner.",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._rewardOwner",
-            "value": null
-          }
-        ],
-        "required": ["#._rewardOwner"],
         "excluded": null
       },
       "autoClaim(address[],uint24,(bytes32[],(uint24,bytes20,uint120,uint8))[])": {
         "$id": null,
-        "intent": "Claim rewards for multiple reward owners and their associated accounts, and deposit them to the WNAT",
+        "intent": "claims rewards for list of reward owners",
         "screens": null,
         "fields": [
           {
@@ -2099,7 +1671,10 @@
             "label": "Reward Owners",
             "format": "addressName",
             "params": {
-              "types": ["eoa", "wallet"],
+              "types": [
+                "eoa",
+                "wallet"
+              ],
               "sources": null
             },
             "path": "#._rewardOwners.[]",
@@ -2181,177 +1756,6 @@
           "#._proofs.[]bodyamount",
           "#._proofs.[]bodyclaimType"
         ],
-        "excluded": null
-      },
-      "initialiseWeightBasedClaims((bytes32[],(uint24,bytes20,uint120,uint8))[])": {
-        "$id": null,
-        "intent": "Initialize weight based claims",
-        "screens": null,
-        "fields": [
-          {
-            "path": "#._proofs.[]",
-            "value": null,
-            "fields": [
-              {
-                "path": "",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "Merkle Proof",
-                    "format": "raw",
-                    "params": null,
-                    "path": "merkleProof.[]",
-                    "value": null
-                  },
-                  {
-                    "path": "body",
-                    "value": null,
-                    "fields": [
-                      {
-                        "$id": null,
-                        "label": "Reward Epoch Id",
-                        "format": "raw",
-                        "params": null,
-                        "path": "rewardEpochId",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
-                        "label": "Beneficiary",
-                        "format": "raw",
-                        "params": null,
-                        "path": "beneficiary",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
-                        "label": "Amount",
-                        "format": "amount",
-                        "params": null,
-                        "path": "amount",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
-                        "label": "Claim Type",
-                        "format": "raw",
-                        "params": null,
-                        "path": "claimType",
-                        "value": null
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ],
-        "required": [
-          "#._proofs.[]merkleProof.[]",
-          "#._proofs.[]bodyrewardEpochId",
-          "#._proofs.[]bodybeneficiary",
-          "#._proofs.[]bodyamount",
-          "#._proofs.[]bodyclaimType"
-        ],
-        "excluded": null
-      },
-      "noOfInitialisedWeightBasedClaims(uint256)": {
-        "$id": null,
-        "intent": "Return the number of weight based claims that have been initialized",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Epoch Id",
-            "format": "raw",
-            "params": null,
-            "path": "#.rewardEpochId",
-            "value": null
-          }
-        ],
-        "required": ["#.rewardEpochId"],
-        "excluded": null
-      },
-      "getStateOfRewardsAt(address,uint24)": {
-        "$id": null,
-        "intent": "Get the reward states for a given address at a specific reward epoch",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Owner",
-            "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
-            "path": "#._rewardOwner",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Reward Epoch Id",
-            "format": "raw",
-            "params": null,
-            "path": "#._rewardEpochId",
-            "value": null
-          }
-        ],
-        "required": ["#._rewardOwner", "#._rewardEpochId"],
-        "excluded": null
-      },
-      "getUnclaimedRewardState(address,uint24,uint8)": {
-        "$id": null,
-        "intent": "Get the unclaimed reward state for a beneficiary, reward epoch, and claim type",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Beneficiary",
-            "format": "addressName",
-            "params": {
-              "types": ["wallet", "eoa", "contract", "token", "collection"],
-              "sources": null
-            },
-            "path": "#._beneficiary",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Reward Epoch Id",
-            "format": "raw",
-            "params": null,
-            "path": "#._rewardEpochId",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Claim Type",
-            "format": "raw",
-            "params": null,
-            "path": "#._claimType",
-            "value": null
-          }
-        ],
-        "required": ["#._beneficiary", "#._rewardEpochId", "#._claimType"],
-        "excluded": null
-      },
-      "getRewardEpochTotals(uint24)": {
-        "$id": null,
-        "intent": "Get reward epoch totals",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Reward Epoch Id",
-            "format": "raw",
-            "params": null,
-            "path": "#._rewardEpochId",
-            "value": null
-          }
-        ],
-        "required": ["#._rewardEpochId"],
         "excluded": null
       }
     }
