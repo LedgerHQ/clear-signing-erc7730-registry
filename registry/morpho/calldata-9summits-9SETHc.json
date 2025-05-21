@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "9Summits",
-    "info": {
-      "legalName": "9Summits",
-      "url": "https://9summits.io/"
-    },
-    "constants": {
-      "underlyingToken": "0x4200000000000000000000000000000000000006",
-      "underlyingTicker": "WETH",
-      "vaultTicker": "9SETHc"
-    }
+    "info": { "legalName": "9Summits", "url": "https://9summits.io/" },
+    "constants": { "underlyingToken": "0x4200000000000000000000000000000000000006", "underlyingTicker": "WETH", "vaultTicker": "9SETHc" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 8453,
-          "address": "0xF540D790413FCFAedAC93518Ae99EdDacE82cb78"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 8453, "address": "0xF540D790413FCFAedAC93518Ae99EdDacE82cb78" }] } }
 }
