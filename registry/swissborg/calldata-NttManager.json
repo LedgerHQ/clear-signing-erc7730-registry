@@ -1357,8 +1357,7 @@
         "url": "https://swissborg.com/bridge"
       },
       "constants": { 
-        "chsbAddress": "0xba9d4199faB4f26eFE3551D490E3821486f135Ba",
-        "borgAddress": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224"
+        "borgAddress": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224",
       }
     },
     "display": {
@@ -1406,7 +1405,7 @@
               "label": "Amount",
               "format": "tokenAmount",
               "params": {
-                "token": "$.metadata.constants.chsbAddress"
+                "token": "$.metadata.constants.borgAddress"
               },
               "path": "#.amount"
             },
