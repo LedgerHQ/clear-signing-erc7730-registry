@@ -1357,7 +1357,7 @@
         "url": "https://swissborg.com/bridge"
       },
       "constants": { 
-        "borgAddress": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224",
+        "borgAddress": "0x64d0f55Cd8C7133a9D7102b13987235F486F2224"
       }
     },
     "display": {
