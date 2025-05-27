@@ -1443,6 +1443,12 @@
               "format": "raw",
               "params": null,
               "path": "#.transceiverInstructions"
+            },
+            {
+              "$id": "relayingFee",
+              "label": "Relaying Fee",
+              "path": "@.value",
+              "format": "amount"
             }
           ],
           "required": [
