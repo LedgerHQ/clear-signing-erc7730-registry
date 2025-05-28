@@ -1,0 +1,1720 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "RainbowSuperToken",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xdeadbeef00000000000000000000000000000000"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "DOMAIN_SEPARATOR",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "allowance",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "approve",
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "claim",
+          "inputs": [
+            {
+              "name": "proof",
+              "type": "bytes32[]",
+              "internalType": "bytes32[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "recipient",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "claimed",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "crosschainBurn",
+          "inputs": [
+            {
+              "name": "_from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "crosschainMint",
+          "inputs": [
+            {
+              "name": "_to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "decimals",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint8",
+              "internalType": "uint8",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "maxTotalMintedSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "merkleRoot",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mint",
+          "inputs": [
+            {
+              "name": "recipient",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "name",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "nonces",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "originalChainId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "permit",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "deadline",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "v",
+              "type": "uint8",
+              "internalType": "uint8",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "r",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "s",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "supportsInterface",
+          "inputs": [
+            {
+              "name": "_interfaceId",
+              "type": "bytes4",
+              "internalType": "bytes4",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "pure",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "symbol",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "tokenURI",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalMintedSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transfer",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferFrom",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Rainbow",
+    "info": {
+      "legalName": "Rainbow Studio, Inc.",
+      "url": "https://rainbow.me"
+    }
+  },
+  "display": {
+    "formats": {
+      "fillQuoteEthToToken(address,address,bytes,uint256)": {
+        "$id": null,
+        "intent": "Swap",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Buying Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": []
+            },
+            "path": "#.buyTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Router",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#.target",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Call Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.swapCallData",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Fee Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.feeAmount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.buyTokenAddress",
+          "#.target"
+        ],
+        "excluded": null
+      },
+      "fillQuoteTokenToEth(address,address,bytes,uint256,uint256)": {
+        "$id": null,
+        "intent": "Swap",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Selling Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.sellTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Router",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#.target",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Call Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.swapCallData",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Sell Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.sellAmount",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Fee Percentage Basis Points",
+            "format": "raw",
+            "params": null,
+            "path": "#.feePercentageBasisPoints",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.sellTokenAddress",
+          "#.target",
+          "#.sellAmount"
+        ],
+        "excluded": null
+      },
+      "fillQuoteTokenToEthWithPermit(address,address,bytes,uint256,uint256,(uint256,uint256,uint256,bool,uint8,bytes32,bytes32))": {
+        "$id": null,
+        "intent": "Swap",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Selling Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.sellTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Router",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#.target",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Call Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.swapCallData",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Sell Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.sellAmount",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Fee Percentage Basis Points",
+            "format": "raw",
+            "params": null,
+            "path": "#.feePercentageBasisPoints",
+            "value": null
+          },
+          {
+            "path": "#.permitData",
+            "value": null,
+            "fields": [
+              {
+                "$id": null,
+                "label": "Allowance",
+                "format": "amount",
+                "params": {},
+                "path": "value",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Nonce",
+                "format": "raw",
+                "params": null,
+                "path": "nonce",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Expiration",
+                "format": "date",
+                "params": {
+                  "encoding": "timestamp"
+                },
+                "path": "deadline",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Is Dai Style Permit",
+                "format": "raw",
+                "params": null,
+                "path": "isDaiStylePermit",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "V",
+                "format": "raw",
+                "params": null,
+                "path": "v",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "R",
+                "format": "raw",
+                "params": null,
+                "path": "r",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "S",
+                "format": "raw",
+                "params": null,
+                "path": "s",
+                "value": null
+              }
+            ]
+          }
+        ],
+        "required": [
+          "#.sellTokenAddress",
+          "#.target",
+          "#.sellAmount",
+          "#.permitDatavalue",
+          "#.permitDatadeadline"
+        ],
+        "excluded": null
+      },
+      "fillQuoteTokenToToken(address,address,address,bytes,uint256,uint256)": {
+        "$id": null,
+        "intent": "Swap",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Selling Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.sellTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Buying Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.buyTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Router",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#.target",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Call Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.swapCallData",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Sell Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.sellAmount",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Fee Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.feeAmount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.sellTokenAddress",
+          "#.buyTokenAddress",
+          "#.target",
+          "#.sellAmount"
+        ],
+        "excluded": null
+      },
+      "fillQuoteTokenToTokenWithPermit(address,address,address,bytes,uint256,uint256,(uint256,uint256,uint256,bool,uint8,bytes32,bytes32))": {
+        "$id": null,
+        "intent": "Swap",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Selling Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.sellTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Buying Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.buyTokenAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Router",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#.target",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Swap Call Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.swapCallData",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Sell Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.sellAmount",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Fee Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.feeAmount",
+            "value": null
+          },
+          {
+            "path": "#.permitData",
+            "value": null,
+            "fields": [
+              {
+                "$id": null,
+                "label": "Allowance",
+                "format": "amount",
+                "params": null,
+                "path": "value",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Nonce",
+                "format": "raw",
+                "params": null,
+                "path": "nonce",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Expiration",
+                "format": "date",
+                "params": {
+                  "encoding": "timestamp"
+                },
+                "path": "deadline",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Is Dai Style Permit",
+                "format": "raw",
+                "params": null,
+                "path": "isDaiStylePermit",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "V",
+                "format": "raw",
+                "params": null,
+                "path": "v",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "R",
+                "format": "raw",
+                "params": null,
+                "path": "r",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "S",
+                "format": "raw",
+                "params": null,
+                "path": "s",
+                "value": null
+              }
+            ]
+          }
+        ],
+        "required": [
+          "#.sellTokenAddress",
+          "#.buyTokenAddress",
+          "#.target",
+          "#.sellAmount",
+          "#.permitDatavalue",
+          "#.permitDatadeadline"
+        ],
+        "excluded": null
+      },
+      "claimCreatorFees(address,address)": {
+        "$id": null,
+        "intent": "Claim",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "token"
+              ],
+              "sources": null
+            },
+            "path": "#.token",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.recipient",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.token",
+          "#.recipient"
+        ],
+        "excluded": null
+      },
+      "launchRainbowSuperToken(string,string,bytes32,uint256,int24,bytes32,address)": {
+        "$id": null,
+        "intent": "Launch Token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.name",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Symbol",
+            "format": "raw",
+            "params": null,
+            "path": "#.symbol",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Merkleroot",
+            "format": "raw",
+            "params": null,
+            "path": "#.merkleroot",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Supply",
+            "format": "amount",
+            "params": {},
+            "path": "#.supply",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Initial Tick",
+            "format": "raw",
+            "params": null,
+            "path": "#.initialTick",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Salt",
+            "format": "raw",
+            "params": null,
+            "path": "#.salt",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Creator",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.creator",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.name",
+          "#.symbol",
+          "#.supply",
+          "#.creator"
+        ],
+        "excluded": null
+      },
+      "launchFromOtherChain(string,string,bytes32,uint256,bytes32,address,uint256,uint256)": {
+        "$id": null,
+        "intent": "Launch Token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.name",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Symbol",
+            "format": "raw",
+            "params": null,
+            "path": "#.symbol",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Merkleroot",
+            "format": "raw",
+            "params": null,
+            "path": "#.merkleroot",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Supply",
+            "format": "amount",
+            "params": {},
+            "path": "#.supply",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Salt",
+            "format": "raw",
+            "params": null,
+            "path": "#.salt",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Creator",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.creator",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Original Chain Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.originalChainId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Airdrop Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.airdropAmount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.name",
+          "#.symbol",
+          "#.supply",
+          "#.creator",
+          "#.airdropAmount"
+        ],
+        "excluded": null
+      },
+      "launchRainbowSuperTokenAndBuy(string,string,bytes32,uint256,int24,bytes32,address,uint256)": {
+        "$id": null,
+        "intent": "Launch Token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.name",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Symbol",
+            "format": "raw",
+            "params": null,
+            "path": "#.symbol",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Merkleroot",
+            "format": "raw",
+            "params": null,
+            "path": "#.merkleroot",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Supply",
+            "format": "amount",
+            "params": {},
+            "path": "#.supply",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Initial Tick",
+            "format": "raw",
+            "params": null,
+            "path": "#.initialTick",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Salt",
+            "format": "raw",
+            "params": null,
+            "path": "#.salt",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Creator",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.creator",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Purchase Amount",
+            "format": "amount",
+            "params": {},
+            "path": "#.amountIn",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.name",
+          "#.symbol",
+          "#.supply",
+          "#.creator",
+          "#.amountIn"
+        ],
+        "excluded": null
+      },
+      "approve(address,uint256)": {
+        "$id": null,
+        "intent": "Approve Spend",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Contract",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": null
+            },
+            "path": "#.spender",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.spender",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "claim(bytes32[],address,uint256)": {
+        "$id": null,
+        "intent": "Claim Tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Proof",
+            "format": "raw",
+            "params": null,
+            "path": "#.proof.[]",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.recipient",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.recipient",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "mint(address,uint256)": {
+        "$id": null,
+        "intent": "Mint Tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.recipient",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.recipient",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "permit(address,address,uint256,uint256,uint8,bytes32,bytes32)": {
+        "$id": null,
+        "intent": "Approve Spend",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.owner",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Contract",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": null
+            },
+            "path": "#.spender",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Value",
+            "format": "amount",
+            "params": null,
+            "path": "#.value",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Expiration",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#.deadline",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "V",
+            "format": "raw",
+            "params": null,
+            "path": "#.v",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "R",
+            "format": "raw",
+            "params": null,
+            "path": "#.r",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "S",
+            "format": "raw",
+            "params": null,
+            "path": "#.s",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.spender",
+          "#.value",
+          "#.deadline"
+        ],
+        "excluded": null
+      },
+      "transfer(address,uint256)": {
+        "$id": null,
+        "intent": "Send Tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.to",
+          "#.amount"
+        ],
+        "excluded": null
+      }
+    }
+  }
+}
