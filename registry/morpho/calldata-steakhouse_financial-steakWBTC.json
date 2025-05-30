@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Steakhouse Financial",
-    "info": {
-      "legalName": "Steakhouse Financial",
-      "url": "https://www.steakhouse.financial"
-    },
-    "constants": {
-      "underlyingToken": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
-      "underlyingTicker": "WBTC",
-      "vaultTicker": "steakWBTC"
-    }
+    "info": { "legalName": "Steakhouse Financial", "url": "https://www.steakhouse.financial" },
+    "constants": { "underlyingToken": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", "underlyingTicker": "WBTC", "vaultTicker": "steakWBTC" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xbeEf094333AEdD535c130958c204E84f681FD9FA"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xbeEf094333AEdD535c130958c204E84f681FD9FA" }] } }
 }

@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Gauntlet",
-    "info": {
-      "legalName": "Gauntlet",
-      "url": "https://www.gauntlet.xyz/"
-    },
-    "constants": {
-      "underlyingToken": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-      "underlyingTicker": "USDC",
-      "vaultTicker": "gtUSDCp"
-    }
+    "info": { "legalName": "Gauntlet", "url": "https://www.gauntlet.xyz/" },
+    "constants": { "underlyingToken": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", "underlyingTicker": "USDC", "vaultTicker": "gtUSDCp" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 8453,
-          "address": "0xeE8F4eC5672F09119b96Ab6fB59C27E1b7e44b61"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 8453, "address": "0xeE8F4eC5672F09119b96Ab6fB59C27E1b7e44b61" }] } }
 }

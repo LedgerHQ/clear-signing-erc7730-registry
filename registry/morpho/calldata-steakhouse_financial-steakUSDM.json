@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "Steakhouse Financial",
-    "info": {
-      "legalName": "Steakhouse Financial",
-      "url": "https://www.steakhouse.financial"
-    },
-    "constants": {
-      "underlyingToken": "0x57F5E098CaD7A3D1Eed53991D4d66C45C9AF7812",
-      "underlyingTicker": "wUSDM",
-      "vaultTicker": "steakUSDM"
-    }
+    "info": { "legalName": "Steakhouse Financial", "url": "https://www.steakhouse.financial" },
+    "constants": { "underlyingToken": "0x57F5E098CaD7A3D1Eed53991D4d66C45C9AF7812", "underlyingTicker": "wUSDM", "vaultTicker": "steakUSDM" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 8453,
-          "address": "0xBEef03f0BF3cb2e348393008a826538AaDD7d183"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 8453, "address": "0xBEef03f0BF3cb2e348393008a826538AaDD7d183" }] } }
 }
