@@ -628,7 +628,7 @@
               "types": [
                 "token"
               ],
-              "sources": []
+              "sources": ["local", "ens"]
             },
             "path": "#.buyTokenAddress",
             "value": null
@@ -804,7 +804,7 @@
                 "$id": null,
                 "label": "Allowance",
                 "format": "amount",
-                "params": {},
+                "params": null,
                 "path": "value",
                 "value": null
               },

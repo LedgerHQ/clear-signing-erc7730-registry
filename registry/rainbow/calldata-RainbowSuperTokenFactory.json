@@ -1271,7 +1271,7 @@
               "types": [
                 "token"
               ],
-              "sources": []
+              "sources": ["local", "ens"]
             },
             "path": "#.buyTokenAddress",
             "value": null
@@ -1447,7 +1447,7 @@
                 "$id": null,
                 "label": "Allowance",
                 "format": "amount",
-                "params": {},
+                "params": null,
                 "path": "value",
                 "value": null
               },
@@ -1811,7 +1811,7 @@
             "$id": null,
             "label": "Supply",
             "format": "amount",
-            "params": {},
+            "params": null,
             "path": "#.supply",
             "value": null
           },
@@ -1887,7 +1887,7 @@
             "$id": null,
             "label": "Supply",
             "format": "amount",
-            "params": {},
+            "params": null,
             "path": "#.supply",
             "value": null
           },
@@ -1972,7 +1972,7 @@
             "$id": null,
             "label": "Supply",
             "format": "amount",
-            "params": {},
+            "params": null,
             "path": "#.supply",
             "value": null
           },
@@ -2010,7 +2010,7 @@
             "$id": null,
             "label": "Purchase Amount",
             "format": "amount",
-            "params": {},
+            "params": null,
             "path": "#.amountIn",
             "value": null
           }
