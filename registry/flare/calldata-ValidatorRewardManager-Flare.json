@@ -836,12 +836,12 @@
       },
       "setClaimExecutors(address[])": {
         "$id": null,
-        "intent": "set the list of approved executors",
+        "intent": "set executors",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Executors",
+            "label": "Executor",
             "format": "addressName",
             "params": {
               "types": [
@@ -861,12 +861,12 @@
       },
       "setAllowedClaimRecipients(address[])": {
         "$id": null,
-        "intent": "set the list of recipients for rewards",
+        "intent": "set recipients",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Recipients",
+            "label": "Recipient",
             "format": "addressName",
             "params": {
               "types": [

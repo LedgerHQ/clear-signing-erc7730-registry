@@ -1590,7 +1590,7 @@
     "formats": {
       "initialiseWeightBasedClaims((bytes32[],(uint24,bytes20,uint120,uint8))[])": {
         "$id": null,
-        "intent": "initialise weight-based reward claims",
+        "intent": "initialise claims",
         "screens": null,
         "fields": [
           {
@@ -1602,29 +1602,13 @@
                 "value": null,
                 "fields": [
                   {
-                    "$id": null,
-                    "label": "Merkle Proof",
-                    "format": "raw",
-                    "params": null,
-                    "path": "merkleProof.[]",
-                    "value": null
-                  },
-                  {
                     "path": "body",
                     "value": null,
                     "fields": [
                       {
                         "$id": null,
-                        "label": "Reward Epoch Id",
-                        "format": "raw",
-                        "params": null,
-                        "path": "rewardEpochId",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
                         "label": "Beneficiary",
-                        "format": "raw",
+                        "format": "addressName",
                         "params": null,
                         "path": "beneficiary",
                         "value": null
@@ -1653,22 +1637,23 @@
           }
         ],
         "required": [
-          "#._proofs.[]merkleProof.[]",
-          "#._proofs.[]bodyrewardEpochId",
-          "#._proofs.[]bodybeneficiary",
-          "#._proofs.[]bodyamount",
-          "#._proofs.[]bodyclaimType"
+          "#._proofs.[].bodybeneficiary",
+          "#._proofs.[].bodyamount",
+          "#._proofs.[].bodyclaimType"
         ],
-        "excluded": null
+        "excluded": [
+          "#._proofs.[].merkleProof.[]",
+          "#._proofs.[].bodyrewardEpochId"
+        ]
       },
       "autoClaim(address[],uint24,(bytes32[],(uint24,bytes20,uint120,uint8))[])": {
         "$id": null,
-        "intent": "claims rewards for list of reward owners",
+        "intent": "claim rewards",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Reward Owners",
+            "label": "Reward Owner",
             "format": "addressName",
             "params": {
               "types": [
@@ -1697,25 +1682,9 @@
                 "value": null,
                 "fields": [
                   {
-                    "$id": null,
-                    "label": "Merkle Proof",
-                    "format": "raw",
-                    "params": null,
-                    "path": "merkleProof.[]",
-                    "value": null
-                  },
-                  {
                     "path": "body",
                     "value": null,
                     "fields": [
-                      {
-                        "$id": null,
-                        "label": "Reward Epoch Id",
-                        "format": "raw",
-                        "params": null,
-                        "path": "rewardEpochId",
-                        "value": null
-                      },
                       {
                         "$id": null,
                         "label": "Beneficiary",
@@ -1749,14 +1718,15 @@
         ],
         "required": [
           "#._rewardOwners.[]",
-          "#._rewardEpochId",
-          "#._proofs.[]merkleProof.[]",
-          "#._proofs.[]bodyrewardEpochId",
-          "#._proofs.[]bodybeneficiary",
-          "#._proofs.[]bodyamount",
-          "#._proofs.[]bodyclaimType"
+          "#._proofs.[].bodyrewardEpochId",
+          "#._proofs.[].bodybeneficiary",
+          "#._proofs.[].bodyamount",
+          "#._proofs.[].bodyclaimType"
         ],
-        "excluded": null
+        "excluded": [
+          "#._rewardEpochId",
+          "#._proofs.[].merkleProof.[]"
+        ]
       }
     }
   }

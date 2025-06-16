@@ -1324,9 +1324,37 @@
   },
   "display": {
     "formats": {
+      "castVote(uint256,uint8)": {
+        "$id": null,
+        "intent": "cast vote",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Proposal Id",
+            "format": "raw",
+            "params": null,
+            "path": "#._proposalId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Support",
+            "format": "raw",
+            "params": null,
+            "path": "#._support",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._proposalId",
+          "#._support"
+        ],
+        "excluded": null
+      },
       "propose(address[],uint256[],bytes[],string,(bool,uint256,uint256,uint256,uint256,uint256,uint256,uint256))": {
         "$id": null,
-        "intent": "create proposal without parameters",
+        "intent": "create proposal",
         "screens": null,
         "fields": [
           {
@@ -1357,7 +1385,7 @@
           {
             "$id": null,
             "label": "Calldatas",
-            "format": "calldata",
+            "format": "raw",
             "params": null,
             "path": "#._calldatas.[]",
             "value": null
@@ -1386,7 +1414,9 @@
                 "$id": null,
                 "label": "Voting Start Ts",
                 "format": "raw",
-                "params": null,
+                "params": {
+                  "encoding": "timestamp"
+                },
                 "path": "votingStartTs",
                 "value": null
               },
@@ -1459,7 +1489,7 @@
       },
       "propose(string,(bool,uint256,uint256,uint256,uint256,uint256))": {
         "$id": null,
-        "intent": "create proposal with parameters",
+        "intent": "create proposal",
         "screens": null,
         "fields": [
           {
@@ -1486,7 +1516,9 @@
                 "$id": null,
                 "label": "Voting Start Ts",
                 "format": "raw",
-                "params": null,
+                "params": {
+                  "encoding": "timestamp"
+                },
                 "path": "votingStartTs",
                 "value": null
               },

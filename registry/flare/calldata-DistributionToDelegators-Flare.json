@@ -1283,7 +1283,7 @@
     "formats": {
       "claim(address,address,uint256,bool)": {
         "$id": null,
-        "intent": "claim rewards for specific owner",
+        "intent": "claim rewards",
         "screens": null,
         "fields": [
           {
@@ -1341,12 +1341,12 @@
       },
       "autoClaim(address[],uint256)": {
         "$id": null,
-        "intent": "batch claims rewards for multiple owners.",
+        "intent": "batch claims rewards",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Reward Owners",
+            "label": "Reward Owner",
             "format": "addressName",
             "params": {
               "types": [
@@ -1380,7 +1380,7 @@
         "fields": [
           {
             "$id": null,
-            "label": "Opt Out Addresses",
+            "label": "Opt Out Address",
             "format": "addressName",
             "params": {
               "types": [
