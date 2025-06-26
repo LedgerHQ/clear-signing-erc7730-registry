@@ -1612,38 +1612,32 @@
             "value": null,
             "fields": [
               {
-                "path": "",
+                "path": "body",
                 "value": null,
                 "fields": [
                   {
-                    "path": "body",
-                    "value": null,
-                    "fields": [
-                      {
-                        "$id": null,
-                        "label": "Beneficiary",
-                        "format": "raw",
-                        "params": null,
-                        "path": "beneficiary",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
-                        "label": "Amount",
-                        "format": "amount",
-                        "params": null,
-                        "path": "amount",
-                        "value": null
-                      },
-                      {
-                        "$id": null,
-                        "label": "Claim Type",
-                        "format": "raw",
-                        "params": null,
-                        "path": "claimType",
-                        "value": null
-                      }
-                    ]
+                    "$id": null,
+                    "label": "Beneficiary",
+                    "format": "raw",
+                    "params": null,
+                    "path": "beneficiary",
+                    "value": null
+                  },
+                  {
+                    "$id": null,
+                    "label": "Amount",
+                    "format": "amount",
+                    "params": null,
+                    "path": "amount",
+                    "value": null
+                  },
+                  {
+                    "$id": null,
+                    "label": "Claim Type",
+                    "format": "raw",
+                    "params": null,
+                    "path": "claimType",
+                    "value": null
                   }
                 ]
               }
@@ -1652,14 +1646,14 @@
         ],
         "required": [
           "#._rewardOwners.[]",
-          "#._proofs.[].bodyrewardEpochId",
-          "#._proofs.[].bodybeneficiary",
-          "#._proofs.[].bodyamount",
-          "#._proofs.[].bodyclaimType"
+          "#._proofs.[].body.beneficiary",
+          "#._proofs.[].body.amount",
+          "#._proofs.[].body.claimType"
         ],
         "excluded": [
           "#._proofs.[].merkleProof.[]",
-          "#._rewardEpochId"
+          "#._rewardEpochId",
+          "#._proofs.[].body.rewardEpochId"
         ]
       },
       "initialiseWeightBasedClaims((bytes32[],(uint24,bytes20,uint120,uint8))[])": {

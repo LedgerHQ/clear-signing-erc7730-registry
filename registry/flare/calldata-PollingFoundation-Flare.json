@@ -1515,7 +1515,7 @@
               {
                 "$id": null,
                 "label": "Voting Start Ts",
-                "format": "raw",
+                "format": "date",
                 "params": {
                   "encoding": "timestamp"
                 },
