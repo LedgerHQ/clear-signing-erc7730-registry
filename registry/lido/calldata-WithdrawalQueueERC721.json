@@ -31,7 +31,8 @@
           {
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "path": "#._amounts.[]"
+            "path": "#._amounts.[]",
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           },
           {
             "label": "Beneficiary",
@@ -52,7 +53,8 @@
           {
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "path": "#._amounts.[]"
+            "path": "#._amounts.[]",
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           },
           {
             "label": "Beneficiary",
@@ -62,10 +64,6 @@
               "sources": ["local", "ens"]
             },
             "path": "#._owner"
-          },
-          {
-            "path": "#._permit",
-            "fields": []
           }
         ],
         "required": ["#._amounts.[]", "#._owner"],
@@ -83,7 +81,8 @@
           {
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "path": "#._amounts.[]"
+            "path": "#._amounts.[]",
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           },
           {
             "label": "Beneficiary",
@@ -104,7 +103,8 @@
           {
             "label": "Amount to withdraw",
             "format": "tokenAmount",
-            "path": "#._amounts.[]"
+            "path": "#._amounts.[]",
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           },
           {
             "label": "Beneficiary",
@@ -132,10 +132,10 @@
         "excluded": []
       },
       "claimWithdrawals(uint256[],uint256[])": {
-        "intent": "claim a batch of withdrawal requests",
+        "intent": "claim withdrawal requests",
         "fields": [
           {
-            "label": "Request IDs",
+            "label": "Request ID",
             "format": "raw",
             "path": "#._requestIds.[]"
           }
@@ -144,7 +144,7 @@
         "excluded": ["#._hints.[]"]
       },
       "claimWithdrawalsTo(uint256[],uint256[],address)": {
-        "intent": "claim a batch of withdrawal requests",
+        "intent": "claim withdrawal requests",
         "fields": [
           {
             "label": "Request IDs",
@@ -165,7 +165,7 @@
         "excluded": ["#._hints.[]"]
       },
       "approve(address,uint256)": {
-        "intent": "allow to transfer stETH Withdrawal NFT (unstETH)",
+        "intent": "allow unstETH NFT transfer",
         "fields": [
           {
             "label": "Operator address",
@@ -184,7 +184,7 @@
         ]
       },
       "safeTransferFrom(address,address,uint256)": {
-        "intent": "transfer stETH Withdrawal NFT (unstETH)",
+        "intent": "transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
@@ -209,7 +209,7 @@
         "excluded": ["#._requestId"]
       },
       "transferFrom(address,address,uint256)": {
-        "intent": "transfer stETH Withdrawal NFT (unstETH)",
+        "intent": "transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
@@ -234,7 +234,7 @@
         "excluded": ["#._requestId"]
       },
       "setApprovalForAll(address, bool)": {
-        "intent": "approve operating on all unstETH tokens",
+        "intent": "approve all unstETH tokens",
         "fields": [
           {
             "label": "Operator",

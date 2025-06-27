@@ -17,6 +17,10 @@
     "info": {
       "legalName": "Lido DAO",
       "url": "https://lido.fi"
+    },
+    "constants": {
+      "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84",
+      "wstETHaddress": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
     }
   },
   "display": {
@@ -36,7 +40,8 @@
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#.amount"
+            "path": "#.amount",
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           }
         ],
         "required": ["#.spender", "#.amount"],
@@ -48,7 +53,8 @@
           {
             "label": "stETH amount",
             "format": "tokenAmount",
-            "path": "#._stETHAmount"
+            "path": "#._stETHAmount",
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           }
         ],
         "required": ["#._stETHAmount"],
@@ -60,7 +66,8 @@
           {
             "label": "wstETH amount",
             "format": "tokenAmount",
-            "path": "#._wstETHAmount"
+            "path": "#._wstETHAmount",
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           }
         ],
         "required": ["#._wstETHAmount"],
@@ -81,7 +88,8 @@
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#.amount"
+            "path": "#.amount",
+            "params": { "token": "$.metadata.constants.wstETHaddress" }
           }
         ],
         "required": ["#.recipient", "#.amount"],

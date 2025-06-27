@@ -17,6 +17,9 @@
     "info": {
       "legalName": "Lido DAO",
       "url": "https://lido.fi"
+    },
+    "constants": {
+      "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
     }
   },
   "display": {
@@ -36,7 +39,8 @@
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#._amount"
+            "path": "#._amount",
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           }
         ],
         "required": ["#._spender", "#._amount"],
@@ -44,7 +48,13 @@
       },
       "submit(address)": {
         "intent": "stake ETH",
-        "fields": [],
+        "fields": [
+          {
+            "label": "Amount to stake",
+            "format": "amount",
+            "path": "@.value"
+          }
+        ],
         "required": [],
         "excluded": ["#._referral"]
       },
@@ -63,7 +73,8 @@
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#._amount"
+            "path": "#._amount",
+            "params": { "token": "$.metadata.constants.stETHaddress" }
           }
         ],
         "required": ["#._recipient", "#._amount"],
