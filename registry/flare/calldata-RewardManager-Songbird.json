@@ -1588,7 +1588,7 @@
   },
   "display": {
     "formats": {
-      "initialiseWeightBasedClaims((bytes32[],(uint24,bytes20,uint120,uint8))[])": {
+      "0x3ce7522a": {
         "$id": null,
         "intent": "initialise claims",
         "screens": null,
@@ -1640,7 +1640,7 @@
           "#._proofs.[].body.rewardEpochId"
         ]
       },
-      "autoClaim(address[],uint24,(bytes32[],(uint24,bytes20,uint120,uint8))[])": {
+      "0x15f253fb": {
         "$id": null,
         "intent": "claim rewards",
         "screens": null,
