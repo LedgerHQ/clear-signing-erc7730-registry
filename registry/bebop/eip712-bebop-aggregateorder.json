@@ -1,0 +1,137 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-eip712-base.json",
+
+  "context": {
+    "eip712": {
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "PermitBatchWitnessTransferFrom": [
+              { "name": "permitted", "type": "TokenPermissions[]" },
+              { "name": "spender", "type": "address" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "deadline", "type": "uint256" },
+              { "name": "witness", "type": "AggregateOrder" }
+            ],
+            "TokenPermissions": [
+              { "name": "token", "type": "address" },
+              { "name": "amount", "type": "uint256" }
+            ],
+            "AggregateOrder": [
+              { "name": "partner_id", "type": "uint64" },
+              { "name": "expiry", "type": "uint256" },
+              { "name": "taker_address", "type": "address" },
+              { "name": "maker_addresses", "type": "address[]" },
+              { "name": "maker_nonces", "type": "uint256[]" },
+              { "name": "taker_tokens", "type": "address[][]" },
+              { "name": "taker_amounts", "type": "uint256[][]" },
+              { "name": "maker_tokens", "type": "address[][]" },
+              { "name": "maker_amounts", "type": "uint256[][]" },
+              { "name": "receiver", "type": "address" },
+              { "name": "commands", "type": "bytes" },
+              { "name": "hooksHash", "type": "bytes32" }
+            ]
+          },
+          "primaryType": "PermitBatchWitnessTransferFrom"
+        }
+      ],
+      "domain": {
+        "name": "Bebop Aggregate Order"
+      }
+    }
+  },
+
+  "display": {
+    "formats": {
+      "PermitBatchWitnessTransferFrom": {
+        "intent": "AggregateOrder Permit",
+        "fields": [
+          {
+            "path": "spender",
+            "label": "Approved Spender",
+            "format": "addressName"
+          },
+          {
+            "path": "permitted.[]",
+            "fields": [
+              {
+                "path": "token",
+                "label": "Token",
+                "format": "addressName",
+                "params": { "types": ["token"] }
+              },
+              {
+                "path": "amount",
+                "label": "Approval Amount",
+                "format": "tokenAmount",
+                "params": {
+                  "tokenPath": "token"
+                }
+              }
+            ]
+          },
+          {
+            "path": "deadline",
+            "label": "Deadline",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          },
+          {
+            "path": "witness",
+            "fields": [
+              {
+                "path": "expiry",
+                "label": "Expiry",
+                "format": "date",
+                "params": { "encoding": "timestamp" }
+              },
+              {
+                "path": "taker_address",
+                "label": "Taker",
+                "format": "addressName"
+              },
+              {
+                "path": "taker_amounts.[index]",
+                "fields": [
+                  {
+                    "path": "[]",
+                    "label": "Sell Token",
+                    "format": "tokenAmount",
+                    "params": {
+                      "tokenPath": "witness.taker_tokens.[_outerIndex].[ _innerIndex ]"
+                    }
+                  }
+                ]
+              },
+              {
+                "path": "maker_amounts.[]",
+                "fields": [
+                  {
+                    "path": "[]",
+                    "label": "Buy Token",
+                    "format": "tokenAmount",
+                    "params": {
+                      "tokenPath": "witness.maker_tokens.[_outerIndex].[ _innerIndex ]"
+                    }
+                  }
+                ]
+              },
+              {
+                "path": "receiver",
+                "label": "Receiver",
+                "format": "addressName"
+              }
+            ]
+          }
+        ],
+        "excluded": ["hooksHash", "commands"]
+      }
+    }
+  }
+}
