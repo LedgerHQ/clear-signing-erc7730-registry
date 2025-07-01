@@ -1,29 +1,15 @@
 {
-    "$schema": "../../specs/erc7730-v1.schema.json",
-    "context": {
-      "$id": "PollingFoundation-Songbird",
-      "contract": {
-        "deployments": [
-          {
-            "chainId": 19,
-            "address": "0x79Df47237292Dbd1477502CFF3F61cD535B0FAce"
-          }
-        ],
-        "abi": [
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "PollingFoundation-Songbird",
+    "contract": {
+      "deployments": [{ "chainId": 19, "address": "0x79Df47237292Dbd1477502CFF3F61cD535B0FAce" }],
+      "abi": [
         {
           "type": "function",
           "name": "BALLOT_TYPEHASH",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -33,16 +19,7 @@
         {
           "type": "function",
           "name": "cancel",
-          "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -53,16 +30,7 @@
         {
           "type": "function",
           "name": "cancelGovernanceCall",
-          "inputs": [
-            {
-              "name": "_selector",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_selector", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -74,33 +42,10 @@
           "type": "function",
           "name": "castVote",
           "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_support",
-              "type": "uint8",
-              "internalType": "uint8",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_support", "type": "uint8", "internalType": "uint8", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "nonpayable",
           "constant": null,
           "payable": null,
@@ -111,57 +56,13 @@
           "type": "function",
           "name": "castVoteBySig",
           "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_support",
-              "type": "uint8",
-              "internalType": "uint8",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_v",
-              "type": "uint8",
-              "internalType": "uint8",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_r",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_s",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_support", "type": "uint8", "internalType": "uint8", "components": null, "indexed": null, "unit": null },
+            { "name": "_v", "type": "uint8", "internalType": "uint8", "components": null, "indexed": null, "unit": null },
+            { "name": "_r", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
+            { "name": "_s", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "nonpayable",
           "constant": null,
           "payable": null,
@@ -172,41 +73,11 @@
           "type": "function",
           "name": "castVoteWithReason",
           "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_support",
-              "type": "uint8",
-              "internalType": "uint8",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_reason",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_support", "type": "uint8", "internalType": "uint8", "components": null, "indexed": null, "unit": null },
+            { "name": "_reason", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "nonpayable",
           "constant": null,
           "payable": null,
@@ -217,16 +88,7 @@
           "type": "function",
           "name": "chainId",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -266,38 +128,10 @@
           "name": "eip712Domain",
           "inputs": [],
           "outputs": [
-            {
-              "name": "fields",
-              "type": "bytes1",
-              "internalType": "bytes1",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "name",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "version",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "chainId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "fields", "type": "bytes1", "internalType": "bytes1", "components": null, "indexed": null, "unit": null },
+            { "name": "name", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null },
+            { "name": "version", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null },
+            { "name": "chainId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
             {
               "name": "verifyingContract",
               "type": "address",
@@ -306,14 +140,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "salt",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "salt", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
             {
               "name": "extensions",
               "type": "uint256[]",
@@ -333,38 +160,10 @@
           "type": "function",
           "name": "execute",
           "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_targets",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_values",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_calldatas",
-              "type": "bytes[]",
-              "internalType": "bytes[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_targets", "type": "address[]", "internalType": "address[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_values", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_calldatas", "type": "bytes[]", "internalType": "bytes[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "payable",
@@ -376,16 +175,7 @@
         {
           "type": "function",
           "name": "execute",
-          "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -396,16 +186,7 @@
         {
           "type": "function",
           "name": "executeGovernanceCall",
-          "inputs": [
-            {
-              "name": "_selector",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_selector", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -457,49 +238,12 @@
           "type": "function",
           "name": "getProposalId",
           "inputs": [
-            {
-              "name": "_targets",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_values",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_calldatas",
-              "type": "bytes[]",
-              "internalType": "bytes[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_description",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_targets", "type": "address[]", "internalType": "address[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_values", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_calldatas", "type": "bytes[]", "internalType": "bytes[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_description", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -510,16 +254,7 @@
           "type": "function",
           "name": "getProposalIds",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -529,33 +264,10 @@
         {
           "type": "function",
           "name": "getProposalInfo",
-          "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [
-            {
-              "name": "_proposer",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_accept",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_proposer", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "_accept", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null },
             {
               "name": "_votePowerBlock",
               "type": "uint256",
@@ -572,14 +284,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_voteEndTime",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_voteEndTime", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
             {
               "name": "_execStartTime",
               "type": "uint256",
@@ -588,14 +293,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_execEndTime",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_execEndTime", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
             {
               "name": "_thresholdConditionBIPS",
               "type": "uint256",
@@ -620,14 +318,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_description",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_description", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -638,33 +329,10 @@
         {
           "type": "function",
           "name": "getProposalVotes",
-          "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [
-            {
-              "name": "_for",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_against",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_for", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_against", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -676,33 +344,10 @@
           "type": "function",
           "name": "getVotes",
           "inputs": [
-            {
-              "name": "_voter",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_blockNumber",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_voter", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "_blockNumber", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -713,16 +358,7 @@
           "type": "function",
           "name": "governance",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -773,33 +409,10 @@
           "type": "function",
           "name": "hasVoted",
           "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_voter",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_voter", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -837,26 +450,8 @@
         {
           "type": "function",
           "name": "isExecutor",
-          "inputs": [
-            {
-              "name": "_address",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_address", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -866,26 +461,8 @@
         {
           "type": "function",
           "name": "isProposer",
-          "inputs": [
-            {
-              "name": "_account",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_account", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -896,16 +473,7 @@
           "type": "function",
           "name": "name",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "pure",
           "constant": null,
           "payable": null,
@@ -916,16 +484,7 @@
           "type": "function",
           "name": "productionMode",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -935,26 +494,8 @@
         {
           "type": "function",
           "name": "proposalIds",
-          "inputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -965,106 +506,29 @@
           "type": "function",
           "name": "propose",
           "inputs": [
-            {
-              "name": "_targets",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_values",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_calldatas",
-              "type": "bytes[]",
-              "internalType": "bytes[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_description",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_targets", "type": "address[]", "internalType": "address[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_values", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_calldatas", "type": "bytes[]", "internalType": "bytes[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_description", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null },
             {
               "name": "_settings",
               "type": "tuple",
               "internalType": "struct IGovernor.GovernorSettings",
               "components": [
-                {
-                  "name": "accept",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "votingStartTs",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "votingPeriodSeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "vpBlockPeriodSeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "thresholdConditionBIPS",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "majorityConditionBIPS",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "executionDelaySeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "executionPeriodSeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "accept", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "votingStartTs", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "votingPeriodSeconds", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "vpBlockPeriodSeconds", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "thresholdConditionBIPS", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "majorityConditionBIPS", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "executionDelaySeconds", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "executionPeriodSeconds", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "nonpayable",
           "constant": null,
           "payable": null,
@@ -1075,70 +539,24 @@
           "type": "function",
           "name": "propose",
           "inputs": [
-            {
-              "name": "_description",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_description", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null },
             {
               "name": "_settings",
               "type": "tuple",
               "internalType": "struct IIPollingFoundation.GovernorSettingsWithoutExecParams",
               "components": [
-                {
-                  "name": "accept",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "votingStartTs",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "votingPeriodSeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "vpBlockPeriodSeconds",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "thresholdConditionBIPS",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "majorityConditionBIPS",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "accept", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "votingStartTs", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "votingPeriodSeconds", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "vpBlockPeriodSeconds", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "thresholdConditionBIPS", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "majorityConditionBIPS", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "nonpayable",
           "constant": null,
           "payable": null,
@@ -1148,16 +566,7 @@
         {
           "type": "function",
           "name": "state",
-          "inputs": [
-            {
-              "name": "_proposalId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_proposalId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "outputs": [
             {
               "name": "",
@@ -1179,14 +588,7 @@
           "name": "submission",
           "inputs": [],
           "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "contract ISubmission",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "", "type": "address", "internalType": "contract ISubmission", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -1198,16 +600,7 @@
           "type": "function",
           "name": "supply",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "contract IISupply",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "contract IISupply", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -1228,16 +621,7 @@
         {
           "type": "function",
           "name": "timelockedCalls",
-          "inputs": [
-            {
-              "name": "selector",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "selector", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [
             {
               "name": "allowedAfterTimestamp",
@@ -1247,14 +631,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "encodedCall",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "encodedCall", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -1294,16 +671,7 @@
           "type": "function",
           "name": "version",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "pure",
           "constant": null,
           "payable": null,
@@ -1315,13 +683,7 @@
       "factory": null
     }
   },
-  "metadata": {
-    "owner": "Flare Network",
-    "info": {
-      "legalName": "Flare Labs",
-      "url": "https://flare.network/"
-    }
-  },
+  "metadata": { "owner": "Flare Network", "info": { "legalName": "Flare Labs", "url": "https://flare.network/" } },
   "display": {
     "formats": {
       "castVote(uint256,uint8)": {
@@ -1329,27 +691,10 @@
         "intent": "cast vote",
         "screens": null,
         "fields": [
-          {
-            "$id": null,
-            "label": "Proposal Id",
-            "format": "raw",
-            "params": null,
-            "path": "#._proposalId",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Support",
-            "format": "raw",
-            "params": null,
-            "path": "#._support",
-            "value": null
-          }
+          { "$id": null, "label": "Proposal Id", "format": "raw", "params": null, "path": "#._proposalId", "value": null },
+          { "$id": null, "label": "Support", "format": "raw", "params": null, "path": "#._support", "value": null }
         ],
-        "required": [
-          "#._proposalId",
-          "#._support"
-        ],
+        "required": ["#._proposalId", "#._support"],
         "excluded": null
       },
       "propose(address[],uint256[],bytes[],string,(bool,uint256,uint256,uint256,uint256,uint256,uint256,uint256))": {
@@ -1361,62 +706,23 @@
             "$id": null,
             "label": "Targets",
             "format": "addressName",
-            "params": {
-              "types": [
-                "wallet",
-                "eoa",
-                "contract",
-                "token",
-                "collection"
-              ],
-              "sources": null
-            },
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"], "sources": null },
             "path": "#._targets.[]",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Values",
-            "format": "amount",
-            "params": null,
-            "path": "#._values.[]",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Calldatas",
-            "format": "raw",
-            "params": null,
-            "path": "#._calldatas.[]",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Description",
-            "format": "raw",
-            "params": null,
-            "path": "#._description",
-            "value": null
-          },
+          { "$id": null, "label": "Values", "format": "amount", "params": null, "path": "#._values.[]", "value": null },
+          { "$id": null, "label": "Calldatas", "format": "raw", "params": null, "path": "#._calldatas.[]", "value": null },
+          { "$id": null, "label": "Description", "format": "raw", "params": null, "path": "#._description", "value": null },
           {
             "path": "#._settings",
             "value": null,
             "fields": [
-              {
-                "$id": null,
-                "label": "Accept",
-                "format": "raw",
-                "params": null,
-                "path": "accept",
-                "value": null
-              },
+              { "$id": null, "label": "Accept", "format": "raw", "params": null, "path": "accept", "value": null },
               {
                 "$id": null,
                 "label": "Voting Start Ts",
                 "format": "date",
-                "params": {
-                  "encoding": "timestamp"
-                },
+                "params": { "encoding": "timestamp" },
                 "path": "votingStartTs",
                 "value": null
               },
@@ -1492,33 +798,17 @@
         "intent": "create proposal",
         "screens": null,
         "fields": [
-          {
-            "$id": null,
-            "label": "Description",
-            "format": "raw",
-            "params": null,
-            "path": "#._description",
-            "value": null
-          },
+          { "$id": null, "label": "Description", "format": "raw", "params": null, "path": "#._description", "value": null },
           {
             "path": "#._settings",
             "value": null,
             "fields": [
-              {
-                "$id": null,
-                "label": "Accept",
-                "format": "raw",
-                "params": null,
-                "path": "accept",
-                "value": null
-              },
+              { "$id": null, "label": "Accept", "format": "raw", "params": null, "path": "accept", "value": null },
               {
                 "$id": null,
                 "label": "Voting Start Ts",
                 "format": "date",
-                "params": {
-                  "encoding": "timestamp"
-                },
+                "params": { "encoding": "timestamp" },
                 "path": "votingStartTs",
                 "value": null
               },

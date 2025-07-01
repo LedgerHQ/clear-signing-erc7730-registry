@@ -3,12 +3,7 @@
   "context": {
     "$id": "ValidatorRewardManager-Flare",
     "contract": {
-      "deployments": [
-        {
-          "chainId": 14,
-          "address": "0xc0CF3Aaf93bd978C5BC662564Aa73E331f2eC0B5"
-        }
-      ],
+      "deployments": [{ "chainId": 14, "address": "0xc0CF3Aaf93bd978C5BC662564Aa73E331f2eC0B5" }],
       "abi": [
         {
           "type": "function",
@@ -25,16 +20,7 @@
           "type": "function",
           "name": "active",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -45,25 +31,9 @@
           "type": "function",
           "name": "allowedClaimRecipients",
           "inputs": [
-            {
-              "name": "_rewardOwner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_rewardOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address[]", "internalType": "address[]", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -73,16 +43,7 @@
         {
           "type": "function",
           "name": "cancelGovernanceCall",
-          "inputs": [
-            {
-              "name": "_selector",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_selector", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -94,14 +55,7 @@
           "type": "function",
           "name": "claim",
           "inputs": [
-            {
-              "name": "_rewardOwner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_rewardOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "_recipient",
               "type": "address",
@@ -110,22 +64,8 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_rewardAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_wrap",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_rewardAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "_wrap", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -138,25 +78,9 @@
           "type": "function",
           "name": "claimExecutors",
           "inputs": [
-            {
-              "name": "_rewardOwner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_rewardOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address[]", "internalType": "address[]", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -205,16 +129,7 @@
         {
           "type": "function",
           "name": "executeGovernanceCall",
-          "inputs": [
-            {
-              "name": "_selector",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_selector", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -246,16 +161,7 @@
           "type": "function",
           "name": "getContractName",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "pure",
           "constant": null,
           "payable": null,
@@ -266,16 +172,7 @@
           "type": "function",
           "name": "getInflationAddress",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -286,24 +183,10 @@
           "type": "function",
           "name": "getStateOfRewards",
           "inputs": [
-            {
-              "name": "_beneficiary",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_beneficiary", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "_totalReward",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_totalReward", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
             {
               "name": "_claimedReward",
               "type": "uint256",
@@ -419,16 +302,7 @@
           "type": "function",
           "name": "governance",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -479,16 +353,7 @@
           "type": "function",
           "name": "newRewardManager",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -499,16 +364,7 @@
           "type": "function",
           "name": "oldRewardManager",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -519,16 +375,7 @@
           "type": "function",
           "name": "productionMode",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -550,16 +397,7 @@
           "type": "function",
           "name": "rewardDistributor",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -680,16 +518,7 @@
         {
           "type": "function",
           "name": "timelockedCalls",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
           "outputs": [
             {
               "name": "allowedAfterTimestamp",
@@ -699,14 +528,7 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "encodedCall",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "encodedCall", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "view",
           "constant": null,
@@ -746,16 +568,7 @@
           "type": "function",
           "name": "wNat",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "contract WNat",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "contract WNat", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -767,13 +580,7 @@
       "factory": null
     }
   },
-  "metadata": {
-    "owner": "Flare Network",
-    "info": {
-      "legalName": "Flare Labs",
-      "url": "https://flare.network/"
-    }
-  },
+  "metadata": { "owner": "Flare Network", "info": { "legalName": "Flare Labs", "url": "https://flare.network/" } },
   "display": {
     "formats": {
       "claim(address,address,uint256,bool)": {
@@ -785,13 +592,7 @@
             "$id": null,
             "label": "Reward Owner",
             "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
-              "sources": null
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#._rewardOwner",
             "value": null
           },
@@ -799,39 +600,14 @@
             "$id": null,
             "label": "Recipient",
             "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
-              "sources": null
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#._recipient",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Reward Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#._rewardAmount",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Wrap",
-            "format": "raw",
-            "params": null,
-            "path": "#._wrap",
-            "value": null
-          }
+          { "$id": null, "label": "Reward Amount", "format": "amount", "params": null, "path": "#._rewardAmount", "value": null },
+          { "$id": null, "label": "Wrap", "format": "raw", "params": null, "path": "#._wrap", "value": null }
         ],
-        "required": [
-          "#._rewardOwner",
-          "#._recipient",
-          "#._rewardAmount",
-          "#._wrap"
-        ],
+        "required": ["#._rewardOwner", "#._recipient", "#._rewardAmount", "#._wrap"],
         "excluded": null
       },
       "setClaimExecutors(address[])": {
@@ -843,20 +619,12 @@
             "$id": null,
             "label": "Executor",
             "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
-              "sources": null
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#._executors.[]",
             "value": null
           }
         ],
-        "required": [
-          "#._executors.[]"
-        ],
+        "required": ["#._executors.[]"],
         "excluded": null
       },
       "setAllowedClaimRecipients(address[])": {
@@ -868,20 +636,12 @@
             "$id": null,
             "label": "Recipient",
             "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
-              "sources": null
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#._recipients.[]",
             "value": null
           }
         ],
-        "required": [
-          "#._recipients.[]"
-        ],
+        "required": ["#._recipients.[]"],
         "excluded": null
       }
     }
