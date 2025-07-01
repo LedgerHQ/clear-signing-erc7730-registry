@@ -9,7 +9,7 @@
         { "chainId": 137, "address": "0xf3cd476c3c4d3ac5ca2724767f269070ca09a043" },
         { "chainId": 42161, "address": "0x0927fd43a7a87e3e8b81df2c44b03c4756849f6d" }
       ],
-      "domain": { "name": "ParaSwap" },
+      "domain": { "name": "Velora" },
       "schemas": [
         {
           "primaryType": "Order",
