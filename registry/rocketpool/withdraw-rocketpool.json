@@ -290,9 +290,28 @@
   },
   "display": {
     "formats": {
-      "withdrawExcessBalance(uint256)": {
+      "nodeDeposit(uint256)": {
         "$id": null,
-        "intent": "withdrawExcessBalance(uint256)",
+        "intent": "deposit from the node deposit contract",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Total Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._totalAmount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._totalAmount"
+        ],
+        "excluded": null
+      },
+      "nodeCreditWithdrawal(uint256)": {
+        "$id": null,
+        "intent": "Withdraw from deposit pool for a mini pool",
         "screens": null,
         "fields": [
           {
@@ -308,7 +327,7 @@
           "#._amount"
         ],
         "excluded": null
-      },
+      }
     }
   }
 }
