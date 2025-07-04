@@ -732,12 +732,13 @@
                     "title": "Callee Path",
                     "type": "string",
                     "description": "The path to the address of the contract being called by this embedded calldata."
+                },
+                "amount": {
+                    "title": "Amount (Optional)",
+                    "type": "integer",
+                    "description": "The associated amount in native currency, if the calldata can be associated with a container value."
                 }
             },
-            "anyOf": [
-                {"required": ["callee"]},
-                {"required": ["calleePath"]}
-            ],
             "not": {
                 "required": ["callee", "calleePath"]
             },
