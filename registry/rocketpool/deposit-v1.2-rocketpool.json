@@ -311,7 +311,7 @@
       },
       "nodeDeposit(uint256)": {
         "$id": null,
-        "intent": "deposit from the node deposit contract",
+        "intent": "Deposit to the node",
         "screens": null,
         "fields": [
           {
@@ -330,7 +330,7 @@
       },
       "nodeCreditWithdrawal(uint256)": {
         "$id": null,
-        "intent": "Withdraw from deposit pool for a mini pool",
+        "intent": "Withdraw from deposit pool to a mini pool",
         "screens": null,
         "fields": [
           {
