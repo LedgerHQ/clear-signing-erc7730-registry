@@ -290,6 +290,25 @@
   },
   "display": {
     "formats": {
+      "withdrawExcessBalance(uint256)": {
+        "$id": null,
+        "intent": "Withdraw and Reallocate Excess ETH to rETH",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._amount"
+        ],
+        "excluded": null
+      },
       "nodeDeposit(uint256)": {
         "$id": null,
         "intent": "deposit from the node deposit contract",
