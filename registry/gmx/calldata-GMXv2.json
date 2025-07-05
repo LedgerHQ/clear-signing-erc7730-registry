@@ -1698,8 +1698,8 @@
         "$id": "createOrder",
         "intent": "Create Order",
         "fields": [
-          { "path": "market", "label": "Market", "format": "addressName", "params": { "format": "contract_address_array", "addresses": "market" } },
-          { "path": "orderType", "label": "Order Type", "format": "amount", "params": { "params": "orderType"} },
+          { "path": "market", "label": "Market", "format": "addressName", "params": { "type": "tuple", "addresses": "market" } },
+          { "path": "orderType", "label": "Order Type", "format": "raw", "params": { "params": "orderType"} },
           { "path": "isLong", "label": "Is Long", "format": "raw", "params": { "params": "isLong"} },
           { "path": "sizeDeltaUsd", "label": "Order Size Delta in USD", "format": "amount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "payableAmount", "label": "Payable Amount in Ether", "format": "tokenAmount", "params": { "params.numbers": "sizeDeltaUsd" } },
@@ -1715,7 +1715,7 @@
         "intent": "Update Order",
         "fields": [
           { "path": "market", "label": "Market", "format": "addressName", "params": { "addresses": "market" } },
-          { "path": "orderType", "label": "Order Type", "format": "amount", "params": { "params": "orderType"} },
+          { "path": "orderType", "label": "Order Type", "format": "raw", "params": { "params": "orderType"} },
           { "path": "isLong", "label": "Is Long", "format": "raw", "params": { "params": "isLong"} },
           { "path": "sizeDeltaUsd", "label": "Order Size Delta in USD", "format": "amount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "payableAmount", "label": "Payable Amount in Ether", "format": "tokenAmount", "params": { "params.numbers": "sizeDeltaUsd" } },
