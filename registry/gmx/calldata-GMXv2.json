@@ -1698,7 +1698,7 @@
         "$id": "createOrder",
         "intent": "Create Order",
         "fields": [
-          { "path": "market", "label": "Market", "format": "addressName", "params": { "params.addresses": "market" } },
+          { "path": "market", "label": "Market", "format": "addressName", "type": "tuple", "params": { "params.addresses": "market" } },
           { "path": "orderType", "label": "Order Type", "format": "amount", "params": { "params": "orderType"} },
           { "path": "isLong", "label": "Is Long", "format": "raw", "params": { "params": "isLong"} },
           { "path": "sizeDeltaUsd", "label": "Order Size Delta in USD", "format": "amount", "params": { "params.numbers": "sizeDeltaUsd" } },
