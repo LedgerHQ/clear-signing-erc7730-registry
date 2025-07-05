@@ -1697,13 +1697,10 @@
       "0x6996807b": {
         "intent": "Create Order",
         "fields": [
-          { "label": "Market", "format": "addressName", "path": "#.params.addresses.market" },
-          {
-            "label": "Order Type",
-            "format": "raw",
-            "params": "#.params.orderType",
-            "path": "#.params.orderType"
-          }
+          { "path": "market",    "label": "Market",     "format": "addressName", "params": "#.params.addresses.market" },
+          { "path": "orderType", "label": "Order Type", "format": "raw",      "params": "#.params.orderType"},
+          { "path": "#.params.addresses.market",    "label": "Market",     "format": "addressName", "params": "#.params.addresses.market" },
+          { "path": "#.params.orderType",           "label": "Order Type", "format": "raw",      "params": "#.params.orderType"}
         ],
         "required": ["payableAmount", "orderType"]
       }
