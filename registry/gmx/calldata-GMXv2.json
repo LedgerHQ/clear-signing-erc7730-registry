@@ -1698,15 +1698,15 @@
         "$id": "createOrder",
         "intent": "Create Order",
         "fields": [
-          { "path": "market", "label": "Market", "format": "address", "params": { "params.addresses": "market" } },
-          { "path": "orderType", "label": "Order Type", "format": "string", "params": { "params": "orderType"} },
+          { "path": "market", "label": "Market", "format": "addressName", "params": { "params.addresses": "market" } },
+          { "path": "orderType", "label": "Order Type", "format": "amount", "params": { "params": "orderType"} },
           { "path": "isLong", "label": "Is Long", "format": "bool", "params": { "params": "isLong"} },
           { "path": "sizeDeltaUsd", "label": "Order Size Delta in USD", "format": "amount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "payableAmount", "label": "Payable Amount in Ether", "format": "tokenAmount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "minOutputAmount", "label": "Minimum Output Amount", "format": "amount", "params": { "params.numbers": "minOutputAmount" } },
           { "path": "acceptablePrice", "label": "Acceptable Price", "format": "amount", "params": { "params.numbers": "acceptablePrice" } },
           { "path": "triggerPrice", "label": "Trigger Price", "format": "amount", "params": { "params.numbers": "triggerPrice" } },
-          { "path": "referralCode", "label": "Referral Code", "format": "bytes32", "params": { "params.numbers": "referralCode" } }
+          { "path": "referralCode", "label": "Referral Code", "format": "raw", "params": { "params.numbers": "referralCode" } }
         ],
         "required": ["payableAmount", "orderType"]
       },
@@ -1714,15 +1714,15 @@
         "$id": "updateOrder",
         "intent": "Update Order",
         "fields": [
-          { "path": "market", "label": "Market", "format": "address", "params": { "params.addresses": "market" } },
-          { "path": "orderType", "label": "Order Type", "format": "string", "params": { "params": "orderType"} },
+          { "path": "market", "label": "Market", "format": "addressName", "params": { "params.addresses": "market" } },
+          { "path": "orderType", "label": "Order Type", "format": "amount", "params": { "params": "orderType"} },
           { "path": "isLong", "label": "Is Long", "format": "bool", "params": { "params": "isLong"} },
           { "path": "sizeDeltaUsd", "label": "Order Size Delta in USD", "format": "amount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "payableAmount", "label": "Payable Amount in Ether", "format": "tokenAmount", "params": { "params.numbers": "sizeDeltaUsd" } },
           { "path": "minOutputAmount", "label": "Minimum Output Amount", "format": "amount", "params": { "params.numbers": "minOutputAmount" } },
           { "path": "acceptablePrice", "label": "Acceptable Price", "format": "amount", "params": { "params.numbers": "acceptablePrice" } },
           { "path": "triggerPrice", "label": "Trigger Price", "format": "amount", "params": { "params.numbers": "triggerPrice" } },
-          { "path": "referralCode", "label": "Referral Code", "format": "bytes32", "params": { "params.numbers": "referralCode" } }
+          { "path": "referralCode", "label": "Referral Code", "format": "raw", "params": { "params.numbers": "referralCode" } }
         ],
         "required": ["payableAmount", "orderType"] 
       } 
