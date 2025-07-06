@@ -1,9 +1,10 @@
 {
-  "type": "contract",
   "name": "CoreStake",
   "version": "1",
-  "contractAddress": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
-  "chainId": 1116,
+  "contract": {
+    "chainId": 1116,
+    "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
+  },
   "functions": [
     {
       "name": "mint",
@@ -35,11 +36,3 @@
         }
       ]
     },
-    {
-      "name": "withdraw",
-      "selector": "0x3ccfd60b",
-      "description": "Withdraw previously unstaked CORE tokens",
-      "params": []
-    }
-  ]
-}
