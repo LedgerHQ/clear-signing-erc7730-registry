@@ -98,7 +98,8 @@
           {
             "path": "expiry",
             "format": "date",
-            "label": "Expires at"
+            "label": "Expires at",
+            "params": { "encoding": "timestamp" }
           }
         ],
         "required": ["delegatee", "nonce", "expiry"]

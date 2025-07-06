@@ -74,7 +74,8 @@
           {
             "path": "deadline",
             "format": "date",
-            "label": "Permit expires at"
+            "label": "Permit expires at",
+            "params": { "encoding": "timestamp" }
           }
         ],
         "required": ["owner", "spender", "value", "deadline"],

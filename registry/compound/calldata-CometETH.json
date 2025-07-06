@@ -142,24 +142,6 @@
           }
         ],
         "required": ["amount", "asset", "dst"]
-      },
-      "absorb(address absorber, address[] accounts)": {
-        "$id": "absorb",
-        "intent": "Liquidate underwater accounts",
-        "fields": [
-          {
-            "path": "absorber",
-            "format": "addressName",
-            "label": "Absorber",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "accounts",
-            "format": "raw",
-            "label": "Accounts to liquidate"
-          }
-        ],
-        "required": ["absorber", "accounts"]
       }
     }
   }
