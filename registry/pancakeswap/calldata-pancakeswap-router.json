@@ -3,7 +3,7 @@
   "context": {
     "$id": "PancakeSwap Router",
     "contract": {
-      "abi": "https://api.etherscan.io/v2/api?chainid=56&module=contract&action=getabi&address=0x10ED43C718714eb63d5aA57B78B54704E256024E&apikey=YourApiKeyToken",
+      "abi": "https://gist.githubusercontent.com/jjordan-quantum/dcf6ad8e3dd1b3a825a5f51e8684857a/raw/ce5e7c2b3d0f86e84bf08be1e506af2757071807/pancakeswap.json",
       "deployments": [
         {
           "chainId": 56,
