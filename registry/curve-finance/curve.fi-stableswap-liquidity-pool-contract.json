@@ -1,0 +1,1386 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "Curve.fi StableSwap Liquidity Pool Contract",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xdcef968d416a41cdac0ed8702fac8128a64241a2"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "A",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 10058,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "A_precise",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 10058,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "get_virtual_price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 804988,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "calc_token_amount",
+          "inputs": [
+            {
+              "name": "_amounts",
+              "type": "uint256[2]",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_is_deposit",
+              "type": "bool",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1593467,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "add_liquidity",
+          "inputs": [
+            {
+              "name": "_amounts",
+              "type": "uint256[2]",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_min_mint_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 2546841,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "get_dy",
+          "inputs": [
+            {
+              "name": "i",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "j",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_dx",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1149036,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "exchange",
+          "inputs": [
+            {
+              "name": "i",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "j",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_dx",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_min_dy",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 1307513,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "remove_liquidity",
+          "inputs": [
+            {
+              "name": "_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_min_amounts",
+              "type": "uint256[2]",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256[2]",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 169716,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "remove_liquidity_imbalance",
+          "inputs": [
+            {
+              "name": "_amounts",
+              "type": "uint256[2]",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_max_burn_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 2546560,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "calc_withdraw_one_coin",
+          "inputs": [
+            {
+              "name": "_token_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "i",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 989,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "remove_liquidity_one_coin",
+          "inputs": [
+            {
+              "name": "_token_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "i",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_min_amount",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 1620521,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "ramp_A",
+          "inputs": [
+            {
+              "name": "_future_A",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_future_time",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 158394,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "stop_ramp_A",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 154617,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "commit_new_fee",
+          "inputs": [
+            {
+              "name": "_new_fee",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_new_admin_fee",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 113298,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "apply_new_fee",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 103621,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "revert_new_parameters",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 22901,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "commit_transfer_ownership",
+          "inputs": [
+            {
+              "name": "_owner",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 78536,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "apply_transfer_ownership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 66804,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "revert_transfer_ownership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 22991,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "admin_balances",
+          "inputs": [
+            {
+              "name": "i",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 7769,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "withdraw_admin_fees",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 31496,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "donate_admin_fees",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 82442,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "kill_me",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 40304,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "unkill_me",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 23141,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "coins",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3225,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balances",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3255,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "fee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3240,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "admin_fee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3270,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3300,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "lp_token",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3330,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "initial_A",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3360,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_A",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3390,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "initial_A_time",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3420,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_A_time",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3450,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "admin_actions_deadline",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3480,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transfer_ownership_deadline",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3510,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_fee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3540,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_admin_fee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3570,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3600,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Curve Finance",
+    "info": {
+      "legalName": "Curve Finance Ltd.",
+      "url": "https://curve.fi"
+    }
+  },
+  "display": {
+    "formats": {
+      "calc_token_amount(uint256[2],bool)": {
+        "intent": "Calculate token amount for deposit or withdrawal",
+        "fields": [
+          {
+            "label": "Amounts",
+            "format": "amount",
+            "params": null,
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Is Deposit",
+            "format": "raw",
+            "params": null,
+            "path": "#._is_deposit",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._is_deposit"
+        ]
+      },
+      "add_liquidity(uint256[2],uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._min_mint_amount"
+        ]
+      },
+      "get_dy(int128,int128,uint256)": {
+        "intent": "Exchange tokens between coins",
+        "fields": [
+          {
+            "label": "Source Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Destination Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.j",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Amount to Exchange",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[i]"
+            },
+            "path": "#._dx",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.i",
+          "#.j",
+          "#._dx"
+        ]
+      },
+      "exchange(int128,int128,uint256,uint256)": {
+        "intent": "Exchange one token for another",
+        "fields": [
+          {
+            "label": "Source Token Index (i)",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Destination Token Index (j)",
+            "format": "raw",
+            "params": null,
+            "path": "#.j",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Amount to Exchange (Dx)",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[i]"
+            },
+            "path": "#._dx",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Amount to Receive (Min Dy)",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[j]"
+            },
+            "path": "#._min_dy",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.i",
+          "#.j",
+          "#._dx",
+          "#._min_dy"
+        ]
+      },
+      "remove_liquidity(uint256,uint256[2])": {
+        "intent": "Remove liquidity from the pool",
+        "fields": [
+          {
+            "label": "Amount of LP tokens to burn",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum amounts of underlying tokens to receive",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._min_amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amount",
+          "#._min_amounts.[]"
+        ]
+      },
+      "remove_liquidity_imbalance(uint256[2],uint256)": {
+        "intent": "Remove liquidity imbalance from the pool",
+        "fields": [
+          {
+            "label": "Amounts",
+            "format": "amount",
+            "params": null,
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Max Burn Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._max_burn_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._max_burn_amount"
+        ]
+      },
+      "calc_withdraw_one_coin(uint256,int128)": {
+        "intent": "Remove liquidity in one coin",
+        "fields": [
+          {
+            "label": "Token Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._token_amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Coin Index",
+            "format": "enum",
+            "params": {
+              "mapping": {
+                "0": "Coin 0",
+                "1": "Coin 1"
+              }
+            },
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._token_amount",
+          "#.i"
+        ]
+      },
+      "remove_liquidity_one_coin(uint256,int128,uint256)": {
+        "intent": "Remove liquidity in one coin",
+        "fields": [
+          {
+            "label": "Token Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._token_amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._min_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._token_amount",
+          "#.i",
+          "#._min_amount"
+        ]
+      },
+      "ramp_A(uint256,uint256)": {
+        "intent": "Ramp the amplification coefficient A to a future value",
+        "fields": [
+          {
+            "label": "Future A",
+            "format": "raw",
+            "params": null,
+            "path": "#._future_A",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Future Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#._future_time",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._future_A",
+          "#._future_time"
+        ]
+      },
+      "commit_new_fee(uint256,uint256)": {
+        "intent": "Commit new fee parameters",
+        "fields": [
+          {
+            "label": "New Fee",
+            "format": "unit",
+            "params": {
+              "unit": "ratio"
+            },
+            "path": "#._new_fee",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "New Admin Fee",
+            "format": "unit",
+            "params": {
+              "unit": "ratio"
+            },
+            "path": "#._new_admin_fee",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._new_fee",
+          "#._new_admin_fee"
+        ]
+      },
+      "commit_transfer_ownership(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens",
+                "local"
+              ]
+            },
+            "path": "#._owner",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._owner"
+        ]
+      },
+      "admin_balances(uint256)": {
+        "intent": "Calculate token amount for deposit or withdrawal",
+        "fields": [
+          {
+            "label": "Token Amounts",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.tokens",
+              "arrayLength": 2
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Is Deposit",
+            "format": "enum",
+            "params": {
+              "mapping": {
+                "true": "Deposit",
+                "false": "Withdrawal"
+              }
+            },
+            "path": "#._is_deposit",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._is_deposit"
+        ]
+      },
+      "coins(uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._min_mint_amount"
+        ]
+      },
+      "balances(uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._min_mint_amount"
+        ]
+      }
+    }
+  }
+}
