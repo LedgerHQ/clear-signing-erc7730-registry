@@ -1,0 +1,562 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "POAP Token Minting and Management Contract",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x0bb4D3e88243F4A057Db77341e6916B0e449b158"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "NAME",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "feeReceiver",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address payable",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "migrationFee",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mintToken",
+          "inputs": [
+            {
+              "name": "eventId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "expirationTime",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "signature",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "pause",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "paused",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "processed",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "renouncePoapAdmin",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setFeeReceiver",
+          "inputs": [
+            {
+              "name": "_feeReceiver",
+              "type": "address",
+              "internalType": "address payable",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setMigrationFee",
+          "inputs": [
+            {
+              "name": "_migrationFee",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setValidSigner",
+          "inputs": [
+            {
+              "name": "_validSigner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "unpause",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "validSigner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "POAP",
+    "info": {
+      "legalName": "Proof of Attendance Protocol",
+      "url": "https://poap.xyz"
+    }
+  },
+  "display": {
+    "formats": {
+      "mintToken(uint256,uint256,address,uint256,bytes)": {
+        "intent": "Mint a new token",
+        "fields": [
+          {
+            "label": "Event Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.eventId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Token Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.receiver",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Expiration Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#.expirationTime",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Signature",
+            "format": "raw",
+            "params": null,
+            "path": "#.signature",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.eventId",
+          "#.tokenId",
+          "#.receiver",
+          "#.expirationTime",
+          "#.signature"
+        ]
+      },
+      "setFeeReceiver(address)": {
+        "intent": "Set the fee receiver address",
+        "fields": [
+          {
+            "label": "Fee Receiver",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens",
+                "local"
+              ]
+            },
+            "path": "#._feeReceiver",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._feeReceiver"
+        ]
+      },
+      "setMigrationFee(uint256)": {
+        "intent": "Set the migration fee",
+        "fields": [
+          {
+            "label": "Migration Fee",
+            "format": "amount",
+            "params": null,
+            "path": "#._migrationFee",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._migrationFee"
+        ]
+      },
+      "setValidSigner(address)": {
+        "intent": "Mint a new token",
+        "fields": [
+          {
+            "label": "Event ID",
+            "format": "raw",
+            "params": {},
+            "path": "#.eventId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Token ID",
+            "format": "raw",
+            "params": {},
+            "path": "#.tokenId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.receiver",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Expiration Time",
+            "format": "date",
+            "params": {},
+            "path": "#.expirationTime",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Signature",
+            "format": "raw",
+            "params": {},
+            "path": "#.signature",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.eventId",
+          "#.tokenId",
+          "#.receiver",
+          "#.expirationTime",
+          "#.signature"
+        ]
+      },
+      "transferOwnership(address)": {
+        "intent": "Transfer ownership of the contract",
+        "fields": [
+          {
+            "label": "New Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens",
+                "local"
+              ]
+            },
+            "path": "#.newOwner",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.newOwner"
+        ]
+      }
+    }
+  }
+}
