@@ -117,31 +117,6 @@
           }
         ],
         "required": ["amount", "asset", "dst"]
-      },
-      "transferAsset(address dst, address asset, uint amount)": {
-        "$id": "transferAsset",
-        "intent": "Transfer asset within Compound",
-        "fields": [
-          {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to transfer",
-            "params": { "tokenPath": "asset" }
-          },
-          {
-            "path": "asset",
-            "format": "addressName",
-            "label": "Asset",
-            "params": { "types": ["token"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "dst",
-            "format": "addressName",
-            "label": "Recipient",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "asset", "dst"]
       }
     }
   }
