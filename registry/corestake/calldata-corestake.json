@@ -1,4 +1,5 @@
 {
+  "type": "contract",
   "name": "CoreStake",
   "version": "1",
   "contractAddress": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
