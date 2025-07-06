@@ -1,0 +1,2205 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "Curve Voting Escrow (veCRV) Smart Contract",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x5f3b5dfeb7b28cdbd7faba78963ee202a494e2a2"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "commit_transfer_ownership",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 37597,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "apply_transfer_ownership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 38497,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "commit_smart_wallet_checker",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 36307,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "apply_smart_wallet_checker",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 37095,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "get_last_user_slope",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2569,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "user_point_history__ts",
+          "inputs": [
+            {
+              "name": "_addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_idx",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1672,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "locked__end",
+          "inputs": [
+            {
+              "name": "_addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1593,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "checkpoint",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 37052342,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "deposit_for",
+          "inputs": [
+            {
+              "name": "_addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_value",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 74279891,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "create_lock",
+          "inputs": [
+            {
+              "name": "_value",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_unlock_time",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 74281465,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "increase_amount",
+          "inputs": [
+            {
+              "name": "_value",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 74280830,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "increase_unlock_time",
+          "inputs": [
+            {
+              "name": "_unlock_time",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 74281578,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 37223566,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_t",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOfAt",
+          "inputs": [
+            {
+              "name": "addr",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_block",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 514333,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [
+            {
+              "name": "t",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupplyAt",
+          "inputs": [
+            {
+              "name": "_block",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 812560,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "changeController",
+          "inputs": [
+            {
+              "name": "_newController",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": 36907,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "token",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1841,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "supply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1871,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "locked",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "amount",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "end",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 3359,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "epoch",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 1931,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "point_history",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "bias",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "slope",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "ts",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "blk",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 5550,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "user_point_history",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "arg1",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "bias",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "slope",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "ts",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "blk",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 6079,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "user_point_epoch",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2175,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "slope_changes",
+          "inputs": [
+            {
+              "name": "arg0",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "int128",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2166,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "controller",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2081,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transfersEnabled",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2111,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "name",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 8543,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "symbol",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 7596,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "version",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 7626,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "decimals",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2231,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_smart_wallet_checker",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2261,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "smart_wallet_checker",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2291,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "admin",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2321,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "future_admin",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": null,
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": 2351,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Curve Finance",
+    "info": {
+      "legalName": "Curve Finance Ltd.",
+      "url": "https://curve.fi"
+    }
+  },
+  "display": {
+    "formats": {
+      "calc_token_amount(uint256[2],bool)": {
+        "intent": "Calculate token amount for deposit or withdrawal",
+        "fields": [
+          {
+            "label": "Amounts",
+            "format": "amount",
+            "params": null,
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Is Deposit",
+            "format": "raw",
+            "params": null,
+            "path": "#._is_deposit",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._is_deposit"
+        ]
+      },
+      "add_liquidity(uint256[2],uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._min_mint_amount"
+        ]
+      },
+      "get_dy(int128,int128,uint256)": {
+        "intent": "Exchange tokens between coins",
+        "fields": [
+          {
+            "label": "Source Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Destination Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.j",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Amount to Exchange",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[i]"
+            },
+            "path": "#._dx",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.i",
+          "#.j",
+          "#._dx"
+        ]
+      },
+      "exchange(int128,int128,uint256,uint256)": {
+        "intent": "Exchange one token for another",
+        "fields": [
+          {
+            "label": "Source Token Index (i)",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Destination Token Index (j)",
+            "format": "raw",
+            "params": null,
+            "path": "#.j",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Amount to Exchange (Dx)",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[i]"
+            },
+            "path": "#._dx",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Amount to Receive (Min Dy)",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins[j]"
+            },
+            "path": "#._min_dy",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.i",
+          "#.j",
+          "#._dx",
+          "#._min_dy"
+        ]
+      },
+      "remove_liquidity(uint256,uint256[2])": {
+        "intent": "Remove liquidity from the pool",
+        "fields": [
+          {
+            "label": "Amount of LP tokens to burn",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum amounts of underlying tokens to receive",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._min_amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amount",
+          "#._min_amounts.[]"
+        ]
+      },
+      "remove_liquidity_imbalance(uint256[2],uint256)": {
+        "intent": "Remove liquidity imbalance from the pool",
+        "fields": [
+          {
+            "label": "Amounts",
+            "format": "amount",
+            "params": null,
+            "path": "#._amounts.[]",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Max Burn Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._max_burn_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts.[]",
+          "#._max_burn_amount"
+        ]
+      },
+      "calc_withdraw_one_coin(uint256,int128)": {
+        "intent": "Remove liquidity in one coin",
+        "fields": [
+          {
+            "label": "Token Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._token_amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Coin Index",
+            "format": "enum",
+            "params": {
+              "mapping": {
+                "0": "Coin 0",
+                "1": "Coin 1"
+              }
+            },
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._token_amount",
+          "#.i"
+        ]
+      },
+      "remove_liquidity_one_coin(uint256,int128,uint256)": {
+        "intent": "Remove liquidity in one coin",
+        "fields": [
+          {
+            "label": "Token Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._token_amount",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Coin Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.i",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._min_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._token_amount",
+          "#.i",
+          "#._min_amount"
+        ]
+      },
+      "ramp_A(uint256,uint256)": {
+        "intent": "Ramp the amplification coefficient A to a future value",
+        "fields": [
+          {
+            "label": "Future A",
+            "format": "raw",
+            "params": null,
+            "path": "#._future_A",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Future Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#._future_time",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._future_A",
+          "#._future_time"
+        ]
+      },
+      "commit_new_fee(uint256,uint256)": {
+        "intent": "Commit new fee parameters",
+        "fields": [
+          {
+            "label": "New Fee",
+            "format": "unit",
+            "params": {
+              "unit": "ratio"
+            },
+            "path": "#._new_fee",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "New Admin Fee",
+            "format": "unit",
+            "params": {
+              "unit": "ratio"
+            },
+            "path": "#._new_admin_fee",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._new_fee",
+          "#._new_admin_fee"
+        ]
+      },
+      "commit_transfer_ownership(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "admin_balances(uint256)": {
+        "intent": "Calculate token amount for deposit or withdrawal",
+        "fields": [
+          {
+            "label": "Token Amounts",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.tokens",
+              "arrayLength": 2
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Is Deposit",
+            "format": "enum",
+            "params": {
+              "mapping": {
+                "true": "Deposit",
+                "false": "Withdrawal"
+              }
+            },
+            "path": "#._is_deposit",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._is_deposit"
+        ]
+      },
+      "coins(uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._min_mint_amount"
+        ]
+      },
+      "balances(uint256)": {
+        "intent": "Add liquidity to the pool",
+        "fields": [
+          {
+            "label": "Amounts to Deposit",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.coins"
+            },
+            "path": "#._amounts",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Minimum Mint Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.lp_token"
+            },
+            "path": "#._min_mint_amount",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._amounts",
+          "#._min_mint_amount"
+        ]
+      },
+      "mint(address)": {
+        "intent": "Mint tokens for a gauge",
+        "fields": [
+          {
+            "label": "Gauge Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.gauge_addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.gauge_addr"
+        ]
+      },
+      "mint_many(address[8])": {
+        "intent": "Mint tokens for multiple gauges",
+        "fields": [
+          {
+            "label": "Gauge Addresses",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.gauge_addrs.[]",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.gauge_addrs.[]"
+        ]
+      },
+      "mint_for(address,address)": {
+        "intent": "Mint tokens for a specified gauge and recipient",
+        "fields": [
+          {
+            "label": "Gauge Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract",
+                "collection"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.gauge_addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Recipient Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#._for",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.gauge_addr",
+          "#._for"
+        ]
+      },
+      "toggle_approve_mint(address)": {
+        "intent": "Toggle approval for minting on behalf of a user",
+        "fields": [
+          {
+            "label": "Minting User",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.minting_user",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.minting_user"
+        ]
+      },
+      "minted(address,address)": {
+        "intent": "Check minted amount for a gauge and user",
+        "fields": [
+          {
+            "label": "Gauge Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract",
+                "collection"
+              ],
+              "sources": [
+                "addressBook",
+                "ens",
+                "userInput"
+              ]
+            },
+            "path": "#.arg0",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "User Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa"
+              ],
+              "sources": [
+                "addressBook",
+                "ens",
+                "userInput"
+              ]
+            },
+            "path": "#.arg1",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.arg0",
+          "#.arg1"
+        ]
+      },
+      "allowed_to_mint_for(address,address)": {
+        "intent": "Mint tokens for a specified gauge",
+        "fields": [
+          {
+            "label": "Gauge Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.gauge_addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.gauge_addr"
+        ]
+      },
+      "commit_smart_wallet_checker(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "get_last_user_slope(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "user_point_history__ts(address,uint256)": {
+        "intent": "Get user point history timestamp",
+        "fields": [
+          {
+            "label": "User Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#._addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "History Index",
+            "format": "raw",
+            "params": null,
+            "path": "#._idx",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._addr",
+          "#._idx"
+        ]
+      },
+      "locked__end(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "deposit_for(address,uint256)": {
+        "intent": "Deposit tokens for a user",
+        "fields": [
+          {
+            "label": "User Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#._addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Deposit Amount",
+            "format": "amount",
+            "params": null,
+            "path": "#._value",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._addr",
+          "#._value"
+        ]
+      },
+      "create_lock(uint256,uint256)": {
+        "intent": "Create a new token lock",
+        "fields": [
+          {
+            "label": "Amount to Lock",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#._value",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Unlock Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#._unlock_time",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._value",
+          "#._unlock_time"
+        ]
+      },
+      "increase_amount(uint256)": {
+        "intent": "Deposit tokens for a user",
+        "fields": [
+          {
+            "label": "User Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#._addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Deposit Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#._value",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._addr",
+          "#._value"
+        ]
+      },
+      "increase_unlock_time(uint256)": {
+        "intent": "Create a new token lock",
+        "fields": [
+          {
+            "label": "Amount to Lock",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#._value",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Unlock Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#._unlock_time",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._value",
+          "#._unlock_time"
+        ]
+      },
+      "balanceOf(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "balanceOf(address,uint256)": {
+        "intent": "Query balance of address at specific time",
+        "fields": [
+          {
+            "label": "Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract",
+                "token",
+                "collection"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens",
+                "local"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Timestamp",
+            "format": "date",
+            "params": {
+              "encoding": null
+            },
+            "path": "#._t",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr",
+          "#._t"
+        ]
+      },
+      "balanceOfAt(address,uint256)": {
+        "intent": "Get balance of address at specific block",
+        "fields": [
+          {
+            "label": "Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract",
+                "token",
+                "collection"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens",
+                "local"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Block Number",
+            "format": "raw",
+            "params": null,
+            "path": "#._block",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr",
+          "#._block"
+        ]
+      },
+      "totalSupply(uint256)": {
+        "intent": "Query total supply at a specific block",
+        "fields": [
+          {
+            "label": "Block Number",
+            "format": "raw",
+            "params": null,
+            "path": "#.t",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.t"
+        ]
+      },
+      "totalSupplyAt(uint256)": {
+        "intent": "Get balance at a specific block",
+        "fields": [
+          {
+            "label": "Account",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Block",
+            "format": "raw",
+            "params": null,
+            "path": "#._block",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr",
+          "#._block"
+        ]
+      },
+      "changeController(address)": {
+        "intent": "Change the contract controller",
+        "fields": [
+          {
+            "label": "New Controller Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#._newController",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#._newController"
+        ]
+      },
+      "locked(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "point_history(uint256)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "user_point_history(address,uint256)": {
+        "intent": "Commit transfer of contract ownership to a new address",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "user_point_epoch(address)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      },
+      "slope_changes(uint256)": {
+        "intent": "Commit transfer of contract ownership",
+        "fields": [
+          {
+            "label": "New Owner Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook",
+                "ens"
+              ]
+            },
+            "path": "#.addr",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.addr"
+        ]
+      }
+    }
+  }
+}
