@@ -3,7 +3,7 @@
   "context": {
     "$id": "SushiSwap Router",
     "contract": {
-      "abi": "https://gist.githubusercontent.com/jjordan-quantum/dcf6ad8e3dd1b3a825a5f51e8684857a/raw/ce5e7c2b3d0f86e84bf08be1e506af2757071807/uniswap-v2-router-02.json",
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
       "deployments": [
         {
           "chainId": 1,
@@ -61,7 +61,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -95,7 +98,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -114,12 +120,18 @@
           {
             "path": "#.tokenA",
             "label": "Token A",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.tokenB",
             "label": "Token B",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.amountADesired",
@@ -144,7 +156,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -163,12 +178,18 @@
           {
             "path": "#.tokenA",
             "label": "Token A",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.tokenB",
             "label": "Token B",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.liquidity",
@@ -188,7 +209,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",

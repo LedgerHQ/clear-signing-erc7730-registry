@@ -3,7 +3,7 @@
   "context": {
     "$id": "PancakeSwap Router",
     "contract": {
-      "abi": "https://gist.githubusercontent.com/jjordan-quantum/dcf6ad8e3dd1b3a825a5f51e8684857a/raw/ce5e7c2b3d0f86e84bf08be1e506af2757071807/pancakeswap.json",
+      "abi": "https://api.etherscan.io/v2/api?module=contract&action=getabi&chainid=56&address=0x10ED43C718714eb63d5aA57B78B54704E256024E",
       "deployments": [
         {
           "chainId": 56,
@@ -57,7 +57,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -86,7 +89,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -120,7 +126,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
@@ -139,12 +148,18 @@
           {
             "path": "#.tokenA",
             "label": "Token A",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.tokenB",
             "label": "Token B",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["contract"]
+            }
           },
           {
             "path": "#.amountADesired",
@@ -169,7 +184,10 @@
           {
             "path": "#.to",
             "label": "Recipient",
-            "format": "addressName"
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"]
+            }
           },
           {
             "path": "#.deadline",
