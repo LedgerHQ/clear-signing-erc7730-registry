@@ -1,10 +1,8 @@
 {
   "name": "CoreStake",
   "version": "1",
-  "contract": {
-    "chainId": 1116,
-    "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
-  },
+  "chainId": 1116,
+  "contractAddress": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
   "functions": [
     {
       "name": "mint",
