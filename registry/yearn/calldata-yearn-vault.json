@@ -3,7 +3,7 @@
   "context": {
     "$id": "yearn-vault",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/yearn/yearn-vaults/v0.4.6/contracts/Vault.vy",
+      "abi": "https://api.etherscan.io/v2/api?chainid=1&module=contract&action=getabi&address=0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE&apikey=YourApiKeyToken",
       "deployments": [
         {
           "chainId": 1,

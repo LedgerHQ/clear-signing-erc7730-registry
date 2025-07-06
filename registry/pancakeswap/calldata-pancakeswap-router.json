@@ -3,7 +3,7 @@
   "context": {
     "$id": "PancakeSwap Router",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/pancakeswap/pancake-smart-contracts/master/projects/exchange-protocol/contracts/PancakeRouter.sol",
+      "abi": "https://api.etherscan.io/v2/api?chainid=56&module=contract&action=getabi&address=0x10ED43C718714eb63d5aA57B78B54704E256024E&apikey=YourApiKeyToken",
       "deployments": [
         {
           "chainId": 56,

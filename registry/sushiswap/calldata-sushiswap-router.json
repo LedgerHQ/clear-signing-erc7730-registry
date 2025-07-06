@@ -3,7 +3,7 @@
   "context": {
     "$id": "SushiSwap Router",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/Uniswap/v2-periphery/master/contracts/UniswapV2Router02.sol",
+      "abi": "https://api.etherscan.io/v2/api?chainid=1&module=contract&action=getabi&address=0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F&apikey=YourApiKeyToken",
       "deployments": [
         {
           "chainId": 1,
