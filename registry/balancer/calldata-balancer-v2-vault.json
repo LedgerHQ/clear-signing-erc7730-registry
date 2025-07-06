@@ -3,7 +3,7 @@
   "context": {
     "$id": "Balancer V2 Vault",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/balancer-labs/balancer-v2-monorepo/master/pkg/vault/contracts/Vault.sol",
+      "abi": "https://raw.githubusercontent.com/balancer-labs/balancer-v2-monorepo/v2.0.0/pkg/vault/contracts/Vault.sol",
       "deployments": [
         {
           "chainId": 1,
@@ -44,47 +44,47 @@
         "intent": "Swap Tokens on Balancer",
         "fields": [
           {
-            "path": "$.singleSwap.poolId",
+            "path": "#.singleSwap.poolId",
             "label": "Pool ID",
             "format": "raw"
           },
           {
-            "path": "$.singleSwap.kind",
+            "path": "#.singleSwap.kind",
             "label": "Swap Kind",
             "format": "raw"
           },
           {
-            "path": "$.singleSwap.assetIn",
+            "path": "#.singleSwap.assetIn",
             "label": "Asset In",
             "format": "addressName"
           },
           {
-            "path": "$.singleSwap.assetOut",
+            "path": "#.singleSwap.assetOut",
             "label": "Asset Out",
             "format": "addressName"
           },
           {
-            "path": "$.singleSwap.amount",
+            "path": "#.singleSwap.amount",
             "label": "Amount",
             "format": "amount"
           },
           {
-            "path": "$.funds.sender",
+            "path": "#.funds.sender",
             "label": "Sender",
             "format": "addressName"
           },
           {
-            "path": "$.funds.recipient",
+            "path": "#.funds.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.limit",
+            "path": "#.limit",
             "label": "Limit",
             "format": "amount"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {
@@ -98,37 +98,37 @@
         "intent": "Batch Swap on Balancer",
         "fields": [
           {
-            "path": "$.kind",
+            "path": "#.kind",
             "label": "Swap Kind",
             "format": "raw"
           },
           {
-            "path": "$.swaps",
+            "path": "#.swaps",
             "label": "Swaps",
             "format": "raw"
           },
           {
-            "path": "$.assets",
+            "path": "#.assets",
             "label": "Assets",
             "format": "raw"
           },
           {
-            "path": "$.funds.sender",
+            "path": "#.funds.sender",
             "label": "Sender",
             "format": "addressName"
           },
           {
-            "path": "$.funds.recipient",
+            "path": "#.funds.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.limits",
+            "path": "#.limits",
             "label": "Limits",
             "format": "raw"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {
@@ -142,37 +142,37 @@
         "intent": "Join Balancer Pool",
         "fields": [
           {
-            "path": "$.poolId",
+            "path": "#.poolId",
             "label": "Pool ID",
             "format": "raw"
           },
           {
-            "path": "$.sender",
+            "path": "#.sender",
             "label": "Sender",
             "format": "addressName"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.request.assets",
+            "path": "#.request.assets",
             "label": "Assets",
             "format": "raw"
           },
           {
-            "path": "$.request.maxAmountsIn",
+            "path": "#.request.maxAmountsIn",
             "label": "Max Amounts In",
             "format": "raw"
           },
           {
-            "path": "$.request.userData",
+            "path": "#.request.userData",
             "label": "User Data",
             "format": "raw"
           },
           {
-            "path": "$.request.fromInternalBalance",
+            "path": "#.request.fromInternalBalance",
             "label": "From Internal Balance",
             "format": "raw"
           }
@@ -183,37 +183,37 @@
         "intent": "Exit Balancer Pool",
         "fields": [
           {
-            "path": "$.poolId",
+            "path": "#.poolId",
             "label": "Pool ID",
             "format": "raw"
           },
           {
-            "path": "$.sender",
+            "path": "#.sender",
             "label": "Sender",
             "format": "addressName"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.request.assets",
+            "path": "#.request.assets",
             "label": "Assets",
             "format": "raw"
           },
           {
-            "path": "$.request.minAmountsOut",
+            "path": "#.request.minAmountsOut",
             "label": "Min Amounts Out",
             "format": "raw"
           },
           {
-            "path": "$.request.userData",
+            "path": "#.request.userData",
             "label": "User Data",
             "format": "raw"
           },
           {
-            "path": "$.request.toInternalBalance",
+            "path": "#.request.toInternalBalance",
             "label": "To Internal Balance",
             "format": "raw"
           }

@@ -3,7 +3,7 @@
   "context": {
     "$id": "PancakeSwap Router",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/pancakeswap/pancake-smart-contracts/master/contracts/PancakeRouter.sol",
+      "abi": "https://raw.githubusercontent.com/pancakeswap/pancake-smart-contracts/master/projects/exchange-protocol/contracts/PancakeRouter.sol",
       "deployments": [
         {
           "chainId": 56,
@@ -40,27 +40,27 @@
         "intent": "Swap Exact Tokens for Tokens",
         "fields": [
           {
-            "path": "$.amountIn",
+            "path": "#.amountIn",
             "label": "Amount In",
             "format": "amount"
           },
           {
-            "path": "$.amountOutMin",
+            "path": "#.amountOutMin",
             "label": "Minimum Amount Out",
             "format": "amount"
           },
           {
-            "path": "$.path",
+            "path": "#.path",
             "label": "Token Path",
             "format": "raw"
           },
           {
-            "path": "$.to",
+            "path": "#.to",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {
@@ -74,22 +74,22 @@
         "intent": "Swap Exact BNB for Tokens",
         "fields": [
           {
-            "path": "$.amountOutMin",
+            "path": "#.amountOutMin",
             "label": "Minimum Amount Out",
             "format": "amount"
           },
           {
-            "path": "$.path",
+            "path": "#.path",
             "label": "Token Path",
             "format": "raw"
           },
           {
-            "path": "$.to",
+            "path": "#.to",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {
@@ -103,27 +103,27 @@
         "intent": "Swap Tokens for Exact BNB",
         "fields": [
           {
-            "path": "$.amountOut",
+            "path": "#.amountOut",
             "label": "Amount Out",
             "format": "amount"
           },
           {
-            "path": "$.amountInMax",
+            "path": "#.amountInMax",
             "label": "Maximum Amount In",
             "format": "amount"
           },
           {
-            "path": "$.path",
+            "path": "#.path",
             "label": "Token Path",
             "format": "raw"
           },
           {
-            "path": "$.to",
+            "path": "#.to",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {
@@ -137,42 +137,42 @@
         "intent": "Add Liquidity",
         "fields": [
           {
-            "path": "$.tokenA",
+            "path": "#.tokenA",
             "label": "Token A",
             "format": "addressName"
           },
           {
-            "path": "$.tokenB",
+            "path": "#.tokenB",
             "label": "Token B",
             "format": "addressName"
           },
           {
-            "path": "$.amountADesired",
+            "path": "#.amountADesired",
             "label": "Desired Amount A",
             "format": "amount"
           },
           {
-            "path": "$.amountBDesired",
+            "path": "#.amountBDesired",
             "label": "Desired Amount B",
             "format": "amount"
           },
           {
-            "path": "$.amountAMin",
+            "path": "#.amountAMin",
             "label": "Minimum Amount A",
             "format": "amount"
           },
           {
-            "path": "$.amountBMin",
+            "path": "#.amountBMin",
             "label": "Minimum Amount B",
             "format": "amount"
           },
           {
-            "path": "$.to",
+            "path": "#.to",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.deadline",
+            "path": "#.deadline",
             "label": "Deadline",
             "format": "date",
             "params": {

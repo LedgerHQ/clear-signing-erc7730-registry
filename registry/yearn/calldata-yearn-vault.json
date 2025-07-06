@@ -3,7 +3,7 @@
   "context": {
     "$id": "yearn-vault",
     "contract": {
-      "abi": "https://raw.githubusercontent.com/yearn/yearn-vaults/master/contracts/Vault.vy",
+      "abi": "https://raw.githubusercontent.com/yearn/yearn-vaults/v0.4.6/contracts/Vault.vy",
       "deployments": [
         {
           "chainId": 1,
@@ -45,7 +45,7 @@
         "intent": "Deposit tokens into Yearn vault",
         "fields": [
           {
-            "path": "$.amount",
+            "path": "#.amount",
             "label": "Deposit Amount",
             "format": "amount"
           }
@@ -56,12 +56,12 @@
         "intent": "Deposit tokens into Yearn vault for recipient",
         "fields": [
           {
-            "path": "$.amount",
+            "path": "#.amount",
             "label": "Deposit Amount",
             "format": "amount"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           }
@@ -72,7 +72,7 @@
         "intent": "Withdraw tokens from Yearn vault",
         "fields": [
           {
-            "path": "$.maxShares",
+            "path": "#.maxShares",
             "label": "Max Shares to Burn",
             "format": "amount"
           }
@@ -83,12 +83,12 @@
         "intent": "Withdraw tokens from Yearn vault to recipient",
         "fields": [
           {
-            "path": "$.maxShares",
+            "path": "#.maxShares",
             "label": "Max Shares to Burn",
             "format": "amount"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           }
@@ -99,17 +99,17 @@
         "intent": "Withdraw exact amount from Yearn vault",
         "fields": [
           {
-            "path": "$.maxShares",
+            "path": "#.maxShares",
             "label": "Max Shares to Burn",
             "format": "amount"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.maxLoss",
+            "path": "#.maxLoss",
             "label": "Max Loss (BPS)",
             "format": "raw"
           }
@@ -120,7 +120,7 @@
         "intent": "Redeem vault shares for underlying tokens",
         "fields": [
           {
-            "path": "$.shares",
+            "path": "#.shares",
             "label": "Shares to Redeem",
             "format": "amount"
           }
@@ -131,12 +131,12 @@
         "intent": "Redeem vault shares for underlying tokens to recipient",
         "fields": [
           {
-            "path": "$.shares",
+            "path": "#.shares",
             "label": "Shares to Redeem",
             "format": "amount"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           }
@@ -147,17 +147,17 @@
         "intent": "Redeem vault shares with max loss protection",
         "fields": [
           {
-            "path": "$.shares",
+            "path": "#.shares",
             "label": "Shares to Redeem",
             "format": "amount"
           },
           {
-            "path": "$.recipient",
+            "path": "#.recipient",
             "label": "Recipient",
             "format": "addressName"
           },
           {
-            "path": "$.maxLoss",
+            "path": "#.maxLoss",
             "label": "Max Loss (BPS)",
             "format": "raw"
           }

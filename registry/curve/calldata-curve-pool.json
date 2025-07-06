@@ -41,22 +41,22 @@
         "intent": "Swap Tokens on Curve",
         "fields": [
           {
-            "path": "$.i",
+            "path": "#.i",
             "label": "From Token Index",
             "format": "raw"
           },
           {
-            "path": "$.j",
+            "path": "#.j",
             "label": "To Token Index",
             "format": "raw"
           },
           {
-            "path": "$.dx",
+            "path": "#.dx",
             "label": "Input Amount",
             "format": "amount"
           },
           {
-            "path": "$.min_dy",
+            "path": "#.min_dy",
             "label": "Minimum Output",
             "format": "amount"
           }
@@ -67,22 +67,22 @@
         "intent": "Swap Underlying Tokens",
         "fields": [
           {
-            "path": "$.i",
+            "path": "#.i",
             "label": "From Token Index",
             "format": "raw"
           },
           {
-            "path": "$.j",
+            "path": "#.j",
             "label": "To Token Index",
             "format": "raw"
           },
           {
-            "path": "$.dx",
+            "path": "#.dx",
             "label": "Input Amount",
             "format": "amount"
           },
           {
-            "path": "$.min_dy",
+            "path": "#.min_dy",
             "label": "Minimum Output",
             "format": "amount"
           }
@@ -93,22 +93,22 @@
         "intent": "Add Liquidity to Pool",
         "fields": [
           {
-            "path": "$.amounts[0]",
+            "path": "#.amounts.[0]",
             "label": "DAI Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[1]",
+            "path": "#.amounts.[1]",
             "label": "USDC Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[2]",
+            "path": "#.amounts.[2]",
             "label": "USDT Amount",
             "format": "amount"
           },
           {
-            "path": "$.min_mint_amount",
+            "path": "#.min_mint_amount",
             "label": "Minimum LP Tokens",
             "format": "amount"
           }
@@ -119,22 +119,22 @@
         "intent": "Remove Liquidity from Pool",
         "fields": [
           {
-            "path": "$._amount",
+            "path": "#._amount",
             "label": "LP Token Amount",
             "format": "amount"
           },
           {
-            "path": "$.min_amounts[0]",
+            "path": "#.min_amounts.[0]",
             "label": "Min DAI",
             "format": "amount"
           },
           {
-            "path": "$.min_amounts[1]",
+            "path": "#.min_amounts.[1]",
             "label": "Min USDC",
             "format": "amount"
           },
           {
-            "path": "$.min_amounts[2]",
+            "path": "#.min_amounts.[2]",
             "label": "Min USDT",
             "format": "amount"
           }
@@ -145,17 +145,17 @@
         "intent": "Remove Liquidity in Single Token",
         "fields": [
           {
-            "path": "$._token_amount",
+            "path": "#._token_amount",
             "label": "LP Token Amount",
             "format": "amount"
           },
           {
-            "path": "$.i",
+            "path": "#.i",
             "label": "Token Index",
             "format": "raw"
           },
           {
-            "path": "$.min_amount",
+            "path": "#.min_amount",
             "label": "Minimum Token Amount",
             "format": "amount"
           }
@@ -166,22 +166,22 @@
         "intent": "Remove Imbalanced Liquidity",
         "fields": [
           {
-            "path": "$.amounts[0]",
+            "path": "#.amounts.[0]",
             "label": "DAI Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[1]",
+            "path": "#.amounts.[1]",
             "label": "USDC Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[2]",
+            "path": "#.amounts.[2]",
             "label": "USDT Amount",
             "format": "amount"
           },
           {
-            "path": "$.max_burn_amount",
+            "path": "#.max_burn_amount",
             "label": "Max LP Tokens to Burn",
             "format": "amount"
           }
@@ -192,17 +192,17 @@
         "intent": "Get Exchange Rate",
         "fields": [
           {
-            "path": "$.i",
+            "path": "#.i",
             "label": "From Token Index",
             "format": "raw"
           },
           {
-            "path": "$.j",
+            "path": "#.j",
             "label": "To Token Index",
             "format": "raw"
           },
           {
-            "path": "$.dx",
+            "path": "#.dx",
             "label": "Input Amount",
             "format": "amount"
           }
@@ -213,22 +213,22 @@
         "intent": "Calculate LP Token Amount",
         "fields": [
           {
-            "path": "$.amounts[0]",
+            "path": "#.amounts.[0]",
             "label": "DAI Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[1]",
+            "path": "#.amounts.[1]",
             "label": "USDC Amount",
             "format": "amount"
           },
           {
-            "path": "$.amounts[2]",
+            "path": "#.amounts.[2]",
             "label": "USDT Amount",
             "format": "amount"
           },
           {
-            "path": "$.deposit",
+            "path": "#.deposit",
             "label": "Is Deposit",
             "format": "raw"
           }
@@ -239,12 +239,12 @@
         "intent": "Calculate Single Token Withdrawal",
         "fields": [
           {
-            "path": "$._token_amount",
+            "path": "#._token_amount",
             "label": "LP Token Amount",
             "format": "amount"
           },
           {
-            "path": "$.i",
+            "path": "#.i",
             "label": "Token Index",
             "format": "raw"
           }
