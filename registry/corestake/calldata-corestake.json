@@ -36,3 +36,11 @@
         }
       ]
     },
+    {
+      "name": "withdraw",
+      "selector": "0x3ccfd60b",
+      "description": "Withdraw previously unstaked CORE tokens",
+      "params": []
+    }
+  ]
+}
