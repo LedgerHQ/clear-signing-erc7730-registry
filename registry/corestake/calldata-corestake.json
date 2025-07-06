@@ -24,7 +24,7 @@
           {
             "path": "validator",
             "label": "Validator Address",
-            "format": "address"
+            "format": "addressName"
           }
         ]
       },
@@ -34,7 +34,10 @@
           {
             "path": "stCore",
             "label": "Amount to Redeem (in stCORE)",
-            "format": "decimal"
+            "format": "tokenAmount",
+            "params": {
+              "token": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
+            }
           }
         ]
       },
