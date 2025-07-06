@@ -1,0 +1,256 @@
+{
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Curve Finance Pool",
+    "contract": {
+      "abi": "https://raw.githubusercontent.com/curvefi/curve-contract/master/contracts/pools/3pool/StableSwap3Pool.vy",
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7"
+        },
+        {
+          "chainId": 137,
+          "address": "0x445FE580eF8d70FF569aB36e80c647af338db351"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x7f90122BF0700F9E7e1F688fe926940E8839F353"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Curve Finance",
+    "info": {
+      "legalName": "Curve Finance",
+      "url": "https://curve.fi/",
+      "deploymentDate": "2020-01-01T00:00:00Z"
+    },
+    "constants": {
+      "COIN_0_MAINNET": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+      "COIN_1_MAINNET": "0xA0b86a33E6441E6C673A4C5C7C4b5C8e6C3b5C8e",
+      "COIN_2_MAINNET": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "N_COINS": 3,
+      "FEE_DENOMINATOR": 10000000000
+    }
+  },
+  "display": {
+    "formats": {
+      "exchange(int128 i,int128 j,uint256 dx,uint256 min_dy)": {
+        "intent": "Swap Tokens on Curve",
+        "fields": [
+          {
+            "path": "$.i",
+            "label": "From Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.j",
+            "label": "To Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.dx",
+            "label": "Input Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_dy",
+            "label": "Minimum Output",
+            "format": "amount"
+          }
+        ],
+        "required": ["i", "j", "dx", "min_dy"]
+      },
+      "exchange_underlying(int128 i,int128 j,uint256 dx,uint256 min_dy)": {
+        "intent": "Swap Underlying Tokens",
+        "fields": [
+          {
+            "path": "$.i",
+            "label": "From Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.j",
+            "label": "To Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.dx",
+            "label": "Input Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_dy",
+            "label": "Minimum Output",
+            "format": "amount"
+          }
+        ],
+        "required": ["i", "j", "dx", "min_dy"]
+      },
+      "add_liquidity(uint256[3] amounts,uint256 min_mint_amount)": {
+        "intent": "Add Liquidity to Pool",
+        "fields": [
+          {
+            "path": "$.amounts[0]",
+            "label": "DAI Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[1]",
+            "label": "USDC Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[2]",
+            "label": "USDT Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_mint_amount",
+            "label": "Minimum LP Tokens",
+            "format": "amount"
+          }
+        ],
+        "required": ["amounts", "min_mint_amount"]
+      },
+      "remove_liquidity(uint256 _amount,uint256[3] min_amounts)": {
+        "intent": "Remove Liquidity from Pool",
+        "fields": [
+          {
+            "path": "$._amount",
+            "label": "LP Token Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_amounts[0]",
+            "label": "Min DAI",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_amounts[1]",
+            "label": "Min USDC",
+            "format": "amount"
+          },
+          {
+            "path": "$.min_amounts[2]",
+            "label": "Min USDT",
+            "format": "amount"
+          }
+        ],
+        "required": ["_amount", "min_amounts"]
+      },
+      "remove_liquidity_one_coin(uint256 _token_amount,int128 i,uint256 min_amount)": {
+        "intent": "Remove Liquidity in Single Token",
+        "fields": [
+          {
+            "path": "$._token_amount",
+            "label": "LP Token Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.i",
+            "label": "Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.min_amount",
+            "label": "Minimum Token Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["_token_amount", "i", "min_amount"]
+      },
+      "remove_liquidity_imbalance(uint256[3] amounts,uint256 max_burn_amount)": {
+        "intent": "Remove Imbalanced Liquidity",
+        "fields": [
+          {
+            "path": "$.amounts[0]",
+            "label": "DAI Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[1]",
+            "label": "USDC Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[2]",
+            "label": "USDT Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.max_burn_amount",
+            "label": "Max LP Tokens to Burn",
+            "format": "amount"
+          }
+        ],
+        "required": ["amounts", "max_burn_amount"]
+      },
+      "get_dy(int128 i,int128 j,uint256 dx)": {
+        "intent": "Get Exchange Rate",
+        "fields": [
+          {
+            "path": "$.i",
+            "label": "From Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.j",
+            "label": "To Token Index",
+            "format": "raw"
+          },
+          {
+            "path": "$.dx",
+            "label": "Input Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["i", "j", "dx"]
+      },
+      "calc_token_amount(uint256[3] amounts,bool deposit)": {
+        "intent": "Calculate LP Token Amount",
+        "fields": [
+          {
+            "path": "$.amounts[0]",
+            "label": "DAI Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[1]",
+            "label": "USDC Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.amounts[2]",
+            "label": "USDT Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.deposit",
+            "label": "Is Deposit",
+            "format": "raw"
+          }
+        ],
+        "required": ["amounts", "deposit"]
+      },
+      "calc_withdraw_one_coin(uint256 _token_amount,int128 i)": {
+        "intent": "Calculate Single Token Withdrawal",
+        "fields": [
+          {
+            "path": "$._token_amount",
+            "label": "LP Token Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.i",
+            "label": "Token Index",
+            "format": "raw"
+          }
+        ],
+        "required": ["_token_amount", "i"]
+      }
+    }
+  }
+}

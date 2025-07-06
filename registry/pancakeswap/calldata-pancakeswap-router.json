@@ -1,0 +1,187 @@
+{
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "$id": "PancakeSwap Router",
+    "contract": {
+      "abi": "https://raw.githubusercontent.com/pancakeswap/pancake-smart-contracts/master/contracts/PancakeRouter.sol",
+      "deployments": [
+        {
+          "chainId": 56,
+          "address": "0x10ED43C718714eb63d5aA57B78B54704E256024E"
+        },
+        {
+          "chainId": 1,
+          "address": "0xEfF92A263d31888d860bD50809A8D171709b7b1c"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "PancakeSwap",
+    "info": {
+      "legalName": "PancakeSwap",
+      "url": "https://pancakeswap.finance/",
+      "deploymentDate": "2020-09-20T00:00:00Z"
+    },
+    "constants": {
+      "WBNB_BSC": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+      "WETH_MAINNET": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+      "WETH_ARBITRUM": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "CAKE_TOKEN": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82"
+    }
+  },
+  "display": {
+    "formats": {
+      "swapExactTokensForTokens(uint256 amountIn,uint256 amountOutMin,address[] path,address to,uint256 deadline)": {
+        "intent": "Swap Exact Tokens for Tokens",
+        "fields": [
+          {
+            "path": "$.amountIn",
+            "label": "Amount In",
+            "format": "amount"
+          },
+          {
+            "path": "$.amountOutMin",
+            "label": "Minimum Amount Out",
+            "format": "amount"
+          },
+          {
+            "path": "$.path",
+            "label": "Token Path",
+            "format": "raw"
+          },
+          {
+            "path": "$.to",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.deadline",
+            "label": "Deadline",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
+          }
+        ],
+        "required": ["amountIn", "amountOutMin", "path", "to", "deadline"]
+      },
+      "swapExactBNBForTokens(uint256 amountOutMin,address[] path,address to,uint256 deadline)": {
+        "intent": "Swap Exact BNB for Tokens",
+        "fields": [
+          {
+            "path": "$.amountOutMin",
+            "label": "Minimum Amount Out",
+            "format": "amount"
+          },
+          {
+            "path": "$.path",
+            "label": "Token Path",
+            "format": "raw"
+          },
+          {
+            "path": "$.to",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.deadline",
+            "label": "Deadline",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
+          }
+        ],
+        "required": ["amountOutMin", "path", "to", "deadline"]
+      },
+      "swapTokensForExactBNB(uint256 amountOut,uint256 amountInMax,address[] path,address to,uint256 deadline)": {
+        "intent": "Swap Tokens for Exact BNB",
+        "fields": [
+          {
+            "path": "$.amountOut",
+            "label": "Amount Out",
+            "format": "amount"
+          },
+          {
+            "path": "$.amountInMax",
+            "label": "Maximum Amount In",
+            "format": "amount"
+          },
+          {
+            "path": "$.path",
+            "label": "Token Path",
+            "format": "raw"
+          },
+          {
+            "path": "$.to",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.deadline",
+            "label": "Deadline",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
+          }
+        ],
+        "required": ["amountOut", "amountInMax", "path", "to", "deadline"]
+      },
+      "addLiquidity(address tokenA,address tokenB,uint256 amountADesired,uint256 amountBDesired,uint256 amountAMin,uint256 amountBMin,address to,uint256 deadline)": {
+        "intent": "Add Liquidity",
+        "fields": [
+          {
+            "path": "$.tokenA",
+            "label": "Token A",
+            "format": "addressName"
+          },
+          {
+            "path": "$.tokenB",
+            "label": "Token B",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amountADesired",
+            "label": "Desired Amount A",
+            "format": "amount"
+          },
+          {
+            "path": "$.amountBDesired",
+            "label": "Desired Amount B",
+            "format": "amount"
+          },
+          {
+            "path": "$.amountAMin",
+            "label": "Minimum Amount A",
+            "format": "amount"
+          },
+          {
+            "path": "$.amountBMin",
+            "label": "Minimum Amount B",
+            "format": "amount"
+          },
+          {
+            "path": "$.to",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.deadline",
+            "label": "Deadline",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            }
+          }
+        ],
+        "required": ["tokenA", "tokenB", "amountADesired", "amountBDesired", "amountAMin", "amountBMin", "to", "deadline"]
+      }
+    }
+  }
+}

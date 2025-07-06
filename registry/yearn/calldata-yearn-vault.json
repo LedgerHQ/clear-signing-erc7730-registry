@@ -1,0 +1,169 @@
+{
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "$id": "yearn-vault",
+    "contract": {
+      "abi": "https://raw.githubusercontent.com/yearn/yearn-vaults/master/contracts/Vault.vy",
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE"
+        },
+        {
+          "chainId": 1,
+          "address": "0xdA816459F1AB5631232FE5e97a05BBBb94970c95"
+        },
+        {
+          "chainId": 1,
+          "address": "0xa258C4606Ca8206D8aA700cE2143D7db854D168c"
+        },
+        {
+          "chainId": 137,
+          "address": "0xE14d13d8B3b85aF791b2AADD661cDBd5E6097Db1"
+        },
+        {
+          "chainId": 250,
+          "address": "0xEF0210eB96c7EB36AF8ed1c20306462764935607"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x239e14A19DFF93a17339DCC444f74406C17f8E67"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Yearn Finance",
+    "info": {
+      "legalName": "Yearn Finance",
+      "url": "https://yearn.fi"
+    }
+  },
+  "display": {
+    "formats": {
+      "deposit(uint256)": {
+        "intent": "Deposit tokens into Yearn vault",
+        "fields": [
+          {
+            "path": "$.amount",
+            "label": "Deposit Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["amount"]
+      },
+      "deposit(uint256,address)": {
+        "intent": "Deposit tokens into Yearn vault for recipient",
+        "fields": [
+          {
+            "path": "$.amount",
+            "label": "Deposit Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          }
+        ],
+        "required": ["amount", "recipient"]
+      },
+      "withdraw(uint256)": {
+        "intent": "Withdraw tokens from Yearn vault",
+        "fields": [
+          {
+            "path": "$.maxShares",
+            "label": "Max Shares to Burn",
+            "format": "amount"
+          }
+        ],
+        "required": ["maxShares"]
+      },
+      "withdraw(uint256,address)": {
+        "intent": "Withdraw tokens from Yearn vault to recipient",
+        "fields": [
+          {
+            "path": "$.maxShares",
+            "label": "Max Shares to Burn",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          }
+        ],
+        "required": ["maxShares", "recipient"]
+      },
+      "withdraw(uint256,address,uint256)": {
+        "intent": "Withdraw exact amount from Yearn vault",
+        "fields": [
+          {
+            "path": "$.maxShares",
+            "label": "Max Shares to Burn",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.maxLoss",
+            "label": "Max Loss (BPS)",
+            "format": "raw"
+          }
+        ],
+        "required": ["maxShares", "recipient", "maxLoss"]
+      },
+      "redeem(uint256)": {
+        "intent": "Redeem vault shares for underlying tokens",
+        "fields": [
+          {
+            "path": "$.shares",
+            "label": "Shares to Redeem",
+            "format": "amount"
+          }
+        ],
+        "required": ["shares"]
+      },
+      "redeem(uint256,address)": {
+        "intent": "Redeem vault shares for underlying tokens to recipient",
+        "fields": [
+          {
+            "path": "$.shares",
+            "label": "Shares to Redeem",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          }
+        ],
+        "required": ["shares", "recipient"]
+      },
+      "redeem(uint256,address,uint256)": {
+        "intent": "Redeem vault shares with max loss protection",
+        "fields": [
+          {
+            "path": "$.shares",
+            "label": "Shares to Redeem",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.maxLoss",
+            "label": "Max Loss (BPS)",
+            "format": "raw"
+          }
+        ],
+        "required": ["shares", "recipient", "maxLoss"]
+      }
+    }
+  }
+}

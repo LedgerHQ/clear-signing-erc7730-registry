@@ -1,0 +1,252 @@
+{
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Compound V3 Comet",
+    "contract": {
+      "abi": "https://raw.githubusercontent.com/compound-finance/comet/main/deployments/mainnet/usdc/artifacts/Comet.sol/Comet.json",
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xc3d688B66703497DAA19211EEdff47f25384cdc3"
+        },
+        {
+          "chainId": 137,
+          "address": "0xF25212E676D1F7F89Cd72fFEe66158f541246445"
+        },
+        {
+          "chainId": 42161,
+          "address": "0xA5EDBDD9646f8dFF606d7448e414884C7d905dCA"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Compound Labs",
+    "info": {
+      "legalName": "Compound Labs, Inc.",
+      "url": "https://compound.finance/",
+      "deploymentDate": "2022-08-26T00:00:00Z"
+    },
+    "constants": {
+      "BASE_ASSET_MAINNET": "0xA0b86a33E6441E6C673A4C5C7C4b5C8e6C3b5C8e",
+      "BASE_ASSET_POLYGON": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+      "BASE_ASSET_ARBITRUM": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8"
+    }
+  },
+  "display": {
+    "formats": {
+      "supply(address asset,uint amount)": {
+        "intent": "Supply Asset to Compound",
+        "fields": [
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Supply Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "$.asset"
+            }
+          }
+        ],
+        "required": ["asset", "amount"]
+      },
+      "supplyTo(address dst,address asset,uint amount)": {
+        "intent": "Supply Asset for Another User",
+        "fields": [
+          {
+            "path": "$.dst",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Supply Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "$.asset"
+            }
+          }
+        ],
+        "required": ["dst", "asset", "amount"]
+      },
+      "withdraw(address asset,uint amount)": {
+        "intent": "Withdraw Asset from Compound",
+        "fields": [
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Withdraw Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "$.asset"
+            }
+          }
+        ],
+        "required": ["asset", "amount"]
+      },
+      "withdrawTo(address to,address asset,uint amount)": {
+        "intent": "Withdraw Asset to Address",
+        "fields": [
+          {
+            "path": "$.to",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Withdraw Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "$.asset"
+            }
+          }
+        ],
+        "required": ["to", "asset", "amount"]
+      },
+      "transferAsset(address dst,address asset,uint amount)": {
+        "intent": "Transfer Asset",
+        "fields": [
+          {
+            "path": "$.dst",
+            "label": "Recipient",
+            "format": "addressName"
+          },
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Transfer Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["dst", "asset", "amount"]
+      },
+      "transferAssetFrom(address src,address dst,address asset,uint amount)": {
+        "intent": "Transfer Asset From Address",
+        "fields": [
+          {
+            "path": "$.src",
+            "label": "From",
+            "format": "addressName"
+          },
+          {
+            "path": "$.dst",
+            "label": "To",
+            "format": "addressName"
+          },
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Transfer Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["src", "dst", "asset", "amount"]
+      },
+      "buyCollateral(address asset,uint minAmount,uint baseAmount,address recipient)": {
+        "intent": "Buy Collateral",
+        "fields": [
+          {
+            "path": "$.asset",
+            "label": "Collateral Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.minAmount",
+            "label": "Minimum Amount",
+            "format": "amount"
+          },
+          {
+            "path": "$.baseAmount",
+            "label": "Base Amount to Pay",
+            "format": "amount"
+          },
+          {
+            "path": "$.recipient",
+            "label": "Recipient",
+            "format": "addressName"
+          }
+        ],
+        "required": ["asset", "minAmount", "baseAmount", "recipient"]
+      },
+      "quoteCollateral(address asset,uint baseAmount)": {
+        "intent": "Quote Collateral Price",
+        "fields": [
+          {
+            "path": "$.asset",
+            "label": "Collateral Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.baseAmount",
+            "label": "Base Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["asset", "baseAmount"]
+      },
+      "absorb(address absorber,address[] accounts)": {
+        "intent": "Absorb Underwater Accounts",
+        "fields": [
+          {
+            "path": "$.absorber",
+            "label": "Absorber",
+            "format": "addressName"
+          },
+          {
+            "path": "$.accounts",
+            "label": "Accounts to Absorb",
+            "format": "raw"
+          }
+        ],
+        "required": ["absorber", "accounts"]
+      },
+      "approveThis(address manager,address asset,uint amount)": {
+        "intent": "Approve Asset Manager",
+        "fields": [
+          {
+            "path": "$.manager",
+            "label": "Manager",
+            "format": "addressName"
+          },
+          {
+            "path": "$.asset",
+            "label": "Asset",
+            "format": "addressName"
+          },
+          {
+            "path": "$.amount",
+            "label": "Approval Amount",
+            "format": "amount"
+          }
+        ],
+        "required": ["manager", "asset", "amount"]
+      }
+    }
+  }
+}
