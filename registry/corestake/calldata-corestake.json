@@ -1,44 +1,47 @@
 {
-  "name": "CoreStake",
-  "version": "1",
-  "chainId": 1116,
-  "contractAddress": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
-  "functions": [
-    {
-      "name": "mint",
-      "selector": "0x40c10f19",
-      "description": "Stake CORE tokens to a validator",
-      "params": [
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "abi": "https://openapi.coredao.org/api/contracts/abi_of_verified_contract/0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
+      "deployments": [
         {
-          "name": "validator",
-          "type": "address",
-          "display": {
+          "chainId": 1116,
+          "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "name": "CoreStake",
+    "version": "1.0.0",
+    "description": "Staking contract for CORE tokens"
+  },
+  "display": {
+    "formats": {
+      "mint(address)": {
+        "description": "Stake CORE tokens to a validator",
+        "fields": [
+          {
+            "path": "validator",
             "label": "Validator Address",
             "format": "address"
           }
-        }
-      ]
-    },
-    {
-      "name": "redeem",
-      "selector": "0xdb006a75",
-      "description": "Unstake CORE by redeeming staked tokens (stCORE)",
-      "params": [
-        {
-          "name": "stCore",
-          "type": "uint256",
-          "display": {
+        ]
+      },
+      "redeem(uint256)": {
+        "description": "Unstake CORE by redeeming staked tokens (stCORE)",
+        "fields": [
+          {
+            "path": "stCore",
             "label": "Amount to Redeem (in stCORE)",
             "format": "decimal"
           }
-        }
-      ]
-    },
-    {
-      "name": "withdraw",
-      "selector": "0x3ccfd60b",
-      "description": "Withdraw previously unstaked CORE tokens",
-      "params": []
+        ]
+      },
+      "withdraw()": {
+        "description": "Withdraw previously unstaked CORE tokens",
+        "fields": []
+      }
     }
-  ]
+  }
 }
