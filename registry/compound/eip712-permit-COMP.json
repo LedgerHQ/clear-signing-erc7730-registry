@@ -1,0 +1,85 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "COMPPermit",
+    "eip712": {
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "Permit": [
+              { "name": "owner", "type": "address" },
+              { "name": "spender", "type": "address" },
+              { "name": "value", "type": "uint256" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "deadline", "type": "uint256" }
+            ]
+          },
+          "primaryType": "Permit"
+        }
+      ],
+      "domain": {
+        "name": "Compound",
+        "chainId": 1,
+        "verifyingContract": "0xc00e94Cb662C3520282E6f5717214004A7f26888"
+      },
+      "deployments": [
+        { "chainId": 1, "address": "0xc00e94Cb662C3520282E6f5717214004A7f26888" }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Compound Labs",
+    "info": {
+      "url": "https://compound.finance",
+      "legalName": "Compound Labs, Inc.",
+      "deploymentDate": "2020-06-15T00:00:00Z"
+    },
+    "constants": {
+      "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  },
+  "display": {
+    "formats": {
+      "Permit": {
+        "$id": "permit",
+        "intent": "Approve COMP token spending",
+        "fields": [
+          {
+            "path": "owner",
+            "format": "addressName",
+            "label": "Token owner",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "spender",
+            "format": "addressName",
+            "label": "Approved spender",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "value",
+            "format": "tokenAmount",
+            "label": "Approval amount",
+            "params": { 
+              "token": "0xc00e94Cb662C3520282E6f5717214004A7f26888",
+              "threshold": "$.metadata.constants.max",
+              "message": "Unlimited"
+            }
+          },
+          {
+            "path": "deadline",
+            "format": "date",
+            "label": "Permit expires at"
+          }
+        ],
+        "required": ["owner", "spender", "value", "deadline"],
+        "excluded": ["nonce"]
+      }
+    }
+  }
+}

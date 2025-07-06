@@ -1,0 +1,166 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "CometETH",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xA17581A9E3356d9A858b789D68B4d866e593aE94",
+      "deployments": [
+        { "chainId": 1, "address": "0xA17581A9E3356d9A858b789D68B4d866e593aE94" }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Compound Labs",
+    "info": {
+      "url": "https://compound.finance",
+      "legalName": "Compound Labs, Inc.",
+      "deploymentDate": "2023-01-09T00:00:00Z"
+    },
+    "constants": {
+      "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  },
+  "display": {
+    "formats": {
+      "supply(address asset, uint amount)": {
+        "$id": "supply",
+        "intent": "Supply asset to Compound",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to supply",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "Asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "asset"]
+      },
+      "supplyTo(address dst, address asset, uint amount)": {
+        "$id": "supplyTo",
+        "intent": "Supply asset to Compound for recipient",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to supply",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "Asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "dst",
+            "format": "addressName",
+            "label": "Recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "asset", "dst"]
+      },
+      "withdraw(address asset, uint amount)": {
+        "$id": "withdraw",
+        "intent": "Withdraw asset from Compound",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": { 
+              "tokenPath": "asset", 
+              "threshold": "$.metadata.constants.max", 
+              "message": "Max" 
+            }
+          },
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "Asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "asset"]
+      },
+      "withdrawTo(address dst, address asset, uint amount)": {
+        "$id": "withdrawTo",
+        "intent": "Withdraw asset from Compound to recipient",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": { 
+              "tokenPath": "asset", 
+              "threshold": "$.metadata.constants.max", 
+              "message": "Max" 
+            }
+          },
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "Asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "dst",
+            "format": "addressName",
+            "label": "Recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "asset", "dst"]
+      },
+      "transferAsset(address dst, address asset, uint amount)": {
+        "$id": "transferAsset",
+        "intent": "Transfer asset within Compound",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to transfer",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "Asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "dst",
+            "format": "addressName",
+            "label": "Recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "asset", "dst"]
+      },
+      "absorb(address absorber, address[] accounts)": {
+        "$id": "absorb",
+        "intent": "Liquidate underwater accounts",
+        "fields": [
+          {
+            "path": "absorber",
+            "format": "addressName",
+            "label": "Absorber",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "accounts",
+            "format": "raw",
+            "label": "Accounts to liquidate"
+          }
+        ],
+        "required": ["absorber", "accounts"]
+      }
+    }
+  }
+}

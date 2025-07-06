@@ -1,0 +1,108 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "CompoundGovernance",
+    "eip712": {
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "Ballot": [
+              { "name": "proposalId", "type": "uint256" },
+              { "name": "support", "type": "uint8" }
+            ]
+          },
+          "primaryType": "Ballot"
+        },
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "Delegation": [
+              { "name": "delegatee", "type": "address" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "expiry", "type": "uint256" }
+            ]
+          },
+          "primaryType": "Delegation"
+        }
+      ],
+      "domain": {
+        "name": "Compound Governor Bravo",
+        "chainId": 1,
+        "verifyingContract": "0xc0Da02939E1441F497fd74F78cE7Decb17B66529"
+      },
+      "deployments": [
+        { "chainId": 1, "address": "0xc0Da02939E1441F497fd74F78cE7Decb17B66529" }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Compound Labs",
+    "info": {
+      "url": "https://compound.finance",
+      "legalName": "Compound Labs, Inc.",
+      "deploymentDate": "2021-04-30T00:00:00Z"
+    },
+    "enums": {
+      "voteSupport": {
+        "0": "Against",
+        "1": "For",
+        "2": "Abstain"
+      }
+    }
+  },
+  "display": {
+    "formats": {
+      "Ballot": {
+        "$id": "ballot",
+        "intent": "Vote on Compound governance proposal",
+        "fields": [
+          {
+            "path": "proposalId",
+            "format": "raw",
+            "label": "Proposal ID"
+          },
+          {
+            "path": "support",
+            "format": "enum",
+            "label": "Vote",
+            "params": { "$ref": "$.metadata.enums.voteSupport" }
+          }
+        ],
+        "required": ["proposalId", "support"]
+      },
+      "Delegation": {
+        "$id": "delegation",
+        "intent": "Delegate COMP voting power",
+        "fields": [
+          {
+            "path": "delegatee",
+            "format": "addressName",
+            "label": "Delegate to",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "nonce",
+            "format": "raw",
+            "label": "Nonce"
+          },
+          {
+            "path": "expiry",
+            "format": "date",
+            "label": "Expires at"
+          }
+        ],
+        "required": ["delegatee", "nonce", "expiry"]
+      }
+    }
+  }
+}
