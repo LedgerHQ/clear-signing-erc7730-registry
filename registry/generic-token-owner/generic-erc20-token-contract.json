@@ -1,0 +1,649 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "Generic ERC20 Token Contract",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 11155111,
+          "address": "0x666f72589ec58f9ad1e8282fe517eac34fa45aa9"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "allowance",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "remaining",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "approve",
+          "inputs": [
+            {
+              "name": "spender",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "decimals",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "name",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "symbol",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transfer",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferFrom",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Generic Token Owner",
+    "info": {
+      "legalName": "Generic Token Corporation",
+      "url": "https://www.generictoken.org"
+    }
+  },
+  "display": {
+    "formats": {
+      "mintToken(uint256,uint256,address,uint256,bytes)": {
+        "intent": "Mint a new token",
+        "fields": [
+          {
+            "label": "Event Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.eventId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Token Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.receiver",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Expiration Time",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#.expirationTime",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Signature",
+            "format": "raw",
+            "params": null,
+            "path": "#.signature",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ]
+      },
+      "setFeeReceiver(address)": {
+        "intent": "Set the fee receiver address",
+        "fields": [
+          {
+            "label": "Fee Receiver",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#._feeReceiver",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ]
+      },
+      "setMigrationFee(uint256)": {
+        "intent": "Set migration fee",
+        "fields": [
+          {
+            "label": "Migration Fee",
+            "format": "amount",
+            "params": {
+              "unit": "wei"
+            },
+            "path": "#._migrationFee",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ]
+      },
+      "setValidSigner(address)": {
+        "intent": "Set the valid signer address",
+        "fields": [
+          {
+            "label": "Valid Signer",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#._validSigner",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ]
+      },
+      "transferOwnership(address)": {
+        "intent": "Transfer contract ownership",
+        "fields": [
+          {
+            "label": "New Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.newOwner",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ]
+      },
+      "allowance(address,address)": {
+        "intent": "Check allowance",
+        "fields": [
+          {
+            "label": "Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.owner",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.spender",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.owner",
+          "#.spender"
+        ]
+      },
+      "approve(address,uint256)": {
+        "intent": "Approve token spending",
+        "fields": [
+          {
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.spender",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Value",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#.value",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.spender",
+          "#.value"
+        ]
+      },
+      "balanceOf(address)": {
+        "intent": "Query allowance",
+        "fields": [
+          {
+            "label": "Owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.owner",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.spender",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.owner",
+          "#.spender"
+        ]
+      },
+      "transfer(address,uint256)": {
+        "intent": "Transfer tokens",
+        "fields": [
+          {
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.to",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Value",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#.value",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.to",
+          "#.value"
+        ]
+      },
+      "transferFrom(address,address,uint256)": {
+        "intent": "Transfer tokens",
+        "fields": [
+          {
+            "label": "From",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.from",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": [
+                "userInput",
+                "addressBook"
+              ]
+            },
+            "path": "#.to",
+            "isRequired": true,
+            "isIncluded": true
+          },
+          {
+            "label": "Value",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "#.token"
+            },
+            "path": "#.value",
+            "isRequired": true,
+            "isIncluded": true
+          }
+        ],
+        "excluded": null,
+        "required": [
+          "#.from",
+          "#.to",
+          "#.value"
+        ]
+      }
+    }
+  }
+}
