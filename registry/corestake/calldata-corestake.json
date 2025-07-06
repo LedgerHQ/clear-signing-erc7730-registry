@@ -1,0 +1,44 @@
+{
+  "name": "CoreStake",
+  "version": "1",
+  "contractAddress": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
+  "chainId": 1116,
+  "functions": [
+    {
+      "name": "mint",
+      "selector": "0x40c10f19",
+      "description": "Stake CORE tokens to a validator",
+      "params": [
+        {
+          "name": "validator",
+          "type": "address",
+          "display": {
+            "label": "Validator Address",
+            "format": "address"
+          }
+        }
+      ]
+    },
+    {
+      "name": "redeem",
+      "selector": "0xdb006a75",
+      "description": "Unstake CORE by redeeming staked tokens (stCORE)",
+      "params": [
+        {
+          "name": "stCore",
+          "type": "uint256",
+          "display": {
+            "label": "Amount to Redeem (in stCORE)",
+            "format": "decimal"
+          }
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "selector": "0x3ccfd60b",
+      "description": "Withdraw previously unstaked CORE tokens",
+      "params": []
+    }
+  ]
+}
