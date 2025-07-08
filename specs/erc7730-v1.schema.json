@@ -737,6 +737,11 @@
                     "title": "Amount (Optional)",
                     "type": "integer",
                     "description": "The associated amount in native currency, if the calldata can be associated with a container value."
+                },
+                "spender": {
+                    "title": "Spender (Optional)",
+                    "type": "string",
+                    "description": "The associated spender, if the calldata can be associated with a container value."
                 }
             },
             "not": {
