@@ -1,0 +1,59 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "GnosisSafeProxyFactory",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
+      "deployments": [{ "chainId": 1, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" }]
+    }
+  },
+  "metadata": {
+    "owner": "Safe Proxy Factory",
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2021-05-25T02:50:20Z" }
+  },
+  "display": {
+    "formats": {
+      "createProxy(address singleton, bytes data)": {
+        "$id": "createProxy",
+        "intent": "Deploy account",
+        "fields": [
+          {
+            "path": "data",
+            "format": "calldata",
+            "label": "Account setup",
+            "params": { "calleePath": "singleton" }
+          }
+        ],
+        "required": ["data"]
+      },
+      "createProxyWithNonce(address _singleton, bytes initializer, uint256 saltNonce)": {
+        "$id": "createProxyWithNonce",
+        "intent": "Deploy account",
+        "fields": [
+          {
+            "path": "initializer",
+            "format": "calldata",
+            "label": "Account setup",
+            "params": { "calleePath": "_singleton" }
+          }
+        ],
+        "required": ["data"],
+        "excluded": ["saltNonce"]
+      },
+      "createProxyWithCallback(address _singleton, bytes initializer, uint256 saltNonce, address callback)": {
+        "$id": "createProxyWithCallback",
+        "intent": "Deploy account",
+        "fields": [
+          {
+            "path": "initializer",
+            "format": "calldata",
+            "label": "Account setup",
+            "params": { "calleePath": "_singleton" }
+          }
+        ],
+        "required": ["data"],
+        "excluded": ["saltNonce", "callback"]
+      }
+    }
+  }
+}

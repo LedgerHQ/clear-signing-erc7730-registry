@@ -1,0 +1,111 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "GnosisSafe",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0x3E5c63644E683549055b9Be8653de26E0B4CD36E",
+      "deployments": [
+        { "chainId": 1, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 1, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Safe",
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2021-05-25T03:53:22Z" },
+    "enums": { "operation": { "0": "Call", "1": "Delegate Call" } },
+    "constants": {"addressAsNull": "0x0000000000000000000000000000000000000000" }
+  },
+  "display": {
+    "formats": {
+      "setup(address[] _owners, uint256 _threshold, address to, bytes data, address fallbackHandler, address paymentToken, uint256 payment, address paymentReceiver)": {
+        "$id": "setup",
+        "intent": "Create account",
+        "fields": [
+          {
+            "path": "_owners.[]",
+            "label": "Owner",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] }
+          },
+          {
+            "path": "_threshold",
+            "label": "Required approvals",
+            "format": "raw"
+          },
+          {
+            "path": "fallbackHandler",
+            "label": "Fallback handler",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },
+          {
+            "path": "payment",
+            "label": "Payment",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "paymentToken",
+              "nativeCurrencyAddress": "$.metadata.constants.addressAsNull"
+            }
+          },
+          {
+            "path": "paymentReceiver",
+            "label": "Payment receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"] }
+          },
+          {
+            "path": "data",
+            "label": "Module setup",
+            "format": "calldata",
+            "params": { "calleePath": "to" }
+          }
+        ],
+        "required": ["_owners", "_threshold", "to", "data", "fallbackHandler", "paymentToken", "payment", "paymentReceiver"]
+      },
+      "execTransaction(address to, uint256 value, bytes data, uint8 operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, bytes signatures)": {
+        "$id": "execTransaction",
+        "intent": "Execute transaction",
+        "fields": [
+          {
+            "path": "data",
+            "label": "Transaction",
+            "format": "calldata",
+            "params": {
+              "calleePath": "to",
+              "amount": "value"
+            }
+          },
+          {
+            "path": "operation",
+            "label": "Operation",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.operation" }
+          },
+          {
+            "path": "baseGas",
+            "label": "Gas amount",
+            "format": "raw"
+          },
+          {
+            "path": "gasPrice",
+            "label": "Gas price",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "gasToken",
+              "nativeCurrencyAddress": "$.metadata.constants.addressAsNull"
+            }
+          },
+          {
+            "path": "refundReceiver",
+            "label": "Gas receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"] }
+          }
+        ],
+        "required": ["data", "operation", "baseGas", "gasPrice", "refundReceiver"],
+        "excluded": ["safeTxGas", "signatures"]
+      }
+    }
+  }
+}
