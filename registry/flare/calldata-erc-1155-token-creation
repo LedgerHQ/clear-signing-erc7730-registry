@@ -1,0 +1,1929 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "ERC 1155 Fan Token",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xdeadbeef00000000000000000000000000000000"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "MAX_TOKENS_PER_PLAYER",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "addPlayer",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_playerAddress",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOf",
+          "inputs": [
+            {
+              "name": "account",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "balanceOfBatch",
+          "inputs": [
+            {
+              "name": "accounts",
+              "type": "address[]",
+              "internalType": "address[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "ids",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "burnTokens",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "gameContract",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getAllPlayerIds",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getPlayerAddress",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getPlayerInfo",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "player",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "minted",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "burned",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "circulating",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "isApprovedForAll",
+          "inputs": [
+            {
+              "name": "account",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "operator",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mintTokens",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerAddress",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerExists",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerTokenExists",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "safeBatchTransferFrom",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "ids",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "values",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "data",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "safeTransferFrom",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "id",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "value",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "data",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setApprovalForAll",
+          "inputs": [
+            {
+              "name": "operator",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "approved",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setGameContract",
+          "inputs": [
+            {
+              "name": "_gameContract",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setURI",
+          "inputs": [
+            {
+              "name": "newUri",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "supportsInterface",
+          "inputs": [
+            {
+              "name": "interfaceId",
+              "type": "bytes4",
+              "internalType": "bytes4",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalBurned",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalMinted",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalSupply",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "updatePlayerAddress",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "_playerAddress",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "uri",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Curve League Protocol",
+    "info": {
+      "legalName": "ERC 1155",
+      "url": "https://github.com/LeoFranklin015/ScoreX"
+    }
+  },
+  "display": {
+    "formats": {
+      "getAllUserTokens(address)": {
+        "$id": null,
+        "intent": "Fetch all token holdings",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "User",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "getGameInfo(uint256)": {
+        "$id": null,
+        "intent": "get details about liquidity and tokenomics.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getPerformanceMultiplier(uint256)": {
+        "$id": null,
+        "intent": "fetch performance metrics of a player token.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getPrice(uint256)": {
+        "$id": null,
+        "intent": "get dynamic price of the fan token.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getUserGameInfo(address)": {
+        "$id": null,
+        "intent": "get current fan token holdings and their value",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "getUserNullifier(address)": {
+        "$id": null,
+        "intent": "view the proof generated by self protocol.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "handleTransfer(address,address,uint256,uint256)": {
+        "$id": null,
+        "intent": "Transfer fan tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Source wallet of tokens",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.from",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Destination wallet of tokens",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": [
+                "ens"
+              ]
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "amount in ETH",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.from",
+          "#.to",
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "hasPlayerClaimed(uint256)": {
+        "$id": null,
+        "intent": "check if the user has claimed their token holdings.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "hasUserClaimed(address,uint256)": {
+        "$id": null,
+        "intent": "check if the user has claimed the fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user",
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "initializeSeason(uint256[])": {
+        "$id": null,
+        "intent": "Create a new season (Only do this after end of previous season)",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#._playerIds.[]",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._playerIds.[]"
+        ],
+        "excluded": null
+      },
+      "mintPlayer(uint256,uint256)": {
+        "$id": null,
+        "intent": "Purchase fan token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Self Protocol proof.",
+            "format": "raw",
+            "params": null,
+            "path": "#.nullifier",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#.nullifier"
+        ],
+        "excluded": null
+      },
+      "playerClaim(uint256)": {
+        "$id": null,
+        "intent": "collect all the seasons earnings.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "processPlayerVerification(uint256,address,string,string,string)": {
+        "$id": null,
+        "intent": "prove player with ZK.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.playerId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Player Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.playerAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "First Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.firstName",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Last Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.lastName",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Date Of Birth",
+            "format": "raw",
+            "params": null,
+            "path": "#.dateOfBirth",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.playerId",
+          "#.playerAddress",
+          "#.firstName",
+          "#.lastName",
+          "#.dateOfBirth"
+        ],
+        "excluded": null
+      },
+      "setPlayerStatsListAddress(address)": {
+        "$id": null,
+        "intent": "add address to the player stats",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Player Stats List Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#._playerStatsListAddress",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._playerStatsListAddress"
+        ],
+        "excluded": null
+      },
+      "transferOwnership(address)": {
+        "$id": null,
+        "intent": "transfer contract ownership to someone else",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "public address of the new owner.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.newOwner",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.newOwner"
+        ],
+        "excluded": null
+      },
+      "userClaim(uint256)": {
+        "$id": null,
+        "intent": "claim all investment funds.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "withdrawAllLiquidity(uint256)": {
+        "$id": null,
+        "intent": "withdraw all liquidity from fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "withdrawLiquidity(uint256,uint256)": {
+        "$id": null,
+        "intent": "withdraw a specific amount of liquidity from the fan token pool.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount in eth",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "addPlayer(uint256,address)": {
+        "$id": null,
+        "intent": "to add a new fan token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Player Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#._playerAddress",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#._playerAddress"
+        ],
+        "excluded": null
+      },
+      "balanceOf(address,uint256)": {
+        "$id": null,
+        "intent": "check the fan token balance",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "public address of the Payer",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.account",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.id",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.account",
+          "#.id"
+        ],
+        "excluded": null
+      },
+      "balanceOfBatch(address[],uint256[])": {
+        "$id": null,
+        "intent": "check the balance of a batch of fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "List of batches to check balance",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.accounts.[]",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Ids of the players.",
+            "format": "raw",
+            "params": null,
+            "path": "#.ids.[]",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.accounts.[]",
+          "#.ids.[]"
+        ],
+        "excluded": null
+      },
+      "burnTokens(address,uint256,uint256)": {
+        "$id": null,
+        "intent": "burn fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Source account of tokens.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.from",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount to be burnt",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.from",
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "getPlayerAddress(uint256)": {
+        "$id": null,
+        "intent": "get the address of the player.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getPlayerInfo(uint256)": {
+        "$id": null,
+        "intent": "get the informations about the player.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "isApprovedForAll(address,address)": {
+        "$id": null,
+        "intent": "check if the approval is given for all users.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "public address of the user",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.account",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Operator",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.operator",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.account",
+          "#.operator"
+        ],
+        "excluded": null
+      },
+      "mintTokens(address,uint256,uint256)": {
+        "$id": null,
+        "intent": "mint new fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Destination of the fan tokens.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount to mint.",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.to",
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "playerTokenExists(uint256)": {
+        "$id": null,
+        "intent": "check if the token exists on the user account.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+        "$id": null,
+        "intent": "perform batch transfers of fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Source of the tokens.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.from",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Destination of the tokens.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "list of player id to send.",
+            "format": "raw",
+            "params": null,
+            "path": "#.ids.[]",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "amount of tokens - user index wise",
+            "format": "amount",
+            "params": null,
+            "path": "#.values.[]",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "call data for the transaction.",
+            "format": "raw",
+            "params": null,
+            "path": "#.data",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.from",
+          "#.to",
+          "#.ids.[]",
+          "#.values.[]",
+          "#.data"
+        ],
+        "excluded": null
+      },
+      "safeTransferFrom(address,address,uint256,uint256,bytes)": {
+        "$id": null,
+        "intent": "Perform a safe transfer of tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "source account of funds.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.from",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "destination of the tokens.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "id",
+            "format": "raw",
+            "params": null,
+            "path": "#.id",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "amount of tokens.",
+            "format": "amount",
+            "params": null,
+            "path": "#.value",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Data",
+            "format": "raw",
+            "params": null,
+            "path": "#.data",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.from",
+          "#.to",
+          "#.id",
+          "#.value",
+          "#.data"
+        ],
+        "excluded": null
+      },
+      "setApprovalForAll(address,bool)": {
+        "$id": null,
+        "intent": "give approval to all addresses",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Sequencer",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.operator",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "status of approval",
+            "format": "raw",
+            "params": null,
+            "path": "#.approved",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.operator",
+          "#.approved"
+        ],
+        "excluded": null
+      },
+      "setGameContract(address)": {
+        "$id": null,
+        "intent": "modify the game contract address.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Address to be changed",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#._gameContract",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._gameContract"
+        ],
+        "excluded": null
+      },
+      "setURI(string)": {
+        "$id": null,
+        "intent": "constructor to set token details",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "link to the token details.",
+            "format": "raw",
+            "params": null,
+            "path": "#.newUri",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.newUri"
+        ],
+        "excluded": null
+      },
+      "supportsInterface(bytes4)": {
+        "$id": null,
+        "intent": "check if interface is supported",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Interface Id",
+            "format": "raw",
+            "params": null,
+            "path": "#.interfaceId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.interfaceId"
+        ],
+        "excluded": null
+      },
+      "totalSupply(uint256)": {
+        "$id": null,
+        "intent": "find the total supplhy of the token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "updatePlayerAddress(uint256,address)": {
+        "$id": null,
+        "intent": "update a specific player's address.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Player Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet",
+                "eoa",
+                "contract",
+                "token",
+                "collection"
+              ],
+              "sources": null
+            },
+            "path": "#._playerAddress",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#._playerAddress"
+        ],
+        "excluded": null
+      },
+      "uri(uint256)": {
+        "$id": null,
+        "intent": "get link containing token details.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      }
+    }
+  }
+}
