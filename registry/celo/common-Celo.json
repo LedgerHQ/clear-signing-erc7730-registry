@@ -1,0 +1,7 @@
+{
+    "$schema": "../../specs/erc7730-v1.schema.json",    
+    "metadata": {
+      "owner": "Celo Governance",
+      "info": { "legalName": "Celo", "url": "https://celo.org/" }
+    }
+}
