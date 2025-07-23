@@ -199,20 +199,13 @@
   "metadata": {
     "owner": "Swell Network Deployer",
     "info": { "legalName": "Swell", "url": "https://www.swellnetwork.io/" },
-    "constants": { "swellToken": "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0" } 
+    "constants": { "swellToken": "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0" }
   },
   "display": {
     "formats": {
       "addToWhitelist(address)": {
         "intent": "Add to whitelist a single address",
-        "fields": [
-          {
-            "label": "Address",
-            "format": "addressName",
-            "params": { "types": ["wallet", "eoa", "contract"] },
-            "path": "#._address"
-          }
-        ]
+        "fields": [{ "label": "Address", "format": "addressName", "params": { "types": ["wallet", "eoa", "contract"] }, "path": "#._address" }]
       },
       "allowance(address,address)": {
         "intent": "Remaining number of tokens that `spender` will be allowed to spend",
@@ -269,14 +262,7 @@
       },
       "depositWithReferral(address)": {
         "intent": "Deposit with referral",
-        "fields": [
-          {
-            "label": "Referral",
-            "format": "addressName",
-            "params": { "types": ["wallet", "eoa", "contract"] },
-            "path": "#.referral"
-          }
-        ]
+        "fields": [{ "label": "Referral", "format": "addressName", "params": { "types": ["wallet", "eoa", "contract"] }, "path": "#.referral" }]
       },
       "increaseAllowance(address,uint256)": {
         "intent": "Increase allowance",
@@ -298,14 +284,7 @@
       },
       "removeFromWhitelist(address)": {
         "intent": "Remove from whitelist a single address",
-        "fields": [
-          {
-            "label": "Address",
-            "format": "addressName",
-            "params": { "types": ["wallet", "eoa", "contract"] },
-            "path": "#._address"
-          }
-        ]
+        "fields": [{ "label": "Address", "format": "addressName", "params": { "types": ["wallet", "eoa", "contract"] }, "path": "#._address" }]
       },
       "reprice(uint256,uint256,uint256)": {
         "intent": "Reprice",
