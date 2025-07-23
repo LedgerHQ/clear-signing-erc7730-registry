@@ -1,0 +1,50 @@
+{
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "abi": "https://openapi.coredao.org/api/contracts/abi_of_verified_contract/0xf5fA1728bABc3f8D2a617397faC2696c958C3409",
+      "deployments": [
+        {
+          "chainId": 1116,
+          "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "name": "CoreStake",
+    "version": "1.0.0",
+    "description": "Staking contract for CORE tokens"
+  },
+  "display": {
+    "formats": {
+      "mint(address)": {
+        "description": "Stake CORE tokens to a validator",
+        "fields": [
+          {
+            "path": "validator",
+            "label": "Validator Address",
+            "format": "addressName"
+          }
+        ]
+      },
+      "redeem(uint256)": {
+        "description": "Unstake CORE by redeeming staked tokens (stCORE)",
+        "fields": [
+          {
+            "path": "stCore",
+            "label": "Amount to Redeem (in stCORE)",
+            "format": "tokenAmount",
+            "params": {
+              "token": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
+            }
+          }
+        ]
+      },
+      "withdraw()": {
+        "description": "Withdraw previously unstaked CORE tokens",
+        "fields": []
+      }
+    }
+  }
+}
