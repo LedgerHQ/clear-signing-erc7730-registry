@@ -73,8 +73,8 @@
             "format": "calldata",
             "params": {
               "calleePath": "to",
-              "amount": "value",
-              "spender": "@.to"
+              "amountPath": "value",
+              "spenderPath": "@.to"
             }
           },
           {
