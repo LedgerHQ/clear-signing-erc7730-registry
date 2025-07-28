@@ -29,7 +29,7 @@
         "$id": "permitAndCall",
         "intent": "Execute with permit",
         "fields": [
-          { "path": "action", "label": "Swap", "format": "calldata" }
+          { "path": "action", "label": "Swap", "format": "calldata", "params": { "calleePath": "@.to" } }
         ],
         "required": ["action"],
         "excluded": ["permit"]
