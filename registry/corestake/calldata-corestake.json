@@ -5,65 +5,32 @@
       "abi": [
         {
           "outputs": [],
-          "inputs": [
-            {
-              "name": "_validator",
-              "internalType": "address",
-              "type": "address"
-            }
-          ],
+          "inputs": [{ "name": "_validator", "internalType": "address", "type": "address" }],
           "name": "mint",
           "stateMutability": "payable",
           "type": "function"
         },
         {
           "outputs": [],
-          "inputs": [
-            {
-              "name": "stCore",
-              "internalType": "uint256",
-              "type": "uint256"
-            }
-          ],
+          "inputs": [{ "name": "stCore", "internalType": "uint256", "type": "uint256" }],
           "name": "redeem",
           "stateMutability": "nonpayable",
           "type": "function"
         },
-        {
-          "outputs": [],
-          "inputs": [],
-          "name": "withdraw",
-          "stateMutability": "nonpayable",
-          "type": "function"
-        }
+        { "outputs": [], "inputs": [], "name": "withdraw", "stateMutability": "nonpayable", "type": "function" }
       ],
-      "deployments": [
-        {
-          "chainId": 1116,
-          "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409"
-        }
-      ]
+      "deployments": [{ "chainId": 1116, "address": "0xf5fA1728bABc3f8D2a617397faC2696c958C3409" }]
     }
   },
   "metadata": {
     "owner": "CoreDAO",
-    "info": {
-      "legalName": "CoreDAO Earn Contract",
-      "url": "https://coredao.org/",
-      "deploymentDate": "2025-02-24T02:55:15Z"
-    }
+    "info": { "legalName": "CoreDAO Earn Contract", "url": "https://coredao.org/", "deploymentDate": "2025-02-24T02:55:15Z" }
   },
   "display": {
     "formats": {
       "mint(address)": {
         "intent": "Stake CORE tokens to a validator",
-        "fields": [
-          {
-            "path": "_validator",
-            "label": "Validator Address",
-            "format": "raw"
-          }
-        ],
+        "fields": [{ "path": "_validator", "label": "Validator Address", "format": "raw" }],
         "required": ["_validator"]
       },
       "redeem(uint256)": {
@@ -73,17 +40,12 @@
             "path": "stCore",
             "label": "Amount to Redeem (in stCORE)",
             "format": "tokenAmount",
-            "params": {
-              "token": "0xb3A8F0f0da9ffC65318aA39E55079796093029AD"
-            }
+            "params": { "token": "0xb3A8F0f0da9ffC65318aA39E55079796093029AD" }
           }
         ],
         "required": ["stCore"]
       },
-      "withdraw()": {
-        "intent": "Withdraw previously unstaked CORE tokens",
-        "fields": []
-      }
+      "withdraw()": { "intent": "Withdraw previously unstaked CORE tokens", "fields": [] }
     }
   }
 }
