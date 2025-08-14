@@ -1,0 +1,255 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "eip712": {
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+        },
+        {
+          "chainId": 8453,
+          "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+        },
+        {
+          "chainId": 1,
+          "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        },
+        {
+          "chainId": 10,
+          "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85"
+        },
+        {
+          "chainId": 137,
+          "address": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+        },
+        {
+          "chainId": 421614,
+          "address": "0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d"
+        },
+        {
+          "chainId": 84532,
+          "address": "0x036CbD53842c5426634e7929541eC2318f3dCF7e"
+        },
+        {
+          "chainId": 11155111,
+          "address": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+        },
+        {
+          "chainId": 11155420,
+          "address": "0x5fd84259d66Cd46123540766Be93DFE6D43130D7"
+        },
+        {
+          "chainId": 80002,
+          "address": "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582"
+        }
+      ],
+      "domain": {
+        "name": "USD Coin",
+        "version": "2"
+      },
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "TransferWithAuthorization": [
+              { "name": "from", "type": "address" },
+              { "name": "to", "type": "address" },
+              { "name": "value", "type": "uint256" },
+              { "name": "validAfter", "type": "uint256" },
+              { "name": "validBefore", "type": "uint256" },
+              { "name": "nonce", "type": "bytes32" }
+            ]
+          },
+          "primaryType": "TransferWithAuthorization"
+        },
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "ReceiveWithAuthorization": [
+              { "name": "from", "type": "address" },
+              { "name": "to", "type": "address" },
+              { "name": "value", "type": "uint256" },
+              { "name": "validAfter", "type": "uint256" },
+              { "name": "validBefore", "type": "uint256" },
+              { "name": "nonce", "type": "bytes32" }
+            ]
+          },
+          "primaryType": "ReceiveWithAuthorization"
+        },
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "CancelAuthorization": [
+              { "name": "authorizer", "type": "address" },
+              { "name": "nonce", "type": "bytes32" }
+            ]
+          },
+          "primaryType": "CancelAuthorization"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Circle",
+    "info": {
+      "legalName": "Circle Internet Financial, LLC",
+      "url": "https://www.circle.com/"
+    },
+    "token": {
+      "ticker": "USDC",
+      "name": "USD Coin",
+      "decimals": 6
+    }
+  },
+  "display": {
+    "formats": {
+      "TransferWithAuthorization": {
+        "$id": "EIP3009 TransferAuth",
+        "intent": "Authorize token transfer",
+        "fields": [
+          {
+            "path": "#.from",
+            "label": "From",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.to",
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.value",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": { "tokenPath": "@.to" }
+          },
+          {
+            "path": "#.validAfter",
+            "label": "Valid after",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          },
+          {
+            "path": "#.validBefore",
+            "label": "Valid before",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          },
+          {
+            "path": "#.nonce",
+            "label": "Nonce",
+            "format": "raw"
+          }
+        ],
+        "required": [
+          "#.to",
+          "#.value",
+          "#.validAfter",
+          "#.validBefore",
+          "#.nonce"
+        ],
+        "excluded": ["#.from"],
+        "screens": {}
+      },
+      "ReceiveWithAuthorization": {
+        "$id": "EIP3009 ReceiveAuth",
+        "intent": "Authorize receiving tokens",
+        "fields": [
+          {
+            "path": "#.from",
+            "label": "From",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.to",
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.value",
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": { "tokenPath": "@.to" }
+          },
+          {
+            "path": "#.validAfter",
+            "label": "Valid after",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          },
+          {
+            "path": "#.validBefore",
+            "label": "Valid before",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          },
+          {
+            "path": "#.nonce",
+            "label": "Nonce",
+            "format": "raw"
+          }
+        ],
+        "required": [
+          "#.to",
+          "#.value",
+          "#.validAfter",
+          "#.validBefore",
+          "#.nonce"
+        ],
+        "excluded": ["#.from"],
+        "screens": {}
+      },
+      "CancelAuthorization": {
+        "$id": "EIP3009 CancelAuthorization",
+        "intent": "Cancel a prior authorization",
+        "fields": [
+          {
+            "path": "#.authorizer",
+            "label": "Authorizer",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            }
+          },
+          { "path": "#.nonce", "label": "Nonce", "format": "raw" }
+        ],
+        "required": ["#.nonce"],
+        "excluded": ["#.authorizer"],
+        "screens": {}
+      }
+    }
+  }
+}

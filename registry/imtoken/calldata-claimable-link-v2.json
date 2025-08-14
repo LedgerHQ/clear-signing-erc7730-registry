@@ -1,0 +1,448 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 42161,
+          "address": "0x05a10D7A19585218DB515FDf3F20043614C843dB"
+        },
+        {
+          "chainId": 421614,
+          "address": "0x05a10D7A19585218DB515FDf3F20043614C843dB"
+        },
+        {
+          "chainId": 11155111,
+          "address": "0x05a10D7A19585218DB515FDf3F20043614C843dB"
+        },
+        {
+          "chainId": 11155420,
+          "address": "0x05a10D7A19585218DB515FDf3F20043614C843dB"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "PERMIT2",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "contract IPermit2"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "claim",
+          "inputs": [
+            {
+              "name": "permit3009",
+              "type": "tuple",
+              "internalType": "struct IClaimableLinkV2.Permit3009",
+              "components": [
+                {
+                  "name": "authorization",
+                  "type": "tuple",
+                  "internalType": "struct IClaimableLinkV2.Authorization",
+                  "components": [
+                    {
+                      "name": "from",
+                      "type": "address",
+                      "internalType": "address"
+                    },
+                    {
+                      "name": "to",
+                      "type": "address",
+                      "internalType": "address"
+                    },
+                    {
+                      "name": "value",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "validAfter",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "validBefore",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "nonce",
+                      "type": "bytes32",
+                      "internalType": "bytes32"
+                    }
+                  ]
+                },
+                {
+                  "name": "token",
+                  "type": "address",
+                  "internalType": "address"
+                }
+              ]
+            },
+            { "name": "signature", "type": "bytes", "internalType": "bytes" },
+            {
+              "name": "recipient",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "claim",
+          "inputs": [
+            {
+              "name": "permit2",
+              "type": "tuple",
+              "internalType": "struct IClaimableLinkV2.Permit2",
+              "components": [
+                {
+                  "name": "permit",
+                  "type": "tuple",
+                  "internalType": "struct IPermit2.PermitTransferFrom",
+                  "components": [
+                    {
+                      "name": "permitted",
+                      "type": "tuple",
+                      "internalType": "struct IPermit2.TokenPermissions",
+                      "components": [
+                        {
+                          "name": "token",
+                          "type": "address",
+                          "internalType": "address"
+                        },
+                        {
+                          "name": "amount",
+                          "type": "uint256",
+                          "internalType": "uint256"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "nonce",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    },
+                    {
+                      "name": "deadline",
+                      "type": "uint256",
+                      "internalType": "uint256"
+                    }
+                  ]
+                },
+                {
+                  "name": "owner",
+                  "type": "address",
+                  "internalType": "address"
+                }
+              ]
+            },
+            { "name": "signature", "type": "bytes", "internalType": "bytes" },
+            {
+              "name": "recipient",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "commit",
+          "inputs": [
+            {
+              "name": "permitHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "commitHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "isClaimed",
+          "inputs": [
+            {
+              "name": "permitHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            { "name": "claimed", "type": "bool", "internalType": "bool" }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "permitCommit",
+          "inputs": [
+            {
+              "name": "permitHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "commitHash",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "view"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "imToken",
+    "info": {
+      "legalName": "imToken Labs",
+      "deploymentDate": "2025-07-21T00:00:00Z",
+      "url": "https://token.im/"
+    }
+  },
+  "display": {
+    "formats": {
+      "claim(((address,address,uint256,uint256,uint256,bytes32),address),bytes,address)": {
+        "$id": "claimEIP3009",
+        "intent": "Claim token via EIP-3009",
+        "fields": [
+          {
+            "path": "#.permit3009",
+            "fields": [
+              {
+                "path": "#.permit3009.authorization",
+                "fields": [
+                  {
+                    "label": "From",
+                    "format": "addressName",
+                    "params": {
+                      "types": ["wallet", "eoa"],
+                      "sources": ["ens", "local"]
+                    },
+                    "path": "#.permit3009.authorization.from"
+                  },
+                  {
+                    "label": "To",
+                    "format": "addressName",
+                    "params": {
+                      "types": ["contract"]
+                    },
+                    "path": "#.permit3009.authorization.to"
+                  },
+                  {
+                    "label": "Value",
+                    "format": "tokenAmount",
+                    "params": { "tokenPath": "#.permit3009.token" },
+                    "path": "#.permit3009.authorization.value"
+                  },
+                  {
+                    "label": "Valid After",
+                    "format": "date",
+                    "params": {
+                      "encoding": "timestamp"
+                    },
+                    "path": "#.permit3009.authorization.validAfter"
+                  },
+                  {
+                    "label": "Valid Before",
+                    "format": "date",
+                    "params": {
+                      "encoding": "timestamp"
+                    },
+                    "path": "#.permit3009.authorization.validBefore"
+                  },
+                  {
+                    "label": "Nonce",
+                    "format": "raw",
+                    "path": "#.permit3009.authorization.nonce"
+                  }
+                ]
+              },
+              {
+                "label": "Token",
+                "format": "addressName",
+                "params": {
+                  "types": ["token"]
+                },
+                "path": "#.permit3009.token"
+              }
+            ]
+          },
+          {
+            "label": "Signature",
+            "format": "raw",
+            "path": "#.signature"
+          },
+          {
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens", "contract"]
+            },
+            "path": "#.recipient"
+          }
+        ],
+        "required": [
+          "#.recipient",
+          "#.permit3009.token",
+          "#.permit3009.authorization.value",
+          "#.permit3009.authorization.validAfter",
+          "#.permit3009.authorization.validBefore",
+          "#.permit3009.authorization.nonce"
+        ],
+        "excluded": ["#.signature", "#.permit3009.authorization.from"],
+        "screens": {}
+      },
+      "claim((((address,uint256),uint256,uint256),address),bytes,address)": {
+        "$id": "claimPermit2",
+        "intent": "Claim token via Permit2",
+        "fields": [
+          {
+            "path": "#.permit2",
+            "fields": [
+              {
+                "path": "#.permit2.permit",
+                "fields": [
+                  {
+                    "path": "#.permit2.permit.permitted",
+                    "fields": [
+                      {
+                        "label": "Token",
+                        "format": "addressName",
+                        "params": {
+                          "types": ["token"]
+                        },
+                        "path": "#.permit2.permit.permitted.token"
+                      },
+                      {
+                        "label": "Amount",
+                        "format": "tokenAmount",
+                        "params": {
+                          "tokenPath": "#.permit2.permit.permitted.token"
+                        },
+                        "path": "#.permit2.permit.permitted.amount"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Nonce",
+                    "format": "raw",
+                    "path": "#.permit2.permit.nonce"
+                  },
+                  {
+                    "label": "Deadline",
+                    "format": "date",
+                    "params": {
+                      "encoding": "timestamp"
+                    },
+                    "path": "#.permit2.permit.deadline"
+                  }
+                ]
+              },
+              {
+                "label": "Owner",
+                "format": "addressName",
+                "params": {
+                  "types": ["eoa", "wallet"],
+                  "sources": ["local", "ens"]
+                },
+                "path": "#.permit2.owner"
+              }
+            ]
+          },
+          {
+            "label": "Signature",
+            "format": "raw",
+            "path": "#.signature"
+          },
+          {
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
+            "path": "#.recipient"
+          }
+        ],
+        "required": [
+          "#.recipient",
+          "#.permit2.permit.nonce",
+          "#.permit2.permit.deadline",
+          "#.permit2.permit.permitted.token",
+          "#.permit2.permit.permitted.amount"
+        ],
+        "excluded": ["#.signature", "#.permit2.owner"],
+        "screens": {}
+      },
+      "commit(bytes32,bytes32)": {
+        "$id": "commit",
+        "intent": "Commit a claim link",
+        "fields": [
+          {
+            "label": "Permit Hash",
+            "format": "raw",
+            "path": "#.permitHash"
+          },
+          {
+            "label": "Commit Hash",
+            "format": "raw",
+            "path": "#.commitHash"
+          }
+        ],
+        "required": ["#.permitHash", "#.commitHash"],
+        "excluded": [],
+        "screens": {}
+      },
+      "isClaimed(bytes32)": {
+        "$id": "isClaimed",
+        "intent": "Checks if a permit is used",
+        "fields": [
+          {
+            "label": "Permit Hash",
+            "format": "raw",
+            "path": "#.permitHash"
+          }
+        ],
+        "required": ["#.permitHash"],
+        "excluded": [],
+        "screens": {}
+      },
+      "permitCommit(bytes32)": {
+        "$id": "permitCommit",
+        "intent": "Links a permit to its claimer",
+        "fields": [
+          {
+            "label": "Permit Hash",
+            "format": "raw",
+            "path": "#.permitHash"
+          }
+        ],
+        "required": ["#.permitHash"],
+        "excluded": [],
+        "screens": {}
+      }
+    }
+  }
+}

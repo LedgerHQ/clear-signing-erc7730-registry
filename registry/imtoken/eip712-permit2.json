@@ -1,0 +1,162 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../uniswap/uniswap-common-eip712.json",
+  "context": {
+    "eip712": {
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "TokenPermissions": [
+              { "name": "token", "type": "address" },
+              { "name": "amount", "type": "uint256" }
+            ],
+            "PermitTransferFrom": [
+              { "name": "permitted", "type": "TokenPermissions" },
+              { "name": "spender", "type": "address" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "deadline", "type": "uint256" }
+            ]
+          },
+          "primaryType": "PermitTransferFrom"
+        },
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "TokenPermissions": [
+              { "name": "token", "type": "address" },
+              { "name": "amount", "type": "uint256" }
+            ],
+            "PermitBatchTransferFrom": [
+              { "name": "permitted", "type": "TokenPermissions[]" },
+              { "name": "spender", "type": "address" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "deadline", "type": "uint256" }
+            ]
+          },
+          "primaryType": "PermitBatchTransferFrom"
+        }
+      ]
+    }
+  },
+  "display": {
+    "formats": {
+      "PermitTransferFrom": {
+        "$id": "Permit2 TransferFrom",
+        "intent": "Authorize single transfer",
+        "fields": [
+          {
+            "path": "#.permitted",
+            "fields": [
+              {
+                "path": "#.permitted.token",
+                "label": "Max amount",
+                "format": "addressName",
+                "params": {
+                  "types": ["token"]
+                }
+              },
+              {
+                "path": "#.permitted.amount",
+                "label": "Max amount",
+                "format": "tokenAmount",
+                "params": { "tokenPath": "#.permitted.token" }
+              }
+            ]
+          },
+          {
+            "path": "#.spender",
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.nonce",
+            "label": "Nonce",
+            "format": "raw"
+          },
+          {
+            "path": "#.deadline",
+            "label": "Permit expires",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          }
+        ],
+        "required": [
+          "#.spender",
+          "#.nonce",
+          "#.deadline",
+          "#.permitted.token",
+          "#.permitted.amount"
+        ],
+        "excluded": [],
+        "screens": {}
+      },
+      "PermitBatchTransferFrom": {
+        "$id": "Permit2 BatchTransferFrom",
+        "intent": "Authorize batch transfers",
+        "fields": [
+          {
+            "path": "#.permitted.[]",
+            "fields": [
+              {
+                "path": "#.permitted.[].token",
+                "label": "Max amount",
+                "format": "addressName",
+                "params": {
+                  "types": ["token"]
+                }
+              },
+              {
+                "path": "#.permitted.[].amount",
+                "label": "Max amount",
+                "format": "tokenAmount",
+                "params": { "tokenPath": "#.permitted.[].token" }
+              }
+            ]
+          },
+          {
+            "path": "spender",
+            "label": "Spender",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "#.nonce",
+            "label": "Nonce",
+            "format": "raw"
+          },
+          {
+            "path": "deadline",
+            "label": "Permit expires",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          }
+        ],
+        "required": [
+          "#.spender",
+          "#.nonce",
+          "#.deadline",
+          "#.permitted.[].token",
+          "#.permitted.[].amount"
+        ],
+        "excluded": [],
+        "screens": {}
+      }
+    }
+  }
+}
