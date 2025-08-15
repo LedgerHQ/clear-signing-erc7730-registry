@@ -30,7 +30,7 @@
     "formats": {
       "mint(address)": {
         "intent": "Stake CORE tokens to a validator",
-        "fields": [{ "path": "_validator", "label": "Validator Address", "format": "raw" }],
+        "fields": [{ "path": "_validator", "label": "Validator Address", "format": "addressName","params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] } }],
         "required": ["_validator"]
       },
       "redeem(uint256)": {
