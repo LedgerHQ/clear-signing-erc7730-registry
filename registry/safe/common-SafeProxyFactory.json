@@ -1,0 +1,25 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "metadata": {
+    "owner": "Safe Proxy Factory",
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2021-05-25T02:50:20Z" }
+  },
+  "display": {
+    "formats": {
+      "createProxyWithNonce(address _singleton, bytes initializer, uint256 saltNonce)": {
+        "$id": "createProxyWithNonce",
+        "intent": "Deploy account",
+        "fields": [
+          {
+            "path": "initializer",
+            "format": "calldata",
+            "label": "Account setup",
+            "params": { "calleePath": "_singleton" }
+          }
+        ],
+        "required": ["data"],
+        "excluded": ["saltNonce"]
+      }
+    }
+  }
+}
