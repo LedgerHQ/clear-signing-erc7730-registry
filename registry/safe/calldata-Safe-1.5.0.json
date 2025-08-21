@@ -1,0 +1,13 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-Safe.json",
+  "context": {
+    "$id": "Safe",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xFf51A5898e281Db6DfC7855790607438dF2ca44b",
+      "deployments": [
+        { "chainId": 1, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" }
+      ]
+    }
+  }
+}
