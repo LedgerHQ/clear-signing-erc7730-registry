@@ -8,11 +8,11 @@
     "formats": {
       "setupToL2(address l2Singleton)": {
         "$id": "setupToL2",
-        "intent": "Create account to L2",
+        "intent": "Create Safe",
         "fields": [
           {
             "path": "l2Singleton",
-            "label": "L2 Safe",
+            "label": "Module",
             "format": "addressName",
             "params": { "types": ["contract"] }
           }

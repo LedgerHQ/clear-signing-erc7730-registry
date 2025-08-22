@@ -10,17 +10,17 @@
     "formats": {
       "setup(address[] _owners, uint256 _threshold, address to, bytes data, address fallbackHandler, address paymentToken, uint256 payment, address paymentReceiver)": {
         "$id": "setup",
-        "intent": "Create account",
+        "intent": "Create Safe",
         "fields": [
           {
             "path": "_owners.[]",
-            "label": "Owner",
+            "label": "Signer",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"] }
           },
           {
             "path": "_threshold",
-            "label": "Required approvals",
+            "label": "Threshold",
             "format": "raw"
           },
           {
@@ -46,7 +46,7 @@
           },
           {
             "path": "data",
-            "label": "Module setup",
+            "label": "Module",
             "format": "calldata",
             "params": { "calleePath": "to" }
           }
@@ -72,6 +72,18 @@
             "label": "Operation",
             "format": "enum",
             "params": { "$ref": "$.metadata.enums.operation" }
+          },
+          {
+            "path": "@.to",
+            "label": "From Safe",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },
+          {
+            "path": "@.from",
+            "label": "Execution signer",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
           },
           {
             "path": "baseGas",
