@@ -4,9 +4,29 @@
     "eip712": {
       "deployments": [
         { "chainId": 1, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 56, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 137, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 8453, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 42161, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        { "chainId": 11155111, "address": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
         { "chainId": 1, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
+        { "chainId": 56, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
+        { "chainId": 137, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
+        { "chainId": 8453, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
+        { "chainId": 42161, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
+        { "chainId": 11155111, "address": "0xd9Db270c1B5E3Bd161E8c8503c55cEABeE709552" },
         { "chainId": 1, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
-        { "chainId": 1, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" }
+        { "chainId": 56, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
+        { "chainId": 137, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
+        { "chainId": 8453, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
+        { "chainId": 42161, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
+        { "chainId": 11155111, "address": "0x41675C099F32341bf84BFc5382aF534df5C7461a" },
+        { "chainId": 1, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" },
+        { "chainId": 56, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" },
+        { "chainId": 137, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" },
+        { "chainId": 8453, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" },
+        { "chainId": 42161, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" },
+        { "chainId": 11155111, "address": "0xFf51A5898e281Db6DfC7855790607438dF2ca44b" }
       ],
       "domain": { "name": "SafeTx" },
       "schemas": [
