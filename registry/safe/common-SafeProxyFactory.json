@@ -8,7 +8,7 @@
     "formats": {
       "createProxyWithNonce(address _singleton, bytes initializer, uint256 saltNonce)": {
         "$id": "createProxyWithNonce",
-        "intent": "Deploy account",
+        "intent": "Create Safe",
         "fields": [
           {
             "path": "initializer",
