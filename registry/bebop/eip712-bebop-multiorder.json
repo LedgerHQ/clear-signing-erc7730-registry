@@ -1,0 +1,127 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-eip712-base.json",
+
+  "context": {
+    "eip712": {
+      "schemas": [
+        {
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "TokenPermissions": [
+              { "name": "token", "type": "address" },
+              { "name": "amount", "type": "uint256" }
+            ],
+            "MultiOrder": [
+              { "name": "partner_id", "type": "uint64" },
+              { "name": "expiry", "type": "uint256" },
+              { "name": "taker_address", "type": "address" },
+              { "name": "maker_address", "type": "address" },
+              { "name": "maker_nonce", "type": "uint256" },
+              { "name": "taker_tokens", "type": "address[]" },
+              { "name": "maker_tokens", "type": "address[]" },
+              { "name": "taker_amounts", "type": "uint256[]" },
+              { "name": "maker_amounts", "type": "uint256[]" },
+              { "name": "receiver", "type": "address" },
+              { "name": "commands", "type": "bytes" },
+              { "name": "hooksHash", "type": "bytes32" }
+            ],
+            "PermitBatchWitnessTransferFrom": [
+              { "name": "permitted", "type": "TokenPermissions[]" },
+              { "name": "spender", "type": "address" },
+              { "name": "nonce", "type": "uint256" },
+              { "name": "deadline", "type": "uint256" },
+              { "name": "witness", "type": "MultiOrder" }
+            ]
+          },
+          "primaryType": "PermitBatchWitnessTransferFrom"
+        }
+      ],
+      "domain": {
+        "name": "Bebop Multi Order"
+      }
+    }
+  },
+
+  "display": {
+    "formats": {
+      "PermitBatchWitnessTransferFrom": {
+        "intent": "MultiOrder Permit",
+        "fields": [
+          {
+            "path": "spender",
+            "label": "Approved Spender",
+            "format": "addressName"
+          },
+          {
+            "path": "permitted.[]",
+            "fields": [
+              {
+                "path": "amount",
+                "label": "Approval Amount",
+                "format": "tokenAmount",
+                "params": { "tokenPath": "token" }
+              }
+            ]
+          },
+          {
+            "path": "witness",
+            "fields": [
+              {
+                "path": "taker_address",
+                "label": "Taker",
+                "format": "addressName"
+              },
+              {
+                "path": "taker_amounts.[]",
+                "fields": [
+                  {
+                    "path": "",
+                    "label": "Sell Token",
+                    "format": "tokenAmount",
+                    "params": {
+                      "tokenPath": "witness.taker_tokens.[_index]"
+                    }
+                  }
+                ]
+              },
+              {
+                "path": "maker_amounts.[]",
+                "fields": [
+                  {
+                    "path": "",
+                    "label": "Buy Token",
+                    "format": "tokenAmount",
+                    "params": {
+                      "tokenPath": "witness.maker_tokens.[_index]"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "path": "deadline",
+            "label": "Expiration",
+            "format": "date",
+            "params": { "encoding": "timestamp" }
+          }
+        ],
+        "excluded": [
+          "nonce",
+          "witness.partner_id",
+          "witness.maker_nonce",
+          "witness.maker_tokens",
+          "witness.taker_tokens",
+          "witness.commands",
+          "witness.hooksHash",
+          "witness.receiver"
+        ]
+      }
+    }
+  }
+}
