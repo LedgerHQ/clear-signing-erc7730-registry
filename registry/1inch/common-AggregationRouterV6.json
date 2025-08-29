@@ -25,6 +25,15 @@
       "expirationTime": { "label": "Expiration time", "format": "date", "params": { "encoding": "timestamp" } }
     },
     "formats": {
+      "permitAndCall(bytes permit, bytes action)": {
+        "$id": "permitAndCall",
+        "intent": "Execute with permit",
+        "fields": [
+          { "path": "action", "label": "Swap", "format": "calldata", "params": { "calleePath": "@.to" } }
+        ],
+        "required": ["action"],
+        "excluded": ["permit"]
+      },
       "swap(address executor, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags) desc, bytes data)": {
         "$id": "swap",
         "intent": "Swap",
