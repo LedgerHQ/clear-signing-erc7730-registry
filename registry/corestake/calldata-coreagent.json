@@ -5,9 +5,7 @@
       "abi": [
         {
           "outputs": [],
-          "inputs": [
-            { "name": "candidate", "internalType": "address", "type": "address" }
-          ],
+          "inputs": [{ "name": "candidate", "internalType": "address", "type": "address" }],
           "name": "delegateCoin",
           "stateMutability": "payable",
           "type": "function"
@@ -34,21 +32,10 @@
           "type": "function"
         }
       ],
-      "deployments": [
-        {
-          "chainId": 1116,
-          "address": "0x0000000000000000000000000000000000001011"
-        }
-      ]
+      "deployments": [{ "chainId": 1116, "address": "0x0000000000000000000000000000000000001011" }]
     }
   },
-  "metadata": {
-    "owner": "CoreDAO",
-    "info": {
-      "legalName": "CoreDAO CoreAgent Contract",
-      "url": "https://coredao.org/"
-    }
-  },
+  "metadata": { "owner": "CoreDAO", "info": { "legalName": "CoreDAO CoreAgent Contract", "url": "https://coredao.org/" } },
   "display": {
     "formats": {
       "delegateCoin(address)": {
@@ -72,11 +59,7 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           },
-          {
-            "path": "amount",
-            "label": "Amount to Unstake (in CORE)",
-            "format": "amount"
-          }
+          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
         ],
         "required": ["candidate", "amount"]
       },
@@ -95,11 +78,7 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           },
-          {
-            "path": "amount",
-            "label": "Amount to Unstake (in CORE)",
-            "format": "amount"
-          }
+          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
         ],
         "required": ["sourceCandidate", "targetCandidate", "amount"]
       }
