@@ -10,7 +10,7 @@
     "formats": {
       "setup(address[] _owners, uint256 _threshold, address to, bytes data, address fallbackHandler, address paymentToken, uint256 payment, address paymentReceiver)": {
         "$id": "setup",
-        "intent": "Create Safe",
+        "intent": "Setup Safe",
         "fields": [
           {
             "path": "_owners.[]",
@@ -55,7 +55,7 @@
       },
       "execTransaction(address to, uint256 value, bytes data, uint8 operation, uint256 safeTxGas, uint256 baseGas, uint256 gasPrice, address gasToken, address refundReceiver, bytes signatures)": {
         "$id": "execTransaction",
-        "intent": "Execute transaction",
+        "intent": "Multisig operation",
         "fields": [
           {
             "path": "data",
@@ -83,7 +83,7 @@
             "path": "@.from",
             "label": "Execution signer",
             "format": "addressName",
-            "params": { "types": ["contract"] }
+            "params": { "types": ["eoa"] }
           },
           {
             "path": "baseGas",
@@ -108,6 +108,98 @@
         ],
         "required": ["data", "operation", "baseGas", "gasPrice", "refundReceiver"],
         "excluded": ["safeTxGas", "signatures"]
+      },
+      "addOwnerWithThreshold(address owner, uint256 _threshold)": {
+        "$id": "addOwnerWithThreshold",
+        "intent": "Add signer",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Safe account",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },
+          {
+            "path": "owner",
+            "label": "Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"] }
+          },
+          {
+            "path": "_threshold",
+            "label": "New threshold",
+            "format": "raw"
+          }
+        ],
+        "required": ["owner", "_threshold"]
+      },
+      "removeOwner(address prevOwner, address owner, uint256 _threshold)": {
+        "$id": "removeOwner",
+        "intent": "Remove signer",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Safe account",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },
+          {
+            "path": "owner",
+            "label": "Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"] }
+          },
+          {
+            "path": "_threshold",
+            "label": "New threshold",
+            "format": "raw"
+          }
+        ],
+        "required": ["owner", "_threshold"],
+        "excluded": ["prevOwner"]
+      },
+      "swapOwner(address prevOwner, address oldOwner, address newOwner)": {
+        "$id": "swapOwner",
+        "intent": "Swap signer",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Safe account",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },
+          {
+            "path": "oldOwner",
+            "label": "Old signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"] }
+          },
+          {
+            "path": "newOwner",
+            "label": "New signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"] }
+          }
+        ],
+        "required": ["oldOwner", "newOwner"],
+        "excluded": ["prevOwner"]
+      },
+      "changeThreshold(uint256 _threshold)": {
+        "$id": "changeThreshold",
+        "intent": "Modify threshold",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Safe account",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          },          {
+            "path": "_threshold",
+            "label": "New threshold",
+            "format": "raw"
+          }
+        ],
+        "required": ["_threshold"]
       }
     }
   }

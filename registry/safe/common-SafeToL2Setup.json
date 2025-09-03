@@ -8,7 +8,7 @@
     "formats": {
       "setupToL2(address l2Singleton)": {
         "$id": "setupToL2",
-        "intent": "Create Safe",
+        "intent": "Setup Safe L2",
         "fields": [
           {
             "path": "l2Singleton",
