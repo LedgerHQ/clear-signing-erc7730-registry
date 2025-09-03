@@ -58,7 +58,7 @@
   "display": {
     "formats": {
       "SafeTx": {
-        "intent": "Execute transaction",
+        "intent": "Multisig transaction",
         "fields": [
           {
             "path": "data",
