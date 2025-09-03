@@ -114,12 +114,6 @@
         "intent": "Add signer",
         "fields": [
           {
-            "path": "@.to",
-            "label": "Safe account",
-            "format": "addressName",
-            "params": { "types": ["contract"] }
-          },
-          {
             "path": "owner",
             "label": "Signer",
             "format": "addressName",
@@ -137,12 +131,6 @@
         "$id": "removeOwner",
         "intent": "Remove signer",
         "fields": [
-          {
-            "path": "@.to",
-            "label": "Safe account",
-            "format": "addressName",
-            "params": { "types": ["contract"] }
-          },
           {
             "path": "owner",
             "label": "Signer",
@@ -162,12 +150,6 @@
         "$id": "swapOwner",
         "intent": "Swap signer",
         "fields": [
-          {
-            "path": "@.to",
-            "label": "Safe account",
-            "format": "addressName",
-            "params": { "types": ["contract"] }
-          },
           {
             "path": "oldOwner",
             "label": "Old signer",
@@ -189,11 +171,6 @@
         "intent": "Modify threshold",
         "fields": [
           {
-            "path": "@.to",
-            "label": "Safe account",
-            "format": "addressName",
-            "params": { "types": ["contract"] }
-          },          {
             "path": "_threshold",
             "label": "New threshold",
             "format": "raw"
