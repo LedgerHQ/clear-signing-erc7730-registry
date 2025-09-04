@@ -61,6 +61,11 @@
         "intent": "Multisig transaction",
         "fields": [
           {
+            "path": "operation",
+            "label": "Operation type",
+            "format": "raw"
+          },
+          {
             "path": "data",
             "label": "Transaction",
             "format": "calldata",
@@ -69,11 +74,6 @@
               "amountPath": "value",
               "spenderPath": "@.to"
             }
-          },
-          {
-            "path": "operation",
-            "label": "Operation",
-            "format": "raw"
           },
           {
             "path": "baseGas",
