@@ -58,18 +58,8 @@
         "intent": "Multisig operation",
         "fields": [
           {
-            "path": "data",
-            "label": "Transaction",
-            "format": "calldata",
-            "params": {
-              "calleePath": "to",
-              "amountPath": "value",
-              "spenderPath": "@.to"
-            }
-          },
-          {
             "path": "operation",
-            "label": "Operation",
+            "label": "Operation type",
             "format": "enum",
             "params": { "$ref": "$.metadata.enums.operation" }
           },
@@ -84,6 +74,16 @@
             "label": "Execution signer",
             "format": "addressName",
             "params": { "types": ["eoa"] }
+          },
+          {
+            "path": "data",
+            "label": "Transaction",
+            "format": "calldata",
+            "params": {
+              "calleePath": "to",
+              "amountPath": "value",
+              "spenderPath": "@.to"
+            }
           },
           {
             "path": "baseGas",
