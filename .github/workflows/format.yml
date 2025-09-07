@@ -25,7 +25,7 @@ jobs:
 
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Get date
         timeout-minutes: 10
