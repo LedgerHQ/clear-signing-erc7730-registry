@@ -1,0 +1,89 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "BatchExecutor",
+    "contract": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "callIndex",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "errorData",
+              "type": "bytes"
+            }
+          ],
+          "name": "BatchExecutionFailed",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "to",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "value",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "data",
+                  "type": "bytes"
+                }
+              ],
+              "internalType": "struct Call[]",
+              "name": "calls",
+              "type": "tuple[]"
+            }
+          ],
+          "name": "batchExecute",
+          "outputs": [],
+          "stateMutability": "payable",
+          "type": "function"
+        }
+      ],
+      "deployments": [
+        { "chainId": 137, "address": "0x60aA01971A2adC1D6b2b59B972fb47b2fEC095Fc" }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Ledger",
+    "info": { "url": "https://www.ledger.com", "legalName": "Ledger Multisig" }
+  },
+  "display": {
+    "formats": {
+      "0x1a833ee3": {
+        "$id": "batchExecute",
+        "intent": "sign batch transactions",
+        "fields": [
+          {
+            "path": "calls.[].data",
+            "label": "Transaction",
+            "format": "calldata",
+            "params": {
+              "calleePath": "calls.[].to",
+              "amountPath": "calls.[].value",
+              "spenderPath": "@.to"
+            }
+          }
+        ],
+        "required": ["calls"]
+      }
+    }
+  }
+}
