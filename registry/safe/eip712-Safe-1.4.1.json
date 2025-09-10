@@ -40,7 +40,7 @@
   "display": {
     "formats": {
       "SafeTx": {
-        "intent": "Multisig transaction",
+        "intent": "Safe",
         "fields": [
           {
             "path": "operation",
@@ -65,10 +65,12 @@
           {
             "path": "gasPrice",
             "label": "Gas price",
-            "format": "tokenAmount",
-            "params": {
-              "tokenPath": "gasToken"
-            }
+            "format": "raw"
+          },
+          {
+            "path": "gasToken",
+            "label": "Gas token",
+            "format": "raw"
           },
           {
             "path": "refundReceiver",
