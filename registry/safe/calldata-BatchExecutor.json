@@ -69,7 +69,7 @@
     "formats": {
       "0x1a833ee3": {
         "$id": "batchExecute",
-        "intent": "sign batch transactions",
+        "intent": "Batch transactions",
         "fields": [
           {
             "path": "calls.[].data",
