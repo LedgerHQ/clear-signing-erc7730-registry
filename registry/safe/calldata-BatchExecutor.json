@@ -77,8 +77,7 @@
             "format": "calldata",
             "params": {
               "calleePath": "calls.[].to",
-              "amountPath": "calls.[].value",
-              "spenderPath": "@.to"
+              "amountPath": "calls.[].value"
             }
           }
         ],
