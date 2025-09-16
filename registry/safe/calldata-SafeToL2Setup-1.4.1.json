@@ -7,6 +7,7 @@
       "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54",
       "deployments": [
         { "chainId": 1, "address": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54" },
+        { "chainId": 10, "address": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54" },
         { "chainId": 56, "address": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54" },
         { "chainId": 137, "address": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54" },
         { "chainId": 8453, "address": "0xBD89A1CE4DDe368FFAB0eC35506eEcE0b1fFdc54" },
