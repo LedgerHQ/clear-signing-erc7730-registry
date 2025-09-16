@@ -1,0 +1,31 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "metadata": {
+    "owner": "Safe Migration",
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2024-09-12T02:49:11Z" }
+  },
+  "display": {
+    "formats": {
+      "migrateSingleton()": {
+        "$id": "migrateSingleton",
+        "intent": "Migrate Safe singleton",
+        "fields": []
+      },
+      "migrateWithFallbackHandler()": {
+        "$id": "migrateWithFallbackHandler",
+        "intent": "Migrate Safe",
+        "fields": []
+      },
+      "migrateL2Singleton()": {
+        "$id": "migrateL2Singleton",
+        "intent": "Migrate Safe singleton L2",
+        "fields": []
+      },
+      "migrateL2WithFallbackHandler()": {
+        "$id": "migrateL2WithFallbackHandler",
+        "intent": "Migrate Safe L2",
+        "fields": []
+      }
+    }
+  }
+}
