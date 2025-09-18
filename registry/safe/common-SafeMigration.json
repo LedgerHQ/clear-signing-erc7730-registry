@@ -8,23 +8,51 @@
     "formats": {
       "migrateSingleton()": {
         "$id": "migrateSingleton",
-        "intent": "Migrate Safe singleton",
-        "fields": []
+        "intent": "Migrate Safe",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Migration contract",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          }
+        ]
       },
       "migrateWithFallbackHandler()": {
         "$id": "migrateWithFallbackHandler",
         "intent": "Migrate Safe",
-        "fields": []
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Migration contract",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          }
+        ]
       },
       "migrateL2Singleton()": {
         "$id": "migrateL2Singleton",
-        "intent": "Migrate Safe singleton L2",
-        "fields": []
+        "intent": "Migrate Safe L2",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Migration contract",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          }
+        ]
       },
       "migrateL2WithFallbackHandler()": {
         "$id": "migrateL2WithFallbackHandler",
         "intent": "Migrate Safe L2",
-        "fields": []
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Migration contract",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          }
+        ]
       }
     }
   }
