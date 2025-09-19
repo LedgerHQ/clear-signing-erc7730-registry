@@ -2,7 +2,7 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "metadata": {
     "owner": "Safe Proxy Factory",
-    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2021-05-25T02:50:20Z" }
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}" }
   },
   "display": {
     "formats": {
