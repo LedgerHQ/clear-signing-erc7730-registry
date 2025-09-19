@@ -2,7 +2,7 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "metadata": {
     "owner": "Safe",
-    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2024-09-12T02:40:59Z" }
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}" }
   },
   "display": {
     "formats": {
