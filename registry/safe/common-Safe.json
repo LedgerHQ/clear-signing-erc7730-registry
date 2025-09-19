@@ -2,7 +2,7 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "metadata": {
     "owner": "Safe",
-    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}", "deploymentDate": "2021-05-25T03:53:22Z" },
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}" },
     "enums": { "operation": { "0": "Call", "1": "Delegate Call" } },
     "constants": {"addressAsNull": "0x0000000000000000000000000000000000000000" }
   },
