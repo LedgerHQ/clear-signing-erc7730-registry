@@ -1,166 +1,722 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": "PoolInstance",
     "contract": {
-      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xef434e4573b90b6ecd4a00f4888381e4d0cc5ccd",
-      "deployments": [{ "chainId": 1, "address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2" }]
+      "deployments": [{ "chainId": 1, "address": "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2" }],
+      "abi": [
+        {
+          "type": "function",
+          "name": "approvePositionManager",
+          "inputs": [
+            { "name": "positionManager", "type": "address", "internalType": "address" },
+            { "name": "approve", "type": "bool", "internalType": "bool" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "borrow",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "interestRateMode", "type": "uint256", "internalType": "uint256" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "configureEModeCategory",
+          "inputs": [
+            { "name": "id", "type": "uint8", "internalType": "uint8" },
+            {
+              "name": "category",
+              "type": "tuple",
+              "internalType": "struct DataTypes.EModeCategoryBaseConfiguration",
+              "components": [
+                { "name": "ltv", "type": "uint16", "internalType": "uint16" },
+                { "name": "liquidationThreshold", "type": "uint16", "internalType": "uint16" },
+                { "name": "liquidationBonus", "type": "uint16", "internalType": "uint16" },
+                { "name": "label", "type": "string", "internalType": "string" }
+              ]
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "configureEModeCategoryBorrowableBitmap",
+          "inputs": [
+            { "name": "id", "type": "uint8", "internalType": "uint8" },
+            { "name": "borrowableBitmap", "type": "uint128", "internalType": "uint128" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "configureEModeCategoryCollateralBitmap",
+          "inputs": [
+            { "name": "id", "type": "uint8", "internalType": "uint8" },
+            { "name": "collateralBitmap", "type": "uint128", "internalType": "uint128" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "deposit",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "dropReserve",
+          "inputs": [{ "name": "asset", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "eliminateReserveDeficit",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "finalizeTransfer",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "from", "type": "address", "internalType": "address" },
+            { "name": "to", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "balanceFromBefore", "type": "uint256", "internalType": "uint256" },
+            { "name": "balanceToBefore", "type": "uint256", "internalType": "uint256" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "flashLoan",
+          "inputs": [
+            { "name": "receiverAddress", "type": "address", "internalType": "address" },
+            { "name": "assets", "type": "address[]", "internalType": "address[]" },
+            { "name": "amounts", "type": "uint256[]", "internalType": "uint256[]" },
+            { "name": "interestRateModes", "type": "uint256[]", "internalType": "uint256[]" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" },
+            { "name": "params", "type": "bytes", "internalType": "bytes" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "flashLoanSimple",
+          "inputs": [
+            { "name": "receiverAddress", "type": "address", "internalType": "address" },
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "params", "type": "bytes", "internalType": "bytes" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "initReserve",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "aTokenAddress", "type": "address", "internalType": "address" },
+            { "name": "variableDebtAddress", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "initialize",
+          "inputs": [{ "name": "provider", "type": "address", "internalType": "contract IPoolAddressesProvider" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "liquidationCall",
+          "inputs": [
+            { "name": "collateralAsset", "type": "address", "internalType": "address" },
+            { "name": "debtAsset", "type": "address", "internalType": "address" },
+            { "name": "borrower", "type": "address", "internalType": "address" },
+            { "name": "debtToCover", "type": "uint256", "internalType": "uint256" },
+            { "name": "receiveAToken", "type": "bool", "internalType": "bool" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "mintToTreasury",
+          "inputs": [{ "name": "assets", "type": "address[]", "internalType": "address[]" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "multicall",
+          "inputs": [{ "name": "data", "type": "bytes[]", "internalType": "bytes[]" }],
+          "outputs": [{ "name": "results", "type": "bytes[]", "internalType": "bytes[]" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "renouncePositionManagerRole",
+          "inputs": [{ "name": "user", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "repay",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "interestRateMode", "type": "uint256", "internalType": "uint256" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "repayWithATokens",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "interestRateMode", "type": "uint256", "internalType": "uint256" }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "repayWithPermit",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "interestRateMode", "type": "uint256", "internalType": "uint256" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" },
+            { "name": "deadline", "type": "uint256", "internalType": "uint256" },
+            { "name": "permitV", "type": "uint8", "internalType": "uint8" },
+            { "name": "permitR", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "permitS", "type": "bytes32", "internalType": "bytes32" }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "rescueTokens",
+          "inputs": [
+            { "name": "token", "type": "address", "internalType": "address" },
+            { "name": "to", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "resetIsolationModeTotalDebt",
+          "inputs": [{ "name": "asset", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setConfiguration",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            {
+              "name": "configuration",
+              "type": "tuple",
+              "internalType": "struct DataTypes.ReserveConfigurationMap",
+              "components": [{ "name": "data", "type": "uint256", "internalType": "uint256" }]
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setLiquidationGracePeriod",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "until", "type": "uint40", "internalType": "uint40" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUserEMode",
+          "inputs": [{ "name": "categoryId", "type": "uint8", "internalType": "uint8" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUserEModeOnBehalfOf",
+          "inputs": [
+            { "name": "categoryId", "type": "uint8", "internalType": "uint8" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUserUseReserveAsCollateral",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "useAsCollateral", "type": "bool", "internalType": "bool" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setUserUseReserveAsCollateralOnBehalfOf",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "useAsCollateral", "type": "bool", "internalType": "bool" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "supply",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "supplyWithPermit",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "onBehalfOf", "type": "address", "internalType": "address" },
+            { "name": "referralCode", "type": "uint16", "internalType": "uint16" },
+            { "name": "deadline", "type": "uint256", "internalType": "uint256" },
+            { "name": "permitV", "type": "uint8", "internalType": "uint8" },
+            { "name": "permitR", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "permitS", "type": "bytes32", "internalType": "bytes32" }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "syncIndexesState",
+          "inputs": [{ "name": "asset", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "syncRatesState",
+          "inputs": [{ "name": "asset", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "updateFlashloanPremium",
+          "inputs": [{ "name": "flashLoanPremium", "type": "uint128", "internalType": "uint128" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [
+            { "name": "asset", "type": "address", "internalType": "address" },
+            { "name": "amount", "type": "uint256", "internalType": "uint256" },
+            { "name": "to", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "admin",
+          "inputs": [],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "implementation",
+          "inputs": [],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "upgradeTo",
+          "inputs": [{ "name": "newImplementation", "type": "address", "internalType": "address" }],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "upgradeToAndCall",
+          "inputs": [
+            { "name": "newImplementation", "type": "address", "internalType": "address" },
+            { "name": "data", "type": "bytes", "internalType": "bytes" }
+          ],
+          "outputs": [],
+          "stateMutability": "payable"
+        }
+      ]
     }
   },
-  "metadata": {
-    "owner": "Aave",
-    "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2024-10-09T21:46:47Z" },
-    "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
-    "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
-  },
+  "metadata": {},
   "display": {
     "formats": {
-      "repay(address asset, uint256 amount, uint256 interestRateMode, address onBehalfOf)": {
-        "$id": "repay",
-        "intent": "Repay loan",
+      "approvePositionManager(address,bool)": {
         "fields": [
           {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to repay",
-            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "All" }
+            "label": "Position Manager",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.positionManager"
           },
+          { "label": "Approve", "format": "raw", "path": "#.approve" }
+        ]
+      },
+      "borrow(address,uint256,uint256,uint16,address)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Interest Rate Mode", "format": "raw", "path": "#.interestRateMode" },
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" },
           {
-            "path": "interestRateMode",
-            "format": "enum",
-            "label": "Interest rate mode",
-            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
+          }
+        ]
+      },
+      "configureEModeCategory(uint8,(uint16,uint16,uint16,string))": {
+        "fields": [
+          { "label": "Id", "format": "raw", "path": "#.id" },
+          {
+            "path": "#.category",
+            "fields": [
+              { "label": "Ltv", "format": "raw", "path": "ltv" },
+              { "label": "Liquidation Threshold", "format": "raw", "path": "liquidationThreshold" },
+              { "label": "Liquidation Bonus", "format": "raw", "path": "liquidationBonus" },
+              { "label": "Label", "format": "raw", "path": "label" }
+            ]
+          }
+        ]
+      },
+      "configureEModeCategoryBorrowableBitmap(uint8,uint128)": {
+        "fields": [
+          { "label": "Id", "format": "raw", "path": "#.id" },
+          { "label": "Borrowable Bitmap", "format": "raw", "path": "#.borrowableBitmap" }
+        ]
+      },
+      "configureEModeCategoryCollateralBitmap(uint8,uint128)": {
+        "fields": [
+          { "label": "Id", "format": "raw", "path": "#.id" },
+          { "label": "Collateral Bitmap", "format": "raw", "path": "#.collateralBitmap" }
+        ]
+      },
+      "deposit(address,uint256,address,uint16)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
           },
-          {
-            "path": "onBehalfOf",
-            "format": "addressName",
-            "label": "For debt holder",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "interestRateMode", "onBehalfOf"]
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" }
+        ]
       },
-      "repayWithPermit(address asset, uint256 amount, uint256 interestRateMode, address onBehalfOf, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
-        "$id": "repayWithPermit",
-        "intent": "Repay loan",
+      "dropReserve(address)": { "fields": [{ "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" }] },
+      "eliminateReserveDeficit(address,uint256)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" }
+        ]
+      },
+      "finalizeTransfer(address,address,address,uint256,uint256,uint256)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "From", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.from" },
+          { "label": "To", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.to" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Balance From Before", "format": "raw", "path": "#.balanceFromBefore" },
+          { "label": "Balance To Before", "format": "raw", "path": "#.balanceToBefore" }
+        ]
+      },
+      "flashLoan(address,address[],uint256[],uint256[],address,bytes,uint16)": {
         "fields": [
           {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to repay",
-            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "All" }
+            "label": "Receiver Address",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.receiverAddress"
           },
+          { "label": "Assets", "format": "addressName", "params": { "types": ["token"] }, "path": "#.assets.[]" },
+          { "label": "Amounts", "format": "amount", "path": "#.amounts.[]" },
+          { "label": "Interest Rate Modes", "format": "raw", "path": "#.interestRateModes.[]" },
           {
-            "path": "interestRateMode",
-            "format": "enum",
-            "label": "Interest rate mode",
-            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
           },
-          {
-            "path": "onBehalfOf",
-            "format": "addressName",
-            "label": "For debt holder",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "interestRateMode", "onBehalfOf"],
-        "excluded": ["deadline", "permitV", "permitR", "permitS"]
+          { "label": "Params", "format": "raw", "path": "#.params" },
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" }
+        ]
       },
-      "setUserUseReserveAsCollateral(address asset, bool useAsCollateral)": {
-        "intent": "Manage collateral",
+      "flashLoanSimple(address,address,uint256,bytes,uint16)": {
         "fields": [
           {
-            "path": "asset",
+            "label": "Receiver Address",
             "format": "addressName",
-            "label": "For asset",
-            "params": { "types": ["token"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.receiverAddress"
           },
-          { "path": "useAsCollateral", "format": "raw", "label": "Enable use as collateral" }
-        ],
-        "required": ["asset", "useAsCollateral"]
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Params", "format": "raw", "path": "#.params" },
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" }
+        ]
       },
-      "withdraw(address asset, uint256 amount, address to)": {
-        "intent": "Withdraw",
+      "initReserve(address,address,address)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "A Token Address", "format": "addressName", "params": { "types": ["token"] }, "path": "#.aTokenAddress" },
+          {
+            "label": "Variable Debt Address",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.variableDebtAddress"
+          }
+        ]
+      },
+      "initialize(address)": {
         "fields": [
           {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to withdraw",
-            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "Max" }
+            "label": "Provider",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.provider"
+          }
+        ]
+      },
+      "liquidationCall(address,address,address,uint256,bool)": {
+        "fields": [
+          { "label": "Collateral Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.collateralAsset" },
+          { "label": "Debt Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.debtAsset" },
+          {
+            "label": "Borrower",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.borrower"
           },
-          {
-            "path": "to",
-            "format": "addressName",
-            "label": "To recipient",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "to"]
+          { "label": "Debt To Cover", "format": "raw", "path": "#.debtToCover" },
+          { "label": "Receive A Token", "format": "raw", "path": "#.receiveAToken" }
+        ]
       },
-      "borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)": {
-        "intent": "Borrow",
+      "mintToTreasury(address[])": { "fields": [{ "label": "Assets", "format": "addressName", "params": { "types": ["token"] }, "path": "#.assets.[]" }] },
+      "multicall(bytes[])": { "fields": [{ "label": "Data", "format": "raw", "path": "#.data.[]" }] },
+      "renouncePositionManagerRole(address)": {
         "fields": [
-          { "path": "amount", "format": "tokenAmount", "label": "Amount to borrow", "params": { "tokenPath": "asset" } },
           {
-            "path": "interestRateMode",
-            "format": "enum",
-            "label": "Interest Rate mode",
-            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+            "label": "User",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.user"
+          }
+        ]
+      },
+      "repay(address,uint256,uint256,address)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Interest Rate Mode", "format": "raw", "path": "#.interestRateMode" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
+          }
+        ]
+      },
+      "repayWithATokens(address,uint256,uint256)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Interest Rate Mode", "format": "raw", "path": "#.interestRateMode" }
+        ]
+      },
+      "repayWithPermit(address,uint256,uint256,address,uint256,uint8,bytes32,bytes32)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "Interest Rate Mode", "format": "raw", "path": "#.interestRateMode" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
           },
-          {
-            "path": "onBehalfOf",
-            "format": "addressName",
-            "label": "Debtor",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "onBehalfOf", "interestRateMode"],
-        "excluded": ["referralCode"]
+          { "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.deadline" },
+          { "label": "Permit V", "format": "raw", "path": "#.permitV" },
+          { "label": "Permit R", "format": "raw", "path": "#.permitR" },
+          { "label": "Permit S", "format": "raw", "path": "#.permitS" }
+        ]
       },
-      "deposit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)": {
-        "$id": "deposit",
-        "intent": "Supply",
+      "rescueTokens(address,address,uint256)": {
         "fields": [
-          { "path": "amount", "format": "tokenAmount", "label": "Amount to supply", "params": { "tokenPath": "asset" } },
-          {
-            "path": "onBehalfOf",
-            "format": "addressName",
-            "label": "Collateral recipient",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "onBehalfOf"],
-        "excluded": ["referralCode"]
+          { "label": "Token", "format": "addressName", "params": { "types": ["token"] }, "path": "#.token" },
+          { "label": "To", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.to" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" }
+        ]
       },
-      "supply(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)": {
-        "$id": "supply",
-        "intent": "Supply",
+      "resetIsolationModeTotalDebt(address)": { "fields": [{ "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" }] },
+      "setConfiguration(address,(uint256))": {
         "fields": [
-          { "path": "amount", "format": "tokenAmount", "label": "Amount to supply", "params": { "tokenPath": "asset" } },
-          {
-            "path": "onBehalfOf",
-            "format": "addressName",
-            "label": "Collateral recipient",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["amount", "onBehalfOf"],
-        "excluded": ["referralCode"]
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "path": "#.configuration", "fields": [{ "label": "Data", "format": "raw", "path": "data" }] }
+        ]
       },
-      "supplyWithPermit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
-        "$id": "supplyWithPermit",
-        "intent": "Supply",
+      "setLiquidationGracePeriod(address,uint40)": {
         "fields": [
-          { "path": "amount", "format": "tokenAmount", "label": "Amount to supply", "params": { "tokenPath": "asset" } },
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Until", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.until" }
+        ]
+      },
+      "setUserEMode(uint8)": { "fields": [{ "label": "Category Id", "format": "raw", "path": "#.categoryId" }] },
+      "setUserEModeOnBehalfOf(uint8,address)": {
+        "fields": [
+          { "label": "Category Id", "format": "raw", "path": "#.categoryId" },
           {
-            "path": "onBehalfOf",
+            "label": "On Behalf Of",
             "format": "addressName",
-            "label": "Collateral recipient",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
           }
-        ],
-        "required": ["amount", "onBehalfOf"],
-        "excluded": ["referralCode", "deadline", "permitV", "permitR", "permitS"]
+        ]
+      },
+      "setUserUseReserveAsCollateral(address,bool)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Use As Collateral", "format": "raw", "path": "#.useAsCollateral" }
+        ]
+      },
+      "setUserUseReserveAsCollateralOnBehalfOf(address,bool,address)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Use As Collateral", "format": "raw", "path": "#.useAsCollateral" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
+          }
+        ]
+      },
+      "supply(address,uint256,address,uint16)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
+          },
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" }
+        ]
+      },
+      "supplyWithPermit(address,uint256,address,uint16,uint256,uint8,bytes32,bytes32)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          {
+            "label": "On Behalf Of",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.onBehalfOf"
+          },
+          { "label": "Referral Code", "format": "raw", "path": "#.referralCode" },
+          { "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.deadline" },
+          { "label": "Permit V", "format": "raw", "path": "#.permitV" },
+          { "label": "Permit R", "format": "raw", "path": "#.permitR" },
+          { "label": "Permit S", "format": "raw", "path": "#.permitS" }
+        ]
+      },
+      "syncIndexesState(address)": { "fields": [{ "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" }] },
+      "syncRatesState(address)": { "fields": [{ "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" }] },
+      "updateFlashloanPremium(uint128)": { "fields": [{ "label": "Flash Loan Premium", "format": "raw", "path": "#.flashLoanPremium" }] },
+      "withdraw(address,uint256,address)": {
+        "fields": [
+          { "label": "Asset", "format": "addressName", "params": { "types": ["token"] }, "path": "#.asset" },
+          { "label": "Amount", "format": "amount", "path": "#.amount" },
+          { "label": "To", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.to" }
+        ]
+      },
+      "upgradeTo(address)": {
+        "fields": [
+          {
+            "label": "New Implementation",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.newImplementation"
+          }
+        ]
+      },
+      "upgradeToAndCall(address,bytes)": {
+        "fields": [
+          {
+            "label": "New Implementation",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+            "path": "#.newImplementation"
+          },
+          { "label": "Data", "format": "raw", "path": "#.data" }
+        ]
       }
     }
   }
