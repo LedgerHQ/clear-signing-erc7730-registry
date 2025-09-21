@@ -1,5 +1,5 @@
 {
-  "$schema": null,
+  "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
     "$id": "ETH Staking Vault",
     "contract": {
@@ -143,87 +143,59 @@
   "display": {
     "formats": {
       "claimExitedAssets(uint256,uint256,uint256)": {
-        "$id": null,
         "intent": "claim exited assets",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Position Ticket", "format": "raw", "params": null, "path": "#.positionTicket", "value": null },
-          {
-            "$id": null,
-            "label": "Timestamp",
-            "format": "date",
-            "params": { "encoding": "timestamp" },
-            "path": "#.timestamp",
-            "value": null
-          },
-          { "$id": null, "label": "Exit Queue Index", "format": "raw", "params": null, "path": "#.exitQueueIndex", "value": null }
+          { "label": "Position Ticket", "format": "raw", "path": "#.positionTicket" },
+          { "label": "Timestamp", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.timestamp" },
+          { "label": "Exit Queue Index", "format": "raw", "path": "#.exitQueueIndex" }
         ],
-        "required": ["#.positionTicket", "#.timestamp", "#.exitQueueIndex"],
-        "excluded": null
+        "required": ["#.positionTicket", "#.timestamp", "#.exitQueueIndex"]
       },
       "deposit(address,address)": {
-        "$id": null,
         "intent": "deposit and stake ETH",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Receiver",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
-            "path": "#.receiver",
-            "value": null
+            "path": "#.receiver"
           }
         ],
         "required": ["#.receiver"],
         "excluded": ["#.referrer"]
       },
       "enterExitQueue(uint256,address)": {
-        "$id": null,
         "intent": "enter exit queue",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Shares to lock", "format": "raw", "params": null, "path": "#.shares", "value": null },
+          { "label": "Shares to lock", "format": "raw", "path": "#.shares" },
           {
-            "$id": null,
             "label": "Assets Receiver",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
-            "path": "#.receiver",
-            "value": null
+            "path": "#.receiver"
           }
         ],
-        "required": ["#.shares", "#.receiver"],
-        "excluded": null
+        "required": ["#.shares", "#.receiver"]
       },
       "multicall(bytes[])": {
-        "$id": null,
-        "intent": "update vault's internal state",
-        "screens": null,
-        "fields": [],
-        "required": null,
-        "excluded": ["#.data.[]"]
+        "intent": "call multiple methods",
+        "fields": [{ "label": "Call", "path": "#.data.[]", "format": "calldata", "params": { "calleePath": "@.to" } }],
+        "required": ["#.data.[]"]
       },
       "updateState((bytes32,int160,uint160,bytes32[]))": {
-        "$id": null,
         "intent": "update vault's internal state",
-        "screens": null,
         "fields": [],
         "required": [],
         "excluded": ["#.harvestParams.rewardsRoot", "#.harvestParams.reward", "#.harvestParams.unlockedMevReward", "#.harvestParams.proof.[]"]
       },
       "updateStateAndDeposit(address,address,(bytes32,int160,uint160,bytes32[]))": {
-        "$id": null,
         "intent": "deposit and stake ETH",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Receiver",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
-            "path": "#.receiver",
-            "value": null
+            "path": "#.receiver"
           }
         ],
         "required": ["#.receiver"],
