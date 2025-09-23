@@ -914,7 +914,7 @@
                 "$id": null,
                 "label": "The Vault cumulative reward earned since the start",
                 "format": "amount",
-                "params": {},
+                "params": null,
                 "path": "reward",
                 "value": null
               },
@@ -922,7 +922,7 @@
                 "$id": null,
                 "label": "Cumulative execution reward",
                 "format": "amount",
-                "params": {},
+                "params": null,
                 "path": "unlockedMevReward",
                 "value": null
               },
@@ -990,7 +990,7 @@
             "$id": null,
             "label": "Amount of shares to exit",
             "format": "amount",
-            "params": {},
+            "params": null,
             "path": "#.shares",
             "value": null
           },

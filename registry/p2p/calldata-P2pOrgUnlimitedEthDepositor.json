@@ -603,7 +603,7 @@
             "$id": null,
             "label": "Validator withdrawal credentials",
             "format": "raw",
-            "params": {},
+            "params": null,
             "path": "#._eth2WithdrawalCredentials",
             "value": null
           },
