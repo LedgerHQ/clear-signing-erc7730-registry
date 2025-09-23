@@ -108,30 +108,22 @@
             "path": "safeTxHash",
             "label": "Safe TX hash",
             "format": "raw"
-          },
-          {
-            "path": "totp",
-            "label": "TOTP",
-            "format": "raw"
           }
         ],
-        "required": ["safeTxHash", "totp"]
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
       },
       "Delegate": {
-        "intent": "Add proposer",
+        "intent": "Add or remove proposer",
         "fields": [
           {
             "path": "delegateAddress",
             "label": "Proposer address",
             "format": "raw"
-          },
-          {
-            "path": "totp",
-            "label": "TOTP",
-            "format": "raw"
           }
         ],
-        "required": ["delegateAddress", "totp"]
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
       }
     }
   }
