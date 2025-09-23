@@ -1,0 +1,1014 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "NativeTokenVault",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xb72668d6ff7a0e318f83097a754c6aed0f8af034"
+        },
+        {
+          "chainId": 560048,
+          "address": "0x8f73c1ce7fe0e17f45b317b33620924a94256fbb"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "osTokenPositions",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "shares",
+              "type": "uint128",
+              "internalType": "uint128",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "burnOsToken",
+          "inputs": [
+            {
+              "name": "osTokenShares",
+              "type": "uint128",
+              "internalType": "uint128",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "assets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mintOsToken",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "osTokenShares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "referrer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "assets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "convertToAssets",
+          "inputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "assets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getExitQueueIndex",
+          "inputs": [
+            {
+              "name": "positionTicket",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "int256",
+              "internalType": "int256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "calculateExitedAssets",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "positionTicket",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "timestamp",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "exitQueueIndex",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "leftTickets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "exitedTickets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "exitedAssets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "claimExitedAssets",
+          "inputs": [
+            {
+              "name": "positionTicket",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "timestamp",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "exitQueueIndex",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "newPositionTicket",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "claimedShares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "claimedAssets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "updateStateAndDeposit",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "referrer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "harvestParams",
+              "type": "tuple",
+              "internalType": "struct IKeeperRewards.HarvestParams",
+              "components": [
+                {
+                  "name": "rewardsRoot",
+                  "type": "bytes32",
+                  "internalType": "bytes32",
+                  "components": null
+                },
+                {
+                  "name": "reward",
+                  "type": "int160",
+                  "internalType": "int160",
+                  "components": null
+                },
+                {
+                  "name": "unlockedMevReward",
+                  "type": "uint160",
+                  "internalType": "uint160",
+                  "components": null
+                },
+                {
+                  "name": "proof",
+                  "type": "bytes32[]",
+                  "internalType": "bytes32[]",
+                  "components": null
+                }
+              ],
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "deposit",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "referrer",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "convertToShares",
+          "inputs": [
+            {
+              "name": "assets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "enterExitQueue",
+          "inputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "positionTicket",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeem",
+          "inputs": [
+            {
+              "name": "shares",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "assets",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setValidatorsRoot",
+          "inputs": [
+            {
+              "name": "_validatorsRoot",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "multicall",
+          "inputs": [
+            {
+              "name": "data",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "results",
+              "type": "bytes[]",
+              "internalType": "bytes[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getShares",
+          "inputs": [
+            {
+              "name": "account",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "updateState",
+          "inputs": [
+            {
+              "name": "harvestParams",
+              "type": "tuple",
+              "internalType": "struct IKeeperRewards.HarvestParams",
+              "components": [
+                {
+                  "name": "rewardsRoot",
+                  "type": "bytes32",
+                  "internalType": "bytes32",
+                  "components": null
+                },
+                {
+                  "name": "reward",
+                  "type": "int160",
+                  "internalType": "int160",
+                  "components": null
+                },
+                {
+                  "name": "unlockedMevReward",
+                  "type": "uint160",
+                  "internalType": "uint160",
+                  "components": null
+                },
+                {
+                  "name": "proof",
+                  "type": "bytes32[]",
+                  "internalType": "bytes32[]",
+                  "components": null
+                }
+              ],
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setMetadata",
+          "inputs": [
+            {
+              "name": "metadataIpfsHash",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setFeeRecipient",
+          "inputs": [
+            {
+              "name": "_feeRecipient",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "admin",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "keysManager",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setKeysManager",
+          "inputs": [
+            {
+              "name": "_keysManager",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "version",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint8",
+              "internalType": "uint8",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "pure",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "vaultId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "pure",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "upgradeToAndCall",
+          "inputs": [
+            {
+              "name": "newImplementation",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "data",
+              "type": "bytes",
+              "internalType": "bytes",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setValidatorsManager",
+          "inputs": [
+            {
+              "name": "_validatorsManager",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "p2p",
+    "info": {
+      "legalName": "P2P Staking",
+      "url": "https://www.p2p.org/"
+    }
+  },
+  "display": {
+    "formats": {
+      "deposit(address,address)": {
+        "$id": null,
+        "intent": "Deposit ETH with p2p.org pooled staking",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Client address",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": null
+            },
+            "path": "#.receiver",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Referrer address",
+            "format": "addressName",
+            "params": {
+              "types": ["contract", "eoa", "wallet"],
+              "sources": null
+            },
+            "path": "#.referrer",
+            "value": null
+          }
+        ],
+        "required": ["#.receiver"],
+        "excluded": null
+      },
+      "updateStateAndDeposit(address,address,(bytes32,int160,uint160,bytes32[]))": {
+        "$id": null,
+        "intent": "Deposit ETH with p2p.org pooled staking",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Client address",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": null
+            },
+            "path": "#.receiver",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Referrer address",
+            "format": "addressName",
+            "params": {
+              "types": ["wallet", "eoa", "contract"],
+              "sources": null
+            },
+            "path": "#.referrer",
+            "value": null
+          },
+          {
+            "path": "#.harvestParams",
+            "value": null,
+            "fields": [
+              {
+                "$id": null,
+                "label": "Rewards merkle root",
+                "format": "raw",
+                "params": null,
+                "path": "rewardsRoot",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "The Vault cumulative reward earned since the start",
+                "format": "amount",
+                "params": {},
+                "path": "reward",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "Cumulative execution reward",
+                "format": "amount",
+                "params": {},
+                "path": "unlockedMevReward",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "The proof to verify that reward is correct",
+                "format": "raw",
+                "params": null,
+                "path": "proof.[]",
+                "value": null
+              }
+            ]
+          }
+        ],
+        "required": [
+          "#.receiver",
+          "#.referrer",
+          "#.harvestParamsrewardsRoot",
+          "#.harvestParamsreward",
+          "#.harvestParamsunlockedMevReward"
+        ],
+        "excluded": null
+      },
+      "claimExitedAssets(uint256,uint256,uint256)": {
+        "$id": null,
+        "intent": "Claim exited assets from pooled staking at p2p.org",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "ID of position to claim",
+            "format": "raw",
+            "params": null,
+            "path": "#.positionTicket",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Timestamp of position",
+            "format": "date",
+            "params": {
+              "encoding": "timestamp"
+            },
+            "path": "#.timestamp",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Exit Queue Index",
+            "format": "raw",
+            "params": null,
+            "path": "#.exitQueueIndex",
+            "value": null
+          }
+        ],
+        "required": ["#.positionTicket", "#.timestamp"],
+        "excluded": null
+      },
+      "enterExitQueue(uint256,address)": {
+        "$id": null,
+        "intent": "Initiate exit of funds from p2p.org pooled staking",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Amount of shares to exit",
+            "format": "amount",
+            "params": {},
+            "path": "#.shares",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Client address",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"],
+              "sources": null
+            },
+            "path": "#.receiver",
+            "value": null
+          }
+        ],
+        "required": ["#.shares", "#.receiver"],
+        "excluded": null
+      }
+    }
+  }
+}
