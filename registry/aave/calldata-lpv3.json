@@ -22,8 +22,12 @@
           "address": "0xc47b8C00b0f69a36fa203Ffeac0334874574a8Ac"
         },
         {
-          "chainId": 1088,
+          "chainId": 59144,
           "address": "0xc47b8C00b0f69a36fa203Ffeac0334874574a8Ac"
+        },
+        {
+          "chainId": 1088,
+          "address": "0x90df02551bB792286e8D4f13E0e357b4Bf1D6a57"
         },
         {
           "chainId": 146,
