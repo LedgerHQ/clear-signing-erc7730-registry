@@ -5,32 +5,17 @@
     "contract": {
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json",
       "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9"
-        },
-        {
-          "chainId": 137,
-          "address": "0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf"
-        },
-        {
-          "chainId": 43114,
-          "address": "0x4F01AeD16D97E3aB5ab2B501154DC9bb0F1A5A2C"
-        }
+        { "chainId": 1, "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9" },
+        { "chainId": 137, "address": "0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf" },
+        { "chainId": 43114, "address": "0x4F01AeD16D97E3aB5ab2B501154DC9bb0F1A5A2C" }
       ]
     }
   },
   "metadata": {
     "owner": "Aave",
-    "info": {
-      "url": "https://aave.com",
-      "legalName": "Aave DAO",
-      "deploymentDate": "2020-11-30T09:25:48Z"
-    },
+    "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2020-11-30T09:25:48Z" },
     "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
-    "constants": {
-      "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-    }
+    "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
   },
   "display": {
     "formats": {
@@ -42,11 +27,7 @@
             "path": "amount",
             "format": "tokenAmount",
             "label": "Amount to repay",
-            "params": {
-              "tokenPath": "asset",
-              "threshold": "$.metadata.constants.max",
-              "message": "All"
-            }
+            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "All" }
           },
           {
             "path": "rateMode",
@@ -72,11 +53,7 @@
             "label": "For asset",
             "params": { "types": ["token"], "sources": ["local", "ens"] }
           },
-          {
-            "path": "useAsCollateral",
-            "format": "raw",
-            "label": "Enable use as collateral"
-          }
+          { "path": "useAsCollateral", "format": "raw", "label": "Enable use as collateral" }
         ],
         "required": ["asset", "useAsCollateral"]
       },
@@ -87,11 +64,7 @@
             "path": "amount",
             "format": "tokenAmount",
             "label": "Amount to withdraw",
-            "params": {
-              "tokenPath": "asset",
-              "threshold": "$.metadata.constants.max",
-              "message": "Max"
-            }
+            "params": { "tokenPath": "asset", "threshold": "$.metadata.constants.max", "message": "Max" }
           },
           {
             "path": "to",
@@ -123,12 +96,7 @@
       "borrow(address,uint256,uint256,uint16,address)": {
         "intent": "Borrow",
         "fields": [
-          {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to borrow",
-            "params": { "tokenPath": "asset" }
-          },
+          { "path": "amount", "format": "tokenAmount", "label": "Amount to borrow", "params": { "tokenPath": "asset" } },
           {
             "path": "interestRateMode",
             "format": "enum",
@@ -148,12 +116,7 @@
         "$id": "deposit",
         "intent": "Supply",
         "fields": [
-          {
-            "path": "amount",
-            "format": "tokenAmount",
-            "label": "Amount to supply",
-            "params": { "tokenPath": "asset" }
-          },
+          { "path": "amount", "format": "tokenAmount", "label": "Amount to supply", "params": { "tokenPath": "asset" } },
           {
             "path": "onBehalfOf",
             "format": "addressName",

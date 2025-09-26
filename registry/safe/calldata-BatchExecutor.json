@@ -4,23 +4,11 @@
     "$id": "BatchExecutor",
     "contract": {
       "abi": [
-        {
-          "inputs": [],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
+        { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
         {
           "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "callIndex",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bytes",
-              "name": "errorData",
-              "type": "bytes"
-            }
+            { "internalType": "uint256", "name": "callIndex", "type": "uint256" },
+            { "internalType": "bytes", "name": "errorData", "type": "bytes" }
           ],
           "name": "BatchExecutionFailed",
           "type": "error"
@@ -29,21 +17,9 @@
           "inputs": [
             {
               "components": [
-                {
-                  "internalType": "address",
-                  "name": "to",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "value",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "bytes",
-                  "name": "data",
-                  "type": "bytes"
-                }
+                { "internalType": "address", "name": "to", "type": "address" },
+                { "internalType": "uint256", "name": "value", "type": "uint256" },
+                { "internalType": "bytes", "name": "data", "type": "bytes" }
               ],
               "internalType": "struct Call[]",
               "name": "calls",
@@ -56,15 +32,10 @@
           "type": "function"
         }
       ],
-      "deployments": [
-        { "chainId": 137, "address": "0x60aA01971A2adC1D6b2b59B972fb47b2fEC095Fc" }
-      ]
+      "deployments": [{ "chainId": 137, "address": "0x60aA01971A2adC1D6b2b59B972fb47b2fEC095Fc" }]
     }
   },
-  "metadata": {
-    "owner": "Ledger",
-    "info": { "url": "https://www.ledger.com", "legalName": "Ledger Multisig" }
-  },
+  "metadata": { "owner": "Ledger", "info": { "url": "https://www.ledger.com", "legalName": "Ledger Multisig" } },
   "display": {
     "formats": {
       "0x1a833ee3": {
@@ -75,10 +46,7 @@
             "path": "calls.[].data",
             "label": "Transaction",
             "format": "calldata",
-            "params": {
-              "calleePath": "calls.[].to",
-              "amountPath": "calls.[].value"
-            }
+            "params": { "calleePath": "calls.[].to", "amountPath": "calls.[].value" }
           }
         ],
         "required": ["calls"]
