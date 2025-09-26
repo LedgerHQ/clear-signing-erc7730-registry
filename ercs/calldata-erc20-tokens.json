@@ -29,12 +29,7 @@
       "transfer(address,uint256)": {
         "intent": "Send",
         "fields": [
-          {
-            "path": "_value",
-            "label": "Amount",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "@.to" }
-          },
+          { "path": "_value", "label": "Amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
           { "path": "_to", "label": "To", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } }
         ],
         "required": ["_to", "_value"]
@@ -42,20 +37,12 @@
       "approve(address,uint256)": {
         "intent": "Approve",
         "fields": [
-          {
-            "path": "_spender",
-            "label": "Spender",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "path": "_spender", "label": "Spender", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           {
             "path": "_value",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": {
-              "tokenPath": "@.to",
-              "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000"
-            }
+            "params": { "tokenPath": "@.to", "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000" }
           }
         ],
         "required": ["_spender", "_value"]
