@@ -12,7 +12,14 @@
         { "chainId": 137, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" },
         { "chainId": 8453, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" },
         { "chainId": 42161, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" },
-        { "chainId": 11155111, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" }
+        { "chainId": 11155111, "address": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2" },
+        { "chainId": 1, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 10, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 56, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 137, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 8453, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 42161, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" },
+        { "chainId": 11155111, "address": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC" }
       ]
     }
   },
