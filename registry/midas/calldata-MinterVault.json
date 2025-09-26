@@ -34,6 +34,7 @@
         { "chainId": 1, "address": "0x30aCCEeDFf97A3fe11aB52EE7425Af4589338C06" },
         { "chainId": 1, "address": "0x5E154946561AEA4E750AAc6DeaD23D37e00E47f6" },
         { "chainId": 1, "address": "0x52e808bD3496c69c705028a258aEe0a6E1a5b35D" },
+        { "chainId": 1, "address": "0xd252EB9d448dB3A46d9c1476A7eb45E5c0CED7C2" },
         { "chainId": 30, "address": "0xf454A52DA2157686Ef99702C0C19c0E8D66bC03c" },
         { "chainId": 30, "address": "0x79A15707E2766d486681569Bd1041821f5e32998" },
         { "chainId": 999, "address": "0xbE8A4f1a312b94A712F8E5367B02ae6E378E6F19" },
@@ -1153,12 +1154,12 @@
     "formats": {
       "depositInstant(address,uint256,uint256,bytes32,address)": {
         "$id": null,
-        "intent": "Instant Buy",
+        "intent": "instantly buy",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Token In",
+            "label": "You pay with",
             "format": "addressName",
             "params": { "types": ["token"], "sources": null },
             "path": "#.tokenIn",
@@ -1166,7 +1167,7 @@
           },
           {
             "$id": null,
-            "label": "Amount In",
+            "label": "Amount",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.amountToken",
@@ -1174,7 +1175,7 @@
           },
           {
             "$id": null,
-            "label": "Min. To Receive",
+            "label": "Slippage",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.minReceiveAmount",
@@ -1182,7 +1183,7 @@
           },
           {
             "$id": null,
-            "label": "Tokens Recipient",
+            "label": "Receiver",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#.recipient",
@@ -1194,12 +1195,12 @@
       },
       "depositInstant(address,uint256,uint256,bytes32)": {
         "$id": null,
-        "intent": "Instant Buy",
+        "intent": "instantly buy",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Token In",
+            "label": "You pay with",
             "format": "addressName",
             "params": { "types": ["token"], "sources": null },
             "path": "#.tokenIn",
@@ -1207,7 +1208,7 @@
           },
           {
             "$id": null,
-            "label": "Amount In",
+            "label": "Amount",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.amountToken",
@@ -1215,7 +1216,7 @@
           },
           {
             "$id": null,
-            "label": "Min. To Receive",
+            "label": "Slippage",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.minReceiveAmount",
@@ -1227,12 +1228,12 @@
       },
       "depositRequest(address,uint256,bytes32)": {
         "$id": null,
-        "intent": "Buy Request",
+        "intent": "request buying",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Token In",
+            "label": "You pay with",
             "format": "addressName",
             "params": { "types": ["token"], "sources": null },
             "path": "#.tokenIn",
@@ -1240,7 +1241,7 @@
           },
           {
             "$id": null,
-            "label": "Amount In",
+            "label": "Amount",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.amountToken",
@@ -1252,12 +1253,12 @@
       },
       "depositRequest(address,uint256,bytes32,address)": {
         "$id": null,
-        "intent": "Buy Request",
+        "intent": "request buying",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Token In",
+            "label": "You pay with",
             "format": "addressName",
             "params": { "types": ["token"], "sources": null },
             "path": "#.tokenIn",
@@ -1265,7 +1266,7 @@
           },
           {
             "$id": null,
-            "label": "Amount In",
+            "label": "Amount",
             "format": "unit",
             "params": { "base": null, "decimals": "18", "prefix": null },
             "path": "#.amountToken",
@@ -1273,7 +1274,7 @@
           },
           {
             "$id": null,
-            "label": "Tokens Recipient",
+            "label": "Receiver",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#.recipient",
