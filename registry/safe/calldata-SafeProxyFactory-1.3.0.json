@@ -28,14 +28,7 @@
       "createProxyWithCallback(address _singleton, bytes initializer, uint256 saltNonce, address callback)": {
         "$id": "createProxyWithCallback",
         "intent": "Create Safe",
-        "fields": [
-          {
-            "path": "initializer",
-            "format": "calldata",
-            "label": "Account setup",
-            "params": { "calleePath": "_singleton" }
-          }
-        ],
+        "fields": [{ "path": "initializer", "format": "calldata", "label": "Account setup", "params": { "calleePath": "_singleton" } }],
         "required": ["data"],
         "excluded": ["saltNonce", "callback"]
       }
