@@ -53,6 +53,36 @@
               { "type": "uint256", "name": "totp" }
             ]
           }
+        },
+        {
+          "primaryType": "AddProposer",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "AddProposer": [
+              { "type": "address", "name": "delegateAddress" },
+              { "type": "uint256", "name": "totp" }
+            ]
+          }
+        },
+        {
+          "primaryType": "RemoveProposer",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "RemoveProposer": [
+              { "type": "address", "name": "delegateAddress" },
+              { "type": "uint256", "name": "totp" }
+            ]
+          }
         }
       ]
     }
@@ -115,6 +145,30 @@
       },
       "Delegate": {
         "intent": "Add or remove proposer",
+        "fields": [
+          {
+            "path": "delegateAddress",
+            "label": "Proposer address",
+            "format": "raw"
+          }
+        ],
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
+      },
+      "AddProposer": {
+        "intent": "Add proposer",
+        "fields": [
+          {
+            "path": "delegateAddress",
+            "label": "Proposer address",
+            "format": "raw"
+          }
+        ],
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
+      },
+      "RemoveProposer": {
+        "intent": "Remove proposer",
         "fields": [
           {
             "path": "delegateAddress",
