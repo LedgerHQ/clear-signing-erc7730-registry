@@ -1156,133 +1156,71 @@
   "display": {
     "formats": {
       "depositInstant(address,uint256,uint256,bytes32,address)": {
-        "$id": null,
         "intent": "instantly buy",
-        "screens": null,
         "fields": [
+          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {
-            "$id": null,
-            "label": "You pay with",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenIn",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountToken",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountToken"
           },
           {
-            "$id": null,
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.minReceiveAmount",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
           },
-          {
-            "$id": null,
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": null },
-            "path": "#.recipient",
-            "value": null
-          }
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
         ],
         "required": ["#.tokenIn", "#.amountToken", "#.minReceiveAmount", "#.recipient"],
         "excluded": ["#.referrerId"]
       },
       "depositInstant(address,uint256,uint256,bytes32)": {
-        "$id": null,
         "intent": "instantly buy",
-        "screens": null,
         "fields": [
+          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {
-            "$id": null,
-            "label": "You pay with",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenIn",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountToken",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountToken"
           },
           {
-            "$id": null,
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.minReceiveAmount",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
           }
         ],
         "required": ["#.tokenIn", "#.amountToken", "#.minReceiveAmount"],
         "excluded": ["#.referrerId"]
       },
       "depositRequest(address,uint256,bytes32)": {
-        "$id": null,
         "intent": "request buying",
-        "screens": null,
         "fields": [
+          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {
-            "$id": null,
-            "label": "You pay with",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenIn",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountToken",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountToken"
           }
         ],
         "required": ["#.tokenIn", "#.amountToken"],
         "excluded": ["#.referrerId"]
       },
       "depositRequest(address,uint256,bytes32,address)": {
-        "$id": null,
         "intent": "request buying",
-        "screens": null,
         "fields": [
+          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {
-            "$id": null,
-            "label": "You pay with",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenIn",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountToken",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountToken"
           },
-          {
-            "$id": null,
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": null },
-            "path": "#.recipient",
-            "value": null
-          }
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
         ],
         "required": ["#.tokenIn", "#.amountToken", "#.recipient"],
         "excluded": ["#.referrerId"]

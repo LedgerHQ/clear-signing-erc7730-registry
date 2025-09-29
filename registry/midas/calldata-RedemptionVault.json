@@ -1148,153 +1148,82 @@
   "display": {
     "formats": {
       "redeemInstant(address,uint256,uint256,address)": {
-        "$id": null,
         "intent": "instantly redeem",
-        "screens": null,
         "fields": [
+          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "$id": null,
-            "label": "You receive",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenOut",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountMTokenIn",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
           },
           {
-            "$id": null,
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.minReceiveAmount",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
           },
-          {
-            "$id": null,
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": null },
-            "path": "#.recipient",
-            "value": null
-          }
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
         ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount", "#.recipient"],
-        "excluded": null
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount", "#.recipient"]
       },
       "redeemInstant(address,uint256,uint256)": {
-        "$id": null,
         "intent": "instantly redeem",
-        "screens": null,
         "fields": [
+          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "$id": null,
-            "label": "You receive",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenOut",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountMTokenIn",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
           },
           {
-            "$id": null,
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.minReceiveAmount",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
           }
         ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount"],
-        "excluded": null
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount"]
       },
       "redeemRequest(address,uint256,address)": {
-        "$id": null,
         "intent": "request a redemption",
-        "screens": null,
         "fields": [
+          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "$id": null,
-            "label": "You will receive",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenOut",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountMTokenIn",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
           },
-          {
-            "$id": null,
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": null },
-            "path": "#.recipient",
-            "value": null
-          }
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
         ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.recipient"],
-        "excluded": null
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.recipient"]
       },
       "redeemRequest(address,uint256)": {
-        "$id": null,
         "intent": "request a redemption",
-        "screens": null,
         "fields": [
+          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "$id": null,
-            "label": "You will receive",
-            "format": "addressName",
-            "params": { "types": ["token"], "sources": null },
-            "path": "#.tokenOut",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountMTokenIn",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
           }
         ],
-        "required": ["#.tokenOut", "#.amountMTokenIn"],
-        "excluded": null
+        "required": ["#.tokenOut", "#.amountMTokenIn"]
       },
       "redeemFiatRequest(uint256)": {
-        "$id": null,
         "intent": "request a redemption",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": null, "decimals": "18", "prefix": null },
-            "path": "#.amountMTokenIn",
-            "value": null
+            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
           }
         ],
-        "required": ["#.amountMTokenIn"],
-        "excluded": null
+        "required": ["#.amountMTokenIn"]
       }
     }
   }
