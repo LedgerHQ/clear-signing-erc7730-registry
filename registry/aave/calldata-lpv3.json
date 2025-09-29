@@ -1,0 +1,280 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "PoolInstance",
+    "contract": {
+      "abi": "https://api.etherscan.io/api?module=contract&action=getabi&address=0xef434e4573b90b6ecd4a00f4888381e4d0cc5ccd",
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2"
+        },
+        {
+          "chainId": 8453,
+          "address": "0xA238Dd80C259a72e81d7e4664a9801593F98d1c5"
+        },
+        {
+          "chainId": 42220,
+          "address": "0x3E59A31363E2ad014dcbc521c4a0d5757d9f3402"
+        },
+        {
+          "chainId": 59144,
+          "address": "0xc47b8C00b0f69a36fa203Ffeac0334874574a8Ac"
+        },
+        {
+          "chainId": 59144,
+          "address": "0xc47b8C00b0f69a36fa203Ffeac0334874574a8Ac"
+        },
+        {
+          "chainId": 1088,
+          "address": "0x90df02551bB792286e8D4f13E0e357b4Bf1D6a57"
+        },
+        {
+          "chainId": 146,
+          "address": "0x5362dBb1e601abF3a4c14c22ffEdA64042E5eAA3"
+        },
+        {
+          "chainId": 100,
+          "address": "0xb50201558B00496A145fE76f7424749556E326D8"
+        },
+        {
+          "chainId": 534352,
+          "address": "0x11fCfe756c05AD438e312a7fd934381537D3cFfe"
+        },
+        {
+          "chainId": 324,
+          "address": "0x78e30497a3c7527d953c6B1E3541b021A98Ac43c"
+        },
+        {
+          "chainId": 137,
+          "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD"
+        },
+        {
+          "chainId": 1868,
+          "address": "0xDd3d7A7d03D9fD9ef45f3E587287922eF65CA38B"
+        },
+        {
+          "chainId": 42161,
+          "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD"
+        },
+        {
+          "chainId": 10,
+          "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD"
+        },
+        {
+          "chainId": 43114,
+          "address": "0x794a61358D6845594F94dc1DB02A252b5b4814aD"
+        },
+        {
+          "chainId": 9745,
+          "address": "0x925a2A7214Ed92428B5b1B090F80b25700095e12"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Aave",
+    "info": {
+      "url": "https://aave.com",
+      "legalName": "Aave DAO",
+      "deploymentDate": "2024-10-09T21:46:47Z"
+    },
+    "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
+    "constants": {
+      "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  },
+  "display": {
+    "formats": {
+      "repay(address asset, uint256 amount, uint256 interestRateMode, address onBehalfOf)": {
+        "$id": "repay",
+        "intent": "Repay loan",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to repay",
+            "params": {
+              "tokenPath": "asset",
+              "threshold": "$.metadata.constants.max",
+              "message": "All"
+            }
+          },
+          {
+            "path": "interestRateMode",
+            "format": "enum",
+            "label": "Interest rate mode",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "For debt holder",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "interestRateMode", "onBehalfOf"]
+      },
+      "repayWithPermit(address asset, uint256 amount, uint256 interestRateMode, address onBehalfOf, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
+        "$id": "repayWithPermit",
+        "intent": "Repay loan",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to repay",
+            "params": {
+              "tokenPath": "asset",
+              "threshold": "$.metadata.constants.max",
+              "message": "All"
+            }
+          },
+          {
+            "path": "interestRateMode",
+            "format": "enum",
+            "label": "Interest rate mode",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "For debt holder",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "interestRateMode", "onBehalfOf"],
+        "excluded": ["deadline", "permitV", "permitR", "permitS"]
+      },
+      "setUserUseReserveAsCollateral(address asset, bool useAsCollateral)": {
+        "intent": "Manage collateral",
+        "fields": [
+          {
+            "path": "asset",
+            "format": "addressName",
+            "label": "For asset",
+            "params": { "types": ["token"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "useAsCollateral",
+            "format": "raw",
+            "label": "Enable use as collateral"
+          }
+        ],
+        "required": ["asset", "useAsCollateral"]
+      },
+      "withdraw(address asset, uint256 amount, address to)": {
+        "intent": "Withdraw",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": {
+              "tokenPath": "asset",
+              "threshold": "$.metadata.constants.max",
+              "message": "Max"
+            }
+          },
+          {
+            "path": "to",
+            "format": "addressName",
+            "label": "To recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "to"]
+      },
+      "borrow(address asset, uint256 amount, uint256 interestRateMode, uint16 referralCode, address onBehalfOf)": {
+        "intent": "Borrow",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to borrow",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "interestRateMode",
+            "format": "enum",
+            "label": "Interest Rate mode",
+            "params": { "$ref": "$.metadata.enums.interestRateMode" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Debtor",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf", "interestRateMode"],
+        "excluded": ["referralCode"]
+      },
+      "deposit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)": {
+        "$id": "deposit",
+        "intent": "Supply",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to supply",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Collateral recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf"],
+        "excluded": ["referralCode"]
+      },
+      "supply(address asset, uint256 amount, address onBehalfOf, uint16 referralCode)": {
+        "$id": "supply",
+        "intent": "Supply",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to supply",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Collateral recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf"],
+        "excluded": ["referralCode"]
+      },
+      "supplyWithPermit(address asset, uint256 amount, address onBehalfOf, uint16 referralCode, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
+        "$id": "supplyWithPermit",
+        "intent": "Supply",
+        "fields": [
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to supply",
+            "params": { "tokenPath": "asset" }
+          },
+          {
+            "path": "onBehalfOf",
+            "format": "addressName",
+            "label": "Collateral recipient",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["amount", "onBehalfOf"],
+        "excluded": [
+          "referralCode",
+          "deadline",
+          "permitV",
+          "permitR",
+          "permitS"
+        ]
+      }
+    }
+  }
+}

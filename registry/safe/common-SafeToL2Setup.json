@@ -1,0 +1,24 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "metadata": {
+    "owner": "Safe",
+    "info": { "url": "https://app.safe.global/welcome", "legalName": "Safe{Wallet}" }
+  },
+  "display": {
+    "formats": {
+      "setupToL2(address l2Singleton)": {
+        "$id": "setupToL2",
+        "intent": "Setup Safe L2",
+        "fields": [
+          {
+            "path": "l2Singleton",
+            "label": "Module",
+            "format": "addressName",
+            "params": { "types": ["contract"] }
+          }
+        ],
+        "required": ["l2Singleton"]
+      }
+    }
+  }
+}

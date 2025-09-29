@@ -1,0 +1,14 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "LlamaRisk",
+    "info": { "legalName": "LlamaRisk", "url": "https://www.llamarisk.com/" },
+    "constants": {
+      "underlyingToken": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+      "underlyingTicker": "crvUSD",
+      "vaultTicker": "llama-crvUSD"
+    }
+  },
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x67315dd969B8Cd3a3520C245837Bf71f54579C75" }] } }
+}

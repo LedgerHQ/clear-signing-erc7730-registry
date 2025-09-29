@@ -1,0 +1,41 @@
+name: ✨ pull request setup
+
+on:
+  pull_request_target:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  setup_pull_request:
+    name: 🤖 setup pull request
+    runs-on: public-ledgerhq-shared-small
+    timeout-minutes: 10
+    steps:
+
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@v5
+
+      - name: Add labels
+        timeout-minutes: 5
+        uses: actions/labeler@v5
+
+      - name: Enforce labels
+        timeout-minutes: 5
+        uses: mheap/github-action-required-labels@v5
+        with:
+          mode: minimum
+          count: 1
+          labels: |
+            documentation
+            specifications
+            descriptors
+            ci
+            preview-tool
+          add_comment: true

@@ -1,0 +1,10 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "Yield.xyz",
+    "info": { "legalName": "Yield.xyz", "url": "https://yield.xyz/" },
+    "constants": { "underlyingToken": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3", "underlyingTicker": "USDe", "vaultTicker": "stk-USDe" }
+  },
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x2D152fB171353E70e45322D32bC748F8a61d9971" }] } }
+}

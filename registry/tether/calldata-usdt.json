@@ -1,30 +1,18 @@
 {
-    "context": {
-        "$id": "Tether USD",
-        "contract" : {
-            "deployments": [
-                {
-                    "chainId": 1,
-                    "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7"
-        
-                }
-            ]
-        }
-    }, 
-
-    "includes": "../../ercs/calldata-erc20-tokens.json",
-
-    "metadata": {
-        "owner": "Tether",
-        "info": {
-            "legalName": "Tether Limited",
-            "url": "https://tether.to/",
-            "lastUpdate": "2017-11-28T12:41:21Z"  
-        },
-        "token": {
-            "ticker": "USDT",
-            "name": "Tether USD",
-            "decimals": 6
-        }
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Tether USD",
+    "contract": {
+      "deployments": [
+        { "chainId": 1, "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
+        { "chainId": 137, "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F" }
+      ]
     }
+  },
+  "includes": "../../ercs/calldata-erc20-tokens.json",
+  "metadata": {
+    "owner": "Tether",
+    "info": { "legalName": "Tether Limited", "url": "https://tether.to/", "deploymentDate": "2017-11-28T12:41:21Z" },
+    "token": { "ticker": "USDT", "name": "Tether USD", "decimals": 6 }
+  }
 }
