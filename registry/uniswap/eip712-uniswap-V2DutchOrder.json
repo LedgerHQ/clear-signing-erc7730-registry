@@ -78,11 +78,11 @@
             "fields": [
               {
                 "path": "endAmount",
-                "label": "Minimum amounts to receive",
+                "label": "Minimum amount to receive",
                 "format": "tokenAmount",
                 "params": { "tokenPath": "token" }
               },
-              { "path": "recipient", "label": "On Addresses", "format": "raw" }
+              { "path": "recipient", "label": "On Address", "format": "raw" }
             ]
           },
           {
