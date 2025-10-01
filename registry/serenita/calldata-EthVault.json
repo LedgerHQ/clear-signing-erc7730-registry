@@ -144,12 +144,9 @@
     "formats": {
       "claimExitedAssets(uint256,uint256,uint256)": {
         "intent": "claim exited assets",
-        "fields": [
-          { "label": "Position Ticket", "format": "raw", "path": "#.positionTicket" },
-          { "label": "Timestamp", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.timestamp" },
-          { "label": "Exit Queue Index", "format": "raw", "path": "#.exitQueueIndex" }
-        ],
-        "required": ["#.positionTicket", "#.timestamp", "#.exitQueueIndex"]
+        "fields": [],
+        "required": [],
+        "excluded": ["#.positionTicket", "#.timestamp", "#.exitQueueIndex"]
       },
       "deposit(address,address)": {
         "intent": "deposit and stake ETH",
