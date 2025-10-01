@@ -152,7 +152,7 @@
         "intent": "deposit and stake ETH",
         "fields": [
           {
-            "label": "Receiver",
+            "label": "Receiver of rewards",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.receiver"
@@ -167,7 +167,7 @@
         "fields": [
           { "label": "Shares to lock", "format": "raw", "path": "#.shares" },
           {
-            "label": "Assets Receiver",
+            "label": "Receiver of exited assets",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.receiver"
@@ -190,7 +190,7 @@
         "intent": "deposit and stake ETH",
         "fields": [
           {
-            "label": "Receiver",
+            "label": "Receiver of rewards",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.receiver"
