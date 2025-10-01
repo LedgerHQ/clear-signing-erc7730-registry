@@ -159,7 +159,8 @@
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.receiver"
-          }
+          },
+          { "label": "Amount to stake", "format": "amount", "path": "@.value" }
         ],
         "required": ["#.receiver"],
         "excluded": ["#.referrer"]
@@ -196,7 +197,8 @@
             "format": "addressName",
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.receiver"
-          }
+          },
+          { "label": "Amount to stake", "format": "amount", "path": "@.value" }
         ],
         "required": ["#.receiver"],
         "excluded": [
