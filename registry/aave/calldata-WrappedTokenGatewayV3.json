@@ -21,25 +21,14 @@
       ]
     }
   },
-  "metadata": {
-    "owner": "Aave",
-    "info": {
-      "url": "https://aave.com",
-      "legalName": "Aave DAO",
-      "deploymentDate": "2025-02-11T01:19:11Z"
-    }
-  },
+  "metadata": { "owner": "Aave", "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2025-02-11T01:19:11Z" } },
   "display": {
     "formats": {
       "depositETH(address undefined, address onBehalfOf, uint16 referralCode)": {
         "$id": "depositETH",
         "intent": "Supply",
         "fields": [
-          {
-            "path": "@.value",
-            "format": "amount",
-            "label": "Amount to supply"
-          },
+          { "path": "@.value", "format": "amount", "label": "Amount to supply" },
           {
             "path": "onBehalfOf",
             "format": "addressName",
@@ -54,11 +43,7 @@
         "$id": "repayETH",
         "intent": "Repay loan",
         "fields": [
-          {
-            "path": "amount",
-            "format": "amount",
-            "label": "Amount to repay"
-          },
+          { "path": "amount", "format": "amount", "label": "Amount to repay" },
           {
             "path": "onBehalfOf",
             "format": "addressName",
@@ -73,11 +58,7 @@
         "$id": "withdrawETH",
         "intent": "Withdraw",
         "fields": [
-          {
-            "path": "amount",
-            "format": "amount",
-            "label": "Amount to withdraw"
-          },
+          { "path": "amount", "format": "amount", "label": "Amount to withdraw" },
           {
             "path": "to",
             "format": "addressName",
@@ -92,11 +73,7 @@
         "$id": "withdrawETHWithPermit",
         "intent": "Withdraw",
         "fields": [
-          {
-            "path": "amount",
-            "format": "amount",
-            "label": "Amount to withdraw"
-          },
+          { "path": "amount", "format": "amount", "label": "Amount to withdraw" },
           {
             "path": "to",
             "format": "addressName",
@@ -111,17 +88,8 @@
         "$id": "borrowETH",
         "intent": "Borrow",
         "fields": [
-          {
-            "path": "amount",
-            "format": "amount",
-            "label": "Amount to borrow"
-          },
-          {
-            "path": "@.from",
-            "format": "addressName",
-            "label": "Debtor",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
-          }
+          { "path": "amount", "format": "amount", "label": "Amount to borrow" },
+          { "path": "@.from", "format": "addressName", "label": "Debtor", "params": { "types": ["eoa"], "sources": ["local", "ens"] } }
         ],
         "required": ["amount"],
         "excluded": ["undefined", "referralCode"]
