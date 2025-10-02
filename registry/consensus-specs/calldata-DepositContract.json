@@ -164,6 +164,14 @@
           },
           {
             "$id": null,
+            "label": "Amount to deposit",
+            "format": "amount",
+            "params": null,
+            "path": "@.value",
+            "value": null
+          },
+          {
+            "$id": null,
             "label": "Signature",
             "format": "raw",
             "params": null,
@@ -179,7 +187,7 @@
             "value": null
           }
         ],
-        "required": ["#.pubkey", "#.withdrawal_credentials"],
+        "required": ["#.pubkey", "#.withdrawal_credentials", "@.value"],
         "excluded": ["#.signature", "#.deposit_data_root"]
       }
     }
