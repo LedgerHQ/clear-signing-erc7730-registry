@@ -617,6 +617,14 @@
           },
           {
             "$id": null,
+            "label": "Amount to deposit",
+            "format": "amount",
+            "params": null,
+            "path": "@.value",
+            "value": null
+          },
+          {
+            "$id": null,
             "label": "Fee Distributor",
             "format": "addressName",
             "params": {

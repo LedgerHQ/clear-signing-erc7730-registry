@@ -2207,6 +2207,14 @@
             "value": null
           },
           {
+            "$id": null,
+            "label": "Amount to deposit",
+            "format": "amount",
+            "params": null,
+            "path": "@.value",
+            "value": null
+          },
+          {
             "path": "#._clientConfig",
             "value": null,
             "fields": [

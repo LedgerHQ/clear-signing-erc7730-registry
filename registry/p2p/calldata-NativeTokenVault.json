@@ -866,6 +866,14 @@
             },
             "path": "#.referrer",
             "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount to deposit",
+            "format": "amount",
+            "params": null,
+            "path": "@.value",
+            "value": null
           }
         ],
         "required": ["#.receiver"],
