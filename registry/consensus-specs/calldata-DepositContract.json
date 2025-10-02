@@ -180,7 +180,7 @@
           }
         ],
         "required": ["#.pubkey", "#.withdrawal_credentials"],
-        "excluded": null
+        "excluded": ["#.signature", "#.deposit_data_root"]
       }
     }
   }
