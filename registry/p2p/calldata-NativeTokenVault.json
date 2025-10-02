@@ -842,7 +842,7 @@
     "formats": {
       "deposit(address,address)": {
         "$id": null,
-        "intent": "Deposit ETH with p2p.org pooled staking",
+        "intent": "Deposit ETH with p2p.org",
         "screens": null,
         "fields": [
           {
