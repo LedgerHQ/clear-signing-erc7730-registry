@@ -67,13 +67,13 @@
             "path": "params.amountInMaximum",
             "label": "Maximum Amount to Send",
             "format": "tokenAmount",
-            "params": { "tokenPath": "params.path.[0:20]" }
+            "params": { "tokenPath": "params.path.[-20:]" }
           },
           {
             "path": "params.amountOut",
             "label": "Amount to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "params.path.[-20:]" }
+            "params": { "tokenPath": "params.path.[0:20]" }
           },
           {
             "path": "params.recipient",
@@ -119,6 +119,12 @@
             "label": "Minimum amount to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[-1]" }
+          },
+          {
+            "path": "to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
           }
         ]
       },
