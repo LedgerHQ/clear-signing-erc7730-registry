@@ -704,11 +704,16 @@
         "required": [
           "#._eth2WithdrawalCredentials",
           "#._ethAmountPerValidatorInWei",
-          "#._referenceFeeDistributor",
-          "#._clientConfigbasisPoints",
-          "#._clientConfigrecipient"
+          "@.value",
+          "#._referenceFeeDistributor"
         ],
-        "excluded": null
+        "excluded": [
+          "#._clientConfig.basisPoints",
+          "#._clientConfig.recipient",
+          "#._referrerConfig.basisPoints",
+          "#._referrerConfig.recipient",
+          "#._extraData"
+        ]
       }
     }
   }

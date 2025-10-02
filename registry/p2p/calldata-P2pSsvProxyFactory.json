@@ -2284,10 +2284,15 @@
         "required": [
           "#._eth2WithdrawalCredentials",
           "#._ethAmountPerValidatorInWei",
-          "#._clientConfigbasisPoints",
-          "#._clientConfigrecipient"
+          "@.value"
         ],
-        "excluded": null
+        "excluded": [
+          "#._clientConfig.basisPoints",
+          "#._clientConfig.recipient",
+          "#._referrerConfig.basisPoints",
+          "#._referrerConfig.recipient",
+          "#._extraData"
+        ]
       }
     }
   }

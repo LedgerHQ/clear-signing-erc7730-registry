@@ -876,12 +876,12 @@
             "value": null
           }
         ],
-        "required": ["#.receiver"],
+        "required": ["#.receiver", "#.referrer", "@.value"],
         "excluded": null
       },
       "updateStateAndDeposit(address,address,(bytes32,int160,uint160,bytes32[]))": {
         "$id": null,
-        "intent": "Deposit ETH with p2p.org pooled staking",
+        "intent": "Deposit ETH with p2p.org",
         "screens": null,
         "fields": [
           {
@@ -904,6 +904,14 @@
               "sources": null
             },
             "path": "#.referrer",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount to deposit",
+            "format": "amount",
+            "params": null,
+            "path": "@.value",
             "value": null
           },
           {
@@ -945,18 +953,17 @@
             ]
           }
         ],
-        "required": [
-          "#.receiver",
-          "#.referrer",
-          "#.harvestParamsrewardsRoot",
-          "#.harvestParamsreward",
-          "#.harvestParamsunlockedMevReward"
-        ],
-        "excluded": null
+        "required": ["#.receiver", "#.referrer", "@.value"],
+        "excluded": [
+          "#.harvestParams.rewardsRoot",
+          "#.harvestParams.reward",
+          "#.harvestParams.unlockedMevReward",
+          "#.harvestParams.proof.[]"
+        ]
       },
       "claimExitedAssets(uint256,uint256,uint256)": {
         "$id": null,
-        "intent": "Claim exited assets from pooled staking at p2p.org",
+        "intent": "Claim exited assets",
         "screens": null,
         "fields": [
           {
@@ -969,7 +976,7 @@
           },
           {
             "$id": null,
-            "label": "Timestamp of position",
+            "label": "Exit initiated at",
             "format": "date",
             "params": {
               "encoding": "timestamp"
@@ -986,12 +993,12 @@
             "value": null
           }
         ],
-        "required": ["#.positionTicket", "#.timestamp"],
-        "excluded": null
+        "required": ["#.timestamp"],
+        "excluded": ["#.positionTicket", "#.exitQueueIndex"]
       },
       "enterExitQueue(uint256,address)": {
         "$id": null,
-        "intent": "Initiate exit of funds from p2p.org pooled staking",
+        "intent": "Initiate exit of funds",
         "screens": null,
         "fields": [
           {
