@@ -136,6 +136,7 @@
   "display": {
     "formats": {
       "startBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(int64,uint32,bytes,uint256))": {
+        "intent": "Bridge tokens via Across",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -243,6 +244,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaAcross((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(int64,uint32,bytes,uint256))": {
+        "intent": "Swap and bridge tokens via Across",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -412,6 +414,7 @@
         ]
       },
       "initHop((address,address)[])": {
+        "intent": "Initialize configuration",
         "fields": [
           {
             "path": "#.configs.[]",
@@ -445,6 +448,7 @@
         ]
       },
       "registerBridge(address,address)": {
+        "intent": "Register bridge",
         "fields": [
           {
             "label": "Asset Id",
@@ -473,6 +477,7 @@
         ]
       },
       "startBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": {
+        "intent": "Bridge tokens via Hop",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -612,6 +617,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaHop((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,address,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via Hop",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -813,6 +819,7 @@
         ]
       },
       "startBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64))": {
+        "intent": "Bridge tokens via CBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -907,6 +914,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaCBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64))": {
+        "intent": "Swap and bridge tokens via CBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -1063,6 +1071,7 @@
         ]
       },
       "triggerRefund(address,bytes,address,address,uint256)": {
+        "intent": "Trigger refund",
         "fields": [
           {
             "label": "Call To",
@@ -1109,6 +1118,7 @@
         ]
       },
       "startBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256))": {
+        "intent": "Bridge tokens via ArbitrumBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -1208,6 +1218,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaArbitrumBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via ArbitrumBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -1369,6 +1380,7 @@
         ]
       },
       "startBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint256))": {
+        "intent": "Bridge tokens via Glacis",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -1472,6 +1484,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaGlacis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint256))": {
+        "intent": "Swap and bridge tokens via Glacis",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -1637,6 +1650,7 @@
         ]
       },
       "swapTokensGeneric(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -1734,6 +1748,7 @@
         ]
       },
       "swapTokensMultipleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -1831,6 +1846,7 @@
         ]
       },
       "swapTokensMultipleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -1928,6 +1944,7 @@
         ]
       },
       "swapTokensMultipleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2025,6 +2042,7 @@
         ]
       },
       "swapTokensSingleV3ERC20ToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2122,6 +2140,7 @@
         ]
       },
       "swapTokensSingleV3ERC20ToNative(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2219,6 +2238,7 @@
         ]
       },
       "swapTokensSingleV3NativeToERC20(bytes32,string,string,address,uint256,(address,address,address,address,uint256,bytes,bool))": {
+        "intent": "Swap tokens",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2316,6 +2336,7 @@
         ]
       },
       "getPeripheryContract(string)": {
+        "intent": "Execute getPeripheryContract",
         "fields": [
           {
             "label": "Name",
@@ -2325,6 +2346,7 @@
         ]
       },
       "registerPeripheryContract(string,address)": {
+        "intent": "Register bridge",
         "fields": [
           {
             "label": "Name",
@@ -2348,6 +2370,7 @@
         ]
       },
       "decode_startBridgeTokensViaHopL1ERC20Packed(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2357,6 +2380,7 @@
         ]
       },
       "decode_startBridgeTokensViaHopL1NativePacked(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2366,6 +2390,7 @@
         ]
       },
       "decode_startBridgeTokensViaHopL2ERC20Packed(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2375,6 +2400,7 @@
         ]
       },
       "decode_startBridgeTokensViaHopL2NativePacked(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2384,6 +2410,7 @@
         ]
       },
       "encode_startBridgeTokensViaHopL1ERC20Packed(bytes8,address,uint256,address,uint256,uint256,address,uint256,address)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2462,6 +2489,7 @@
         ]
       },
       "encode_startBridgeTokensViaHopL1NativePacked(bytes8,address,uint256,uint256,address,uint256,address)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2525,6 +2553,7 @@
         ]
       },
       "encode_startBridgeTokensViaHopL2ERC20Packed(bytes32,address,uint256,address,uint256,uint256,uint256,uint256,uint256,address)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2602,6 +2631,7 @@
         ]
       },
       "encode_startBridgeTokensViaHopL2NativePacked(bytes8,address,uint256,uint256,uint256)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2637,6 +2667,7 @@
         ]
       },
       "setApprovalForHopBridges(address[],address[])": {
+        "intent": "Execute setApprovalForHopBridges",
         "fields": [
           {
             "label": "Bridges",
@@ -2665,6 +2696,7 @@
         ]
       },
       "startBridgeTokensViaHopL1ERC20Min(bytes8,address,uint256,address,uint256,uint256,address,uint256,address)": {
+        "intent": "Bridge tokens via HopL1ERC20Min",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2743,6 +2775,7 @@
         ]
       },
       "startBridgeTokensViaHopL1NativeMin(bytes8,address,uint256,uint256,address,uint256,address)": {
+        "intent": "Bridge tokens via HopL1NativeMin",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2806,6 +2839,7 @@
         ]
       },
       "startBridgeTokensViaHopL2ERC20Min(bytes8,address,uint256,address,uint256,uint256,uint256,uint256,uint256,address)": {
+        "intent": "Bridge tokens via HopL2ERC20Min",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2883,6 +2917,7 @@
         ]
       },
       "startBridgeTokensViaHopL2NativeMin(bytes8,address,uint256,uint256,uint256,uint256,uint256,address)": {
+        "intent": "Bridge tokens via HopL2NativeMin",
         "fields": [
           {
             "label": "Transaction Id",
@@ -2945,6 +2980,7 @@
         ]
       },
       "transferOwnership(address)": {
+        "intent": "Execute transferOwnership",
         "fields": [
           {
             "label": "New Owner",
@@ -2960,6 +2996,7 @@
         ]
       },
       "decode_startBridgeTokensViaAcrossV3ERC20Packed(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2969,6 +3006,7 @@
         ]
       },
       "decode_startBridgeTokensViaAcrossV3NativePacked(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -2978,6 +3016,7 @@
         ]
       },
       "encode_startBridgeTokensViaAcrossV3ERC20Packed((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "path": "#._parameters",
@@ -3092,6 +3131,7 @@
         ]
       },
       "encode_startBridgeTokensViaAcrossV3NativePacked((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "path": "#._parameters",
@@ -3191,6 +3231,7 @@
         ]
       },
       "executeCallAndWithdraw(address,bytes,address,address,uint256)": {
+        "intent": "Execute executeCallAndWithdraw",
         "fields": [
           {
             "label": "Call To",
@@ -3237,6 +3278,7 @@
         ]
       },
       "setApprovalForBridge(address[])": {
+        "intent": "Execute setApprovalForBridge",
         "fields": [
           {
             "label": "Tokens To Approve",
@@ -3251,6 +3293,7 @@
         ]
       },
       "startBridgeTokensViaAcrossV3ERC20Min((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes),address,uint256)": {
+        "intent": "Bridge tokens via AcrossV3ERC20Min",
         "fields": [
           {
             "path": "#._parameters",
@@ -3365,6 +3408,7 @@
         ]
       },
       "startBridgeTokensViaAcrossV3NativeMin((bytes32,address,address,uint64,address,uint256,address,uint32,uint32,uint32,bytes))": {
+        "intent": "Bridge tokens via AcrossV3NativeMin",
         "fields": [
           {
             "path": "#._parameters",
@@ -3464,6 +3508,7 @@
         ]
       },
       "decode_startBridgeTokensViaAcrossERC20Packed(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -3473,6 +3518,7 @@
         ]
       },
       "decode_startBridgeTokensViaAcrossNativePacked(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -3482,6 +3528,7 @@
         ]
       },
       "encode_startBridgeTokensViaAcrossERC20Packed(bytes32,address,address,uint256,uint256,int64,uint32,bytes,uint256)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3545,6 +3592,7 @@
         ]
       },
       "encode_startBridgeTokensViaAcrossNativePacked(bytes32,address,uint64,int64,uint32,uint256,bytes)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3593,6 +3641,7 @@
         ]
       },
       "startBridgeTokensViaAcrossERC20Min(bytes32,address,uint256,address,uint64,int64,uint32,bytes,uint256)": {
+        "intent": "Bridge tokens via AcrossERC20Min",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3656,6 +3705,7 @@
         ]
       },
       "startBridgeTokensViaAcrossNativeMin(bytes32,address,uint256,int64,uint32,bytes,uint256)": {
+        "intent": "Bridge tokens via AcrossNativeMin",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3704,6 +3754,7 @@
         ]
       },
       "withdraw(address,address,uint256)": {
+        "intent": "Execute withdraw",
         "fields": [
           {
             "label": "Asset Address",
@@ -3734,6 +3785,7 @@
         ]
       },
       "addressCanExecuteMethod(bytes4,address)": {
+        "intent": "Execute addressCanExecuteMethod",
         "fields": [
           {
             "label": "Selector",
@@ -3754,6 +3806,7 @@
         ]
       },
       "setCanExecute(bytes4,address,bool)": {
+        "intent": "Execute setCanExecute",
         "fields": [
           {
             "label": "Selector",
@@ -3779,6 +3832,7 @@
         ]
       },
       "decode_startBridgeTokensViaCBridgeERC20Packed(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -3788,6 +3842,7 @@
         ]
       },
       "decode_startBridgeTokensViaCBridgeNativePacked(bytes)": {
+        "intent": "Decode parameters",
         "fields": [
           {
             "label": "Data",
@@ -3797,6 +3852,7 @@
         ]
       },
       "encode_startBridgeTokensViaCBridgeERC20Packed(bytes32,address,uint64,address,uint256,uint64,uint32)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3847,6 +3903,7 @@
         ]
       },
       "encode_startBridgeTokensViaCBridgeNativePacked(bytes32,address,uint64,uint64,uint32)": {
+        "intent": "Encode parameters",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3882,6 +3939,7 @@
         ]
       },
       "startBridgeTokensViaCBridgeERC20Min(bytes32,address,uint64,address,uint256,uint64,uint32)": {
+        "intent": "Bridge tokens via CBridgeERC20Min",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3932,6 +3990,7 @@
         ]
       },
       "startBridgeTokensViaCBridgeNativeMin(bytes32,address,uint64,uint64,uint32)": {
+        "intent": "Bridge tokens via CBridgeNativeMin",
         "fields": [
           {
             "label": "Transaction Id",
@@ -3967,6 +4026,7 @@
         ]
       },
       "startBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,uint256,uint64,address,uint32,uint32,uint32,bytes))": {
+        "intent": "Bridge tokens via AcrossV3",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4139,6 +4199,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaAcrossV3((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,address,address,uint256,uint64,address,u\nint32,uint32,uint32,bytes))": {
+        "intent": "Swap and bridge tokens via AcrossV3",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4373,6 +4434,7 @@
         ]
       },
       "startBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": {
+        "intent": "Bridge tokens via CelerCircleBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4452,6 +4514,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaCelerCircleBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap and bridge tokens via CelerCircleBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4593,6 +4656,7 @@
         ]
       },
       "startBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,bytes32,bytes32,bytes))": {
+        "intent": "Bridge tokens via Relay",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4697,6 +4761,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaRelay((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,bytes32,bytes32,bytes))": {
+        "intent": "Swap and bridge tokens via Relay",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4863,6 +4928,7 @@
         ]
       },
       "facetAddress(bytes4)": {
+        "intent": "Execute facetAddress",
         "fields": [
           {
             "label": "Function Selector",
@@ -4872,6 +4938,7 @@
         ]
       },
       "facetFunctionSelectors(address)": {
+        "intent": "Execute facetFunctionSelectors",
         "fields": [
           {
             "label": "Facet",
@@ -4890,6 +4957,7 @@
         ]
       },
       "supportsInterface(bytes4)": {
+        "intent": "Execute supportsInterface",
         "fields": [
           {
             "label": "Interface Id",
@@ -4899,6 +4967,7 @@
         ]
       },
       "startBridgeTokensViaOmniBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": {
+        "intent": "Bridge tokens via OmniBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -4978,6 +5047,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaOmniBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap and bridge tokens via OmniBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5119,6 +5189,7 @@
         ]
       },
       "startBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,uint32,address,(address,address,address,address,uint256,bytes,bool)[],uint256,bytes))": {
+        "intent": "Bridge tokens via Chainflip",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5296,6 +5367,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaChainflip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,uint32,address,(address,address,address,a\nddress,uint256,bytes,bool)[],uint256,bytes))": {
+        "intent": "Swap and bridge tokens via Chainflip",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5535,6 +5607,7 @@
         ]
       },
       "getDestinationChainsValue(uint8[])": {
+        "intent": "Execute getDestinationChainsValue",
         "fields": [
           {
             "label": "Chain Ids",
@@ -5544,6 +5617,7 @@
         ]
       },
       "startBridgeTokensViaGasZip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,uint256))": {
+        "intent": "Bridge tokens via GasZip",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5638,6 +5712,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaGasZip((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,uint256))": {
+        "intent": "Swap and bridge tokens via GasZip",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5794,6 +5869,7 @@
         ]
       },
       "startBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": {
+        "intent": "Bridge tokens via XDaiBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -5873,6 +5949,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaXDaiBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap and bridge tokens via XDaiBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6014,6 +6091,7 @@
         ]
       },
       "startBridgeTokensViaThorSwap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,string,uint256))": {
+        "intent": "Bridge tokens via ThorSwap",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6125,6 +6203,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaThorSwap((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,string,uint256))": {
+        "intent": "Swap and bridge tokens via ThorSwap",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6298,6 +6377,7 @@
         ]
       },
       "startBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint8,string,string,string,address,(uint8,address,uint256,bytes,bytes)[],bytes,uint256,bool))": {
+        "intent": "Bridge tokens via Squid",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6466,6 +6546,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaSquid((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint8,string,string,string,address,(uint8,address,u\nint256,bytes,bytes)[],bytes,uint256,bool))": {
+        "intent": "Swap and bridge tokens via Squid",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6696,6 +6777,7 @@
         ]
       },
       "addDex(address)": {
+        "intent": "Execute addDex",
         "fields": [
           {
             "label": "Dex",
@@ -6714,6 +6796,7 @@
         ]
       },
       "batchAddDex(address[])": {
+        "intent": "Execute batchAddDex",
         "fields": [
           {
             "label": "Dexs",
@@ -6732,6 +6815,7 @@
         ]
       },
       "batchRemoveDex(address[])": {
+        "intent": "Execute batchRemoveDex",
         "fields": [
           {
             "label": "Dexs",
@@ -6750,6 +6834,7 @@
         ]
       },
       "batchSetFunctionApprovalBySignature(bytes4[],bool)": {
+        "intent": "Execute batchSetFunctionApprovalBySignature",
         "fields": [
           {
             "label": "Signatures",
@@ -6764,6 +6849,7 @@
         ]
       },
       "isFunctionApproved(bytes4)": {
+        "intent": "Execute isFunctionApproved",
         "fields": [
           {
             "label": "Signature",
@@ -6773,6 +6859,7 @@
         ]
       },
       "removeDex(address)": {
+        "intent": "Execute removeDex",
         "fields": [
           {
             "label": "Dex",
@@ -6791,6 +6878,7 @@
         ]
       },
       "setFunctionApprovalBySignature(bytes4,bool)": {
+        "intent": "Execute setFunctionApprovalBySignature",
         "fields": [
           {
             "label": "Signature",
@@ -6805,6 +6893,7 @@
         ]
       },
       "getDeBridgeChainId(uint256)": {
+        "intent": "Execute getDeBridgeChainId",
         "fields": [
           {
             "label": "Chain Id",
@@ -6814,6 +6903,7 @@
         ]
       },
       "initDeBridgeDln((uint256,uint256)[])": {
+        "intent": "Initialize configuration",
         "fields": [
           {
             "path": "#.chainIdConfigs.[]",
@@ -6833,6 +6923,7 @@
         ]
       },
       "setDeBridgeChainId(uint256,uint256)": {
+        "intent": "Execute setDeBridgeChainId",
         "fields": [
           {
             "label": "Chain Id",
@@ -6847,6 +6938,7 @@
         ]
       },
       "startBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,bytes,uint256))": {
+        "intent": "Bridge tokens via DeBridgeDln",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -6951,6 +7043,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaDeBridgeDln((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,bytes,uint256))": {
+        "intent": "Swap and bridge tokens via DeBridgeDln",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7117,6 +7210,7 @@
         ]
       },
       "startBridgeTokensViaPolygonBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool))": {
+        "intent": "Bridge tokens via PolygonBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7196,6 +7290,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaPolygonBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[])": {
+        "intent": "Swap and bridge tokens via PolygonBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7337,6 +7432,7 @@
         ]
       },
       "startBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint16,(uint32,bytes32,uint256,uint256,bytes,bytes,bytes),(uint256,uint256),address))": {
+        "intent": "Bridge tokens via Stargate",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7495,6 +7591,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaStargate((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint16,(uint32,bytes32,uint256,uint256,bytes,byt\nes,bytes),(uint256,uint256),address))": {
+        "intent": "Swap and bridge tokens via Stargate",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7715,6 +7812,7 @@
         ]
       },
       "removeFacet(address)": {
+        "intent": "Execute removeFacet",
         "fields": [
           {
             "label": "Facet Address",
@@ -7733,6 +7831,7 @@
         ]
       },
       "unpauseDiamond(address[])": {
+        "intent": "Execute unpauseDiamond",
         "fields": [
           {
             "label": "Blacklist",
@@ -7751,6 +7850,7 @@
         ]
       },
       "startBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint32,uint64,bytes,bytes,uint256,uint8))": {
+        "intent": "Bridge tokens via CelerIM",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -7865,6 +7965,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaCelerIM((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint32,uint64,bytes,bytes,uint256,uint8))": {
+        "intent": "Swap and bridge tokens via CelerIM",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -8041,6 +8142,7 @@
         ]
       },
       "initOptimism((address,address)[],address)": {
+        "intent": "Initialize configuration",
         "fields": [
           {
             "path": "#.configs.[]",
@@ -8088,6 +8190,7 @@
         ]
       },
       "registerOptimismBridge(address,address)": {
+        "intent": "Register bridge",
         "fields": [
           {
             "label": "Asset Id",
@@ -8116,6 +8219,7 @@
         ]
       },
       "startBridgeTokensViaOptimismBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,uint32,bool))": {
+        "intent": "Bridge tokens via OptimismBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -8220,6 +8324,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaOptimismBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(address,uint32,bool))": {
+        "intent": "Swap and bridge tokens via OptimismBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -8386,6 +8491,7 @@
         ]
       },
       "startBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes,bytes,address,address,address,address[],address,bytes))": {
+        "intent": "Bridge tokens via Symbiosis",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -8544,6 +8650,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaSymbiosis((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes,bytes,address,address,address,address[],a\nddress,bytes))": {
+        "intent": "Swap and bridge tokens via Symbiosis",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -8764,6 +8871,7 @@
         ]
       },
       "extractBridgeData(bytes)": {
+        "intent": "Execute extractBridgeData",
         "fields": [
           {
             "label": "Data",
@@ -8773,6 +8881,7 @@
         ]
       },
       "extractData(bytes)": {
+        "intent": "Execute extractData",
         "fields": [
           {
             "label": "Data",
@@ -8782,6 +8891,7 @@
         ]
       },
       "extractGenericSwapParameters(bytes)": {
+        "intent": "Execute extractGenericSwapParameters",
         "fields": [
           {
             "label": "Data",
@@ -8791,6 +8901,7 @@
         ]
       },
       "extractMainParameters(bytes)": {
+        "intent": "Execute extractMainParameters",
         "fields": [
           {
             "label": "Data",
@@ -8800,6 +8911,7 @@
         ]
       },
       "extractNonEVMAddress(bytes)": {
+        "intent": "Execute extractNonEVMAddress",
         "fields": [
           {
             "label": "Data",
@@ -8809,6 +8921,7 @@
         ]
       },
       "extractSwapData(bytes)": {
+        "intent": "Execute extractSwapData",
         "fields": [
           {
             "label": "Data",
@@ -8818,6 +8931,7 @@
         ]
       },
       "validateCalldata(bytes,string,address,address,uint256,uint256,bool,bool)": {
+        "intent": "Execute validateCalldata",
         "fields": [
           {
             "label": "Data",
@@ -8873,6 +8987,7 @@
         ]
       },
       "validateDestinationCalldata(bytes,bytes,bytes)": {
+        "intent": "Execute validateDestinationCalldata",
         "fields": [
           {
             "label": "Data",
@@ -8892,6 +9007,7 @@
         ]
       },
       "setApprovalForBridges(address[],address[])": {
+        "intent": "Execute setApprovalForBridges",
         "fields": [
           {
             "label": "Bridges",
@@ -8920,6 +9036,7 @@
         ]
       },
       "startBridgeTokensViaHopL1ERC20((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,address,uint256,uint256))": {
+        "intent": "Bridge tokens via HopL1ERC20",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9073,6 +9190,7 @@
         ]
       },
       "startBridgeTokensViaHopL1Native((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,address,uint256,uint256))": {
+        "intent": "Bridge tokens via HopL1Native",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9226,6 +9344,7 @@
         ]
       },
       "startBridgeTokensViaHopL2ERC20((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,address,uint256,uint256))": {
+        "intent": "Bridge tokens via HopL2ERC20",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9379,6 +9498,7 @@
         ]
       },
       "startBridgeTokensViaHopL2Native((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,uint256,uint256,uint256,uint256,address,address,uint256,uint256))": {
+        "intent": "Bridge tokens via HopL2Native",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9532,6 +9652,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaHopL1ERC20((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,addres\ns,address,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via HopL1ERC20",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9747,6 +9868,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaHopL1Native((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,addre\nss,address,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via HopL1Native",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -9962,6 +10084,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaHopL2ERC20((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,addres\ns,address,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via HopL2ERC20",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10177,6 +10300,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaHopL2Native((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,uint256,uint256,uint256,uint256,addre\nss,address,uint256,uint256))": {
+        "intent": "Swap and bridge tokens via HopL2Native",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10392,6 +10516,7 @@
         ]
       },
       "startBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(uint256,bytes32,uint256,bytes32,uint256,uint8,bool))": {
+        "intent": "Bridge tokens via AllBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10511,6 +10636,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaAllBridge((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(uint256,bytes32,uint256,bytes32,uint256,uint8,b\nool))": {
+        "intent": "Swap and bridge tokens via AllBridge",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10692,6 +10818,7 @@
         ]
       },
       "startBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(bytes32,address,bytes))": {
+        "intent": "Bridge tokens via Mayan",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10797,6 +10924,7 @@
         ]
       },
       "swapAndStartBridgeTokensViaMayan((bytes32,string,string,address,address,address,uint256,uint256,bool,bool),(address,address,address,address,uint256,bytes,bool)[],(bytes32,address,bytes))": {
+        "intent": "Swap and bridge tokens via Mayan",
         "fields": [
           {
             "path": "#._bridgeData",
@@ -10964,6 +11092,7 @@
         ]
       },
       "diamondCut((address,uint8,bytes4[])[],address,bytes)": {
+        "intent": "Execute diamondCut",
         "fields": [
           {
             "path": "#._diamondCut.[]",
