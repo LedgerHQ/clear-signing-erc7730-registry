@@ -12,8 +12,8 @@
     }
   },
   "metadata": {
-    "owner": "Paraswap",
-    "info": { "url": "https://www.paraswap.io/", "legalName": "ParaSwap", "deploymentDate": "2021-08-18T12:42:05Z" },
+    "owner": "Velora",
+    "info": { "url": "https://www.paraswap.io/", "legalName": "Velora", "deploymentDate": "2021-08-18T12:42:05Z" },
     "constants": { "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" }
   },
   "display": {

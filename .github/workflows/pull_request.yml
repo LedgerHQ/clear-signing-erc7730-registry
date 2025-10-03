@@ -21,7 +21,7 @@ jobs:
 
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Get all changed descriptor files
         timeout-minutes: 5

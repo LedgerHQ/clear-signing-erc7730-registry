@@ -3,24 +3,8 @@
   "includes": "../../ercs/calldata-erc4626-vaults.json",
   "metadata": {
     "owner": "RE7 Labs",
-    "info": {
-      "legalName": "RE7 Labs",
-      "url": "https://www.re7.capital"
-    },
-    "constants": {
-      "underlyingToken": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf",
-      "underlyingTicker": "cbBTC",
-      "vaultTicker": "Re7cbBTC"
-    }
+    "info": { "legalName": "RE7 Labs", "url": "https://www.re7.capital" },
+    "constants": { "underlyingToken": "0xcbB7C0000aB88B473b1f5aFd9ef808440eed33Bf", "underlyingTicker": "cbBTC", "vaultTicker": "Re7cbBTC" }
   },
-  "context": {
-    "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0xA02F5E93f783baF150Aa1F8b341Ae90fe0a772f7"
-        }
-      ]
-    }
-  }
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xA02F5E93f783baF150Aa1F8b341Ae90fe0a772f7" }] } }
 }

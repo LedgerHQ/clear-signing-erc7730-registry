@@ -4,7 +4,11 @@
     "$id": "Lending Pool v2",
     "contract": {
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/aave/abis/0x7d2768de32b0b80b7a3454c06bdac94a69ddc7a9.abi.json",
-      "deployments": [{ "chainId": 1, "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9" }]
+      "deployments": [
+        { "chainId": 1, "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9" },
+        { "chainId": 137, "address": "0x8dFf5E27EA6b7AC08EbFdf9eB090F32ee9a30fcf" },
+        { "chainId": 43114, "address": "0x4F01AeD16D97E3aB5ab2B501154DC9bb0F1A5A2C" }
+      ]
     }
   },
   "metadata": {
