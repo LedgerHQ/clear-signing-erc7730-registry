@@ -323,66 +323,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -422,33 +417,28 @@
             "path": "#.configs.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "assetId"
-                  },
-                  {
-                    "label": "Bridge",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ]
-                    },
-                    "path": "bridge"
-                  }
-                ]
+                "label": "Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "assetId"
+              },
+              {
+                "label": "Bridge",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "wallet",
+                    "eoa",
+                    "contract",
+                    "token",
+                    "collection"
+                  ]
+                },
+                "path": "bridge"
               }
             ]
           }
@@ -702,66 +692,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -1002,66 +987,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -1308,66 +1288,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -1577,66 +1552,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -1703,66 +1673,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -1805,66 +1770,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -1907,66 +1867,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -2009,66 +1964,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -4269,66 +4219,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -4587,66 +4532,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -4837,66 +4777,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -5123,66 +5058,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -5293,66 +5223,61 @@
                 "path": "dstCallSwapData.[]",
                 "fields": [
                   {
-                    "path": "",
-                    "fields": [
-                      {
-                        "label": "Call To",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "eoa",
-                            "wallet"
-                          ]
-                        },
-                        "path": "callTo"
-                      },
-                      {
-                        "label": "Approve To",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "eoa",
-                            "wallet"
-                          ]
-                        },
-                        "path": "approveTo"
-                      },
-                      {
-                        "label": "Sending Asset Id",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "token"
-                          ]
-                        },
-                        "path": "sendingAssetId"
-                      },
-                      {
-                        "label": "Receiving Asset Id",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "token"
-                          ]
-                        },
-                        "path": "receivingAssetId"
-                      },
-                      {
-                        "label": "From Amount",
-                        "format": "amount",
-                        "path": "fromAmount"
-                      },
-                      {
-                        "label": "Call Data",
-                        "format": "raw",
-                        "path": "callData"
-                      },
-                      {
-                        "label": "Requires Deposit",
-                        "format": "raw",
-                        "path": "requiresDeposit"
-                      }
-                    ]
+                    "label": "Call To",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "eoa",
+                        "wallet"
+                      ]
+                    },
+                    "path": "callTo"
+                  },
+                  {
+                    "label": "Approve To",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "eoa",
+                        "wallet"
+                      ]
+                    },
+                    "path": "approveTo"
+                  },
+                  {
+                    "label": "Sending Asset Id",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "token"
+                      ]
+                    },
+                    "path": "sendingAssetId"
+                  },
+                  {
+                    "label": "Receiving Asset Id",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "token"
+                      ]
+                    },
+                    "path": "receivingAssetId"
+                  },
+                  {
+                    "label": "From Amount",
+                    "format": "amount",
+                    "path": "fromAmount"
+                  },
+                  {
+                    "label": "Call Data",
+                    "format": "raw",
+                    "path": "callData"
+                  },
+                  {
+                    "label": "Requires Deposit",
+                    "format": "raw",
+                    "path": "requiresDeposit"
                   }
                 ]
               },
@@ -5451,7 +5376,90 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
+              }
+            ]
+          },
+          {
+            "path": "#._chainflipData",
+            "fields": [
+              {
+                "label": "Non EVM Receiver",
+                "format": "raw",
+                "path": "nonEVMReceiver"
+              },
+              {
+                "label": "Dst Token",
+                "format": "raw",
+                "path": "dstToken"
+              },
+              {
+                "label": "Dst Call Receiver",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "dstCallReceiver"
+              },
+              {
+                "path": "dstCallSwapData.[]",
                 "fields": [
                   {
                     "label": "Call To",
@@ -5509,99 +5517,6 @@
                     "label": "Requires Deposit",
                     "format": "raw",
                     "path": "requiresDeposit"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "path": "#._chainflipData",
-            "fields": [
-              {
-                "label": "Non EVM Receiver",
-                "format": "raw",
-                "path": "nonEVMReceiver"
-              },
-              {
-                "label": "Dst Token",
-                "format": "raw",
-                "path": "dstToken"
-              },
-              {
-                "label": "Dst Call Receiver",
-                "format": "addressName",
-                "params": {
-                  "types": [
-                    "eoa",
-                    "wallet"
-                  ]
-                },
-                "path": "dstCallReceiver"
-              },
-              {
-                "path": "dstCallSwapData.[]",
-                "fields": [
-                  {
-                    "path": "",
-                    "fields": [
-                      {
-                        "label": "Call To",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "eoa",
-                            "wallet"
-                          ]
-                        },
-                        "path": "callTo"
-                      },
-                      {
-                        "label": "Approve To",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "eoa",
-                            "wallet"
-                          ]
-                        },
-                        "path": "approveTo"
-                      },
-                      {
-                        "label": "Sending Asset Id",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "token"
-                          ]
-                        },
-                        "path": "sendingAssetId"
-                      },
-                      {
-                        "label": "Receiving Asset Id",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "token"
-                          ]
-                        },
-                        "path": "receivingAssetId"
-                      },
-                      {
-                        "label": "From Amount",
-                        "format": "amount",
-                        "path": "fromAmount"
-                      },
-                      {
-                        "label": "Call Data",
-                        "format": "raw",
-                        "path": "callData"
-                      },
-                      {
-                        "label": "Requires Deposit",
-                        "format": "raw",
-                        "path": "requiresDeposit"
-                      }
-                    ]
                   }
                 ]
               },
@@ -5803,66 +5718,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -6043,66 +5953,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -6300,66 +6205,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -6511,43 +6411,38 @@
                 "path": "sourceCalls.[]",
                 "fields": [
                   {
-                    "path": "",
-                    "fields": [
-                      {
-                        "label": "Call Type",
-                        "format": "raw",
-                        "path": "callType"
-                      },
-                      {
-                        "label": "Target",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "wallet",
-                            "eoa",
-                            "contract",
-                            "token",
-                            "collection"
-                          ]
-                        },
-                        "path": "target"
-                      },
-                      {
-                        "label": "Value",
-                        "format": "amount",
-                        "path": "value"
-                      },
-                      {
-                        "label": "Call Data",
-                        "format": "raw",
-                        "path": "callData"
-                      },
-                      {
-                        "label": "Payload",
-                        "format": "raw",
-                        "path": "payload"
-                      }
-                    ]
+                    "label": "Call Type",
+                    "format": "raw",
+                    "path": "callType"
+                  },
+                  {
+                    "label": "Target",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "wallet",
+                        "eoa",
+                        "contract",
+                        "token",
+                        "collection"
+                      ]
+                    },
+                    "path": "target"
+                  },
+                  {
+                    "label": "Value",
+                    "format": "amount",
+                    "path": "value"
+                  },
+                  {
+                    "label": "Call Data",
+                    "format": "raw",
+                    "path": "callData"
+                  },
+                  {
+                    "label": "Payload",
+                    "format": "raw",
+                    "path": "payload"
                   }
                 ]
               },
@@ -6651,66 +6546,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -6751,43 +6641,38 @@
                 "path": "sourceCalls.[]",
                 "fields": [
                   {
-                    "path": "",
-                    "fields": [
-                      {
-                        "label": "Call Type",
-                        "format": "raw",
-                        "path": "callType"
-                      },
-                      {
-                        "label": "Target",
-                        "format": "addressName",
-                        "params": {
-                          "types": [
-                            "wallet",
-                            "eoa",
-                            "contract",
-                            "token",
-                            "collection"
-                          ]
-                        },
-                        "path": "target"
-                      },
-                      {
-                        "label": "Value",
-                        "format": "amount",
-                        "path": "value"
-                      },
-                      {
-                        "label": "Call Data",
-                        "format": "raw",
-                        "path": "callData"
-                      },
-                      {
-                        "label": "Payload",
-                        "format": "raw",
-                        "path": "payload"
-                      }
-                    ]
+                    "label": "Call Type",
+                    "format": "raw",
+                    "path": "callType"
+                  },
+                  {
+                    "label": "Target",
+                    "format": "addressName",
+                    "params": {
+                      "types": [
+                        "wallet",
+                        "eoa",
+                        "contract",
+                        "token",
+                        "collection"
+                      ]
+                    },
+                    "path": "target"
+                  },
+                  {
+                    "label": "Value",
+                    "format": "amount",
+                    "path": "value"
+                  },
+                  {
+                    "label": "Call Data",
+                    "format": "raw",
+                    "path": "callData"
+                  },
+                  {
+                    "label": "Payload",
+                    "format": "raw",
+                    "path": "payload"
                   }
                 ]
               },
@@ -6934,19 +6819,14 @@
             "path": "#.chainIdConfigs.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Chain Id",
-                    "format": "raw",
-                    "path": "chainId"
-                  },
-                  {
-                    "label": "De Bridge Chain Id",
-                    "format": "raw",
-                    "path": "deBridgeChainId"
-                  }
-                ]
+                "label": "Chain Id",
+                "format": "raw",
+                "path": "chainId"
+              },
+              {
+                "label": "De Bridge Chain Id",
+                "format": "raw",
+                "path": "deBridgeChainId"
               }
             ]
           }
@@ -7151,66 +7031,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -7401,66 +7276,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           }
@@ -7705,66 +7575,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -8080,66 +7945,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -8186,33 +8046,28 @@
             "path": "#.configs.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "assetId"
-                  },
-                  {
-                    "label": "Bridge",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ]
-                    },
-                    "path": "bridge"
-                  }
-                ]
+                "label": "Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "assetId"
+              },
+              {
+                "label": "Bridge",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "wallet",
+                    "eoa",
+                    "contract",
+                    "token",
+                    "collection"
+                  ]
+                },
+                "path": "bridge"
               }
             ]
           },
@@ -8445,66 +8300,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -8774,66 +8624,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -9767,66 +9612,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -9987,66 +9827,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -10207,66 +10042,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -10427,66 +10257,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -10766,66 +10591,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -11057,66 +10877,61 @@
             "path": "#._swapData.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Call To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "callTo"
-                  },
-                  {
-                    "label": "Approve To",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "eoa",
-                        "wallet"
-                      ]
-                    },
-                    "path": "approveTo"
-                  },
-                  {
-                    "label": "Sending Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "sendingAssetId"
-                  },
-                  {
-                    "label": "Receiving Asset Id",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "receivingAssetId"
-                  },
-                  {
-                    "label": "From Amount",
-                    "format": "amount",
-                    "path": "fromAmount"
-                  },
-                  {
-                    "label": "Call Data",
-                    "format": "raw",
-                    "path": "callData"
-                  },
-                  {
-                    "label": "Requires Deposit",
-                    "format": "raw",
-                    "path": "requiresDeposit"
-                  }
-                ]
+                "label": "Call To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "callTo"
+              },
+              {
+                "label": "Approve To",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "eoa",
+                    "wallet"
+                  ]
+                },
+                "path": "approveTo"
+              },
+              {
+                "label": "Sending Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "sendingAssetId"
+              },
+              {
+                "label": "Receiving Asset Id",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "token"
+                  ]
+                },
+                "path": "receivingAssetId"
+              },
+              {
+                "label": "From Amount",
+                "format": "amount",
+                "path": "fromAmount"
+              },
+              {
+                "label": "Call Data",
+                "format": "raw",
+                "path": "callData"
+              },
+              {
+                "label": "Requires Deposit",
+                "format": "raw",
+                "path": "requiresDeposit"
               }
             ]
           },
@@ -11154,33 +10969,28 @@
             "path": "#._diamondCut.[]",
             "fields": [
               {
-                "path": "",
-                "fields": [
-                  {
-                    "label": "Facet Address",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ]
-                    },
-                    "path": "facetAddress"
-                  },
-                  {
-                    "label": "Action",
-                    "format": "raw",
-                    "path": "action"
-                  },
-                  {
-                    "label": "Function Selectors",
-                    "format": "raw",
-                    "path": "functionSelectors.[]"
-                  }
-                ]
+                "label": "Facet Address",
+                "format": "addressName",
+                "params": {
+                  "types": [
+                    "wallet",
+                    "eoa",
+                    "contract",
+                    "token",
+                    "collection"
+                  ]
+                },
+                "path": "facetAddress"
+              },
+              {
+                "label": "Action",
+                "format": "raw",
+                "path": "action"
+              },
+              {
+                "label": "Function Selectors",
+                "format": "raw",
+                "path": "functionSelectors.[]"
               }
             ]
           },
