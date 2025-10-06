@@ -32,10 +32,7 @@
               { "name": "deadline", "type": "uint256" },
               { "name": "witness", "type": "V2DutchOrder" }
             ],
-            "TokenPermissions": [
-              { "name": "token", "type": "address" },
-              { "name": "amount", "type": "uint256" }
-            ],
+            "TokenPermissions": [{ "name": "token", "type": "address" }, { "name": "amount", "type": "uint256" }],
             "V2DutchOrder": [
               { "name": "info", "type": "OrderInfo" },
               { "name": "cosigner", "type": "address" },
@@ -55,12 +52,7 @@
       "PermitWitnessTransferFrom": {
         "intent": "UniswapX V2 Dutch Order",
         "fields": [
-          {
-            "path": "spender",
-            "label": "Approve to spender",
-            "format": "addressName",
-            "params": { "types": ["contract"] }
-          },
+          { "path": "spender", "label": "Approve to spender", "format": "raw" },
           {
             "path": "permitted.amount",
             "label": "Approve amount",
@@ -74,31 +66,15 @@
             "params": { "tokenPath": "witness.baseInputToken" }
           },
           {
-            "path": "witness.baseOutputs.[0]",
+            "path": "witness.baseOutputs.[]",
             "fields": [
-              {
-                "path": "endAmount",
-                "label": "Minimum amount to receive",
-                "format": "tokenAmount",
-                "params": { "tokenPath": "token" }
-              },
-              { "path": "recipient", "label": "On Address", "format": "raw" }
+              { "path": "endAmount", "label": "Minimum amounts to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
+              { "path": "recipient", "label": "On Addresses", "format": "raw" }
             ]
           },
-          {
-            "path": "deadline",
-            "label": "Approval expire",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
+          { "path": "deadline", "label": "Approval expire", "format": "date", "params": { "encoding": "timestamp" } }
         ],
-        "excluded": [
-          "nonce",
-          "witness.info",
-          "witness.cosigner",
-          "witness.baseInputEndAmount",
-          "witness.baseOutputs.[].startAmount"
-        ]
+        "excluded": ["nonce", "witness.info", "witness.cosigner", "witness.baseInputEndAmount", "witness.baseOutputs.[].startAmount"]
       }
     }
   }
