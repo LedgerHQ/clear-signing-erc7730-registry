@@ -17,7 +17,7 @@
               { "name": "name", "type": "string" },
               { "name": "version", "type": "string" },
               { "name": "chainId", "type": "uint256" },
-              { "name": "verifyingContract", "type": "address"  }
+              { "name": "verifyingContract", "type": "address" }
             ],
             "Order": [
               { "name": "owner", "type": "address" },
@@ -33,7 +33,7 @@
               { "name": "partnerAndFee", "type": "uint256" },
               { "name": "permit", "type": "bytes" },
               { "name": "metadata", "type": "bytes" },
-              { "name": "bridge", "type": "Bridge"  }
+              { "name": "bridge", "type": "Bridge" }
             ],
             "Bridge": [
               { "name": "protocolSelector", "type": "bytes4" },
