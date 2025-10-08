@@ -37,8 +37,10 @@
         { "chainId": 1, "address": "0x4Fd4DD7171D14e5bD93025ec35374d2b9b4321b0" },
         { "chainId": 1, "address": "0x319a05E260acC2490768A726Ccfd341D4b3D5106" },
         { "chainId": 1, "address": "0x2f98A13635F6CEc0cc45bC1e43969C71d68091d6" },
+        { "chainId": 1, "address": "0x9C3743582e8b2d7cCb5e08caF3c9C33780ac446f" },
         { "chainId": 30, "address": "0x99D22115Fd6706B78703fF015DE897d43667D12F" },
         { "chainId": 30, "address": "0xe7a1A676D0CCA2e20A69adD500985C7271a40205" },
+        { "chainId": 56, "address": "0x73685BD72dF34B92Bc81D43ef35CFf4300DE8625" },
         { "chainId": 239, "address": "0x1E2F7f6a8620C2b672b29AD45B61686cEFC8831e" },
         { "chainId": 999, "address": "0xC898a5cbDb81F260bd5306D9F9B9A893D0FdF042" },
         { "chainId": 999, "address": "0xD26bB9B45140D17eF14FbD4fCa8Cf0d610ac50E7" },
@@ -54,6 +56,7 @@
         { "chainId": 999, "address": "0x1605F7C0FF432Ea4cF2b36a2E35076187A1803b0" },
         { "chainId": 999, "address": "0x814E39FeBD0265D39e37bA469d0B40bd9c77Eef2" },
         { "chainId": 999, "address": "0x94A9e619779e65e7B79fEA6f7eF623118ac1c2F2" },
+        { "chainId": 999, "address": "0x36094ABE5E589691B8f60505823A72F5fdEdC953" },
         { "chainId": 8453, "address": "0x2a8c22E3b10036f3AEF5875d04f8441d4188b656" },
         { "chainId": 8453, "address": "0xF804a646C034749b5484bF7dfE875F6A4F969840" },
         { "chainId": 8453, "address": "0x0e0eb6cdad90174f1Db606EC186ddD0B5eD80847" },
@@ -63,6 +66,7 @@
         { "chainId": 8453, "address": "0x86811aD3430DbA37e1641538729bF346c20A5412" },
         { "chainId": 9745, "address": "0x24e49D2Ad8f0bcD0cF7F2A5Ab560Ca4319f6bd75" },
         { "chainId": 9745, "address": "0x69EcaB6aA7bDFDdD99deF0891c0317076430ae50" },
+        { "chainId": 9745, "address": "0x880661F9b412065D616890cA458dcCd0146cb77C" },
         { "chainId": 16661, "address": "0x9dae503014edc48A4d8FE789f22c70Ae650eb79B" },
         { "chainId": 23294, "address": "0xf939E88ecAd43115116c7106DfdbdC4b1315a7Ee" },
         { "chainId": 42161, "address": "0x8ac12d5B71e4f046459b67077F8704BA0a86F8F9" },
@@ -218,13 +222,13 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountMTokenIn"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -238,13 +242,13 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountMTokenIn"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
           }
         ],
@@ -257,7 +261,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountMTokenIn"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -271,7 +275,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountMTokenIn"
           }
         ],
@@ -283,7 +287,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountMTokenIn"
           }
         ],

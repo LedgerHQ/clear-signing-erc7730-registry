@@ -35,8 +35,10 @@
         { "chainId": 1, "address": "0x5E154946561AEA4E750AAc6DeaD23D37e00E47f6" },
         { "chainId": 1, "address": "0x52e808bD3496c69c705028a258aEe0a6E1a5b35D" },
         { "chainId": 1, "address": "0xd252EB9d448dB3A46d9c1476A7eb45E5c0CED7C2" },
+        { "chainId": 1, "address": "0x5455222CCDd32F85C1998f57DC6CF613B4498C2a" },
         { "chainId": 30, "address": "0xf454A52DA2157686Ef99702C0C19c0E8D66bC03c" },
         { "chainId": 30, "address": "0x79A15707E2766d486681569Bd1041821f5e32998" },
+        { "chainId": 56, "address": "0x30B59844eC16ABA3ec4ca0BD97557CcB670D924E" },
         { "chainId": 239, "address": "0x44c782Ba3c71348fdda14ae6AF244f76f7d65549" },
         { "chainId": 999, "address": "0xbE8A4f1a312b94A712F8E5367B02ae6E378E6F19" },
         { "chainId": 999, "address": "0x48fb106Ef0c0C1a19EdDC9C5d27A945E66DA1C4E" },
@@ -52,6 +54,7 @@
         { "chainId": 999, "address": "0x210376434c1591f05399e3F1EF3f98C6e63d370E" },
         { "chainId": 999, "address": "0x13Dea856EdA9ae6d29317ef5644297639837E1b2" },
         { "chainId": 999, "address": "0x6431A3588e76aF88cc6f12926fFCAc7209197382" },
+        { "chainId": 999, "address": "0x65D0a14dd083C38244542BAC0e0cd16d51c37458" },
         { "chainId": 8453, "address": "0x8978e327FE7C72Fa4eaF4649C23147E279ae1470" },
         { "chainId": 8453, "address": "0x80b666D60293217661E7382737bb3E42348f7CE5" },
         { "chainId": 8453, "address": "0x2fD18B0878967E19292E9a8BF38Bb1415F6ad653" },
@@ -61,6 +64,7 @@
         { "chainId": 8453, "address": "0xEa22F8C1624c17C1B58727235292684831A08d56" },
         { "chainId": 9745, "address": "0x2b690Cab819A815732544aEb422474EfDc1B0615" },
         { "chainId": 9745, "address": "0x4Ef9fF56162bD3Cb5073FB20DbD355C59084093f" },
+        { "chainId": 9745, "address": "0xa603cf264aDEB8E7f0f063C116929ADAC2D4286E" },
         { "chainId": 16661, "address": "0x72a93168AE79F269DeB2b1892F2AFd7eaa800271" },
         { "chainId": 23294, "address": "0xD7Fe0e91C05CAfdd26dA4B176eEc2b883795BDcC" },
         { "chainId": 42161, "address": "0x643f73A6a3Ffc5d6C6Be7c97Cc30422763CFb1d0" },
@@ -172,13 +176,13 @@
           {
             "label": "Amount",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountToken"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -193,13 +197,13 @@
           {
             "label": "Amount",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountToken"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
           }
         ],
@@ -213,7 +217,7 @@
           {
             "label": "Amount",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountToken"
           }
         ],
@@ -227,7 +231,7 @@
           {
             "label": "Amount",
             "format": "unit",
-            "params": { "base": "", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.amountToken"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
