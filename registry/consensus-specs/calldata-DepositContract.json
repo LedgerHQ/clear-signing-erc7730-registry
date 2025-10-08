@@ -169,22 +169,6 @@
             "params": null,
             "path": "@.value",
             "value": null
-          },
-          {
-            "$id": null,
-            "label": "Signature",
-            "format": "raw",
-            "params": null,
-            "path": "#.signature",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Deposit Data Root",
-            "format": "raw",
-            "params": null,
-            "path": "#.deposit_data_root",
-            "value": null
           }
         ],
         "required": ["#.pubkey", "#.withdrawal_credentials", "@.value"],

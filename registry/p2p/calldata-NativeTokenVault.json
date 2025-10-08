@@ -913,48 +913,11 @@
             "params": null,
             "path": "@.value",
             "value": null
-          },
-          {
-            "path": "#.harvestParams",
-            "value": null,
-            "fields": [
-              {
-                "$id": null,
-                "label": "Rewards merkle root",
-                "format": "raw",
-                "params": null,
-                "path": "rewardsRoot",
-                "value": null
-              },
-              {
-                "$id": null,
-                "label": "The Vault cumulative reward earned since the start",
-                "format": "amount",
-                "params": null,
-                "path": "reward",
-                "value": null
-              },
-              {
-                "$id": null,
-                "label": "Cumulative execution reward",
-                "format": "amount",
-                "params": null,
-                "path": "unlockedMevReward",
-                "value": null
-              },
-              {
-                "$id": null,
-                "label": "The proof to verify that reward is correct",
-                "format": "raw",
-                "params": null,
-                "path": "proof.[]",
-                "value": null
-              }
-            ]
           }
         ],
         "required": ["#.receiver", "#.referrer", "@.value"],
         "excluded": [
+          "#.harvestParams",
           "#.harvestParams.rewardsRoot",
           "#.harvestParams.reward",
           "#.harvestParams.unlockedMevReward",
@@ -968,28 +931,12 @@
         "fields": [
           {
             "$id": null,
-            "label": "ID of position to claim",
-            "format": "raw",
-            "params": null,
-            "path": "#.positionTicket",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Exit initiated at",
             "format": "date",
             "params": {
               "encoding": "timestamp"
             },
             "path": "#.timestamp",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Exit Queue Index",
-            "format": "raw",
-            "params": null,
-            "path": "#.exitQueueIndex",
             "value": null
           }
         ],

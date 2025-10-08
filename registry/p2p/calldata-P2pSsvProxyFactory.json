@@ -2213,72 +2213,6 @@
             "params": null,
             "path": "@.value",
             "value": null
-          },
-          {
-            "path": "#._clientConfig",
-            "value": null,
-            "fields": [
-              {
-                "$id": null,
-                "label": "Percentage of rewards that goes to client",
-                "format": "unit",
-                "params": {
-                  "base": "%",
-                  "decimals": "2",
-                  "prefix": null
-                },
-                "path": "basisPoints",
-                "value": null
-              },
-              {
-                "$id": null,
-                "label": "Client address",
-                "format": "addressName",
-                "params": {
-                  "types": ["contract", "wallet", "eoa"],
-                  "sources": null
-                },
-                "path": "recipient",
-                "value": null
-              }
-            ]
-          },
-          {
-            "path": "#._referrerConfig",
-            "value": null,
-            "fields": [
-              {
-                "$id": null,
-                "label": "Percentage of rewards that goes to referrer",
-                "format": "unit",
-                "params": {
-                  "base": "%",
-                  "decimals": "2",
-                  "prefix": null
-                },
-                "path": "basisPoints",
-                "value": null
-              },
-              {
-                "$id": null,
-                "label": "Referrer address",
-                "format": "addressName",
-                "params": {
-                  "types": ["eoa", "wallet", "contract"],
-                  "sources": null
-                },
-                "path": "recipient",
-                "value": null
-              }
-            ]
-          },
-          {
-            "$id": null,
-            "label": "Extra Data",
-            "format": "raw",
-            "params": null,
-            "path": "#._extraData",
-            "value": null
           }
         ],
         "required": [
@@ -2287,8 +2221,10 @@
           "@.value"
         ],
         "excluded": [
+          "#._clientConfig",
           "#._clientConfig.basisPoints",
           "#._clientConfig.recipient",
+          "#._referrerConfig",
           "#._referrerConfig.basisPoints",
           "#._referrerConfig.recipient",
           "#._extraData"
