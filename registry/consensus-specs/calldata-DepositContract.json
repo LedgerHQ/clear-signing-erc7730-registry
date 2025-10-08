@@ -143,7 +143,7 @@
     "formats": {
       "deposit(bytes,bytes,bytes,bytes32)": {
         "$id": null,
-        "intent": "top up validator",
+        "intent": "Stake ETH",
         "screens": null,
         "fields": [
           {

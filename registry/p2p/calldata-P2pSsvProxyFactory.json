@@ -2187,7 +2187,7 @@
     "formats": {
       "addEth(bytes32,uint96,(uint96,address),(uint96,address),bytes)": {
         "$id": null,
-        "intent": "Stake ETH with SSV on p2p.org",
+        "intent": "Stake ETH with SSV",
         "screens": null,
         "fields": [
           {

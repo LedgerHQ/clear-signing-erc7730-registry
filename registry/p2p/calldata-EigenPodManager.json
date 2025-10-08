@@ -698,7 +698,7 @@
     "formats": {
       "createPod()": {
         "$id": null,
-        "intent": "Create EigenLayer Pod",
+        "intent": "Create EigenLayerPod",
         "screens": null,
         "fields": [],
         "required": [],

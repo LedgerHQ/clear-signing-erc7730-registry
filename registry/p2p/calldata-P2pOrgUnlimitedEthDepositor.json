@@ -596,12 +596,12 @@
     "formats": {
       "addEth(bytes32,uint96,address,(uint96,address),(uint96,address),bytes)": {
         "$id": null,
-        "intent": "Stake ETH with p2p.org",
+        "intent": "Stake ETH",
         "screens": null,
         "fields": [
           {
             "$id": null,
-            "label": "Validator withdrawal credentials",
+            "label": "Withdraw credentials",
             "format": "raw",
             "params": null,
             "path": "#._eth2WithdrawalCredentials",
@@ -609,7 +609,7 @@
           },
           {
             "$id": null,
-            "label": "Amount of ETH stake per single validator",
+            "label": "ETH per validator",
             "format": "amount",
             "params": null,
             "path": "#._ethAmountPerValidatorInWei",

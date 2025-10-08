@@ -50,7 +50,7 @@
     "formats": {
       "send(string)": {
         "$id": null,
-        "intent": "Withdraw P2P validators",
+        "intent": "Withdraw validators",
         "screens": null,
         "fields": [
           {

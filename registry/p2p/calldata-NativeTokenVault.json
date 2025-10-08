@@ -842,7 +842,7 @@
     "formats": {
       "deposit(address,address)": {
         "$id": null,
-        "intent": "Deposit ETH with p2p.org",
+        "intent": "Stake ETH with p2p",
         "screens": null,
         "fields": [
           {
@@ -881,7 +881,7 @@
       },
       "updateStateAndDeposit(address,address,(bytes32,int160,uint160,bytes32[]))": {
         "$id": null,
-        "intent": "Deposit ETH with p2p.org",
+        "intent": "Stake ETH with p2p",
         "screens": null,
         "fields": [
           {
@@ -945,7 +945,7 @@
       },
       "enterExitQueue(uint256,address)": {
         "$id": null,
-        "intent": "Initiate exit of funds",
+        "intent": "Exit funds",
         "screens": null,
         "fields": [
           {
