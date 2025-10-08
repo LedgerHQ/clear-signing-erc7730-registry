@@ -148,7 +148,7 @@
         "fields": [
           {
             "$id": null,
-            "label": "Validator public key",
+            "label": "Public key",
             "format": "raw",
             "params": null,
             "path": "#.pubkey",
@@ -156,7 +156,7 @@
           },
           {
             "$id": null,
-            "label": "Validator withdrawal credentials",
+            "label": "Withdraw credentials",
             "format": "raw",
             "params": null,
             "path": "#.withdrawal_credentials",

@@ -950,7 +950,7 @@
         "fields": [
           {
             "$id": null,
-            "label": "Amount of shares to exit",
+            "label": "Amount to exit",
             "format": "amount",
             "params": null,
             "path": "#.shares",

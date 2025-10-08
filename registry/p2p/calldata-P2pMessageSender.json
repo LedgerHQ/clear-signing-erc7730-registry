@@ -55,7 +55,7 @@
         "fields": [
           {
             "$id": null,
-            "label": "Validator public keys",
+            "label": "Public keys",
             "format": "raw",
             "params": null,
             "path": "#.text",
