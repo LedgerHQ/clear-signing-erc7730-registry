@@ -83,72 +83,46 @@
   "display": {
     "formats": {
       "batchDeposit(bytes,bytes,bytes,bytes32[])": {
-        "$id": null,
         "intent": "Stake 32ETH per validators",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
-          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
-          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
-          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
+          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" }
         ],
-        "required": ["#.publicKeys", "#.withdrawalCreds"],
-        "excluded": null
+        "required": ["#.publicKeys", "#.withdrawalCreds"]
       },
       "batchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
-        "$id": null,
         "intent": "Stake custom amount of ETH per validators",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
-          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
-          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
-          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null },
-          {
-            "$id": null,
-            "label": "Amount Per Validator",
-            "format": "amount",
-            "params": null,
-            "path": "#.amountPerValidator",
-            "value": null
-          }
+          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" },
+          { "label": "Amount Per Validator", "format": "amount", "path": "#.amountPerValidator" }
         ],
-        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"],
-        "excluded": null
+        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"]
       },
       "bigBatchDeposit(bytes,bytes,bytes,bytes32[])": {
-        "$id": null,
         "intent": "Large Batch Deposit",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
-          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
-          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
-          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
+          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" }
         ],
-        "required": ["#.publicKeys", "#.withdrawalCreds"],
-        "excluded": null
+        "required": ["#.publicKeys", "#.withdrawalCreds"]
       },
       "bigBatchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
-        "$id": null,
         "intent": "Large Batch Deposit Custom",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
-          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
-          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
-          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null },
-          {
-            "$id": null,
-            "label": "Amount Per Validator",
-            "format": "amount",
-            "params": null,
-            "path": "#.amountPerValidator",
-            "value": null
-          }
+          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" },
+          { "label": "Amount Per Validator", "format": "amount", "path": "#.amountPerValidator" }
         ],
-        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"],
-        "excluded": null
+        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"]
       }
     }
   }

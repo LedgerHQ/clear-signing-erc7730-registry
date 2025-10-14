@@ -28,12 +28,9 @@
   "display": {
     "formats": {
       "requestExit(bytes[])": {
-        "$id": null,
         "intent": "Request Validator Exit",
-        "screens": null,
-        "fields": [{ "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.validators_.[]", "value": null }],
-        "required": ["#.validators_.[]"],
-        "excluded": null
+        "fields": [{ "label": "Validators", "format": "raw", "path": "#.validators_.[]" }],
+        "required": ["#.validators_.[]"]
       }
     }
   }
