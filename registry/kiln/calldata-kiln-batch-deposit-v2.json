@@ -1,0 +1,155 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Kiln ETH Native Staking - Batch Deposit",
+    "contract": {
+      "deployments": [
+        { "chainId": 1, "address": "0x576834cB068e677db4aFF6ca245c7bde16C3867e" },
+        { "chainId": 560048, "address": "0x00ae9b96Ef8D5D54cFCC02d9A1Ccc19ACD688B72" }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "batchDeposit",
+          "inputs": [
+            { "name": "publicKeys", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "withdrawalCreds", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "signatures", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "dataRoots", "type": "bytes32[]", "internalType": null, "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "batchDepositCustom",
+          "inputs": [
+            { "name": "publicKeys", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "withdrawalCreds", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "signatures", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "dataRoots", "type": "bytes32[]", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "amountPerValidator", "type": "uint256", "internalType": null, "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "bigBatchDeposit",
+          "inputs": [
+            { "name": "publicKeys", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "withdrawalCreds", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "signatures", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "dataRoots", "type": "bytes32[]", "internalType": null, "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "bigBatchDepositCustom",
+          "inputs": [
+            { "name": "publicKeys", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "withdrawalCreds", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "signatures", "type": "bytes", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "dataRoots", "type": "bytes32[]", "internalType": null, "components": null, "indexed": null, "unit": null },
+            { "name": "amountPerValidator", "type": "uint256", "internalType": null, "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": { "owner": "Kiln", "info": { "legalName": "Kiln", "url": "https://kiln.fi" } },
+  "display": {
+    "formats": {
+      "batchDeposit(bytes,bytes,bytes,bytes32[])": {
+        "$id": null,
+        "intent": "Stake 32ETH per validators",
+        "screens": null,
+        "fields": [
+          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
+          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
+          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
+          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
+        ],
+        "required": ["#.publicKeys","#.withdrawalCreds"],
+        "excluded": null
+      },
+      "batchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
+        "$id": null,
+        "intent": "Stake custom amount of ETH per validators",
+        "screens": null,
+        "fields": [
+          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
+          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
+          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
+          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null },
+          {
+            "$id": null,
+            "label": "Amount Per Validator",
+            "format": "amount",
+            "params": null,
+            "path": "#.amountPerValidator",
+            "value": null
+          }
+        ],
+        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"],
+        "excluded": null
+      },
+      "bigBatchDeposit(bytes,bytes,bytes,bytes32[])": {
+        "$id": null,
+        "intent": "Large Batch Deposit",
+        "screens": null,
+        "fields": [
+          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
+          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
+          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
+          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
+        ],
+        "required": ["#.publicKeys","#.withdrawalCreds"],
+        "excluded": null
+      },
+      "bigBatchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
+        "$id": null,
+        "intent": "Large Batch Deposit Custom",
+        "screens": null,
+        "fields": [
+          { "$id": null, "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys", "value": null },
+          { "$id": null, "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds", "value": null },
+          { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
+          { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null },
+          {
+            "$id": null,
+            "label": "Amount Per Validator",
+            "format": "amount",
+            "params": null,
+            "path": "#.amountPerValidator",
+            "value": null
+          }
+        ],
+        "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"],
+        "excluded": null
+      }
+    }
+  }
+}
