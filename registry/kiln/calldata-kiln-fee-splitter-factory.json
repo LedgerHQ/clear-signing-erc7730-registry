@@ -153,15 +153,20 @@
             "path": "#._owner"
           },
           { "label": "Name", "format": "raw", "path": "#._name" },
-          { "label": "Operator Fee", "format": "raw", "params": {}, "path": "#._operatorFee" },
-          { "label": "Maximum Operator Fee", "format": "raw", "path": "#._maximumOperatorFee" },
+          { "label": "Operator Fee", "format": "unit", "params": { "base": "%", "decimals": "2" }, "path": "#._operatorFee" },
+          {
+            "label": "Maximum Operator Fee",
+            "format": "unit",
+            "params": { "base": "%", "decimals": "2" },
+            "path": "#._maximumOperatorFee"
+          },
           {
             "label": "Recipients",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] },
             "path": "#._recipients.[]"
           },
-          { "label": "Percentages", "format": "raw", "path": "#._percents.[]" }
+          { "label": "Percentages", "format": "unit", "params": { "base": "%", "decimals": "2" }, "path": "#._percents.[]" }
         ],
         "required": ["#._owner", "#._name", "#._operatorFee", "#._maximumOperatorFee", "#._recipients.[]", "#._percents.[]"]
       },
