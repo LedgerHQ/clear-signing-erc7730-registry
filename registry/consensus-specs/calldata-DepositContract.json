@@ -148,7 +148,7 @@
         "fields": [
           {
             "$id": null,
-            "label": "Public key",
+            "label": "Validator public key",
             "format": "raw",
             "params": null,
             "path": "#.pubkey",
