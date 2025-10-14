@@ -92,7 +92,7 @@
           { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
           { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
         ],
-        "required": ["#.publicKeys","#.withdrawalCreds"],
+        "required": ["#.publicKeys", "#.withdrawalCreds"],
         "excluded": null
       },
       "batchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
@@ -126,7 +126,7 @@
           { "$id": null, "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures", "value": null },
           { "$id": null, "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]", "value": null }
         ],
-        "required": ["#.publicKeys","#.withdrawalCreds"],
+        "required": ["#.publicKeys", "#.withdrawalCreds"],
         "excluded": null
       },
       "bigBatchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
