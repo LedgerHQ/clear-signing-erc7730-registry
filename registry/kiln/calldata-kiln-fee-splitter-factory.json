@@ -1,5 +1,5 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
+  "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
   "context": {
     "$id": "Kiln ETH Native Staking - Fee Splitter Factory",
     "contract": {
@@ -8,17 +8,6 @@
         { "chainId": 560048, "address": "0x1A76bc69922744807E86375f8B8AB8A7cf18Eb7a" }
       ],
       "abi": [
-        {
-          "type": "function",
-          "name": "IMPLEMENTATION",
-          "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "contract Splitter", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
         {
           "type": "function",
           "name": "acceptOwnership",
@@ -126,61 +115,6 @@
         },
         {
           "type": "function",
-          "name": "isOperator",
-          "inputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
-          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
-        {
-          "type": "function",
-          "name": "owner",
-          "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
-        {
-          "type": "function",
-          "name": "pendingOwner",
-          "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
-        {
-          "type": "function",
-          "name": "predictSplitter",
-          "inputs": [
-            {
-              "name": "operator",
-              "type": "address",
-              "internalType": "contract Operator",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "owner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "salt", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }
-          ],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
-        {
-          "type": "function",
           "name": "renounceOwnership",
           "inputs": [],
           "outputs": [],
@@ -210,135 +144,71 @@
   "display": {
     "formats": {
       "createOperator(address,string,uint256,uint256,address[],uint256[])": {
-        "$id": null,
         "intent": "Create Operator",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Owner",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["ens", "local"] },
-            "path": "#._owner",
-            "value": null
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["ens", "local"] },
+            "path": "#._owner"
           },
-          { "$id": null, "label": "Name", "format": "raw", "params": null, "path": "#._name", "value": null },
-          { "$id": null, "label": "Operator Fee", "format": "raw", "params": {}, "path": "#._operatorFee", "value": null },
+          { "label": "Name", "format": "raw", "path": "#._name" },
+          { "label": "Operator Fee", "format": "raw", "params": {}, "path": "#._operatorFee" },
+          { "label": "Maximum Operator Fee", "format": "raw", "path": "#._maximumOperatorFee" },
           {
-            "$id": null,
-            "label": "Maximum Operator Fee",
-            "format": "raw",
-            "params": null,
-            "path": "#._maximumOperatorFee",
-            "value": null
-          },
-          {
-            "$id": null,
             "label": "Recipients",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
-            "path": "#._recipients.[]",
-            "value": null
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] },
+            "path": "#._recipients.[]"
           },
-          { "$id": null, "label": "Percents", "format": "raw", "params": null, "path": "#._percents.[]", "value": null }
+          { "label": "Percentages", "format": "raw", "path": "#._percents.[]" }
         ],
-        "required": ["#._owner", "#._name", "#._operatorFee", "#._maximumOperatorFee", "#._recipients.[]", "#._percents.[]"],
-        "excluded": null
+        "required": ["#._owner", "#._name", "#._operatorFee", "#._maximumOperatorFee", "#._recipients.[]", "#._percents.[]"]
       },
       "createSplitter(address,bytes32)": {
-        "$id": null,
         "intent": "Create Splitter",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Operator",
             "format": "addressName",
-            "params": { "types": ["contract"], "sources": [] },
-            "path": "#.operator",
-            "value": null
+            "params": { "types": ["contract"], "sources": ["local", "ens"] },
+            "path": "#.operator"
           },
-          { "$id": null, "label": "Salt", "format": "raw", "params": null, "path": "#.salt", "value": null }
+          { "label": "Salt", "format": "raw", "path": "#.salt" }
         ],
-        "required": ["#.operator"],
-        "excluded": null
+        "required": ["#.operator"]
       },
       "createSplitterAndCall(address,bytes32,address,bytes)": {
-        "$id": null,
         "intent": "Create Splitter and Stake",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "Operator",
             "format": "addressName",
-            "params": { "types": ["contract"], "sources": null },
-            "path": "#.operator",
-            "value": null
+            "params": { "types": ["contract"], "sources": ["local", "ens"] },
+            "path": "#.operator"
           },
-          { "$id": null, "label": "Salt", "format": "raw", "params": null, "path": "#.salt", "value": null },
+          { "label": "Salt", "format": "raw", "path": "#.salt" },
           {
-            "$id": null,
             "label": "Call Address",
             "format": "addressName",
-            "params": { "types": ["contract"], "sources": null },
-            "path": "#.callAddress",
-            "value": null
+            "params": { "types": ["contract"], "sources": ["local", "ens"] },
+            "path": "#.callAddress"
           },
-          {
-            "$id": null,
-            "label": "Transaction",
-            "format": "calldata",
-            "params": { "calleePath": "#.callAddress" },
-            "path": "#.data",
-            "value": null
-          }
+          { "label": "Transaction", "format": "calldata", "params": { "calleePath": "#.callAddress" }, "path": "#.data" }
         ],
-        "required": ["#.operator", "#.data"],
-        "excluded": null
-      },
-      "predictSplitter(address,address,bytes32)": {
-        "$id": null,
-        "intent": "Predict Splitter",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Operator",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": null },
-            "path": "#.operator",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Owner",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
-            "path": "#.owner",
-            "value": null
-          },
-          { "$id": null, "label": "Salt", "format": "raw", "params": null, "path": "#.salt", "value": null }
-        ],
-        "required": ["#.operator", "#.owner", "#.salt"],
-        "excluded": null
+        "required": ["#.operator", "#.data"]
       },
       "transferOwnership(address)": {
-        "$id": null,
         "intent": "Transfer Ownership",
-        "screens": null,
         "fields": [
           {
-            "$id": null,
             "label": "New Owner",
             "format": "addressName",
             "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] },
-            "path": "#.newOwner",
-            "value": null
+            "path": "#.newOwner"
           }
         ],
-        "required": ["#.newOwner"],
-        "excluded": null
+        "required": ["#.newOwner"]
       }
     }
   }
