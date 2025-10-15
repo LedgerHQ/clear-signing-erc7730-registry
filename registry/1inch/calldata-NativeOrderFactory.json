@@ -30,11 +30,7 @@
         "$id": "create",
         "intent": "create order",
         "fields": [
-          {
-            "label": "Amount to Send",
-            "path": "@.value",
-            "format": "amount"
-          },
+          { "label": "Amount to Send", "path": "@.value", "format": "amount" },
           {
             "label": "Minimum to receive",
             "path": "makerOrder.takingAmount",
@@ -44,12 +40,7 @@
               "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"]
             }
           },
-          {
-            "label": "Beneficiary",
-            "path": "makerOrder.receiver",
-            "format": "addressName",
-            "params": { "types": [ "eoa", "contract" ] }
-          }
+          { "label": "Beneficiary", "path": "makerOrder.receiver", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["makerOrder.takingAmount", "makerOrder.takerAsset", "makerOrder.receiver"],
         "excluded": ["makerOrder.salt", "makerOrder.maker", "makerOrder.makerAsset", "makerOrder.makingAmount", "makerOrder.makerTraits"]
