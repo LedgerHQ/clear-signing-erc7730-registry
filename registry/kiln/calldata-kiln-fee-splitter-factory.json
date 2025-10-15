@@ -1,7 +1,7 @@
 {
   "$schema": "https://eips.ethereum.org/assets/eip-7730/erc7730-v1.schema.json",
   "context": {
-    "$id": "Kiln ETH Native Staking - Fee Splitter Factory",
+    "$id": "Kiln Staking - Fee Splitter",
     "contract": {
       "deployments": [
         { "chainId": 1, "address": "0x8659EEFF31CFcff580D37AF8e7Af250F8998aA83" },
