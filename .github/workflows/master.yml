@@ -27,7 +27,7 @@ jobs:
 
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup python
         timeout-minutes: 10

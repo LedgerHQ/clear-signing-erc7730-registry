@@ -1,0 +1,87 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "abi": [
+        {
+          "outputs": [],
+          "inputs": [{ "name": "candidate", "internalType": "address", "type": "address" }],
+          "name": "delegateCoin",
+          "stateMutability": "payable",
+          "type": "function"
+        },
+        {
+          "outputs": [],
+          "inputs": [
+            { "name": "candidate", "internalType": "address", "type": "address" },
+            { "name": "amount", "internalType": "uint256", "type": "uint256" }
+          ],
+          "name": "undelegateCoin",
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "outputs": [],
+          "inputs": [
+            { "name": "sourceCandidate", "internalType": "address", "type": "address" },
+            { "name": "targetCandidate", "internalType": "address", "type": "address" },
+            { "name": "amount", "internalType": "uint256", "type": "uint256" }
+          ],
+          "name": "transferCoin",
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ],
+      "deployments": [{ "chainId": 1116, "address": "0x0000000000000000000000000000000000001011" }]
+    }
+  },
+  "metadata": { "owner": "CoreDAO", "info": { "legalName": "CoreDAO CoreAgent Contract", "url": "https://coredao.org/" } },
+  "display": {
+    "formats": {
+      "delegateCoin(address)": {
+        "intent": "Delegate CORE tokens to a validator",
+        "fields": [
+          {
+            "path": "candidate",
+            "label": "Validator Address",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["candidate"]
+      },
+      "undelegateCoin(address,uint256)": {
+        "intent": "Unstake CORE tokens from a validator",
+        "fields": [
+          {
+            "path": "candidate",
+            "label": "Validator Address",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
+        ],
+        "required": ["candidate", "amount"]
+      },
+      "transferCoin(address,address,uint256)": {
+        "intent": "Move staked CORE from one validator to another",
+        "fields": [
+          {
+            "path": "sourceCandidate",
+            "label": "From Validator",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "targetCandidate",
+            "label": "To Validator",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
+        ],
+        "required": ["sourceCandidate", "targetCandidate", "amount"]
+      }
+    }
+  }
+}
