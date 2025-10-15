@@ -1,7 +1,7 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": "Kiln ETH Native Staking - Batch Exit",
+    "$id": "Kiln Staking - Batch Exit",
     "contract": {
       "deployments": [
         { "chainId": 1, "address": "0x004c226fff73aa94b78a4df1a0e861797ba16819" },
