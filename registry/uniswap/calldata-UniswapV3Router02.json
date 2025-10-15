@@ -33,7 +33,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
         "required": ["params.amountIn", "params.amountOutMinimum", "params.recipient"]
@@ -54,7 +54,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
         "required": ["params.amountIn", "params.amountOutMinimum", "params.fee", "params.recipient"]
@@ -79,7 +79,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
         "required": ["params.amountInMaximum", "params.amountOut", "params.recipient"]
@@ -105,7 +105,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ]
       },
@@ -124,7 +124,7 @@
             "path": "to",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ]
       },
@@ -138,7 +138,7 @@
             "path": "to",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa","contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ]
       }
