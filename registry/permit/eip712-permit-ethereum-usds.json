@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 1, "address": "0xdC035D45d973E3EC169d2276DDab16f1e407384F" }],
+      "domain": { "name": "Permit", "chainId": 1, "verifyingContract": "0xdC035D45d973E3EC169d2276DDab16f1e407384F" }
+    }
+  },
+  "metadata": { "owner": "USDS" }
+}
