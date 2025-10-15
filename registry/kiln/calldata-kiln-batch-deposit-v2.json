@@ -1,7 +1,7 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": "Kiln ETH Native Staking - Batch Deposit",
+    "$id": "Kiln Staking - Batch Deposit",
     "contract": {
       "deployments": [
         { "chainId": 1, "address": "0x576834cB068e677db4aFF6ca245c7bde16C3867e" },
@@ -85,41 +85,41 @@
       "batchDeposit(bytes,bytes,bytes,bytes32[])": {
         "intent": "Stake 32ETH per validators",
         "fields": [
-          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
-          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
-          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
-          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" }
+          { "label": "Validators", "format": "raw", "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "path": "#.dataRoots.[]" }
         ],
         "required": ["#.publicKeys", "#.withdrawalCreds"]
       },
       "batchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
-        "intent": "Stake custom amount of ETH per validators",
+        "intent": "Stake any amount per validator",
         "fields": [
-          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
-          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
-          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
-          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" },
+          { "label": "Validators", "format": "raw", "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "path": "#.dataRoots.[]" },
           { "label": "Amount Per Validator", "format": "amount", "path": "#.amountPerValidator" }
         ],
         "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"]
       },
       "bigBatchDeposit(bytes,bytes,bytes,bytes32[])": {
-        "intent": "Large Batch Deposit",
+        "intent": "Stake 32ETH per validators",
         "fields": [
-          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
-          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
-          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
-          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" }
+          { "label": "Validators", "format": "raw", "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "path": "#.dataRoots.[]" }
         ],
         "required": ["#.publicKeys", "#.withdrawalCreds"]
       },
       "bigBatchDepositCustom(bytes,bytes,bytes,bytes32[],uint256)": {
-        "intent": "Large Batch Deposit Custom",
+        "intent": "Stake any amount per validator",
         "fields": [
-          { "label": "Validators", "format": "raw", "params": null, "path": "#.publicKeys" },
-          { "label": "Type and owner", "format": "raw", "params": null, "path": "#.withdrawalCreds" },
-          { "label": "Signatures", "format": "raw", "params": null, "path": "#.signatures" },
-          { "label": "Data Roots", "format": "raw", "params": null, "path": "#.dataRoots.[]" },
+          { "label": "Validators", "format": "raw", "path": "#.publicKeys" },
+          { "label": "Type and owner", "format": "raw", "path": "#.withdrawalCreds" },
+          { "label": "Signatures", "format": "raw", "path": "#.signatures" },
+          { "label": "Data Roots", "format": "raw", "path": "#.dataRoots.[]" },
           { "label": "Amount Per Validator", "format": "amount", "path": "#.amountPerValidator" }
         ],
         "required": ["#.publicKeys", "#.withdrawalCreds", "#.amountPerValidator"]
