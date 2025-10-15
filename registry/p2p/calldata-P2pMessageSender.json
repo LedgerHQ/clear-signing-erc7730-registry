@@ -4,29 +4,14 @@
     "$id": "P2pMessageSender",
     "contract": {
       "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x4E1224f513048e18e7a1883985B45dc0Fe1D917e"
-        },
-        {
-          "chainId": 560048,
-          "address": "0x917105CC314C12890D9C8224Aee5aF9574F871cf"
-        }
+        { "chainId": 1, "address": "0x4E1224f513048e18e7a1883985B45dc0Fe1D917e" },
+        { "chainId": 560048, "address": "0x917105CC314C12890D9C8224Aee5aF9574F871cf" }
       ],
       "abi": [
         {
           "type": "function",
           "name": "send",
-          "inputs": [
-            {
-              "name": "text",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "text", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -39,29 +24,14 @@
       "factory": null
     }
   },
-  "metadata": {
-    "owner": "p2p",
-    "info": {
-      "legalName": "P2P Staking",
-      "url": "https://www.p2p.org/"
-    }
-  },
+  "metadata": { "owner": "p2p", "info": { "legalName": "P2P Staking", "url": "https://www.p2p.org/" } },
   "display": {
     "formats": {
       "send(string)": {
         "$id": null,
         "intent": "Withdraw validators",
         "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Public keys",
-            "format": "raw",
-            "params": null,
-            "path": "#.text",
-            "value": null
-          }
-        ],
+        "fields": [{ "$id": null, "label": "Public keys", "format": "raw", "params": null, "path": "#.text", "value": null }],
         "required": ["#.text"],
         "excluded": null
       }

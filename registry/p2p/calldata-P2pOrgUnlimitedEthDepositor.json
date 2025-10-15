@@ -4,14 +4,8 @@
     "$id": "P2pOrgUnlimitedEthDepositor",
     "contract": {
       "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x23be839a14cec3d6d716d904f09368bbf9c750eb"
-        },
-        {
-          "chainId": 560048,
-          "address": "0x933AcC6f337489D78188CBef2141cD9D6466d07D"
-        }
+        { "chainId": 1, "address": "0x23be839a14cec3d6d716d904f09368bbf9c750eb" },
+        { "chainId": 560048, "address": "0x933AcC6f337489D78188CBef2141cD9D6466d07D" }
       ],
       "abi": [
         {
@@ -47,18 +41,8 @@
               "type": "tuple",
               "internalType": "struct FeeRecipient",
               "components": [
-                {
-                  "name": "basisPoints",
-                  "type": "uint96",
-                  "internalType": "uint96",
-                  "components": null
-                },
-                {
-                  "name": "recipient",
-                  "type": "address",
-                  "internalType": "address payable",
-                  "components": null
-                }
+                { "name": "basisPoints", "type": "uint96", "internalType": "uint96", "components": null },
+                { "name": "recipient", "type": "address", "internalType": "address payable", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -68,40 +52,16 @@
               "type": "tuple",
               "internalType": "struct FeeRecipient",
               "components": [
-                {
-                  "name": "basisPoints",
-                  "type": "uint96",
-                  "internalType": "uint96",
-                  "components": null
-                },
-                {
-                  "name": "recipient",
-                  "type": "address",
-                  "internalType": "address payable",
-                  "components": null
-                }
+                { "name": "basisPoints", "type": "uint96", "internalType": "uint96", "components": null },
+                { "name": "recipient", "type": "address", "internalType": "address payable", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_extraData",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_extraData", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "depositId",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "depositId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
             {
               "name": "feeDistributorInstance",
               "type": "address",
@@ -120,26 +80,8 @@
         {
           "type": "function",
           "name": "depositAmount",
-          "inputs": [
-            {
-              "name": "_depositId",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint112",
-              "internalType": "uint112",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_depositId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "uint112", "internalType": "uint112", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -149,26 +91,8 @@
         {
           "type": "function",
           "name": "depositExpiration",
-          "inputs": [
-            {
-              "name": "_depositId",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint40",
-              "internalType": "uint40",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_depositId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "uint40", "internalType": "uint40", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -178,16 +102,7 @@
         {
           "type": "function",
           "name": "depositStatus",
-          "inputs": [
-            {
-              "name": "_depositId",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "_depositId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
           "outputs": [
             {
               "name": "",
@@ -208,16 +123,7 @@
           "type": "function",
           "name": "eip7251Enabled",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -264,16 +170,7 @@
               "unit": null
             }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "pure",
           "constant": null,
           "payable": null,
@@ -313,18 +210,8 @@
               "type": "tuple",
               "internalType": "struct FeeRecipient",
               "components": [
-                {
-                  "name": "basisPoints",
-                  "type": "uint96",
-                  "internalType": "uint96",
-                  "components": null
-                },
-                {
-                  "name": "recipient",
-                  "type": "address",
-                  "internalType": "address payable",
-                  "components": null
-                }
+                { "name": "basisPoints", "type": "uint96", "internalType": "uint96", "components": null },
+                { "name": "recipient", "type": "address", "internalType": "address payable", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -334,33 +221,14 @@
               "type": "tuple",
               "internalType": "struct FeeRecipient",
               "components": [
-                {
-                  "name": "basisPoints",
-                  "type": "uint96",
-                  "internalType": "uint96",
-                  "components": null
-                },
-                {
-                  "name": "recipient",
-                  "type": "address",
-                  "internalType": "address payable",
-                  "components": null
-                }
+                { "name": "basisPoints", "type": "uint96", "internalType": "uint96", "components": null },
+                { "name": "recipient", "type": "address", "internalType": "address payable", "components": null }
               ],
               "indexed": null,
               "unit": null
             }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -435,22 +303,8 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "_pubkeys",
-              "type": "bytes[]",
-              "internalType": "bytes[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_signatures",
-              "type": "bytes[]",
-              "internalType": "bytes[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "_pubkeys", "type": "bytes[]", "internalType": "bytes[]", "components": null, "indexed": null, "unit": null },
+            { "name": "_signatures", "type": "bytes[]", "internalType": "bytes[]", "components": null, "indexed": null, "unit": null },
             {
               "name": "_depositDataRoots",
               "type": "bytes32[]",
@@ -507,22 +361,8 @@
           "type": "function",
           "name": "rejectService",
           "inputs": [
-            {
-              "name": "_depositId",
-              "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_reason",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_depositId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
+            { "name": "_reason", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -534,26 +374,8 @@
         {
           "type": "function",
           "name": "supportsInterface",
-          "inputs": [
-            {
-              "name": "interfaceId",
-              "type": "bytes4",
-              "internalType": "bytes4",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "interfaceId", "type": "bytes4", "internalType": "bytes4", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -564,16 +386,7 @@
           "type": "function",
           "name": "totalBalance",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -585,13 +398,7 @@
       "factory": null
     }
   },
-  "metadata": {
-    "owner": "p2p",
-    "info": {
-      "legalName": "P2P Staking",
-      "url": "https://www.p2p.org/"
-    }
-  },
+  "metadata": { "owner": "p2p", "info": { "legalName": "P2P Staking", "url": "https://www.p2p.org/" } },
   "display": {
     "formats": {
       "addEth(bytes32,uint96,address,(uint96,address),(uint96,address),bytes)": {
@@ -615,32 +422,17 @@
             "path": "#._ethAmountPerValidatorInWei",
             "value": null
           },
-          {
-            "$id": null,
-            "label": "Amount to deposit",
-            "format": "amount",
-            "params": null,
-            "path": "@.value",
-            "value": null
-          },
+          { "$id": null, "label": "Amount to deposit", "format": "amount", "params": null, "path": "@.value", "value": null },
           {
             "$id": null,
             "label": "Fee Distributor",
             "format": "addressName",
-            "params": {
-              "types": ["contract"],
-              "sources": null
-            },
+            "params": { "types": ["contract"], "sources": null },
             "path": "#._referenceFeeDistributor",
             "value": null
           }
         ],
-        "required": [
-          "#._eth2WithdrawalCredentials",
-          "#._ethAmountPerValidatorInWei",
-          "@.value",
-          "#._referenceFeeDistributor"
-        ],
+        "required": ["#._eth2WithdrawalCredentials", "#._ethAmountPerValidatorInWei", "@.value", "#._referenceFeeDistributor"],
         "excluded": [
           "#._clientConfig",
           "#._clientConfig.basisPoints",
