@@ -371,7 +371,7 @@
           "fields": [
             {
               "$id": null,
-              "label": "Pubkeys",
+              "label": "Validator Public Key",
               "format": "raw",
               "params": null,
               "path": "#.pubkeys.[]",
