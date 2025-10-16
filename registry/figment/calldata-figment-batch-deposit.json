@@ -387,22 +387,6 @@
             },
             {
               "$id": null,
-              "label": "Signatures",
-              "format": "raw",
-              "params": null,
-              "path": "#.signatures.[]",
-              "value": null
-            },
-            {
-              "$id": null,
-              "label": "Deposit Data Roots",
-              "format": "raw",
-              "params": null,
-              "path": "#.deposit_data_roots.[]",
-              "value": null
-            },
-            {
-              "$id": null,
               "label": "Amount to Deposit",
               "format": "amount",
               "params": null,
@@ -413,7 +397,10 @@
           "required": [
             "#.amounts_gwei.[]"
           ],
-          "excluded": null
+          "excluded": [
+            "#.signatures.[]",
+            "#.deposit_data_roots.[]"
+          ]
         }
       }
     }
