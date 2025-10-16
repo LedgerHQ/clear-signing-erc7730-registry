@@ -388,8 +388,11 @@
             {
               "$id": null,
               "label": "Amount to Deposit",
-              "format": "amount",
-              "params": null,
+              "format": "unit",
+              "params": {
+                "base": "ETH",
+                "decimals": "9"
+              },
               "path": "#.amounts_gwei.[]",
               "value": null
             }
