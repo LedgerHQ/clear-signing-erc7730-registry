@@ -379,7 +379,7 @@
             },
             {
               "$id": null,
-              "label": "Withdrawal Credentials",
+              "label": "Withdraw Credentials",
               "format": "raw",
               "params": null,
               "path": "#.withdrawal_credentials.[]",
