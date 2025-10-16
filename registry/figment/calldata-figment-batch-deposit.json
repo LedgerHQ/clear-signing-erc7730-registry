@@ -403,7 +403,7 @@
             },
             {
               "$id": null,
-              "label": "Amounts Gwei",
+              "label": "Amount to Deposit",
               "format": "amount",
               "params": null,
               "path": "#.amounts_gwei.[]",
