@@ -1444,66 +1444,54 @@
             "value": null
           },
           {
-            "path": "#.batches.[]",
+            "path": "#.batches.[].[]",
             "value": null,
             "fields": [
               {
-                "path": "",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ],
-                      "sources": null
-                    },
-                    "path": "mixAdapters.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "addressName",
-                    "params": {
-                      "types": ["token"],
-                      "sources": null
-                    },
-                    "path": "assetTo.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "rawData.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "extraData.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "fromToken",
-                    "value": null
-                  }
-                ]
+                "$id": null,
+                "label": "",
+                "format": "addressName",
+                "params": {
+                  "types": ["wallet", "eoa", "contract", "token", "collection"],
+                  "sources": null
+                },
+                "path": "mixAdapters.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "addressName",
+                "params": {
+                  "types": ["token"],
+                  "sources": null
+                },
+                "path": "assetTo.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "rawData.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "extraData.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "fromToken",
+                "value": null
               }
             ]
           }
@@ -1588,66 +1576,54 @@
             "value": null
           },
           {
-            "path": "#.batches.[]",
+            "path": "#.batches.[].[]",
             "value": null,
             "fields": [
               {
-                "path": "",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ],
-                      "sources": null
-                    },
-                    "path": "mixAdapters.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "addressName",
-                    "params": {
-                      "types": ["token"],
-                      "sources": null
-                    },
-                    "path": "assetTo.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "rawData.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "extraData.[]",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "",
-                    "format": "raw",
-                    "params": null,
-                    "path": "fromToken",
-                    "value": null
-                  }
-                ]
+                "$id": null,
+                "label": "",
+                "format": "addressName",
+                "params": {
+                  "types": ["wallet", "eoa", "contract", "token", "collection"],
+                  "sources": null
+                },
+                "path": "mixAdapters.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "addressName",
+                "params": {
+                  "types": ["token"],
+                  "sources": null
+                },
+                "path": "assetTo.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "rawData.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "extraData.[]",
+                "value": null
+              },
+              {
+                "$id": null,
+                "label": "",
+                "format": "raw",
+                "params": null,
+                "path": "fromToken",
+                "value": null
               }
             ]
           }
