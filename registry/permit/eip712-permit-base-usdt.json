@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 8453, "address": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2" }],
+      "domain": { "name": "Permit", "chainId": 8453, "verifyingContract": "0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2" }
+    }
+  },
+  "metadata": { "owner": "Tether USD" }
+}

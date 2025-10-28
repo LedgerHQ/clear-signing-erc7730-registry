@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 10, "address": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85" }],
+      "domain": { "name": "Permit", "chainId": 10, "verifyingContract": "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85" }
+    }
+  },
+  "metadata": { "owner": "USD Coin" }
+}
