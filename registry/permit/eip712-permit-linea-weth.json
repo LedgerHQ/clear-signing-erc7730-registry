@@ -1,0 +1,11 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 59144, "address": "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f" }],
+      "domain": { "name": "Permit", "chainId": 59144, "verifyingContract": "0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f" }
+    }
+  },
+  "metadata": { "owner": "Wrapped Ether" }
+}
+

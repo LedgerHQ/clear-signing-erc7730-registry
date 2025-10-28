@@ -1,0 +1,11 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 43114, "address": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE" }],
+      "domain": { "name": "Permit", "chainId": 43114, "verifyingContract": "0x2b2C81e08f1Af8835a78Bb2A90AE924ACE0eA4bE" }
+    }
+  },
+  "metadata": { "owner": "Staked AVAX" }
+}
+

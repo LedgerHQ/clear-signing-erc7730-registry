@@ -11,11 +11,13 @@
         { "chainId": 56, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 100, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 137, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 146, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 250, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 8217, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 8453, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 42161, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 43114, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
+        { "chainId": 59144, "address": "0x111111125421cA6dc452d289314280a0f8842A65" },
         { "chainId": 1313161554, "address": "0x111111125421cA6dc452d289314280a0f8842A65" }
       ]
     }
