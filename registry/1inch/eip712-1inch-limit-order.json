@@ -9,7 +9,7 @@
         { "chainId": 137, "address": "0x94bc2a1c732bcad7343b25af48385fe76e08734f" },
         { "chainId": 42161, "address": "0x7f069df72b7a39bce9806e3afaf579e54d8cf2b9" }
       ],
-      "domain": { "name": "Permit2" },
+      "domain": { "name": "1inch" },
       "schemas": [
         {
           "primaryType": "OrderStructure",

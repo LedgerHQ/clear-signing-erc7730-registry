@@ -68,8 +68,8 @@
           {
             "path": "witness.baseOutputs.[]",
             "fields": [
-              { "path": "endAmount", "label": "Minimum amounts to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
-              { "path": "recipient", "label": "On Addresses", "format": "raw" }
+              { "path": "endAmount", "label": "Min amount to receive", "format": "tokenAmount", "params": { "tokenPath": "token" } },
+              { "path": "recipient", "label": "On Address", "format": "raw" }
             ]
           },
           { "path": "deadline", "label": "Approval expire", "format": "date", "params": { "encoding": "timestamp" } }
