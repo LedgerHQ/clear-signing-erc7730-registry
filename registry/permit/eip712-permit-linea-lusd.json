@@ -1,0 +1,11 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 59144, "address": "0xEB466342C4d449BC9f53A865D5Cb90586f405215" }],
+      "domain": { "name": "Permit", "chainId": 59144, "verifyingContract": "0xEB466342C4d449BC9f53A865D5Cb90586f405215" }
+    }
+  },
+  "metadata": { "owner": "Axelar Wrapped USDC" }
+}
+
