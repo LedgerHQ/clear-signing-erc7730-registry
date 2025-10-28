@@ -35,7 +35,7 @@ jobs:
       - name: Setup python
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: 'pip'
