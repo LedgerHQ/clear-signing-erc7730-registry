@@ -1,0 +1,11 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 10, "address": "0x8700dAec35aF8Ff88c16BdF0418774CB3D7599B4" }],
+      "domain": { "name": "Permit", "chainId": 10, "verifyingContract": "0x8700dAec35aF8Ff88c16BdF0418774CB3D7599B4" }
+    }
+  },
+  "metadata": { "owner": "Synthetix Network Token" }
+}
+
