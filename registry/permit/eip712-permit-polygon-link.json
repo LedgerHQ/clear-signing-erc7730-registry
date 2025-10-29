@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 137, "address": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39" }],
+      "domain": { "name": "Permit", "chainId": 137, "verifyingContract": "0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39" }
+    }
+  },
+  "metadata": { "owner": "ChainLink Token" }
+}

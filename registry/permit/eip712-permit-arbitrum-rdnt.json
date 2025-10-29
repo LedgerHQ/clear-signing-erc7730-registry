@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 42161, "address": "0x3082CC23568eA640225c2467653dB90e9250AaA0" }],
+      "domain": { "name": "Permit", "chainId": 42161, "verifyingContract": "0x3082CC23568eA640225c2467653dB90e9250AaA0" }
+    }
+  },
+  "metadata": { "owner": "Radiant" }
+}
