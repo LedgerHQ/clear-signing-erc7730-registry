@@ -3,12 +3,7 @@
   "context": {
     "$id": "OKX: DEX Router",
     "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x2E1Dee213BA8d7af0934C49a23187BabEACa8764"
-        }
-      ],
+      "deployments": [{ "chainId": 1, "address": "0x2E1Dee213BA8d7af0934C49a23187BabEACa8764" }],
       "abi": [
         {
           "type": "function",
@@ -19,36 +14,11 @@
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -66,36 +36,11 @@
               "type": "tuple[][]",
               "internalType": "struct DexRouter.RouterPath[][]",
               "components": [
-                {
-                  "name": "mixAdapters",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "assetTo",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "rawData",
-                  "type": "uint256[]",
-                  "internalType": "uint256[]",
-                  "components": null
-                },
-                {
-                  "name": "extraData",
-                  "type": "bytes[]",
-                  "internalType": "bytes[]",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "mixAdapters", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "assetTo", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "rawData", "type": "uint256[]", "internalType": "uint256[]", "components": null },
+                { "name": "extraData", "type": "bytes[]", "internalType": "bytes[]", "components": null },
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -105,88 +50,24 @@
               "type": "tuple[]",
               "internalType": "struct PMMLib.PMMSwapRequest[]",
               "components": [
-                {
-                  "name": "pathIndex",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "payer",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "salt",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "isPushOrder",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "extension",
-                  "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
-                }
+                { "name": "pathIndex", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "payer", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "salt", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "isPushOrder", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "extension", "type": "bytes", "internalType": "bytes", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "to",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "to", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -203,36 +84,11 @@
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -250,36 +106,11 @@
               "type": "tuple[][]",
               "internalType": "struct DexRouter.RouterPath[][]",
               "components": [
-                {
-                  "name": "mixAdapters",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "assetTo",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "rawData",
-                  "type": "uint256[]",
-                  "internalType": "uint256[]",
-                  "components": null
-                },
-                {
-                  "name": "extraData",
-                  "type": "bytes[]",
-                  "internalType": "bytes[]",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "mixAdapters", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "assetTo", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "rawData", "type": "uint256[]", "internalType": "uint256[]", "components": null },
+                { "name": "extraData", "type": "bytes[]", "internalType": "bytes[]", "components": null },
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -289,96 +120,25 @@
               "type": "tuple[]",
               "internalType": "struct PMMLib.PMMSwapRequest[]",
               "components": [
-                {
-                  "name": "pathIndex",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "payer",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "salt",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "isPushOrder",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "extension",
-                  "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
-                }
+                { "name": "pathIndex", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "payer", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "salt", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "isPushOrder", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "extension", "type": "bytes", "internalType": "bytes", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "to",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "refundTo",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "to", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "refundTo", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -390,49 +150,17 @@
           "type": "function",
           "name": "smartSwapByOrderId",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
             {
               "name": "baseRequest",
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -450,36 +178,11 @@
               "type": "tuple[][]",
               "internalType": "struct DexRouter.RouterPath[][]",
               "components": [
-                {
-                  "name": "mixAdapters",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "assetTo",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "rawData",
-                  "type": "uint256[]",
-                  "internalType": "uint256[]",
-                  "components": null
-                },
-                {
-                  "name": "extraData",
-                  "type": "bytes[]",
-                  "internalType": "bytes[]",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "mixAdapters", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "assetTo", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "rawData", "type": "uint256[]", "internalType": "uint256[]", "components": null },
+                { "name": "extraData", "type": "bytes[]", "internalType": "bytes[]", "components": null },
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -489,80 +192,23 @@
               "type": "tuple[]",
               "internalType": "struct PMMLib.PMMSwapRequest[]",
               "components": [
-                {
-                  "name": "pathIndex",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "payer",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "salt",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "isPushOrder",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "extension",
-                  "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
-                }
+                { "name": "pathIndex", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "payer", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "salt", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "isPushOrder", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "extension", "type": "bytes", "internalType": "bytes", "components": null }
               ],
               "indexed": null,
               "unit": null
             }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -574,57 +220,18 @@
           "type": "function",
           "name": "smartSwapTo",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "baseRequest",
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -642,36 +249,11 @@
               "type": "tuple[][]",
               "internalType": "struct DexRouter.RouterPath[][]",
               "components": [
-                {
-                  "name": "mixAdapters",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "assetTo",
-                  "type": "address[]",
-                  "internalType": "address[]",
-                  "components": null
-                },
-                {
-                  "name": "rawData",
-                  "type": "uint256[]",
-                  "internalType": "uint256[]",
-                  "components": null
-                },
-                {
-                  "name": "extraData",
-                  "type": "bytes[]",
-                  "internalType": "bytes[]",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "mixAdapters", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "assetTo", "type": "address[]", "internalType": "address[]", "components": null },
+                { "name": "rawData", "type": "uint256[]", "internalType": "uint256[]", "components": null },
+                { "name": "extraData", "type": "bytes[]", "internalType": "bytes[]", "components": null },
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -681,80 +263,23 @@
               "type": "tuple[]",
               "internalType": "struct PMMLib.PMMSwapRequest[]",
               "components": [
-                {
-                  "name": "pathIndex",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "payer",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toTokenAmountMax",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "salt",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "isPushOrder",
-                  "type": "bool",
-                  "internalType": "bool",
-                  "components": null
-                },
-                {
-                  "name": "extension",
-                  "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
-                }
+                { "name": "pathIndex", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "payer", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toTokenAmountMax", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "salt", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "isPushOrder", "type": "bool", "internalType": "bool", "components": null },
+                { "name": "extension", "type": "bytes", "internalType": "bytes", "components": null }
               ],
               "indexed": null,
               "unit": null
             }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -766,22 +291,8 @@
           "type": "function",
           "name": "swapWrap",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "rawdata",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "rawdata", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "payable",
@@ -794,57 +305,18 @@
           "type": "function",
           "name": "swapWrapToWithBaseRequest",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "baseRequest",
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
@@ -861,30 +333,9 @@
           "type": "function",
           "name": "uniswapV3SwapCallback",
           "inputs": [
-            {
-              "name": "amount0Delta",
-              "type": "int256",
-              "internalType": "int256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "amount1Delta",
-              "type": "int256",
-              "internalType": "int256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "amount0Delta", "type": "int256", "internalType": "int256", "components": null, "indexed": null, "unit": null },
+            { "name": "amount1Delta", "type": "int256", "internalType": "int256", "components": null, "indexed": null, "unit": null },
+            { "name": "", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -897,48 +348,13 @@
           "type": "function",
           "name": "uniswapV3SwapTo",
           "inputs": [
-            {
-              "name": "receiver",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "amount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "minReturn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "pools",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "receiver", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "amount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "minReturn", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "pools", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -950,79 +366,26 @@
           "type": "function",
           "name": "uniswapV3SwapToWithBaseRequest",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "baseRequest",
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "pools",
-              "type": "uint256[]",
-              "internalType": "uint256[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "pools", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -1034,48 +397,13 @@
           "type": "function",
           "name": "unxswapByOrderId",
           "inputs": [
-            {
-              "name": "srcToken",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "amount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "minReturn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "pools",
-              "type": "bytes32[]",
-              "internalType": "bytes32[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "srcToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "amount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "minReturn", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "pools", "type": "bytes32[]", "internalType": "bytes32[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -1087,56 +415,14 @@
           "type": "function",
           "name": "unxswapTo",
           "inputs": [
-            {
-              "name": "srcToken",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "amount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "minReturn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "pools",
-              "type": "bytes32[]",
-              "internalType": "bytes32[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "srcToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "amount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "minReturn", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            { "name": "pools", "type": "bytes32[]", "internalType": "bytes32[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -1148,79 +434,26 @@
           "type": "function",
           "name": "unxswapToWithBaseRequest",
           "inputs": [
-            {
-              "name": "orderId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "orderId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "baseRequest",
               "type": "tuple",
               "internalType": "struct DexRouter.BaseRequest",
               "components": [
-                {
-                  "name": "fromToken",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "toToken",
-                  "type": "address",
-                  "internalType": "address",
-                  "components": null
-                },
-                {
-                  "name": "fromTokenAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "minReturnAmount",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                },
-                {
-                  "name": "deadLine",
-                  "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
-                }
+                { "name": "fromToken", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "toToken", "type": "address", "internalType": "address", "components": null },
+                { "name": "fromTokenAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "minReturnAmount", "type": "uint256", "internalType": "uint256", "components": null },
+                { "name": "deadLine", "type": "uint256", "internalType": "uint256", "components": null }
               ],
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "pools",
-              "type": "bytes32[]",
-              "internalType": "bytes32[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "pools", "type": "bytes32[]", "internalType": "bytes32[]", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [
-            {
-              "name": "returnAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "returnAmount", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "stateMutability": "payable",
           "constant": null,
@@ -1231,111 +464,42 @@
       ]
     }
   },
-  "metadata": {
-    "owner": "OKX DEX",
-    "info": {
-      "legalName": "OKX",
-      "url": "https://www.okx.com"
-    }
-  },
+  "metadata": { "owner": "OKX DEX", "info": { "legalName": "OKX", "url": "https://www.okx.com" } },
   "display": {
     "formats": {
       "smartSwapTo(uint256,address,(uint256,address,uint256,uint256,uint256),uint256[],(address[],address[],uint256[],bytes[],uint256)[][],(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[])": {
         "intent": "Swap",
         "fields": [
-          {
-            "label": "Order ID",
-            "format": "raw",
-            "path": "#.orderId"
-          },
-          {
-            "label": "Beneficiary",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ]
-            },
-            "path": "#.receiver"
-          },
+          { "label": "Order ID", "format": "raw", "path": "#.orderId" },
+          { "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.receiver" },
           {
             "path": "#.baseRequest",
             "fields": [
-              {
-                "label": "Amount to Send",
-                "format": "tokenAmount",
-                "path": "fromTokenAmount",
-                "params": {
-                  "tokenPath": "fromToken"
-                }
-              },
+              { "label": "Amount to Send", "format": "tokenAmount", "path": "fromTokenAmount", "params": { "tokenPath": "fromToken" } },
               {
                 "label": "Minimum amount to Receive",
                 "format": "tokenAmount",
                 "path": "minReturnAmount",
-                "params": {
-                  "tokenPath": "toToken"
-                }
+                "params": { "tokenPath": "toToken" }
               },
-              {
-                "label": "Deadline",
-                "format": "date",
-                "path": "deadLine",
-                "params": {
-                  "encoding": "timestamp"
-                }
-              }
+              { "label": "Deadline", "format": "date", "path": "deadLine", "params": { "encoding": "timestamp" } }
             ]
           },
-          {
-            "label": "Batch Amounts",
-            "format": "amount",
-            "path": "#.batchesAmount.[]"
-          },
+          { "label": "Batch Amounts", "format": "amount", "path": "#.batchesAmount.[]" },
           {
             "path": "#.batches.[].[]",
             "fields": [
-                  {
-                    "label": "Adapter addresses",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ]
-                    },
-                    "path": "mixAdapters.[]"
-                  },
-                  {
-                    "label": "Assets to",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "assetTo.[]"
-                  },
-                  {
-                    "label": "Raw Data",
-                    "format": "raw",
-                    "path": "rawData.[]"
-                  },
-                  {
-                    "label": "Raw Extra Data",
-                    "format": "raw",
-                    "path": "extraData.[]"
-                  },
-                  {
-                    "label": "Assets from",
-                    "format": "raw",
-                    "path": "fromToken"
-                  }
-                ]
+              {
+                "label": "Adapter addresses",
+                "format": "addressName",
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+                "path": "mixAdapters.[]"
+              },
+              { "label": "Assets to", "format": "addressName", "params": { "types": ["token"] }, "path": "assetTo.[]" },
+              { "label": "Raw Data", "format": "raw", "path": "rawData.[]" },
+              { "label": "Raw Extra Data", "format": "raw", "path": "extraData.[]" },
+              { "label": "Assets from", "format": "raw", "path": "fromToken" }
+            ]
           }
         ],
         "required": [
@@ -1345,116 +509,45 @@
           "#.baseRequest.fromTokenAmount",
           "#.baseRequest.inReturnAmount"
         ],
-        "excluded": [
-          "#.requests.[]"
-        ]
+        "excluded": ["#.requests.[]"]
       },
       "smartSwapByOrderId(uint256,(uint256,address,uint256,uint256,uint256),uint256[],(address[],address[],uint256[],bytes[],uint256)[][],(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[])": {
         "intent": "Swap",
         "fields": [
-          {
-            "label": "Order ID",
-            "format": "raw",
-            "path": "#.orderId"
-          },
+          { "label": "Order ID", "format": "raw", "path": "#.orderId" },
           {
             "path": "#.baseRequest",
             "fields": [
-              {
-                "label": "Token to Receive",
-                "format": "addressName",
-                "params": {
-                  "types": [
-                    "token"
-                  ]
-                },
-                "path": "toToken"
-              },
-              {
-                "label": "Amount to Send",
-                "format": "tokenAmount",
-                "path": "fromTokenAmount",
-                "params": {
-                  "tokenPath": "fromToken"
-                }
-              },
+              { "label": "Token to Receive", "format": "addressName", "params": { "types": ["token"] }, "path": "toToken" },
+              { "label": "Amount to Send", "format": "tokenAmount", "path": "fromTokenAmount", "params": { "tokenPath": "fromToken" } },
               {
                 "label": "Minimum amount to Receive",
                 "format": "tokenAmount",
                 "path": "minReturnAmount",
-                "params": {
-                  "tokenPath": "toToken"
-                }
+                "params": { "tokenPath": "toToken" }
               },
-              {
-                "label": "Deadline",
-                "format": "date",
-                "path": "deadLine",
-                "params": {
-                  "encoding": "timestamp"
-                }
-              }
+              { "label": "Deadline", "format": "date", "path": "deadLine", "params": { "encoding": "timestamp" } }
             ]
           },
-          {
-            "label": "Batch Amounts",
-            "format": "amount",
-            "path": "#.batchesAmount.[]"
-          },
+          { "label": "Batch Amounts", "format": "amount", "path": "#.batchesAmount.[]" },
           {
             "path": "#.batches.[].[]",
             "fields": [
-                  {
-                    "label": "Adapter addresses",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "wallet",
-                        "eoa",
-                        "contract",
-                        "token",
-                        "collection"
-                      ]
-                    },
-                    "path": "mixAdapters.[]"
-                  },
-                  {
-                    "label": "Assets to",
-                    "format": "addressName",
-                    "params": {
-                      "types": [
-                        "token"
-                      ]
-                    },
-                    "path": "assetTo.[]"
-                  },
-                  {
-                    "label": "Raw Data",
-                    "format": "raw",
-                    "path": "rawData.[]"
-                  },
-                  {
-                    "label": "Raw Extra Data",
-                    "format": "raw",
-                    "path": "extraData.[]"
-                  },
-                  {
-                    "label": "Assets from",
-                    "format": "raw",
-                    "path": "fromToken"
-                  }
-                ]
-              }
+              {
+                "label": "Adapter addresses",
+                "format": "addressName",
+                "params": { "types": ["wallet", "eoa", "contract", "token", "collection"] },
+                "path": "mixAdapters.[]"
+              },
+              { "label": "Assets to", "format": "addressName", "params": { "types": ["token"] }, "path": "assetTo.[]" },
+              { "label": "Raw Data", "format": "raw", "path": "rawData.[]" },
+              { "label": "Raw Extra Data", "format": "raw", "path": "extraData.[]" },
+              { "label": "Assets from", "format": "raw", "path": "fromToken" }
+            ]
+          }
         ],
-        "required": [
-          "#.baseRequest.fromToken",
-          "#.baseRequest.toToken",
-          "#.baseRequest.fromTokenAmount",
-          "#.baseRequest.minReturnAmount"
-        ],
-        "excluded": [
-          "#.requests.[]"
-        ]
+        "required": ["#.baseRequest.fromToken", "#.baseRequest.toToken", "#.baseRequest.fromTokenAmount", "#.baseRequest.minReturnAmount"],
+        "excluded": ["#.requests.[]"]
       }
     }
   }
