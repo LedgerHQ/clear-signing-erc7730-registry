@@ -5,7 +5,8 @@
     "contract": {
       "deployments": [
         { "chainId": 1, "address": "0x5ed861aec31cCB496689FD2E0A1a3F8e8D7B8824" },
-        { "chainId": 560048, "address": "0x2444fae9394deBF503775940AF2a3e9364A31e34" }
+        { "chainId": 560048, "address": "0x2444fae9394deBF503775940AF2a3e9364A31e34" },
+        { "chainId": 560048, "address": "0x91234ffd7D65Aa5E4fDA60a2e7B9513175df3272" }
       ],
       "abi": [
         {
