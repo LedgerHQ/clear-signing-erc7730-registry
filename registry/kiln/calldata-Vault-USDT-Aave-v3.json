@@ -1,0 +1,8 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-KilnVaults.json",
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0xdD7927c757c1659B56C81c65af848Ae400EB879D" }] } },
+  "metadata": {
+    "constants": { "underlyingToken": "0xdAC17F958D2ee523a2206206994597C13D831ec7", "underlyingTicker": "USDT", "vaultTicker": "kAaveUSDT" }
+  }
+}
