@@ -1,0 +1,1171 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-OkxDexRouterV1.0.6-dag.json",
+  "context": {
+    "$id": "OKX DEX Router v1.0.6-dag",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xF6801D319497789f934ec7F83E142a9536312B08"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "dagSwapByOrderId",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "paths",
+              "type": "tuple[]",
+              "internalType": "struct IDexRouter.RouterPath[]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "dagSwapTo",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "paths",
+              "type": "tuple[]",
+              "internalType": "struct IDexRouter.RouterPath[]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "smartSwapByInvest",
+          "inputs": [
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "batchesAmount",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            },
+            {
+              "name": "batches",
+              "type": "tuple[][]",
+              "internalType": "struct IDexRouter.RouterPath[][]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "extraData",
+              "type": "tuple[]",
+              "internalType": "struct PMMLib.PMMSwapRequest[]",
+              "components": [
+                {
+                  "name": "pathIndex",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "payer",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "salt",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "isPushOrder",
+                  "type": "bool",
+                  "internalType": "bool"
+                },
+                {
+                  "name": "extension",
+                  "type": "bytes",
+                  "internalType": "bytes"
+                }
+              ]
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "smartSwapByInvestWithRefund",
+          "inputs": [
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "batchesAmount",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            },
+            {
+              "name": "batches",
+              "type": "tuple[][]",
+              "internalType": "struct IDexRouter.RouterPath[][]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "extraData",
+              "type": "tuple[]",
+              "internalType": "struct PMMLib.PMMSwapRequest[]",
+              "components": [
+                {
+                  "name": "pathIndex",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "payer",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "salt",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "isPushOrder",
+                  "type": "bool",
+                  "internalType": "bool"
+                },
+                {
+                  "name": "extension",
+                  "type": "bytes",
+                  "internalType": "bytes"
+                }
+              ]
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "refundTo",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "smartSwapByOrderId",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "batchesAmount",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            },
+            {
+              "name": "batches",
+              "type": "tuple[][]",
+              "internalType": "struct IDexRouter.RouterPath[][]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "extraData",
+              "type": "tuple[]",
+              "internalType": "struct PMMLib.PMMSwapRequest[]",
+              "components": [
+                {
+                  "name": "pathIndex",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "payer",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "salt",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "isPushOrder",
+                  "type": "bool",
+                  "internalType": "bool"
+                },
+                {
+                  "name": "extension",
+                  "type": "bytes",
+                  "internalType": "bytes"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "smartSwapTo",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "batchesAmount",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            },
+            {
+              "name": "batches",
+              "type": "tuple[][]",
+              "internalType": "struct IDexRouter.RouterPath[][]",
+              "components": [
+                {
+                  "name": "mixAdapters",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "assetTo",
+                  "type": "address[]",
+                  "internalType": "address[]"
+                },
+                {
+                  "name": "rawData",
+                  "type": "uint256[]",
+                  "internalType": "uint256[]"
+                },
+                {
+                  "name": "extraData",
+                  "type": "bytes[]",
+                  "internalType": "bytes[]"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "extraData",
+              "type": "tuple[]",
+              "internalType": "struct PMMLib.PMMSwapRequest[]",
+              "components": [
+                {
+                  "name": "pathIndex",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "payer",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toTokenAmountMax",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "salt",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "isPushOrder",
+                  "type": "bool",
+                  "internalType": "bool"
+                },
+                {
+                  "name": "extension",
+                  "type": "bytes",
+                  "internalType": "bytes"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "swapWrap",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "rawdata",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "swapWrapToWithBaseRequest",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "uniswapV3SwapTo",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "minReturn",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "pools",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "uniswapV3SwapToWithBaseRequest",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "pools",
+              "type": "uint256[]",
+              "internalType": "uint256[]"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "unxswapByOrderId",
+          "inputs": [
+            {
+              "name": "srcToken",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "minReturn",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "pools",
+              "type": "bytes32[]",
+              "internalType": "bytes32[]"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "unxswapTo",
+          "inputs": [
+            {
+              "name": "srcToken",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "minReturn",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "pools",
+              "type": "bytes32[]",
+              "internalType": "bytes32[]"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "unxswapToWithBaseRequest",
+          "inputs": [
+            {
+              "name": "orderId",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "baseRequest",
+              "type": "tuple",
+              "internalType": "struct IDexRouter.BaseRequest",
+              "components": [
+                {
+                  "name": "fromToken",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "toToken",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "fromTokenAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "minReturnAmount",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                },
+                {
+                  "name": "deadLine",
+                  "type": "uint256",
+                  "internalType": "uint256"
+                }
+              ]
+            },
+            {
+              "name": "pools",
+              "type": "bytes32[]",
+              "internalType": "bytes32[]"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "returnAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "payable"
+        }
+      ]
+    }
+  },
+  "display": {
+    "formats": {
+      "smartSwapByInvest((uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[] extraData,address to)": {
+        "$id": "smartSwapByInvest",
+        "intent": "Swap",
+        "fields": [
+          {
+            "path": "baseRequest.fromTokenAmount",
+            "$ref": "$.display.definitions.sendAmount",
+            "params": {
+              "tokenPath": "baseRequest.fromToken.[-20:]"
+            }
+          },
+          {
+            "path": "baseRequest.minReturnAmount",
+            "$ref": "$.display.definitions.minReceiveAmount",
+            "params": {
+              "tokenPath": "baseRequest.toToken"
+            }
+          },
+          {
+            "path": "baseRequest.deadLine",
+            "$ref": "$.display.definitions.deadline"
+          },
+          {
+            "path": "to",
+            "$ref": "$.display.definitions.beneficiary"
+          }
+        ],
+        "required": [
+          "baseRequest.fromToken",
+          "baseRequest.toToken",
+          "baseRequest.fromTokenAmount",
+          "baseRequest.minReturnAmount",
+          "to"
+        ],
+        "excluded": [
+          "batches",
+          "batchesAmount",
+          "extraData"
+        ]
+      },
+      "smartSwapByInvestWithRefund((uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[],address to,address refundTo)": {
+        "$id": "smartSwapByInvestWithRefund",
+        "intent": "Swap",
+        "fields": [
+          {
+            "path": "baseRequest.fromTokenAmount",
+            "$ref": "$.display.definitions.sendAmount",
+            "params": {
+              "tokenPath": "baseRequest.fromToken.[-20:]"
+            }
+          },
+          {
+            "path": "baseRequest.minReturnAmount",
+            "$ref": "$.display.definitions.minReceiveAmount",
+            "params": {
+              "tokenPath": "baseRequest.toToken"
+            }
+          },
+          {
+            "path": "baseRequest.deadLine",
+            "$ref": "$.display.definitions.deadline"
+          },
+          {
+            "path": "to",
+            "$ref": "$.display.definitions.beneficiary"
+          },
+          {
+            "path": "refundTo",
+            "label": "Refund To",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet"
+              ]
+            }
+          }
+        ],
+        "required": [
+          "baseRequest.fromToken",
+          "baseRequest.toToken",
+          "baseRequest.fromTokenAmount",
+          "baseRequest.minReturnAmount",
+          "to",
+          "refundTo"
+        ],
+        "excluded": [
+          "batches",
+          "batchesAmount",
+          "extraData"
+        ]
+      }
+    }
+  }
+}
