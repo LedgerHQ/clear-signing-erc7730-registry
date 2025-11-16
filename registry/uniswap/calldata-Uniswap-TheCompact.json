@@ -7,14 +7,6 @@
                 {
                     "chainId": 1,
                     "address": "0x00000000000000171ede64904551eeDF3C6C9788"
-                },
-                {
-                    "chainId": 8453,
-                    "address": "0x00000000000000171ede64904551eeDF3C6C9788"
-                },
-                {
-                    "chainId": 1301,
-                    "address": "0x00000000000000171ede64904551eeDF3C6C9788"
                 }
             ]
         }
@@ -25,29 +17,7 @@
             "legalName": "Uniswap Labs",
             "url": "https://uniswap.org/"
         },
-        "constants": {
-            "nativeTokenAddress": "0x0000000000000000000000000000000000000000"
-        },
         "enums": {
-            "resetPeriod": {
-                "0": "No reset",
-                "1": "10 minutes",
-                "2": "1 hour",
-                "3": "1 day",
-                "4": "1 week",
-                "5": "1 month",
-                "6": "3 months",
-                "7": "1 year"
-            },
-            "scope": {
-                "0": "Multichain",
-                "1": "Chain-specific"
-            },
-            "forcedWithdrawalStatus": {
-                "0": "Disabled",
-                "1": "Pending",
-                "2": "Enabled"
-            },
             "compactCategory": {
                 "0": "Compact",
                 "1": "BatchCompact",
