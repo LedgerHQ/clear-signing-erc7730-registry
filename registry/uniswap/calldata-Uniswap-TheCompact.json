@@ -1150,6 +1150,486 @@
                 "excluded": [
                     "proof"
                 ]
+            },
+            "claim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] claimants) claimPayload)": {
+                "$id": "claim",
+                "intent": "Process Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.id",
+                    "claimPayload.allocatedAmount",
+                    "claimPayload.claimants.[].claimant",
+                    "claimPayload.claimants.[].amount"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
+            },
+            "batchClaim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,(uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] portions)[] claims) claimPayload)": {
+                "$id": "batchClaim",
+                "intent": "Process Batch Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.claims.[].id",
+                    "claimPayload.claims.[].allocatedAmount",
+                    "claimPayload.claims.[].portions.[].claimant",
+                    "claimPayload.claims.[].portions.[].amount"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
+            },
+            "multichainClaim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] claimants,bytes32[] additionalChains) claimPayload)": {
+                "$id": "multichainClaim",
+                "intent": "Process Multichain Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.additionalChains.[]",
+                        "label": "Additional Chains",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.id",
+                    "claimPayload.allocatedAmount",
+                    "claimPayload.claimants.[].claimant",
+                    "claimPayload.claimants.[].amount",
+                    "claimPayload.additionalChains.[]"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
+            },
+            "exogenousClaim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] claimants,bytes32[] additionalChains,uint256 chainIndex,uint256 notarizedChainId) claimPayload)": {
+                "$id": "exogenousClaim",
+                "intent": "Process Exogenous Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claimants.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.additionalChains.[]",
+                        "label": "Additional Chains",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.chainIndex",
+                        "label": "Chain Index",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.notarizedChainId",
+                        "label": "Notarized Chain ID",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.id",
+                    "claimPayload.allocatedAmount",
+                    "claimPayload.claimants.[].claimant",
+                    "claimPayload.claimants.[].amount",
+                    "claimPayload.additionalChains.[]",
+                    "claimPayload.chainIndex",
+                    "claimPayload.notarizedChainId"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
+            },
+            "batchMultichainClaim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,(uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] portions)[] claims,bytes32[] additionalChains) claimPayload)": {
+                "$id": "batchMultichainClaim",
+                "intent": "Process Batch Multichain Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.additionalChains",
+                        "label": "Additional Chains",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.claims.[].id",
+                    "claimPayload.claims.[].allocatedAmount",
+                    "claimPayload.claims.[].portions.[].claimant",
+                    "claimPayload.claims.[].portions.[].amount",
+                    "claimPayload.additionalChains.[]"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
+            },
+            "exogenousBatchClaim((bytes allocatorData,bytes sponsorSignature,address sponsor,uint256 nonce,uint256 expires,bytes32 witness,string witnessTypestring,(uint256 id,uint256 allocatedAmount,(uint256 claimant,uint256 amount)[] portions)[] claims,bytes32[] additionalChains,uint256 chainIndex,uint256 notarizedChainId) claimPayload)": {
+                "$id": "exogenousBatchClaim",
+                "intent": "Process Exogenous Batch Claim",
+                "fields": [
+                    {
+                        "path": "claimPayload.allocatorData",
+                        "label": "Allocator Data",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsorSignature",
+                        "label": "Sponsor Signature",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.sponsor",
+                        "$ref": "$.display.definitions.sponsor"
+                    },
+                    {
+                        "path": "claimPayload.nonce",
+                        "$ref": "$.display.definitions.nonce"
+                    },
+                    {
+                        "path": "claimPayload.expires",
+                        "$ref": "$.display.definitions.expires"
+                    },
+                    {
+                        "path": "claimPayload.witness",
+                        "label": "Witness",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.witnessTypestring",
+                        "label": "Witness Typestring",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].id",
+                        "$ref": "$.display.definitions.lockId"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].allocatedAmount",
+                        "label": "Allocated Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].claimant",
+                        "label": "Claimant",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.claims.[].portions.[].amount",
+                        "label": "Amount",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.additionalChains.[]",
+                        "label": "Additional Chains",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.chainIndex",
+                        "label": "Chain Index",
+                        "format": "raw"
+                    },
+                    {
+                        "path": "claimPayload.notarizedChainId",
+                        "label": "Notarized Chain ID",
+                        "format": "raw"
+                    }
+                ],
+                "required": [
+                    "claimPayload.sponsor",
+                    "claimPayload.claims.[].id",
+                    "claimPayload.claims.[].allocatedAmount",
+                    "claimPayload.claims.[].portions.[].claimant",
+                    "claimPayload.claims.[].portions.[].amount",
+                    "claimPayload.additionalChains.[]",
+                    "claimPayload.chainIndex",
+                    "claimPayload.notarizedChainId"
+                ],
+                "excluded": [
+                    "claimPayload.allocatorData",
+                    "claimPayload.sponsorSignature",
+                    "claimPayload.nonce",
+                    "claimPayload.expires",
+                    "claimPayload.witness",
+                    "claimPayload.witnessTypestring"
+                ]
             }
         }
     }
