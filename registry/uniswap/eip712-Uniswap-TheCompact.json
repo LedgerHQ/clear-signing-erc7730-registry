@@ -290,7 +290,10 @@
                     {
                         "path": "amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
                     }
                 ],
                 "required": [
@@ -336,7 +339,10 @@
                     {
                         "path": "commitments.[].amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "commitments.[].token"
+                        }
                     }
                 ],
                 "required": [
@@ -386,7 +392,10 @@
                     {
                         "path": "elements.[].commitments.[].amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "elements.[].commitments.[].token"
+                        }
                     }
                 ],
                 "required": [

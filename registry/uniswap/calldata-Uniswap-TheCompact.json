@@ -27,14 +27,6 @@
     },
     "display": {
         "definitions": {
-            "lockId": {
-                "label": "Resource Lock ID",
-                "format": "raw"
-            },
-            "lockTag": {
-                "label": "Lock Tag",
-                "format": "raw"
-            },
             "recipient": {
                 "label": "Recipient",
                 "format": "addressName",
@@ -43,47 +35,6 @@
                         "eoa",
                         "contract"
                     ]
-                }
-            },
-            "erc20Token": {
-                "label": "Token",
-                "format": "addressName"
-            },
-            "tokenAmount": {
-                "label": "Amount",
-                "format": "tokenAmount"
-            },
-            "claimHash": {
-                "label": "Claim Hash",
-                "format": "raw"
-            },
-            "typehash": {
-                "label": "Type Hash",
-                "format": "raw"
-            },
-            "nonce": {
-                "label": "Nonce",
-                "format": "raw"
-            },
-            "expires": {
-                "label": "Expires At",
-                "format": "date",
-                "params": {
-                    "encoding": "timestamp"
-                }
-            },
-            "deadline": {
-                "label": "Deadline",
-                "format": "date",
-                "params": {
-                    "encoding": "timestamp"
-                }
-            },
-            "withdrawableAt": {
-                "label": "Withdrawable At",
-                "format": "date",
-                "params": {
-                    "encoding": "timestamp"
                 }
             },
             "arbiter": {
@@ -114,6 +65,44 @@
                         "eoa",
                         "contract"
                     ]
+                }
+            },
+            "erc20Token": {
+                "label": "Token",
+                "format": "addressName"
+            },
+            "lockId": {
+                "label": "Resource Lock ID",
+                "format": "raw"
+            },
+            "lockTag": {
+                "label": "Lock Tag",
+                "format": "raw"
+            },
+            "claimHash": {
+                "label": "Claim Hash",
+                "format": "raw"
+            },
+            "typehash": {
+                "label": "Type Hash",
+                "format": "raw"
+            },
+            "nonce": {
+                "label": "Nonce",
+                "format": "raw"
+            },
+            "expires": {
+                "label": "Expires At",
+                "format": "date",
+                "params": {
+                    "encoding": "timestamp"
+                }
+            },
+            "deadline": {
+                "label": "Deadline",
+                "format": "date",
+                "params": {
+                    "encoding": "timestamp"
                 }
             }
         },
@@ -161,7 +150,10 @@
                     {
                         "path": "amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
                     },
                     {
                         "path": "recipient",
@@ -214,7 +206,10 @@
                     {
                         "path": "permit.permitted.amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "permit.permitted.token"
+                        }
                     },
                     {
                         "path": "permit.nonce",
@@ -270,7 +265,10 @@
                     {
                         "path": "permitted.[].amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "permitted.[].token"
+                        }
                     },
                     {
                         "path": "details.nonce",
@@ -466,7 +464,10 @@
                     {
                         "path": "amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
                     },
                     {
                         "path": "witness",
@@ -693,7 +694,10 @@
                     {
                         "path": "amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
                     },
                     {
                         "path": "claimHash",
@@ -734,7 +738,10 @@
                     {
                         "path": "amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "token"
+                        }
                     },
                     {
                         "path": "arbiter",
@@ -869,7 +876,10 @@
                     {
                         "path": "permit.permitted.amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "permit.permitted.token"
+                        }
                     },
                     {
                         "path": "permit.nonce",
@@ -941,7 +951,10 @@
                     {
                         "path": "permitted.[].amount",
                         "label": "Amount",
-                        "format": "raw"
+                        "format": "tokenAmount",
+                        "params": {
+                            "tokenPath": "permitted.[].token"
+                        }
                     },
                     {
                         "path": "details.nonce",
