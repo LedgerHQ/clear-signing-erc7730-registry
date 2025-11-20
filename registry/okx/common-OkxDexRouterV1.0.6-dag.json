@@ -1,9 +1,9 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "metadata": {
-    "owner": "Onchain Labs",
+    "owner": "OKX Labs",
     "info": {
-      "legalName": "Onchain Labs",
+      "legalName": "OKX Labs",
       "url": "https://web3.okx.com/dex-swap",
       "deploymentDate": "2025-10-25T12:19:59Z"
     }
