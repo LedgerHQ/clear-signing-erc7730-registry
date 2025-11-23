@@ -34,33 +34,13 @@
           ],
           "outputs": [],
           "stateMutability": "payable"
-        },
-        {
-          "type": "function",
-          "name": "executeSigned",
-          "inputs": [
-            { "name": "commands", "type": "bytes", "internalType": "bytes" },
-            { "name": "inputs", "type": "bytes[]", "internalType": "bytes[]" },
-            { "name": "intent", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "data", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "verifySender", "type": "bool", "internalType": "bool" },
-            { "name": "nonce", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "signature", "type": "bytes", "internalType": "bytes" },
-            { "name": "deadline", "type": "uint256", "internalType": "uint256" }
-          ],
-          "outputs": [],
-          "stateMutability": "payable"
         }
       ]
     }
   },
   "metadata": {
     "owner": "Uniswap",
-    "info": {
-      "legalName": "Uniswap Labs",
-      "deploymentDate": "2023-06-01T00:00:00Z",
-      "url": "https://uniswap.org/"
-    }
+    "info": { "legalName": "Uniswap Labs", "deploymentDate": "2023-06-01T00:00:00Z", "url": "https://uniswap.org/" }
   },
   "display": {
     "formats": {
@@ -68,12 +48,8 @@
         "$id": "execute",
         "intent": "Execute Swap",
         "fields": [
-          {
-            "path": "deadline",
-            "label": "Deadline",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
+          { "path": "@.value", "label": "Amount to Send", "format": "amount" },
+          { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" } }
         ],
         "required": ["deadline"],
         "excluded": ["commands", "commands.[]", "inputs", "inputs.[]"]
@@ -81,22 +57,8 @@
       "0x24856bc3": {
         "$id": "execute",
         "intent": "Execute Swap",
-        "fields": [],
+        "fields": [{ "path": "@.value", "label": "Amount to Send", "format": "amount" }],
         "excluded": ["commands", "commands.[]", "inputs", "inputs.[]"]
-      },
-      "0x44684dc3": {
-        "$id": "executeSigned",
-        "intent": "Execute Signed Swap",
-        "fields": [
-          {
-            "path": "deadline",
-            "label": "Deadline",
-            "format": "date",
-            "params": { "encoding": "timestamp" }
-          }
-        ],
-        "required": ["deadline"],
-        "excluded": ["commands", "commands.[]", "inputs", "inputs.[]", "intent", "data", "verifySender", "nonce", "signature", "signature.[]"]
       }
     }
   }
