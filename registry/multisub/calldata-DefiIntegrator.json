@@ -1,0 +1,207 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "DeFiInteractorModule",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 11155111,
+          "address": "0x42FBd804C677324c4b711Fce26Ee8226702B389A"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "MultiSub",
+    "contractName": "DeFiInteractorModule",
+    "info": {
+      "url": "https://endearing-dragon-650a1a.netlify.app/",
+      "legalName": "MultiSub"
+    }
+  },
+  "display": {
+    "formats": {
+      "pause()": {
+        "intent": "Pause all operations (only owner)",
+        "fields": []
+      },
+      "unpause()": {
+        "intent": "Unpause all operations (only owner)",
+        "fields": []
+      },
+      "grantRole(address,uint16)": {
+        "intent": "Grant a role to a sub-account (only owner)",
+        "fields": [
+          {
+            "path": "member",
+            "label": "Member",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          },
+          {
+            "path": "roleId",
+            "label": "Role Id",
+            "format": "raw"
+          }
+        ],
+        "interpolatedIntent": "Grant a role to a sub-account (only owner)"
+      },
+      "revokeRole(address,uint16)": {
+        "intent": "Revoke a role from a sub-account (only owner)",
+        "fields": [
+          {
+            "path": "member",
+            "label": "Member",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          },
+          {
+            "path": "roleId",
+            "label": "Role Id",
+            "format": "raw"
+          }
+        ],
+        "interpolatedIntent": "Revoke a role from a sub-account (only owner)"
+      },
+      "updateSafeValue(uint256)": {
+        "intent": "Update the USD value for the Safe",
+        "fields": [
+          {
+            "path": "totalValueUSD",
+            "label": "Total Value U S D",
+            "format": "tokenAmount"
+          }
+        ],
+        "interpolatedIntent": "Update the USD value for the Safe {totalValueUSD}"
+      },
+      "setAuthorizedUpdater(address)": {
+        "intent": "Set the authorized updater address",
+        "fields": [
+          {
+            "path": "newUpdater",
+            "label": "New Updater",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          }
+        ],
+        "interpolatedIntent": "Set the authorized updater address"
+      },
+      "setMaxSafeValueAge(uint256)": {
+        "intent": "Set the maximum age for Safe value before considered stale",
+        "fields": [
+          {
+            "path": "newMaxAge",
+            "label": "New Max Age",
+            "format": "raw"
+          }
+        ],
+        "interpolatedIntent": "Set the maximum age for Safe value before considered stale"
+      },
+      "setMaxPriceFeedAge(uint256)": {
+        "intent": "Set the maximum age for Chainlink price feed data",
+        "fields": [
+          {
+            "path": "newMaxAge",
+            "label": "New Max Age",
+            "format": "raw"
+          }
+        ],
+        "interpolatedIntent": "Set the maximum age for Chainlink price feed data"
+      },
+      "setTokenPriceFeed(address,address)": {
+        "intent": "Set the Chainlink price feed for a token",
+        "fields": [
+          {
+            "path": "token",
+            "label": "Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          },
+          {
+            "path": "priceFeed",
+            "label": "Price Feed",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          }
+        ],
+        "interpolatedIntent": "Set the Chainlink price feed for a token {token}"
+      },
+      "setTokenPriceFeeds(address[],address[])": {
+        "intent": "Set multiple token price feeds at once",
+        "fields": [
+          {
+            "path": "tokens",
+            "label": "Tokens",
+            "fields": []
+          },
+          {
+            "path": "priceFeeds",
+            "label": "Price Feeds",
+            "fields": []
+          }
+        ],
+        "interpolatedIntent": "Set multiple token price feeds at once {tokens}"
+      },
+      "removeTokenPriceFeed(address)": {
+        "intent": "Remove the price feed for a token",
+        "fields": [
+          {
+            "path": "token",
+            "label": "Token",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "trust"
+              ]
+            }
+          }
+        ],
+        "interpolatedIntent": "Remove the price feed for a token {token}"
+      }
+    }
+  }
+}
