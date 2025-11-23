@@ -84,7 +84,7 @@
             "label": "Profile Type",
             "format": "enum",
             "params": {
-              "$ref": "#/metadata/enums/ProfileType"
+              "$ref": "$.metadata.enums.ProfileType"
             }
           }
         ]
