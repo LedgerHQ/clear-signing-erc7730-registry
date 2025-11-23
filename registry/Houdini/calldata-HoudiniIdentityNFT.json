@@ -1,7 +1,7 @@
 {
   "$schema": "https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/specs/erc7730-v1.schema.json",
-  "$id": "houdini-identity-nft-0g-testnet",
   "context": {
+    "$id": "houdini-identity-nft-0g-testnet",
     "contract": {
       "abi": [
         {
@@ -57,23 +57,15 @@
   },
   "metadata": {
     "owner": "izzetemredemir",
-    "legalName": "Houdini Identity NFT",
-    "lastUpdate": "2025-11-22",
-    "url": "https://github.com/izzetemredemir/Houdini",
-    "constants": {
+    "info": {
+      "legalName": "Houdini Identity NFT",
+      "url": "https://github.com/izzetemredemir/Houdini"
+    },
+    "enums": {
       "ProfileType": {
-        "0": {
-          "label": "Personal Identity",
-          "description": "Individual wallet identity profile"
-        },
-        "1": {
-          "label": "Project Identity",
-          "description": "Project or protocol identity profile"
-        },
-        "2": {
-          "label": "DAO Identity",
-          "description": "DAO or community identity profile"
-        }
+        "0": "Personal Identity",
+        "1": "Project Identity",
+        "2": "DAO Identity"
       }
     }
   },
@@ -92,7 +84,7 @@
             "label": "Profile Type",
             "format": "enum",
             "params": {
-              "enum": "ProfileType"
+              "$ref": "#/metadata/enums/ProfileType"
             }
           }
         ]
