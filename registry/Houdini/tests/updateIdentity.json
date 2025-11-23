@@ -1,0 +1,21 @@
+{
+  "description": "Update existing Identity NFT with new 0G Storage hash",
+  "transaction": {
+    "to": "0x116938bFd313667f9beFCB762CeD66445b62dC65",
+    "data": "0x...",
+    "value": "0"
+  },
+  "expectedDisplay": {
+    "intent": "Update Profile",
+    "fields": [
+      {
+        "label": "NFT Token ID",
+        "value": "1"
+      },
+      {
+        "label": "New 0G Storage Hash",
+        "value": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+      }
+    ]
+  }
+}
