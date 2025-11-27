@@ -73,9 +73,9 @@
         "required": ["#.unlockIndex"],
         "excluded": []
       },
-      "redeemOverdueShares()": { "intent": "Restake after missed period", "fields": [], "required": [], "excluded": [] },
+      "redeemOverdueShares()": { "intent": "Cancel overdue unlock request", "fields": [], "required": [], "excluded": [] },
       "redeemOverdueShares(uint256)": {
-        "intent": "Restake after missed period",
+        "intent": "Cancel overdue unlock request",
         "fields": [{ "label": "Unlock index", "format": "raw", "path": "#.unlockIndex", "params": null }],
         "required": ["#.unlockIndex"],
         "excluded": []
