@@ -1,0 +1,1243 @@
+{
+  "$schema": "https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Celo Accounts",
+    "contract": {
+      "abi": [
+        {
+          "inputs": [{ "internalType": "bool", "name": "test", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "EIP712_AUTHORIZE_SIGNER_TYPEHASH",
+          "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "bytes", "name": "url", "type": "bytes" }],
+          "name": "addStorageRoot",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "signer", "type": "address" }],
+          "name": "attestationSignerToAccount",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "authorizeAttestationSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "authorizeSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "authorizeSignerWithSignature",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "authorizeValidatorSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" },
+            { "internalType": "bytes", "name": "ecdsaPublicKey", "type": "bytes" }
+          ],
+          "name": "authorizeValidatorSignerWithPublicKey",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "authorizeVoteSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "name": "authorizedBy",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address[]", "name": "accountsToQuery", "type": "address[]" }],
+          "name": "batchGetMetadataURL",
+          "outputs": [{ "internalType": "uint256[]", "name": "", "type": "uint256[]" }, { "internalType": "bytes", "name": "", "type": "bytes" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "completeSignerAuthorization",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "createAccount",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "deletePaymentDelegation",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "eip712DomainSeparator",
+          "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getAttestationSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getDataEncryptionKey",
+          "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "getDefaultSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "getIndexedSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "getLegacySigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getMetadataURL",
+          "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getName",
+          "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getOffchainStorageRoots",
+          "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }, { "internalType": "uint256[]", "name": "", "type": "uint256[]" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getPaymentDelegation",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "getRoleAuthorizationSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getValidatorSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "getVersionNumber",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "payable": false,
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getVoteSigner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "getWalletAddress",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "hasAuthorizedAttestationSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "string", "name": "role", "type": "string" }
+          ],
+          "name": "hasAuthorizedSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "hasAuthorizedValidatorSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "hasAuthorizedVoteSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "hasDefaultSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "hasIndexedSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "hasLegacySigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "address", "name": "registryAddress", "type": "address" }],
+          "name": "initialize",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "initialized",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "account", "type": "address" }],
+          "name": "isAccount",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "signer", "type": "address" }],
+          "name": "isAuthorizedSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "isDefaultSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "isIndexedSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+          "name": "isLegacyRole",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" },
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "isLegacySigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "isOwner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" },
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "isSigner",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }],
+          "name": "offchainStorageRoots",
+          "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "owner",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [],
+          "name": "registry",
+          "outputs": [{ "internalType": "contract IRegistry", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "removeAttestationSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+          "name": "removeDefaultSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "bytes32", "name": "role", "type": "bytes32" }],
+          "name": "removeIndexedSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "removeSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "uint256", "name": "index", "type": "uint256" }],
+          "name": "removeStorageRoot",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "removeValidatorSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "removeVoteSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "renounceOwnership",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "string", "name": "name", "type": "string" },
+            { "internalType": "bytes", "name": "dataEncryptionKey", "type": "bytes" },
+            { "internalType": "address", "name": "walletAddress", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "setAccount",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "bytes", "name": "dataEncryptionKey", "type": "bytes" }],
+          "name": "setAccountDataEncryptionKey",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [],
+          "name": "setEip712DomainSeparator",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "signer", "type": "address" },
+            { "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "setIndexedSigner",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "string", "name": "metadataURL", "type": "string" }],
+          "name": "setMetadataURL",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "string", "name": "name", "type": "string" }],
+          "name": "setName",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "beneficiary", "type": "address" },
+            { "internalType": "uint256", "name": "fraction", "type": "uint256" }
+          ],
+          "name": "setPaymentDelegation",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "address", "name": "registryAddress", "type": "address" }],
+          "name": "setRegistry",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [
+            { "internalType": "address", "name": "walletAddress", "type": "address" },
+            { "internalType": "uint8", "name": "v", "type": "uint8" },
+            { "internalType": "bytes32", "name": "r", "type": "bytes32" },
+            { "internalType": "bytes32", "name": "s", "type": "bytes32" }
+          ],
+          "name": "setWalletAddress",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "signer", "type": "address" }],
+          "name": "signerToAccount",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": false,
+          "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }],
+          "name": "transferOwnership",
+          "outputs": [],
+          "payable": false,
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "signer", "type": "address" }],
+          "name": "validatorSignerToAccount",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "constant": true,
+          "inputs": [{ "internalType": "address", "name": "signer", "type": "address" }],
+          "name": "voteSignerToAccount",
+          "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+          "payable": false,
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "anonymous": false,
+          "inputs": [{ "indexed": true, "internalType": "address", "name": "account", "type": "address" }],
+          "name": "AccountCreated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "bytes", "name": "dataEncryptionKey", "type": "bytes" }
+          ],
+          "name": "AccountDataEncryptionKeySet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "string", "name": "metadataURL", "type": "string" }
+          ],
+          "name": "AccountMetadataURLSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "string", "name": "name", "type": "string" }
+          ],
+          "name": "AccountNameSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "walletAddress", "type": "address" }
+          ],
+          "name": "AccountWalletAddressSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" }
+          ],
+          "name": "AttestationSignerAuthorized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" }
+          ],
+          "name": "AttestationSignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "DefaultSignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "DefaultSignerSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "IndexedSignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "IndexedSignerSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "LegacySignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": false, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "LegacySignerSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "bytes", "name": "url", "type": "bytes" }
+          ],
+          "name": "OffchainStorageRootAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "bytes", "name": "url", "type": "bytes" },
+            { "indexed": false, "internalType": "uint256", "name": "index", "type": "uint256" }
+          ],
+          "name": "OffchainStorageRootRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" },
+            { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "beneficiary", "type": "address" },
+            { "indexed": false, "internalType": "uint256", "name": "fraction", "type": "uint256" }
+          ],
+          "name": "PaymentDelegationSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [{ "indexed": true, "internalType": "address", "name": "registryAddress", "type": "address" }],
+          "name": "RegistrySet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": true, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "SignerAuthorizationCompleted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": true, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "SignerAuthorizationStarted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" },
+            { "indexed": true, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "SignerAuthorized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" },
+            { "indexed": true, "internalType": "bytes32", "name": "role", "type": "bytes32" }
+          ],
+          "name": "SignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" }
+          ],
+          "name": "ValidatorSignerAuthorized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" }
+          ],
+          "name": "ValidatorSignerRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "signer", "type": "address" }
+          ],
+          "name": "VoteSignerAuthorized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            { "indexed": true, "internalType": "address", "name": "account", "type": "address" },
+            { "indexed": false, "internalType": "address", "name": "oldSigner", "type": "address" }
+          ],
+          "name": "VoteSignerRemoved",
+          "type": "event"
+        }
+      ],
+      "deployments": [
+        { "chainId": 42220, "address": "0x7d21685C17607338b313a7174bAb6620baD0aaB7" },
+        { "chainId": 44787, "address": "0xed7f51A34B4e71fbE69B3091FcF879cD14bD73A9" }
+      ]
+    }
+  },
+  "metadata": { "owner": "Celo Governance", "info": { "legalName": "Celo", "url": "https://celo.org/" } },
+  "display": {
+    "formats": {
+      "0xb062c843": {
+        "$id": "addStorageRoot",
+        "intent": "Add Storage Root",
+        "fields": [{ "path": "url", "label": "Storage Root URL", "format": "raw" }],
+        "required": ["url"],
+        "excluded": []
+      },
+      "0x76afa04c": {
+        "$id": "authorizeAttestationSigner",
+        "intent": "Authorize Signer",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Authorized Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "@.from",
+            "label": "Authorizer",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["signer", "@.from"],
+        "excluded": ["v", "r", "s"]
+      },
+      "0x58b81ea8": {
+        "$id": "authorizeSigner",
+        "intent": "Authorize Signer",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "role", "label": "Role", "format": "raw" }
+        ],
+        "required": ["signer", "role"],
+        "excluded": []
+      },
+      "0x92f90fbf": {
+        "$id": "authorizeSignerWithSignature",
+        "intent": "Authorize Signer",
+        "fields": [
+          { "path": "signer", "label": "Signer", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
+          { "path": "role", "label": "Role", "format": "raw" }
+        ],
+        "required": ["signer", "role"],
+        "excluded": ["v", "r", "s"]
+      },
+      "0xbaf7ef0f": {
+        "$id": "authorizeValidatorSigner",
+        "intent": "Authorize Validator",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Validator Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["signer"],
+        "excluded": ["v", "r", "s"]
+      },
+      "0x0fa750d2": {
+        "$id": "authorizeValSignerPK",
+        "intent": "Authorize Validator",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Authorized Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "ecdsaPublicKey", "label": "Public Key", "format": "raw" }
+        ],
+        "required": ["signer", "ecdsaPublicKey"],
+        "excluded": ["v", "r", "s"]
+      },
+      "0x4282ee6d": {
+        "$id": "authorizeVoteSigner",
+        "intent": "Authorize & Set Vote",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Authorized Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["signer"],
+        "excluded": ["v", "r", "s"]
+      },
+      "0x9f682976": {
+        "$id": "completeSignerAuthorization",
+        "intent": "Authorize Signer",
+        "fields": [
+          {
+            "path": "account",
+            "label": "Authorizing Account",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "role", "label": "Role ID", "format": "raw" }
+        ],
+        "required": ["account", "role"],
+        "excluded": []
+      },
+      "0x9dca362f": {
+        "$id": "createAccount",
+        "intent": "Create Account",
+        "fields": [
+          {
+            "path": "@.from",
+            "label": "Account Owner",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["@.from"],
+        "excluded": []
+      },
+      "0xbce2b8d6": {
+        "$id": "deletePaymentDelegation",
+        "intent": "Delete Delegation",
+        "fields": [
+          {
+            "path": "@.from",
+            "label": "Account",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["@.from"],
+        "excluded": []
+      },
+      "0x760fbbb2": {
+        "$id": "removeAttestationSigner",
+        "intent": "Remove Signer",
+        "fields": [
+          {
+            "path": "@.from",
+            "label": "Your Account",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["@.from"],
+        "excluded": []
+      },
+      "0xe7a16e6b": {
+        "$id": "removeDefaultSigner",
+        "intent": "Remove Signer",
+        "fields": [
+          { "path": "@.from", "label": "Account", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
+          { "path": "role", "label": "Role", "format": "raw" }
+        ],
+        "required": ["@.from", "role"],
+        "excluded": []
+      },
+      "0x0185a232": {
+        "$id": "removeIndexedSigner",
+        "intent": "Remove Signer",
+        "fields": [{ "path": "role", "label": "Role", "format": "raw" }],
+        "required": ["role"],
+        "excluded": []
+      },
+      "0xfbe3c373": {
+        "$id": "removeSigner",
+        "intent": "Remove Signer",
+        "fields": [
+          {
+            "path": "signer",
+            "label": "Signer",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "role", "label": "Role", "format": "raw" }
+        ],
+        "required": ["signer", "role"],
+        "excluded": []
+      },
+      "0xe8d787cb": {
+        "$id": "removeStorageRoot",
+        "intent": "Remove Root",
+        "fields": [
+          { "path": "index", "label": "Storage Root Index", "format": "raw" },
+          { "path": "@.from", "label": "Account", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } }
+        ],
+        "required": ["index", "@.from"],
+        "excluded": []
+      },
+      "0xa5ec94f9": {
+        "$id": "removeValidatorSigner",
+        "intent": "Remove Signer",
+        "fields": [
+          {
+            "path": "@.from",
+            "label": "Your Account",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          }
+        ],
+        "required": ["@.from"],
+        "excluded": []
+      },
+      "0x10c504b5": {
+        "$id": "removeVoteSigner",
+        "intent": "Remove Vote Signer",
+        "fields": [
+          { "path": "@.from", "label": "Account", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } }
+        ],
+        "required": ["@.from"],
+        "excluded": []
+      },
+      "0x747daec5": {
+        "$id": "setMetadataURL",
+        "intent": "Set Metadata URL",
+        "fields": [{ "path": "metadataURL", "label": "Metadata URL", "format": "raw" }],
+        "required": ["metadataURL"],
+        "excluded": []
+      },
+      "0xc47f0027": {
+        "$id": "setName",
+        "intent": "Set Account Name",
+        "fields": [{ "path": "name", "label": "Name", "format": "raw" }],
+        "required": ["name"],
+        "excluded": []
+      },
+      "0x8f9ae6dc": {
+        "$id": "setPaymentDelegation",
+        "intent": "Delegate Payment",
+        "fields": [
+          {
+            "path": "beneficiary",
+            "label": "Beneficiary",
+            "format": "addressName",
+            "params": { "types": ["wallet", "eoa", "contract"], "sources": ["ens", "local"] }
+          },
+          { "path": "fraction", "label": "Fraction", "format": "unit", "params": { "base": "%", "decimals": "22" } }
+        ],
+        "required": ["beneficiary", "fraction"],
+        "excluded": []
+      }
+    }
+  }
+}
