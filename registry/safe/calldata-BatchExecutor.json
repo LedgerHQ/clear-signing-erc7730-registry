@@ -32,7 +32,14 @@
           "type": "function"
         }
       ],
-      "deployments": [{ "chainId": 137, "address": "0x60aA01971A2adC1D6b2b59B972fb47b2fEC095Fc" }]
+      "deployments": [
+        { "chainId": 1, "address": "0x2cc8475177918e8C4d840150b68815A4b6f0f5f3" },
+        { "chainId": 10, "address": "0xD0eFB07126e865AC95B60381b468081Ef648ec5f" },
+        { "chainId": 137, "address": "0x2cc8475177918e8C4d840150b68815A4b6f0f5f3" },
+        { "chainId": 8453, "address": "0xD0eFB07126e865AC95B60381b468081Ef648ec5f" },
+        { "chainId": 42161, "address": "0xD0eFB07126e865AC95B60381b468081Ef648ec5f" },
+        { "chainId": 11155111, "address": "0x2cc8475177918e8C4d840150b68815A4b6f0f5f3" }
+      ]
     }
   },
   "metadata": { "owner": "Ledger", "info": { "url": "https://www.ledger.com", "legalName": "Ledger Multisig" } },

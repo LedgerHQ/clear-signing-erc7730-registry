@@ -1,0 +1,8 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-KilnVaults.json",
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x9d4c18c1C15cFDBF260f2910031bBd68F4aa889D" }] } },
+  "metadata": {
+    "constants": { "underlyingToken": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", "underlyingTicker": "WBTC", "vaultTicker": "kmgcWBTC" }
+  }
+}

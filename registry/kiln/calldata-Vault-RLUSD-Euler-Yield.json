@@ -1,0 +1,12 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-KilnVaults.json",
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x11AEE91ED1e5a40443dd0ed21f7CF4d3fD4E0826" }] } },
+  "metadata": {
+    "constants": {
+      "underlyingToken": "0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD",
+      "underlyingTicker": "RLUSD",
+      "vaultTicker": "kEulerRLUSD"
+    }
+  }
+}

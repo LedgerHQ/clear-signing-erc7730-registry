@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 59144, "address": "0xB5beDd42000b71FddE22D3eE8a79Bd49A568fC8F" }],
+      "domain": { "name": "Permit", "chainId": 59144, "verifyingContract": "0xB5beDd42000b71FddE22D3eE8a79Bd49A568fC8F" }
+    }
+  },
+  "metadata": { "owner": "Wrapped liquid staked Ether 2.0" }
+}
