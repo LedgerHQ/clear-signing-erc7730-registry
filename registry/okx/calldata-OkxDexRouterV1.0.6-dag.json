@@ -1201,10 +1201,7 @@
         "label": "Beneficiary",
         "format": "addressName",
         "params": {
-          "types": [
-            "eoa",
-            "wallet"
-          ]
+          "types": ["eoa", "wallet"]
         }
       },
       "deadline": {
@@ -1222,9 +1219,7 @@
         "label": "Token",
         "format": "addressName",
         "params": {
-          "types": [
-            "token"
-          ]
+          "types": ["token"]
         }
       }
     },
@@ -1263,9 +1258,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "paths"
-        ]
+        "excluded": ["paths"]
       },
       "dagSwapTo(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest,(address[],address[],uint256[],bytes[],uint256)[] paths)": {
         "$id": "dagSwapTo",
@@ -1306,9 +1299,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "paths"
-        ]
+        "excluded": ["paths"]
       },
       "smartSwapByOrderId(uint256 orderId,(uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[] extraData)": {
         "$id": "smartSwapByOrderId",
@@ -1344,11 +1335,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "batches",
-          "batchesAmount",
-          "extraData"
-        ]
+        "excluded": ["batches", "batchesAmount", "extraData"]
       },
       "smartSwapTo(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[] extraData)": {
         "$id": "smartSwapTo",
@@ -1389,11 +1376,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "batches",
-          "batchesAmount",
-          "extraData"
-        ]
+        "excluded": ["batches", "batchesAmount", "extraData"]
       },
       "swapWrap(uint256 orderId,uint256 rawdata)": {
         "$id": "swapWrap",
@@ -1417,10 +1400,7 @@
             }
           }
         ],
-        "required": [
-          "orderId",
-          "rawdata"
-        ]
+        "required": ["orderId", "rawdata"]
       },
       "swapWrapToWithBaseRequest(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest)": {
         "$id": "swapWrapToWithBaseRequest",
@@ -1472,14 +1452,8 @@
             "$ref": "$.display.definitions.beneficiary"
           }
         ],
-        "required": [
-          "receiver",
-          "amount",
-          "minReturn"
-        ],
-        "excluded": [
-          "pools"
-        ]
+        "required": ["receiver", "amount", "minReturn"],
+        "excluded": ["pools"]
       },
       "uniswapV3SwapToWithBaseRequest(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest,uint256[] pools)": {
         "$id": "uniswapV3SwapToWithBaseRequest",
@@ -1520,37 +1494,29 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "pools"
-        ]
+        "excluded": ["pools"]
       },
       "unxswapByOrderId(uint256 srcToken,uint256 amount,uint256 minReturn,bytes32[] pools)": {
         "$id": "unxswapByOrderId",
         "intent": "Swap",
         "fields": [
-        {
-        "path": "amount",
-        "label": "Amount In",
-        "$ref": "$.display.definitions.sendAmount",
-        "format": "tokenAmount",
-        "params": {
-          "tokenPath": "srcToken.[0:20]"
-        }
-    },
-        {
-        "path": "minReturn",
-        "label": "Minimum to Receive",
-        "format": "raw"
-        }
-    ],
-        "required": [
-          "srcToken",
-          "amount",
-          "minReturn"
+          {
+            "path": "amount",
+            "label": "Amount In",
+            "$ref": "$.display.definitions.sendAmount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "srcToken.[0:20]"
+            }
+          },
+          {
+            "path": "minReturn",
+            "label": "Minimum to Receive",
+            "format": "raw"
+          }
         ],
-        "excluded": [
-          "pools"
-        ]
+        "required": ["srcToken", "amount", "minReturn"],
+        "excluded": ["pools"]
       },
       "unxswapTo(uint256 srcToken,uint256 amount,uint256 minReturn,address receiver,bytes32[] pools)": {
         "$id": "unxswapTo",
@@ -1572,15 +1538,8 @@
             "$ref": "$.display.definitions.minReceiveAmount"
           }
         ],
-        "required": [
-          "receiver",
-          "srcToken",
-          "amount",
-          "minReturn"
-        ],
-        "excluded": [
-          "pools"
-        ]
+        "required": ["receiver", "srcToken", "amount", "minReturn"],
+        "excluded": ["pools"]
       },
       "unxswapToWithBaseRequest(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest,bytes32[] pools)": {
         "$id": "unxswapToWithBaseRequest",
@@ -1621,9 +1580,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": [
-          "pools"
-        ]
+        "excluded": ["pools"]
       },
       "smartSwapByInvest((uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[] extraData,address to)": {
         "$id": "smartSwapByInvest",
@@ -1659,11 +1616,7 @@
           "baseRequest.minReturnAmount",
           "to"
         ],
-        "excluded": [
-          "batches",
-          "batchesAmount",
-          "extraData"
-        ]
+        "excluded": ["batches", "batchesAmount", "extraData"]
       },
       "smartSwapByInvestWithRefund((uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[],address to,address refundTo)": {
         "$id": "smartSwapByInvestWithRefund",
@@ -1696,10 +1649,7 @@
             "label": "Refund To",
             "format": "addressName",
             "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ]
+              "types": ["eoa", "wallet"]
             }
           }
         ],
@@ -1711,11 +1661,7 @@
           "to",
           "refundTo"
         ],
-        "excluded": [
-          "batches",
-          "batchesAmount",
-          "extraData"
-        ]
+        "excluded": ["batches", "batchesAmount", "extraData"]
       }
     }
   }
