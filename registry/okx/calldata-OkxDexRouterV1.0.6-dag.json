@@ -6,6 +6,13 @@
       "legalName": "OKX Labs",
       "url": "https://web3.okx.com/dex-swap",
       "deploymentDate": "2025-10-25T12:19:59Z"
+    },
+    "enums": {
+      "swapDirection": {
+        "0": "ETH --> WETH",
+        "128": "WETH --> ETH",
+        "1": "WETH --> ETH"
+      }
     }
   },
   "context": {
@@ -1387,13 +1394,16 @@
             "$ref": "$.display.definitions.orderId"
           },
           {
-            "path": "@.value",
-            "label": "ETH Amount",
-            "format": "amount"
+            "path": "rawdata.[0:1]",
+            "label": "Direction",
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.swapDirection"
+            }
           },
           {
             "path": "rawdata.[-16:]",
-            "label": "WETH Amount (packed)",
+            "label": "WETH Amount",
             "format": "tokenAmount",
             "params": {
               "token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
