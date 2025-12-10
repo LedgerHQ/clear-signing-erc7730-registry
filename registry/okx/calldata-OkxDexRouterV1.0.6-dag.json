@@ -1502,11 +1502,9 @@
         "fields": [
           {
             "path": "amount",
-            "label": "Amount In",
             "$ref": "$.display.definitions.sendAmount",
-            "format": "tokenAmount",
             "params": {
-              "tokenPath": "srcToken.[0:20]"
+              "tokenPath": "srcToken.[-20:]"
             }
           },
           {
