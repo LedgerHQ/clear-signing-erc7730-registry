@@ -1245,6 +1245,13 @@
             }
           },
           {
+            "path": "baseRequest.minReturnAmount",
+            "$ref": "$.display.definitions.minReceiveAmount",
+            "params": {
+              "tokenPath": "baseRequest.toToken"
+            }
+          },
+          {
             "path": "baseRequest.deadLine",
             "$ref": "$.display.definitions.deadline"
           }
@@ -1354,6 +1361,13 @@
           {
             "path": "receiver",
             "$ref": "$.display.definitions.beneficiary"
+          },
+          {
+            "path": "baseRequest.fromTokenAmount",
+            "$ref": "$.display.definitions.sendAmount",
+            "params": {
+              "tokenPath": "baseRequest.fromToken.[-20:]"
+            }
           },
           {
             "path": "baseRequest.minReturnAmount",
@@ -1487,6 +1501,13 @@
             }
           },
           {
+            "path": "baseRequest.minReturnAmount",
+            "$ref": "$.display.definitions.minReceiveAmount",
+            "params": {
+              "tokenPath": "baseRequest.toToken"
+            }
+          },
+          {
             "path": "baseRequest.deadLine",
             "$ref": "$.display.definitions.deadline"
           }
@@ -1506,7 +1527,22 @@
       "unxswapByOrderId(uint256 srcToken,uint256 amount,uint256 minReturn,bytes32[] pools)": {
         "$id": "unxswapByOrderId",
         "intent": "Swap",
-        "fields": [],
+        "fields": [
+        {
+        "path": "amount",
+        "label": "Amount In",
+        "$ref": "$.display.definitions.sendAmount",
+        "format": "tokenAmount",
+        "params": {
+          "tokenPath": "srcToken.[0:20]"
+        }
+    },
+        {
+        "path": "minReturn",
+        "label": "Minimum to Receive",
+        "format": "raw"
+        }
+    ],
         "required": [
           "srcToken",
           "amount",
