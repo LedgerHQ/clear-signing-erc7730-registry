@@ -38,7 +38,7 @@
             "format": "tokenAmount",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           },
-          { "label": "Receive shares", "format": "raw", "value": "$.metadata.constants.vaultTicker" },
+          { "label": "Share ticker", "format": "raw", "value": "$.metadata.constants.vaultTicker" },
           { "path": "receiver", "label": "Send shares to", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["assets", "receiver"]
@@ -50,7 +50,7 @@
           { "path": "shares", "label": "Minted shares", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
           { "path": "receiver", "label": "Mint shares to", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
-        "required": ["assets", "receiver"]
+        "required": ["shares", "receiver"]
       },
       "withdraw(uint256 assets,address receiver,address owner)": {
         "intent": "Withdraw",
@@ -69,11 +69,11 @@
       "redeem(uint256 shares,address receiver,address owner)": {
         "intent": "Redeem",
         "fields": [
-          { "path": "shares", "label": "Redeem exactly", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
+          { "path": "shares", "label": "Shares to redeem", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
           { "path": "receiver", "label": "To", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "owner", "label": "Owner", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
-        "required": ["assets", "receiver", "owner"]
+        "required": ["shares", "receiver", "owner"]
       }
     }
   }
