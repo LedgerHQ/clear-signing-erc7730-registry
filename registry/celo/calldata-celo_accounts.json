@@ -1233,7 +1233,7 @@
             "format": "addressName",
             "params": { "types": ["wallet", "eoa", "contract"], "sources": ["ens", "local"] }
           },
-          { "path": "fraction", "label": "Fraction", "format": "unit", "params": { "base": "%", "decimals": "22" } }
+          { "path": "fraction", "label": "Fraction", "format": "unit", "params": { "base": "%", "decimals": 22 } }
         ],
         "required": ["beneficiary", "fraction"],
         "excluded": []
