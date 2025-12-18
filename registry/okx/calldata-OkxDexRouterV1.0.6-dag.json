@@ -5,7 +5,7 @@
     "info": {
       "legalName": "OKX Labs",
       "url": "https://web3.okx.com/dex-swap",
-      "deploymentDate": "2025-10-25T12:19:59Z"
+      "deploymentDate": "2025-11-28T02:08:59Z"
     },
     "enums": {
       "swapDirection": {
@@ -16,7 +16,7 @@
     }
   },
   "context": {
-    "$id": "OKX DEX Router v1.0.6-dag",
+    "$id": "OKX DEX Router v1.0.7-multi-commission",
     "contract": {
       "deployments": [
         {
@@ -25,99 +25,99 @@
         },
         {
           "chainId": 10,
-          "address": "0xC44C6550a3B13116F6fD593e1ec963d5aE78C4C8"
+          "address": "0x6733Eb2E75B1625F1Fe5f18aD2cB2BaBDA510d19"
         },
         {
           "chainId": 25,
-          "address": "0xB21A65a68A6abEed1A344AEB69AF146D64B06127"
+          "address": "0xcF76984119C7f6ae56fAfE680d39C08278b7eCF4"
         },
         {
           "chainId": 56,
-          "address": "0xd547Eafde2410e63300Fc5308CceA0b356E7b5d8"
+          "address": "0x3156020dfF8D99af1dDC523ebDfb1ad2018554a0"
         },
         {
           "chainId": 130,
-          "address": "0x1e3143b9cb44170098092e53bfbce76e1ce53e00"
+          "address": "0x23E2f2FA1967FAffde2e05fDecbb3fa787A5D3E5"
         },
         {
           "chainId": 137,
-          "address": "0x5e11D6A2184c321e69c6443DedB980F943DB7836"
+          "address": "0x057cfd839aa88994d1a8a8c6d336cf21550f05ef"
         },
         {
           "chainId": 143,
-          "address": "0xb1E4E25b1938c78Ec0b21cCb2D6a0Be60aA7E63f"
+          "address": "0x6088d94C5a40CEcd3ae2D4e0710cA687b91c61d0"
         },
         {
           "chainId": 146,
-          "address": "0x49E10cAee23d198CEE1E44b2a222232A85Df62Bb"
+          "address": "0x86F752f1F662f39BFbcBeF95EE56B6C20d178969"
         },
         {
           "chainId": 169,
-          "address": "0x1A2bD99016233a06dbE7D69a30316dB46b7c6511"
+          "address": "0x8feB9E84b7E9DC86adc6cD6Eb554C5B4355c8405"
         },
         {
           "chainId": 196,
-          "address": "0xC259de94F6bedDec5Ed1C024b0283082ffa50cca"
+          "address": "0x0efa3a01eb0708f9e40b661c6cd7c56c83b9f45a"
         },
         {
           "chainId": 250,
-          "address": "0x4f61d47f5942ad214a0fe93dae2e82f4cb871d81"
+          "address": "0xcF76984119C7f6ae56fAfE680d39C08278b7eCF4"
         },
         {
           "chainId": 324,
-          "address": "0xa081120347e57EB74DE8a9bE4a0441EbcB0A35F6"
+          "address": "0x3163Ed233a3Cb5E6B7F10A6f02b01F15867a8779"
         },
         {
           "chainId": 1030,
-          "address": "0x1e3143b9cB44170098092e53bfbCE76E1Ce53E00"
+          "address": "0x23e2f2fa1967faffde2e05fdecbb3fa787a5d3e5"
         },
         {
           "chainId": 1088,
-          "address": "0x49E10cAee23d198CEE1E44b2a222232A85Df62Bb"
+          "address": "0xDd5E9B947c99Aa60bab00ca4631Dce63b49983E7"
         },
         {
           "chainId": 1101,
-          "address": "0x1A2bD99016233a06dbE7D69a30316dB46b7c6511"
+          "address": "0x79f7C6C6dc16Ed3154E85A8ef9c1Ef31CEFaEB19"
         },
         {
           "chainId": 4200,
-          "address": "0x0F315e89c1c8ad9E75fbe434082cF790d481ACC0"
+          "address": "0xd3b3e6433d6a7f94c28ce907311fb21b0f0b659e"
         },
         {
           "chainId": 5000,
-          "address": "0x1f16A607a7f3F3044E477abFFc8BD33952cE306b"
+          "address": "0xF5402CCC5fC3181B45D7571512999D3Eea0257B6"
         },
         {
           "chainId": 7000,
-          "address": "0xAE571B4937b42587a4Ab3dcd434d62b09519c831"
+          "address": "0x8feB9E84b7E9DC86adc6cD6Eb554C5B4355c8405"
         },
         {
           "chainId": 8453,
-          "address": "0x2bD541Ab3b704F7d4c9DFf79EfaDeaa85EC034f1"
+          "address": "0x4409921ae43a39a11d90f7b7f96cfd0b8093d9fc"
         },
         {
           "chainId": 9745,
-          "address": "0x509c370da4dc569f45d48a2318a54c5442bc23cf"
+          "address": "0x5c1c902e7e04de98b49acd3de68e12bee2d7908d"
         },
         {
           "chainId": 42161,
-          "address": "0x3608c8186fF3dCa322DeEFb8c27162162d581081"
+          "address": "0x368E01160C2244B0363a35B3fF0A971E44a89284"
         },
         {
           "chainId": 43114,
-          "address": "0x2e84246828ddae18500bc0cf23dd8a8d1aa5cf1f"
+          "address": "0x8aDFb0D24cdb09c6eB6b001A41820eCe98831B91"
         },
         {
           "chainId": 59144,
-          "address": "0x5Eb082A0713481d29cDCd19B2Af5736007571472"
+          "address": "0x9EaBF1D34819D9eC9Fe5fd3Db4e9DCD12Fa05284"
         },
         {
           "chainId": 81457,
-          "address": "0x5e11D6A2184c321e69c6443DedB980F943DB7836"
+          "address": "0xc9da86c392101047188bae98ccc192271a136a13"
         },
         {
           "chainId": 534352,
-          "address": "0x6702E6db3d5cc50E0040E7876A48faA5a4706148"
+          "address": "0x6733Eb2E75B1625F1Fe5f18aD2cB2BaBDA510d19"
         }
       ],
       "abi": [
