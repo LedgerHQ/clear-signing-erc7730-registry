@@ -35,7 +35,8 @@
           { "label": "Receive", "format": "raw", "value": "$.metadata.constants.vaultTicker" },
           { "path": "receiver", "label": "Send shares to", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
-        "required": ["assets", "receiver"]
+        "required": ["assets", "receiver"],
+        "excluded": []
       },
       "redeem(uint256 shares,address receiver,address owner)": {
         "intent": "Unwrap",
@@ -44,7 +45,8 @@
           { "path": "receiver", "label": "To", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "owner", "label": "Owner", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
-        "required": ["assets", "receiver", "owner"]
+        "required": ["shares", "receiver", "owner"],
+        "excluded": []
       }
     }
   }

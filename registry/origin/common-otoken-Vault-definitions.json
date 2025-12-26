@@ -80,7 +80,8 @@
       "requestWithdrawal(uint256)": {
         "intent": "Request withdrawal",
         "fields": [{ "label": "Amount", "format": "tokenAmount", "path": "#._amount" }],
-        "required": ["#._amount"]
+        "required": ["#._amount"],
+        "excluded": []
       }
     }
   }
