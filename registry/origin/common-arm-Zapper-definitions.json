@@ -16,13 +16,13 @@
   "metadata": { "owner": "Origin Protocol", "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com" } },
   "display": {
     "formats": {
-      "deposit(address)": {
+      "deposit(address arm)": {
         "intent": "Deposit",
         "fields": [
-          { "path": "#.arm", "label": "ARM contract", "format": "addressName", "params": { "types": ["contract"], "sources": ["ens"] } },
+          { "path": "arm", "label": "ARM contract", "format": "addressName", "params": { "types": ["contract"], "sources": ["ens"] } },
           { "label": "Amount", "format": "amount", "path": "@.value" }
         ],
-        "required": ["#.arm", "@.value"],
+        "required": ["arm", "@.value"],
         "excluded": []
       }
     }

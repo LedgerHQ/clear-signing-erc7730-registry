@@ -44,32 +44,32 @@
         "required": ["@.value"],
         "excluded": []
       },
-      "depositETHForWrappedTokens(uint256)": {
+      "depositETHForWrappedTokens(uint256 minReceived)": {
         "intent": "Deposit",
         "fields": [
           { "label": "Amount", "format": "amount", "path": "@.value" },
           {
             "label": "Minimum Amount Out",
             "format": "tokenAmount",
-            "path": "#.minReceived",
+            "path": "minReceived",
             "params": { "token": "$.metadata.constants.wrappedToken" }
           }
         ],
-        "required": ["@.value", "#.minReceived"],
+        "required": ["@.value", "minReceived"],
         "excluded": []
       },
-      "depositWETHForWrappedTokens(uint256,uint256)": {
+      "depositWETHForWrappedTokens(uint256 wethAmount, uint256 minReceived)": {
         "intent": "Deposit",
         "fields": [
-          { "label": "Amount", "format": "amount", "path": "#.wethAmount" },
+          { "label": "Amount", "format": "amount", "path": "wethAmount" },
           {
             "label": "Minimum Amount Out",
             "format": "tokenAmount",
-            "path": "#.minReceived",
+            "path": "minReceived",
             "params": { "token": "$.metadata.constants.wrappedToken" }
           }
         ],
-        "required": ["#.wethAmount", "#.minReceived"],
+        "required": ["wethAmount", "minReceived"],
         "excluded": []
       }
     }

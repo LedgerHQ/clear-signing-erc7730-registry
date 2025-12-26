@@ -37,29 +37,29 @@
   },
   "display": {
     "formats": {
-      "claimRedeem(uint256)": {
+      "claimRedeem(uint256 requestId)": {
         "intent": "Claim request",
-        "fields": [{ "label": "Request Id", "format": "raw", "path": "#.requestId" }],
-        "required": ["#.requestId"],
+        "fields": [{ "label": "Request Id", "format": "raw", "path": "requestId" }],
+        "required": ["requestId"],
         "excluded": []
       },
-      "deposit(uint256)": {
+      "deposit(uint256 assets)": {
         "intent": "Deposit",
         "fields": [
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#.assets",
+            "path": "assets",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           }
         ],
-        "required": ["#.assets"],
+        "required": ["assets"],
         "excluded": []
       },
-      "requestRedeem(uint256)": {
+      "requestRedeem(uint256 shares)": {
         "intent": "Request redemption",
-        "fields": [{ "label": "Amount of shares", "format": "tokenAmount", "path": "#.shares", "params": { "tokenPath": "@.to" } }],
-        "required": ["#.shares"],
+        "fields": [{ "label": "Amount of shares", "format": "tokenAmount", "path": "shares", "params": { "tokenPath": "@.to" } }],
+        "required": ["shares"],
         "excluded": []
       }
     }

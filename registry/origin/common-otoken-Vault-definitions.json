@@ -50,37 +50,37 @@
   },
   "display": {
     "formats": {
-      "claimWithdrawal(uint256)": {
+      "claimWithdrawal(uint256 _requestId)": {
         "intent": "Claim withdrawal request",
-        "fields": [{ "label": "Request Id", "format": "raw", "path": "#._requestId" }],
-        "required": ["#._requestId"],
+        "fields": [{ "label": "Request Id", "format": "raw", "path": "_requestId" }],
+        "required": ["_requestId"],
         "excluded": []
       },
-      "claimWithdrawals(uint256[])": {
+      "claimWithdrawals(uint256[] _requestIds)": {
         "intent": "Claim withdrawal requests",
-        "fields": [{ "label": "Request Ids", "format": "raw", "path": "#._requestIds.[]" }],
-        "required": ["#._requestIds.[]"],
+        "fields": [{ "label": "Request Ids", "format": "raw", "path": "_requestIds.[]" }],
+        "required": ["_requestIds.[]"],
         "excluded": []
       },
-      "mint(address,uint256,uint256)": {
+      "mint(address _asset, uint256 _amount, uint256 _minimumOusdAmount)": {
         "intent": "Mint",
         "fields": [
-          { "label": "Asset", "format": "addressName", "path": "#._asset", "params": { "types": ["token"] } },
-          { "label": "Amount", "format": "tokenAmount", "path": "#._amount", "params": { "tokenPath": "#._asset" } },
+          { "label": "Asset", "format": "addressName", "path": "_asset", "params": { "types": ["token"] } },
+          { "label": "Amount", "format": "tokenAmount", "path": "_amount", "params": { "tokenPath": "_asset" } },
           {
             "label": "Minimum Amount Out",
             "format": "tokenAmount",
-            "path": "#._minimumOusdAmount",
+            "path": "_minimumOusdAmount",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           }
         ],
-        "required": ["#._asset", "#._amount", "#._minimumOusdAmount"],
+        "required": ["_asset", "_amount", "_minimumOusdAmount"],
         "excluded": []
       },
-      "requestWithdrawal(uint256)": {
+      "requestWithdrawal(uint256 _amount)": {
         "intent": "Request withdrawal",
-        "fields": [{ "label": "Amount", "format": "tokenAmount", "path": "#._amount" }],
-        "required": ["#._amount"],
+        "fields": [{ "label": "Amount", "format": "tokenAmount", "path": "_amount" }],
+        "required": ["_amount"],
         "excluded": []
       }
     }

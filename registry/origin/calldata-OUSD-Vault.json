@@ -27,23 +27,23 @@
   },
   "display": {
     "formats": {
-      "redeem(uint256,uint256)": {
+      "redeem(uint256 _amount, uint256 _minimumUnitAmount)": {
         "intent": "Redeem",
         "fields": [
           {
             "label": "Amount",
             "format": "tokenAmount",
-            "path": "#._amount",
+            "path": "_amount",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           },
           {
             "label": "Minimum Amount Out",
             "format": "tokenAmount",
-            "path": "#._minimumUnitAmount",
+            "path": "_minimumUnitAmount",
             "params": { "token": "$.metadata.constants.redeemToken" }
           }
         ],
-        "required": ["#._amount", "#._minimumUnitAmount"],
+        "required": ["_amount", "_minimumUnitAmount"],
         "excluded": []
       }
     }
