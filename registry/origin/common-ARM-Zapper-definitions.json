@@ -4,53 +4,23 @@
     "contract": {
       "abi": [
         {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "arm",
-              "type": "address"
-            }
-          ],
+          "inputs": [{ "internalType": "address", "name": "arm", "type": "address" }],
           "name": "deposit",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "shares",
-              "type": "uint256"
-            }
-          ],
+          "outputs": [{ "internalType": "uint256", "name": "shares", "type": "uint256" }],
           "stateMutability": "payable",
           "type": "function"
         }
       ]
     }
   },
-  "metadata": {
-    "owner": "Origin Protocol",
-    "info": {
-      "legalName": "Origin Protocol",
-      "url": "https://www.originprotocol.com/"
-    }
-  },
+  "metadata": { "owner": "Origin Protocol", "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com" } },
   "display": {
     "formats": {
-      "deposit()": {
+      "deposit(address)": {
         "intent": "Deposit",
         "fields": [
-          {
-            "path": "#.arm",
-            "label": "ARM contract",
-            "format": "addressName",
-            "params": {
-              "types": ["contract"],
-              "sources": ["ens"]
-            }
-          },
-          {
-            "label": "Amount",
-            "format": "amount",
-            "path": "@.value"
-          }
+          { "path": "#.arm", "label": "ARM contract", "format": "addressName", "params": { "types": ["contract"], "sources": ["ens"] } },
+          { "label": "Amount", "format": "amount", "path": "@.value" }
         ],
         "required": ["#.arm", "@.value"],
         "excluded": []

@@ -19,18 +19,16 @@
   },
   "metadata": {
     "owner": "Origin Protocol",
-    "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com/" },
+    "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com" },
     "constants": {
       "underlyingToken": "0x2a8e1e676ec238d8a992307b495b45b3feaa5e86",
-      "underlyingTicker": "OUSD",
-      "redeemToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-      "redeemTicker": "USDC"
+      "redeemToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
     }
   },
   "display": {
     "formats": {
       "redeem(uint256,uint256)": {
-        "intent": "redeem OUSD",
+        "intent": "Redeem",
         "fields": [
           {
             "label": "Amount",

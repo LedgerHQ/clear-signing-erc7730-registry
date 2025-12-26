@@ -24,7 +24,7 @@
       ]
     }
   },
-  "metadata": { "owner": "Origin Protocol", "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com/" } },
+  "metadata": { "owner": "Origin Protocol", "info": { "legalName": "Origin Protocol", "url": "https://www.originprotocol.com" } },
   "display": {
     "formats": {
       "deposit()": {
@@ -45,11 +45,11 @@
           {
             "label": "Minimum Amount Out",
             "format": "tokenAmount",
-            "path": "#._minimumOusdAmount",
+            "path": "#.minOETH",
             "params": { "token": "0x856c4Efb76C1D1AE02e20CEB03A2A6a08b0b8dC3" }
           }
         ],
-        "required": ["#.amount", "#._minimumOusdAmount"],
+        "required": ["#.amount", "#.minOETH"],
         "excluded": []
       }
     }

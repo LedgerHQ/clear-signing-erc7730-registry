@@ -2,12 +2,12 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0x01F30B7358Ba51f637d1aa05D9b4A60f76DAD680" }],
+      "deployments": [{ "chainId": 146, "address": "0xe25A2B256ffb3AD73678d5e80DE8d2F6022fAb21" }],
       "abi": [
         {
           "inputs": [],
           "name": "deposit",
-          "outputs": [{ "internalType": "uint256", "name": "shares", "type": "uint256" }],
+          "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
           "stateMutability": "payable",
           "type": "function"
         }
