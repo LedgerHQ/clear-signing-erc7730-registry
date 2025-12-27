@@ -32,7 +32,7 @@
   "display": {
     "formats": {
       "deposit()": {
-        "intent": "mint OETH",
+        "intent": "Mint",
         "fields": [{ "label": "Amount", "format": "amount", "path": "@.value" }],
         "required": ["@.value"],
         "excluded": []
@@ -42,7 +42,7 @@
         "fields": [
           { "label": "Amount", "format": "tokenAmount", "path": "amount", "params": { "token": "$.metadata.constants.sfrxETH" } },
           {
-            "label": "Minimum Amount Out",
+            "label": "Minimum Received",
             "format": "tokenAmount",
             "path": "minOETH",
             "params": { "token": "$.metadata.constants.oeth" }

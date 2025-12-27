@@ -37,7 +37,7 @@
             "params": { "token": "$.metadata.constants.underlyingToken" }
           },
           {
-            "label": "Minimum Amount Out",
+            "label": "Minimum Received",
             "format": "tokenAmount",
             "path": "_minimumUnitAmount",
             "params": { "token": "$.metadata.constants.redeemToken" }

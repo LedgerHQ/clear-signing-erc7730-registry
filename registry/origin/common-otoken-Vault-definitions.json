@@ -68,7 +68,7 @@
           { "label": "Asset", "format": "addressName", "path": "_asset", "params": { "types": ["token"] } },
           { "label": "Amount", "format": "tokenAmount", "path": "_amount", "params": { "tokenPath": "_asset" } },
           {
-            "label": "Minimum Amount Out",
+            "label": "Minimum Received",
             "format": "tokenAmount",
             "path": "_minimumOusdAmount",
             "params": { "token": "$.metadata.constants.underlyingToken" }

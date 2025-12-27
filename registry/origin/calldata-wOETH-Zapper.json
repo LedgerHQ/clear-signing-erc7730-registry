@@ -49,7 +49,7 @@
         "fields": [
           { "label": "Amount", "format": "amount", "path": "@.value" },
           {
-            "label": "Minimum Amount Out",
+            "label": "Minimum Received",
             "format": "tokenAmount",
             "path": "minReceived",
             "params": { "token": "$.metadata.constants.wrappedToken" }
@@ -63,7 +63,7 @@
         "fields": [
           { "label": "Amount", "format": "amount", "path": "wethAmount" },
           {
-            "label": "Minimum Amount Out",
+            "label": "Minimum Received",
             "format": "tokenAmount",
             "path": "minReceived",
             "params": { "token": "$.metadata.constants.wrappedToken" }
