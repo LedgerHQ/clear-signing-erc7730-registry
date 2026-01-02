@@ -41,6 +41,7 @@
         { "chainId": 1, "address": "0x15f724b35A75F0c28F352b952eA9D1b24e348c57" },
         { "chainId": 1, "address": "0x16d4f955B0aA1b1570Fe3e9bB2f8c19C407cdb67" },
         { "chainId": 1, "address": "0xb02cc77ee137436D71b9dE46958A3bB5d7346CcA" },
+        { "chainId": 1, "address": "0xc37eDf7d955020D547B45F762027b49947D02550" },
         { "chainId": 30, "address": "0x99D22115Fd6706B78703fF015DE897d43667D12F" },
         { "chainId": 30, "address": "0xe7a1A676D0CCA2e20A69adD500985C7271a40205" },
         { "chainId": 56, "address": "0x73685BD72dF34B92Bc81D43ef35CFf4300DE8625" },
