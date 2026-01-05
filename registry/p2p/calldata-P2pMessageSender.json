@@ -30,7 +30,7 @@
     "formats": {
       "send(string)": {
         "$id": null,
-        "intent": "Withdraw validators",
+        "intent": "Withdrawal message",
         "screens": null,
         "fields": [{ "$id": null, "label": "Public keys", "format": "raw", "params": null, "path": "#.text", "value": null }],
         "required": ["#.text"],
