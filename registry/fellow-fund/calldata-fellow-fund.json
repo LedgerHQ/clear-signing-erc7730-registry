@@ -41,28 +41,28 @@
   "display": {
     "formats": {
       "createFellowship(string _metadata,uint256 _funds,uint256 _applicationDeadline,uint256 _marketDeadline,uint256 _epochDeadline)": {
-        "intent": "Create Fellowship Program",
+        "intent": "Create Fellowship",
         "fields": [
           { "path": "_metadata", "label": "Program Details", "format": "raw" },
           { "path": "_funds", "label": "Total Funding", "format": "amount" },
           { "path": "_applicationDeadline", "label": "Application Deadline", "format": "date", "params": { "encoding": "timestamp" } },
-          { "path": "_marketDeadline", "label": "Market Phase Deadline", "format": "date", "params": { "encoding": "timestamp" } },
+          { "path": "_marketDeadline", "label": "Market Deadline", "format": "date", "params": { "encoding": "timestamp" } },
           { "path": "_epochDeadline", "label": "Program End Date", "format": "date", "params": { "encoding": "timestamp" } }
         ],
         "required": ["_metadata", "_funds", "_applicationDeadline", "_marketDeadline", "_epochDeadline"]
       },
       "applyToFellowship(uint256 fellowshipId,string metadata)": {
-        "intent": "Apply to Fellowship Program",
+        "intent": "Apply to Fellowship",
         "fields": [
-          { "path": "fellowshipId", "label": "Fellowship Program ID", "format": "raw" },
+          { "path": "fellowshipId", "label": "Fellowship ID", "format": "raw" },
           { "path": "metadata", "label": "Application Details", "format": "raw" }
         ],
         "required": ["fellowshipId", "metadata"]
       },
       "setApplicantImpact(uint256 fellowshipId,uint256 applicationId,bool achieved,bytes proof)": {
-        "intent": "Verify Fellowship Impact",
+        "intent": "Verify Impact",
         "fields": [
-          { "path": "fellowshipId", "label": "Fellowship Program ID", "format": "raw" },
+          { "path": "fellowshipId", "label": "Fellowship ID", "format": "raw" },
           { "path": "applicationId", "label": "Application ID", "format": "raw" },
           { "path": "achieved", "label": "Impact Achieved", "format": "raw" },
           { "path": "proof", "label": "Verification Proof", "format": "raw" }
