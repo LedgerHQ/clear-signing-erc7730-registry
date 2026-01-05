@@ -41,7 +41,7 @@
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
       "fillAmount": {
-        "label": "Amount to sell",
+        "label": "Fill amount",
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
@@ -154,7 +154,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -165,7 +165,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -177,7 +177,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -189,7 +189,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -200,7 +200,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex2.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -212,7 +212,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "@.value", "label": "Amount to Send", "format": "amount" },
-          { "path": "minReturn.[-20:]", "$ref": "$.display.definitions.minReceiveAmount" },
+          { "path": "minReturn", "$ref": "$.display.definitions.minReceiveAmount" },
           { "path": "to.[-20:]", "$ref": "$.display.definitions.beneficiary" },
           { "path": "dex3.[-20:]", "$ref": "$.display.definitions.lastPool" }
         ],
@@ -221,7 +221,7 @@
       },
       "cancelOrder(uint256 makerTraits, bytes32 orderHash)" : {
         "$id": "cancelOrder",
-        "intent": "Cancel limit order",
+        "intent": "Cancel limit orders",
         "fields": [
           { "path": "orderHash", "label": "Order", "format": "raw" }
         ],
@@ -239,7 +239,7 @@
       },
       "increaseEpoch(uint96 series)" : {
         "$id": "increaseEpoch",
-        "intent": "Cancel all limit orders",
+        "intent": "Increase Order Epoch",
         "fields": [
           { "path": "@.from", "label": "Orders maker", "format": "raw" }
         ],

@@ -31,7 +31,7 @@
           { "path": "inputAmount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken.[-20:]" } },
           { "path": "outputAmount", "$ref": "$.display.definitions.minReceiveAmount", "params": { "tokenPath": "dstToken" } },
           { "path": "@.from", "$ref": "$.display.definitions.beneficiary" },
-          { "path": "goodUntil", "$ref": "$.display.definitions.expirationTime" }
+          { "path": "goodUntil.[-4:]", "$ref": "$.display.definitions.expirationTime" }
         ],
         "required": ["srcToken", "dstToken", "inputAmount", "outputAmount", "@.from", "goodUntil"],
         "excluded": ["clipperExchange", "r", "vs"]
@@ -43,7 +43,7 @@
           { "path": "inputAmount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken.[-20:]" } },
           { "path": "outputAmount", "$ref": "$.display.definitions.minReceiveAmount", "params": { "tokenPath": "dstToken" } },
           { "path": "recipient", "$ref": "$.display.definitions.beneficiary" },
-          { "path": "goodUntil", "$ref": "$.display.definitions.expirationTime" }
+          { "path": "goodUntil.[-4:]", "$ref": "$.display.definitions.expirationTime" }
         ],
         "required": ["srcToken", "dstToken", "inputAmount", "outputAmount", "recipient", "goodUntil"],
         "excluded": ["clipperExchange", "r", "vs"]

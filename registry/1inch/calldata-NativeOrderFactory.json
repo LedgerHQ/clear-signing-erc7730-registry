@@ -34,7 +34,7 @@
         "fields": [
           { "label": "Amount to Send", "path": "@.value", "format": "amount" },
           {
-            "label": "Minimum to receive",
+            "label": "Receive amount",
             "path": "makerOrder.takingAmount",
             "format": "tokenAmount",
             "params": {
