@@ -280,7 +280,7 @@
             "path": "calls.[].callData",
             "label": "Call",
             "format": "calldata",
-            "params": { "calleePath": "calls.[].target", "valuePath": "calls.[].value" }
+            "params": { "calleePath": "calls.[].target" }
           },
           {
             "path": "refundTo",
@@ -306,7 +306,7 @@
             "path": "calls.[].callData",
             "label": "Call",
             "format": "calldata",
-            "params": { "calleePath": "calls.[].target", "valuePath": "calls.[].value" }
+            "params": { "calleePath": "calls.[].target" }
           },
           {
             "path": "refundTo",
@@ -338,7 +338,7 @@
             "path": "calls.[].callData",
             "label": "Call",
             "format": "calldata",
-            "params": { "calleePath": "calls.[].target", "valuePath": "calls.[].value" }
+            "params": { "calleePath": "calls.[].target" }
           },
           {
             "path": "refundTo",
@@ -364,7 +364,7 @@
             "path": "calls.[].callData",
             "label": "Call",
             "format": "calldata",
-            "params": { "calleePath": "calls.[].target", "valuePath": "calls.[].value" }
+            "params": { "calleePath": "calls.[].target" }
           },
           {
             "path": "refundTo",
