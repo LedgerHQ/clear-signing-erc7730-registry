@@ -29,8 +29,13 @@
   "display": {
     "formats": {
       "mint(address)": {
-        "intent": "Stake CORE tokens to a validator",
+        "intent": "Stake CORE",
         "fields": [
+          {
+              "format": "amount",
+              "label": "Amount to stake",
+              "path": "@.value"
+            },
           {
             "path": "_validator",
             "label": "Validator Address",
@@ -41,18 +46,18 @@
         "required": ["_validator"]
       },
       "redeem(uint256)": {
-        "intent": "Unstake CORE by redeeming staked tokens (stCORE)",
+        "intent": "Request Redeem",
         "fields": [
           {
             "path": "stCore",
-            "label": "Amount to Redeem (in stCORE)",
+            "label": "Amount to Redeem",
             "format": "tokenAmount",
             "params": { "token": "0xb3A8F0f0da9ffC65318aA39E55079796093029AD" }
           }
         ],
         "required": ["stCore"]
       },
-      "withdraw()": { "intent": "Withdraw previously unstaked CORE tokens", "fields": [] }
+      "withdraw()": { "intent": "Withdraw CORE", "fields": [] }
     }
   }
 }

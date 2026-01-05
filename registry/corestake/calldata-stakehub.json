@@ -15,5 +15,5 @@
     }
   },
   "metadata": { "owner": "CoreDAO", "info": { "legalName": "CoreDAO StakeHub Contract", "url": "https://coredao.org/" } },
-  "display": { "formats": { "claimReward()": { "intent": "Claim accumulated staking rewards", "fields": [] } } }
+  "display": { "formats": { "claimReward()": { "intent": "Claim rewards", "fields": [] } } }
 }
