@@ -248,9 +248,9 @@
           {
             "$id": null,
             "label": "Withdraw Credentials",
-            "format": "raw",
+            "format": "addressName",
             "params": null,
-            "path": "#.withdrawal_credentials.[]",
+            "path": "#.withdrawal_credentials.[].[-20:]",
             "value": null
           },
           {
