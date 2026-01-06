@@ -21,19 +21,19 @@ jobs:
 
     steps:
       - name: Checkout PR branch (for files to analyze)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
 
       - name: Checkout analyzer repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: LedgerHQ/erc7730-analyzer
           ref: main
           path: erc7730-analyzer
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: 'pip'
