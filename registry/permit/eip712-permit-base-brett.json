@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 8453, "address": "0x532f27101965dd16442E59d40670FaF5eBB142E4" }],
+      "domain": { "name": "Permit", "chainId": 8453, "verifyingContract": "0x532f27101965dd16442E59d40670FaF5eBB142E4" }
+    }
+  },
+  "metadata": { "owner": "BRETT" }
+}

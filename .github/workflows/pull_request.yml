@@ -21,12 +21,12 @@ jobs:
 
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Get all changed descriptor files
         timeout-minutes: 5
         id: changed-descriptor-files
-        uses: tj-actions/changed-files@v45
+        uses: tj-actions/changed-files@v47
         with:
           files: |
             registry/**/eip712-*.json
@@ -35,7 +35,7 @@ jobs:
       - name: Setup python
         timeout-minutes: 10
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: 'pip'

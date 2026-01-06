@@ -1,0 +1,14 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "../../ercs/calldata-erc4626-vaults.json",
+  "metadata": {
+    "owner": "Steakhouse Financial",
+    "info": { "legalName": "Steakhouse Financial", "url": "https://www.steakhouse.financial" },
+    "constants": {
+      "underlyingToken": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "underlyingTicker": "USDT",
+      "vaultTicker": "steakUSDTlite"
+    }
+  },
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x097FFEDb80d4b2Ca6105a07a4D90eB739C45A666" }] } }
+}

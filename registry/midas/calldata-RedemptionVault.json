@@ -1,0 +1,307 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "context": {
+    "$id": "Redemption Vault",
+    "contract": {
+      "deployments": [
+        { "chainId": 1, "address": "0xF6e51d24F4793Ac5e71e0502213a9BBE3A6d4517" },
+        { "chainId": 1, "address": "0x569D7dccBF6923350521ecBC28A555A500c4f0Ec" },
+        { "chainId": 1, "address": "0x19AB19e61A930bc5C7B75Bf06cDd954218Ca9F0b" },
+        { "chainId": 1, "address": "0x0D89C1C4799353F3805A3E6C4e1Cbbb83217D123" },
+        { "chainId": 1, "address": "0x30d9D1e76869516AEa980390494AaEd45C3EfC1a" },
+        { "chainId": 1, "address": "0x9B2C5E30E3B1F6369FC746A1C1E47277396aF15D" },
+        { "chainId": 1, "address": "0xac14a14f578C143625Fc8F54218911e8F634184D" },
+        { "chainId": 1, "address": "0x5356B8E06589DE894D86B24F4079c629E8565234" },
+        { "chainId": 1, "address": "0x8Bee3870Ad8293dcE79E6f4cb049F7531Bd57c22" },
+        { "chainId": 1, "address": "0x44b0440e35c596e858cEA433D0d82F5a985fD19C" },
+        { "chainId": 1, "address": "0x6Be2f55816efd0d91f52720f096006d63c366e98" },
+        { "chainId": 1, "address": "0x5aeA6D35ED7B3B7aE78694B7da2Ee880756Af5C0" },
+        { "chainId": 1, "address": "0x97ACDFb3956403c4c6BbE837DC611e3a6bA1b3a7" },
+        { "chainId": 1, "address": "0x1FE17936c1CdC73c857263997716e3A60B9291C7" },
+        { "chainId": 1, "address": "0x4BCfDA0A844B49dA8Bb19562EE52Cc385395001A" },
+        { "chainId": 1, "address": "0x7b83aA7b4CE8C7a021Cafc862a030129cEbf799d" },
+        { "chainId": 1, "address": "0xFaAE52c6A6d477f859a740a76B29c33559ace18c" },
+        { "chainId": 1, "address": "0xE042678e6c6871Fa279e037C11e390f31334ba0B" },
+        { "chainId": 1, "address": "0x2db1eC186acDeaf7d0fc78bFfE335560b0fE0085" },
+        { "chainId": 1, "address": "0x2d7d5b1706653796602617350571B3F8999B950c" },
+        { "chainId": 1, "address": "0xf4F042D90f0C0d3ABA4A30Caa6Ac124B14A7e600" },
+        { "chainId": 1, "address": "0x9f7dd5462C183B6577858e16a13A4d864CE2f972" },
+        { "chainId": 1, "address": "0x71EFa7AF1686C5c04AA34a120a91cb4262679C44" },
+        { "chainId": 1, "address": "0xa7c6c173D38DCf0543B5C479B845a430529A9a96" },
+        { "chainId": 1, "address": "0xa85b5Dd222A71602FcA40410bc1f158bff1fa458" },
+        { "chainId": 1, "address": "0x1A57Aba59d50b192F8440e205E3B8B885bE128cC" },
+        { "chainId": 1, "address": "0x37769aF173Ea65dfc2880179940d5566817aF6AE" },
+        { "chainId": 1, "address": "0xF0C91Bbae7f67c4e595d723ef5FB38B59F2008cf" },
+        { "chainId": 1, "address": "0x649f8698068ad143A7e18Ba9cb0Be112D5986AEb" },
+        { "chainId": 1, "address": "0x5572Eb7f4fB679Ff6A99203f12B0484dC1062d78" },
+        { "chainId": 1, "address": "0x4Fd4DD7171D14e5bD93025ec35374d2b9b4321b0" },
+        { "chainId": 1, "address": "0x319a05E260acC2490768A726Ccfd341D4b3D5106" },
+        { "chainId": 1, "address": "0x2f98A13635F6CEc0cc45bC1e43969C71d68091d6" },
+        { "chainId": 1, "address": "0x9C3743582e8b2d7cCb5e08caF3c9C33780ac446f" },
+        { "chainId": 1, "address": "0x15f724b35A75F0c28F352b952eA9D1b24e348c57" },
+        { "chainId": 1, "address": "0x16d4f955B0aA1b1570Fe3e9bB2f8c19C407cdb67" },
+        { "chainId": 1, "address": "0xb02cc77ee137436D71b9dE46958A3bB5d7346CcA" },
+        { "chainId": 1, "address": "0xc37eDf7d955020D547B45F762027b49947D02550" },
+        { "chainId": 30, "address": "0x99D22115Fd6706B78703fF015DE897d43667D12F" },
+        { "chainId": 30, "address": "0xe7a1A676D0CCA2e20A69adD500985C7271a40205" },
+        { "chainId": 56, "address": "0x73685BD72dF34B92Bc81D43ef35CFf4300DE8625" },
+        { "chainId": 56, "address": "0xF76e650F8a9526fe5E4B40F1B567C5C1b427EE43" },
+        { "chainId": 143, "address": "0x2Ce347dECFc8dAB433c4EB6CA171747E5a82c332" },
+        { "chainId": 239, "address": "0x5E65feDa93CDf3286d4B70BA6d3e2a0e86594CDd" },
+        { "chainId": 999, "address": "0xC898a5cbDb81F260bd5306D9F9B9A893D0FdF042" },
+        { "chainId": 999, "address": "0xD26bB9B45140D17eF14FbD4fCa8Cf0d610ac50E7" },
+        { "chainId": 999, "address": "0x1eff01e0784ae8d06a17AF29A2300D2A9cdA5440" },
+        { "chainId": 999, "address": "0x558806a80b42cAB4ED75c74bfB178EDc9087AA32" },
+        { "chainId": 999, "address": "0xBb820D0c85C0B5D1B0dC8C6D3541fbb1AB4C7a60" },
+        { "chainId": 999, "address": "0x462B95575cb2D56de9d1aAaAAb452279B058Aa06" },
+        { "chainId": 999, "address": "0xBe61c1A27689c11b63378e84C9bB70A2cd616Fff" },
+        { "chainId": 999, "address": "0x9c915C94066fF921264071aCB7D59DB6e0cBf0D7" },
+        { "chainId": 999, "address": "0x448E290f8090Fe6Bed36Cb07340d43440Ec6ebd3" },
+        { "chainId": 999, "address": "0xD197A60de47b3D0187D48DDd1653A009d5e4E5f8" },
+        { "chainId": 999, "address": "0x1cDd9b3163c7549a89F436d1Eb5C3476238f271e" },
+        { "chainId": 999, "address": "0x1605F7C0FF432Ea4cF2b36a2E35076187A1803b0" },
+        { "chainId": 999, "address": "0x814E39FeBD0265D39e37bA469d0B40bd9c77Eef2" },
+        { "chainId": 999, "address": "0x94A9e619779e65e7B79fEA6f7eF623118ac1c2F2" },
+        { "chainId": 999, "address": "0x36094ABE5E589691B8f60505823A72F5fdEdC953" },
+        { "chainId": 8453, "address": "0x2a8c22E3b10036f3AEF5875d04f8441d4188b656" },
+        { "chainId": 8453, "address": "0xF804a646C034749b5484bF7dfE875F6A4F969840" },
+        { "chainId": 8453, "address": "0x0e0eb6cdad90174f1Db606EC186ddD0B5eD80847" },
+        { "chainId": 8453, "address": "0x25D30cF795602e807d2038c1326Ad6643F822cEA" },
+        { "chainId": 8453, "address": "0xa8a5c4FF4c86a459EBbDC39c5BE77833B3A15d88" },
+        { "chainId": 8453, "address": "0x5CB155D19696ED296dc4942BEDB6EEc69367c332" },
+        { "chainId": 8453, "address": "0x86811aD3430DbA37e1641538729bF346c20A5412" },
+        { "chainId": 8453, "address": "0x9BF00b7CFC00D6A7a2e2C994DB8c8dCa467ee359" },
+        { "chainId": 9745, "address": "0x24e49D2Ad8f0bcD0cF7F2A5Ab560Ca4319f6bd75" },
+        { "chainId": 9745, "address": "0x69EcaB6aA7bDFDdD99deF0891c0317076430ae50" },
+        { "chainId": 9745, "address": "0x880661F9b412065D616890cA458dcCd0146cb77C" },
+        { "chainId": 16661, "address": "0x9dae503014edc48A4d8FE789f22c70Ae650eb79B" },
+        { "chainId": 23294, "address": "0xf939E88ecAd43115116c7106DfdbdC4b1315a7Ee" },
+        { "chainId": 42161, "address": "0x8ac12d5B71e4f046459b67077F8704BA0a86F8F9" },
+        { "chainId": 42161, "address": "0xE03cD34De0E47c67bF881dB22feAb83121B50cC3" },
+        { "chainId": 42161, "address": "0x6D6e88B8514EA404d33f38D505d611B5EEe23AfD" },
+        { "chainId": 42161, "address": "0xe8a95184516C39469a68BA50D134C25fc5A6C9c8" },
+        { "chainId": 42161, "address": "0x139EC173b9c355241dfA91A1DE3453Adae0A9083" },
+        { "chainId": 98866, "address": "0x3aC6b2Bf09f470e5674C3DA60Be7D2DA2791F897" },
+        { "chainId": 98866, "address": "0x9B0d0bDAE237116F711E8C9d900B5dDCC8eF8B5D" },
+        { "chainId": 98866, "address": "0xC874394Cd67F7de462eb5c25889beC9744Bc0F80" },
+        { "chainId": 98866, "address": "0x331Af8984d9f10C5173E69537F41313996e7C3Cc" },
+        { "chainId": 98866, "address": "0xf22Ad227b3082557dBDA8AD99B694eb295c06092" },
+        { "chainId": 98866, "address": "0x3Cd58EFe911B1e936c014695CCfaB8c8825E3a63" },
+        { "chainId": 534352, "address": "0x30b174F86B93672434c313edd80f16E57C476A69" },
+        { "chainId": 534352, "address": "0x904EA8d7FcaB7351758fAC82bDbc738E2010BC25" },
+        { "chainId": 747474, "address": "0xE93E6Cf151588d63bB669138277D20f28C2E7cdA" },
+        { "chainId": 747474, "address": "0x8E3865B9d2d8e562d8bb3b15D9B4941AeE6f67f1" },
+        { "chainId": 1440000, "address": "0xDaC1b058cE42b67Ba33DbfDBA972d76C83C085D6" }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "redeemFiatRequest",
+          "inputs": [
+            {
+              "name": "amountMTokenIn",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeemInstant",
+          "inputs": [
+            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            {
+              "name": "amountMTokenIn",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "minReceiveAmount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeemInstant",
+          "inputs": [
+            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            {
+              "name": "amountMTokenIn",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "minReceiveAmount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeemRequest",
+          "inputs": [
+            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            {
+              "name": "amountMTokenIn",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "redeemRequest",
+          "inputs": [
+            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
+            {
+              "name": "amountMTokenIn",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": { "owner": "Midas", "info": { "legalName": "Midas", "url": "https://midas.app" } },
+  "display": {
+    "formats": {
+      "redeemInstant(address,uint256,uint256,address)": {
+        "intent": "instantly redeem",
+        "fields": [
+          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
+          },
+          {
+            "label": "Slippage",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
+          },
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
+        ],
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount", "#.recipient"]
+      },
+      "redeemInstant(address,uint256,uint256)": {
+        "intent": "instantly redeem",
+        "fields": [
+          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
+          },
+          {
+            "label": "Slippage",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.minReceiveAmount"
+          }
+        ],
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount"]
+      },
+      "redeemRequest(address,uint256,address)": {
+        "intent": "request a redemption",
+        "fields": [
+          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
+          },
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
+        ],
+        "required": ["#.tokenOut", "#.amountMTokenIn", "#.recipient"]
+      },
+      "redeemRequest(address,uint256)": {
+        "intent": "request a redemption",
+        "fields": [
+          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
+          }
+        ],
+        "required": ["#.tokenOut", "#.amountMTokenIn"]
+      },
+      "redeemFiatRequest(uint256)": {
+        "intent": "request a redemption",
+        "fields": [
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "path": "#.amountMTokenIn"
+          }
+        ],
+        "required": ["#.amountMTokenIn"]
+      }
+    }
+  }
+}

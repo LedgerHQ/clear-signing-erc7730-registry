@@ -3,27 +3,13 @@
   "context": {
     "$id": null,
     "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x0bb4D3e88243F4A057Db77341e6916B0e449b158"
-        }
-      ],
+      "deployments": [{ "chainId": 1, "address": "0x0bb4D3e88243F4A057Db77341e6916B0e449b158" }],
       "abi": [
         {
           "type": "function",
           "name": "NAME",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -34,16 +20,7 @@
           "type": "function",
           "name": "feeReceiver",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address payable",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address payable", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -54,16 +31,7 @@
           "type": "function",
           "name": "migrationFee",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -74,30 +42,9 @@
           "type": "function",
           "name": "mintToken",
           "inputs": [
-            {
-              "name": "eventId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "tokenId",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
+            { "name": "eventId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "tokenId", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
+            { "name": "receiver", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
             {
               "name": "expirationTime",
               "type": "uint256",
@@ -106,25 +53,9 @@
               "indexed": null,
               "unit": null
             },
-            {
-              "name": "signature",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "signature", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "payable",
           "constant": null,
           "payable": null,
@@ -135,16 +66,7 @@
           "type": "function",
           "name": "owner",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -166,16 +88,7 @@
           "type": "function",
           "name": "paused",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -185,26 +98,8 @@
         {
           "type": "function",
           "name": "processed",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes",
-              "internalType": "bytes",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }],
+          "outputs": [{ "name": "", "type": "bool", "internalType": "bool", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -257,14 +152,7 @@
           "type": "function",
           "name": "setMigrationFee",
           "inputs": [
-            {
-              "name": "_migrationFee",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_migrationFee", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -277,14 +165,7 @@
           "type": "function",
           "name": "setValidSigner",
           "inputs": [
-            {
-              "name": "_validSigner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "_validSigner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
           ],
           "outputs": [],
           "stateMutability": "nonpayable",
@@ -296,16 +177,7 @@
         {
           "type": "function",
           "name": "transferOwnership",
-          "inputs": [
-            {
-              "name": "newOwner",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "inputs": [{ "name": "newOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "outputs": [],
           "stateMutability": "nonpayable",
           "constant": null,
@@ -328,16 +200,7 @@
           "type": "function",
           "name": "validSigner",
           "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
+          "outputs": [{ "name": "", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
           "stateMutability": "view",
           "constant": null,
           "payable": null,
@@ -349,13 +212,7 @@
       "factory": null
     }
   },
-  "metadata": {
-    "owner": "POAP",
-    "info": {
-      "url": "https://poap.xyz/",
-      "legalName": "Proof of Attendance Protocol"
-    }
-  },
+  "metadata": { "owner": "POAP", "info": { "url": "https://poap.xyz/", "legalName": "Proof of Attendance Protocol" } },
   "display": {
     "formats": {
       "mintToken(uint256,uint256,address,uint256,bytes)": {
@@ -363,21 +220,12 @@
         "intent": "Mint POAP",
         "screens": null,
         "fields": [
-          {
-            "$id": null,
-            "label": "Token Id",
-            "format": "raw",
-            "path": "#.tokenId",
-            "value": null
-          },
+          { "$id": null, "label": "Token Id", "format": "raw", "path": "#.tokenId", "value": null },
           {
             "$id": null,
             "label": "Receiver",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": null
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": null },
             "path": "#.receiver",
             "value": null
           },
@@ -385,9 +233,7 @@
             "$id": null,
             "label": "Expiration Time",
             "format": "date",
-            "params": {
-              "encoding": "timestamp"
-            },
+            "params": { "encoding": "timestamp" },
             "path": "#.expirationTime",
             "value": null
           }

@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 1, "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }],
+      "domain": { "name": "Permit", "chainId": 1, "verifyingContract": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }
+    }
+  },
+  "metadata": { "owner": "Lido DAO" }
+}

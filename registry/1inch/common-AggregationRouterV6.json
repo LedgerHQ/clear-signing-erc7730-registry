@@ -3,6 +3,16 @@
   "metadata": {
     "owner": "1inch",
     "info": { "url": "https://1inch.io/", "legalName": "1inch Network", "deploymentDate": "2024-02-12T03:44:35Z" },
+    "enums": {
+      "takerTraits": {
+        "0": "None",
+        "16": "None",
+        "32": "None",
+        "64": "Unwrap",
+        "80": "Unwrap",
+        "96": "Unwrap"
+      }
+    },
     "constants": {
       "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
       "addressAsNull": "0x0000000000000000000000000000000000000000"
@@ -20,11 +30,40 @@
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
+      "makingAmount": {
+        "label": "Order purchasing amt",
+        "format": "tokenAmount",
+        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+      },
+      "takingAmount": {
+        "label": "Order selling amount",
+        "format": "tokenAmount",
+        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+      },
+      "fillAmount": {
+        "label": "Amount to sell",
+        "format": "tokenAmount",
+        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+      },
+      "takerTraits": {
+        "format": "enum",
+        "label": "Additional action",
+        "params": { "$ref": "$.metadata.enums.takerTraits" }
+      },
       "beneficiary": { "label": "Beneficiary", "format": "addressName" },
       "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "expirationTime": { "label": "Expiration time", "format": "date", "params": { "encoding": "timestamp" } }
     },
     "formats": {
+      "permitAndCall(bytes permit, bytes action)": {
+        "$id": "permitAndCall",
+        "intent": "Execute with permit",
+        "fields": [
+          { "path": "action", "label": "Swap", "format": "calldata", "params": { "calleePath": "@.to" } }
+        ],
+        "required": ["action"],
+        "excluded": ["permit"]
+      },
       "swap(address executor, (address srcToken, address dstToken, address srcReceiver, address dstReceiver, uint256 amount, uint256 minReturnAmount, uint256 flags) desc, bytes data)": {
         "$id": "swap",
         "intent": "Swap",
@@ -206,6 +245,102 @@
         ],
         "required": ["@.from"],
         "excluded": ["series"]
+      },
+      "fillContractOrder((uint256 salt, uint256 maker, uint256 receiver, uint256 makerAsset, uint256 takerAsset, uint256 makingAmount, uint256 takingAmount, uint256 makerTraits) order, bytes signature, uint256 amount, uint256 takerTraits)": {
+        "$id": "fillContractOrder",
+        "intent": "Fill order",
+        "fields": [
+          {
+            "path": "order.takingAmount",
+            "$ref": "$.display.definitions.takingAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          {
+            "path": "order.makingAmount",
+            "$ref": "$.display.definitions.makingAmount",
+            "params": { "tokenPath": "order.makerAsset" }
+          },
+          {
+            "path": "amount",
+            "$ref": "$.display.definitions.fillAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          { "path": "takerTraits.[:1]", "$ref": "$.display.definitions.takerTraits" }
+        ],
+        "required": ["order.makingAmount", "order.makerAsset", "order.takingAmount", "order.takerAsset", "amount", "takerTraits"],
+        "excluded": ["signature", "order.salt", "order.maker", "order.receiver", "order.makerTraits"]
+      },
+      "fillContractOrderArgs((uint256 salt, uint256 maker, uint256 receiver, uint256 makerAsset, uint256 takerAsset, uint256 makingAmount, uint256 takingAmount, uint256 makerTraits) order, bytes signature, uint256 amount, uint256 takerTraits, bytes args)": {
+        "$id": "fillContractOrder",
+        "intent": "Fill order",
+        "fields": [
+          {
+            "path": "order.takingAmount",
+            "$ref": "$.display.definitions.takingAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          {
+            "path": "order.makingAmount",
+            "$ref": "$.display.definitions.makingAmount",
+            "params": { "tokenPath": "order.makerAsset" }
+          },
+          {
+            "path": "amount",
+            "$ref": "$.display.definitions.fillAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          { "path": "takerTraits.[:1]", "$ref": "$.display.definitions.takerTraits" }
+        ],
+        "required": ["order.makingAmount", "order.makerAsset", "order.takingAmount", "order.takerAsset", "amount", "takerTraits"],
+        "excluded": ["signature", "args", "order.salt", "order.maker", "order.receiver", "order.makerTraits"]
+      },
+      "fillOrder((uint256 salt, uint256 maker, uint256 receiver, uint256 makerAsset, uint256 takerAsset, uint256 makingAmount, uint256 takingAmount, uint256 makerTraits) order, bytes32 r, bytes32 vs, uint256 amount, uint256 takerTraits)": {
+        "$id": "fillContractOrder",
+        "intent": "Fill order",
+        "fields": [
+          {
+            "path": "order.takingAmount",
+            "$ref": "$.display.definitions.takingAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          {
+            "path": "order.makingAmount",
+            "$ref": "$.display.definitions.makingAmount",
+            "params": { "tokenPath": "order.makerAsset" }
+          },
+          {
+            "path": "amount",
+            "$ref": "$.display.definitions.fillAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          { "path": "takerTraits.[:1]", "$ref": "$.display.definitions.takerTraits" }
+        ],
+        "required": ["order.makingAmount", "order.makerAsset", "order.takingAmount", "order.takerAsset", "amount", "takerTraits"],
+        "excluded": ["r", "vs", "order.salt", "order.maker", "order.receiver", "order.makerTraits"]
+      },
+      "fillOrderArgs((uint256 salt, uint256 maker, uint256 receiver, uint256 makerAsset, uint256 takerAsset, uint256 makingAmount, uint256 takingAmount, uint256 makerTraits) order, bytes32 r, bytes32 vs, uint256 amount, uint256 takerTraits, bytes args)": {
+        "$id": "fillContractOrder",
+        "intent": "Fill order",
+        "fields": [
+          {
+            "path": "order.takingAmount",
+            "$ref": "$.display.definitions.takingAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          {
+            "path": "order.makingAmount",
+            "$ref": "$.display.definitions.makingAmount",
+            "params": { "tokenPath": "order.makerAsset" }
+          },
+          {
+            "path": "amount",
+            "$ref": "$.display.definitions.fillAmount",
+            "params": { "tokenPath": "order.takerAsset" }
+          },
+          { "path": "takerTraits.[:1]", "$ref": "$.display.definitions.takerTraits" }
+        ],
+        "required": ["order.makingAmount", "order.makerAsset", "order.takingAmount", "order.takerAsset", "amount", "takerTraits"],
+        "excluded": ["r", "vs", "args", "order.salt", "order.maker", "order.receiver", "order.makerTraits"]
       }
     }
   }
