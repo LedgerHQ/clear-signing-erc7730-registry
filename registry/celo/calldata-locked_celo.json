@@ -626,18 +626,6 @@
     }
   },
   "display": {
-    "definitions": {
-      "_amount": {
-        "label": "Amount to Relock",
-        "format": "tokenAmount",
-        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
-      },
-      "amount": {
-        "label": "Amount to Unlock",
-        "format": "tokenAmount",
-        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
-      }
-    },
     "formats": {
       "0x58f84a78": {
         "$id": "delegateGovernanceVotes",
@@ -663,7 +651,7 @@
         "$id": "relock",
         "intent": "Relock",
         "fields": [
-          { "path": "value", "$ref": "$.display.definitions._amount" },
+          { "path": "value", "label": "Amount to Relock", "format": "amount" },
           { "path": "@.from", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["value", "@.from"],
@@ -683,7 +671,7 @@
         "$id": "unlock",
         "intent": "Unlock",
         "fields": [
-          { "path": "value", "$ref": "$.display.definitions.amount" },
+          { "path": "value", "label": "Amount to Unlock", "format": "amount" },
           { "path": "@.from", "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["value", "@.from"],
