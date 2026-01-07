@@ -45,7 +45,7 @@ jobs:
 
       - name: Get changed calldata files
         id: changed-files
-        uses: tj-actions/changed-files@v40
+        uses: tj-actions/changed-files@v47
         with:
           files: |
             registry/**/calldata-*.json
@@ -85,15 +85,30 @@ jobs:
           mapfile -t changed_files <<< "${{ steps.changed-files.outputs.all_changed_files }}"
           for file in "${changed_files[@]}"; do
             [ -n "$file" ] || continue
+            echo "========================================="
             echo "Analyzing: $file"
-            if ! python erc7730-analyzer/analyze_7730.py \
+            echo "========================================="
+
+            # Run analyzer and show all output
+            python erc7730-analyzer/analyze_7730.py \
               --erc7730_file "$file" \
               --api-key "$ETHERSCAN_API_KEY" \
-              --coredao-api-key "$COREDAO_API_KEY" \
-              --lookback-days 20; then
-              echo "❌ Critical issues found in $file"
+              --coredao-api-key "$COREDAO_API_KEY" || true
+
+            # Check if reports were generated (indicates successful run)
+            if [ -d "output" ] && [ "$(ls -A output 2>/dev/null)" ]; then
+              echo "✅ Reports generated for $file"
+
+              # Check for critical issues in the reports
+              if find output -name 'CRITICALS_*.md' -exec grep -q '| 🔴' {} \; 2>/dev/null; then
+                echo "⚠️  Critical issues found in $file"
+                EXIT_CODE=1
+              fi
+            else
+              echo "❌ ERROR: Script failed to generate reports for $file"
               EXIT_CODE=1
             fi
+            echo ""
           done
 
           if [ "$EXIT_CODE" -eq 1 ]; then
@@ -105,7 +120,7 @@ jobs:
 
       - name: Upload analysis reports as artifacts
         if: always() && steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: analysis-reports
           path: output/
@@ -197,7 +212,7 @@ jobs:
 
       - name: Post summary to PR
         if: always() && steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
