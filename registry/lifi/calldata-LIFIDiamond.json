@@ -5128,7 +5128,10 @@
   },
   "metadata": {
     "owner": "LI.FI Service GmbH",
-    "info": { "legalName": "LI.FI", "url": "https://li.fi" },
+    "info": {
+      "legalName": "LI.FI",
+      "url": "https://li.fi"
+    },
     "constants": {
       "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
       "addressAsNull": "0x0000000000000000000000000000000000000000"
@@ -5139,12 +5142,22 @@
       "fromAmount": {
         "label": "Amount info",
         "format": "tokenAmount",
-        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+        "params": {
+          "nativeCurrencyAddress": [
+            "$.metadata.constants.addressAsEth",
+            "$.metadata.constants.addressAsNull"
+          ]
+        }
       },
       "_minAmountOut": {
-        "label": "Minimum Amount to receive",
+        "label": "Minimum Amount Out",
         "format": "tokenAmount",
-        "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
+        "params": {
+          "nativeCurrencyAddress": [
+            "$.metadata.constants.addressAsEth",
+            "$.metadata.constants.addressAsNull"
+          ]
+        }
       }
     },
     "formats": {
@@ -5156,22 +5169,40 @@
             "path": "_swapData.[0].fromAmount",
             "label": "Amount to Send",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.[0].sendingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[0].sendingAssetId"
+            }
           },
           {
             "path": "_minAmountOut",
             "label": "Minimum to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.[-1].receivingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[-1].receivingAssetId"
+            }
           },
           {
             "path": "_receiver",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.[0].fromAmount", "_swapData.[-1].receivingAssetId", "_minAmountOut", "_receiver"],
+        "required": [
+          "_swapData.[0].fromAmount",
+          "_swapData.[-1].receivingAssetId",
+          "_minAmountOut",
+          "_receiver"
+        ],
         "excluded": [
           "_transactionId",
           "_integrator",
@@ -5190,17 +5221,37 @@
             "path": "_swapData.[0].fromAmount",
             "label": "Amount to Send",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.[0].sendingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[0].sendingAssetId"
+            }
           },
-          { "path": "_minAmountOut", "$ref": "$.display.definitions._minAmountOut" },
+          {
+            "path": "_minAmountOut",
+            "label": "Minimum to Receive",
+            "format": "amount"
+          },
           {
             "path": "_receiver",
             "label": "Receiver",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.[0].fromAmount", "_swapData.[-1].receivingAssetId", "_minAmountOut", "_receiver"],
+        "required": [
+          "_swapData.[0].fromAmount",
+          "_swapData.[-1].receivingAssetId",
+          "_minAmountOut",
+          "_receiver"
+        ],
         "excluded": [
           "_transactionId",
           "_integrator",
@@ -5215,21 +5266,41 @@
         "$id": "swapTokensMultipleV3NativeToERC20",
         "intent": "Swap",
         "fields": [
-          { "path": "@.value", "label": "Amount to send", "format": "amount" },
+          {
+            "path": "@.value",
+            "label": "Amount to send",
+            "format": "amount"
+          },
           {
             "path": "_minAmountOut",
             "label": "Minimum to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.[-1].receivingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[-1].receivingAssetId"
+            }
           },
           {
             "path": "_receiver",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.[0].fromAmount", "_swapData.[-1].receivingAssetId", "_minAmountOut", "_receiver"],
+        "required": [
+          "_swapData.[0].fromAmount",
+          "_swapData.[-1].receivingAssetId",
+          "_minAmountOut",
+          "_receiver"
+        ],
         "excluded": [
           "_transactionId",
           "_integrator",
@@ -5248,23 +5319,47 @@
             "path": "_swapData.fromAmount",
             "label": "Amount to Send",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.sendingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.sendingAssetId"
+            }
           },
           {
             "path": "_minAmountOut",
             "label": "Minimum to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.receivingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.receivingAssetId"
+            }
           },
           {
             "path": "_receiver",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.fromAmount", "_minAmountOut", "_receiver", "_swapData.receivingAssetId"],
-        "excluded": ["_transactionId", "_integrator", "_referrer", "_swapData.callData", "_swapData.requiresDeposit"]
+        "required": [
+          "_swapData.fromAmount",
+          "_minAmountOut",
+          "_receiver",
+          "_swapData.receivingAssetId"
+        ],
+        "excluded": [
+          "_transactionId",
+          "_integrator",
+          "_referrer",
+          "_swapData.callData",
+          "_swapData.requiresDeposit"
+        ]
       },
       "0x733214a3": {
         "$id": "swapTokensSingleV3ERC20ToNative",
@@ -5274,17 +5369,36 @@
             "path": "_swapData.fromAmount",
             "label": "Amount to Send",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.sendingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.sendingAssetId"
+            }
           },
-          { "path": "_minAmountOut", "$ref": "$.display.definitions._minAmountOut" },
+          {
+            "path": "_minAmountOut",
+            "label": "Minimum Amount Out",
+            "format": "amount"
+          },
           {
             "path": "_receiver",
             "label": "Receiver",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.fromAmount", "_minAmountOut", "_receiver"],
+        "required": [
+          "_swapData.fromAmount",
+          "_minAmountOut",
+          "_receiver"
+        ],
         "excluded": [
           "_transactionId",
           "_integrator",
@@ -5299,22 +5413,48 @@
         "$id": "swapTokensSingleV3NativeToERC20",
         "intent": "Swap",
         "fields": [
-          { "path": "@.value", "label": "Amount to send", "format": "amount" },
+          {
+            "path": "@.value",
+            "label": "Amount to send",
+            "format": "amount"
+          },
           {
             "path": "_minAmountOut",
             "label": "Minimum to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "_swapData.receivingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.receivingAssetId"
+            }
           },
           {
             "path": "_receiver",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.fromAmount", "_minAmountOut", "_receiver"],
-        "excluded": ["_transactionId", "_integrator", "_referrer", "_swapData.callData", "_swapData.requiresDeposit", "_swapData.approveTo"]
+        "required": [
+          "_swapData.fromAmount",
+          "_minAmountOut",
+          "_receiver"
+        ],
+        "excluded": [
+          "_transactionId",
+          "_integrator",
+          "_referrer",
+          "_swapData.callData",
+          "_swapData.requiresDeposit",
+          "_swapData.approveTo"
+        ]
       },
       "0x4630a0d8": {
         "$id": "swapTokensGeneric",
@@ -5323,21 +5463,38 @@
           {
             "path": "_swapData.[0].fromAmount",
             "$ref": "$.display.definitions.fromAmount",
-            "params": { "tokenPath": "_swapData.[0].sendingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[0].sendingAssetId"
+            }
           },
           {
             "path": "_minAmount",
             "$ref": "$.display.definitions._minAmountOut",
-            "params": { "tokenPath": "_swapData.[-1].receivingAssetId" }
+            "params": {
+              "tokenPath": "_swapData.[-1].receivingAssetId"
+            }
           },
           {
             "path": "_receiver",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": {
+              "types": [
+                "eoa",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
           }
         ],
-        "required": ["_swapData.[0].fromAmount", "_minAmount", "_receiver"],
+        "required": [
+          "_swapData.[0].fromAmount",
+          "_minAmount",
+          "_receiver"
+        ],
         "excluded": [
           "_transactionId",
           "_integrator",
