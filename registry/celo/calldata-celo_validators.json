@@ -807,10 +807,7 @@
       ]
     }
   },
-  "metadata": {
-      "owner": "Celo Governance",
-      "info": { "legalName": "Celo", "url": "https://celo.org/" }
-  },
+  "metadata": { "owner": "Celo Governance", "info": { "legalName": "Celo", "url": "https://celo.org/" } },
   "display": {
     "formats": {
       "0x3173b8db": {
