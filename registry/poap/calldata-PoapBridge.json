@@ -236,7 +236,8 @@
             "params": { "encoding": "timestamp" },
             "path": "#.expirationTime",
             "value": null
-          }
+          },
+          { "path": "@.value", "label": "Migration Fee", "format": "amount" }
         ],
         "required": ["#.tokenId", "#.receiver"],
         "excluded": ["#.eventId", "#.signature"]
