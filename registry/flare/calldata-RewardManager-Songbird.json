@@ -1062,7 +1062,7 @@
                 "path": "body",
                 "value": null,
                 "fields": [
-                  { "$id": null, "label": "Beneficiary", "format": "raw", "params": null, "path": "beneficiary", "value": null },
+                  { "$id": null, "label": "Beneficiary", "format": "addressName", "params": null, "path": "beneficiary", "params": { "types": ["eoa"], "sources": ["local", "ens"] }, "value": null },
                   { "$id": null, "label": "Amount", "format": "amount", "params": null, "path": "amount", "value": null },
                   { "$id": null, "label": "Claim Type", "format": "raw", "params": null, "path": "claimType", "value": null }
                 ]
@@ -1095,7 +1095,7 @@
                 "path": "body",
                 "value": null,
                 "fields": [
-                  { "$id": null, "label": "Beneficiary", "format": "raw", "params": null, "path": "beneficiary", "value": null },
+                  { "$id": null, "label": "Claim Owner", "format": "addressName", "params": null, "path": "beneficiary", "params": { "types": ["eoa"], "sources": ["local", "ens"] }, "value": null },
                   { "$id": null, "label": "Amount", "format": "amount", "params": null, "path": "amount", "value": null },
                   { "$id": null, "label": "Claim Type", "format": "raw", "params": null, "path": "claimType", "value": null }
                 ]
