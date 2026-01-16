@@ -3,12 +3,7 @@
   "context": {
     "$id": "wstETH",
     "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
-        }
-      ],
+      "deployments": [{ "chainId": 1, "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0" }],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0.abi.json"
     }
   },
@@ -73,10 +68,7 @@
           {
             "label": "Recipient",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#.recipient"
           },
           {
