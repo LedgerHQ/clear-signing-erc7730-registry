@@ -3,7 +3,12 @@
   "context": {
     "$id": "WithdrawalQueueERC721",
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1" }],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1"
+        }
+      ],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/2eb3482cb1311f828a88e417c5095b9bbbc43fee/ethereum/lido/abis/0x889edc2edab5f40e902b864ad4d7ade8e412f9b1.abi.json"
     }
   },
@@ -18,7 +23,7 @@
   "display": {
     "formats": {
       "requestWithdrawals(uint256[],address)": {
-        "intent": "request stETH withdrawal",
+        "intent": "Request stETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -29,7 +34,10 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._owner"
           }
         ],
@@ -37,7 +45,7 @@
         "excluded": []
       },
       "requestWithdrawalsWithPermit(uint256[],address,(uint256,uint256,uint8,bytes32,bytes32))": {
-        "intent": "request stETH withdrawal",
+        "intent": "Request stETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -48,15 +56,24 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._owner"
           }
         ],
         "required": ["#._amounts.[]", "#._owner"],
-        "excluded": ["#._permit.value", "#._permit.deadline", "#._permit.v", "#._permit.r", "#._permit.s"]
+        "excluded": [
+          "#._permit.value",
+          "#._permit.deadline",
+          "#._permit.v",
+          "#._permit.r",
+          "#._permit.s"
+        ]
       },
       "requestWithdrawalsWstETH(uint256[],address)": {
-        "intent": "request wstETH withdrawal",
+        "intent": "Request wstETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -67,7 +84,10 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._owner"
           }
         ],
@@ -75,7 +95,7 @@
         "excluded": []
       },
       "requestWithdrawalsWstETHWithPermit(uint256[],address,(uint256,uint256,uint8,bytes32,bytes32))": {
-        "intent": "request wstETH withdrawal",
+        "intent": "Request wstETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -86,7 +106,10 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._owner"
           }
         ],
@@ -94,25 +117,36 @@
         "excluded": ["#._permit"]
       },
       "claimWithdrawal(uint256)": {
-        "intent": "claim withdrawal request",
-        "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestId" }],
+        "intent": "Claim withdrawal request",
+        "fields": [
+          { "label": "Request ID", "format": "raw", "path": "#._requestId" }
+        ],
         "required": ["#._requestId"],
         "excluded": []
       },
       "claimWithdrawals(uint256[],uint256[])": {
-        "intent": "claim withdrawal requests",
-        "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestIds.[]" }],
+        "intent": "Claim withdrawal requests",
+        "fields": [
+          { "label": "Request ID", "format": "raw", "path": "#._requestIds.[]" }
+        ],
         "required": ["#._requestIds.[]"],
         "excluded": ["#._hints.[]"]
       },
       "claimWithdrawalsTo(uint256[],uint256[],address)": {
-        "intent": "claim withdrawal requests",
+        "intent": "Claim withdrawal requests",
         "fields": [
-          { "label": "Request IDs", "format": "raw", "path": "#._requestIds.[]" },
+          {
+            "label": "Request IDs",
+            "format": "raw",
+            "path": "#._requestIds.[]"
+          },
           {
             "label": "ETH recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._recipient"
           }
         ],
@@ -120,7 +154,7 @@
         "excluded": ["#._hints.[]"]
       },
       "approve(address,uint256)": {
-        "intent": "allow unstETH NFT transfer",
+        "intent": "Allow unstETH NFT transfer",
         "fields": [
           {
             "label": "Operator address",
@@ -132,18 +166,24 @@
         ]
       },
       "safeTransferFrom(address,address,uint256)": {
-        "intent": "transfer unstETH NFT",
+        "intent": "Transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._from"
           },
           {
             "label": "To",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._to"
           }
         ],
@@ -151,18 +191,24 @@
         "excluded": ["#._requestId"]
       },
       "transferFrom(address,address,uint256)": {
-        "intent": "transfer unstETH NFT",
+        "intent": "Transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._from"
           },
           {
             "label": "To",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._to"
           }
         ],
@@ -170,12 +216,15 @@
         "excluded": ["#._requestId"]
       },
       "setApprovalForAll(address, bool)": {
-        "intent": "approve all unstETH tokens",
+        "intent": "Approve all unstETH tokens",
         "fields": [
           {
             "label": "Operator",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._operator"
           },
           { "label": "Approved", "format": "raw", "path": "#._approved" }

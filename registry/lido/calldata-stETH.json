@@ -3,19 +3,26 @@
   "context": {
     "$id": "stETH",
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+        }
+      ],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/211e75ed27de3894f592ca73710fa0b72c3ceeae/ethereum/lido/abis/0xae7ab96520de3a18e5e111b5eaab095312d7fe84.abi.json"
     }
   },
   "metadata": {
     "owner": "Lido DAO",
     "info": { "legalName": "Lido DAO", "url": "https://lido.fi" },
-    "constants": { "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }
+    "constants": {
+      "stETHaddress": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84"
+    }
   },
   "display": {
     "formats": {
       "approve(address,uint256)": {
-        "intent": "authorize stETH spending",
+        "intent": "Authorize stETH spending",
         "fields": [
           {
             "label": "Spender",
@@ -34,18 +41,23 @@
         "excluded": []
       },
       "submit(address)": {
-        "intent": "stake ETH",
-        "fields": [{ "label": "Amount to stake", "format": "amount", "path": "@.value" }],
+        "intent": "Stake ETH",
+        "fields": [
+          { "label": "Amount to stake", "format": "amount", "path": "@.value" }
+        ],
         "required": [],
         "excluded": ["#._referral"]
       },
       "transfer(address,uint256)": {
-        "intent": "transfer stETH",
+        "intent": "Transfer stETH",
         "fields": [
           {
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
+            "params": {
+              "types": ["eoa", "wallet"],
+              "sources": ["local", "ens"]
+            },
             "path": "#._recipient"
           },
           {

@@ -85,7 +85,7 @@
   "display": {
     "formats": {
       "stakeETH(address)": {
-        "intent": "stake ETH",
+        "intent": "Stake ETH",
         "fields": [
           {
             "label": "Amount to stake",
