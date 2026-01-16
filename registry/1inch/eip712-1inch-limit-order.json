@@ -69,6 +69,7 @@
           { "path": "takingAmount", "label": "Receive minimum", "format": "tokenAmount", "params": { "tokenPath": "takerAsset" } },
           { "path": "receiver", "label": "To", "format": "raw" }
         ],
+        "required": ["maker", "makingAmount", "takingAmount", "receiver"],
         "excluded": ["salt", "makerTraits", "interactions", "allowedSender", "offsets"]
       }
     }
