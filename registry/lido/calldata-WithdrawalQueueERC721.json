@@ -3,12 +3,7 @@
   "context": {
     "$id": "WithdrawalQueueERC721",
     "contract": {
-      "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1"
-        }
-      ],
+      "deployments": [{ "chainId": 1, "address": "0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1" }],
       "abi": "https://github.com/LedgerHQ/ledger-asset-dapps/blob/2eb3482cb1311f828a88e417c5095b9bbbc43fee/ethereum/lido/abis/0x889edc2edab5f40e902b864ad4d7ade8e412f9b1.abi.json"
     }
   },
@@ -34,10 +29,7 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._owner"
           }
         ],
@@ -56,21 +48,12 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._owner"
           }
         ],
         "required": ["#._amounts.[]", "#._owner"],
-        "excluded": [
-          "#._permit.value",
-          "#._permit.deadline",
-          "#._permit.v",
-          "#._permit.r",
-          "#._permit.s"
-        ]
+        "excluded": ["#._permit.value", "#._permit.deadline", "#._permit.v", "#._permit.r", "#._permit.s"]
       },
       "requestWithdrawalsWstETH(uint256[],address)": {
         "intent": "Request wstETH withdrawal",
@@ -84,10 +67,7 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._owner"
           }
         ],
@@ -106,10 +86,7 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._owner"
           }
         ],
@@ -118,35 +95,24 @@
       },
       "claimWithdrawal(uint256)": {
         "intent": "Claim withdrawal request",
-        "fields": [
-          { "label": "Request ID", "format": "raw", "path": "#._requestId" }
-        ],
+        "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestId" }],
         "required": ["#._requestId"],
         "excluded": []
       },
       "claimWithdrawals(uint256[],uint256[])": {
         "intent": "Claim withdrawal requests",
-        "fields": [
-          { "label": "Request ID", "format": "raw", "path": "#._requestIds.[]" }
-        ],
+        "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestIds.[]" }],
         "required": ["#._requestIds.[]"],
         "excluded": ["#._hints.[]"]
       },
       "claimWithdrawalsTo(uint256[],uint256[],address)": {
         "intent": "Claim withdrawal requests",
         "fields": [
-          {
-            "label": "Request IDs",
-            "format": "raw",
-            "path": "#._requestIds.[]"
-          },
+          { "label": "Request IDs", "format": "raw", "path": "#._requestIds.[]" },
           {
             "label": "ETH recipient",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._recipient"
           }
         ],
@@ -171,19 +137,13 @@
           {
             "label": "From",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._from"
           },
           {
             "label": "To",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._to"
           }
         ],
@@ -196,19 +156,13 @@
           {
             "label": "From",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._from"
           },
           {
             "label": "To",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._to"
           }
         ],
@@ -221,10 +175,7 @@
           {
             "label": "Operator",
             "format": "addressName",
-            "params": {
-              "types": ["eoa", "wallet"],
-              "sources": ["local", "ens"]
-            },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._operator"
           },
           { "label": "Approved", "format": "raw", "path": "#._approved" }
