@@ -17,7 +17,7 @@
         "$id": "createProxyWithNonceL2",
         "intent": "Create Safe",
         "fields": [{ "path": "initializer", "format": "calldata", "label": "Account setup", "params": { "calleePath": "_singleton" } }],
-        "required": ["data"],
+        "required": [],
         "excluded": ["saltNonce"]
       }
     }
