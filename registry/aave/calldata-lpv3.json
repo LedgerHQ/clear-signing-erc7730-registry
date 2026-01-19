@@ -411,7 +411,7 @@
   "metadata": {
     "owner": "Aave",
     "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2024-10-09T21:46:47Z" },
-    "enums": { "interestRateMode": { "1": "stable", "2": "variable" } },
+    "enums": { "interestRateMode": { "0": "none", "1": "deprecated", "2": "variable" } },
     "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" }
   },
   "display": {
@@ -469,7 +469,7 @@
       },
       "repayWithATokens(address asset, uint256 amount, uint256 interestRateMode)": {
         "$id": "repayWithATokens",
-        "intent": "Repay loan",
+        "intent": "Repay with aTokens",
         "fields": [
           {
             "path": "amount",
@@ -610,7 +610,7 @@
       },
       "approvePositionManager(address positionManager, bool approve)": {
         "$id": "approvePositionManager",
-        "intent": "Approve position manager",
+        "intent": "Approve Manager",
         "fields": [
           { "path": "positionManager", "format": "addressName", "label": "Position manager", "params": { "types": ["eoa"] } },
           { "path": "approve", "format": "raw", "label": "Approve" }
@@ -620,8 +620,18 @@
       },
       "renouncePositionManagerRole(address user)": {
         "$id": "renouncePositionManagerRole",
-        "intent": "Renounce position manager",
-        "fields": [{ "path": "user", "format": "addressName", "label": "Position manager", "params": { "types": ["eoa"] } }],
+        "intent": "Revoke Manager Role",
+        "fields": [       {
+          "path": "@.from",
+          "format": "addressName",
+          "label": "Position manager",
+          "params": {
+            "types": [
+              "eoa"
+            ]
+          }
+        },
+        { "path": "user", "format": "addressName", "label": "User", "params": { "types": ["eoa"] } }],
         "required": ["user"],
         "excluded": []
       },
