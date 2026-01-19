@@ -25,7 +25,7 @@
           },
           {
             "path": "params.amountOutMinimum",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.path.[-20:]" }
           },
@@ -45,7 +45,7 @@
           { "path": "params.amountIn", "label": "Send", "format": "tokenAmount", "params": { "tokenPath": "params.tokenIn" } },
           {
             "path": "params.amountOutMinimum",
-            "label": "Receive Minimum",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.tokenOut" }
           },
@@ -65,7 +65,7 @@
         "fields": [
           {
             "path": "params.amountInMaximum",
-            "label": "Maximum Amount to Send",
+            "label": "Maximum Amount In",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.path.[-20:]" }
           },
@@ -90,7 +90,7 @@
         "fields": [
           {
             "path": "params.amountInMaximum",
-            "label": "Maximum Amount to Send",
+            "label": "Maximum Amount In",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.tokenIn" }
           },
@@ -116,7 +116,7 @@
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           {
             "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "path.[-1]" }
           },
@@ -133,12 +133,14 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountOut", "label": "Amount to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[-1]" } },
-          { "path": "amountInMax", "label": "Maximum Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
+          { "path": "amountInMax", "label": "Maximum to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
           {
             "path": "to",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"], "senderAddress": [
+                  "0x0000000000000000000000000000000000000001"
+                ] }
           }
         ]
       }
