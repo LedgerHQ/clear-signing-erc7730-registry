@@ -1,7 +1,6 @@
 {
-  "$schema": null,
+  "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": null,
     "contract": {
       "deployments": [
         {
@@ -22,17 +21,10 @@
             {
               "name": "",
               "type": "address",
-              "internalType": "address",
-              "components": null,
-              "indexed": null,
-              "unit": null
+              "internalType": "address"
             }
           ],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -46,44 +38,33 @@
                 {
                   "name": "to",
                   "type": "address",
-                  "internalType": "address",
-                  "components": null
+                  "internalType": "address"
                 },
                 {
                   "name": "data",
                   "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
+                  "internalType": "bytes"
                 },
                 {
                   "name": "value",
                   "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
+                  "internalType": "uint256"
                 },
                 {
                   "name": "skipRevert",
                   "type": "bool",
-                  "internalType": "bool",
-                  "components": null
+                  "internalType": "bool"
                 },
                 {
                   "name": "callbackHash",
                   "type": "bytes32",
-                  "internalType": "bytes32",
-                  "components": null
+                  "internalType": "bytes32"
                 }
-              ],
-              "indexed": null,
-              "unit": null
+              ]
             }
           ],
           "outputs": [],
-          "stateMutability": "payable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "payable"
         },
         {
           "type": "function",
@@ -97,44 +78,33 @@
                 {
                   "name": "to",
                   "type": "address",
-                  "internalType": "address",
-                  "components": null
+                  "internalType": "address"
                 },
                 {
                   "name": "data",
                   "type": "bytes",
-                  "internalType": "bytes",
-                  "components": null
+                  "internalType": "bytes"
                 },
                 {
                   "name": "value",
                   "type": "uint256",
-                  "internalType": "uint256",
-                  "components": null
+                  "internalType": "uint256"
                 },
                 {
                   "name": "skipRevert",
                   "type": "bool",
-                  "internalType": "bool",
-                  "components": null
+                  "internalType": "bool"
                 },
                 {
                   "name": "callbackHash",
                   "type": "bytes32",
-                  "internalType": "bytes32",
-                  "components": null
+                  "internalType": "bytes32"
                 }
-              ],
-              "indexed": null,
-              "unit": null
+              ]
             }
           ],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
@@ -144,21 +114,12 @@
             {
               "name": "",
               "type": "bytes32",
-              "internalType": "bytes32",
-              "components": null,
-              "indexed": null,
-              "unit": null
+              "internalType": "bytes32"
             }
           ],
-          "stateMutability": "view",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "view"
         }
-      ],
-      "addressMatcher": null,
-      "factory": null
+      ]
     }
   },
   "metadata": {
@@ -170,344 +131,103 @@
   },
   "display": {
     "formats": {
-      "multicall(bytes[])": {
-        "$id": null,
-        "intent": "Multicall ",
-        "screens": null,
+      "multicall((address,bytes,uint256,bool,bytes32)[])": {
+        "intent": "Bundler3 Multicall",
         "fields": [
           {
-            "$id": null,
-            "label": "Data",
-            "format": "raw",
-            "params": null,
-            "path": "#.data.[]",
-            "value": null
-          }
-        ],
-        "required": ["#.data.[]"],
-        "excluded": null
-      },
-      "approve2(((address,uint160,uint48,uint48),address,uint256),bytes,bool)": {
-        "$id": null,
-        "intent": "Approve2 on Bundler",
-        "screens": null,
-        "fields": [
-          {
-            "path": "#.permitSingle",
-            "value": null,
+            "path": "#.bundle.[]",
             "fields": [
               {
-                "path": "details",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "Token",
-                    "format": "addressName",
-                    "params": {
-                      "types": ["token"],
-                      "sources": null
-                    },
-                    "path": "token",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Amount",
-                    "format": "amount",
-                    "params": null,
-                    "path": "amount",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Expiration",
-                    "format": "date",
-                    "params": {
-                      "encoding": "timestamp"
-                    },
-                    "path": "expiration",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Nonce",
-                    "format": "raw",
-                    "params": null,
-                    "path": "nonce",
-                    "value": null
-                  }
-                ]
-              },
-              {
-                "$id": null,
-                "label": "Spender",
+                "label": "To",
                 "format": "addressName",
                 "params": {
-                  "types": ["contract"],
-                  "sources": null
+                  "types": ["eoa", "wallet", "contract", "token"]
                 },
-                "path": "spender",
-                "value": null
+                "path": "to"
               },
               {
-                "$id": null,
-                "label": "Sig Deadline",
-                "format": "date",
+                "label": "Action",
+                "format": "calldata",
                 "params": {
-                  "encoding": "timestamp"
+                  "calleePath": "to",
+                  "selector": "data"
                 },
-                "path": "sigDeadline",
-                "value": null
-              }
-            ]
-          },
-          {
-            "$id": null,
-            "label": "Signature",
-            "format": "raw",
-            "params": null,
-            "path": "#.signature",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Skip Revert",
-            "format": "raw",
-            "params": null,
-            "path": "#.skipRevert",
-            "value": null
-          }
-        ],
-        "required": [
-          "#.permitSingledetailstoken",
-          "#.permitSingledetailsamount",
-          "#.permitSingledetailsexpiration",
-          "#.permitSingledetailsnonce",
-          "#.permitSinglespender",
-          "#.permitSinglesigDeadline",
-          "#.signature",
-          "#.skipRevert"
-        ],
-        "excluded": null
-      },
-      "permit(address,uint256,uint256,uint8,bytes32,bytes32,bool)": {
-        "$id": null,
-        "intent": "permit on Bundler",
-        "screens": null,
-        "fields": [
-          {
-            "$id": null,
-            "label": "Asset",
-            "format": "addressName",
-            "params": {
-              "types": ["token"],
-              "sources": null
-            },
-            "path": "#.asset",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Amount",
-            "format": "amount",
-            "params": null,
-            "path": "#.amount",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Deadline",
-            "format": "date",
-            "params": {
-              "encoding": "timestamp"
-            },
-            "path": "#.deadline",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "V",
-            "format": "raw",
-            "params": null,
-            "path": "#.v",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "R",
-            "format": "raw",
-            "params": null,
-            "path": "#.r",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "S",
-            "format": "raw",
-            "params": null,
-            "path": "#.s",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Skip Revert",
-            "format": "raw",
-            "params": null,
-            "path": "#.skipRevert",
-            "value": null
-          }
-        ],
-        "required": [
-          "#.asset",
-          "#.amount",
-          "#.deadline",
-          "#.v",
-          "#.r",
-          "#.s",
-          "#.skipRevert"
-        ],
-        "excluded": null
-      },
-      "multicall((address,bytes,uint256,bool,bytes32)[])": {
-        "$id": null,
-        "intent": "multicall on Bundler3",
-        "screens": null,
-        "fields": [
-          {
-            "path": "#.bundle.[]",
-            "value": null,
-            "fields": [
+                "path": "data"
+              },
               {
-                "path": "",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "To",
-                    "format": "addressName",
-                    "params": {
-                      "types": ["eoa", "wallet"],
-                      "sources": null
-                    },
-                    "path": "to",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Data",
-                    "format": "raw",
-                    "params": null,
-                    "path": "data",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Value",
-                    "format": "amount",
-                    "params": null,
-                    "path": "value",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Skip Revert",
-                    "format": "raw",
-                    "params": null,
-                    "path": "skipRevert",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Callback Hash",
-                    "format": "raw",
-                    "params": null,
-                    "path": "callbackHash",
-                    "value": null
-                  }
-                ]
+                "label": "Value",
+                "format": "amount",
+                "path": "value"
+              },
+              {
+                "label": "Skip Revert",
+                "format": "raw",
+                "path": "skipRevert"
+              },
+              {
+                "label": "Callback Hash",
+                "format": "raw",
+                "path": "callbackHash"
               }
             ]
           }
         ],
         "required": [
-          "#.bundle.[]to",
-          "#.bundle.[]data",
-          "#.bundle.[]value",
-          "#.bundle.[]skipRevert",
-          "#.bundle.[]callbackHash"
-        ],
-        "excluded": null
+          "#.bundle.[].to",
+          "#.bundle.[].data",
+          "#.bundle.[].value",
+          "#.bundle.[].skipRevert",
+          "#.bundle.[].callbackHash"
+        ]
       },
       "reenter((address,bytes,uint256,bool,bytes32)[])": {
-        "$id": null,
-        "intent": "reenter on Bundler3",
-        "screens": null,
+        "intent": "Reenter Bundler3",
         "fields": [
           {
             "path": "#.bundle.[]",
-            "value": null,
             "fields": [
               {
-                "path": "",
-                "value": null,
-                "fields": [
-                  {
-                    "$id": null,
-                    "label": "To",
-                    "format": "addressName",
-                    "params": {
-                      "types": ["eoa", "wallet"],
-                      "sources": null
-                    },
-                    "path": "to",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Data",
-                    "format": "raw",
-                    "params": null,
-                    "path": "data",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Value",
-                    "format": "amount",
-                    "params": null,
-                    "path": "value",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Skip Revert",
-                    "format": "raw",
-                    "params": null,
-                    "path": "skipRevert",
-                    "value": null
-                  },
-                  {
-                    "$id": null,
-                    "label": "Callback Hash",
-                    "format": "raw",
-                    "params": null,
-                    "path": "callbackHash",
-                    "value": null
-                  }
-                ]
+                "label": "To",
+                "format": "addressName",
+                "params": {
+                  "types": ["eoa", "wallet", "contract", "token"]
+                },
+                "path": "to"
+              },
+              {
+                "label": "Action",
+                "format": "calldata",
+                "params": {
+                  "calleePath": "to",
+                  "selector": "data"
+                },
+                "path": "data"
+              },
+              {
+                "label": "Value",
+                "format": "amount",
+                "path": "value"
+              },
+              {
+                "label": "Skip Revert",
+                "format": "raw",
+                "path": "skipRevert"
+              },
+              {
+                "label": "Callback Hash",
+                "format": "raw",
+                "path": "callbackHash"
               }
             ]
           }
         ],
         "required": [
-          "#.bundle.[]to",
-          "#.bundle.[]data",
-          "#.bundle.[]value",
-          "#.bundle.[]skipRevert",
-          "#.bundle.[]callbackHash"
-        ],
-        "excluded": null
+          "#.bundle.[].to",
+          "#.bundle.[].data",
+          "#.bundle.[].value",
+          "#.bundle.[].skipRevert",
+          "#.bundle.[].callbackHash"
+        ]
       }
     }
   }
