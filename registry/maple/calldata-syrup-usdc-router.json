@@ -3,13 +3,20 @@
   "context": {
     "$id": "syrupUSDC",
     "contract": {
-      "deployments": [{ "chainId": 1, "address": "0x134ccaaa4f1e4552ec8aecb9e4a2360ddcf8df76" }],
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x134ccaaa4f1e4552ec8aecb9e4a2360ddcf8df76"
+        }
+      ],
       "abi": [
         {
           "type": "function",
           "name": "asset",
           "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "outputs": [
+            { "name": "", "type": "address", "internalType": "address" }
+          ],
           "stateMutability": "view"
         },
         {
@@ -17,14 +24,24 @@
           "name": "authorizeAndDeposit",
           "inputs": [
             { "name": "bitmap_", "type": "uint256", "internalType": "uint256" },
-            { "name": "deadline_", "type": "uint256", "internalType": "uint256" },
+            {
+              "name": "deadline_",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
             { "name": "auth_v", "type": "uint8", "internalType": "uint8" },
             { "name": "auth_r", "type": "bytes32", "internalType": "bytes32" },
             { "name": "auth_s", "type": "bytes32", "internalType": "bytes32" },
             { "name": "amount_", "type": "uint256", "internalType": "uint256" },
-            { "name": "depositData_", "type": "bytes32", "internalType": "bytes32" }
+            {
+              "name": "depositData_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
           ],
-          "outputs": [{ "name": "shares_", "type": "uint256", "internalType": "uint256" }],
+          "outputs": [
+            { "name": "shares_", "type": "uint256", "internalType": "uint256" }
+          ],
           "stateMutability": "nonpayable"
         },
         {
@@ -32,18 +49,40 @@
           "name": "authorizeAndDepositWithPermit",
           "inputs": [
             { "name": "bitmap_", "type": "uint256", "internalType": "uint256" },
-            { "name": "auth_deadline_", "type": "uint256", "internalType": "uint256" },
+            {
+              "name": "auth_deadline_",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
             { "name": "auth_v", "type": "uint8", "internalType": "uint8" },
             { "name": "auth_r", "type": "bytes32", "internalType": "bytes32" },
             { "name": "auth_s", "type": "bytes32", "internalType": "bytes32" },
             { "name": "amount_", "type": "uint256", "internalType": "uint256" },
-            { "name": "depositData_", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "permit_deadline", "type": "uint256", "internalType": "uint256" },
+            {
+              "name": "depositData_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "permit_deadline",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
             { "name": "permit_v_", "type": "uint8", "internalType": "uint8" },
-            { "name": "permit_r_", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "permit_s_", "type": "bytes32", "internalType": "bytes32" }
+            {
+              "name": "permit_r_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "permit_s_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
           ],
-          "outputs": [{ "name": "shares_", "type": "uint256", "internalType": "uint256" }],
+          "outputs": [
+            { "name": "shares_", "type": "uint256", "internalType": "uint256" }
+          ],
           "stateMutability": "nonpayable"
         },
         {
@@ -51,9 +90,15 @@
           "name": "deposit",
           "inputs": [
             { "name": "amount_", "type": "uint256", "internalType": "uint256" },
-            { "name": "depositData_", "type": "bytes32", "internalType": "bytes32" }
+            {
+              "name": "depositData_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
           ],
-          "outputs": [{ "name": "shares_", "type": "uint256", "internalType": "uint256" }],
+          "outputs": [
+            { "name": "shares_", "type": "uint256", "internalType": "uint256" }
+          ],
           "stateMutability": "nonpayable"
         },
         {
@@ -61,65 +106,80 @@
           "name": "depositWithPermit",
           "inputs": [
             { "name": "amount_", "type": "uint256", "internalType": "uint256" },
-            { "name": "deadline_", "type": "uint256", "internalType": "uint256" },
+            {
+              "name": "deadline_",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
             { "name": "v_", "type": "uint8", "internalType": "uint8" },
             { "name": "r_", "type": "bytes32", "internalType": "bytes32" },
             { "name": "s_", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "depositData_", "type": "bytes32", "internalType": "bytes32" }
+            {
+              "name": "depositData_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
           ],
-          "outputs": [{ "name": "shares_", "type": "uint256", "internalType": "uint256" }],
+          "outputs": [
+            { "name": "shares_", "type": "uint256", "internalType": "uint256" }
+          ],
           "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "nonces",
-          "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "inputs": [
+            { "name": "", "type": "address", "internalType": "address" }
+          ],
+          "outputs": [
+            { "name": "", "type": "uint256", "internalType": "uint256" }
+          ],
           "stateMutability": "view"
         },
         {
           "type": "function",
           "name": "pool",
           "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "outputs": [
+            { "name": "", "type": "address", "internalType": "address" }
+          ],
           "stateMutability": "view"
         },
         {
           "type": "function",
           "name": "poolManager",
           "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "outputs": [
+            { "name": "", "type": "address", "internalType": "address" }
+          ],
           "stateMutability": "view"
         },
         {
           "type": "function",
           "name": "poolPermissionManager",
           "inputs": [],
-          "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+          "outputs": [
+            { "name": "", "type": "address", "internalType": "address" }
+          ],
           "stateMutability": "view"
         }
       ]
     }
   },
-  "metadata": { "owner": "Maple Finance", "info": { "legalName": "Maple Finance", "url": "https://maple.finance/" } },
+  "metadata": {
+    "owner": "Maple Finance",
+    "info": { "legalName": "Maple Finance", "url": "https://maple.finance/" }
+  },
   "display": {
     "formats": {
       "authorizeAndDeposit(uint256,uint256,uint8,bytes32,bytes32,uint256,bytes32)": {
         "intent": "Authorize & Deposit",
         "fields": [
           {
-            "label": "Amount",
-            "format": "tokenAmount",
-            "params": { "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" },
-            "path": "#.amount_"
-          }
-        ],
-        "required": ["#.amount_"],
-        "excluded": ["#.bitmap_", "#.deadline_", "#.auth_v", "#.auth_r", "#.auth_s", "#.depositData_"]
-      },
-      "authorizeAndDepositWithPermit(uint256,uint256,uint8,bytes32,bytes32,uint256,bytes32,uint256,uint8,bytes32,bytes32)": {
-        "intent": "Authorize & Deposit",
-        "fields": [
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
           {
             "label": "Amount",
             "format": "tokenAmount",
@@ -130,12 +190,47 @@
         "required": ["#.amount_"],
         "excluded": [
           "#.bitmap_",
-          "#.auth_deadline_",
+          "#.deadline_",
+          "#.auth_v",
+          "#.auth_r",
+          "#.auth_s",
+          "#.depositData_"
+        ]
+      },
+      "authorizeAndDepositWithPermit(uint256,uint256,uint8,bytes32,bytes32,uint256,bytes32,uint256,uint8,bytes32,bytes32)": {
+        "intent": "Authorize & Deposit",
+        "fields": [
+          {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
+          {
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": { "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" },
+            "path": "#.amount_"
+          },
+          {
+            "format": "date",
+            "label": "Auth Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.auth_deadline_"
+          },
+          {
+            "format": "date",
+            "label": "Permit Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.permit_deadline"
+          }
+        ],
+        "required": ["#.amount_"],
+        "excluded": [
+          "#.bitmap_",
           "#.auth_v",
           "#.auth_r",
           "#.auth_s",
           "#.depositData_",
-          "#.permit_deadline",
           "#.permit_v_",
           "#.permit_r_",
           "#.permit_s_"
@@ -144,6 +239,11 @@
       "deposit(uint256,bytes32)": {
         "intent": "Deposit",
         "fields": [
+          {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
           {
             "label": "Amount",
             "format": "tokenAmount",
@@ -158,14 +258,25 @@
         "intent": "Deposit With Permit",
         "fields": [
           {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
+          {
             "label": "Amount",
             "format": "tokenAmount",
             "params": { "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" },
             "path": "#.amount_"
+          },
+          {
+            "format": "date",
+            "label": "Permit Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.deadline_"
           }
         ],
         "required": ["#.amount_"],
-        "excluded": ["#.deadline_", "#.v_", "#.r_", "#.s_", "#.depositData_"]
+        "excluded": ["#.v_", "#.r_", "#.s_", "#.depositData_"]
       }
     }
   }

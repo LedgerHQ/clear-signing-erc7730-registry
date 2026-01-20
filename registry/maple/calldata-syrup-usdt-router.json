@@ -108,6 +108,11 @@
         "intent": "Authorize & Deposit",
         "fields": [
           {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
+          {
             "label": "Amount",
             "format": "tokenAmount",
             "params": { "token": "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
@@ -121,21 +126,36 @@
         "intent": "Authorize & Deposit",
         "fields": [
           {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
+          {
             "label": "Amount",
             "format": "tokenAmount",
             "params": { "token": "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
             "path": "#.amount_"
+          },
+          {
+            "format": "date",
+            "label": "Auth Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.auth_deadline_"
+          },
+          {
+            "format": "date",
+            "label": "Permit Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.permit_deadline"
           }
         ],
         "required": ["#.amount_"],
         "excluded": [
           "#.bitmap_",
-          "#.auth_deadline_",
           "#.auth_v",
           "#.auth_r",
           "#.auth_s",
           "#.depositData_",
-          "#.permit_deadline",
           "#.permit_v_",
           "#.permit_r_",
           "#.permit_s_"
@@ -145,18 +165,10 @@
         "intent": "Deposit",
         "fields": [
           {
-            "label": "Amount",
-            "format": "tokenAmount",
-            "params": { "token": "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
-            "path": "#.amount_"
-          }
-        ],
-        "required": ["#.amount_", "#.depositData_"],
-        "excluded": ["#.depositData_"]
-      },
-      "depositWithPermit(uint256,uint256,uint8,bytes32,bytes32,bytes32)": {
-        "intent": "Deposit",
-        "fields": [
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
           {
             "label": "Amount",
             "format": "tokenAmount",
@@ -165,7 +177,31 @@
           }
         ],
         "required": ["#.amount_"],
-        "excluded": ["#.deadline_", "#.v_", "#.r_", "#.s_", "#.depositData_"]
+        "excluded": ["#.depositData_"]
+      },
+      "depositWithPermit(uint256,uint256,uint8,bytes32,bytes32,bytes32)": {
+        "intent": "Deposit With Permit",
+        "fields": [
+          {
+            "format": "addressName",
+            "label": "Beneficiary",
+            "path": "@.from"
+          },
+          {
+            "label": "Amount",
+            "format": "tokenAmount",
+            "params": { "token": "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
+            "path": "#.amount_"
+          },
+          {
+            "format": "date",
+            "label": "Permit Expiry",
+            "params": { "encoding": "timestamp" },
+            "path": "#.deadline_"
+          }
+        ],
+        "required": ["#.amount_"],
+        "excluded": ["#.v_", "#.r_", "#.s_", "#.depositData_"]
       }
     }
   }
