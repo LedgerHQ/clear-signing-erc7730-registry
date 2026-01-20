@@ -15,7 +15,7 @@
   "display": {
     "formats": {
       "approve(address,uint256)": {
-        "intent": "authorize stETH spending",
+        "intent": "Authorize stETH spending",
         "fields": [
           {
             "label": "Spender",
@@ -34,13 +34,13 @@
         "excluded": []
       },
       "submit(address)": {
-        "intent": "stake ETH",
+        "intent": "Stake ETH",
         "fields": [{ "label": "Amount to stake", "format": "amount", "path": "@.value" }],
         "required": [],
         "excluded": ["#._referral"]
       },
       "transfer(address,uint256)": {
-        "intent": "transfer stETH",
+        "intent": "Transfer stETH",
         "fields": [
           {
             "label": "Recipient",
