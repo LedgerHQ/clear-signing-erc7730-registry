@@ -110,7 +110,8 @@
           {
             "format": "addressName",
             "label": "Beneficiary",
-            "path": "@.from"
+            "path": "@.from",
+            "params": { "types": ["eoa", "wallet", "contract"] }
           },
           {
             "label": "Amount",
@@ -128,7 +129,8 @@
           {
             "format": "addressName",
             "label": "Beneficiary",
-            "path": "@.from"
+            "path": "@.from",
+            "params": { "types": ["eoa", "wallet", "contract"] }
           },
           {
             "label": "Amount",
@@ -167,7 +169,8 @@
           {
             "format": "addressName",
             "label": "Beneficiary",
-            "path": "@.from"
+            "path": "@.from",
+            "params": { "types": ["eoa", "wallet", "contract"] }
           },
           {
             "label": "Amount",
@@ -185,7 +188,8 @@
           {
             "format": "addressName",
             "label": "Beneficiary",
-            "path": "@.from"
+            "path": "@.from",
+            "params": { "types": ["eoa", "wallet", "contract"] }
           },
           {
             "label": "Amount",
