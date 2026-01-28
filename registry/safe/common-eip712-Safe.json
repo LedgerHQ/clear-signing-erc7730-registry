@@ -222,8 +222,13 @@
         "intent": "Add address book entry",
         "fields": [
           {
-            "path": "entries",
-            "label": "Address book entries",
+            "path": "entries.[].alias",
+            "label": "Address book alias",
+            "format": "raw"
+          },
+          {
+            "path": "entries.[].address",
+            "label": "Address book address",
             "format": "raw"
           }
         ],
