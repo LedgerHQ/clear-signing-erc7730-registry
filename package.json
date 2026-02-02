@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "js-sha3": "^0.9.3"
+  }
+}

@@ -2,3 +2,11 @@
 .idea/
 .jfrog/
 .lh/
+
+# Environment files with secrets
+.env
+.env.local
+.env.*.local
+
+# Node modules
+node_modules/
