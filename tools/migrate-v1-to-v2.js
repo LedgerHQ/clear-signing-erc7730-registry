@@ -17,7 +17,7 @@
  * - Transform format keys to proper format (human-readable ABI or EIP-712 encodeType)
  *
  * Usage:
- *   node specs/migrate-v1-to-v2.js [--dry-run] [--verbose] [--file <path>]
+ *   node tools/migrate-v1-to-v2.js [--dry-run] [--verbose] [--file <path>]
  */
 
 const fs = require("fs");
