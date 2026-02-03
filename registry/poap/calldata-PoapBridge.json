@@ -219,18 +219,8 @@
         "intent": "Mint POAP",
         "fields": [
           { "label": "Token Id", "format": "raw", "path": "#.tokenId" },
-          {
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"] },
-            "path": "#.receiver"
-          },
-          {
-            "label": "Expiration Time",
-            "format": "date",
-            "params": { "encoding": "timestamp" },
-            "path": "#.expirationTime"
-          }
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.receiver" },
+          { "label": "Expiration Time", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.expirationTime" }
         ],
         "required": ["#.tokenId", "#.receiver"],
         "excluded": ["#.eventId", "#.signature"]
