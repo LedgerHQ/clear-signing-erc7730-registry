@@ -23,12 +23,7 @@
           ]
         },
         "primaryType": "OrderStructure",
-        "domain": {
-          "name": "1inch",
-          "version": "4",
-          "chainId": 1,
-          "verifyingContract": "0x119c71d3bbac22029622cbaec24854d3d32d2828"
-        },
+        "domain": { "name": "1inch", "version": "4", "chainId": 1, "verifyingContract": "0x119c71d3bbac22029622cbaec24854d3d32d2828" },
         "message": {
           "salt": "12345678901234567890123456789012345678901234567890123456789012345678",
           "maker": "0x1234567890123456789012345678901234567890",
