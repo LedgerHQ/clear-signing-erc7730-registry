@@ -548,8 +548,8 @@
           { "path": "orderId", "$ref": "$.display.definitions.orderId" },
           { "path": "rawdata.[0:1]", "label": "Direction", "format": "enum", "params": { "$ref": "$.metadata.enums.swapDirection" } },
           {
-            "path": "rawdata.[-16:]",
-            "label": "WETH Amount",
+            "path": "rawdata.[-17:]",
+            "label": "Amount",
             "format": "tokenAmount",
             "params": { "token": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" }
           }
