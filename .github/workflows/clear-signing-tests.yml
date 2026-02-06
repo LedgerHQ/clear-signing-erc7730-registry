@@ -350,7 +350,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const body = `## Clear Signing Tests\n\n> ℹNo test files found for the changed descriptors.\n\nCreate a test file at \`registry/<entity>/tests/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../README.md#testing-your-descriptors) for details.`;
+            const body = `## Clear Signing Tests\n\n> ℹNo test files found for the changed descriptors.\n\nCreate a test file at \`registry/<entity>/tests/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../blob/master/README.md#reference-test-cases) for details.`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number
