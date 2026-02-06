@@ -66,7 +66,7 @@
             "path": "value",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": { "tokenPath": "@.verifyingContract" }
+            "params": { "tokenPath": "@.to" }
           },
           {
             "path": "validAfter",
