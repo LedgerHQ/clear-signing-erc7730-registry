@@ -10,3 +10,7 @@
 
 # Node modules
 node_modules/
+# Clear signing tester (local setup)
+tools/tester/dmk/
+tools/tester/coin-apps/
+tools/tester/output/
