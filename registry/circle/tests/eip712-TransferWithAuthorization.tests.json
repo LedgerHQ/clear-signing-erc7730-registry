@@ -37,15 +37,19 @@
         }
       },
       "expectedTexts": [
-        "Authorize USDC transfer",
+        "Contract",
+        "Authorize USDC",
+        "transfer",
         "From",
-        "0x1234567890123456789012345678901234567890",
+        "0x12345678901234567",
         "To",
-        "0x110cdBba7FE6434Ec4CE3464CC523942ad6Fb784",
+        "0x110cdBba7FE6434Ec",
         "Amount",
         "0.01 USDC",
         "Valid after",
-        "Valid before"
+        "1970-01-01",
+        "Valid before",
+        "2025-02-07"
       ]
     },
     {
@@ -84,15 +88,19 @@
         }
       },
       "expectedTexts": [
-        "Authorize USDC transfer",
+        "Contract",
+        "Authorize USDC",
+        "transfer",
         "From",
-        "0xABCDEF0123456789ABCDEF0123456789ABCDEF01",
+        "0xabCDeF0123456789",
         "To",
-        "0x43a2a720cd0911690c248075f4a29a5e7716f758",
+        "0x43A2A720cD091169",
         "Amount",
         "0.003 USDC",
         "Valid after",
-        "Valid before"
+        "1970-01-01",
+        "Valid before",
+        "2025-02-07"
       ]
     },
     {
@@ -131,15 +139,19 @@
         }
       },
       "expectedTexts": [
-        "Authorize USDC transfer",
+        "Contract",
+        "Authorize USDC",
+        "transfer",
         "From",
-        "0x9876543210987654321098765432109876543210",
+        "0x9876543210987654",
         "To",
-        "0x402FaCcC3fAeb72351CC2b68C7966faF5f22B0d4",
+        "0x402FaCcC3fAeb723",
         "Amount",
         "0.3 USDC",
         "Valid after",
-        "Valid before"
+        "1970-01-01",
+        "Valid before",
+        "2025-02-07"
       ]
     },
     {
@@ -178,15 +190,18 @@
         }
       },
       "expectedTexts": [
-        "Authorize USDC transfer",
+        "Authorize USDC",
+        "transfer",
         "From",
-        "0xFEDCBA9876543210FEDCBA9876543210FEDCBA98",
+        "0xfEdcBA9876543210F",
         "To",
-        "0xD34411a70EffbDd000c529bbF572082ffDcF1794",
+        "0xD34411a70EffbDd00",
         "Amount",
         "0.005 USDC",
         "Valid after",
-        "Valid before"
+        "1970-01-01",
+        "Valid before",
+        "2025-02-07"
       ]
     },
     {
@@ -225,15 +240,18 @@
         }
       },
       "expectedTexts": [
-        "Authorize USDC transfer",
+        "Authorize USDC",
+        "transfer",
         "From",
-        "0x0123456789ABCDEF0123456789ABCDEF01234567",
+        "0x0123456789abcDEF",
         "To",
-        "0x89764c3dEd721c29999A237cF935a34e1C8EDf97",
+        "0x89764c3dEd721c299",
         "Amount",
         "0.05 USDC",
         "Valid after",
-        "Valid before"
+        "1970-01-01",
+        "Valid before",
+        "2025-02-07"
       ]
     }
   ]
