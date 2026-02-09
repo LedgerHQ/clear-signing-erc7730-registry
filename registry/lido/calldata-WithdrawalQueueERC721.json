@@ -18,7 +18,7 @@
   "display": {
     "formats": {
       "requestWithdrawals(uint256[],address)": {
-        "intent": "request stETH withdrawal",
+        "intent": "Request stETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -37,7 +37,7 @@
         "excluded": []
       },
       "requestWithdrawalsWithPermit(uint256[],address,(uint256,uint256,uint8,bytes32,bytes32))": {
-        "intent": "request stETH withdrawal",
+        "intent": "Request stETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -56,7 +56,7 @@
         "excluded": ["#._permit.value", "#._permit.deadline", "#._permit.v", "#._permit.r", "#._permit.s"]
       },
       "requestWithdrawalsWstETH(uint256[],address)": {
-        "intent": "request wstETH withdrawal",
+        "intent": "Request wstETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -75,7 +75,7 @@
         "excluded": []
       },
       "requestWithdrawalsWstETHWithPermit(uint256[],address,(uint256,uint256,uint8,bytes32,bytes32))": {
-        "intent": "request wstETH withdrawal",
+        "intent": "Request wstETH withdrawal",
         "fields": [
           {
             "label": "Amount to withdraw",
@@ -94,19 +94,19 @@
         "excluded": ["#._permit"]
       },
       "claimWithdrawal(uint256)": {
-        "intent": "claim withdrawal request",
+        "intent": "Claim withdrawal request",
         "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestId" }],
         "required": ["#._requestId"],
         "excluded": []
       },
       "claimWithdrawals(uint256[],uint256[])": {
-        "intent": "claim withdrawal requests",
+        "intent": "Claim withdrawal requests",
         "fields": [{ "label": "Request ID", "format": "raw", "path": "#._requestIds.[]" }],
         "required": ["#._requestIds.[]"],
         "excluded": ["#._hints.[]"]
       },
       "claimWithdrawalsTo(uint256[],uint256[],address)": {
-        "intent": "claim withdrawal requests",
+        "intent": "Claim withdrawal requests",
         "fields": [
           { "label": "Request IDs", "format": "raw", "path": "#._requestIds.[]" },
           {
@@ -120,7 +120,7 @@
         "excluded": ["#._hints.[]"]
       },
       "approve(address,uint256)": {
-        "intent": "allow unstETH NFT transfer",
+        "intent": "Allow unstETH NFT transfer",
         "fields": [
           {
             "label": "Operator address",
@@ -132,7 +132,7 @@
         ]
       },
       "safeTransferFrom(address,address,uint256)": {
-        "intent": "transfer unstETH NFT",
+        "intent": "Transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
@@ -151,7 +151,7 @@
         "excluded": ["#._requestId"]
       },
       "transferFrom(address,address,uint256)": {
-        "intent": "transfer unstETH NFT",
+        "intent": "Transfer unstETH NFT",
         "fields": [
           {
             "label": "From",
@@ -170,7 +170,7 @@
         "excluded": ["#._requestId"]
       },
       "setApprovalForAll(address, bool)": {
-        "intent": "approve all unstETH tokens",
+        "intent": "Approve all unstETH tokens",
         "fields": [
           {
             "label": "Operator",
