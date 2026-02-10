@@ -21,56 +21,49 @@ jobs:
 
     steps:
       - name: Checkout PR branch (for files to analyze)
-        uses: actions/checkout@v6
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.head_ref }}
 
       - name: Checkout analyzer repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           repository: LedgerHQ/erc7730-analyzer
           ref: main
-          path: erc7730-analyzer
+          path: analyzer
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv
+        uses: astral-sh/setup-uv@0c5e2b8115b80b4c7c5ddf6ffdd634974642d182 # v5.4.1
         with:
-          python-version: '3.12'
-          cache: 'pip'
-          cache-dependency-path: erc7730-analyzer/requirements.txt
-
-      - name: Install dependencies
-        run: |
-          pip install -r erc7730-analyzer/requirements.txt
+          version: "0.6.14"
 
       - name: Get changed calldata files
         id: changed-files
-        uses: tj-actions/changed-files@v47
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             registry/**/calldata-*.json
-          separator: '\n'
 
       - name: Check if this is a report commit (Analysis files only)
         id: check-report-commit
         run: |
           if [ "${{ steps.changed-files.outputs.any_changed }}" != "true" ]; then
-            echo "is_report_commit=true" >> "$GITHUB_OUTPUT"
+            echo "is_report_commit=true" >> $GITHUB_OUTPUT
             # This is a report commit - check the CRITICALS file for issues
-            CRITICALS_FILE=$(find output -maxdepth 1 -name 'CRITICALS_*.md' -print -quit)
-            if [ -n "$CRITICALS_FILE" ] && [ -f "$CRITICALS_FILE" ]; then
+            CRITICALS_FILE=$(ls Analysis/CRITICALS_*.md 2>/dev/null | head -1)
+            if [ -f "$CRITICALS_FILE" ]; then
               if grep -q '| 🔴' "$CRITICALS_FILE"; then
-                echo "has_criticals=true" >> "$GITHUB_OUTPUT"
+                echo "has_criticals=true" >> $GITHUB_OUTPUT
                 echo "Report commit contains critical issues"
               else
-                echo "has_criticals=false" >> "$GITHUB_OUTPUT"
+                echo "has_criticals=false" >> $GITHUB_OUTPUT
                 echo "Report commit has no critical issues"
               fi
             else
-              echo "has_criticals=false" >> "$GITHUB_OUTPUT"
+              echo "has_criticals=false" >> $GITHUB_OUTPUT
             fi
           else
-            echo "is_report_commit=false" >> "$GITHUB_OUTPUT"
+            echo "is_report_commit=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Run analyzer on each file
@@ -78,49 +71,27 @@ jobs:
         id: run-analyzer
         env:
           ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
-          COREDAO_API_KEY: ${{ secrets.COREDAO_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           EXIT_CODE=0
-          mapfile -t changed_files <<< "${{ steps.changed-files.outputs.all_changed_files }}"
-          for file in "${changed_files[@]}"; do
-            [ -n "$file" ] || continue
-            echo "========================================="
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Analyzing: $file"
-            echo "========================================="
-
-            # Run analyzer and show all output
-            python erc7730-analyzer/analyze_7730.py \
-              --erc7730_file "$file" \
-              --api-key "$ETHERSCAN_API_KEY" \
-              --coredao-api-key "$COREDAO_API_KEY" || true
-
-            # Check if reports were generated (indicates successful run)
-            if [ -d "output" ] && [ "$(ls -A output 2>/dev/null)" ]; then
-              echo "✅ Reports generated for $file"
-
-              # Check for critical issues in the reports
-              if find output -name 'CRITICALS_*.md' -exec grep -q '| 🔴' {} \; 2>/dev/null; then
-                echo "⚠️  Critical issues found in $file"
-                EXIT_CODE=1
-              fi
-            else
-              echo "❌ ERROR: Script failed to generate reports for $file"
+            if ! uvx --from ./analyzer analyze_7730 --erc7730_file "$file" --api-key "$ETHERSCAN_API_KEY" --lookback-days 20; then
+              echo "❌ Critical issues found in $file"
               EXIT_CODE=1
             fi
-            echo ""
           done
 
-          if [ "$EXIT_CODE" -eq 1 ]; then
-            echo "has_criticals=true" >> "$GITHUB_OUTPUT"
+          if [ $EXIT_CODE -eq 1 ]; then
+            echo "has_criticals=true" >> $GITHUB_OUTPUT
             exit 1
           else
-            echo "has_criticals=false" >> "$GITHUB_OUTPUT"
+            echo "has_criticals=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Upload analysis reports as artifacts
         if: always() && steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: analysis-reports
           path: output/
@@ -130,21 +101,21 @@ jobs:
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
           # Find CRITICALS report
-          CRITICALS_FILE=$(find output -maxdepth 1 -name 'CRITICALS_*.md' -print -quit)
+          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
 
-          if [ -n "$CRITICALS_FILE" ] && [ -f "$CRITICALS_FILE" ]; then
+          if [ -f "$CRITICALS_FILE" ]; then
             # Extract contract name from filename (e.g., CRITICALS_wstETH_20251119.md -> wstETH)
             CONTRACT_NAME=$(basename "$CRITICALS_FILE" | sed 's/CRITICALS_\(.*\)_[0-9]*.md/\1/')
 
             # Find the corresponding calldata file
-            CALLDATA_FILE=$(find . -name "calldata-${CONTRACT_NAME}.json" -print -quit)
+            CALLDATA_FILE=$(find . -name "calldata-${CONTRACT_NAME}.json" 2>/dev/null | head -1)
             if [ -z "$CALLDATA_FILE" ]; then
-              CALLDATA_FILE=$(find registry -name 'calldata-*.json' -print -quit)
+              CALLDATA_FILE=$(ls **/calldata-*.json 2>/dev/null | head -1)
             fi
 
             # Parse CRITICALS file for issues
             # Look for lines with 🔴 in the summary table
-            while IFS='|' read -r col1 col2 _ col4 _; do
+            while IFS='|' read -r col1 col2 col3 col4 col5; do
               if [[ "$col4" == *"🔴"* ]]; then
                 # Extract function name and selector (using sed for trimming instead of xargs)
                 FUNCTION=$(echo "$col1" | sed 's/`//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
@@ -171,48 +142,30 @@ jobs:
       - name: Add reports to job summary
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
-          {
-            echo "## 📊 ERC-7730 Analysis Results"
-            echo ""
-          } >> "$GITHUB_STEP_SUMMARY"
+          echo "## 📊 ERC-7730 Analysis Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
 
-          # Find CRITICALS report
-          CRITICALS_FILE=$(find output -maxdepth 1 -name 'CRITICALS_*.md' -print -quit)
-          if [ -n "$CRITICALS_FILE" ] && [ -f "$CRITICALS_FILE" ]; then
-            {
-              echo "### 🔴 Critical Issues Report"
-              echo ""
-              cat "$CRITICALS_FILE"
-              echo ""
-              echo "---"
-              echo ""
-            } >> "$GITHUB_STEP_SUMMARY"
+          # Find CRITICALS report (only display this in the summary)
+          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
+          if [ -f "$CRITICALS_FILE" ]; then
+            echo "### 🔴 Critical Issues Report" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            cat "$CRITICALS_FILE" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ No critical issues found." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
           fi
 
-          # Find SUMMARY report
-          SUMMARY_FILE=$(find output -maxdepth 1 -name 'FULL_REPORT_*.md' -print -quit)
-          if [ -n "$SUMMARY_FILE" ] && [ -f "$SUMMARY_FILE" ]; then
-            {
-              echo "### 📋 Detailed Summary"
-              echo ""
-              echo "<details>"
-              echo "<summary>Click to expand full summary</summary>"
-              echo ""
-              cat "$SUMMARY_FILE"
-              echo ""
-              echo "</details>"
-            } >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-          # Add download link
-          {
-            echo ""
-            echo "📥 [Download all reports as artifacts](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-          } >> "$GITHUB_STEP_SUMMARY"
+          # Add link to artifacts section
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 **Full reports available in the Artifacts section at the bottom of this page.**" >> $GITHUB_STEP_SUMMARY
 
       - name: Post summary to PR
         if: always() && steps.changed-files.outputs.any_changed == 'true'
-        uses: actions/github-script@v8
+        continue-on-error: true
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -229,7 +182,7 @@ jobs:
 
             let body = '## 🔍 ERC-7730 Analysis Complete\n\n';
             body += `📊 **Reports generated:** ${files.length}\n\n`;
-            body += `📥 **[Download full reports (artifacts)](${context.payload.repository.html_url}/actions/runs/${context.runId})**\n\n`;
+            body += `📥 **[View workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId})** (download reports from Artifacts section)\n\n`;
 
             // Add status based on critical issues
             const hasCriticals = '${{ steps.run-analyzer.outputs.has_criticals }}' === 'true';
@@ -242,12 +195,40 @@ jobs:
               body += '**This PR is safe to merge** (based on automated analysis).\n';
             }
 
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: body
-            });
+            // Only PR events have issue_number.
+            if (!context.issue || !context.issue.number) {
+              core.notice('No PR issue number found; skipping PR comment.');
+              return;
+            }
+
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const maxAttempts = 3;
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+              try {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: body
+                });
+                core.info(`Posted PR summary comment on attempt ${attempt}.`);
+                break;
+              } catch (error) {
+                const status = error.status || 'unknown';
+                const msg = error.message || String(error);
+                if (attempt === maxAttempts) {
+                  core.warning(
+                    `Failed to post PR summary comment after ${maxAttempts} attempts (status=${status}): ${msg}`
+                  );
+                } else {
+                  const waitMs = attempt * 2000;
+                  core.warning(
+                    `PR comment attempt ${attempt}/${maxAttempts} failed (status=${status}): ${msg}. Retrying in ${waitMs}ms...`
+                  );
+                  await sleep(waitMs);
+                }
+              }
+            }
 
       - name: Block merge if critical issues found
         if: always()
