@@ -1,0 +1,70 @@
+---
+description: Batch process ERC-7730 folders - migrate schemas, generate tests, create PRs
+globs: registry/**
+alwaysApply: false
+---
+
+# Batch Process ERC-7730 Registry Folder
+
+When the user wants to process, migrate, or update an entire registry folder, use this tool.
+
+## Command
+
+```bash
+node tools/migrate/batch-process.js <folder-name> [options]
+```
+
+## Options
+
+| Option | Description |
+|--------|-------------|
+| `--dry-run` | Preview changes without modifying files |
+| `--verbose` | Show detailed output for each operation |
+| `--skip-tests` | Skip test file generation |
+| `--skip-migration` | Skip v1 to v2 schema migration |
+| `--skip-lint` | Skip linting validation |
+| `--skip-pr` | Skip PR creation (just process files) |
+| `--pr-title <title>` | Custom PR title |
+| `--pr-branch <name>` | Custom branch name |
+
+## Examples
+
+Preview what will happen:
+
+```bash
+node tools/migrate/batch-process.js 1inch --dry-run --verbose
+```
+
+Full processing with PR:
+
+```bash
+source .env && node tools/migrate/batch-process.js uniswap
+```
+
+Migrate only (no tests):
+
+```bash
+node tools/migrate/batch-process.js aave --skip-tests
+```
+
+Generate tests only (no migration):
+
+```bash
+source .env && node tools/migrate/batch-process.js protocol --skip-migration
+```
+
+## Prerequisites
+
+- Node.js v16+
+- Environment variables for test generation: `source .env`
+- Optional: `erc7730` Python CLI for linting
+- Optional: `gh` CLI for PR creation
+
+## Workflow
+
+The script processes each ERC-7730 file in the target folder:
+
+1. **Schema Migration** - Migrates v1 files to v2 format
+2. **Validation** - Runs `erc7730 lint` on migrated files
+3. **Test Generation** - Creates missing test files from blockchain data
+4. **PR Creation** - Creates a GitHub PR with all changes

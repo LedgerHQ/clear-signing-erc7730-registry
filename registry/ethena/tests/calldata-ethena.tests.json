@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../specs/erc7730-tests.schema.json",
+  "tests": [
+    {
+      "description": "Cooldown Shares - chain 1",
+      "rawTx": "0x02f84c01748477359400847ba502768301d132949d39a5de30e57443bff2a8307a4256c8797a349780a49343d9e10000000000000000000000000000000000000000000000878678326eac900000c0",
+      "txHash": "0xf2f3d6abf3834b2a3ec58c4dd2c04d47c75797606ad5a579de739cf12274d0b8",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Amount 2500",
+        "Max fees"
+      ]
+    },
+    {
+      "description": "Cooldown Shares - chain 1",
+      "rawTx": "0x02f84c013984022cf22084060fd1a083024704949d39a5de30e57443bff2a8307a4256c8797a349780a49343d9e100000000000000000000000000000000000000000000008708e91dfcf2e10aa6c0",
+      "txHash": "0xe961e5c571385e53a7fb05a131d9665a452c2e9202a860b66c30eda8ae543bb1",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Amount 2490.95",
+        "Max fees"
+      ]
+    },
+    {
+      "description": "Cooldown Shares - chain 1",
+      "rawTx": "0x02f84d01820193830f4240840523c3f083024716949d39a5de30e57443bff2a8307a4256c8797a349780a49343d9e1000000000000000000000000000000000000000000000dded0afa2da9bb293cbc0",
+      "txHash": "0xcd141930f944ae6eb629397264171ba64427fc33ab4e0ffe82687eef1aa094d5",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Amount 65500.97",
+        "Max fees"
+      ]
+    },
+    {
+      "description": "Unstake - chain 1",
+      "rawTx": "0x02f84c01058435a4e90f843d70c98583012a3a949d39a5de30e57443bff2a8307a4256c8797a349780a4f2888dbb000000000000000000000000153a8cec9e94e995242894f9e3c49eaa04ca4224c0",
+      "txHash": "0x22bf2d3fdb3b72e95e46bff2ce37ee15c5ad5fea3cb58bc1c0202784504bfd22",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Receiver 0x153a8CEc",
+        "Max fees"
+      ]
+    },
+    {
+      "description": "Unstake - chain 1",
+      "rawTx": "0x02f84a0129837c5dc0840302108a82d923949d39a5de30e57443bff2a8307a4256c8797a349780a4f2888dbb000000000000000000000000ae04007121bcc2ad416114cfe4e5695b2f24825ec0",
+      "txHash": "0x3e76233e955357a57e2c9ea18ed183c36eb276057336c0f2b43c3658599615a1",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Receiver 0xAE040071",
+        "Max fees"
+      ]
+    },
+    {
+      "description": "Unstake - chain 1",
+      "rawTx": "0x02f84c01178477359400847a876ba583012a3a949d39a5de30e57443bff2a8307a4256c8797a349780a4f2888dbb00000000000000000000000056877d4f7a20ffac44bb69afba74b0a6e97b4e90c0",
+      "txHash": "0xf6a2d6ca75f2faf81438249dcc2d32d01b113a225147fc7cdd4dac9e576346b9",
+      "expectedTexts": [
+        "Interaction with Ethena",
+        "Receiver 0x56877D4F",
+        "Max fees"
+      ]
+    }
+  ]
+}
