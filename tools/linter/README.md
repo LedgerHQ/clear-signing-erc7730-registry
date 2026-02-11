@@ -4,8 +4,7 @@ This document describes how to set up and use the [python-erc7730](https://githu
 
 ## Prerequisites
 
-- Python 3.12
-- Git
+- Python 3.12+
 
 ## Setup
 
@@ -17,9 +16,8 @@ cd tools/linter
 ```
 
 This will:
-1. Clone the python-erc7730 repository
-2. Create a Python virtual environment
-3. Install PDM and all dependencies
+1. Create a Python virtual environment
+2. Install the `erc7730` package from [PyPI](https://pypi.org/project/erc7730/)
 
 ## Usage
 
