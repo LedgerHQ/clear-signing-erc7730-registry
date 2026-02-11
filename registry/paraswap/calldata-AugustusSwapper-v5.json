@@ -376,23 +376,24 @@
       "sendAmount": {
         "label": "Amount to Send",
         "format": "tokenAmount",
-        "params": { "tokenPath": "fromToken", "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
+        "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
       "minReceiveAmount": {
-        "label": "Minimum to Receive",
+        "label": "Receive before fees",
         "format": "tokenAmount",
-        "params": { "tokenPath": "toToken", "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
+        "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
       "maxSendAmount": {
         "label": "Maximum to Send",
         "format": "tokenAmount",
-        "params": { "tokenPath": "tokenIn", "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
+        "params": {"nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
       "receiveAmount": {
         "label": "Amount to Receive",
         "format": "tokenAmount",
-        "params": { "tokenPath": "tokenOut", "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
+        "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
+      
       "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "beneficiary": { "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
       "exchange": { "label": "Exchange", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } },
