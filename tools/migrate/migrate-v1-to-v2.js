@@ -16,20 +16,30 @@
  * - Clean up null values
  * - Transform format keys to proper format (human-readable ABI or EIP-712 encodeType)
  *
+ * After migration, validates:
+ * - Lints the migrated v2 file
+ * - Runs calldata validation on both v1 (original) and v2 (migrated) files
+ *
  * Usage:
- *   node specs/migrate-v1-to-v2.js [--dry-run] [--verbose] [--file <path>]
+ *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--file <path>] [--skip-lint]
  */
 
 const fs = require("fs");
 const path = require("path");
+const { spawnSync } = require("child_process");
 
 // Configuration
-const REGISTRY_DIR = path.join(__dirname, "..", "registry");
+const ROOT_DIR = path.join(__dirname, "..", "..");
+const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const DRY_RUN = process.argv.includes("--dry-run");
 const VERBOSE = process.argv.includes("--verbose");
+const SKIP_LINT = process.argv.includes("--skip-lint");
 const SINGLE_FILE = process.argv.includes("--file")
   ? process.argv[process.argv.indexOf("--file") + 1]
   : null;
+
+// Local linter path
+const LOCAL_LINTER_PATH = path.join(ROOT_DIR, "tools", "linter", ".venv", "bin", "erc7730");
 
 // Statistics
 const stats = {
@@ -50,7 +60,190 @@ const stats = {
     nullsCleaned: 0,
     formatKeysTransformed: 0,
   },
+  linting: {
+    v1Passed: 0,
+    v1Failed: [],
+    v2Passed: 0,
+    v2Failed: [],
+    skipped: 0,
+  },
+  calldata: {
+    v1Passed: 0,
+    v1Failed: [],
+    v2Passed: 0,
+    v2Failed: [],
+    skipped: 0,
+  },
 };
+
+// =============================================================================
+// Linting Functions
+// =============================================================================
+
+/**
+ * Check if local linter is available
+ */
+function checkLocalLinter() {
+  return fs.existsSync(LOCAL_LINTER_PATH);
+}
+
+/**
+ * Get the linter command to use (local or global)
+ */
+function getLinterCommand() {
+  if (checkLocalLinter()) {
+    return LOCAL_LINTER_PATH;
+  }
+  // Fallback to global erc7730 command
+  try {
+    spawnSync("erc7730", ["--version"], { encoding: "utf8", stdio: "pipe" });
+    return "erc7730";
+  } catch (e) {
+    return null;
+  }
+}
+
+/**
+ * Lint a file using erc7730 CLI
+ * @param {string} filePath - Path to the file to lint
+ * @param {string} version - "v1" or "v2" for tracking stats
+ * @returns {boolean} - True if linting passed
+ */
+function lintFile(filePath, version) {
+  const linterCmd = getLinterCommand();
+  if (!linterCmd) {
+    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found. Install with: pip install erc7730");
+    stats.linting.skipped++;
+    return true; // Don't fail if CLI not available
+  }
+
+  if (VERBOSE) console.log(`  🔍 Linting ${version}: ${path.relative(ROOT_DIR, filePath)}`);
+
+  try {
+    const result = spawnSync(linterCmd, ["lint", filePath], {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+      stdio: VERBOSE ? "inherit" : "pipe",
+    });
+
+    if (result.status !== 0) {
+      const errorMsg = result.stderr || result.stdout || "Linting failed";
+      if (version === "v1") {
+        stats.linting.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
+      } else {
+        stats.linting.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
+      }
+      return false;
+    }
+
+    if (version === "v1") {
+      stats.linting.v1Passed++;
+    } else {
+      stats.linting.v2Passed++;
+    }
+    return true;
+  } catch (error) {
+    if (version === "v1") {
+      stats.linting.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
+    } else {
+      stats.linting.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
+    }
+    return false;
+  }
+}
+
+/**
+ * Run calldata validation on a file using erc7730 CLI
+ * @param {string} filePath - Path to the file to validate
+ * @param {string} version - "v1" or "v2" for tracking stats
+ * @returns {object|null} - Calldata output or null on failure
+ */
+function validateCalldata(filePath, version) {
+  const linterCmd = getLinterCommand();
+  if (!linterCmd) {
+    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found for calldata validation");
+    stats.calldata.skipped++;
+    return null;
+  }
+
+  if (VERBOSE) console.log(`  📋 Validating calldata ${version}: ${path.relative(ROOT_DIR, filePath)}`);
+
+  try {
+    const result = spawnSync(linterCmd, ["calldata", filePath], {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+      stdio: "pipe",
+    });
+
+    if (result.status !== 0) {
+      const errorMsg = result.stderr || result.stdout || "Calldata validation failed";
+      if (version === "v1") {
+        stats.calldata.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
+      } else {
+        stats.calldata.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
+      }
+      return null;
+    }
+
+    if (version === "v1") {
+      stats.calldata.v1Passed++;
+    } else {
+      stats.calldata.v2Passed++;
+    }
+    return result.stdout;
+  } catch (error) {
+    if (version === "v1") {
+      stats.calldata.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
+    } else {
+      stats.calldata.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
+    }
+    return null;
+  }
+}
+
+/**
+ * Validate a file before and after migration
+ * @param {string} filePath - Path to the file
+ * @param {string} v1Content - Original v1 content (to validate calldata before migration)
+ * @param {boolean} wasV1 - Whether the file was originally v1
+ */
+function validateMigration(filePath, v1Content, wasV1) {
+  if (SKIP_LINT || DRY_RUN) {
+    stats.linting.skipped++;
+    stats.calldata.skipped++;
+    return;
+  }
+
+  const linterCmd = getLinterCommand();
+  if (!linterCmd) {
+    if (VERBOSE) console.log("  ⚠️  Skipping validation - erc7730 CLI not available");
+    stats.linting.skipped++;
+    stats.calldata.skipped++;
+    return;
+  }
+
+  // If we have v1 content, create a temp file and validate it
+  let v1TempPath = null;
+  if (wasV1 && v1Content) {
+    v1TempPath = filePath + ".v1.tmp";
+    fs.writeFileSync(v1TempPath, v1Content);
+    
+    // Lint v1
+    lintFile(v1TempPath, "v1");
+    
+    // Calldata validation on v1
+    validateCalldata(v1TempPath, "v1");
+    
+    // Clean up temp file
+    fs.unlinkSync(v1TempPath);
+  }
+
+  // Lint v2 (the migrated file)
+  lintFile(filePath, "v2");
+  
+  // Calldata validation on v2
+  validateCalldata(filePath, "v2");
+}
 
 /**
  * Recursively remove keys with null values from an object
@@ -216,6 +409,7 @@ function migrateFile(filePath) {
 
   try {
     const content = fs.readFileSync(filePath, "utf8");
+    const originalV1Content = content; // Store for validation
     let json = JSON.parse(content);
     let modified = false;
 
@@ -342,6 +536,9 @@ function migrateFile(filePath) {
     if (modified) {
       if (!DRY_RUN) {
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
+        
+        // Validate the migration (lint v1 and v2, calldata on both)
+        validateMigration(filePath, originalV1Content, true);
       }
       stats.migrated++;
       if (VERBOSE) console.log(`Migrated: ${filePath}`);
@@ -428,9 +625,48 @@ function main() {
   console.log(`Null values cleaned:    ${stats.changes.nullsCleaned}`);
   console.log(`Format keys transformed:${stats.changes.formatKeysTransformed}`);
 
+  // Print linting summary
+  if (!SKIP_LINT && !DRY_RUN) {
+    console.log("\n🔍 Linting Validation");
+    console.log("---------------------");
+    console.log(`v1 passed:              ${stats.linting.v1Passed}`);
+    console.log(`v2 passed:              ${stats.linting.v2Passed}`);
+    console.log(`Skipped:                ${stats.linting.skipped}`);
+    if (stats.linting.v1Failed.length > 0) {
+      console.log(`v1 failed:              ${stats.linting.v1Failed.length}`);
+      for (const { file, error } of stats.linting.v1Failed) {
+        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+      }
+    }
+    if (stats.linting.v2Failed.length > 0) {
+      console.log(`v2 failed:              ${stats.linting.v2Failed.length}`);
+      for (const { file, error } of stats.linting.v2Failed) {
+        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+      }
+    }
+
+    console.log("\n📋 Calldata Validation");
+    console.log("----------------------");
+    console.log(`v1 passed:              ${stats.calldata.v1Passed}`);
+    console.log(`v2 passed:              ${stats.calldata.v2Passed}`);
+    console.log(`Skipped:                ${stats.calldata.skipped}`);
+    if (stats.calldata.v1Failed.length > 0) {
+      console.log(`v1 failed:              ${stats.calldata.v1Failed.length}`);
+      for (const { file, error } of stats.calldata.v1Failed) {
+        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+      }
+    }
+    if (stats.calldata.v2Failed.length > 0) {
+      console.log(`v2 failed:              ${stats.calldata.v2Failed.length}`);
+      for (const { file, error } of stats.calldata.v2Failed) {
+        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+      }
+    }
+  }
+
   if (stats.errors.length > 0) {
-    console.log("\n❌ Errors");
-    console.log("---------");
+    console.log("\n❌ Migration Errors");
+    console.log("-------------------");
     for (const { file, error } of stats.errors) {
       console.log(`  ${file}: ${error}`);
     }
@@ -438,6 +674,19 @@ function main() {
 
   if (DRY_RUN) {
     console.log("\n💡 Run without --dry-run to apply changes");
+  }
+  if (SKIP_LINT) {
+    console.log("\n💡 Run without --skip-lint to validate files after migration");
+  }
+
+  // Determine exit code based on failures
+  const hasFailures =
+    stats.errors.length > 0 ||
+    stats.linting.v2Failed.length > 0 ||
+    stats.calldata.v2Failed.length > 0;
+
+  if (hasFailures && !DRY_RUN) {
+    process.exit(1);
   }
 }
 

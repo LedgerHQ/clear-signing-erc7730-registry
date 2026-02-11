@@ -14,3 +14,7 @@ node_modules/
 tools/tester/dmk/
 tools/tester/coin-apps/
 tools/tester/output/
+
+# ERC-7730 linter (local setup)
+tools/linter/python-erc7730/
+tools/linter/.venv/

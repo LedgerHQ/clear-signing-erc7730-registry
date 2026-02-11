@@ -24,19 +24,19 @@ yarn add js-sha3
 
 ```bash
 # Basic usage
-node tools/generate-tests.js <erc7730-file>
+node tools/migrate/generate-tests.js <erc7730-file>
 
 # Dry run (preview without writing)
-node tools/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --dry-run
+node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --dry-run
 
 # Verbose output
-node tools/generate-tests.js registry/ethena/calldata-ethena.json --verbose
+node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --verbose
 
 # Limit search depth and tests
-node tools/generate-tests.js registry/aave/calldata-lpv3.json --depth 50 --max-tests 2
+node tools/migrate/generate-tests.js registry/aave/calldata-lpv3.json --depth 50 --max-tests 2
 
 # Process only specific chain
-node tools/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --chain 1
+node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --chain 1
 ```
 
 ## Options
@@ -79,13 +79,13 @@ The script uses the unified Etherscan V2 API which supports multiple chains with
 
 ```bash
 # Copy the template to .env in the project root
-cp tools/env.example .env
+cp tools/migrate/env.example .env
 
 # Edit .env and add your API keys
 nano .env  # or use your preferred editor
 
 # Source the file before running
-source .env && node tools/generate-tests.js registry/file.json
+source .env && node tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 2: Using dotenv package**
@@ -95,17 +95,17 @@ source .env && node tools/generate-tests.js registry/file.json
 npm install dotenv
 
 # Create .env file from template
-cp tools/env.example .env
+cp tools/migrate/env.example .env
 # Edit .env with your keys...
 
 # Run with dotenv preloading
-node -r dotenv/config tools/generate-tests.js registry/file.json
+node -r dotenv/config tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 3: Inline environment variables**
 
 ```bash
-ETHERSCAN_API_KEY="your-key" node tools/generate-tests.js registry/file.json
+ETHERSCAN_API_KEY="your-key" node tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 4: Export in your shell**
@@ -113,7 +113,7 @@ ETHERSCAN_API_KEY="your-key" node tools/generate-tests.js registry/file.json
 ```bash
 export ETHERSCAN_API_KEY="your-api-key-here"
 export OPENAI_API_KEY="your-openai-key"
-node tools/generate-tests.js registry/file.json
+node tools/migrate/generate-tests.js registry/file.json
 ```
 
 > ⚠️ **Important**: The `.env` file is in `.gitignore` - never commit files containing real API keys!
@@ -124,7 +124,7 @@ Azure OpenAI uses a different authentication format (`api-key` header instead of
 
 ```bash
 # Using CLI arguments
-node tools/generate-tests.js registry/uniswap/eip712-uniswap.json \
+node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json \
   --azure \
   --openai-url "https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview" \
   --openai-key "YOUR-AZURE-API-KEY"
@@ -133,7 +133,7 @@ node tools/generate-tests.js registry/uniswap/eip712-uniswap.json \
 export AZURE_OPENAI=true
 export LLM_BASE_URL="https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview"
 export OPENAI_API_KEY="YOUR-AZURE-API-KEY"
-node tools/generate-tests.js registry/uniswap/eip712-uniswap.json
+node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json
 ```
 
 **Note**: For Azure, the `--openai-url` should be the full deployment URL including the API version query parameter.
@@ -225,7 +225,7 @@ The provider must implement the Etherscan-compatible API format.
 
 ```bash
 $ ETHERSCAN_API_KEY="your-api-key" \
-  node tools/generate-tests.js registry/ethena/calldata-ethena.json --dry-run --verbose
+  node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --dry-run --verbose
 
 ERC-7730 Test Generator
 =======================

@@ -3,20 +3,18 @@
  * ERC-7730 Batch Processor
  *
  * Processes a registry subfolder to:
- * - Migrate v1 schema files to v2
- * - Validate migrations with linter and binary comparison
+ * - Migrate v1 schema files to v2 (linting/validation is handled by migrate-v1-to-v2.js)
  * - Generate missing test files
  * - Optionally create a PR with all changes
  *
  * Usage:
- *   node tools/batch-process.js <registry-subfolder> [options]
+ *   node tools/migrate/batch-process.js <registry-subfolder> [options]
  *
  * Options:
  *   --dry-run           Preview changes without modifying files
  *   --verbose           Show detailed output
  *   --skip-tests        Skip test generation
  *   --skip-migration    Skip v1 to v2 migration
- *   --skip-lint         Skip linting validation
  *   --skip-pr           Skip PR creation
  *   --pr-title <title>  Custom PR title
  *   --pr-branch <name>  Custom branch name
@@ -40,7 +38,6 @@ const CONFIG = {
   verbose: process.argv.includes("--verbose"),
   skipTests: process.argv.includes("--skip-tests"),
   skipMigration: process.argv.includes("--skip-migration"),
-  skipLint: process.argv.includes("--skip-lint"),
   skipPr: process.argv.includes("--skip-pr"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
@@ -55,7 +52,7 @@ function getArgValue(flag, defaultValue) {
 }
 
 // Paths
-const ROOT_DIR = path.join(__dirname, "..");
+const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const MIGRATE_SCRIPT = path.join(__dirname, "migrate-v1-to-v2.js");
 const GENERATE_TESTS_SCRIPT = path.join(__dirname, "generate-tests.js");
@@ -90,8 +87,6 @@ class Report {
   constructor() {
     this.filesProcessed = 0;
     this.migrations = { attempted: 0, successful: 0, failed: [], skipped: 0 };
-    this.linting = { passed: 0, failed: [], skipped: 0 };
-    this.binaryComparison = { passed: 0, failed: [], skipped: 0 };
     this.testGeneration = { attempted: 0, successful: 0, failed: [], skipped: 0 };
     this.modifiedFiles = [];
     this.newFiles = [];
@@ -126,22 +121,7 @@ class Report {
       console.log(`   Failed:     ${this.migrations.failed.length}`);
       this.migrations.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
     }
-
-    console.log("\n🔍 Linting:");
-    console.log(`   Passed:  ${this.linting.passed}`);
-    console.log(`   Skipped: ${this.linting.skipped}`);
-    if (this.linting.failed.length > 0) {
-      console.log(`   Failed:  ${this.linting.failed.length}`);
-      this.linting.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
-    }
-
-    console.log("\n🔢 Binary Comparison (placeholder):");
-    console.log(`   Passed:  ${this.binaryComparison.passed}`);
-    console.log(`   Skipped: ${this.binaryComparison.skipped}`);
-    if (this.binaryComparison.failed.length > 0) {
-      console.log(`   Failed:  ${this.binaryComparison.failed.length}`);
-      this.binaryComparison.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
-    }
+    console.log("   (Linting/validation is now handled by migrate-v1-to-v2.js)");
 
     console.log("\n🧪 Test Generation:");
     console.log(`   Attempted:  ${this.testGeneration.attempted}`);
@@ -273,85 +253,6 @@ function migrateFile(filePath, report) {
     });
     return false;
   }
-}
-
-// =============================================================================
-// Linting
-// =============================================================================
-
-/**
- * Check if erc7730 CLI is available
- */
-function checkErc7730Cli() {
-  try {
-    execSync("erc7730 --version", { encoding: "utf8", stdio: "pipe" });
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-/**
- * Lint a file using erc7730 CLI
- */
-function lintFile(filePath, report) {
-  if (!checkErc7730Cli()) {
-    log("erc7730 CLI not found. Install with: pip install erc7730", "warning");
-    report.linting.skipped++;
-    return true; // Don't fail if CLI not available
-  }
-
-  log(`Linting: ${path.relative(ROOT_DIR, filePath)}`, "debug");
-
-  try {
-    const result = spawnSync("erc7730", ["lint", filePath], {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: CONFIG.verbose ? "inherit" : "pipe",
-    });
-
-    if (result.status !== 0) {
-      report.linting.failed.push({
-        file: path.relative(ROOT_DIR, filePath),
-        error: result.stderr || result.stdout || "Linting failed",
-      });
-      return false;
-    }
-
-    report.linting.passed++;
-    return true;
-  } catch (error) {
-    report.linting.failed.push({
-      file: path.relative(ROOT_DIR, filePath),
-      error: error.message,
-    });
-    return false;
-  }
-}
-
-// =============================================================================
-// Binary Comparison (Placeholder)
-// =============================================================================
-
-/**
- * Compare binary descriptors between v1 and v2
- * NOTE: This is a placeholder - actual implementation pending erc7730 calldata command support
- */
-function compareBinaryDescriptors(v1FilePath, v2FilePath, report) {
-  log(`Binary comparison: ${path.relative(ROOT_DIR, v2FilePath)}`, "debug");
-  log("  → Binary comparison is a placeholder (erc7730 calldata command not yet available)", "debug");
-
-  // Placeholder: Skip comparison until calldata command is available
-  report.binaryComparison.skipped++;
-
-  // TODO: Implement when erc7730 calldata command is available
-  // The implementation would:
-  // 1. Run `erc7730 calldata <v1-file>` to generate v1 binary descriptor
-  // 2. Run `erc7730 calldata <v2-file>` to generate v2 binary descriptor
-  // 3. Compare the outputs byte-by-byte
-  // 4. Report any differences
-
-  return true;
 }
 
 // =============================================================================
@@ -503,8 +404,7 @@ function preparePr(targetFolder, report) {
     const commitMessage = `chore(${folderName}): batch migration and test generation
 
 - Migrated ${report.migrations.successful} files from v1 to v2 schema
-- Generated ${report.testGeneration.successful} test files
-- Linted ${report.linting.passed} files`;
+- Generated ${report.testGeneration.successful} test files`;
 
     execSync(`git commit -m "${commitMessage}"`, { cwd: ROOT_DIR, stdio: "pipe" });
 
@@ -542,7 +442,6 @@ This PR contains automated batch updates for the \`${folderName}\` registry fold
 
 - **Schema Migrations**: Migrated ${report.migrations.successful} files from ERC-7730 v1 to v2 schema
 - **Test Generation**: Generated ${report.testGeneration.successful} new test files
-- **Validation**: Linted ${report.linting.passed} files successfully
 
 ### Modified Files
 
@@ -557,14 +456,13 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 | Check | Status |
 |-------|--------|
 | Schema Migration | ${report.migrations.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
-| Linting | ${report.linting.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
-| Binary Comparison | ⏳ Placeholder (pending tooling) |
+| Linting/Calldata | Validated by migrate-v1-to-v2.js |
 | Test Generation | ${report.testGeneration.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
 
 ### Notes
 
 <!-- Add any additional notes or context here -->
-- This PR was auto-generated by \`tools/batch-process.js\`
+- This PR was auto-generated by \`tools/migrate/batch-process.js\`
 - Please review the changes before merging
 
 ### Test Plan
@@ -588,40 +486,17 @@ async function processFile(filePath, report) {
 
   log(`\nProcessing: ${relPath}`, "info");
 
-  // Store original content for comparison
-  let originalContent = null;
-  let wasV1 = false;
-
   // Check if v1 and migrate
   if (!CONFIG.skipMigration && isV1Schema(filePath)) {
-    wasV1 = true;
-    originalContent = fs.readFileSync(filePath, "utf8");
-
     log("  → v1 schema detected, migrating to v2...", "info");
-    const migrated = migrateFile(filePath, report);
-
-    if (migrated && !CONFIG.dryRun) {
-      // Lint the migrated file
-      if (!CONFIG.skipLint) {
-        log("  → Linting migrated file...", "info");
-        lintFile(filePath, report);
-      }
-
-      // Binary comparison placeholder
-      log("  → Binary comparison (placeholder)...", "info");
-      compareBinaryDescriptors(filePath, filePath, report);
-    }
+    migrateFile(filePath, report);
+    // Note: Linting/validation is now handled inside migrate-v1-to-v2.js
   } else {
     if (CONFIG.skipMigration) {
       report.migrations.skipped++;
     } else {
       log("  → Already v2 schema, skipping migration", "debug");
       report.migrations.skipped++;
-
-      // Still lint v2 files
-      if (!CONFIG.skipLint) {
-        lintFile(filePath, report);
-      }
     }
   }
 
@@ -655,20 +530,19 @@ async function main() {
   );
 
   if (!targetArg) {
-    console.error("Usage: node tools/batch-process.js <registry-subfolder> [options]");
+    console.error("Usage: node tools/migrate/batch-process.js <registry-subfolder> [options]");
     console.error("\nOptions:");
     console.error("  --dry-run           Preview changes without modifying files");
     console.error("  --verbose           Show detailed output");
     console.error("  --skip-tests        Skip test generation");
     console.error("  --skip-migration    Skip v1 to v2 migration");
-    console.error("  --skip-lint         Skip linting validation");
     console.error("  --skip-pr           Skip PR creation");
     console.error("  --pr-title <title>  Custom PR title");
     console.error("  --pr-branch <name>  Custom branch name");
     console.error("\nExamples:");
-    console.error("  node tools/batch-process.js 1inch --dry-run");
-    console.error("  node tools/batch-process.js registry/ethena --verbose");
-    console.error("  node tools/batch-process.js morpho --skip-pr");
+    console.error("  node tools/migrate/batch-process.js 1inch --dry-run");
+    console.error("  node tools/migrate/batch-process.js registry/ethena --verbose");
+    console.error("  node tools/migrate/batch-process.js morpho --skip-pr");
     process.exit(1);
   }
 
@@ -725,7 +599,6 @@ async function main() {
   // Exit with error if there were failures
   const hasFailures =
     report.migrations.failed.length > 0 ||
-    report.linting.failed.length > 0 ||
     report.testGeneration.failed.length > 0;
 
   if (hasFailures) {

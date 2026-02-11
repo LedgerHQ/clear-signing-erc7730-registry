@@ -8,7 +8,7 @@
  * - Inferring expected display values from the descriptor
  *
  * Usage:
- *   node tools/generate-tests.js <erc7730-file> [options]
+ *   node tools/migrate/generate-tests.js <erc7730-file> [options]
  *
  * Options:
  *   --dry-run         Preview without writing files
@@ -1084,7 +1084,7 @@ async function main() {
   );
 
   if (!inputFile) {
-    console.error("Usage: node tools/generate-tests.js <erc7730-file> [options]");
+    console.error("Usage: node tools/migrate/generate-tests.js <erc7730-file> [options]");
     console.error("\nOptions:");
     console.error("  --dry-run           Preview without writing files");
     console.error("  --verbose           Show detailed output");
@@ -1102,10 +1102,10 @@ async function main() {
     console.error("  AZURE_OPENAI=true   Use Azure OpenAI API format");
     console.error("\nExamples:");
     console.error("  # Standard OpenAI");
-    console.error("  OPENAI_API_KEY=sk-xxx node tools/generate-tests.js registry/uniswap/eip712-uniswap.json");
+    console.error("  OPENAI_API_KEY=sk-xxx node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json");
     console.error("");
     console.error("  # Azure OpenAI");
-    console.error("  node tools/generate-tests.js registry/uniswap/eip712-uniswap.json \\");
+    console.error("  node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json \\");
     console.error("    --azure \\");
     console.error("    --openai-url 'https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview' \\");
     console.error("    --openai-key YOUR-API-KEY");
