@@ -6,16 +6,19 @@ This script migrates registry files from `erc7730-v1.schema.json` to `erc7730-v2
 
 ```bash
 # Dry run (preview changes, no files modified)
-node tools/migrate-v1-to-v2.js --dry-run
+node tools/migrate/migrate-v1-to-v2.js --dry-run
 
 # Dry run with verbose output
-node tools/migrate-v1-to-v2.js --dry-run --verbose
+node tools/migrate/migrate-v1-to-v2.js --dry-run --verbose
 
 # Migrate a single file
-node tools/migrate-v1-to-v2.js --file registry/ethena/calldata-ethena.json
+node tools/migrate/migrate-v1-to-v2.js --file registry/ethena/calldata-ethena.json
+
+# Migrate a single file and skip linting validation
+node tools/migrate/migrate-v1-to-v2.js --file registry/ethena/calldata-ethena.json --skip-lint
 
 # Run full migration on all registry files
-node tools/migrate-v1-to-v2.js
+node tools/migrate/migrate-v1-to-v2.js
 ```
 
 ## Transformations Applied

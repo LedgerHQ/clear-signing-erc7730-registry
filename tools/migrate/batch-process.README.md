@@ -1,12 +1,10 @@
 # ERC-7730 Batch Processor
 
-Automated batch processing tool for ERC-7730 registry folders. This script streamlines the workflow of migrating schema versions, validating files, generating tests, and creating pull requests.
+Automated batch processing tool for ERC-7730 registry folders. This script streamlines the workflow of migrating schema versions, generating tests, and creating pull requests.
 
 ## Features
 
-- **Schema Migration**: Automatically migrates files from ERC-7730 v1 to v2 schema
-- **Validation**: Runs the `erc7730` linter on migrated files
-- **Binary Comparison**: Placeholder for comparing generated binary descriptors (pending tooling)
+- **Schema Migration**: Automatically migrates files from ERC-7730 v1 to v2 schema (linting/validation is handled by `migrate-v1-to-v2.js`)
 - **Test Generation**: Creates missing test files using transaction data from block explorers
 - **PR Automation**: Creates a GitHub PR with all changes and a detailed summary
 
@@ -53,23 +51,23 @@ pip install erc7730
 
 ```bash
 # Basic usage - process a registry subfolder
-node tools/batch-process.js <folder-name>
+node tools/migrate/batch-process.js <folder-name>
 
 # Dry run - preview changes without modifying files
-node tools/batch-process.js 1inch --dry-run
+node tools/migrate/batch-process.js 1inch --dry-run
 
 # Verbose output
-node tools/batch-process.js ethena --verbose
+node tools/migrate/batch-process.js ethena --verbose
 
 # Full path syntax
-node tools/batch-process.js registry/morpho
+node tools/migrate/batch-process.js registry/morpho
 
 # Skip certain steps
-node tools/batch-process.js aave --skip-tests
-node tools/batch-process.js uniswap --skip-migration --skip-pr
+node tools/migrate/batch-process.js aave --skip-tests
+node tools/migrate/batch-process.js uniswap --skip-migration --skip-pr
 
 # Custom PR settings
-node tools/batch-process.js kiln --pr-title "Update Kiln descriptors" --pr-branch "feat/kiln-v2"
+node tools/migrate/batch-process.js kiln --pr-title "Update Kiln descriptors" --pr-branch "feat/kiln-v2"
 ```
 
 ## Options
@@ -80,7 +78,6 @@ node tools/batch-process.js kiln --pr-title "Update Kiln descriptors" --pr-branc
 | `--verbose` | Show detailed output for each operation |
 | `--skip-tests` | Skip test file generation |
 | `--skip-migration` | Skip v1 to v2 schema migration |
-| `--skip-lint` | Skip linting validation |
 | `--skip-pr` | Skip PR creation (just process files) |
 | `--pr-title <title>` | Custom PR title |
 | `--pr-branch <name>` | Custom branch name |
@@ -109,7 +106,7 @@ export GITHUB_TOKEN=your-token
 You can use the provided env template:
 
 ```bash
-cp tools/env.example .env
+cp tools/migrate/env.example .env
 # Edit .env with your keys
 source .env
 ```
@@ -141,22 +138,7 @@ Transformations applied:
 
 ### 2. Validation
 
-After migration:
-
-```
-┌─────────────────┐     ┌─────────────────┐
-│   Migrated      │ ──► │   erc7730       │
-│   File          │     │   lint          │
-└─────────────────┘     └─────────────────┘
-                              │
-                              ▼
-                        ┌─────────────────┐
-                        │   Binary        │
-                        │   Comparison*   │
-                        └─────────────────┘
-                        
-* Placeholder - pending erc7730 calldata command
-```
+Validation (linting and calldata checks) is now handled directly by the `migrate-v1-to-v2.js` script during migration.
 
 ### 3. Test Generation
 
@@ -197,8 +179,6 @@ Found 10 ERC-7730 files to process
 
 ℹ️ Processing: registry/1inch/eip712-1inch-limit-order.json
   → v1 schema detected, migrating to v2...
-  → Linting migrated file...
-  → Binary comparison (placeholder)...
   → No test file found, generating tests...
 
 [...]
@@ -213,14 +193,7 @@ Found 10 ERC-7730 files to process
    Attempted:  3
    Successful: 3
    Skipped:    7
-
-🔍 Linting:
-   Passed:  10
-   Skipped: 0
-
-🔢 Binary Comparison (placeholder):
-   Passed:  0
-   Skipped: 10
+   (Linting/validation is now handled by migrate-v1-to-v2.js)
 
 🧪 Test Generation:
    Attempted:  5
@@ -259,11 +232,11 @@ The script creates a PR with:
 
 ```bash
 # 1. Preview what will happen
-node tools/batch-process.js newprotocol --dry-run --verbose
+node tools/migrate/batch-process.js newprotocol --dry-run --verbose
 
 # 2. Run the actual processing
 source .env  # Load API keys
-node tools/batch-process.js newprotocol
+node tools/migrate/batch-process.js newprotocol
 
 # 3. Review the PR
 # The script outputs the PR URL
@@ -273,25 +246,15 @@ node tools/batch-process.js newprotocol
 
 ```bash
 # Skip test generation, just migrate
-node tools/batch-process.js oldprotocol --skip-tests
+node tools/migrate/batch-process.js oldprotocol --skip-tests
 ```
 
 ### Generating Missing Tests Only
 
 ```bash
 # Skip migration, just generate tests
-node tools/batch-process.js protocol --skip-migration
+node tools/migrate/batch-process.js protocol --skip-migration
 ```
-
-## Binary Comparison (Placeholder)
-
-The binary comparison feature is currently a placeholder. When the `erc7730 calldata` command becomes available, this will:
-
-1. Generate binary descriptors for both v1 and v2 versions
-2. Compare the outputs byte-by-byte
-3. Report any differences
-
-This ensures that the migration doesn't change the semantic meaning of the descriptor.
 
 ## Troubleshooting
 
@@ -330,10 +293,10 @@ This usually means:
 Try:
 ```bash
 # Increase search depth
-node tools/generate-tests.js registry/file.json --depth 500
+node tools/migrate/generate-tests.js registry/file.json --depth 500
 
 # Check with verbose output
-node tools/batch-process.js folder --verbose
+node tools/migrate/batch-process.js folder --verbose
 ```
 
 ### Migration fails
