@@ -175,7 +175,7 @@
             "path": "#.amountToken"
           },
           {
-            "label": "Slippage",
+            "label": "Minimum to Receive",
             "format": "unit",
             "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
@@ -196,7 +196,7 @@
             "path": "#.amountToken"
           },
           {
-            "label": "Slippage",
+            "label": "Minimum to Receive",
             "format": "unit",
             "params": { "base": " ", "decimals": "18", "prefix": "false" },
             "path": "#.minReceiveAmount"
@@ -206,7 +206,7 @@
         "excluded": ["#.referrerId"]
       },
       "depositRequest(address,uint256,bytes32)": {
-        "intent": "request buying",
+        "intent": "Deposit Request",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {
@@ -220,7 +220,7 @@
         "excluded": ["#.referrerId"]
       },
       "depositRequest(address,uint256,bytes32,address)": {
-        "intent": "request buying",
+        "intent": "Deposit Request",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
           {

@@ -213,17 +213,17 @@
       "redeemInstant(address,uint256,uint256,address)": {
         "intent": "instantly redeem",
         "fields": [
-          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          { "label": "Receive token", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.amountMTokenIn"
           },
           {
-            "label": "Slippage",
+            "label": "Min receive amount",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.minReceiveAmount"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -233,17 +233,17 @@
       "redeemInstant(address,uint256,uint256)": {
         "intent": "instantly redeem",
         "fields": [
-          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          { "label": "Receive token", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.amountMTokenIn"
           },
           {
-            "label": "Slippage",
+            "label": "Min receive amount",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.minReceiveAmount"
           }
         ],
@@ -252,11 +252,11 @@
       "redeemRequest(address,uint256,address)": {
         "intent": "request a redemption",
         "fields": [
-          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          { "label": "Receive token", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.amountMTokenIn"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -266,11 +266,11 @@
       "redeemRequest(address,uint256)": {
         "intent": "request a redemption",
         "fields": [
-          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          { "label": "Receive token", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.amountMTokenIn"
           }
         ],
@@ -280,9 +280,9 @@
         "intent": "request a redemption",
         "fields": [
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": "18", "prefix": false },
             "path": "#.amountMTokenIn"
           }
         ],
