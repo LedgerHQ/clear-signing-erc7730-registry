@@ -17,7 +17,7 @@
             "params": { "calleePath": "_singleton" }
           }
         ],
-        "required": ["data"],
+        "required": [],
         "excluded": ["saltNonce"]
       }
     }
