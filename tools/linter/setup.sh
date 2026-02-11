@@ -1,12 +1,11 @@
 #!/bin/bash
 # ERC-7730 Linter - Local Setup Script
-# This script clones and sets up the python-erc7730 linter for local use
+# This script installs the erc7730 linter from PyPI in a virtual environment
 #
 # Usage: ./setup.sh
 #
 # Requirements:
-#   - Python 3.12
-#   - Git
+#   - Python 3.12+
 
 set -e
 
@@ -27,26 +26,17 @@ echo ""
 
 # Check for required tools
 echo "Checking prerequisites..."
-command -v git >/dev/null 2>&1 || { echo -e "${RED}❌ git is required${NC}"; exit 1; }
 command -v python3 >/dev/null 2>&1 || { echo -e "${RED}❌ python3 is required${NC}"; exit 1; }
 
-# Check Python version (needs 3.12)
+# Check Python version (needs 3.12+)
 PYTHON_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-if [[ "$PYTHON_VERSION" != "3.12" ]]; then
-    echo -e "${RED}❌ Python 3.12 is required (found $PYTHON_VERSION)${NC}"
+PYTHON_MAJOR=$(python3 -c 'import sys; print(sys.version_info.major)')
+PYTHON_MINOR=$(python3 -c 'import sys; print(sys.version_info.minor)')
+if [[ "$PYTHON_MAJOR" -lt 3 ]] || { [[ "$PYTHON_MAJOR" -eq 3 ]] && [[ "$PYTHON_MINOR" -lt 12 ]]; }; then
+    echo -e "${RED}❌ Python 3.12+ is required (found $PYTHON_VERSION)${NC}"
     exit 1
 fi
 echo -e "${GREEN}✅ All prerequisites found (Python $PYTHON_VERSION)${NC}"
-echo ""
-
-# Clone python-erc7730 if not exists
-if [ ! -d "python-erc7730" ]; then
-    echo -e "${BLUE}📦 Cloning python-erc7730...${NC}"
-    git clone --depth 1 https://github.com/LedgerHQ/python-erc7730.git python-erc7730
-else
-    echo -e "${BLUE}📦 python-erc7730 already cloned, pulling latest...${NC}"
-    cd python-erc7730 && git pull && cd ..
-fi
 echo ""
 
 # Create virtual environment if not exists
@@ -58,17 +48,10 @@ else
 fi
 echo ""
 
-# Activate virtual environment and install dependencies
-echo -e "${BLUE}📥 Installing dependencies...${NC}"
+# Activate virtual environment and install erc7730 from PyPI
+echo -e "${BLUE}📥 Installing erc7730 from PyPI...${NC}"
 source .venv/bin/activate
-
-# Install PDM in the virtual environment
-pip install --quiet pdm
-
-# Install project dependencies
-cd python-erc7730
-pdm install
-cd ..
+pip install --upgrade erc7730
 
 echo ""
 echo "============================================"

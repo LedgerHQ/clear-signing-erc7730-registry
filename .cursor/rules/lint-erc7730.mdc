@@ -51,7 +51,7 @@ source .env && source tools/linter/.venv/bin/activate && erc7730 lint registry/u
 
 ## Prerequisites
 
-- Python 3.12
+- Python 3.12+
 - Environment variable: `ETHERSCAN_API_KEY` (for ABI validation)
 
 ## One-liner
