@@ -175,6 +175,12 @@ jobs:
           mkdir -p test-inputs screenshots
           jq '.tests' "registry/${{ matrix.test.test_file }}" > test-inputs/tests.json
 
+      - name: Resolve descriptor includes
+        run: |
+          node "${{ github.workspace }}/registry/.github/scripts/resolve-erc7730-includes.js" \
+            "${{ github.workspace }}/registry/${{ matrix.test.descriptor }}" \
+            "${{ github.workspace }}/test-inputs/resolved-descriptor.json"
+
       - name: Run clear signing tests
         id: run-tests
         working-directory: dmk
@@ -188,7 +194,7 @@ jobs:
           set +e
           pnpm cs-tester cli $CMD "${{ github.workspace }}/test-inputs/tests.json" \
             --device ${{ matrix.device }} \
-            --erc7730-files "${{ github.workspace }}/registry/${{ matrix.test.descriptor }}" \
+            --erc7730-files "${{ github.workspace }}/test-inputs/resolved-descriptor.json" \
             --screenshot-folder-path "${{ github.workspace }}/screenshots" \
             --log-level info 2>&1 | tee test-output.log
           EXIT_CODE=${PIPESTATUS[0]}
