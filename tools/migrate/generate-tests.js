@@ -11,15 +11,19 @@
  *   node tools/migrate/generate-tests.js <erc7730-file> [options]
  *
  * Options:
- *   --dry-run         Preview without writing files
- *   --verbose         Show detailed output
- *   --depth <n>       Max transactions to search (default: 100)
- *   --max-tests <n>   Max tests to generate per function (default: 3)
- *   --chain <id>      Only process specific chain ID
- *   --openai-url <url>  Custom OpenAI API URL (e.g., Azure OpenAI endpoint)
- *   --openai-key <key>  OpenAI API key (overrides OPENAI_API_KEY env var)
+ *   --dry-run               Preview without writing files
+ *   --verbose               Show detailed output
+ *   --depth <n>             Max transactions to search (default: 100)
+ *   --max-tests <n>         Max tests to generate per function (default: 3)
+ *   --chain <id>            Only process specific chain ID
+ *   --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)
+ *   --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)
  *   --openai-model <model>  Model to use (default: gpt-4)
- *   --azure            Use Azure OpenAI API format (api-key header)
+ *   --azure                 Use Azure OpenAI API format (api-key header)
+ *   --no-test               Skip running the clear signing tester after generation
+ *   --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)
+ *   --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)
+ *   --no-refine             Skip refining expectedTexts from tester screen output
  *
  * Environment Variables:
  *   ETHERSCAN_API_KEY      API key for Etherscan (Ethereum mainnet)
@@ -38,6 +42,7 @@ const path = require("path");
 const https = require("https");
 const http = require("http");
 const crypto = require("crypto");
+const { execSync } = require("child_process");
 
 // =============================================================================
 // Configuration
@@ -53,6 +58,10 @@ const CONFIG = {
   openaiKey: getArgValue("--openai-key", process.env.OPENAI_API_KEY),
   openaiModel: getArgValue("--openai-model", "gpt-4"),
   useAzure: process.argv.includes("--azure") || process.env.AZURE_OPENAI === "true",
+  runTest: !process.argv.includes("--no-test"),
+  testDevice: getArgValue("--device", "flex"),
+  testLogLevel: getArgValue("--test-log-level", "info"),
+  refine: !process.argv.includes("--no-refine"),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -184,58 +193,275 @@ async function fetchTransactions(chainId, address, depth = 100) {
   }
 }
 
-/**
- * Fetch full transaction details including input data
- */
-async function fetchTransactionByHash(chainId, txHash) {
-  const provider = PROVIDERS[chainId];
-  if (!provider) return null;
+// =============================================================================
+// Ledger Explorer API
+// =============================================================================
 
-  const apiKey = process.env[provider.apiKeyEnv];
-  if (!apiKey) return null;
+/**
+ * Maps chainId to Ledger explorer API coin path.
+ * API base: https://explorers.api.vault.ledger.com/blockchain/v4/{coin}/
+ * No API key required.
+ */
+const LEDGER_EXPLORER_CHAINS = {
+  1: "eth",
+  56: "bnb",
+  137: "matic",
+  43114: "avax",
+};
+
+/**
+ * Fetch transaction details from Ledger's explorer API.
+ * Returns the full transaction object with input data.
+ *
+ * @param {number} chainId
+ * @param {string} txHash
+ * @returns {Promise<object|null>} Transaction data or null
+ */
+async function fetchTransactionFromLedger(chainId, txHash) {
+  const coin = LEDGER_EXPLORER_CHAINS[chainId];
+  if (!coin) {
+    if (CONFIG.verbose) {
+      log(`   ⚠️  No Ledger explorer mapping for chainId ${chainId}`);
+    }
+    return null;
+  }
 
   const url =
-    `https://${provider.baseUrl}/api?module=proxy&action=eth_getTransactionByHash` +
-    `&txhash=${txHash}&apikey=${apiKey}`;
+    `https://explorers.api.vault.ledger.com/blockchain/v4/${coin}/tx/${txHash}?noinput=false`;
+
+  if (CONFIG.verbose) {
+    log(`   📡 Fetching tx details from Ledger explorer (${coin})...`);
+  }
 
   try {
     const response = await httpsGet(url);
-    if (response.result) {
-      return response.result;
+    if (response && response.hash) {
+      return response;
     }
     return null;
   } catch (error) {
+    if (CONFIG.verbose) {
+      log(`   ⚠️  Ledger explorer request failed: ${error.message}`);
+    }
     return null;
   }
 }
 
+// =============================================================================
+// RLP Encoding (minimal implementation for unsigned transaction serialization)
+// =============================================================================
+
 /**
- * Get raw transaction from transaction details
- * Note: Block explorers don't provide signed raw tx directly,
- * so we use the input data as the test case
+ * RLP-encode a value. Accepts Buffer/Uint8Array (byte string) or Array (list).
+ * @param {Buffer|Uint8Array|Array} input
+ * @returns {Buffer}
  */
-async function getRawTransaction(chainId, txHash) {
-  const provider = PROVIDERS[chainId];
-  if (!provider) return null;
-
-  const apiKey = process.env[provider.apiKeyEnv];
-  if (!apiKey) return null;
-
-  // Fetch raw transaction using eth_getRawTransactionByHash if available (V2 API)
-  const url =
-    `https://${provider.baseUrl}/v2/api?chainid=${chainId}&module=proxy&action=eth_getRawTransactionByHash` +
-    `&txhash=${txHash}&apikey=${apiKey}`;
-
-  try {
-    const response = await httpsGet(url);
-    if (response.result && response.result.startsWith("0x")) {
-      return response.result;
-    }
-  } catch (error) {
-    // Fallback below
+function rlpEncode(input) {
+  if (Array.isArray(input)) {
+    // Encode as list: concatenate encoded items, then wrap with list prefix
+    const encoded = Buffer.concat(input.map((item) => rlpEncode(item)));
+    return Buffer.concat([rlpLength(encoded.length, 0xc0), encoded]);
   }
 
-  // If raw tx not available, return null - we'll use tx details instead
+  // Ensure input is a Buffer
+  const buf = Buffer.isBuffer(input) ? input : Buffer.from(input);
+
+  // Single byte in [0x00, 0x7f]
+  if (buf.length === 1 && buf[0] < 0x80) {
+    return buf;
+  }
+
+  // Short string (0-55 bytes)
+  return Buffer.concat([rlpLength(buf.length, 0x80), buf]);
+}
+
+/**
+ * Encode the RLP length prefix.
+ * For lengths <= 55: single byte (offset + length)
+ * For lengths > 55: (offset + 55 + byte-length-of-length) || length bytes
+ */
+function rlpLength(len, offset) {
+  if (len <= 55) {
+    return Buffer.from([offset + len]);
+  }
+  const lenBytes = intToBuffer(len);
+  return Buffer.concat([Buffer.from([offset + 55 + lenBytes.length]), lenBytes]);
+}
+
+/**
+ * Convert a non-negative integer to a big-endian Buffer with no leading zeros.
+ * 0 returns empty Buffer (RLP encodes 0 as empty byte string).
+ */
+function intToBuffer(n) {
+  if (typeof n === "string") {
+    // Handle hex strings
+    if (n.startsWith("0x") || n.startsWith("0X")) {
+      const hex = n.slice(2);
+      if (hex === "" || hex === "0") return Buffer.alloc(0);
+      // Ensure even length
+      const padded = hex.length % 2 === 0 ? hex : "0" + hex;
+      return Buffer.from(padded, "hex");
+    }
+    // Decimal string
+    n = BigInt(n);
+  }
+  if (typeof n === "number") {
+    n = BigInt(n);
+  }
+  if (n === 0n || n === 0) return Buffer.alloc(0);
+
+  const hex = n.toString(16);
+  const padded = hex.length % 2 === 0 ? hex : "0" + hex;
+  return Buffer.from(padded, "hex");
+}
+
+/**
+ * Convert an address string to a 20-byte Buffer.
+ */
+function addressToBuffer(addr) {
+  if (!addr || addr === "0x" || addr === "0x0") return Buffer.alloc(0);
+  return Buffer.from(addr.replace("0x", "").padStart(40, "0"), "hex");
+}
+
+/**
+ * Convert a hex data string to a Buffer.
+ */
+function hexToBuffer(hex) {
+  if (!hex || hex === "0x") return Buffer.alloc(0);
+  return Buffer.from(hex.replace("0x", ""), "hex");
+}
+
+// =============================================================================
+// Unsigned Transaction Serialization
+// =============================================================================
+
+/**
+ * Build an unsigned raw transaction (RLP-encoded) from Ledger explorer tx data.
+ *
+ * Supports:
+ *   - Type 0 (legacy) with EIP-155 replay protection
+ *   - Type 1 (EIP-2930)
+ *   - Type 2 (EIP-1559)
+ *
+ * @param {object} txData - Transaction data from Ledger explorer API
+ * @param {number} chainId - Chain ID
+ * @returns {string} Hex-encoded unsigned raw transaction (0x-prefixed)
+ */
+function buildUnsignedRawTx(txData, chainId) {
+  const type = txData.transaction_type || 0;
+  const nonce = intToBuffer(txData.nonce);
+  const gasLimit = intToBuffer(txData.gas);
+  const to = addressToBuffer(txData.to);
+  const value = intToBuffer(txData.value || "0");
+  const data = hexToBuffer(txData.input || "0x");
+
+  if (type === 2) {
+    // EIP-1559: 0x02 || RLP([chainId, nonce, maxPriorityFeePerGas, maxFeePerGas,
+    //                         gasLimit, to, value, data, accessList])
+    const fields = [
+      intToBuffer(chainId),
+      nonce,
+      intToBuffer(txData.max_priority_fee_per_gas || "0"),
+      intToBuffer(txData.max_fee_per_gas || "0"),
+      gasLimit,
+      to,
+      value,
+      data,
+      [], // accessList (empty)
+    ];
+    const payload = rlpEncode(fields);
+    return "0x02" + payload.toString("hex");
+  }
+
+  if (type === 1) {
+    // EIP-2930: 0x01 || RLP([chainId, nonce, gasPrice, gasLimit, to, value,
+    //                         data, accessList])
+    const fields = [
+      intToBuffer(chainId),
+      nonce,
+      intToBuffer(txData.gas_price || "0"),
+      gasLimit,
+      to,
+      value,
+      data,
+      [], // accessList (empty)
+    ];
+    const payload = rlpEncode(fields);
+    return "0x01" + payload.toString("hex");
+  }
+
+  // Legacy (type 0) with EIP-155 replay protection:
+  // RLP([nonce, gasPrice, gasLimit, to, value, data, chainId, 0, 0])
+  const fields = [
+    nonce,
+    intToBuffer(txData.gas_price || "0"),
+    gasLimit,
+    to,
+    value,
+    data,
+    intToBuffer(chainId),
+    Buffer.alloc(0), // 0
+    Buffer.alloc(0), // 0
+  ];
+  return "0x" + rlpEncode(fields).toString("hex");
+}
+
+// =============================================================================
+// Raw Transaction Fetching
+// =============================================================================
+
+/**
+ * Get the unsigned raw transaction for a given tx hash.
+ *
+ * Strategy:
+ *   1. Fetch tx details from Ledger explorer API (no API key needed)
+ *   2. Reconstruct the unsigned raw tx via RLP encoding
+ *   3. Fallback: try Etherscan eth_getRawTransactionByHash
+ *
+ * @param {number} chainId
+ * @param {string} txHash
+ * @returns {Promise<string|null>} Hex-encoded unsigned raw tx, or null
+ */
+async function getRawTransaction(chainId, txHash) {
+  // Strategy 1: Ledger explorer API + RLP reconstruction
+  const ledgerTx = await fetchTransactionFromLedger(chainId, txHash);
+  if (ledgerTx && ledgerTx.input) {
+    try {
+      const rawTx = buildUnsignedRawTx(ledgerTx, chainId);
+      if (CONFIG.verbose) {
+        log(`   ✅ Built unsigned raw tx from Ledger explorer (type ${ledgerTx.transaction_type || 0})`);
+      }
+      return rawTx;
+    } catch (error) {
+      if (CONFIG.verbose) {
+        log(`   ⚠️  Failed to build raw tx: ${error.message}`);
+      }
+    }
+  }
+
+  // Strategy 2: Etherscan eth_getRawTransactionByHash (returns signed raw tx)
+  const provider = PROVIDERS[chainId];
+  if (provider) {
+    const apiKey = process.env[provider.apiKeyEnv];
+    if (apiKey) {
+      const url =
+        `https://${provider.baseUrl}/v2/api?chainid=${chainId}&module=proxy&action=eth_getRawTransactionByHash` +
+        `&txhash=${txHash}&apikey=${apiKey}`;
+
+      try {
+        const response = await httpsGet(url);
+        if (response.result && response.result.startsWith("0x") && response.result.length > 10) {
+          if (CONFIG.verbose) {
+            log(`   ✅ Got signed raw tx from Etherscan`);
+          }
+          return response.result;
+        }
+      } catch (error) {
+        // Fall through
+      }
+    }
+  }
+
   return null;
 }
 
@@ -562,17 +788,15 @@ async function generateCalldataTests(erc7730, report) {
       const examples = matching.slice(0, CONFIG.maxTests);
 
       for (const tx of examples) {
-        // Try to get raw transaction
+        // Get unsigned raw transaction (Ledger explorer + RLP reconstruction)
         let rawTx = await getRawTransaction(chainId, tx.hash);
 
-        // If no raw tx available, we need to construct test differently
-        // For now, we'll use the input data
         if (!rawTx) {
-          // Create a minimal test case
-          rawTx = tx.input; // This is the calldata, not the full signed tx
+          // Could not fetch or reconstruct — skip this test case
           report.warnings.push(
-            `Chain ${chainId}: Using calldata instead of raw tx for ${tx.hash}`
+            `Chain ${chainId}: Could not build raw tx for ${tx.hash} (no Ledger explorer support and Etherscan fallback failed)`
           );
+          continue;
         }
 
         const testCase = {
@@ -1068,6 +1292,344 @@ function log(message) {
 }
 
 // =============================================================================
+// Clear Signing Tester Integration
+// =============================================================================
+
+/**
+ * Run the clear signing tester on the generated test file.
+ * Invokes tools/tester/run-test.sh with the descriptor and test file.
+ *
+ * @param {string} descriptorPath - Absolute path to the ERC-7730 descriptor
+ * @param {string} testFilePath   - Absolute path to the generated .tests.json
+ * @returns {{ passed: boolean, logFile: string|null }} test result and log file path
+ */
+function runTester(descriptorPath, testFilePath) {
+  // Resolve the run-test.sh script relative to the repository root
+  const repoRoot = path.resolve(__dirname, "../..");
+  const runTestScript = path.join(repoRoot, "tools", "tester", "run-test.sh");
+
+  if (!fs.existsSync(runTestScript)) {
+    console.log("\n⚠️  Tester script not found at: " + runTestScript);
+    console.log("   Skipping test execution. Run setup first: cd tools/tester && ./setup.sh");
+    return { passed: false, logFile: null };
+  }
+
+  const device = CONFIG.testDevice;
+  const logLevel = CONFIG.testLogLevel;
+
+  console.log("\n" + "=".repeat(60));
+  console.log("🧪 RUNNING CLEAR SIGNING TESTER");
+  console.log("=".repeat(60));
+  console.log(`\n   Descriptor: ${descriptorPath}`);
+  console.log(`   Test file:  ${testFilePath}`);
+  console.log(`   Device:     ${device}`);
+  console.log(`   Log level:  ${logLevel}\n`);
+
+  let passed = false;
+  try {
+    execSync(
+      `"${runTestScript}" "${descriptorPath}" "${testFilePath}" "${device}" "${logLevel}"`,
+      {
+        stdio: "inherit",
+        cwd: repoRoot,
+        env: { ...process.env },
+      }
+    );
+    console.log("\n✅ Clear signing tests passed!");
+    passed = true;
+  } catch (error) {
+    const exitCode = error.status || 1;
+    console.log(`\n❌ Clear signing tests failed (exit code: ${exitCode})`);
+  }
+
+  // Find the most recent test output log
+  const logsDir = path.join(repoRoot, "tools", "tester", "output", "logs");
+  const logFile = findMostRecentFile(logsDir, "test-output-");
+  return { passed, logFile };
+}
+
+/**
+ * Find the most recent file in a directory matching a prefix.
+ */
+function findMostRecentFile(dir, prefix) {
+  if (!fs.existsSync(dir)) return null;
+  const files = fs.readdirSync(dir)
+    .filter((f) => f.startsWith(prefix))
+    .map((f) => ({ name: f, mtime: fs.statSync(path.join(dir, f)).mtimeMs }))
+    .sort((a, b) => b.mtime - a.mtime);
+  return files.length > 0 ? path.join(dir, files[0].name) : null;
+}
+
+// =============================================================================
+// Test Refinement — extract expectedTexts from tester screen output
+// =============================================================================
+
+/**
+ * Generic UI patterns to filter out from screen texts.
+ * These are standard Ledger device chrome, not descriptor-specific content.
+ */
+const GENERIC_UI_PATTERNS = [
+  /^Review transaction/i,
+  /^Sign transaction/i,
+  /^Transaction signed/i,
+  /Swipe to review/i,
+  /Hold to sign/i,
+  /Reject \d+ of \d+/i,
+  /^Ethereum\b.*Quit app/i,
+];
+
+/**
+ * Parse tester log output to extract per-test screen text blocks.
+ *
+ * Each "SCREEN TEXT ANALYSIS" section in the log corresponds to one test case
+ * (in order). Returns an array of arrays, one per test, each containing the
+ * raw screen text strings.
+ *
+ * @param {string} logContent - Full tester log file content
+ * @returns {string[][]} Per-test arrays of screen text strings
+ */
+function parseTesterScreenTexts(logContent) {
+  const allTests = [];
+  const sectionRegex = /Accumulated screen texts from device:\n([\s\S]*?)Expected texts from test file:/g;
+
+  let match;
+  while ((match = sectionRegex.exec(logContent)) !== null) {
+    const block = match[1];
+    const texts = [];
+    const lineRegex = /\[\d+\]\s+"(.*?)"/g;
+    let lineMatch;
+    while ((lineMatch = lineRegex.exec(block)) !== null) {
+      texts.push(lineMatch[1]);
+    }
+    allTests.push(texts);
+  }
+
+  return allTests;
+}
+
+/**
+ * Extract refined expectedTexts from screen texts for one test case.
+ *
+ * Filters out generic UI, identifies the data screen(s) containing
+ * "Interaction with", and extracts label + shortened value pairs.
+ *
+ * @param {string[]} screenTexts - Raw screen texts for one test
+ * @param {string[]} descriptorLabels - Field labels from the ERC-7730 descriptor
+ * @returns {string[]} Refined expected text strings
+ */
+function extractExpectedTexts(screenTexts, descriptorLabels) {
+  const expectedTexts = [];
+
+  // Find the data screen(s) — those containing "Interaction with"
+  for (const text of screenTexts) {
+    // Data screen: contains "Interaction with" — check this BEFORE generic UI
+    // because data screens also contain generic suffixes like "Reject X of Y"
+    if (text.includes("Interaction with")) {
+      // Extract "Interaction with {owner}"
+      const ownerMatch = text.match(/Interaction with\s+(\S+)/);
+      if (ownerMatch) {
+        expectedTexts.push(`Interaction with ${ownerMatch[1]}`);
+      }
+
+      // Extract label + shortened value for each descriptor label
+      for (const label of descriptorLabels) {
+        const shortValue = extractShortLabelValue(text, label);
+        if (shortValue) {
+          expectedTexts.push(shortValue);
+        }
+      }
+
+      // Check for "Max fees" presence
+      if (text.includes("Max fees")) {
+        expectedTexts.push("Max fees");
+      }
+    }
+  }
+
+  return expectedTexts;
+}
+
+/**
+ * Check if a screen text is generic Ledger UI chrome.
+ */
+function isGenericUI(text) {
+  return GENERIC_UI_PATTERNS.some((pattern) => pattern.test(text));
+}
+
+/**
+ * Extract a label + shortened value from a data screen text.
+ *
+ * Finds the label in the text, then captures the value that follows.
+ * Returns "Label shortvalue" or null if not found.
+ *
+ * For numeric/token values: first ~8 significant characters
+ * For address values (0x...): first ~10 hex characters
+ *
+ * @param {string} text - Full data screen text
+ * @param {string} label - Field label to search for
+ * @returns {string|null}
+ */
+function extractShortLabelValue(text, label) {
+  const idx = text.indexOf(label);
+  if (idx === -1) return null;
+
+  // Get the text after the label
+  const afterLabel = text.slice(idx + label.length).trimStart();
+
+  // Known delimiters that mark the end of a value: next label, "Max fees", "Reject"
+  // We grab a reasonable chunk and truncate
+  const valuePortion = afterLabel.split(/\s+(?:Max fees|Reject\s+\d)/).shift() || "";
+
+  if (!valuePortion.trim()) return label;
+
+  // Remove device line-break artifacts: join tokens back, then shorten
+  const tokens = valuePortion.trim().split(/\s+/);
+
+  // Detect address value (starts with 0x)
+  if (tokens[0] && tokens[0].startsWith("0x")) {
+    // Rejoin hex fragments that were split by line breaks
+    const fullHex = tokens.join("");
+    // Keep "0x" + first 8 hex chars
+    const shortAddr = fullHex.slice(0, 10);
+    return `${label} ${shortAddr}`;
+  }
+
+  // Detect numeric value (starts with digit or decimal point)
+  if (tokens[0] && /^[\d.]/.test(tokens[0])) {
+    // Rejoin numeric fragments (line breaks can split "65500.978878409520 354251")
+    // Take just the first token which has the significant start
+    const numStr = tokens[0];
+    // Find decimal point position for truncation
+    const dotIdx = numStr.indexOf(".");
+    if (dotIdx !== -1) {
+      // Keep up to 2 decimal places
+      const short = numStr.slice(0, dotIdx + 3);
+      return `${label} ${short}`;
+    }
+    // Integer: take first 8 chars
+    return `${label} ${numStr.slice(0, 8)}`;
+  }
+
+  // Fallback: just label + first token (shortened)
+  return `${label} ${tokens[0].slice(0, 10)}`;
+}
+
+/**
+ * Refine the expectedTexts in a test file using actual tester screen output.
+ *
+ * @param {string} testFilePath - Path to the .tests.json file
+ * @param {string} logFile      - Path to the tester output log
+ * @param {object} erc7730      - Parsed ERC-7730 descriptor
+ * @returns {boolean} true if refinement was applied
+ */
+function refineTestFile(testFilePath, logFile, erc7730) {
+  const logContent = fs.readFileSync(logFile, "utf8");
+  const perTestScreens = parseTesterScreenTexts(logContent);
+
+  if (perTestScreens.length === 0) {
+    console.log("   ⚠️  No screen text analysis found in tester log");
+    return false;
+  }
+
+  const testFile = JSON.parse(fs.readFileSync(testFilePath, "utf8"));
+  const tests = testFile.tests;
+
+  if (perTestScreens.length !== tests.length) {
+    console.log(
+      `   ⚠️  Screen text count (${perTestScreens.length}) doesn't match test count (${tests.length}), skipping refinement`
+    );
+    return false;
+  }
+
+  // Build a map from descriptor labels per function/intent
+  const labelsByIntent = buildLabelsByIntent(erc7730);
+
+  let refined = 0;
+  for (let i = 0; i < tests.length; i++) {
+    const test = tests[i];
+    const screenTexts = perTestScreens[i];
+
+    // Determine which labels apply to this test based on its description
+    const labels = findLabelsForTest(test, labelsByIntent, erc7730);
+
+    const newExpectedTexts = extractExpectedTexts(screenTexts, labels);
+
+    if (newExpectedTexts.length > 0) {
+      test.expectedTexts = newExpectedTexts;
+      refined++;
+    }
+  }
+
+  if (refined > 0) {
+    fs.writeFileSync(testFilePath, JSON.stringify(testFile, null, 2) + "\n");
+    console.log(`   ✅ Refined expectedTexts for ${refined}/${tests.length} test cases`);
+  }
+
+  return refined > 0;
+}
+
+/**
+ * Build a mapping from intent/function name to field labels from the descriptor.
+ */
+function buildLabelsByIntent(erc7730) {
+  const map = {};
+
+  // Calldata functions
+  for (const func of erc7730.functions || []) {
+    const intent = func.intent || extractFunctionName(func.signature);
+    const labels = (func.fields || [])
+      .map((f) => f.label)
+      .filter(Boolean);
+    map[intent] = labels;
+    // Also index by function name
+    const funcName = extractFunctionName(func.signature);
+    if (funcName !== intent) {
+      map[funcName] = labels;
+    }
+  }
+
+  // EIP-712 message types
+  for (const msgType of erc7730.messageTypes || []) {
+    const intent = msgType.intent || msgType.primaryType;
+    const labels = (msgType.fields || [])
+      .map((f) => f.label)
+      .filter(Boolean);
+    map[intent] = labels;
+  }
+
+  return map;
+}
+
+/**
+ * Find the descriptor labels that apply to a given test case.
+ * Matches test description against known intents/function names.
+ */
+function findLabelsForTest(test, labelsByIntent, erc7730) {
+  const desc = test.description || "";
+
+  // Try to match the test description against known intents
+  for (const [intent, labels] of Object.entries(labelsByIntent)) {
+    if (desc.includes(intent)) {
+      return labels;
+    }
+  }
+
+  // Fallback: return all labels from the descriptor
+  const allLabels = [];
+  for (const func of erc7730.functions || []) {
+    for (const f of func.fields || []) {
+      if (f.label) allLabels.push(f.label);
+    }
+  }
+  for (const msgType of erc7730.messageTypes || []) {
+    for (const f of msgType.fields || []) {
+      if (f.label) allLabels.push(f.label);
+    }
+  }
+  return [...new Set(allLabels)];
+}
+
+// =============================================================================
 // Main
 // =============================================================================
 
@@ -1086,20 +1648,25 @@ async function main() {
   if (!inputFile) {
     console.error("Usage: node tools/migrate/generate-tests.js <erc7730-file> [options]");
     console.error("\nOptions:");
-    console.error("  --dry-run           Preview without writing files");
-    console.error("  --verbose           Show detailed output");
-    console.error("  --depth <n>         Max transactions to search (default: 100)");
-    console.error("  --max-tests <n>     Max tests per function (default: 3)");
-    console.error("  --chain <id>        Only process specific chain ID");
-    console.error("  --openai-url <url>  Custom OpenAI API URL (e.g., Azure OpenAI endpoint)");
-    console.error("  --openai-key <key>  OpenAI API key (overrides OPENAI_API_KEY env var)");
-    console.error("  --openai-model <m>  Model to use (default: gpt-4)");
-    console.error("  --azure             Use Azure OpenAI API format (api-key header)");
+    console.error("  --dry-run                Preview without writing files");
+    console.error("  --verbose                Show detailed output");
+    console.error("  --depth <n>              Max transactions to search (default: 100)");
+    console.error("  --max-tests <n>          Max tests per function (default: 3)");
+    console.error("  --chain <id>             Only process specific chain ID");
+    console.error("  --openai-url <url>       Custom OpenAI API URL (e.g., Azure OpenAI endpoint)");
+    console.error("  --openai-key <key>       OpenAI API key (overrides OPENAI_API_KEY env var)");
+    console.error("  --openai-model <m>       Model to use (default: gpt-4)");
+    console.error("  --azure                  Use Azure OpenAI API format (api-key header)");
+    console.error("  --no-test                Skip running the clear signing tester (on by default)");
+    console.error("  --device <device>        Tester device: flex, stax, nanosp, nanox (default: flex)");
+    console.error("  --test-log-level <lvl>   Tester log level: none, error, warn, info, debug (default: info)");
+    console.error("  --no-refine              Skip refining expectedTexts from tester screen output");
     console.error("\nEnvironment Variables:");
     console.error("  ETHERSCAN_API_KEY, POLYGONSCAN_API_KEY, BSCSCAN_API_KEY, etc.");
     console.error("  OPENAI_API_KEY      API key for OpenAI (for EIP-712 examples)");
     console.error("  LLM_BASE_URL        Custom LLM endpoint URL");
     console.error("  AZURE_OPENAI=true   Use Azure OpenAI API format");
+    console.error("  GATING_TOKEN        Required for tester (Ledger auth token)");
     console.error("\nExamples:");
     console.error("  # Standard OpenAI");
     console.error("  OPENAI_API_KEY=sk-xxx node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json");
@@ -1109,6 +1676,12 @@ async function main() {
     console.error("    --azure \\");
     console.error("    --openai-url 'https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview' \\");
     console.error("    --openai-key YOUR-API-KEY");
+    console.error("");
+    console.error("  # Generate tests and run on Ledger Stax");
+    console.error("  node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --device stax");
+    console.error("");
+    console.error("  # Generate tests without running the tester");
+    console.error("  node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-test");
     process.exit(1);
   }
 
@@ -1147,10 +1720,36 @@ async function main() {
     }
 
     // Write output
-    writeTestFile(erc7730, tests, report);
+    const testFilePath = writeTestFile(erc7730, tests, report);
 
     // Print report
     printReport(report);
+
+    // Run clear signing tester if enabled and tests were written
+    if (CONFIG.runTest && !CONFIG.dryRun && testFilePath) {
+      const { passed, logFile } = runTester(filePath, testFilePath);
+      if (!passed) {
+        process.exitCode = 1;
+      }
+
+      // Refine expectedTexts from tester screen output
+      if (CONFIG.refine && logFile) {
+        console.log("\n" + "=".repeat(60));
+        console.log("🔍 REFINING expectedTexts FROM TESTER OUTPUT");
+        console.log("=".repeat(60));
+        console.log(`\n   Log file: ${logFile}`);
+        try {
+          refineTestFile(testFilePath, logFile, erc7730);
+        } catch (err) {
+          console.log(`   ⚠️  Refinement failed: ${err.message}`);
+          if (CONFIG.verbose) console.error(err.stack);
+        }
+      } else if (!CONFIG.refine) {
+        console.log("\nℹ️  Refinement skipped (--no-refine)");
+      }
+    } else if (!CONFIG.runTest) {
+      console.log("\nℹ️  Tester skipped (--no-test)");
+    }
   } catch (error) {
     console.error(`\n❌ Fatal error: ${error.message}`);
     if (CONFIG.verbose) {

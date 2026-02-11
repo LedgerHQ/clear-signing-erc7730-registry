@@ -52,6 +52,9 @@ node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3
 | `--openai-key <key>` | OPENAI_API_KEY env | OpenAI API key |
 | `--openai-model <model>` | gpt-4 | Model to use for generation |
 | `--azure` | false | Use Azure OpenAI API format (api-key header) |
+| `--no-test` | false | Skip running the clear signing tester after generation |
+| `--device <device>` | flex | Tester device: `flex`, `stax`, `nanosp`, `nanox` |
+| `--test-log-level <lvl>` | info | Tester log level: `none`, `error`, `warn`, `info`, `debug` |
 
 ## Environment Variables
 
@@ -72,6 +75,12 @@ The script uses the unified Etherscan V2 API which supports multiple chains with
 | `OPENAI_API_KEY` | OpenAI API key for generating EIP-712 examples |
 | `LLM_BASE_URL` | Custom LLM endpoint (default: https://api.openai.com) |
 | `AZURE_OPENAI` | Set to `true` to use Azure OpenAI API format |
+
+### Clear Signing Tester
+
+| Variable | Description |
+|----------|-------------|
+| `GATING_TOKEN` | Ledger authentication token (required for tester) |
 
 ### Setting Up Environment Variables
 
@@ -213,6 +222,38 @@ const PROVIDERS = {
 ```
 
 The provider must implement the Etherscan-compatible API format.
+
+## Clear Signing Tester Integration
+
+After generating tests, the script automatically runs the clear signing tester (`tools/tester/run-test.sh`) against the generated test file using a Ledger device emulator (Speculos). This is **enabled by default**.
+
+### Prerequisites for Testing
+
+- Docker running
+- Tester set up: `cd tools/tester && ./setup.sh`
+- Environment variable: `GATING_TOKEN` (Ledger auth token)
+
+### Examples
+
+```bash
+# Generate tests and run tester on Ledger Flex (default)
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json
+
+# Generate tests and run tester on Ledger Stax
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --device stax
+
+# Generate tests and run tester with debug logging
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --test-log-level debug
+
+# Skip the tester entirely
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-test
+```
+
+### Notes
+
+- The tester is automatically skipped in `--dry-run` mode or when no tests are generated.
+- If `tools/tester/run-test.sh` is not found (setup not done), a warning is printed and testing is skipped gracefully.
+- If the tester fails, the script exits with a non-zero exit code but the generated test file is still written.
 
 ## Limitations
 
