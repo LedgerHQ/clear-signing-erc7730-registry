@@ -72,6 +72,7 @@ const stats = {
     v1Failed: [],
     v2Passed: 0,
     v2Failed: [],
+    mismatches: [],
     skipped: 0,
   },
 };
@@ -153,58 +154,229 @@ function lintFile(filePath, version) {
 }
 
 /**
- * Run calldata validation on a file using erc7730 CLI
- * @param {string} filePath - Path to the file to validate
- * @param {string} version - "v1" or "v2" for tracking stats
- * @returns {object|null} - Calldata output or null on failure
+ * Detect whether a descriptor file is a contract (calldata) or eip712 type.
+ * @param {string} filePath - Path to the file
+ * @returns {string|null} - "contract", "eip712", or null if unknown
  */
-function validateCalldata(filePath, version) {
-  const linterCmd = getLinterCommand();
-  if (!linterCmd) {
-    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found for calldata validation");
-    stats.calldata.skipped++;
-    return null;
-  }
-
-  if (VERBOSE) console.log(`  📋 Validating calldata ${version}: ${path.relative(ROOT_DIR, filePath)}`);
-
+function detectDescriptorType(filePath) {
   try {
-    const result = spawnSync(linterCmd, ["calldata", filePath], {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: "pipe",
-    });
-
-    if (result.status !== 0) {
-      const errorMsg = result.stderr || result.stdout || "Calldata validation failed";
-      if (version === "v1") {
-        stats.calldata.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
-      } else {
-        stats.calldata.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });
-      }
-      return null;
-    }
-
-    if (version === "v1") {
-      stats.calldata.v1Passed++;
-    } else {
-      stats.calldata.v2Passed++;
-    }
-    return result.stdout;
-  } catch (error) {
-    if (version === "v1") {
-      stats.calldata.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
-    } else {
-      stats.calldata.v2Failed.push({ file: path.relative(ROOT_DIR, filePath), error: error.message });
-    }
+    const content = fs.readFileSync(filePath, "utf8");
+    const json = JSON.parse(content);
+    if (json.context?.contract) return "contract";
+    if (json.context?.eip712) return "eip712";
+    return null;
+  } catch {
     return null;
   }
 }
 
 /**
- * Validate a file before and after migration
- * @param {string} filePath - Path to the file
- * @param {string} v1Content - Original v1 content (to validate calldata before migration)
+ * Check if a parsed JSON value is empty (null, undefined, empty object, empty array, empty string).
+ * @param {*} value - The parsed JSON value
+ * @returns {boolean}
+ */
+function isEmptyJson(value) {
+  if (value === null || value === undefined) return true;
+  if (typeof value === "string" && value.trim() === "") return true;
+  if (Array.isArray(value) && value.length === 0) return true;
+  if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0) return true;
+  return false;
+}
+
+/**
+ * Deep compare two JSON values, returning a list of human-readable differences.
+ * @param {*} v1 - First value (from v1)
+ * @param {*} v2 - Second value (from v2)
+ * @param {string} jsonPath - Current path for error messages
+ * @returns {string[]} - List of difference descriptions
+ */
+function deepCompare(v1, v2, jsonPath = "$") {
+  const diffs = [];
+
+  if (v1 === v2) return diffs;
+
+  if (typeof v1 !== typeof v2) {
+    diffs.push(`${jsonPath}: type mismatch — v1 is ${typeof v1}, v2 is ${typeof v2}`);
+    return diffs;
+  }
+
+  if (v1 === null || v2 === null) {
+    if (v1 !== v2) {
+      diffs.push(`${jsonPath}: v1=${JSON.stringify(v1)}, v2=${JSON.stringify(v2)}`);
+    }
+    return diffs;
+  }
+
+  if (Array.isArray(v1) && Array.isArray(v2)) {
+    if (v1.length !== v2.length) {
+      diffs.push(`${jsonPath}: array length mismatch — v1 has ${v1.length} elements, v2 has ${v2.length}`);
+    }
+    const maxLen = Math.max(v1.length, v2.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (i >= v1.length) {
+        diffs.push(`${jsonPath}[${i}]: missing in v1, present in v2`);
+      } else if (i >= v2.length) {
+        diffs.push(`${jsonPath}[${i}]: present in v1, missing in v2`);
+      } else {
+        diffs.push(...deepCompare(v1[i], v2[i], `${jsonPath}[${i}]`));
+      }
+    }
+    return diffs;
+  }
+
+  if (typeof v1 === "object" && typeof v2 === "object") {
+    const allKeys = new Set([...Object.keys(v1), ...Object.keys(v2)]);
+    for (const key of [...allKeys].sort()) {
+      const subPath = `${jsonPath}.${key}`;
+      if (!(key in v1)) {
+        diffs.push(`${subPath}: missing in v1, present in v2`);
+      } else if (!(key in v2)) {
+        diffs.push(`${subPath}: present in v1, missing in v2`);
+      } else {
+        diffs.push(...deepCompare(v1[key], v2[key], subPath));
+      }
+    }
+    return diffs;
+  }
+
+  // Primitive mismatch
+  diffs.push(`${jsonPath}: v1=${JSON.stringify(v1)}, v2=${JSON.stringify(v2)}`);
+  return diffs;
+}
+
+/**
+ * Record a calldata/convert validation failure in stats.
+ */
+function recordCalldataFailure(version, filePath, errorMsg) {
+  const relFile = path.relative(ROOT_DIR, filePath);
+  if (version === "v1") {
+    stats.calldata.v1Failed.push({ file: relFile, error: errorMsg });
+  } else {
+    stats.calldata.v2Failed.push({ file: relFile, error: errorMsg });
+  }
+}
+
+/**
+ * Record a calldata/convert validation success in stats.
+ */
+function recordCalldataSuccess(version) {
+  if (version === "v1") {
+    stats.calldata.v1Passed++;
+  } else {
+    stats.calldata.v2Passed++;
+  }
+}
+
+/**
+ * Run output validation on a file using erc7730 CLI.
+ *
+ * For contract descriptors, runs `erc7730 calldata <file>` (output on stdout).
+ * For eip712 descriptors, runs `erc7730 convert erc7730-to-eip712 <input> <tmp-output>`.
+ *
+ * Validates that the resulting JSON is not empty.
+ *
+ * @param {string} filePath - Path to the descriptor file
+ * @param {string} version - "v1" or "v2" for tracking stats
+ * @returns {object|null} - Parsed JSON output, or null on failure
+ */
+function validateCalldata(filePath, version) {
+  const linterCmd = getLinterCommand();
+  if (!linterCmd) {
+    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found for output validation");
+    stats.calldata.skipped++;
+    return null;
+  }
+
+  const descriptorType = detectDescriptorType(filePath);
+  if (!descriptorType) {
+    if (VERBOSE) console.log(`  ⚠️  Could not detect descriptor type for ${path.relative(ROOT_DIR, filePath)}`);
+    stats.calldata.skipped++;
+    return null;
+  }
+
+  if (VERBOSE) console.log(`  📋 Validating ${descriptorType} output ${version}: ${path.relative(ROOT_DIR, filePath)}`);
+
+  try {
+    let jsonResult;
+
+    if (descriptorType === "contract") {
+      // Contract descriptors: use `erc7730 calldata <file>` (stdout)
+      const result = spawnSync(linterCmd, ["calldata", filePath], {
+        cwd: ROOT_DIR,
+        encoding: "utf8",
+        stdio: "pipe",
+      });
+
+      if (result.status !== 0) {
+        const errorMsg = result.stderr || result.stdout || "Calldata command failed";
+        recordCalldataFailure(version, filePath, errorMsg);
+        return null;
+      }
+
+      try {
+        jsonResult = JSON.parse(result.stdout);
+      } catch (e) {
+        recordCalldataFailure(version, filePath, `Failed to parse calldata output as JSON: ${e.message}\nOutput: ${(result.stdout || "").slice(0, 200)}`);
+        return null;
+      }
+
+    } else if (descriptorType === "eip712") {
+      // EIP-712 descriptors: use `erc7730 convert erc7730-to-eip712 <input> <output>`
+      const tempOutputPath = filePath + `.${version}.eip712.tmp.json`;
+      try {
+        const result = spawnSync(linterCmd, ["convert", "erc7730-to-eip712", filePath, tempOutputPath], {
+          cwd: ROOT_DIR,
+          encoding: "utf8",
+          stdio: "pipe",
+        });
+
+        if (result.status !== 0) {
+          const errorMsg = result.stderr || result.stdout || "Convert command failed";
+          recordCalldataFailure(version, filePath, errorMsg);
+          return null;
+        }
+
+        if (!fs.existsSync(tempOutputPath)) {
+          recordCalldataFailure(version, filePath, "Convert command succeeded but did not produce output file");
+          return null;
+        }
+
+        const outputContent = fs.readFileSync(tempOutputPath, "utf8");
+        try {
+          jsonResult = JSON.parse(outputContent);
+        } catch (e) {
+          recordCalldataFailure(version, filePath, `Failed to parse convert output as JSON: ${e.message}`);
+          return null;
+        }
+      } finally {
+        // Clean up temp output file
+        try { if (fs.existsSync(tempOutputPath)) fs.unlinkSync(tempOutputPath); } catch { /* ignore */ }
+      }
+    }
+
+    // Validate result is not empty
+    if (isEmptyJson(jsonResult)) {
+      recordCalldataFailure(version, filePath, `Output is empty JSON (${JSON.stringify(jsonResult)})`);
+      return null;
+    }
+
+    recordCalldataSuccess(version);
+    return jsonResult;
+  } catch (error) {
+    recordCalldataFailure(version, filePath, error.message);
+    return null;
+  }
+}
+
+/**
+ * Validate a file before and after migration.
+ *
+ * Lints both v1 and v2 files, runs output generation (calldata for contracts,
+ * convert for eip712) on both, validates outputs are non-empty JSON, and
+ * compares v1/v2 outputs — they should be identical.
+ *
+ * @param {string} filePath - Path to the migrated v2 file
+ * @param {string} v1Content - Original v1 content string
  * @param {boolean} wasV1 - Whether the file was originally v1
  */
 function validateMigration(filePath, v1Content, wasV1) {
@@ -222,27 +394,54 @@ function validateMigration(filePath, v1Content, wasV1) {
     return;
   }
 
+  let v1Result = null;
+  let v2Result = null;
+
   // If we have v1 content, create a temp file and validate it
-  let v1TempPath = null;
   if (wasV1 && v1Content) {
-    v1TempPath = filePath + ".v1.tmp";
-    fs.writeFileSync(v1TempPath, v1Content);
-    
-    // Lint v1
-    lintFile(v1TempPath, "v1");
-    
-    // Calldata validation on v1
-    validateCalldata(v1TempPath, "v1");
-    
-    // Clean up temp file
-    fs.unlinkSync(v1TempPath);
+    const v1TempPath = filePath + ".v1.tmp";
+    try {
+      fs.writeFileSync(v1TempPath, v1Content);
+
+      // Lint v1
+      lintFile(v1TempPath, "v1");
+
+      // Output validation on v1 (calldata or convert)
+      v1Result = validateCalldata(v1TempPath, "v1");
+    } finally {
+      // Clean up temp file
+      try { if (fs.existsSync(v1TempPath)) fs.unlinkSync(v1TempPath); } catch { /* ignore */ }
+    }
   }
 
   // Lint v2 (the migrated file)
   lintFile(filePath, "v2");
-  
-  // Calldata validation on v2
-  validateCalldata(filePath, "v2");
+
+  // Output validation on v2 (calldata or convert)
+  v2Result = validateCalldata(filePath, "v2");
+
+  // Compare v1 and v2 outputs — they should be identical
+  if (v1Result !== null && v2Result !== null) {
+    const differences = deepCompare(v1Result, v2Result);
+    const relPath = path.relative(ROOT_DIR, filePath);
+    if (differences.length > 0) {
+      const diffSummary = differences.map((d) => `    ${d}`).join("\n");
+      const errorMsg = `v1/v2 output mismatch (${differences.length} difference${differences.length > 1 ? "s" : ""}):\n${diffSummary}`;
+      console.error(`  ❌ ${relPath}: ${errorMsg}`);
+      stats.calldata.mismatches.push({ file: relPath, differences });
+    } else {
+      if (VERBOSE) console.log(`  ✅ v1/v2 outputs match for ${relPath}`);
+    }
+  } else if (VERBOSE) {
+    const relPath = path.relative(ROOT_DIR, filePath);
+    if (v1Result === null && v2Result === null) {
+      console.log(`  ⚠️  Skipping comparison — both v1 and v2 output generation failed for ${relPath}`);
+    } else if (v1Result === null) {
+      console.log(`  ⚠️  Skipping comparison — v1 output generation failed for ${relPath}`);
+    } else {
+      console.log(`  ⚠️  Skipping comparison — v2 output generation failed for ${relPath}`);
+    }
+  }
 }
 
 /**
@@ -645,21 +844,33 @@ function main() {
       }
     }
 
-    console.log("\n📋 Calldata Validation");
-    console.log("----------------------");
+    console.log("\n📋 Output Validation (calldata / convert)");
+    console.log("------------------------------------------");
     console.log(`v1 passed:              ${stats.calldata.v1Passed}`);
     console.log(`v2 passed:              ${stats.calldata.v2Passed}`);
     console.log(`Skipped:                ${stats.calldata.skipped}`);
     if (stats.calldata.v1Failed.length > 0) {
       console.log(`v1 failed:              ${stats.calldata.v1Failed.length}`);
       for (const { file, error } of stats.calldata.v1Failed) {
-        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+        console.log(`  ${file}: ${error.slice(0, 200)}${error.length > 200 ? '...' : ''}`);
       }
     }
     if (stats.calldata.v2Failed.length > 0) {
       console.log(`v2 failed:              ${stats.calldata.v2Failed.length}`);
       for (const { file, error } of stats.calldata.v2Failed) {
-        console.log(`  ${file}: ${error.slice(0, 100)}${error.length > 100 ? '...' : ''}`);
+        console.log(`  ${file}: ${error.slice(0, 200)}${error.length > 200 ? '...' : ''}`);
+      }
+    }
+    if (stats.calldata.mismatches.length > 0) {
+      console.log(`\n❌ v1/v2 mismatches:     ${stats.calldata.mismatches.length}`);
+      for (const { file, differences } of stats.calldata.mismatches) {
+        console.log(`  ${file} (${differences.length} difference${differences.length > 1 ? "s" : ""}):`);
+        for (const diff of differences.slice(0, 10)) {
+          console.log(`    ${diff}`);
+        }
+        if (differences.length > 10) {
+          console.log(`    ... and ${differences.length - 10} more`);
+        }
       }
     }
   }
@@ -683,7 +894,8 @@ function main() {
   const hasFailures =
     stats.errors.length > 0 ||
     stats.linting.v2Failed.length > 0 ||
-    stats.calldata.v2Failed.length > 0;
+    stats.calldata.v2Failed.length > 0 ||
+    stats.calldata.mismatches.length > 0;
 
   if (hasFailures && !DRY_RUN) {
     process.exit(1);
