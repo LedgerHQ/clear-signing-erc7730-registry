@@ -1643,28 +1643,43 @@ function parseTesterScreenTexts(logContent) {
 function extractExpectedTexts(screenTexts, descriptorLabels) {
   const expectedTexts = [];
 
-  // Find the data screen(s) — those containing "Interaction with"
+  // All known labels that can delimit values on screen
+  const allLabels = [...new Set([...descriptorLabels, "Interaction with", "Max fees"])];
+
   for (const text of screenTexts) {
-    // Data screen: contains "Interaction with" — check this BEFORE generic UI
-    // because data screens also contain generic suffixes like "Reject X of Y"
-    if (text.includes("Interaction with")) {
-      // Extract "Interaction with {owner}"
-      const ownerMatch = text.match(/Interaction with\s+(\S+)/);
-      if (ownerMatch) {
-        expectedTexts.push(`Interaction with ${ownerMatch[1]}`);
+    // Find all label positions in this screen text
+    const labelPositions = [];
+    for (const label of allLabels) {
+      const idx = text.indexOf(label);
+      if (idx !== -1) {
+        labelPositions.push({ label, start: idx });
       }
+    }
 
-      // Extract label + shortened value for each descriptor label
-      for (const label of descriptorLabels) {
-        const shortValue = extractShortLabelValue(text, label);
-        if (shortValue) {
-          expectedTexts.push(shortValue);
-        }
-      }
+    // Skip screens with no known labels (generic UI screens)
+    if (labelPositions.length === 0) continue;
 
-      // Check for "Max fees" presence
-      if (text.includes("Max fees")) {
-        expectedTexts.push("Max fees");
+    // Sort labels by their position in the text
+    labelPositions.sort((a, b) => a.start - b.start);
+
+    // Find the "Reject X of Y" position as the final boundary
+    const rejectMatch = text.match(/Reject\s+\d+\s+of\s+\d+/);
+    const endBoundary = rejectMatch ? rejectMatch.index : text.length;
+
+    // Extract label and value as separate items
+    for (let i = 0; i < labelPositions.length; i++) {
+      const { label, start } = labelPositions[i];
+      const nextStart = i + 1 < labelPositions.length
+        ? labelPositions[i + 1].start
+        : endBoundary;
+
+      // Push the label itself
+      expectedTexts.push(label);
+
+      // Push the value (text after the label, up to the next label or end boundary)
+      const value = text.slice(start + label.length, nextStart).trim();
+      if (value) {
+        expectedTexts.push(value);
       }
     }
   }
