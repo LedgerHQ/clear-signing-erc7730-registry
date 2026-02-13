@@ -18,6 +18,8 @@
  *   --skip-pr           Skip PR creation
  *   --pr-title <title>  Custom PR title
  *   --pr-branch <name>  Custom branch name
+ *   --local-api         Auto-start local Flask API server for the tester
+ *   --local-api-port <port>  Port for the local API server (default: 5000)
  *
  * Environment Variables:
  *   GITHUB_TOKEN        GitHub token for PR creation (required for --create-pr)
@@ -27,7 +29,8 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync, spawnSync } = require("child_process");
+const http = require("http");
+const { execSync, spawnSync, spawn } = require("child_process");
 
 // =============================================================================
 // Configuration
@@ -41,6 +44,8 @@ const CONFIG = {
   skipPr: process.argv.includes("--skip-pr"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
+  localApi: process.argv.includes("--local-api"),
+  localApiPort: getArgValue("--local-api-port", 5000),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -268,6 +273,9 @@ function generateTests(filePath, report) {
   const args = [filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  // NOTE: when --local-api is used, batch-process.js starts the server once
+  // and passes ERC7730_API_URL via the environment rather than letting each
+  // generate-tests.js subprocess start its own server.
 
   log(`Generating tests: ${path.relative(ROOT_DIR, filePath)}`, "debug");
 
@@ -278,13 +286,30 @@ function generateTests(filePath, report) {
       stdio: CONFIG.verbose ? "inherit" : "pipe",
     });
 
+    // Check if the test file was actually written, regardless of exit code.
+    // generate-tests.js may exit non-zero because the *tester* step failed
+    // (e.g. blind signing), but the test file itself is still valid and
+    // should be included in the PR.
+    const testFilePath = getTestFilePath(filePath);
+    const testFileWritten = !CONFIG.dryRun && fs.existsSync(testFilePath);
+
     if (result.status !== 0) {
-      // Don't treat as failure if it's just "no tests generated"
+      // "No tests generated" → not a real failure, just skip
       if (result.stdout?.includes("No tests generated") || result.stderr?.includes("No tests generated")) {
         log(`  → No tests could be generated for ${path.basename(filePath)}`, "warning");
         report.testGeneration.skipped++;
         return true;
       }
+
+      if (testFileWritten) {
+        // Test file exists — generation succeeded, only the tester failed.
+        // Still include the file in the PR.
+        log(`  → Test file written but tester step failed for ${path.basename(filePath)}`, "warning");
+        report.testGeneration.successful++;
+        report.addNewFile(testFilePath);
+        return true;
+      }
+
       report.testGeneration.failed.push({
         file: path.relative(ROOT_DIR, filePath),
         error: result.stderr || "Test generation failed",
@@ -292,8 +317,7 @@ function generateTests(filePath, report) {
       return false;
     }
 
-    const testFilePath = getTestFilePath(filePath);
-    if (!CONFIG.dryRun && fs.existsSync(testFilePath)) {
+    if (testFileWritten) {
       report.testGeneration.successful++;
       report.addNewFile(testFilePath);
     } else if (CONFIG.dryRun) {
@@ -349,7 +373,12 @@ function getCurrentBranch() {
 }
 
 /**
- * Create branch and prepare PR
+ * Create branch and prepare PR.
+ *
+ * Only the files inside the target folder that were actually modified or
+ * created by this run are included in the commit.  Any other dirty /
+ * staged changes in the working tree are stashed beforehand and restored
+ * afterwards so the PR is scoped to the target folder.
  */
 function preparePr(targetFolder, report) {
   if (!checkGit()) {
@@ -389,15 +418,68 @@ function preparePr(targetFolder, report) {
     return true;
   }
 
+  const originalBranch = getCurrentBranch();
+  let stashed = false;
+
   try {
-    // Create and checkout new branch
+    // -----------------------------------------------------------------
+    // 1. Stash unrelated changes so they don't leak into the PR.
+    //    We stash everything (including untracked), then selectively
+    //    re-apply only the target folder files on the new branch.
+    // -----------------------------------------------------------------
+    const relChanges = allChanges.map((f) => path.relative(ROOT_DIR, f));
+
+    // Check if there are OTHER dirty files outside the target folder
+    const statusOutput = execSync("git status --porcelain", {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+    }).trim();
+
+    if (statusOutput) {
+      // Stash everything (tracked + untracked) to get a clean working tree
+      log("Stashing unrelated changes...", "debug");
+      execSync("git stash push --include-untracked -m batch-process-temp", {
+        cwd: ROOT_DIR,
+        stdio: "pipe",
+      });
+      stashed = true;
+
+      // Pop only the target folder files back into the working tree.
+      // `git checkout stash -- <paths>` restores files from the stash
+      // without dropping it, so we can still pop the rest later.
+      for (const rel of relChanges) {
+        try {
+          execSync(`git checkout stash -- "${rel}"`, {
+            cwd: ROOT_DIR,
+            stdio: "pipe",
+          });
+        } catch {
+          // File may be newly created (untracked) – extract from stash^3
+          try {
+            execSync(`git checkout stash^3 -- "${rel}"`, {
+              cwd: ROOT_DIR,
+              stdio: "pipe",
+            });
+          } catch {
+            // Last resort: file wasn't in stash (shouldn't happen)
+            log(`Could not restore ${rel} from stash, skipping`, "warning");
+          }
+        }
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 2. Create branch, stage ONLY the target files, commit, push, PR
+    // -----------------------------------------------------------------
     log(`Creating branch: ${branchName}`, "info");
     execSync(`git checkout -b ${branchName}`, { cwd: ROOT_DIR, stdio: "pipe" });
 
-    // Stage all changes
-    for (const file of allChanges) {
-      const relPath = path.relative(ROOT_DIR, file);
-      execSync(`git add "${relPath}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+    // Reset the index so nothing is pre-staged
+    execSync("git reset", { cwd: ROOT_DIR, stdio: "pipe" });
+
+    // Stage only the target folder files
+    for (const rel of relChanges) {
+      execSync(`git add "${rel}"`, { cwd: ROOT_DIR, stdio: "pipe" });
     }
 
     // Create commit
@@ -427,6 +509,24 @@ function preparePr(targetFolder, report) {
   } catch (error) {
     log(`Failed to create PR: ${error.message}`, "error");
     return false;
+  } finally {
+    // -----------------------------------------------------------------
+    // 3. Always restore the original branch and unstash
+    // -----------------------------------------------------------------
+    try {
+      if (originalBranch) {
+        execSync(`git checkout ${originalBranch}`, { cwd: ROOT_DIR, stdio: "pipe" });
+      }
+    } catch (e) {
+      log(`Warning: could not switch back to ${originalBranch}: ${e.message}`, "warning");
+    }
+    if (stashed) {
+      try {
+        execSync("git stash pop", { cwd: ROOT_DIR, stdio: "pipe" });
+      } catch (e) {
+        log("Warning: could not pop stash. Run 'git stash pop' manually.", "warning");
+      }
+    }
   }
 }
 
@@ -472,6 +572,96 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 - [ ] Run CI checks
 - [ ] Manual spot-check on sample files`;
 }
+
+// =============================================================================
+// Local ERC7730 API Server Management
+// =============================================================================
+
+/** @type {import("child_process").ChildProcess | null} */
+let _localApiProcess = null;
+
+/**
+ * Start the local Flask API server in the background.
+ * Resolves once the server is accepting HTTP requests.
+ *
+ * @param {number} port
+ * @returns {Promise<import("child_process").ChildProcess>}
+ */
+function startLocalApiServer(port) {
+  return new Promise((resolve, reject) => {
+    const runScript = path.join(ROOT_DIR, "tools", "tester", "run-local-api.sh");
+    if (!fs.existsSync(runScript)) {
+      reject(new Error(
+        `Local API script not found: ${runScript}\n` +
+        "  Set up with: cd tools/tester && ./setup.sh"
+      ));
+      return;
+    }
+
+    log(`Starting local ERC7730 API server on port ${port}...`, "info");
+
+    const child = spawn("bash", [runScript, String(port)], {
+      cwd: ROOT_DIR,
+      stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env },
+    });
+    _localApiProcess = child;
+
+    let stderr = "";
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+      if (CONFIG.verbose) process.stderr.write(chunk);
+    });
+    child.stdout.on("data", (chunk) => {
+      if (CONFIG.verbose) process.stdout.write(chunk);
+    });
+    child.on("error", (err) => reject(new Error(`Failed to start local API: ${err.message}`)));
+    child.on("exit", (code) => {
+      if (code !== null && code !== 0) {
+        reject(new Error(`Local API exited with code ${code}\n${stderr.slice(-500)}`));
+      }
+    });
+
+    // Poll until ready
+    const startTime = Date.now();
+    const timeout = 30000;
+    const poll = setInterval(() => {
+      if (Date.now() - startTime > timeout) {
+        clearInterval(poll);
+        stopLocalApiServer();
+        reject(new Error(`Local API server did not start within ${timeout / 1000}s\n${stderr.slice(-500)}`));
+        return;
+      }
+      const req = http.get(`http://127.0.0.1:${port}/`, (res) => {
+        clearInterval(poll);
+        log(`Local API server ready on http://127.0.0.1:${port}`, "success");
+        resolve(child);
+      });
+      req.on("error", () => { /* not ready yet */ });
+      req.end();
+    }, 500);
+  });
+}
+
+/**
+ * Stop the local API server if we started it.
+ */
+function stopLocalApiServer() {
+  if (_localApiProcess && !_localApiProcess.killed) {
+    log("Stopping local API server...", "info");
+    _localApiProcess.kill("SIGTERM");
+    setTimeout(() => {
+      if (_localApiProcess && !_localApiProcess.killed) {
+        _localApiProcess.kill("SIGKILL");
+      }
+    }, 3000);
+    _localApiProcess = null;
+  }
+}
+
+process.on("exit", stopLocalApiServer);
+process.on("SIGINT", () => { stopLocalApiServer(); process.exit(130); });
+process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
 
 // =============================================================================
 // Main Process
@@ -539,10 +729,13 @@ async function main() {
     console.error("  --skip-pr           Skip PR creation");
     console.error("  --pr-title <title>  Custom PR title");
     console.error("  --pr-branch <name>  Custom branch name");
+    console.error("  --local-api         Auto-start local Flask API server (patched erc7730)");
+    console.error("  --local-api-port <port>  Port for the local API server (default: 5000)");
     console.error("\nExamples:");
     console.error("  node tools/migrate/batch-process.js 1inch --dry-run");
     console.error("  node tools/migrate/batch-process.js registry/ethena --verbose");
     console.error("  node tools/migrate/batch-process.js morpho --skip-pr");
+    console.error("  node tools/migrate/batch-process.js figment --local-api --verbose");
     process.exit(1);
   }
 
@@ -581,28 +774,44 @@ async function main() {
     process.exit(0);
   }
 
-  // Process each file
-  logSection("Processing Files");
-  for (const file of files) {
-    await processFile(file, report);
+  // Start local API server once (shared by all generate-tests invocations)
+  if (CONFIG.localApi && !CONFIG.skipTests) {
+    try {
+      await startLocalApiServer(CONFIG.localApiPort);
+      process.env.ERC7730_API_URL = `http://127.0.0.1:${CONFIG.localApiPort}`;
+      log(`ERC7730_API_URL set to ${process.env.ERC7730_API_URL}`, "info");
+    } catch (err) {
+      log(`Could not start local API server: ${err.message}`, "error");
+      process.exit(1);
+    }
   }
 
-  // Create PR if there are changes
-  if (!CONFIG.skipPr && (report.modifiedFiles.length > 0 || report.newFiles.length > 0)) {
-    logSection("Preparing Pull Request");
-    preparePr(targetFolder, report);
-  }
+  try {
+    // Process each file
+    logSection("Processing Files");
+    for (const file of files) {
+      await processFile(file, report);
+    }
 
-  // Print summary
-  report.print();
+    // Create PR if there are changes
+    if (!CONFIG.skipPr && (report.modifiedFiles.length > 0 || report.newFiles.length > 0)) {
+      logSection("Preparing Pull Request");
+      preparePr(targetFolder, report);
+    }
 
-  // Exit with error if there were failures
-  const hasFailures =
-    report.migrations.failed.length > 0 ||
-    report.testGeneration.failed.length > 0;
+    // Print summary
+    report.print();
 
-  if (hasFailures) {
-    process.exit(1);
+    // Exit with error if there were failures
+    const hasFailures =
+      report.migrations.failed.length > 0 ||
+      report.testGeneration.failed.length > 0;
+
+    if (hasFailures) {
+      process.exit(1);
+    }
+  } finally {
+    stopLocalApiServer();
   }
 }
 

@@ -24,6 +24,8 @@
  *   --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)
  *   --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)
  *   --no-refine             Skip refining expectedTexts from tester screen output
+ *   --local-api             Auto-start a local Flask API server (patched erc7730)
+ *   --local-api-port <port> Port for the local API server (default: 5000)
  *
  * Environment Variables:
  *   ETHERSCAN_API_KEY      API key for Etherscan (Ethereum mainnet)
@@ -42,7 +44,7 @@ const path = require("path");
 const https = require("https");
 const http = require("http");
 const crypto = require("crypto");
-const { execSync } = require("child_process");
+const { execSync, spawn } = require("child_process");
 
 // =============================================================================
 // Configuration
@@ -62,6 +64,8 @@ const CONFIG = {
   testDevice: getArgValue("--device", "flex"),
   testLogLevel: getArgValue("--test-log-level", "info"),
   refine: !process.argv.includes("--no-refine"),
+  localApi: process.argv.includes("--local-api"),
+  localApiPort: getArgValue("--local-api-port", 5000),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -1405,6 +1409,112 @@ function log(message) {
 }
 
 // =============================================================================
+// Local ERC7730 API Server Management
+// =============================================================================
+
+/** @type {import("child_process").ChildProcess | null} */
+let _localApiProcess = null;
+
+/**
+ * Start the local Flask API server in the background.
+ * Resolves once the server is accepting HTTP requests on the given port.
+ *
+ * @param {number} port  Port to run on
+ * @returns {Promise<import("child_process").ChildProcess>}
+ */
+function startLocalApiServer(port) {
+  return new Promise((resolve, reject) => {
+    const repoRoot = path.resolve(__dirname, "../..");
+    const runScript = path.join(repoRoot, "tools", "tester", "run-local-api.sh");
+
+    if (!fs.existsSync(runScript)) {
+      reject(new Error(
+        `Local API script not found: ${runScript}\n` +
+        "  Set up with: cd tools/tester && ./setup.sh"
+      ));
+      return;
+    }
+
+    console.log(`\n🚀 Starting local ERC7730 API server on port ${port}...`);
+
+    const child = spawn("bash", [runScript, String(port)], {
+      cwd: repoRoot,
+      stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env },
+    });
+
+    _localApiProcess = child;
+
+    // Accumulate stderr/stdout for diagnostics
+    let stderr = "";
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+      if (CONFIG.verbose) process.stderr.write(chunk);
+    });
+    child.stdout.on("data", (chunk) => {
+      if (CONFIG.verbose) process.stdout.write(chunk);
+    });
+
+    child.on("error", (err) => {
+      reject(new Error(`Failed to start local API: ${err.message}`));
+    });
+
+    child.on("exit", (code) => {
+      if (code !== null && code !== 0) {
+        reject(new Error(
+          `Local API server exited with code ${code}\n${stderr.slice(-500)}`
+        ));
+      }
+    });
+
+    // Poll until the server is accepting connections
+    const startTime = Date.now();
+    const timeout = 30000; // 30 s
+    const poll = setInterval(() => {
+      if (Date.now() - startTime > timeout) {
+        clearInterval(poll);
+        stopLocalApiServer();
+        reject(new Error(
+          `Local API server did not start within ${timeout / 1000}s\n${stderr.slice(-500)}`
+        ));
+        return;
+      }
+
+      const req = http.get(`http://127.0.0.1:${port}/`, (res) => {
+        // Any HTTP response (even 404) means Flask is up
+        clearInterval(poll);
+        console.log(`✅ Local API server ready on http://127.0.0.1:${port}`);
+        resolve(child);
+      });
+      req.on("error", () => { /* not ready yet, keep polling */ });
+      req.end();
+    }, 500);
+  });
+}
+
+/**
+ * Stop the local API server if it was started by us.
+ */
+function stopLocalApiServer() {
+  if (_localApiProcess && !_localApiProcess.killed) {
+    console.log("\n🛑 Stopping local API server...");
+    _localApiProcess.kill("SIGTERM");
+    // Give it a moment, then force kill
+    setTimeout(() => {
+      if (_localApiProcess && !_localApiProcess.killed) {
+        _localApiProcess.kill("SIGKILL");
+      }
+    }, 3000);
+    _localApiProcess = null;
+  }
+}
+
+// Ensure the child process is cleaned up on unexpected exit
+process.on("exit", stopLocalApiServer);
+process.on("SIGINT", () => { stopLocalApiServer(); process.exit(130); });
+process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
+
+// =============================================================================
 // Clear Signing Tester Integration
 // =============================================================================
 
@@ -1774,6 +1884,8 @@ async function main() {
     console.error("  --device <device>        Tester device: flex, stax, nanosp, nanox (default: flex)");
     console.error("  --test-log-level <lvl>   Tester log level: none, error, warn, info, debug (default: info)");
     console.error("  --no-refine              Skip refining expectedTexts from tester screen output");
+    console.error("  --local-api              Auto-start local Flask API server (patched erc7730)");
+    console.error("  --local-api-port <port>  Port for the local API server (default: 5000)");
     console.error("\nEnvironment Variables:");
     console.error("  ETHERSCAN_API_KEY, POLYGONSCAN_API_KEY, BSCSCAN_API_KEY, etc.");
     console.error("  OPENAI_API_KEY      API key for OpenAI (for EIP-712 examples)");
@@ -1814,6 +1926,19 @@ async function main() {
   }
 
   console.log(`Input: ${filePath}\n`);
+
+  // Start local API server if requested
+  if (CONFIG.localApi) {
+    try {
+      await startLocalApiServer(CONFIG.localApiPort);
+      // Set env var so the tester subprocess (run-test.sh) uses the local server
+      process.env.ERC7730_API_URL = `http://127.0.0.1:${CONFIG.localApiPort}`;
+      console.log(`   ERC7730_API_URL set to ${process.env.ERC7730_API_URL}\n`);
+    } catch (err) {
+      console.error(`\n❌ Could not start local API server: ${err.message}`);
+      process.exit(1);
+    }
+  }
 
   // Initialize report
   const report = {
@@ -1893,6 +2018,9 @@ async function main() {
       console.error(error.stack);
     }
     process.exit(1);
+  } finally {
+    // Clean up local API server if we started one
+    stopLocalApiServer();
   }
 }
 

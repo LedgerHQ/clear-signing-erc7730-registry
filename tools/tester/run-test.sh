@@ -11,6 +11,9 @@
 #
 # Environment variables:
 #   GATING_TOKEN     Required. Ledger authentication token
+#   ERC7730_API_URL  Optional. Override the ERC7730 API URL (default: remote service)
+#                    Set to http://localhost:5000 to use local patched erc7730.
+#                    Start local server with: ./run-local-api.sh
 
 set -e
 
@@ -117,6 +120,9 @@ echo -e "Test file:   ${GREEN}$TEST_FILE${NC}"
 echo -e "Test type:   ${GREEN}$TEST_TYPE${NC}"
 echo -e "Device:      ${GREEN}$DEVICE${NC}"
 echo -e "Log level:   ${GREEN}$LOG_LEVEL${NC}"
+if [ -n "$ERC7730_API_URL" ]; then
+    echo -e "ERC7730 API: ${YELLOW}$ERC7730_API_URL${NC} (local)"
+fi
 echo ""
 
 # Prepare output directories
