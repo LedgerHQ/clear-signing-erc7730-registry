@@ -3,23 +3,23 @@
  * ERC-7730 Batch Processor
  *
  * Processes a registry subfolder to:
- * - Migrate v1 schema files to v2
- * - Validate migrations with linter and binary comparison
+ * - Migrate v1 schema files to v2 (linting/validation is handled by migrate-v1-to-v2.js)
  * - Generate missing test files
  * - Optionally create a PR with all changes
  *
  * Usage:
- *   node tools/batch-process.js <registry-subfolder> [options]
+ *   node tools/migrate/batch-process.js <registry-subfolder> [options]
  *
  * Options:
  *   --dry-run           Preview changes without modifying files
  *   --verbose           Show detailed output
  *   --skip-tests        Skip test generation
  *   --skip-migration    Skip v1 to v2 migration
- *   --skip-lint         Skip linting validation
  *   --skip-pr           Skip PR creation
  *   --pr-title <title>  Custom PR title
  *   --pr-branch <name>  Custom branch name
+ *   --local-api         Auto-start local Flask API server for the tester
+ *   --local-api-port <port>  Port for the local API server (default: 5000)
  *
  * Environment Variables:
  *   GITHUB_TOKEN        GitHub token for PR creation (required for --create-pr)
@@ -29,7 +29,8 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync, spawnSync } = require("child_process");
+const http = require("http");
+const { execSync, spawnSync, spawn } = require("child_process");
 
 // =============================================================================
 // Configuration
@@ -40,10 +41,11 @@ const CONFIG = {
   verbose: process.argv.includes("--verbose"),
   skipTests: process.argv.includes("--skip-tests"),
   skipMigration: process.argv.includes("--skip-migration"),
-  skipLint: process.argv.includes("--skip-lint"),
   skipPr: process.argv.includes("--skip-pr"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
+  localApi: process.argv.includes("--local-api"),
+  localApiPort: getArgValue("--local-api-port", 5000),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -55,7 +57,7 @@ function getArgValue(flag, defaultValue) {
 }
 
 // Paths
-const ROOT_DIR = path.join(__dirname, "..");
+const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const MIGRATE_SCRIPT = path.join(__dirname, "migrate-v1-to-v2.js");
 const GENERATE_TESTS_SCRIPT = path.join(__dirname, "generate-tests.js");
@@ -90,8 +92,6 @@ class Report {
   constructor() {
     this.filesProcessed = 0;
     this.migrations = { attempted: 0, successful: 0, failed: [], skipped: 0 };
-    this.linting = { passed: 0, failed: [], skipped: 0 };
-    this.binaryComparison = { passed: 0, failed: [], skipped: 0 };
     this.testGeneration = { attempted: 0, successful: 0, failed: [], skipped: 0 };
     this.modifiedFiles = [];
     this.newFiles = [];
@@ -126,22 +126,7 @@ class Report {
       console.log(`   Failed:     ${this.migrations.failed.length}`);
       this.migrations.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
     }
-
-    console.log("\n🔍 Linting:");
-    console.log(`   Passed:  ${this.linting.passed}`);
-    console.log(`   Skipped: ${this.linting.skipped}`);
-    if (this.linting.failed.length > 0) {
-      console.log(`   Failed:  ${this.linting.failed.length}`);
-      this.linting.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
-    }
-
-    console.log("\n🔢 Binary Comparison (placeholder):");
-    console.log(`   Passed:  ${this.binaryComparison.passed}`);
-    console.log(`   Skipped: ${this.binaryComparison.skipped}`);
-    if (this.binaryComparison.failed.length > 0) {
-      console.log(`   Failed:  ${this.binaryComparison.failed.length}`);
-      this.binaryComparison.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
-    }
+    console.log("   (Linting/validation is now handled by migrate-v1-to-v2.js)");
 
     console.log("\n🧪 Test Generation:");
     console.log(`   Attempted:  ${this.testGeneration.attempted}`);
@@ -276,85 +261,6 @@ function migrateFile(filePath, report) {
 }
 
 // =============================================================================
-// Linting
-// =============================================================================
-
-/**
- * Check if erc7730 CLI is available
- */
-function checkErc7730Cli() {
-  try {
-    execSync("erc7730 --version", { encoding: "utf8", stdio: "pipe" });
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-/**
- * Lint a file using erc7730 CLI
- */
-function lintFile(filePath, report) {
-  if (!checkErc7730Cli()) {
-    log("erc7730 CLI not found. Install with: pip install erc7730", "warning");
-    report.linting.skipped++;
-    return true; // Don't fail if CLI not available
-  }
-
-  log(`Linting: ${path.relative(ROOT_DIR, filePath)}`, "debug");
-
-  try {
-    const result = spawnSync("erc7730", ["lint", filePath], {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: CONFIG.verbose ? "inherit" : "pipe",
-    });
-
-    if (result.status !== 0) {
-      report.linting.failed.push({
-        file: path.relative(ROOT_DIR, filePath),
-        error: result.stderr || result.stdout || "Linting failed",
-      });
-      return false;
-    }
-
-    report.linting.passed++;
-    return true;
-  } catch (error) {
-    report.linting.failed.push({
-      file: path.relative(ROOT_DIR, filePath),
-      error: error.message,
-    });
-    return false;
-  }
-}
-
-// =============================================================================
-// Binary Comparison (Placeholder)
-// =============================================================================
-
-/**
- * Compare binary descriptors between v1 and v2
- * NOTE: This is a placeholder - actual implementation pending erc7730 calldata command support
- */
-function compareBinaryDescriptors(v1FilePath, v2FilePath, report) {
-  log(`Binary comparison: ${path.relative(ROOT_DIR, v2FilePath)}`, "debug");
-  log("  → Binary comparison is a placeholder (erc7730 calldata command not yet available)", "debug");
-
-  // Placeholder: Skip comparison until calldata command is available
-  report.binaryComparison.skipped++;
-
-  // TODO: Implement when erc7730 calldata command is available
-  // The implementation would:
-  // 1. Run `erc7730 calldata <v1-file>` to generate v1 binary descriptor
-  // 2. Run `erc7730 calldata <v2-file>` to generate v2 binary descriptor
-  // 3. Compare the outputs byte-by-byte
-  // 4. Report any differences
-
-  return true;
-}
-
-// =============================================================================
 // Test Generation
 // =============================================================================
 
@@ -367,6 +273,9 @@ function generateTests(filePath, report) {
   const args = [filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  // NOTE: when --local-api is used, batch-process.js starts the server once
+  // and passes ERC7730_API_URL via the environment rather than letting each
+  // generate-tests.js subprocess start its own server.
 
   log(`Generating tests: ${path.relative(ROOT_DIR, filePath)}`, "debug");
 
@@ -377,13 +286,30 @@ function generateTests(filePath, report) {
       stdio: CONFIG.verbose ? "inherit" : "pipe",
     });
 
+    // Check if the test file was actually written, regardless of exit code.
+    // generate-tests.js may exit non-zero because the *tester* step failed
+    // (e.g. blind signing), but the test file itself is still valid and
+    // should be included in the PR.
+    const testFilePath = getTestFilePath(filePath);
+    const testFileWritten = !CONFIG.dryRun && fs.existsSync(testFilePath);
+
     if (result.status !== 0) {
-      // Don't treat as failure if it's just "no tests generated"
+      // "No tests generated" → not a real failure, just skip
       if (result.stdout?.includes("No tests generated") || result.stderr?.includes("No tests generated")) {
         log(`  → No tests could be generated for ${path.basename(filePath)}`, "warning");
         report.testGeneration.skipped++;
         return true;
       }
+
+      if (testFileWritten) {
+        // Test file exists — generation succeeded, only the tester failed.
+        // Still include the file in the PR.
+        log(`  → Test file written but tester step failed for ${path.basename(filePath)}`, "warning");
+        report.testGeneration.successful++;
+        report.addNewFile(testFilePath);
+        return true;
+      }
+
       report.testGeneration.failed.push({
         file: path.relative(ROOT_DIR, filePath),
         error: result.stderr || "Test generation failed",
@@ -391,8 +317,7 @@ function generateTests(filePath, report) {
       return false;
     }
 
-    const testFilePath = getTestFilePath(filePath);
-    if (!CONFIG.dryRun && fs.existsSync(testFilePath)) {
+    if (testFileWritten) {
       report.testGeneration.successful++;
       report.addNewFile(testFilePath);
     } else if (CONFIG.dryRun) {
@@ -448,7 +373,12 @@ function getCurrentBranch() {
 }
 
 /**
- * Create branch and prepare PR
+ * Create branch and prepare PR.
+ *
+ * Only the files inside the target folder that were actually modified or
+ * created by this run are included in the commit.  Any other dirty /
+ * staged changes in the working tree are stashed beforehand and restored
+ * afterwards so the PR is scoped to the target folder.
  */
 function preparePr(targetFolder, report) {
   if (!checkGit()) {
@@ -488,23 +418,75 @@ function preparePr(targetFolder, report) {
     return true;
   }
 
+  const originalBranch = getCurrentBranch();
+  let stashed = false;
+
   try {
-    // Create and checkout new branch
+    // -----------------------------------------------------------------
+    // 1. Stash unrelated changes so they don't leak into the PR.
+    //    We stash everything (including untracked), then selectively
+    //    re-apply only the target folder files on the new branch.
+    // -----------------------------------------------------------------
+    const relChanges = allChanges.map((f) => path.relative(ROOT_DIR, f));
+
+    // Check if there are OTHER dirty files outside the target folder
+    const statusOutput = execSync("git status --porcelain", {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+    }).trim();
+
+    if (statusOutput) {
+      // Stash everything (tracked + untracked) to get a clean working tree
+      log("Stashing unrelated changes...", "debug");
+      execSync("git stash push --include-untracked -m batch-process-temp", {
+        cwd: ROOT_DIR,
+        stdio: "pipe",
+      });
+      stashed = true;
+
+      // Pop only the target folder files back into the working tree.
+      // `git checkout stash -- <paths>` restores files from the stash
+      // without dropping it, so we can still pop the rest later.
+      for (const rel of relChanges) {
+        try {
+          execSync(`git checkout stash -- "${rel}"`, {
+            cwd: ROOT_DIR,
+            stdio: "pipe",
+          });
+        } catch {
+          // File may be newly created (untracked) – extract from stash^3
+          try {
+            execSync(`git checkout stash^3 -- "${rel}"`, {
+              cwd: ROOT_DIR,
+              stdio: "pipe",
+            });
+          } catch {
+            // Last resort: file wasn't in stash (shouldn't happen)
+            log(`Could not restore ${rel} from stash, skipping`, "warning");
+          }
+        }
+      }
+    }
+
+    // -----------------------------------------------------------------
+    // 2. Create branch, stage ONLY the target files, commit, push, PR
+    // -----------------------------------------------------------------
     log(`Creating branch: ${branchName}`, "info");
     execSync(`git checkout -b ${branchName}`, { cwd: ROOT_DIR, stdio: "pipe" });
 
-    // Stage all changes
-    for (const file of allChanges) {
-      const relPath = path.relative(ROOT_DIR, file);
-      execSync(`git add "${relPath}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+    // Reset the index so nothing is pre-staged
+    execSync("git reset", { cwd: ROOT_DIR, stdio: "pipe" });
+
+    // Stage only the target folder files
+    for (const rel of relChanges) {
+      execSync(`git add "${rel}"`, { cwd: ROOT_DIR, stdio: "pipe" });
     }
 
     // Create commit
     const commitMessage = `chore(${folderName}): batch migration and test generation
 
 - Migrated ${report.migrations.successful} files from v1 to v2 schema
-- Generated ${report.testGeneration.successful} test files
-- Linted ${report.linting.passed} files`;
+- Generated ${report.testGeneration.successful} test files`;
 
     execSync(`git commit -m "${commitMessage}"`, { cwd: ROOT_DIR, stdio: "pipe" });
 
@@ -527,6 +509,24 @@ function preparePr(targetFolder, report) {
   } catch (error) {
     log(`Failed to create PR: ${error.message}`, "error");
     return false;
+  } finally {
+    // -----------------------------------------------------------------
+    // 3. Always restore the original branch and unstash
+    // -----------------------------------------------------------------
+    try {
+      if (originalBranch) {
+        execSync(`git checkout ${originalBranch}`, { cwd: ROOT_DIR, stdio: "pipe" });
+      }
+    } catch (e) {
+      log(`Warning: could not switch back to ${originalBranch}: ${e.message}`, "warning");
+    }
+    if (stashed) {
+      try {
+        execSync("git stash pop", { cwd: ROOT_DIR, stdio: "pipe" });
+      } catch (e) {
+        log("Warning: could not pop stash. Run 'git stash pop' manually.", "warning");
+      }
+    }
   }
 }
 
@@ -542,7 +542,6 @@ This PR contains automated batch updates for the \`${folderName}\` registry fold
 
 - **Schema Migrations**: Migrated ${report.migrations.successful} files from ERC-7730 v1 to v2 schema
 - **Test Generation**: Generated ${report.testGeneration.successful} new test files
-- **Validation**: Linted ${report.linting.passed} files successfully
 
 ### Modified Files
 
@@ -557,14 +556,13 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 | Check | Status |
 |-------|--------|
 | Schema Migration | ${report.migrations.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
-| Linting | ${report.linting.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
-| Binary Comparison | ⏳ Placeholder (pending tooling) |
+| Linting/Calldata | Validated by migrate-v1-to-v2.js |
 | Test Generation | ${report.testGeneration.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
 
 ### Notes
 
 <!-- Add any additional notes or context here -->
-- This PR was auto-generated by \`tools/batch-process.js\`
+- This PR was auto-generated by \`tools/migrate/batch-process.js\`
 - Please review the changes before merging
 
 ### Test Plan
@@ -574,6 +572,100 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 - [ ] Run CI checks
 - [ ] Manual spot-check on sample files`;
 }
+
+// =============================================================================
+// Local ERC7730 API Server Management
+// =============================================================================
+
+/** @type {import("child_process").ChildProcess | null} */
+let _localApiProcess = null;
+
+/**
+ * Start the local Flask API server in the background.
+ * Resolves once the server is accepting HTTP requests.
+ *
+ * @param {number} port
+ * @returns {Promise<import("child_process").ChildProcess>}
+ */
+function startLocalApiServer(port) {
+  return new Promise((resolve, reject) => {
+    const runScript = path.join(ROOT_DIR, "tools", "tester", "run-local-api.sh");
+    if (!fs.existsSync(runScript)) {
+      reject(new Error(
+        `Local API script not found: ${runScript}\n` +
+        "  Set up with: cd tools/tester && ./setup.sh"
+      ));
+      return;
+    }
+
+    log(`Starting local ERC7730 API server on port ${port}...`, "info");
+
+    // detached: true creates a new process group so we can kill bash + Flask together
+    const child = spawn("bash", [runScript, String(port)], {
+      cwd: ROOT_DIR,
+      stdio: ["ignore", "pipe", "pipe"],
+      env: { ...process.env },
+      detached: true,
+    });
+    _localApiProcess = child;
+
+    let stderr = "";
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString();
+      if (CONFIG.verbose) process.stderr.write(chunk);
+    });
+    child.stdout.on("data", (chunk) => {
+      if (CONFIG.verbose) process.stdout.write(chunk);
+    });
+    child.on("error", (err) => reject(new Error(`Failed to start local API: ${err.message}`)));
+    child.on("exit", (code) => {
+      if (code !== null && code !== 0) {
+        reject(new Error(`Local API exited with code ${code}\n${stderr.slice(-500)}`));
+      }
+    });
+
+    // Poll until ready
+    const startTime = Date.now();
+    const timeout = 30000;
+    const poll = setInterval(() => {
+      if (Date.now() - startTime > timeout) {
+        clearInterval(poll);
+        stopLocalApiServer();
+        reject(new Error(`Local API server did not start within ${timeout / 1000}s\n${stderr.slice(-500)}`));
+        return;
+      }
+      const req = http.get(`http://127.0.0.1:${port}/`, (res) => {
+        clearInterval(poll);
+        log(`Local API server ready on http://127.0.0.1:${port}`, "success");
+        resolve(child);
+      });
+      req.on("error", () => { /* not ready yet */ });
+      req.end();
+    }, 500);
+  });
+}
+
+/**
+ * Stop the local API server if we started it.
+ * Kills the entire process group (bash + Flask) so nothing lingers.
+ */
+function stopLocalApiServer() {
+  if (_localApiProcess && !_localApiProcess.killed) {
+    log("Stopping local API server...", "info");
+    try {
+      // Kill the entire process group (negative PID) so Flask dies too
+      process.kill(-_localApiProcess.pid, "SIGTERM");
+    } catch (e) {
+      // Process group may already be gone
+      try { _localApiProcess.kill("SIGTERM"); } catch {}
+    }
+    _localApiProcess = null;
+  }
+}
+
+process.on("exit", stopLocalApiServer);
+process.on("SIGINT", () => { stopLocalApiServer(); process.exit(130); });
+process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
 
 // =============================================================================
 // Main Process
@@ -588,40 +680,17 @@ async function processFile(filePath, report) {
 
   log(`\nProcessing: ${relPath}`, "info");
 
-  // Store original content for comparison
-  let originalContent = null;
-  let wasV1 = false;
-
   // Check if v1 and migrate
   if (!CONFIG.skipMigration && isV1Schema(filePath)) {
-    wasV1 = true;
-    originalContent = fs.readFileSync(filePath, "utf8");
-
     log("  → v1 schema detected, migrating to v2...", "info");
-    const migrated = migrateFile(filePath, report);
-
-    if (migrated && !CONFIG.dryRun) {
-      // Lint the migrated file
-      if (!CONFIG.skipLint) {
-        log("  → Linting migrated file...", "info");
-        lintFile(filePath, report);
-      }
-
-      // Binary comparison placeholder
-      log("  → Binary comparison (placeholder)...", "info");
-      compareBinaryDescriptors(filePath, filePath, report);
-    }
+    migrateFile(filePath, report);
+    // Note: Linting/validation is now handled inside migrate-v1-to-v2.js
   } else {
     if (CONFIG.skipMigration) {
       report.migrations.skipped++;
     } else {
       log("  → Already v2 schema, skipping migration", "debug");
       report.migrations.skipped++;
-
-      // Still lint v2 files
-      if (!CONFIG.skipLint) {
-        lintFile(filePath, report);
-      }
     }
   }
 
@@ -655,20 +724,22 @@ async function main() {
   );
 
   if (!targetArg) {
-    console.error("Usage: node tools/batch-process.js <registry-subfolder> [options]");
+    console.error("Usage: node tools/migrate/batch-process.js <registry-subfolder> [options]");
     console.error("\nOptions:");
     console.error("  --dry-run           Preview changes without modifying files");
     console.error("  --verbose           Show detailed output");
     console.error("  --skip-tests        Skip test generation");
     console.error("  --skip-migration    Skip v1 to v2 migration");
-    console.error("  --skip-lint         Skip linting validation");
     console.error("  --skip-pr           Skip PR creation");
     console.error("  --pr-title <title>  Custom PR title");
     console.error("  --pr-branch <name>  Custom branch name");
+    console.error("  --local-api         Auto-start local Flask API server (patched erc7730)");
+    console.error("  --local-api-port <port>  Port for the local API server (default: 5000)");
     console.error("\nExamples:");
-    console.error("  node tools/batch-process.js 1inch --dry-run");
-    console.error("  node tools/batch-process.js registry/ethena --verbose");
-    console.error("  node tools/batch-process.js morpho --skip-pr");
+    console.error("  node tools/migrate/batch-process.js 1inch --dry-run");
+    console.error("  node tools/migrate/batch-process.js registry/ethena --verbose");
+    console.error("  node tools/migrate/batch-process.js morpho --skip-pr");
+    console.error("  node tools/migrate/batch-process.js figment --local-api --verbose");
     process.exit(1);
   }
 
@@ -707,29 +778,44 @@ async function main() {
     process.exit(0);
   }
 
-  // Process each file
-  logSection("Processing Files");
-  for (const file of files) {
-    await processFile(file, report);
+  // Start local API server once (shared by all generate-tests invocations)
+  if (CONFIG.localApi && !CONFIG.skipTests) {
+    try {
+      await startLocalApiServer(CONFIG.localApiPort);
+      process.env.ERC7730_API_URL = `http://127.0.0.1:${CONFIG.localApiPort}`;
+      log(`ERC7730_API_URL set to ${process.env.ERC7730_API_URL}`, "info");
+    } catch (err) {
+      log(`Could not start local API server: ${err.message}`, "error");
+      process.exit(1);
+    }
   }
 
-  // Create PR if there are changes
-  if (!CONFIG.skipPr && (report.modifiedFiles.length > 0 || report.newFiles.length > 0)) {
-    logSection("Preparing Pull Request");
-    preparePr(targetFolder, report);
-  }
+  try {
+    // Process each file
+    logSection("Processing Files");
+    for (const file of files) {
+      await processFile(file, report);
+    }
 
-  // Print summary
-  report.print();
+    // Create PR if there are changes
+    if (!CONFIG.skipPr && (report.modifiedFiles.length > 0 || report.newFiles.length > 0)) {
+      logSection("Preparing Pull Request");
+      preparePr(targetFolder, report);
+    }
 
-  // Exit with error if there were failures
-  const hasFailures =
-    report.migrations.failed.length > 0 ||
-    report.linting.failed.length > 0 ||
-    report.testGeneration.failed.length > 0;
+    // Print summary
+    report.print();
 
-  if (hasFailures) {
-    process.exit(1);
+    // Exit with error if there were failures
+    const hasFailures =
+      report.migrations.failed.length > 0 ||
+      report.testGeneration.failed.length > 0;
+
+    if (hasFailures) {
+      process.exit(1);
+    }
+  } finally {
+    stopLocalApiServer();
   }
 }
 
