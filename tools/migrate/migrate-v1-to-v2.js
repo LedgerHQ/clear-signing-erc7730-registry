@@ -167,6 +167,18 @@ function lintFile(filePath, version) {
 }
 
 /**
+ * Check whether a file is a "leaf" ERC-7730 descriptor (as opposed to a shared/common file).
+ * By convention, leaf files start with `calldata` (for contracts) or `eip712` (for messages).
+ * Non-leaf files (e.g. common-*.json) are shared includes and cannot be validated standalone.
+ * @param {string} filePath - Path to the file
+ * @returns {boolean}
+ */
+function isLeafDescriptor(filePath) {
+  const baseName = path.basename(filePath);
+  return baseName.startsWith("calldata") || baseName.startsWith("eip712");
+}
+
+/**
  * Detect whether a descriptor file is a contract (calldata) or eip712 type.
  * @param {string} filePath - Path to the file
  * @returns {string|null} - "contract", "eip712", or null if unknown
@@ -431,6 +443,16 @@ function validateMigration(filePath, v1Content, wasV1) {
   const linterCmd = getLinterCommand();
   if (!linterCmd) {
     if (VERBOSE) console.log("  ⚠️  Skipping validation - erc7730 CLI not available");
+    stats.linting.skipped++;
+    stats.calldata.skipped++;
+    return;
+  }
+
+  // Only run linting and calldata/convert comparison on leaf descriptors (calldata-* / eip712-* files).
+  // Non-leaf files (e.g. common-*) are shared includes that cannot be validated standalone.
+  const isLeaf = isLeafDescriptor(filePath);
+  if (!isLeaf) {
+    if (VERBOSE) console.log(`  ℹ️  Non-leaf file — skipping validation for ${path.relative(ROOT_DIR, filePath)}`);
     stats.linting.skipped++;
     stats.calldata.skipped++;
     return;
