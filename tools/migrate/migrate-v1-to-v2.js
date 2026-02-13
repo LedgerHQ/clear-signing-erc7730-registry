@@ -21,7 +21,7 @@
  * - Runs calldata validation on both v1 (original) and v2 (migrated) files
  *
  * Usage:
- *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--file <path>] [--skip-lint]
+ *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--skip-lint] [--file <path> | <path>]
  */
 
 const fs = require("fs");
@@ -34,9 +34,22 @@ const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const DRY_RUN = process.argv.includes("--dry-run");
 const VERBOSE = process.argv.includes("--verbose");
 const SKIP_LINT = process.argv.includes("--skip-lint");
-const SINGLE_FILE = process.argv.includes("--file")
-  ? process.argv[process.argv.indexOf("--file") + 1]
-  : null;
+const SINGLE_FILE = (() => {
+  // Support --file <path> flag
+  if (process.argv.includes("--file")) {
+    return process.argv[process.argv.indexOf("--file") + 1];
+  }
+  // Support bare positional argument (first arg that is not a flag)
+  const FLAGS = new Set(["--dry-run", "--verbose", "--skip-lint", "--file"]);
+  for (let i = 2; i < process.argv.length; i++) {
+    if (!FLAGS.has(process.argv[i]) && !process.argv[i].startsWith("--")) {
+      // Skip if previous arg was --file (already handled above)
+      if (i > 2 && process.argv[i - 1] === "--file") continue;
+      return process.argv[i];
+    }
+  }
+  return null;
+})();
 
 // Local linter path
 const LOCAL_LINTER_PATH = path.join(ROOT_DIR, "tools", "linter", ".venv", "bin", "erc7730");
@@ -700,7 +713,15 @@ function migrateFile(filePath) {
               (f) => f.path === excludedPath
             );
             if (!existingField) {
-              format.fields.push({ path: excludedPath, visible: "never" });
+              // Generate a label from the path (e.g. "#.signatures.[]" -> "Signatures")
+              const pathLabel = excludedPath
+                .replace(/^#\./, "")
+                .replace(/\.\[\]/g, "")
+                .replace(/([A-Z])/g, " $1")
+                .replace(/[_.]/g, " ")
+                .trim()
+                .replace(/\b\w/g, (c) => c.toUpperCase());
+              format.fields.push({ label: pathLabel, path: excludedPath, visible: "never" });
               stats.changes.excludedConverted++;
               modified = true;
             }
