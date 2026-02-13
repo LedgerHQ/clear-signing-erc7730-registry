@@ -1190,7 +1190,10 @@ async function callLLM(prompt) {
 // =============================================================================
 
 /**
- * Infer expected display texts from function fields
+ * Infer expected display texts from function fields.
+ * Only includes labels from fields with visible:"always" — other fields may
+ * be hidden or conditionally shown depending on the device/firmware, so they
+ * are not reliable for initial expectedTexts (refinement fills them in later).
  */
 function inferExpectedTexts(func, metadata) {
   const texts = [];
@@ -1200,9 +1203,9 @@ function inferExpectedTexts(func, metadata) {
     // texts.push(func.intent); // Usually shown as title, not in field list
   }
 
-  // Add field labels
+  // Add field labels only for always-visible fields
   for (const field of func.fields || []) {
-    if (field.label) {
+    if (field.label && field.visible === "always") {
       texts.push(field.label);
     }
   }
@@ -1211,13 +1214,14 @@ function inferExpectedTexts(func, metadata) {
 }
 
 /**
- * Infer expected texts for EIP-712 messages
+ * Infer expected texts for EIP-712 messages.
+ * Only includes labels from fields with visible:"always".
  */
 function inferExpectedTextsEip712(msgType, metadata) {
   const texts = [];
 
   for (const field of msgType.fields || []) {
-    if (field.label) {
+    if (field.label && field.visible === "always") {
       texts.push(field.label);
     }
   }
@@ -1437,10 +1441,12 @@ function startLocalApiServer(port) {
 
     console.log(`\n🚀 Starting local ERC7730 API server on port ${port}...`);
 
+    // detached: true creates a new process group so we can kill bash + Flask together
     const child = spawn("bash", [runScript, String(port)], {
       cwd: repoRoot,
       stdio: ["ignore", "pipe", "pipe"],
       env: { ...process.env },
+      detached: true,
     });
 
     _localApiProcess = child;
@@ -1494,17 +1500,18 @@ function startLocalApiServer(port) {
 
 /**
  * Stop the local API server if it was started by us.
+ * Kills the entire process group (bash + Flask) so nothing lingers.
  */
 function stopLocalApiServer() {
   if (_localApiProcess && !_localApiProcess.killed) {
     console.log("\n🛑 Stopping local API server...");
-    _localApiProcess.kill("SIGTERM");
-    // Give it a moment, then force kill
-    setTimeout(() => {
-      if (_localApiProcess && !_localApiProcess.killed) {
-        _localApiProcess.kill("SIGKILL");
-      }
-    }, 3000);
+    try {
+      // Kill the entire process group (negative PID) so Flask dies too
+      process.kill(-_localApiProcess.pid, "SIGTERM");
+    } catch (e) {
+      // Process group may already be gone
+      try { _localApiProcess.kill("SIGTERM"); } catch {}
+    }
     _localApiProcess = null;
   }
 }

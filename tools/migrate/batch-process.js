@@ -600,10 +600,12 @@ function startLocalApiServer(port) {
 
     log(`Starting local ERC7730 API server on port ${port}...`, "info");
 
+    // detached: true creates a new process group so we can kill bash + Flask together
     const child = spawn("bash", [runScript, String(port)], {
       cwd: ROOT_DIR,
       stdio: ["ignore", "pipe", "pipe"],
       env: { ...process.env },
+      detached: true,
     });
     _localApiProcess = child;
 
@@ -645,16 +647,18 @@ function startLocalApiServer(port) {
 
 /**
  * Stop the local API server if we started it.
+ * Kills the entire process group (bash + Flask) so nothing lingers.
  */
 function stopLocalApiServer() {
   if (_localApiProcess && !_localApiProcess.killed) {
     log("Stopping local API server...", "info");
-    _localApiProcess.kill("SIGTERM");
-    setTimeout(() => {
-      if (_localApiProcess && !_localApiProcess.killed) {
-        _localApiProcess.kill("SIGKILL");
-      }
-    }, 3000);
+    try {
+      // Kill the entire process group (negative PID) so Flask dies too
+      process.kill(-_localApiProcess.pid, "SIGTERM");
+    } catch (e) {
+      // Process group may already be gone
+      try { _localApiProcess.kill("SIGTERM"); } catch {}
+    }
     _localApiProcess = null;
   }
 }
