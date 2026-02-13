@@ -335,7 +335,9 @@ function validateCalldata(filePath, version) {
 
     } else if (descriptorType === "eip712") {
       // EIP-712 descriptors: use `erc7730 convert erc7730-to-eip712 <input> <output>`
+      // The converter writes chain-suffixed files: <output>.{chainId}.json
       const tempOutputPath = filePath + `.${version}.eip712.tmp.json`;
+      const tempOutputGlob = [];
       try {
         const result = spawnSync(linterCmd, ["convert", "erc7730-to-eip712", filePath, tempOutputPath], {
           cwd: ROOT_DIR,
@@ -349,20 +351,47 @@ function validateCalldata(filePath, version) {
           return null;
         }
 
-        if (!fs.existsSync(tempOutputPath)) {
+        // The converter writes chain-specific files like foo.tmp.json -> foo.tmp.{chainId}.json
+        // Find all matching output files
+        const outputDir = path.dirname(tempOutputPath);
+        const baseName = path.basename(tempOutputPath, ".json");
+        const outputFiles = fs.readdirSync(outputDir).filter((f) => {
+          return f.startsWith(baseName + ".") && f.endsWith(".json") && f !== path.basename(tempOutputPath);
+        }).map((f) => path.join(outputDir, f));
+
+        // Also check if the exact path exists (single output case)
+        if (fs.existsSync(tempOutputPath)) {
+          outputFiles.push(tempOutputPath);
+        }
+
+        if (outputFiles.length === 0) {
           recordCalldataFailure(version, filePath, "Convert command succeeded but did not produce output file");
           return null;
         }
 
-        const outputContent = fs.readFileSync(tempOutputPath, "utf8");
-        try {
-          jsonResult = JSON.parse(outputContent);
-        } catch (e) {
-          recordCalldataFailure(version, filePath, `Failed to parse convert output as JSON: ${e.message}`);
-          return null;
+        tempOutputGlob.push(...outputFiles);
+
+        // Combine all chain outputs into a single dict keyed by chain ID for comparison
+        const combined = {};
+        for (const outFile of outputFiles) {
+          const content = fs.readFileSync(outFile, "utf8");
+          try {
+            const parsed = JSON.parse(content);
+            // Use chainId as key, or filename if no chainId
+            const key = parsed.chainId != null ? String(parsed.chainId) : path.basename(outFile);
+            combined[key] = parsed;
+          } catch (e) {
+            recordCalldataFailure(version, filePath, `Failed to parse convert output as JSON: ${e.message}`);
+            return null;
+          }
         }
+
+        jsonResult = combined;
       } finally {
-        // Clean up temp output file
+        // Clean up all temp output files
+        for (const f of tempOutputGlob) {
+          try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch { /* ignore */ }
+        }
         try { if (fs.existsSync(tempOutputPath)) fs.unlinkSync(tempOutputPath); } catch { /* ignore */ }
       }
     }
