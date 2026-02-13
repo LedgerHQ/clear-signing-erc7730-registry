@@ -755,8 +755,11 @@ function computeKeccak256Selector(input) {
 
 /**
  * Generate test cases for calldata functions
+ * @param {object} erc7730 - Parsed descriptor
+ * @param {object} report - Generation report
+ * @param {Set<string>} [coveredFunctions] - Function signatures already covered by existing tests
  */
-async function generateCalldataTests(erc7730, report) {
+async function generateCalldataTests(erc7730, report, coveredFunctions = new Set()) {
   const tests = [];
 
   for (const deployment of erc7730.deployments) {
@@ -775,6 +778,12 @@ async function generateCalldataTests(erc7730, report) {
     for (const func of erc7730.functions) {
       const selector = func.selector?.toLowerCase();
       if (!selector) continue;
+
+      // Skip functions already covered by existing tests
+      if (coveredFunctions.has(func.signature)) {
+        log(`   ✔️  ${func.intent || func.signature}: already covered — skipping`);
+        continue;
+      }
 
       // Find transactions matching this function
       const matching = transactions.filter((tx) => {
@@ -836,11 +845,20 @@ async function generateCalldataTests(erc7730, report) {
 
 /**
  * Generate test cases for EIP-712 messages using LLM
+ * @param {object} erc7730 - Parsed descriptor
+ * @param {object} report - Generation report
+ * @param {Set<string>} [coveredMessageTypes] - Primary types already covered by existing tests
  */
-async function generateEip712Tests(erc7730, report) {
+async function generateEip712Tests(erc7730, report, coveredMessageTypes = new Set()) {
   const tests = [];
 
   for (const msgType of erc7730.messageTypes) {
+    // Skip message types already covered by existing tests
+    if (coveredMessageTypes.has(msgType.primaryType)) {
+      log(`\n✔️  ${msgType.primaryType}: already covered — skipping`);
+      continue;
+    }
+
     log(`\n📝 Generating EIP-712 test for: ${msgType.primaryType}`);
 
     // Try to generate example using LLM
@@ -1073,10 +1091,16 @@ async function callLLM(prompt) {
   const useAzure = CONFIG.useAzure;
 
   // Build request body - Azure doesn't need model in body if it's in the URL
+  const model = CONFIG.openaiModel;
   const requestBody = {
     messages: [{ role: "user", content: prompt }],
-    temperature: 0.7,
   };
+
+  // Only set temperature for models that support it (skip for o-series and gpt-5+)
+  const skipTemperature = /^(o[1-9]|gpt-5)/.test(model);
+  if (!skipTemperature) {
+    requestBody.temperature = 0.7;
+  }
 
   // Only include model for non-Azure APIs (Azure has model in URL)
   if (!useAzure) {
@@ -1086,11 +1110,21 @@ async function callLLM(prompt) {
   const data = JSON.stringify(requestBody);
 
   return new Promise((resolve, reject) => {
-    // For Azure, the URL is the full endpoint; for OpenAI, append the path
+    // Build the request URL
     let url;
     if (useAzure) {
-      // Azure URL is typically the full endpoint already
-      url = new URL(baseUrl);
+      if (baseUrl.includes("/openai/deployments/")) {
+        // Full Azure endpoint provided — use as-is
+        url = new URL(baseUrl);
+      } else {
+        // Base URL only — construct the full Azure OpenAI chat completions endpoint
+        // using the model name as the deployment name
+        const deployment = CONFIG.openaiModel;
+        const base = baseUrl.replace(/\/+$/, "");
+        url = new URL(
+          `${base}/openai/deployments/${deployment}/chat/completions?api-version=2024-02-15-preview`
+        );
+      }
     } else {
       url = new URL("/v1/chat/completions", baseUrl);
     }
@@ -1196,33 +1230,108 @@ function extractFunctionName(signature) {
 }
 
 // =============================================================================
+// Existing Test Coverage Detection
+// =============================================================================
+
+/**
+ * Compute the output test file path for a given descriptor.
+ * @param {string} descriptorPath - Absolute path to the ERC-7730 descriptor
+ * @returns {string} Absolute path to the corresponding .tests.json file
+ */
+function getTestFilePath(descriptorPath) {
+  const dir = path.dirname(descriptorPath);
+  const testsDir = path.join(dir, "tests");
+  const baseName = path.basename(descriptorPath, ".json");
+  return path.join(testsDir, `${baseName}.tests.json`);
+}
+
+/**
+ * Load an existing test file and determine which functions / message types
+ * are already covered by existing tests.
+ *
+ * Coverage detection:
+ *   - EIP-712: uses `test.data.primaryType` to identify the message type.
+ *   - Calldata: searches the raw tx hex for known function selectors.
+ *
+ * @param {string} testFilePath - Path to the .tests.json file
+ * @param {object} erc7730 - Parsed ERC-7730 descriptor (from parseErc7730)
+ * @returns {{ existingTests: object[], coveredFunctions: Set<string>, coveredMessageTypes: Set<string> }}
+ */
+function getExistingTestCoverage(testFilePath, erc7730) {
+  const empty = { existingTests: [], coveredFunctions: new Set(), coveredMessageTypes: new Set() };
+
+  if (!fs.existsSync(testFilePath)) return empty;
+
+  let existing;
+  try {
+    existing = JSON.parse(fs.readFileSync(testFilePath, "utf8"));
+  } catch {
+    return empty;
+  }
+
+  const existingTests = existing.tests || [];
+  const coveredFunctions = new Set();
+  const coveredMessageTypes = new Set();
+
+  for (const test of existingTests) {
+    // EIP-712: identify by primaryType in test data
+    if (test.data?.primaryType) {
+      coveredMessageTypes.add(test.data.primaryType);
+    }
+
+    // Calldata: search rawTx hex for known function selectors
+    if (test.rawTx) {
+      const rawHex = test.rawTx.toLowerCase();
+      for (const func of erc7730.functions || []) {
+        if (func.selector) {
+          const selectorHex = func.selector.toLowerCase().replace("0x", "");
+          if (rawHex.includes(selectorHex)) {
+            coveredFunctions.add(func.signature);
+          }
+        }
+      }
+    }
+  }
+
+  return { existingTests, coveredFunctions, coveredMessageTypes };
+}
+
+// =============================================================================
 // Output
 // =============================================================================
 
 /**
- * Write test file
+ * Write test file, merging with existing tests.
+ * Existing tests are preserved at the beginning, new tests are appended.
  */
-function writeTestFile(erc7730, tests, report) {
-  if (tests.length === 0) {
+function writeTestFile(erc7730, tests, report, existingTests = []) {
+  const allTests = [...existingTests, ...tests];
+
+  if (allTests.length === 0) {
     log("\n⚠️  No tests generated");
     return null;
   }
 
-  // Determine output path
-  const dir = path.dirname(erc7730.filePath);
-  const testsDir = path.join(dir, "tests");
-  const baseName = path.basename(erc7730.filePath, ".json");
-  const testFileName = `${baseName}.tests.json`;
-  const testFilePath = path.join(testsDir, testFileName);
+  if (tests.length === 0 && existingTests.length > 0) {
+    log("\nℹ️  All functions/messages already covered by existing tests — nothing new to add");
+    // Return the existing path so tester can still run on existing tests
+    return getTestFilePath(erc7730.filePath);
+  }
+
+  const testFilePath = getTestFilePath(erc7730.filePath);
+  const testsDir = path.dirname(testFilePath);
 
   // Build test file content
   const testFile = {
     $schema: "../../../specs/erc7730-tests.schema.json",
-    tests,
+    tests: allTests,
   };
 
   if (CONFIG.dryRun) {
     log(`\n📄 Would write: ${testFilePath}`);
+    if (existingTests.length > 0) {
+      log(`   Preserving ${existingTests.length} existing test(s), adding ${tests.length} new test(s)`);
+    }
     log(JSON.stringify(testFile, null, 2).slice(0, 500) + "...");
   } else {
     // Create tests directory if needed
@@ -1230,7 +1339,11 @@ function writeTestFile(erc7730, tests, report) {
       fs.mkdirSync(testsDir, { recursive: true });
     }
     fs.writeFileSync(testFilePath, JSON.stringify(testFile, null, 2) + "\n");
-    log(`\n✅ Written: ${testFilePath}`);
+    if (existingTests.length > 0) {
+      log(`\n✅ Written: ${testFilePath} (${existingTests.length} existing + ${tests.length} new)`);
+    } else {
+      log(`\n✅ Written: ${testFilePath}`);
+    }
   }
 
   return testFilePath;
@@ -1691,6 +1804,15 @@ async function main() {
     process.exit(1);
   }
 
+  // Only generate tests for leaf descriptors (calldata-* / eip712-* files).
+  // Non-leaf files (e.g. common-*) are shared includes that cannot be tested standalone.
+  const baseName = path.basename(filePath);
+  if (!baseName.startsWith("calldata") && !baseName.startsWith("eip712")) {
+    console.log(`⚠️  Skipping non-leaf file: ${baseName}`);
+    console.log("   Tests can only be generated for leaf descriptors (calldata-* / eip712-* files).");
+    return;
+  }
+
   console.log(`Input: ${filePath}\n`);
 
   // Initialize report
@@ -1710,17 +1832,32 @@ async function main() {
       `Functions/Types: ${erc7730.functions.length || erc7730.messageTypes.length}`
     );
 
-    let tests = [];
+    // Check for existing tests and determine coverage
+    const testFileTarget = getTestFilePath(filePath);
+    const { existingTests, coveredFunctions, coveredMessageTypes } =
+      getExistingTestCoverage(testFileTarget, erc7730);
 
-    // Generate tests
-    if (erc7730.isCalldata) {
-      tests = await generateCalldataTests(erc7730, report);
-    } else if (erc7730.isEip712) {
-      tests = await generateEip712Tests(erc7730, report);
+    if (existingTests.length > 0) {
+      console.log(`Existing tests: ${existingTests.length}`);
+      if (coveredFunctions.size > 0) {
+        console.log(`Covered functions: ${[...coveredFunctions].join(", ")}`);
+      }
+      if (coveredMessageTypes.size > 0) {
+        console.log(`Covered message types: ${[...coveredMessageTypes].join(", ")}`);
+      }
     }
 
-    // Write output
-    const testFilePath = writeTestFile(erc7730, tests, report);
+    let tests = [];
+
+    // Generate tests only for uncovered functions/message types
+    if (erc7730.isCalldata) {
+      tests = await generateCalldataTests(erc7730, report, coveredFunctions);
+    } else if (erc7730.isEip712) {
+      tests = await generateEip712Tests(erc7730, report, coveredMessageTypes);
+    }
+
+    // Write output (merge existing + new)
+    const testFilePath = writeTestFile(erc7730, tests, report, existingTests);
 
     // Print report
     printReport(report);
