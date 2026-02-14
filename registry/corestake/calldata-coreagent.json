@@ -39,19 +39,7 @@
   "display": {
     "formats": {
       "delegateCoin(address)": {
-        "intent": "Delegate CORE tokens to a validator",
-        "fields": [
-          {
-            "path": "candidate",
-            "label": "Validator Address",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
-          }
-        ],
-        "required": ["candidate"]
-      },
-      "undelegateCoin(address,uint256)": {
-        "intent": "Unstake CORE tokens from a validator",
+        "intent": "Delegate CORE",
         "fields": [
           {
             "path": "candidate",
@@ -59,12 +47,29 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           },
-          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
+          {
+            "format": "amount",
+            "label": "CORE amount",
+            "path": "@.value"
+          }
+        ],
+        "required": ["candidate"]
+      },
+      "undelegateCoin(address,uint256)": {
+        "intent": "Unstake CORE",
+        "fields": [
+          {
+            "path": "candidate",
+            "label": "Validator Address",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
+          },
+          { "path": "amount", "label": "CORE amount (0=All)", "format": "amount" }
         ],
         "required": ["candidate", "amount"]
       },
       "transferCoin(address,address,uint256)": {
-        "intent": "Move staked CORE from one validator to another",
+        "intent": "Move staked CORE",
         "fields": [
           {
             "path": "sourceCandidate",
@@ -78,7 +83,7 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           },
-          { "path": "amount", "label": "Amount to Unstake (in CORE)", "format": "amount" }
+          { "path": "amount", "label": "Amount (in CORE)", "format": "amount" }
         ],
         "required": ["sourceCandidate", "targetCandidate", "amount"]
       }
