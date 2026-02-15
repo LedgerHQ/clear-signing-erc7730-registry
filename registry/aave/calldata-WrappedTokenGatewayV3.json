@@ -24,7 +24,7 @@
   "metadata": { "owner": "Aave", "info": { "url": "https://aave.com", "legalName": "Aave DAO", "deploymentDate": "2025-02-11T01:19:11Z" } },
   "display": {
     "formats": {
-      "depositETH(address undefined, address onBehalfOf, uint16 referralCode)": {
+      "depositETH(address , address onBehalfOf, uint16 referralCode)": {
         "$id": "depositETH",
         "intent": "Supply",
         "fields": [
@@ -37,9 +37,9 @@
           }
         ],
         "required": ["onBehalfOf"],
-        "excluded": ["undefined", "referralCode"]
+        "excluded": ["referralCode"]
       },
-      "repayETH(address undefined, uint256 amount, address onBehalfOf)": {
+      "repayETH(address , uint256 amount, address onBehalfOf)": {
         "$id": "repayETH",
         "intent": "Repay loan",
         "fields": [
@@ -52,13 +52,23 @@
           }
         ],
         "required": ["onBehalfOf", "amount"],
-        "excluded": ["undefined"]
+        "excluded": []
       },
-      "withdrawETH(address undefined, uint256 amount, address to)": {
+      "withdrawETH(address , uint256 amount, address to)": {
         "$id": "withdrawETH",
         "intent": "Withdraw",
         "fields": [
-          { "path": "amount", "format": "amount", "label": "Amount to withdraw" },
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": {
+              "token": "0x0000000000000000000000000000000000000000",
+              "nativeCurrencyAddress": "0x0000000000000000000000000000000000000000",
+              "threshold": "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+              "message": "All"
+            }
+          },
           {
             "path": "to",
             "format": "addressName",
@@ -67,13 +77,23 @@
           }
         ],
         "required": ["to", "amount"],
-        "excluded": ["undefined"]
+        "excluded": []
       },
-      "withdrawETHWithPermit(address undefined, uint256 amount, address to, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
+      "withdrawETHWithPermit(address, uint256 amount, address to, uint256 deadline, uint8 permitV, bytes32 permitR, bytes32 permitS)": {
         "$id": "withdrawETHWithPermit",
         "intent": "Withdraw",
         "fields": [
-          { "path": "amount", "format": "amount", "label": "Amount to withdraw" },
+          {
+            "path": "amount",
+            "format": "tokenAmount",
+            "label": "Amount to withdraw",
+            "params": {
+              "token": "0x0000000000000000000000000000000000000000",
+              "nativeCurrencyAddress": "0x0000000000000000000000000000000000000000",
+              "threshold": "0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+              "message": "All"
+            }
+          },
           {
             "path": "to",
             "format": "addressName",
@@ -82,9 +102,9 @@
           }
         ],
         "required": ["to", "amount"],
-        "excluded": ["undefined", "deadline", "permitV", "permitR", "permitS"]
+        "excluded": ["deadline", "permitV", "permitR", "permitS"]
       },
-      "borrowETH(address undefined, uint256 amount, uint16 referralCode)": {
+      "borrowETH(address , uint256 amount, uint16 referralCode)": {
         "$id": "borrowETH",
         "intent": "Borrow",
         "fields": [
@@ -92,7 +112,7 @@
           { "path": "@.from", "format": "addressName", "label": "Debtor", "params": { "types": ["eoa"], "sources": ["local", "ens"] } }
         ],
         "required": ["amount"],
-        "excluded": ["undefined", "referralCode"]
+        "excluded": ["referralCode"]
       }
     }
   }
