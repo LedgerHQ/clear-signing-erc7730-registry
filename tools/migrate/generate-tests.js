@@ -58,7 +58,7 @@ const CONFIG = {
   chainFilter: getArgValue("--chain", null),
   openaiUrl: getArgValue("--openai-url", process.env.LLM_BASE_URL || "https://api.openai.com"),
   openaiKey: getArgValue("--openai-key", process.env.OPENAI_API_KEY),
-  openaiModel: getArgValue("--openai-model", "gpt-4"),
+  openaiModel: getArgValue("--openai-model", "gpt-5"),
   useAzure: process.argv.includes("--azure") || process.env.AZURE_OPENAI === "true",
   runTest: !process.argv.includes("--no-test"),
   testDevice: getArgValue("--device", "flex"),
