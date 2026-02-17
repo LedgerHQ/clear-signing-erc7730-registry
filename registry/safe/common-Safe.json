@@ -177,6 +177,18 @@
           }
         ],
         "required": ["_threshold"]
+      },
+      "approveHash(bytes32 hashToApprove)": {
+        "$id": "approveHash",
+        "intent": "Approve Safe hash",
+        "fields": [
+          {
+            "path": "hashToApprove",
+            "label": "Hash to approve",
+            "format": "raw"
+          }
+        ],
+        "required": ["hashToApprove"]
       }
     }
   }
