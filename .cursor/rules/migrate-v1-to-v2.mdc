@@ -51,6 +51,7 @@ node tools/migrate/migrate-v1-to-v2.js
    - `context.contract.addressMatcher`
    - `context.contract.abi` (replaced by human-readable format keys)
    - `context.eip712.schemas` (replaced by encodeType format keys)
+   - `context.eip712.domain.chainId` / `context.eip712.domain.verifyingContract` (redundant when `deployments` exists)
    - `display.formats.*.screens`
 4. **Format keys** - Transformed to human-readable ABI / encodeType format
 5. **Visibility modifiers**:

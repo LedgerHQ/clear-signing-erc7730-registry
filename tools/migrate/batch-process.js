@@ -373,159 +373,158 @@ function getCurrentBranch() {
 }
 
 /**
- * Create branch and prepare PR.
+ * Set up a clean working branch for the batch process.
  *
- * Only the files inside the target folder that were actually modified or
- * created by this run are included in the commit.  Any other dirty /
- * staged changes in the working tree are stashed beforehand and restored
- * afterwards so the PR is scoped to the target folder.
+ * Stashes any existing dirty/untracked changes so the working tree is
+ * clean, then creates a new branch from the current HEAD.  File
+ * processing happens directly on this branch, so changes are isolated
+ * from the user's working tree.
+ *
+ * @param {string} folderName - Registry subfolder name (e.g. "ethena")
+ * @returns {{ branchName: string, originalBranch: string, stashed: boolean }}
  */
-function preparePr(targetFolder, report) {
-  if (!checkGit()) {
-    log("Git not available, skipping PR creation", "warning");
-    return false;
+function setupBranch(folderName) {
+  const branchName = CONFIG.prBranch || `migrate-v1-to-v2/${folderName}`;
+  const originalBranch = getCurrentBranch();
+  let stashed = false;
+
+  // Stash any dirty / untracked files so we start clean
+  const statusOutput = execSync("git status --porcelain", {
+    cwd: ROOT_DIR,
+    encoding: "utf8",
+  }).trim();
+
+  if (statusOutput) {
+    log("Stashing current changes...", "info");
+    execSync('git stash push --include-untracked -m "batch-process-temp"', {
+      cwd: ROOT_DIR,
+      stdio: "pipe",
+    });
+    stashed = true;
   }
 
-  if (!checkGhCli()) {
-    log("GitHub CLI (gh) not installed. Install with: brew install gh", "warning");
-    log("PR will not be created, but changes are staged.", "warning");
-    return false;
+  // Delete branch if it already exists (stale leftover from a previous run)
+  try {
+    execSync(`git rev-parse --verify "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+    log(`Branch ${branchName} already exists, recreating...`, "info");
+    execSync(`git branch -D "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+  } catch {
+    // Branch doesn't exist — good
   }
 
+  log(`Creating branch: ${branchName}`, "info");
+  execSync(`git checkout -b "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+
+  return { branchName, originalBranch, stashed };
+}
+
+/**
+ * Commit all changes on the working branch and optionally push + create a PR.
+ *
+ * @param {{ branchName: string }} context - Branch context from setupBranch
+ * @param {string} targetFolder - Target folder path
+ * @param {Report} report - Processing report
+ */
+function commitAndCreatePr(context, targetFolder, report) {
   const folderName = path.basename(targetFolder);
-  const timestamp = new Date().toISOString().split("T")[0].replace(/-/g, "");
-  const branchName = CONFIG.prBranch || `batch-update-${folderName}-${timestamp}`;
-  const prTitle = CONFIG.prTitle || `[Batch Update] ${folderName} - schema migration and test generation`;
-
+  const { branchName } = context;
   const allChanges = [...report.modifiedFiles, ...report.newFiles];
 
   if (allChanges.length === 0) {
     log("No changes to commit", "info");
-    return false;
+    return;
   }
 
-  // Build PR body
+  // Stage only the target folder files
+  const relChanges = allChanges.map((f) => path.relative(ROOT_DIR, f));
+  for (const rel of relChanges) {
+    execSync(`git add "${rel}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+  }
+
+  // Create commit
+  const commitMessage =
+    `chore(${folderName}): batch migration and test generation\n\n` +
+    `- Migrated ${report.migrations.successful} files from v1 to v2 schema\n` +
+    `- Generated ${report.testGeneration.successful} test files`;
+
+  execSync(`git commit -m "${commitMessage}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+  log("Changes committed", "success");
+
+  // Build PR body & save to file for reference
   const prBody = buildPrBody(folderName, report);
+  const prTitle =
+    CONFIG.prTitle || `[V2 migration] ${folderName} - schema migration and test generation`;
+  const prBodyFile = path.join(ROOT_DIR, `.migrate-pr-body-${folderName}.md`);
+  fs.writeFileSync(prBodyFile, prBody);
+  log(`PR summary saved to: ${path.relative(ROOT_DIR, prBodyFile)}`, "info");
 
-  if (CONFIG.dryRun) {
-    log("\n📝 Would create PR:", "info");
-    log(`   Branch: ${branchName}`, "info");
-    log(`   Title:  ${prTitle}`, "info");
-    log(`   Files:  ${allChanges.length}`, "info");
-    console.log("\n--- PR Body Preview ---");
-    console.log(prBody);
-    console.log("--- End Preview ---\n");
-    return true;
-  }
-
-  const originalBranch = getCurrentBranch();
-  let stashed = false;
-
-  try {
-    // -----------------------------------------------------------------
-    // 1. Stash unrelated changes so they don't leak into the PR.
-    //    We stash everything (including untracked), then selectively
-    //    re-apply only the target folder files on the new branch.
-    // -----------------------------------------------------------------
-    const relChanges = allChanges.map((f) => path.relative(ROOT_DIR, f));
-
-    // Check if there are OTHER dirty files outside the target folder
-    const statusOutput = execSync("git status --porcelain", {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-    }).trim();
-
-    if (statusOutput) {
-      // Stash everything (tracked + untracked) to get a clean working tree
-      log("Stashing unrelated changes...", "debug");
-      execSync("git stash push --include-untracked -m batch-process-temp", {
-        cwd: ROOT_DIR,
-        stdio: "pipe",
-      });
-      stashed = true;
-
-      // Pop only the target folder files back into the working tree.
-      // `git checkout stash -- <paths>` restores files from the stash
-      // without dropping it, so we can still pop the rest later.
-      for (const rel of relChanges) {
-        try {
-          execSync(`git checkout stash -- "${rel}"`, {
-            cwd: ROOT_DIR,
-            stdio: "pipe",
-          });
-        } catch {
-          // File may be newly created (untracked) – extract from stash^3
-          try {
-            execSync(`git checkout stash^3 -- "${rel}"`, {
-              cwd: ROOT_DIR,
-              stdio: "pipe",
-            });
-          } catch {
-            // Last resort: file wasn't in stash (shouldn't happen)
-            log(`Could not restore ${rel} from stash, skipping`, "warning");
-          }
-        }
-      }
+  if (!CONFIG.skipPr) {
+    if (!checkGhCli()) {
+      log("GitHub CLI (gh) not installed. Install with: brew install gh", "warning");
+      log("PR will not be created.", "warning");
+      return;
     }
 
-    // -----------------------------------------------------------------
-    // 2. Create branch, stage ONLY the target files, commit, push, PR
-    // -----------------------------------------------------------------
-    log(`Creating branch: ${branchName}`, "info");
-    execSync(`git checkout -b ${branchName}`, { cwd: ROOT_DIR, stdio: "pipe" });
-
-    // Reset the index so nothing is pre-staged
-    execSync("git reset", { cwd: ROOT_DIR, stdio: "pipe" });
-
-    // Stage only the target folder files
-    for (const rel of relChanges) {
-      execSync(`git add "${rel}"`, { cwd: ROOT_DIR, stdio: "pipe" });
-    }
-
-    // Create commit
-    const commitMessage = `chore(${folderName}): batch migration and test generation
-
-- Migrated ${report.migrations.successful} files from v1 to v2 schema
-- Generated ${report.testGeneration.successful} test files`;
-
-    execSync(`git commit -m "${commitMessage}"`, { cwd: ROOT_DIR, stdio: "pipe" });
-
-    // Push branch
     log("Pushing branch to remote...", "info");
-    execSync(`git push -u origin ${branchName}`, { cwd: ROOT_DIR, stdio: "pipe" });
+    execSync(`git push -u origin "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
 
-    // Create PR using gh CLI
     log("Creating PR...", "info");
     const prResult = execSync(
-      `gh pr create --title "${prTitle}" --body "${prBody.replace(/"/g, '\\"')}"`,
+      `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"`,
       { cwd: ROOT_DIR, encoding: "utf8" }
     );
 
     report.prCreated = true;
     report.prUrl = prResult.trim();
     log(`PR created: ${report.prUrl}`, "success");
+  } else {
+    console.log(`\n${"-".repeat(60)}`);
+    console.log("To create the PR manually, run:");
+    console.log(`${"-".repeat(60)}`);
+    console.log(`git checkout "${branchName}" && \\`);
+    console.log(`  git push -u origin "${branchName}" && \\`);
+    console.log(`  gh pr create \\`);
+    console.log(`    --title "${prTitle}" \\`);
+    console.log(`    --body-file "${prBodyFile}"`);
+    console.log(`${"-".repeat(60)}`);
+  }
+}
 
-    return true;
-  } catch (error) {
-    log(`Failed to create PR: ${error.message}`, "error");
-    return false;
-  } finally {
-    // -----------------------------------------------------------------
-    // 3. Always restore the original branch and unstash
-    // -----------------------------------------------------------------
-    try {
-      if (originalBranch) {
-        execSync(`git checkout ${originalBranch}`, { cwd: ROOT_DIR, stdio: "pipe" });
-      }
-    } catch (e) {
-      log(`Warning: could not switch back to ${originalBranch}: ${e.message}`, "warning");
+/**
+ * Clean up after processing: switch back to the original branch, restore
+ * stashed changes, and delete the working branch if nothing was committed.
+ *
+ * @param {{ branchName: string, originalBranch: string, stashed: boolean }} context
+ * @param {boolean} hasChanges - Whether any changes were committed on the branch
+ */
+function cleanupBranch(context, hasChanges) {
+  const { branchName, originalBranch, stashed } = context;
+
+  // Switch back to the original branch
+  try {
+    if (originalBranch && getCurrentBranch() !== originalBranch) {
+      execSync(`git checkout "${originalBranch}"`, { cwd: ROOT_DIR, stdio: "pipe" });
     }
-    if (stashed) {
-      try {
-        execSync("git stash pop", { cwd: ROOT_DIR, stdio: "pipe" });
-      } catch (e) {
-        log("Warning: could not pop stash. Run 'git stash pop' manually.", "warning");
-      }
+  } catch (e) {
+    log(`Warning: could not switch back to ${originalBranch}: ${e.message}`, "warning");
+  }
+
+  // Restore stashed changes
+  if (stashed) {
+    try {
+      execSync("git stash pop", { cwd: ROOT_DIR, stdio: "pipe" });
+    } catch (e) {
+      log("Warning: could not pop stash. Run 'git stash pop' manually.", "warning");
+    }
+  }
+
+  // Delete the branch if there were no changes (nothing committed)
+  if (!hasChanges) {
+    try {
+      execSync(`git branch -D "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+      log(`Deleted empty branch: ${branchName}`, "info");
+    } catch (e) {
+      log(`Warning: could not delete branch ${branchName}: ${e.message}`, "warning");
     }
   }
 }
@@ -778,29 +777,39 @@ async function main() {
     process.exit(0);
   }
 
-  // Start local API server once (shared by all generate-tests invocations)
-  if (CONFIG.localApi && !CONFIG.skipTests) {
-    try {
-      await startLocalApiServer(CONFIG.localApiPort);
-      process.env.ERC7730_API_URL = `http://127.0.0.1:${CONFIG.localApiPort}`;
-      log(`ERC7730_API_URL set to ${process.env.ERC7730_API_URL}`, "info");
-    } catch (err) {
-      log(`Could not start local API server: ${err.message}`, "error");
-      process.exit(1);
-    }
+  // Set up working branch (stash + create branch) so changes are isolated.
+  // Branch is always created — even if only tests are generated — so the
+  // user gets a clean PR-ready branch.  If nothing changes, the branch is
+  // deleted in the cleanup step.
+  let branchContext = null;
+  if (!CONFIG.dryRun && checkGit()) {
+    branchContext = setupBranch(path.basename(targetFolder));
   }
 
   try {
+    // Start local API server once (shared by all generate-tests invocations)
+    if (CONFIG.localApi && !CONFIG.skipTests) {
+      try {
+        await startLocalApiServer(CONFIG.localApiPort);
+        process.env.ERC7730_API_URL = `http://127.0.0.1:${CONFIG.localApiPort}`;
+        log(`ERC7730_API_URL set to ${process.env.ERC7730_API_URL}`, "info");
+      } catch (err) {
+        log(`Could not start local API server: ${err.message}`, "error");
+        process.exit(1);
+      }
+    }
+
     // Process each file
     logSection("Processing Files");
     for (const file of files) {
       await processFile(file, report);
     }
 
-    // Create PR if there are changes
-    if (!CONFIG.skipPr && (report.modifiedFiles.length > 0 || report.newFiles.length > 0)) {
-      logSection("Preparing Pull Request");
-      preparePr(targetFolder, report);
+    // Commit changes and optionally create PR
+    const hasChanges = report.modifiedFiles.length > 0 || report.newFiles.length > 0;
+    if (branchContext && hasChanges) {
+      logSection("Committing Changes");
+      commitAndCreatePr(branchContext, targetFolder, report);
     }
 
     // Print summary
@@ -816,6 +825,10 @@ async function main() {
     }
   } finally {
     stopLocalApiServer();
+    if (branchContext) {
+      const hasChanges = report.modifiedFiles.length > 0 || report.newFiles.length > 0;
+      cleanupBranch(branchContext, hasChanges);
+    }
   }
 }
 
