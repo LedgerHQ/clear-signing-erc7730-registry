@@ -11,15 +11,28 @@
  *   node tools/migrate/batch-process.js <registry-subfolder> [options]
  *
  * Options:
- *   --dry-run           Preview changes without modifying files
- *   --verbose           Show detailed output
- *   --skip-tests        Skip test generation
- *   --skip-migration    Skip v1 to v2 migration
- *   --skip-pr           Skip PR creation
- *   --pr-title <title>  Custom PR title
- *   --pr-branch <name>  Custom branch name
- *   --local-api         Auto-start local Flask API server for the tester
- *   --local-api-port <port>  Port for the local API server (default: 5000)
+ *   --dry-run               Preview changes without modifying files
+ *   --verbose               Show detailed output
+ *   --skip-tests            Skip test generation
+ *   --skip-migration        Skip v1 to v2 migration
+ *   --skip-pr               Skip PR creation
+ *   --pr-title <title>      Custom PR title
+ *   --pr-branch <name>      Custom branch name
+ *   --local-api             Auto-start local Flask API server for the tester
+ *   --local-api-port <port> Port for the local API server (default: 5000)
+ *
+ * Test generation options (cascaded to generate-tests.js):
+ *   --depth <n>             Max transactions to search (default: 100)
+ *   --max-tests <n>         Max tests to generate per function (default: 3)
+ *   --chain <id>            Only process specific chain ID
+ *   --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)
+ *   --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)
+ *   --openai-model <model>  Model to use (default: gpt-4)
+ *   --azure                 Use Azure OpenAI API format (api-key header)
+ *   --no-test               Skip running the clear signing tester after generation
+ *   --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)
+ *   --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)
+ *   --no-refine             Skip refining expectedTexts from tester screen output
  *
  * Environment Variables:
  *   GITHUB_TOKEN        GitHub token for PR creation (required for --create-pr)
@@ -46,6 +59,18 @@ const CONFIG = {
   prBranch: getArgValue("--pr-branch", null),
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
+  // Parameters cascaded to generate-tests.js
+  depth: getArgValue("--depth", null),
+  maxTests: getArgValue("--max-tests", null),
+  chainFilter: getArgValue("--chain", null),
+  openaiUrl: getArgValue("--openai-url", null),
+  openaiKey: getArgValue("--openai-key", null),
+  openaiModel: getArgValue("--openai-model", null),
+  useAzure: process.argv.includes("--azure"),
+  noTest: process.argv.includes("--no-test"),
+  testDevice: getArgValue("--device", null),
+  testLogLevel: getArgValue("--test-log-level", null),
+  noRefine: process.argv.includes("--no-refine"),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -273,6 +298,17 @@ function generateTests(filePath, report) {
   const args = [filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  if (CONFIG.depth) args.push("--depth", String(CONFIG.depth));
+  if (CONFIG.maxTests) args.push("--max-tests", String(CONFIG.maxTests));
+  if (CONFIG.chainFilter) args.push("--chain", String(CONFIG.chainFilter));
+  if (CONFIG.openaiUrl) args.push("--openai-url", CONFIG.openaiUrl);
+  if (CONFIG.openaiKey) args.push("--openai-key", CONFIG.openaiKey);
+  if (CONFIG.openaiModel) args.push("--openai-model", CONFIG.openaiModel);
+  if (CONFIG.useAzure) args.push("--azure");
+  if (CONFIG.noTest) args.push("--no-test");
+  if (CONFIG.testDevice) args.push("--device", CONFIG.testDevice);
+  if (CONFIG.testLogLevel) args.push("--test-log-level", CONFIG.testLogLevel);
+  if (CONFIG.noRefine) args.push("--no-refine");
   // NOTE: when --local-api is used, batch-process.js starts the server once
   // and passes ERC7730_API_URL via the environment rather than letting each
   // generate-tests.js subprocess start its own server.
@@ -555,7 +591,6 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 | Check | Status |
 |-------|--------|
 | Schema Migration | ${report.migrations.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
-| Linting/Calldata | Validated by migrate-v1-to-v2.js |
 | Test Generation | ${report.testGeneration.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
 
 ### Notes
@@ -725,20 +760,33 @@ async function main() {
   if (!targetArg) {
     console.error("Usage: node tools/migrate/batch-process.js <registry-subfolder> [options]");
     console.error("\nOptions:");
-    console.error("  --dry-run           Preview changes without modifying files");
-    console.error("  --verbose           Show detailed output");
-    console.error("  --skip-tests        Skip test generation");
-    console.error("  --skip-migration    Skip v1 to v2 migration");
-    console.error("  --skip-pr           Skip PR creation");
-    console.error("  --pr-title <title>  Custom PR title");
-    console.error("  --pr-branch <name>  Custom branch name");
-    console.error("  --local-api         Auto-start local Flask API server (patched erc7730)");
-    console.error("  --local-api-port <port>  Port for the local API server (default: 5000)");
+    console.error("  --dry-run               Preview changes without modifying files");
+    console.error("  --verbose               Show detailed output");
+    console.error("  --skip-tests            Skip test generation");
+    console.error("  --skip-migration        Skip v1 to v2 migration");
+    console.error("  --skip-pr               Skip PR creation");
+    console.error("  --pr-title <title>      Custom PR title");
+    console.error("  --pr-branch <name>      Custom branch name");
+    console.error("  --local-api             Auto-start local Flask API server (patched erc7730)");
+    console.error("  --local-api-port <port> Port for the local API server (default: 5000)");
+    console.error("\nTest generation options (cascaded to generate-tests.js):");
+    console.error("  --depth <n>             Max transactions to search (default: 100)");
+    console.error("  --max-tests <n>         Max tests per function (default: 3)");
+    console.error("  --chain <id>            Only process specific chain ID");
+    console.error("  --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)");
+    console.error("  --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)");
+    console.error("  --openai-model <model>  Model to use (default: gpt-4)");
+    console.error("  --azure                 Use Azure OpenAI API format (api-key header)");
+    console.error("  --no-test               Skip running the clear signing tester after generation");
+    console.error("  --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)");
+    console.error("  --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)");
+    console.error("  --no-refine             Skip refining expectedTexts from tester screen output");
     console.error("\nExamples:");
     console.error("  node tools/migrate/batch-process.js 1inch --dry-run");
     console.error("  node tools/migrate/batch-process.js registry/ethena --verbose");
     console.error("  node tools/migrate/batch-process.js morpho --skip-pr");
     console.error("  node tools/migrate/batch-process.js figment --local-api --verbose");
+    console.error("  node tools/migrate/batch-process.js ethena --device stax --no-refine");
     process.exit(1);
   }
 
