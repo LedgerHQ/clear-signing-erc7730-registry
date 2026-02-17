@@ -684,6 +684,7 @@ function parseErc7730(filePath) {
           selector,
           intent: format.intent || format.$id || key,
           fields: format.fields || [],
+          required: format.required || [],
         });
       } else if (result.isEip712) {
         result.messageTypes.push({
@@ -691,6 +692,7 @@ function parseErc7730(filePath) {
           encodeType: key,
           intent: format.intent || key,
           fields: format.fields || [],
+          required: format.required || [],
         });
       }
     }
@@ -818,11 +820,8 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
           txHash: tx.hash,
         };
 
-        // Try to infer expected texts
-        const expectedTexts = inferExpectedTexts(func, erc7730.metadata);
-        if (expectedTexts.length > 0) {
-          testCase.expectedTexts = expectedTexts;
-        }
+        // Infer expected texts (always include field, refinement fills it in later)
+        testCase.expectedTexts = inferExpectedTexts(func, erc7730.metadata);
 
         tests.push(testCase);
         report.generated.push({
@@ -874,11 +873,8 @@ async function generateEip712Tests(erc7730, report, coveredMessageTypes = new Se
         data: example,
       };
 
-      // Try to infer expected texts
-      const expectedTexts = inferExpectedTextsEip712(msgType, erc7730.metadata);
-      if (expectedTexts.length > 0) {
-        testCase.expectedTexts = expectedTexts;
-      }
+      // Infer expected texts (always include field, refinement fills it in later)
+      testCase.expectedTexts = inferExpectedTextsEip712(msgType, erc7730.metadata);
 
       tests.push(testCase);
       report.generated.push({
@@ -1203,9 +1199,17 @@ function inferExpectedTexts(func, metadata) {
     // texts.push(func.intent); // Usually shown as title, not in field list
   }
 
-  // Add field labels only for always-visible fields
+  // v1: "required" array lists paths of always-visible fields
+  const requiredPaths = new Set(func.required || []);
+
   for (const field of func.fields || []) {
-    if (field.label && field.visible === "always") {
+    if (!field.label) continue;
+    // v2: explicit visible property
+    if (field.visible === "always") {
+      texts.push(field.label);
+    }
+    // v1: field path is in the required array
+    else if (requiredPaths.size > 0 && field.path && requiredPaths.has(field.path)) {
       texts.push(field.label);
     }
   }
@@ -1215,13 +1219,22 @@ function inferExpectedTexts(func, metadata) {
 
 /**
  * Infer expected texts for EIP-712 messages.
- * Only includes labels from fields with visible:"always".
+ * Supports v2 (visible:"always") and v1 (required array).
  */
 function inferExpectedTextsEip712(msgType, metadata) {
   const texts = [];
 
+  // v1: "required" array lists paths of always-visible fields
+  const requiredPaths = new Set(msgType.required || []);
+
   for (const field of msgType.fields || []) {
-    if (field.label && field.visible === "always") {
+    if (!field.label) continue;
+    // v2: explicit visible property
+    if (field.visible === "always") {
+      texts.push(field.label);
+    }
+    // v1: field path is in the required array
+    else if (requiredPaths.size > 0 && field.path && requiredPaths.has(field.path)) {
       texts.push(field.label);
     }
   }
@@ -1790,6 +1803,7 @@ function refineTestFile(testFilePath, logFile, erc7730) {
   const labelsByIntent = buildLabelsByIntent(erc7730);
 
   let refined = 0;
+  let needsWrite = false;
   for (let i = 0; i < tests.length; i++) {
     const test = tests[i];
     const screenTexts = perTestScreens[i];
@@ -1802,15 +1816,19 @@ function refineTestFile(testFilePath, logFile, erc7730) {
     if (newExpectedTexts.length > 0) {
       test.expectedTexts = newExpectedTexts;
       refined++;
+    } else if (!test.expectedTexts) {
+      // Ensure expectedTexts field always exists, even if empty
+      test.expectedTexts = [];
+      needsWrite = true;
     }
   }
 
-  if (refined > 0) {
+  if (refined > 0 || needsWrite) {
     fs.writeFileSync(testFilePath, JSON.stringify(testFile, null, 2) + "\n");
     console.log(`   ✅ Refined expectedTexts for ${refined}/${tests.length} test cases`);
   }
 
-  return refined > 0;
+  return refined > 0 || needsWrite;
 }
 
 /**

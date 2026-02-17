@@ -11,6 +11,7 @@
  * - Remove context.contract.addressMatcher
  * - Remove context.contract.abi (format keys should be human-readable ABI)
  * - Remove context.eip712.schemas (format keys should be encodeType strings)
+ * - Remove redundant domain.chainId / domain.verifyingContract when deployments exist
  * - Convert required/excluded to visibility modifiers
  * - Remove screens
  * - Clean up null values
@@ -72,6 +73,7 @@ const stats = {
     screensRemoved: 0,
     nullsCleaned: 0,
     formatKeysTransformed: 0,
+    domainRedundantRemoved: 0,
   },
   linting: {
     v1Passed: 0,
@@ -741,7 +743,29 @@ function migrateFile(filePath) {
       modified = true;
     }
 
-    // 8. Convert required/excluded to visibility modifiers
+    // 8. Remove redundant chainId/verifyingContract from eip712 domain when deployments exist
+    if (json.context?.eip712?.deployments && json.context.eip712.domain) {
+      const domain = json.context.eip712.domain;
+      let removed = false;
+      if ("chainId" in domain) {
+        delete domain.chainId;
+        removed = true;
+      }
+      if ("verifyingContract" in domain) {
+        delete domain.verifyingContract;
+        removed = true;
+      }
+      if (removed) {
+        stats.changes.domainRedundantRemoved++;
+        modified = true;
+        // If domain is now empty, remove it entirely
+        if (Object.keys(domain).length === 0) {
+          delete json.context.eip712.domain;
+        }
+      }
+    }
+
+    // 9. Convert required/excluded to visibility modifiers
     if (json.display?.formats) {
       for (const format of Object.values(json.display.formats)) {
         const required = format.required || [];
@@ -796,7 +820,7 @@ function migrateFile(filePath) {
       }
     }
 
-    // 9. Clean up null values (do this last)
+    // 10. Clean up null values (do this last)
     const beforeNulls = stats.changes.nullsCleaned;
     json = removeNullValues(json);
     if (stats.changes.nullsCleaned > beforeNulls) {
@@ -895,6 +919,7 @@ function main() {
   console.log(`Screens removed:        ${stats.changes.screensRemoved}`);
   console.log(`Null values cleaned:    ${stats.changes.nullsCleaned}`);
   console.log(`Format keys transformed:${stats.changes.formatKeysTransformed}`);
+  console.log(`Domain redundant removed:${stats.changes.domainRedundantRemoved}`);
 
   // Print linting summary
   if (!SKIP_LINT && !DRY_RUN) {
