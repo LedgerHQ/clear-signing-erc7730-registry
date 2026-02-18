@@ -30,6 +30,7 @@
  *   --openai-model <model>  Model to use (default: gpt-4)
  *   --azure                 Use Azure OpenAI API format (api-key header)
  *   --no-test               Skip running the clear signing tester after generation
+ *   --force-test            Run tester even when test file already exists
  *   --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)
  *   --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)
  *   --no-refine             Skip refining expectedTexts from tester screen output
@@ -68,6 +69,7 @@ const CONFIG = {
   openaiModel: getArgValue("--openai-model", null),
   useAzure: process.argv.includes("--azure"),
   noTest: process.argv.includes("--no-test"),
+  forceTest: process.argv.includes("--force-test"),
   testDevice: getArgValue("--device", null),
   testLogLevel: getArgValue("--test-log-level", null),
   noRefine: process.argv.includes("--no-refine"),
@@ -306,6 +308,7 @@ function generateTests(filePath, report) {
   if (CONFIG.openaiModel) args.push("--openai-model", CONFIG.openaiModel);
   if (CONFIG.useAzure) args.push("--azure");
   if (CONFIG.noTest) args.push("--no-test");
+  if (CONFIG.forceTest) args.push("--force-test");
   if (CONFIG.testDevice) args.push("--device", CONFIG.testDevice);
   if (CONFIG.testLogLevel) args.push("--test-log-level", CONFIG.testLogLevel);
   if (CONFIG.noRefine) args.push("--no-refine");
@@ -728,9 +731,13 @@ async function processFile(filePath, report) {
     }
   }
 
-  // Generate tests if missing
-  if (!CONFIG.skipTests && !hasTestFile(filePath)) {
-    log("  → No test file found, generating tests...", "info");
+  // Generate tests if missing, or run tester on existing tests when forced
+  if (!CONFIG.skipTests && (!hasTestFile(filePath) || CONFIG.forceTest)) {
+    if (hasTestFile(filePath)) {
+      log("  → Test file already exists, force-running tester...", "info");
+    } else {
+      log("  → No test file found, generating tests...", "info");
+    }
     generateTests(filePath, report);
   } else {
     if (CONFIG.skipTests) {
@@ -778,6 +785,7 @@ async function main() {
     console.error("  --openai-model <model>  Model to use (default: gpt-4)");
     console.error("  --azure                 Use Azure OpenAI API format (api-key header)");
     console.error("  --no-test               Skip running the clear signing tester after generation");
+    console.error("  --force-test            Run tester even when test file already exists");
     console.error("  --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)");
     console.error("  --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)");
     console.error("  --no-refine             Skip refining expectedTexts from tester screen output");
