@@ -66,19 +66,45 @@ node tools/migrate/batch-process.js uniswap --skip-migration --skip-pr
 
 # Custom PR settings
 node tools/migrate/batch-process.js kiln --pr-title "Update Kiln descriptors" --pr-branch "feat/kiln-v2"
+
+# Force-run tester even when tests already exist
+node tools/migrate/batch-process.js circle --local-api --skip-pr --force-test
 ```
 
 ## Options
+
+### Batch Processor Options
 
 | Option | Description |
 |--------|-------------|
 | `--dry-run` | Preview changes without modifying files |
 | `--verbose` | Show detailed output for each operation |
-| `--skip-tests` | Skip test file generation |
+| `--skip-tests` | Skip test generation |
 | `--skip-migration` | Skip v1 to v2 schema migration |
 | `--skip-pr` | Skip PR creation (just process files) |
 | `--pr-title <title>` | Custom PR title |
 | `--pr-branch <name>` | Custom branch name |
+| `--local-api` | Auto-start local Flask API server for tester calls |
+| `--local-api-port <port>` | Port for local API server (default: `5000`) |
+
+### Cascaded Test Generation Options
+
+These options are passed through to `generate-tests.js`:
+
+| Option | Description |
+|--------|-------------|
+| `--depth <n>` | Max transactions to search (default: `100`) |
+| `--max-tests <n>` | Max tests to generate per function (default: `3`) |
+| `--chain <id>` | Only process a specific chain ID |
+| `--openai-url <url>` | Custom OpenAI API URL (e.g., Azure endpoint) |
+| `--openai-key <key>` | OpenAI API key (overrides `OPENAI_API_KEY`) |
+| `--openai-model <model>` | Model to use (default: `gpt-5`) |
+| `--azure` | Use Azure OpenAI request format |
+| `--no-test` | Skip running the clear signing tester |
+| `--force-test` | Run tester even when test file already exists |
+| `--device <device>` | Tester device: `flex`, `stax`, `nanosp`, `nanox` |
+| `--test-log-level <lvl>` | Tester log level: `none`, `error`, `warn`, `info`, `debug` |
+| `--no-refine` | Skip refining `expectedTexts` from tester output |
 
 ## Environment Variables
 
@@ -140,7 +166,7 @@ Validation (linting and calldata checks) is now handled directly by the `migrate
 
 ### 3. Test Generation
 
-For files without test files:
+For files without test files (or for existing tests when using `--force-test`):
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐

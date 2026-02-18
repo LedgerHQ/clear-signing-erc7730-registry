@@ -50,11 +50,15 @@ node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3
 | `--chain <id>` | all | Only process specific chain ID |
 | `--openai-url <url>` | api.openai.com | Custom OpenAI API URL (e.g., Azure endpoint) |
 | `--openai-key <key>` | OPENAI_API_KEY env | OpenAI API key |
-| `--openai-model <model>` | gpt-4 | Model to use for generation |
+| `--openai-model <model>` | gpt-5 | Model to use for generation |
 | `--azure` | false | Use Azure OpenAI API format (api-key header) |
 | `--no-test` | false | Skip running the clear signing tester after generation |
+| `--force-test` | false | Force running tester on existing tests, including 100% coverage cases |
 | `--device <device>` | flex | Tester device: `flex`, `stax`, `nanosp`, `nanox` |
 | `--test-log-level <lvl>` | info | Tester log level: `none`, `error`, `warn`, `info`, `debug` |
+| `--no-refine` | false | Skip refining `expectedTexts` from tester screen output |
+| `--local-api` | false | Auto-start a local Flask API server (patched `erc7730`) |
+| `--local-api-port <port>` | 5000 | Port for local API server started by `--local-api` |
 
 ## Environment Variables
 
@@ -247,11 +251,20 @@ source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-eth
 
 # Skip the tester entirely
 source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-test
+
+# Run tester even when tests already exist and coverage is complete
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --force-test
+
+# Use local API server started by the script
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --local-api
+
+# Disable expectedTexts refinement step
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-refine
 ```
 
 ### Notes
 
-- The tester is automatically skipped in `--dry-run` mode or when no tests are generated.
+- The tester is automatically skipped in `--dry-run` mode or when no tests are generated, unless `--force-test` is set and an existing test file is available.
 - If `tools/tester/run-test.sh` is not found (setup not done), a warning is printed and testing is skipped gracefully.
 - If the tester fails, the script exits with a non-zero exit code but the generated test file is still written.
 

@@ -21,6 +21,7 @@
  *   --openai-model <model>  Model to use (default: gpt-4)
  *   --azure                 Use Azure OpenAI API format (api-key header)
  *   --no-test               Skip running the clear signing tester after generation
+ *   --force-test            Force running the tester on existing tests even at 100% coverage
  *   --device <device>       Tester device: flex, stax, nanosp, nanox (default: flex)
  *   --test-log-level <lvl>  Tester log level: none, error, warn, info, debug (default: info)
  *   --no-refine             Skip refining expectedTexts from tester screen output
@@ -61,6 +62,7 @@ const CONFIG = {
   openaiModel: getArgValue("--openai-model", "gpt-5"),
   useAzure: process.argv.includes("--azure") || process.env.AZURE_OPENAI === "true",
   runTest: !process.argv.includes("--no-test"),
+  forceTest: process.argv.includes("--force-test"),
   testDevice: getArgValue("--device", "flex"),
   testLogLevel: getArgValue("--test-log-level", "info"),
   refine: !process.argv.includes("--no-refine"),
@@ -1921,6 +1923,7 @@ async function main() {
     console.error("  --openai-model <m>       Model to use (default: gpt-4)");
     console.error("  --azure                  Use Azure OpenAI API format (api-key header)");
     console.error("  --no-test                Skip running the clear signing tester (on by default)");
+    console.error("  --force-test             Force running tester on existing tests at 100% coverage");
     console.error("  --device <device>        Tester device: flex, stax, nanosp, nanox (default: flex)");
     console.error("  --test-log-level <lvl>   Tester log level: none, error, warn, info, debug (default: info)");
     console.error("  --no-refine              Skip refining expectedTexts from tester screen output");
@@ -2012,6 +2015,20 @@ async function main() {
       }
     }
 
+    const totalCoverageTargets = erc7730.isCalldata
+      ? erc7730.functions.length
+      : erc7730.messageTypes.length;
+    const coveredTargets = erc7730.isCalldata
+      ? coveredFunctions.size
+      : coveredMessageTypes.size;
+    const hasFullCoverage = totalCoverageTargets > 0 && coveredTargets >= totalCoverageTargets;
+
+    if (CONFIG.forceTest && existingTests.length > 0 && hasFullCoverage) {
+      console.log(
+        "ℹ️  --force-test enabled: running tester against existing test file despite full coverage"
+      );
+    }
+
     let tests = [];
 
     // Generate tests only for uncovered functions/message types
@@ -2028,7 +2045,7 @@ async function main() {
     printReport(report);
 
     // Run clear signing tester if enabled and tests were written
-    if (CONFIG.runTest && !CONFIG.dryRun && testFilePath) {
+    if ((CONFIG.runTest || CONFIG.forceTest) && !CONFIG.dryRun && testFilePath) {
       const { passed, logFile } = runTester(filePath, testFilePath);
       if (!passed) {
         process.exitCode = 1;
