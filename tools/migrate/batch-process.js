@@ -3,8 +3,9 @@
  * ERC-7730 Batch Processor
  *
  * Processes a registry subfolder to:
- * - Migrate v1 schema files to v2 (linting/validation is handled by migrate-v1-to-v2.js)
  * - Generate missing test files
+ * - Migrate v1 schema files to v2 (linting/validation is handled by migrate-v1-to-v2.js)
+ * - Run clear-signing tests after migration
  * - Optionally create a PR with all changes
  *
  * Usage:
@@ -88,6 +89,7 @@ const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const MIGRATE_SCRIPT = path.join(__dirname, "migrate-v1-to-v2.js");
 const GENERATE_TESTS_SCRIPT = path.join(__dirname, "generate-tests.js");
+const TESTER_SCRIPT = path.join(ROOT_DIR, "tools", "tester", "run-test.sh");
 
 // =============================================================================
 // Logging
@@ -221,16 +223,6 @@ function isV1Schema(filePath) {
   } catch (e) {
     return false;
   }
-}
-
-/**
- * Check if test file exists for a descriptor
- */
-function hasTestFile(descriptorPath) {
-  const dir = path.dirname(descriptorPath);
-  const baseName = path.basename(descriptorPath, ".json");
-  const testFilePath = path.join(dir, "tests", `${baseName}.tests.json`);
-  return fs.existsSync(testFilePath);
 }
 
 /**
@@ -368,6 +360,53 @@ function generateTests(filePath, report) {
       file: path.relative(ROOT_DIR, filePath),
       error: error.message,
     });
+    return false;
+  }
+}
+
+/**
+ * Run clear-signing tests for an existing descriptor test file.
+ */
+function runTests(filePath) {
+  const testFilePath = getTestFilePath(filePath);
+  const relPath = path.relative(ROOT_DIR, filePath);
+
+  if (!fs.existsSync(testFilePath)) {
+    log(`  → Skipping test run (no test file): ${path.relative(ROOT_DIR, testFilePath)}`, "warning");
+    return false;
+  }
+
+  if (!fs.existsSync(TESTER_SCRIPT)) {
+    log("  → Tester script not found at tools/tester/run-test.sh, skipping test run", "warning");
+    return false;
+  }
+
+  const device = CONFIG.testDevice || "flex";
+  const logLevel = CONFIG.testLogLevel || "info";
+
+  log(`Running tests: ${relPath}`, "debug");
+
+  try {
+    const result = spawnSync(
+      "bash",
+      [TESTER_SCRIPT, filePath, testFilePath, device, logLevel],
+      {
+        cwd: ROOT_DIR,
+        encoding: "utf8",
+        stdio: CONFIG.verbose ? "inherit" : "pipe",
+        env: { ...process.env },
+      }
+    );
+
+    if (result.status !== 0) {
+      log(`  → Test run failed for ${path.basename(filePath)}`, "warning");
+      return false;
+    }
+
+    log(`  → Test run passed for ${path.basename(filePath)}`, "success");
+    return true;
+  } catch (error) {
+    log(`  → Test run failed for ${path.basename(filePath)}: ${error.message}`, "warning");
     return false;
   }
 }
@@ -717,6 +756,15 @@ async function processFile(filePath, report) {
 
   log(`\nProcessing: ${relPath}`, "info");
 
+  // Always call generate-tests unless explicitly skipped via args.
+  // generate-tests.js handles coverage checks and decides whether generation is needed.
+  if (!CONFIG.skipTests) {
+    log("  → Running test generation/refinement...", "info");
+    generateTests(filePath, report);
+  } else {
+    report.testGeneration.skipped++;
+  }
+
   // Check if v1 and migrate
   if (!CONFIG.skipMigration && isV1Schema(filePath)) {
     log("  → v1 schema detected, migrating to v2...", "info");
@@ -731,21 +779,10 @@ async function processFile(filePath, report) {
     }
   }
 
-  // Generate tests if missing, or run tester on existing tests when forced
-  if (!CONFIG.skipTests && (!hasTestFile(filePath) || CONFIG.forceTest)) {
-    if (hasTestFile(filePath)) {
-      log("  → Test file already exists, force-running tester...", "info");
-    } else {
-      log("  → No test file found, generating tests...", "info");
-    }
-    generateTests(filePath, report);
-  } else {
-    if (CONFIG.skipTests) {
-      report.testGeneration.skipped++;
-    } else {
-      log("  → Test file already exists", "debug");
-      report.testGeneration.skipped++;
-    }
+  // Run tests after migration step (without generating tests again)
+  if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun) {
+    log("  → Running tests after migration...", "info");
+    runTests(filePath);
   }
 }
 
