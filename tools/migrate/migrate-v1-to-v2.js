@@ -74,6 +74,7 @@ const stats = {
     nullsCleaned: 0,
     formatKeysTransformed: 0,
     domainRedundantRemoved: 0,
+    integerStringsConverted: 0,
   },
   linting: {
     v1Passed: 0,
@@ -539,6 +540,69 @@ function removeNullValues(obj) {
 }
 
 /**
+ * Return true when value is a base-10 integer string.
+ * Examples accepted: "0", "-1", "42"
+ * Examples rejected: " 1", "1 ", "1.0", "1e3", "abc"
+ */
+function isIntegerString(value) {
+  return typeof value === "string" && /^-?\d+$/.test(value);
+}
+
+/**
+ * Convert targeted string fields to integers when possible.
+ * Keeps non-integer strings untouched.
+ */
+function normalizeIntegerLikeFields(json) {
+  let converted = false;
+
+  function convertIfIntegerString(obj, key) {
+    if (!obj || typeof obj !== "object") return;
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) return;
+    const current = obj[key];
+    if (isIntegerString(current)) {
+      obj[key] = Number.parseInt(current, 10);
+      stats.changes.integerStringsConverted++;
+      converted = true;
+    }
+  }
+
+  // $context.EIP712.properties.eip712.properties.domain.properties.chainId
+  convertIfIntegerString(json.context?.eip712?.domain, "chainId");
+
+  // $context.deployments.items.properties.chainId
+  if (Array.isArray(json.context?.contract?.deployments)) {
+    for (const deployment of json.context.contract.deployments) {
+      convertIfIntegerString(deployment, "chainId");
+    }
+  }
+  if (Array.isArray(json.context?.eip712?.deployments)) {
+    for (const deployment of json.context.eip712.deployments) {
+      convertIfIntegerString(deployment, "chainId");
+    }
+  }
+
+  // $metadata.token.properties.decimals
+  convertIfIntegerString(json.metadata?.token, "decimals");
+
+  // $format.calldataParameters.properties.amount.anyOf.[0]
+  // $format.unitParameters.properties.decimals
+  if (json.display?.formats && typeof json.display.formats === "object") {
+    for (const format of Object.values(json.display.formats)) {
+      if (!format || typeof format !== "object") continue;
+      if (!Array.isArray(format.fields)) continue;
+
+      for (const field of format.fields) {
+        if (!field || typeof field !== "object" || !field.params || typeof field.params !== "object") continue;
+        convertIfIntegerString(field.params, "amount");
+        convertIfIntegerString(field.params, "decimals");
+      }
+    }
+  }
+
+  return converted;
+}
+
+/**
  * Generate EIP-712 encodeType string from schema
  * Format: "PrimaryType(type1 name1,type2 name2,...)DependentType(...)"
  */
@@ -820,7 +884,12 @@ function migrateFile(filePath) {
       }
     }
 
-    // 10. Clean up null values (do this last)
+    // 10. Normalize integer-capable fields where values are numeric strings
+    if (normalizeIntegerLikeFields(json)) {
+      modified = true;
+    }
+
+    // 11. Clean up null values (do this last)
     const beforeNulls = stats.changes.nullsCleaned;
     json = removeNullValues(json);
     if (stats.changes.nullsCleaned > beforeNulls) {
@@ -920,6 +989,7 @@ function main() {
   console.log(`Null values cleaned:    ${stats.changes.nullsCleaned}`);
   console.log(`Format keys transformed:${stats.changes.formatKeysTransformed}`);
   console.log(`Domain redundant removed:${stats.changes.domainRedundantRemoved}`);
+  console.log(`Int strings converted:  ${stats.changes.integerStringsConverted}`);
 
   // Print linting summary
   if (!SKIP_LINT && !DRY_RUN) {
