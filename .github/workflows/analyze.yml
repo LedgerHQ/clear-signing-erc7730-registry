@@ -1,0 +1,255 @@
+name: Analyze
+
+on:
+  pull_request:
+    paths:
+      - 'registry/**/calldata-*.json'
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: public-ledgerhq-shared-small
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout PR branch (for files to analyze)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Checkout analyzer repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: LedgerHQ/erc7730-analyzer
+          ref: main
+          path: analyzer
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@0c5e2b8115b80b4c7c5ddf6ffdd634974642d182 # v5.4.1
+        with:
+          version: "0.6.14"
+
+      - name: Get changed calldata files
+        id: changed-files
+        uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
+        with:
+          files: |
+            registry/**/calldata-*.json
+
+      - name: Check if this is a report commit (Analysis files only)
+        id: check-report-commit
+        run: |
+          if [ "${{ steps.changed-files.outputs.any_changed }}" != "true" ]; then
+            echo "is_report_commit=true" >> $GITHUB_OUTPUT
+            # This is a report commit - check the CRITICALS file for issues
+            CRITICALS_FILE=$(ls Analysis/CRITICALS_*.md 2>/dev/null | head -1)
+            if [ -f "$CRITICALS_FILE" ]; then
+              if grep -q '| 🔴' "$CRITICALS_FILE"; then
+                echo "has_criticals=true" >> $GITHUB_OUTPUT
+                echo "Report commit contains critical issues"
+              else
+                echo "has_criticals=false" >> $GITHUB_OUTPUT
+                echo "Report commit has no critical issues"
+              fi
+            else
+              echo "has_criticals=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "is_report_commit=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run analyzer on each file
+        if: steps.changed-files.outputs.any_changed == 'true'
+        id: run-analyzer
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          EXIT_CODE=0
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Analyzing: $file"
+            if ! uvx --from ./analyzer analyze_7730 --erc7730_file "$file" --api-key "$ETHERSCAN_API_KEY" --lookback-days 20; then
+              echo "❌ Critical issues found in $file"
+              EXIT_CODE=1
+            fi
+          done
+
+          if [ $EXIT_CODE -eq 1 ]; then
+            echo "has_criticals=true" >> $GITHUB_OUTPUT
+            exit 1
+          else
+            echo "has_criticals=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload analysis reports as artifacts
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: analysis-reports
+          path: output/
+          retention-days: 30
+
+      - name: Create annotations for critical issues
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          # Find CRITICALS report
+          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
+
+          if [ -f "$CRITICALS_FILE" ]; then
+            # Extract contract name from filename (e.g., CRITICALS_wstETH_20251119.md -> wstETH)
+            CONTRACT_NAME=$(basename "$CRITICALS_FILE" | sed 's/CRITICALS_\(.*\)_[0-9]*.md/\1/')
+
+            # Find the corresponding calldata file
+            CALLDATA_FILE=$(find . -name "calldata-${CONTRACT_NAME}.json" 2>/dev/null | head -1)
+            if [ -z "$CALLDATA_FILE" ]; then
+              CALLDATA_FILE=$(ls **/calldata-*.json 2>/dev/null | head -1)
+            fi
+
+            # Parse CRITICALS file for issues
+            # Look for lines with 🔴 in the summary table
+            while IFS='|' read -r col1 col2 col3 col4 col5; do
+              if [[ "$col4" == *"🔴"* ]]; then
+                # Extract function name and selector (using sed for trimming instead of xargs)
+                FUNCTION=$(echo "$col1" | sed 's/`//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+                SELECTOR=$(echo "$col2" | sed 's/`//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+                ISSUE=$(echo "$col4" | sed 's/🔴 Critical//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+                if [ -n "$FUNCTION" ] && [ "$FUNCTION" != "Function" ]; then
+                  # Create error annotation
+                  if [ -n "$CALLDATA_FILE" ]; then
+                    echo "::error file=${CALLDATA_FILE},title=🔴 Critical Issue in ${FUNCTION} (${SELECTOR})::${ISSUE} - View full report: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+                  else
+                    echo "::error title=🔴 Critical Issue in ${FUNCTION} (${SELECTOR})::${ISSUE} - View full report: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+                  fi
+                fi
+              fi
+            done < "$CRITICALS_FILE"
+
+            # Also create a notice with link to full report
+            echo "::notice title=📊 ERC-7730 Analysis Complete::Critical issues detected. View full report at ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          else
+            echo "::notice title=📊 ERC-7730 Analysis Complete::No critical issues detected. View full report at ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          fi
+
+      - name: Add reports to job summary
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "## 📊 ERC-7730 Analysis Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Find CRITICALS report (only display this in the summary)
+          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
+          if [ -f "$CRITICALS_FILE" ]; then
+            echo "### 🔴 Critical Issues Report" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            cat "$CRITICALS_FILE" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "✅ No critical issues found." >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          # Add link to artifacts section
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📥 **Full reports available in the Artifacts section at the bottom of this page.**" >> $GITHUB_STEP_SUMMARY
+
+      - name: Post summary to PR
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        continue-on-error: true
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const reportsDir = 'output';
+            if (!fs.existsSync(reportsDir)) {
+              console.log('No reports directory found');
+              return;
+            }
+
+            const files = fs.readdirSync(reportsDir).filter(f => f.endsWith('.md'));
+
+            let body = '## 🔍 ERC-7730 Analysis Complete\n\n';
+            body += `📊 **Reports generated:** ${files.length}\n\n`;
+            body += `📥 **[View workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId})** (download reports from Artifacts section)\n\n`;
+
+            // Add status based on critical issues
+            const hasCriticals = '${{ steps.run-analyzer.outputs.has_criticals }}' === 'true';
+            if (hasCriticals) {
+              body += '\n## ❌ Status: CRITICAL ISSUES FOUND\n\n';
+              body += '**This PR cannot be merged until critical issues are resolved.**\n';
+              body += 'Please review the reports above and fix the identified issues.\n';
+            } else {
+              body += '\n## ✅ Status: NO CRITICAL ISSUES\n\n';
+              body += '**This PR is safe to merge** (based on automated analysis).\n';
+            }
+
+            // Only PR events have issue_number.
+            if (!context.issue || !context.issue.number) {
+              core.notice('No PR issue number found; skipping PR comment.');
+              return;
+            }
+
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const maxAttempts = 3;
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+              try {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: body
+                });
+                core.info(`Posted PR summary comment on attempt ${attempt}.`);
+                break;
+              } catch (error) {
+                const status = error.status || 'unknown';
+                const msg = error.message || String(error);
+                if (attempt === maxAttempts) {
+                  core.warning(
+                    `Failed to post PR summary comment after ${maxAttempts} attempts (status=${status}): ${msg}`
+                  );
+                } else {
+                  const waitMs = attempt * 2000;
+                  core.warning(
+                    `PR comment attempt ${attempt}/${maxAttempts} failed (status=${status}): ${msg}. Retrying in ${waitMs}ms...`
+                  );
+                  await sleep(waitMs);
+                }
+              }
+            }
+
+      - name: Block merge if critical issues found
+        if: always()
+        run: |
+          # Check if this is a report commit or a regular analysis
+          if [ "${{ steps.check-report-commit.outputs.is_report_commit }}" = "true" ]; then
+            # Report commit - use the check-report-commit result
+            if [ "${{ steps.check-report-commit.outputs.has_criticals }}" = "true" ]; then
+              echo "::error::❌ BLOCKING MERGE - Critical issues found in committed reports"
+              exit 1
+            else
+              echo "✅ No critical issues in reports - merge allowed"
+              exit 0
+            fi
+          else
+            # Regular analysis - use the run-analyzer result
+            if [ "${{ steps.run-analyzer.outputs.has_criticals }}" = "true" ]; then
+              echo "::error::❌ BLOCKING MERGE - Critical issues found in analysis"
+              exit 1
+            else
+              echo "✅ No critical issues - merge allowed"
+              exit 0
+            fi
+          fi
