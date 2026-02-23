@@ -128,9 +128,42 @@ function formatProgressBar(done, total, width = 20) {
   return `[${"#".repeat(filled)}${"-".repeat(width - filled)}]`;
 }
 
-function printPhaseProgress(label, done, total) {
+function printPhaseProgress(label, done, total, suffix = "") {
   if (CONFIG.verbose || !total || total <= 0) return;
-  console.log(`   ${label}: ${formatProgressBar(done, total)} ${done}/${total}`);
+  console.log(`   ${label}: ${formatProgressBar(done, total)} ${done}/${total}${suffix}`);
+}
+
+function printPhaseStart(label, nextIndex, total, relPath) {
+  if (CONFIG.verbose || !total || total <= 0) return;
+  console.log(`   ${label}: starting ${nextIndex}/${total} (${relPath})`);
+}
+
+function stripAnsi(text) {
+  return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
+}
+
+function printCommandErrorOutput(label, stdout, stderr, maxLines = 20) {
+  if (CONFIG.verbose) return;
+
+  const clean = stripAnsi(`${stdout || ""}\n${stderr || ""}`).trim();
+  if (!clean) return;
+
+  const lines = clean
+    .split(/\r?\n/)
+    .map((line) => line.trimEnd())
+    .filter((line) => line.trim().length > 0);
+
+  if (lines.length === 0) return;
+
+  const errorLike = lines.filter((line) =>
+    /(error|failed|failure|fatal|traceback|exception|keyboardinterrupt|^\s*\^C\s*$|^\s*❌)/i.test(line)
+  );
+  const picked = (errorLike.length > 0 ? errorLike : lines).slice(-maxLines);
+
+  console.log(`   ${label} (last ${picked.length} line${picked.length > 1 ? "s" : ""}):`);
+  for (const line of picked) {
+    console.log(`     ${line}`);
+  }
 }
 
 // =============================================================================
@@ -431,6 +464,44 @@ function getTestFilePath(descriptorPath) {
   return path.join(dir, "tests", `${baseName}.tests.json`);
 }
 
+/**
+ * Read number of tests from a *.tests.json file.
+ * @returns {number|null}
+ */
+function getTestCountFromFile(testFilePath) {
+  try {
+    if (!fs.existsSync(testFilePath)) return null;
+    const content = fs.readFileSync(testFilePath, "utf8");
+    const json = JSON.parse(content);
+    return Array.isArray(json.tests) ? json.tests.length : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Best-effort extraction of how many individual tests were executed
+ * from tester output captured in stdout/stderr.
+ * @returns {number|null}
+ */
+function extractExecutedTestCount(output) {
+  if (!output) return null;
+
+  const countMatches = (regex) => {
+    const matches = output.match(regex);
+    return matches ? matches.length : 0;
+  };
+
+  const candidates = [
+    countMatches(/SCREEN TEXT ANALYSIS/g),
+    countMatches(/Expected texts from test file:/g),
+    countMatches(/Accumulated screen texts from device:/g),
+  ];
+
+  const maxCount = Math.max(...candidates);
+  return maxCount > 0 ? maxCount : null;
+}
+
 // =============================================================================
 // Migration
 // =============================================================================
@@ -457,6 +528,11 @@ function migrateFile(filePath, report, options = {}) {
     });
 
     if (result.status !== 0) {
+      printCommandErrorOutput(
+        "migrate-v1-to-v2.js error output",
+        result.stdout,
+        result.stderr
+      );
       report.migrations.failed.push({
         file: path.relative(ROOT_DIR, filePath),
         error: result.stderr || "Migration script failed",
@@ -516,6 +592,7 @@ function generateTests(filePath, report) {
       encoding: "utf8",
       stdio: CONFIG.verbose ? "inherit" : "pipe",
     });
+    const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
 
     // Check if the test file was actually written, regardless of exit code.
     // generate-tests.js may exit non-zero because the *tester* step failed
@@ -523,29 +600,41 @@ function generateTests(filePath, report) {
     // should be included in the PR.
     const testFilePath = getTestFilePath(filePath);
     const testFileWritten = !CONFIG.dryRun && fs.existsSync(testFilePath);
+    const plannedTests = testFileWritten ? getTestCountFromFile(testFilePath) : null;
+    const executedTests = extractExecutedTestCount(combinedOutput);
 
     if (result.status !== 0) {
       // "No tests generated" → not a real failure, just skip
       if (result.stdout?.includes("No tests generated") || result.stderr?.includes("No tests generated")) {
         log(`  → No tests could be generated for ${path.basename(filePath)}`, "warning");
         report.testGeneration.skipped++;
-        return true;
+        return { ok: true, plannedTests, executedTests };
       }
 
       if (testFileWritten) {
         // Test file exists — generation succeeded, only the tester failed.
         // Still include the file in the PR.
         log(`  → Test file written but tester step failed for ${path.basename(filePath)}`, "warning");
+        printCommandErrorOutput(
+          "generate-tests.js reported errors",
+          result.stdout,
+          result.stderr
+        );
         report.testGeneration.successful++;
         report.addNewFile(testFilePath);
-        return true;
+        return { ok: true, plannedTests, executedTests };
       }
 
+      printCommandErrorOutput(
+        "generate-tests.js error output",
+        result.stdout,
+        result.stderr
+      );
       report.testGeneration.failed.push({
         file: path.relative(ROOT_DIR, filePath),
         error: result.stderr || "Test generation failed",
       });
-      return false;
+      return { ok: false, plannedTests, executedTests };
     }
 
     if (testFileWritten) {
@@ -554,13 +643,13 @@ function generateTests(filePath, report) {
     } else if (CONFIG.dryRun) {
       report.testGeneration.successful++;
     }
-    return true;
+    return { ok: true, plannedTests, executedTests };
   } catch (error) {
     report.testGeneration.failed.push({
       file: path.relative(ROOT_DIR, filePath),
       error: error.message,
     });
-    return false;
+    return { ok: false, plannedTests: null, executedTests: null };
   }
 }
 
@@ -570,15 +659,16 @@ function generateTests(filePath, report) {
 function runTests(filePath) {
   const testFilePath = getTestFilePath(filePath);
   const relPath = path.relative(ROOT_DIR, filePath);
+  const plannedTests = getTestCountFromFile(testFilePath);
 
   if (!fs.existsSync(testFilePath)) {
     log(`  → Skipping test run (no test file): ${path.relative(ROOT_DIR, testFilePath)}`, "warning");
-    return false;
+    return { ok: false, plannedTests: null, executedTests: null };
   }
 
   if (!fs.existsSync(TESTER_SCRIPT)) {
     log("  → Tester script not found at tools/tester/run-test.sh, skipping test run", "warning");
-    return false;
+    return { ok: false, plannedTests, executedTests: null };
   }
 
   const device = CONFIG.testDevice || "flex";
@@ -597,17 +687,28 @@ function runTests(filePath) {
         env: { ...process.env },
       }
     );
+    const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
+    let executedTests = extractExecutedTestCount(combinedOutput);
 
     if (result.status !== 0) {
       log(`  → Test run failed for ${path.basename(filePath)}`, "warning");
-      return false;
+      printCommandErrorOutput(
+        "run-test.sh error output",
+        result.stdout,
+        result.stderr
+      );
+      return { ok: false, plannedTests, executedTests };
     }
 
+    if (executedTests === null && plannedTests !== null) {
+      // If parsing fails but run succeeded, assume all planned tests were executed.
+      executedTests = plannedTests;
+    }
     log(`  → Test run passed for ${path.basename(filePath)}`, "success");
-    return true;
+    return { ok: true, plannedTests, executedTests };
   } catch (error) {
     log(`  → Test run failed for ${path.basename(filePath)}: ${error.message}`, "warning");
-    return false;
+    return { ok: false, plannedTests, executedTests: null };
   }
 }
 
@@ -966,13 +1067,30 @@ async function processFile(filePath, report, options = {}) {
   // generate-tests.js handles coverage checks and decides whether generation is needed.
   if (!CONFIG.skipTests && runTestGeneration) {
     log("  → Running test generation/refinement...", "info");
-    generateTests(filePath, report);
     if (progress?.testGeneration) {
-      progress.testGeneration.done++;
       printPhaseProgress(
         "Test generation progress",
         progress.testGeneration.done,
         progress.testGeneration.total
+      );
+      printPhaseStart(
+        "Test generation",
+        progress.testGeneration.done + 1,
+        progress.testGeneration.total,
+        relPath
+      );
+    }
+    const generation = generateTests(filePath, report);
+    if (progress?.testGeneration) {
+      progress.testGeneration.done++;
+      const testsSuffix = generation?.plannedTests !== null && generation?.plannedTests !== undefined
+        ? ` | tests ${generation.executedTests ?? "?"}/${generation.plannedTests}`
+        : "";
+      printPhaseProgress(
+        "Test generation progress",
+        progress.testGeneration.done,
+        progress.testGeneration.total,
+        testsSuffix
       );
     }
   } else {
@@ -1003,13 +1121,30 @@ async function processFile(filePath, report, options = {}) {
   // Run tests after migration step (without generating tests again)
   if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && runFinalTests) {
     log("  → Running tests after migration...", "info");
-    runTests(filePath);
     if (progress?.finalTests) {
-      progress.finalTests.done++;
       printPhaseProgress(
         "Final test run progress",
         progress.finalTests.done,
         progress.finalTests.total
+      );
+      printPhaseStart(
+        "Final test run",
+        progress.finalTests.done + 1,
+        progress.finalTests.total,
+        relPath
+      );
+    }
+    const testRun = runTests(filePath);
+    if (progress?.finalTests) {
+      progress.finalTests.done++;
+      const testsSuffix = testRun?.plannedTests !== null && testRun?.plannedTests !== undefined
+        ? ` | tests ${testRun.executedTests ?? "?"}/${testRun.plannedTests}`
+        : "";
+      printPhaseProgress(
+        "Final test run progress",
+        progress.finalTests.done,
+        progress.finalTests.total,
+        testsSuffix
       );
     }
   } else if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && !runFinalTests) {
