@@ -119,6 +119,20 @@ function logSection(title) {
   console.log(`${"=".repeat(60)}\n`);
 }
 
+function formatProgressBar(done, total, width = 20) {
+  if (!total || total <= 0) {
+    return `[${"-".repeat(width)}]`;
+  }
+  const ratio = Math.max(0, Math.min(1, done / total));
+  const filled = Math.round(ratio * width);
+  return `[${"#".repeat(filled)}${"-".repeat(width - filled)}]`;
+}
+
+function printPhaseProgress(label, done, total) {
+  if (CONFIG.verbose || !total || total <= 0) return;
+  console.log(`   ${label}: ${formatProgressBar(done, total)} ${done}/${total}`);
+}
+
 // =============================================================================
 // Report
 // =============================================================================
@@ -937,7 +951,12 @@ process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
  * Process a single file
  */
 async function processFile(filePath, report, options = {}) {
-  const { runTestGeneration = true, runFinalTests = true, isLeaf = true } = options;
+  const {
+    runTestGeneration = true,
+    runFinalTests = true,
+    isLeaf = true,
+    progress = null,
+  } = options;
   report.filesProcessed++;
   const relPath = path.relative(ROOT_DIR, filePath);
 
@@ -948,6 +967,14 @@ async function processFile(filePath, report, options = {}) {
   if (!CONFIG.skipTests && runTestGeneration) {
     log("  → Running test generation/refinement...", "info");
     generateTests(filePath, report);
+    if (progress?.testGeneration) {
+      progress.testGeneration.done++;
+      printPhaseProgress(
+        "Test generation progress",
+        progress.testGeneration.done,
+        progress.testGeneration.total
+      );
+    }
   } else {
     if (!CONFIG.skipTests && !runTestGeneration) {
       log("  → Skipping test generation (only enabled for leaf descriptors)", "debug");
@@ -977,6 +1004,14 @@ async function processFile(filePath, report, options = {}) {
   if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && runFinalTests) {
     log("  → Running tests after migration...", "info");
     runTests(filePath);
+    if (progress?.finalTests) {
+      progress.finalTests.done++;
+      printPhaseProgress(
+        "Final test run progress",
+        progress.finalTests.done,
+        progress.finalTests.total
+      );
+    }
   } else if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && !runFinalTests) {
     log("  → Skipping final test run (only enabled for leaf descriptors)", "debug");
   }
@@ -1079,6 +1114,16 @@ async function main() {
       return !node || node.dependents.size === 0;
     })
   );
+  const progress = {
+    testGeneration: {
+      done: 0,
+      total: CONFIG.skipTests ? 0 : leafFiles.size,
+    },
+    finalTests: {
+      done: 0,
+      total: CONFIG.skipTests || CONFIG.noTest || CONFIG.dryRun ? 0 : leafFiles.size,
+    },
+  };
 
   console.log(`Found ${targetFiles.length} target ERC-7730 files`);
   if (CONFIG.includeExternalDeps) {
@@ -1126,6 +1171,7 @@ async function main() {
         runTestGeneration: isLeaf,
         runFinalTests: isLeaf,
         isLeaf,
+        progress,
       });
     }
 
