@@ -28,6 +28,7 @@
  *   --depth <n>             Max transactions to search (default: 100)
  *   --max-tests <n>         Max tests to generate per function (default: 3)
  *   --chain <id>            Only process specific chain ID
+ *   --compact               Only process one chain + one deployment address
  *   --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)
  *   --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)
  *   --openai-model <model>  Model to use (default: gpt-4)
@@ -69,6 +70,7 @@ const CONFIG = {
   depth: getArgValue("--depth", null),
   maxTests: getArgValue("--max-tests", null),
   chainFilter: getArgValue("--chain", null),
+  compact: process.argv.includes("--compact"),
   openaiUrl: getArgValue("--openai-url", null),
   openaiKey: getArgValue("--openai-key", null),
   openaiModel: getArgValue("--openai-model", null),
@@ -478,6 +480,7 @@ function generateTests(filePath, report) {
   if (CONFIG.depth) args.push("--depth", String(CONFIG.depth));
   if (CONFIG.maxTests) args.push("--max-tests", String(CONFIG.maxTests));
   if (CONFIG.chainFilter) args.push("--chain", String(CONFIG.chainFilter));
+  if (CONFIG.compact) args.push("--compact");
   if (CONFIG.openaiUrl) args.push("--openai-url", CONFIG.openaiUrl);
   if (CONFIG.openaiKey) args.push("--openai-key", CONFIG.openaiKey);
   if (CONFIG.openaiModel) args.push("--openai-model", CONFIG.openaiModel);
@@ -1012,6 +1015,7 @@ async function main() {
     console.error("  --depth <n>             Max transactions to search (default: 100)");
     console.error("  --max-tests <n>         Max tests per function (default: 3)");
     console.error("  --chain <id>            Only process specific chain ID");
+    console.error("  --compact               Only process one chain + one deployment address");
     console.error("  --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)");
     console.error("  --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)");
     console.error("  --openai-model <model>  Model to use (default: gpt-4)");
