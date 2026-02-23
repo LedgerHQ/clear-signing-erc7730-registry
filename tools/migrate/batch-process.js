@@ -167,10 +167,13 @@ function printCommandErrorOutput(label, stdout, stderr, maxLines = 20) {
 }
 
 function printIndividualTestProgress(phaseLabel, relPath, done, total) {
-  if (CONFIG.verbose || total === null || total === undefined || total <= 0) return;
-  console.log(
-    `      ${phaseLabel} tests: ${formatProgressBar(done, total, 16)} ${done}/${total} (${relPath})`
-  );
+  if (CONFIG.verbose) return;
+  if (total === null || total === undefined || total <= 0) {
+    // Total may be unknown during generation until the test file is written.
+    console.log(`      ${phaseLabel} tests: ${done}/? (${relPath})`);
+    return;
+  }
+  console.log(`      ${phaseLabel} tests: ${formatProgressBar(done, total, 16)} ${done}/${total} (${relPath})`);
 }
 
 function streamToLines(stream, onLine, onChunk) {
@@ -664,10 +667,8 @@ async function generateTests(filePath, report) {
       if (/SCREEN TEXT ANALYSIS/.test(clean)) {
         sawLiveTestMarkers = true;
         liveExecutedTests++;
-        if (prePlannedTests !== null) {
-          const safe = Math.min(liveExecutedTests, prePlannedTests);
-          printIndividualTestProgress("generation", relPath, safe, prePlannedTests);
-        }
+        const safe = prePlannedTests !== null ? Math.min(liveExecutedTests, prePlannedTests) : liveExecutedTests;
+        printIndividualTestProgress("generation", relPath, safe, prePlannedTests);
       }
     };
 
@@ -689,6 +690,10 @@ async function generateTests(filePath, report) {
     let executedTests = sawLiveTestMarkers ? liveExecutedTests : extractExecutedTestCount(combinedOutput);
     if (!sawLiveTestMarkers && executedTests === null && plannedTests !== null && result.status === 0) {
       executedTests = plannedTests;
+    }
+    if (executedTests !== null) {
+      const safe = plannedTests !== null ? Math.min(executedTests, plannedTests) : executedTests;
+      printIndividualTestProgress("generation", relPath, safe, plannedTests);
     }
 
     if (result.status !== 0) {
