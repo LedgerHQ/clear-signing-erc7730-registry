@@ -101,6 +101,32 @@ const TESTER_SCRIPT = path.join(ROOT_DIR, "tools", "tester", "run-test.sh");
 // Logging
 // =============================================================================
 
+const INTERACTIVE_PROGRESS = !CONFIG.verbose && !!process.stdout.isTTY;
+let _activeInlineProgress = false;
+
+function ensureProgressLineBreak() {
+  if (INTERACTIVE_PROGRESS && _activeInlineProgress) {
+    process.stdout.write("\n");
+    _activeInlineProgress = false;
+  }
+}
+
+function renderInlineProgressLine(text, done, total) {
+  if (!INTERACTIVE_PROGRESS) {
+    console.log(text);
+    return;
+  }
+
+  const prefix = _activeInlineProgress ? "\r\x1b[2K" : "";
+  process.stdout.write(prefix + text);
+  _activeInlineProgress = true;
+
+  if (total !== null && total !== undefined && total > 0 && done >= total) {
+    process.stdout.write("\n");
+    _activeInlineProgress = false;
+  }
+}
+
 function log(message, level = "info") {
   const prefix = {
     info: "ℹ️ ",
@@ -110,10 +136,12 @@ function log(message, level = "info") {
     debug: "🔍 ",
   };
   if (level === "debug" && !CONFIG.verbose) return;
+  ensureProgressLineBreak();
   console.log(`${prefix[level] || ""}${message}`);
 }
 
 function logSection(title) {
+  ensureProgressLineBreak();
   console.log(`\n${"=".repeat(60)}`);
   console.log(`📦 ${title}`);
   console.log(`${"=".repeat(60)}\n`);
@@ -130,11 +158,13 @@ function formatProgressBar(done, total, width = 20) {
 
 function printPhaseProgress(label, done, total, suffix = "") {
   if (CONFIG.verbose || !total || total <= 0) return;
+  ensureProgressLineBreak();
   console.log(`   ${label}: ${formatProgressBar(done, total)} ${done}/${total}${suffix}`);
 }
 
 function printPhaseStart(label, nextIndex, total, relPath) {
   if (CONFIG.verbose || !total || total <= 0) return;
+  ensureProgressLineBreak();
   console.log(`   ${label}: starting ${nextIndex}/${total} (${relPath})`);
 }
 
@@ -170,10 +200,14 @@ function printIndividualTestProgress(phaseLabel, relPath, done, total) {
   if (CONFIG.verbose) return;
   if (total === null || total === undefined || total <= 0) {
     // Total may be unknown during generation until the test file is written.
-    console.log(`      ${phaseLabel} tests: ${done}/? (${relPath})`);
+    renderInlineProgressLine(`      ${phaseLabel} tests: ${done}/? (${relPath})`, done, null);
     return;
   }
-  console.log(`      ${phaseLabel} tests: ${formatProgressBar(done, total, 16)} ${done}/${total} (${relPath})`);
+  renderInlineProgressLine(
+    `      ${phaseLabel} tests: ${formatProgressBar(done, total, 16)} ${done}/${total} (${relPath})`,
+    done,
+    total
+  );
 }
 
 function streamToLines(stream, onLine, onChunk) {
@@ -276,7 +310,6 @@ class Report {
       console.log(`   Failed:     ${this.migrations.failed.length}`);
       this.migrations.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
     }
-    console.log("   (Linting/validation is now handled by migrate-v1-to-v2.js)");
 
     console.log("\n🧪 Test Generation:");
     console.log(`   Attempted:  ${this.testGeneration.attempted}`);
