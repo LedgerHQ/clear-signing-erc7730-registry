@@ -14,8 +14,9 @@
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
  *   --depth <n>             Max transactions to search (default: 100)
- *   --max-tests <n>         Max tests to generate per function (default: 3)
+ *   --max-tests <n>         Max tests to generate per function (default: 3, or 1 with --compact)
  *   --chain <id>            Only process specific chain ID
+ *   --compact               Process only one deployment (single chain + address)
  *   --openai-url <url>      Custom OpenAI API URL (e.g., Azure OpenAI endpoint)
  *   --openai-key <key>      OpenAI API key (overrides OPENAI_API_KEY env var)
  *   --openai-model <model>  Model to use (default: gpt-4)
@@ -55,8 +56,9 @@ const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
   verbose: process.argv.includes("--verbose"),
   depth: getArgValue("--depth", 100),
-  maxTests: getArgValue("--max-tests", 3),
+  maxTests: getArgValue("--max-tests", process.argv.includes("--compact") ? 1 : 3),
   chainFilter: getArgValue("--chain", null),
+  compact: process.argv.includes("--compact"),
   openaiUrl: getArgValue("--openai-url", process.env.LLM_BASE_URL || "https://api.openai.com"),
   openaiKey: getArgValue("--openai-key", process.env.OPENAI_API_KEY),
   openaiModel: getArgValue("--openai-model", "gpt-5"),
@@ -769,12 +771,13 @@ function computeKeccak256Selector(input) {
  */
 async function generateCalldataTests(erc7730, report, coveredFunctions = new Set()) {
   const tests = [];
+  const deploymentsToProcess = selectDeploymentsForGeneration(erc7730.deployments);
 
-  for (const deployment of erc7730.deployments) {
+  for (const deployment of deploymentsToProcess) {
     const { chainId, address } = deployment;
 
     // Apply chain filter if specified
-    if (CONFIG.chainFilter && chainId !== parseInt(CONFIG.chainFilter)) {
+    if (!CONFIG.compact && CONFIG.chainFilter && chainId !== parseInt(CONFIG.chainFilter)) {
       continue;
     }
 
@@ -846,6 +849,70 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
   }
 
   return tests;
+}
+
+/**
+ * Select deployments to process.
+ * In compact mode, picks exactly one deployment using this preference order:
+ *   1) --chain value (if provided and present in descriptor)
+ *   2) chainId 1 (Ethereum mainnet), if present
+ *   3) first chainId from descriptor deployments
+ * Then picks the first deployment address on that selected chain.
+ */
+function selectDeploymentsForGeneration(deployments) {
+  if (!Array.isArray(deployments) || deployments.length === 0) {
+    return [];
+  }
+
+  if (!CONFIG.compact) {
+    return deployments;
+  }
+
+  const normalizeChainId = (value) => {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  };
+
+  const requestedChain = normalizeChainId(CONFIG.chainFilter);
+  const firstChainInFile = normalizeChainId(deployments[0]?.chainId);
+
+  const preferredChains = [];
+  if (requestedChain !== null) preferredChains.push(requestedChain);
+  if (!preferredChains.includes(1)) preferredChains.push(1);
+  if (firstChainInFile !== null && !preferredChains.includes(firstChainInFile)) {
+    preferredChains.push(firstChainInFile);
+  }
+
+  let selectedChain = null;
+  let selectionReason = "";
+  for (const chainId of preferredChains) {
+    if (deployments.some((d) => normalizeChainId(d.chainId) === chainId)) {
+      selectedChain = chainId;
+      if (requestedChain !== null && chainId === requestedChain) {
+        selectionReason = "--chain";
+      } else if (chainId === 1) {
+        selectionReason = "ethereum-mainnet";
+      } else {
+        selectionReason = "first-chain-in-file";
+      }
+      break;
+    }
+  }
+
+  if (selectedChain === null) {
+    selectedChain = firstChainInFile;
+    selectionReason = "first-chain-in-file";
+  }
+
+  const selectedDeployment = deployments.find(
+    (d) => normalizeChainId(d.chainId) === selectedChain
+  ) || deployments[0];
+
+  console.log(
+    `ℹ️  Compact mode: selected ${selectedDeployment.address} on chain ${selectedDeployment.chainId} (${selectionReason})`
+  );
+
+  return [selectedDeployment];
 }
 
 /**
@@ -1916,8 +1983,9 @@ async function main() {
     console.error("  --dry-run                Preview without writing files");
     console.error("  --verbose                Show detailed output");
     console.error("  --depth <n>              Max transactions to search (default: 100)");
-    console.error("  --max-tests <n>          Max tests per function (default: 3)");
+    console.error("  --max-tests <n>          Max tests per function (default: 3, or 1 with --compact)");
     console.error("  --chain <id>             Only process specific chain ID");
+    console.error("  --compact                Only process one chain + one deployment address");
     console.error("  --openai-url <url>       Custom OpenAI API URL (e.g., Azure OpenAI endpoint)");
     console.error("  --openai-key <key>       OpenAI API key (overrides OPENAI_API_KEY env var)");
     console.error("  --openai-model <m>       Model to use (default: gpt-4)");
