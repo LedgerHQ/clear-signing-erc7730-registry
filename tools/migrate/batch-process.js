@@ -166,6 +166,71 @@ function printCommandErrorOutput(label, stdout, stderr, maxLines = 20) {
   }
 }
 
+function printIndividualTestProgress(phaseLabel, relPath, done, total) {
+  if (CONFIG.verbose || total === null || total === undefined || total <= 0) return;
+  console.log(
+    `      ${phaseLabel} tests: ${formatProgressBar(done, total, 16)} ${done}/${total} (${relPath})`
+  );
+}
+
+function streamToLines(stream, onLine, onChunk) {
+  let buffer = "";
+  stream.on("data", (chunk) => {
+    const text = chunk.toString();
+    if (onChunk) onChunk(text);
+    buffer += text;
+    const lines = buffer.split(/\r?\n/);
+    buffer = lines.pop() || "";
+    for (const line of lines) {
+      onLine(line);
+    }
+  });
+  stream.on("end", () => {
+    if (buffer) onLine(buffer);
+  });
+}
+
+function spawnAndCapture(command, args, options = {}) {
+  const { cwd = ROOT_DIR, env = process.env, onStdoutLine, onStderrLine } = options;
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd,
+      env,
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+
+    let stdout = "";
+    let stderr = "";
+
+    streamToLines(
+      child.stdout,
+      (line) => {
+        if (onStdoutLine) onStdoutLine(line);
+      },
+      (text) => {
+        stdout += text;
+        if (CONFIG.verbose) process.stdout.write(text);
+      }
+    );
+
+    streamToLines(
+      child.stderr,
+      (line) => {
+        if (onStderrLine) onStderrLine(line);
+      },
+      (text) => {
+        stderr += text;
+        if (CONFIG.verbose) process.stderr.write(text);
+      }
+    );
+
+    child.on("error", reject);
+    child.on("close", (code) => {
+      resolve({ status: code ?? 1, stdout, stderr });
+    });
+  });
+}
+
 // =============================================================================
 // Report
 // =============================================================================
@@ -561,7 +626,7 @@ function migrateFile(filePath, report, options = {}) {
 /**
  * Generate test file for a descriptor
  */
-function generateTests(filePath, report) {
+async function generateTests(filePath, report) {
   report.testGeneration.attempted++;
 
   const args = [filePath];
@@ -587,10 +652,30 @@ function generateTests(filePath, report) {
   log(`Generating tests: ${path.relative(ROOT_DIR, filePath)}`, "debug");
 
   try {
-    const result = spawnSync("node", [GENERATE_TESTS_SCRIPT, ...args], {
+    const relPath = path.relative(ROOT_DIR, filePath);
+    const preTestFilePath = getTestFilePath(filePath);
+    const prePlannedTests = getTestCountFromFile(preTestFilePath);
+    let liveExecutedTests = 0;
+    let sawLiveTestMarkers = false;
+    printIndividualTestProgress("generation", relPath, 0, prePlannedTests);
+
+    const onLine = (line) => {
+      const clean = stripAnsi(line);
+      if (/SCREEN TEXT ANALYSIS/.test(clean)) {
+        sawLiveTestMarkers = true;
+        liveExecutedTests++;
+        if (prePlannedTests !== null) {
+          const safe = Math.min(liveExecutedTests, prePlannedTests);
+          printIndividualTestProgress("generation", relPath, safe, prePlannedTests);
+        }
+      }
+    };
+
+    const result = await spawnAndCapture("node", [GENERATE_TESTS_SCRIPT, ...args], {
       cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: CONFIG.verbose ? "inherit" : "pipe",
+      env: process.env,
+      onStdoutLine: onLine,
+      onStderrLine: onLine,
     });
     const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
 
@@ -601,7 +686,10 @@ function generateTests(filePath, report) {
     const testFilePath = getTestFilePath(filePath);
     const testFileWritten = !CONFIG.dryRun && fs.existsSync(testFilePath);
     const plannedTests = testFileWritten ? getTestCountFromFile(testFilePath) : null;
-    const executedTests = extractExecutedTestCount(combinedOutput);
+    let executedTests = sawLiveTestMarkers ? liveExecutedTests : extractExecutedTestCount(combinedOutput);
+    if (!sawLiveTestMarkers && executedTests === null && plannedTests !== null && result.status === 0) {
+      executedTests = plannedTests;
+    }
 
     if (result.status !== 0) {
       // "No tests generated" → not a real failure, just skip
@@ -656,7 +744,7 @@ function generateTests(filePath, report) {
 /**
  * Run clear-signing tests for an existing descriptor test file.
  */
-function runTests(filePath) {
+async function runTests(filePath) {
   const testFilePath = getTestFilePath(filePath);
   const relPath = path.relative(ROOT_DIR, filePath);
   const plannedTests = getTestCountFromFile(testFilePath);
@@ -677,18 +765,34 @@ function runTests(filePath) {
   log(`Running tests: ${relPath}`, "debug");
 
   try {
-    const result = spawnSync(
+    let liveExecutedTests = 0;
+    let sawLiveTestMarkers = false;
+    printIndividualTestProgress("final run", relPath, 0, plannedTests);
+
+    const onLine = (line) => {
+      const clean = stripAnsi(line);
+      if (/SCREEN TEXT ANALYSIS/.test(clean)) {
+        sawLiveTestMarkers = true;
+        liveExecutedTests++;
+        if (plannedTests !== null) {
+          const safe = Math.min(liveExecutedTests, plannedTests);
+          printIndividualTestProgress("final run", relPath, safe, plannedTests);
+        }
+      }
+    };
+
+    const result = await spawnAndCapture(
       "bash",
       [TESTER_SCRIPT, filePath, testFilePath, device, logLevel],
       {
         cwd: ROOT_DIR,
-        encoding: "utf8",
-        stdio: CONFIG.verbose ? "inherit" : "pipe",
         env: { ...process.env },
+        onStdoutLine: onLine,
+        onStderrLine: onLine,
       }
     );
     const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
-    let executedTests = extractExecutedTestCount(combinedOutput);
+    let executedTests = sawLiveTestMarkers ? liveExecutedTests : extractExecutedTestCount(combinedOutput);
 
     if (result.status !== 0) {
       log(`  → Test run failed for ${path.basename(filePath)}`, "warning");
@@ -1080,7 +1184,7 @@ async function processFile(filePath, report, options = {}) {
         relPath
       );
     }
-    const generation = generateTests(filePath, report);
+    const generation = await generateTests(filePath, report);
     if (progress?.testGeneration) {
       progress.testGeneration.done++;
       const testsSuffix = generation?.plannedTests !== null && generation?.plannedTests !== undefined
@@ -1134,7 +1238,7 @@ async function processFile(filePath, report, options = {}) {
         relPath
       );
     }
-    const testRun = runTests(filePath);
+    const testRun = await runTests(filePath);
     if (progress?.finalTests) {
       progress.finalTests.done++;
       const testsSuffix = testRun?.plannedTests !== null && testRun?.plannedTests !== undefined
