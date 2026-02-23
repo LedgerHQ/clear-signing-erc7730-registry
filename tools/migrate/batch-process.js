@@ -15,12 +15,14 @@
  *   --dry-run               Preview changes without modifying files
  *   --verbose               Show detailed output
  *   --skip-tests            Skip test generation
+ *   --skip-lint             Skip linting during migration
  *   --skip-migration        Skip v1 to v2 migration
  *   --skip-pr               Skip PR creation
  *   --pr-title <title>      Custom PR title
  *   --pr-branch <name>      Custom branch name
  *   --local-api             Auto-start local Flask API server for the tester
  *   --local-api-port <port> Port for the local API server (default: 5000)
+ *   --include-external-deps Also migrate included files outside target folder
  *
  * Test generation options (cascaded to generate-tests.js):
  *   --depth <n>             Max transactions to search (default: 100)
@@ -55,12 +57,14 @@ const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
   verbose: process.argv.includes("--verbose"),
   skipTests: process.argv.includes("--skip-tests"),
+  skipLint: process.argv.includes("--skip-lint"),
   skipMigration: process.argv.includes("--skip-migration"),
   skipPr: process.argv.includes("--skip-pr"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
+  includeExternalDeps: process.argv.includes("--include-external-deps"),
   // Parameters cascaded to generate-tests.js
   depth: getArgValue("--depth", null),
   maxTests: getArgValue("--max-tests", null),
@@ -189,19 +193,28 @@ class Report {
  */
 function findErc7730Files(dir) {
   const files = [];
+  if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) {
+    return files;
+  }
 
   function walk(currentDir) {
     const entries = fs.readdirSync(currentDir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
       if (entry.isDirectory()) {
-        // Skip tests directories for main file discovery
-        if (entry.name !== "tests") {
+        // Skip tests directories and heavy/non-source folders
+        if (
+          entry.name !== "tests" &&
+          entry.name !== ".git" &&
+          entry.name !== "node_modules" &&
+          entry.name !== ".cursor" &&
+          entry.name !== "output"
+        ) {
           walk(fullPath);
         }
       } else if (entry.isFile() && entry.name.endsWith(".json")) {
-        // Skip test files and common/shared files
-        if (!entry.name.includes(".tests.") && !entry.name.startsWith("common-")) {
+        // Skip test files, keep shared descriptor files (e.g. common-*.json)
+        if (!entry.name.includes(".tests.") && isErc7730DescriptorFile(fullPath)) {
           files.push(fullPath);
         }
       }
@@ -210,6 +223,174 @@ function findErc7730Files(dir) {
 
   walk(dir);
   return files;
+}
+
+/**
+ * Check if JSON file is an ERC-7730 descriptor (v1 or v2).
+ */
+function isErc7730DescriptorFile(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, "utf8");
+    const json = JSON.parse(content);
+    return typeof json?.$schema === "string" && json.$schema.includes("erc7730-");
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Read descriptor JSON if valid.
+ */
+function readDescriptorJson(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, "utf8");
+    const json = JSON.parse(content);
+    if (typeof json?.$schema === "string" && json.$schema.includes("erc7730-")) {
+      return json;
+    }
+  } catch (e) {
+    // ignore parse errors
+  }
+  return null;
+}
+
+/**
+ * Normalize includes to a list.
+ */
+function getIncludesList(descriptorJson) {
+  if (typeof descriptorJson?.includes === "string") {
+    return [descriptorJson.includes];
+  }
+  if (Array.isArray(descriptorJson?.includes)) {
+    return descriptorJson.includes.filter((v) => typeof v === "string");
+  }
+  return [];
+}
+
+/**
+ * Resolve include path relative to descriptor file.
+ */
+function resolveIncludePath(filePath, includeValue) {
+  if (!includeValue || typeof includeValue !== "string") return null;
+  if (/^[a-z]+:\/\//i.test(includeValue)) {
+    // External URL include, not part of local repo graph
+    return null;
+  }
+  return path.normalize(path.resolve(path.dirname(filePath), includeValue));
+}
+
+/**
+ * Build repository-level dependency graph from all known descriptor files.
+ *
+ * Edge direction:
+ * - dependency (included file) -> dependent (including file)
+ */
+function buildDependencyGraph(descriptorFiles) {
+  /** @type {Map<string, { includes: Set<string>, dependents: Set<string> }>} */
+  const graph = new Map();
+
+  for (const file of descriptorFiles) {
+    graph.set(file, { includes: new Set(), dependents: new Set() });
+  }
+
+  for (const file of descriptorFiles) {
+    const descriptor = readDescriptorJson(file);
+    if (!descriptor) continue;
+
+    const includeRefs = getIncludesList(descriptor);
+    for (const includeRef of includeRefs) {
+      const includePath = resolveIncludePath(file, includeRef);
+      if (!includePath) continue;
+
+      // Keep only local ERC-7730 descriptors present in the graph
+      if (!graph.has(includePath)) continue;
+
+      graph.get(file).includes.add(includePath);
+      graph.get(includePath).dependents.add(file);
+    }
+  }
+
+  return graph;
+}
+
+/**
+ * Order files so dependencies (roots) are processed before dependents (leafs).
+ *
+ * @param {string[]} filesToProcess
+ * @param {Map<string, { includes: Set<string>, dependents: Set<string> }>} graph
+ * @returns {string[]}
+ */
+function orderFilesByDependencies(filesToProcess, graph) {
+  const selected = new Set(filesToProcess);
+  const indegree = new Map();
+
+  for (const file of filesToProcess) {
+    const node = graph.get(file);
+    if (!node) {
+      indegree.set(file, 0);
+      continue;
+    }
+    const internalDeps = [...node.includes].filter((dep) => selected.has(dep));
+    indegree.set(file, internalDeps.length);
+  }
+
+  const ready = filesToProcess
+    .filter((file) => indegree.get(file) === 0)
+    .sort((a, b) => a.localeCompare(b));
+  const ordered = [];
+
+  while (ready.length > 0) {
+    const current = ready.shift();
+    ordered.push(current);
+
+    const currentNode = graph.get(current);
+    if (!currentNode) continue;
+
+    for (const dependent of currentNode.dependents) {
+      if (!selected.has(dependent)) continue;
+      indegree.set(dependent, indegree.get(dependent) - 1);
+      if (indegree.get(dependent) === 0) {
+        ready.push(dependent);
+        ready.sort((a, b) => a.localeCompare(b));
+      }
+    }
+  }
+
+  // Handle unexpected cycles by appending remaining files in deterministic order
+  if (ordered.length < filesToProcess.length) {
+    const remaining = filesToProcess
+      .filter((file) => !ordered.includes(file))
+      .sort((a, b) => a.localeCompare(b));
+    ordered.push(...remaining);
+    log(
+      `Dependency cycle detected for ${remaining.length} file(s); using deterministic fallback order`,
+      "warning"
+    );
+  }
+
+  return ordered;
+}
+
+/**
+ * Collect transitive dependency files for the target set.
+ */
+function collectTransitiveDependencies(startFiles, graph) {
+  const visited = new Set(startFiles);
+  const stack = [...startFiles];
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+    const node = graph.get(current);
+    if (!node) continue;
+
+    for (const dep of node.includes) {
+      if (visited.has(dep)) continue;
+      visited.add(dep);
+      stack.push(dep);
+    }
+  }
+
+  return visited;
 }
 
 /**
@@ -241,12 +422,14 @@ function getTestFilePath(descriptorPath) {
 /**
  * Migrate a file from v1 to v2
  */
-function migrateFile(filePath, report) {
+function migrateFile(filePath, report, options = {}) {
+  const { skipLint = false } = options;
   report.migrations.attempted++;
 
   const args = ["--file", filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  if (skipLint) args.push("--skip-lint");
 
   log(`Migrating: ${path.relative(ROOT_DIR, filePath)}`, "debug");
 
@@ -750,7 +933,8 @@ process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
 /**
  * Process a single file
  */
-async function processFile(filePath, report) {
+async function processFile(filePath, report, options = {}) {
+  const { runTestGeneration = true, runFinalTests = true, isLeaf = true } = options;
   report.filesProcessed++;
   const relPath = path.relative(ROOT_DIR, filePath);
 
@@ -758,17 +942,24 @@ async function processFile(filePath, report) {
 
   // Always call generate-tests unless explicitly skipped via args.
   // generate-tests.js handles coverage checks and decides whether generation is needed.
-  if (!CONFIG.skipTests) {
+  if (!CONFIG.skipTests && runTestGeneration) {
     log("  → Running test generation/refinement...", "info");
     generateTests(filePath, report);
   } else {
+    if (!CONFIG.skipTests && !runTestGeneration) {
+      log("  → Skipping test generation (only enabled for leaf descriptors)", "debug");
+    }
     report.testGeneration.skipped++;
   }
 
   // Check if v1 and migrate
   if (!CONFIG.skipMigration && isV1Schema(filePath)) {
     log("  → v1 schema detected, migrating to v2...", "info");
-    migrateFile(filePath, report);
+    const skipLintForThisFile = CONFIG.skipLint || !isLeaf;
+    if (skipLintForThisFile && !CONFIG.skipLint && !isLeaf) {
+      log("  → Skipping lint for non-leaf descriptor during migration", "debug");
+    }
+    migrateFile(filePath, report, { skipLint: skipLintForThisFile });
     // Note: Linting/validation is now handled inside migrate-v1-to-v2.js
   } else {
     if (CONFIG.skipMigration) {
@@ -780,9 +971,11 @@ async function processFile(filePath, report) {
   }
 
   // Run tests after migration step (without generating tests again)
-  if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun) {
+  if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && runFinalTests) {
     log("  → Running tests after migration...", "info");
     runTests(filePath);
+  } else if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && !runFinalTests) {
+    log("  → Skipping final test run (only enabled for leaf descriptors)", "debug");
   }
 }
 
@@ -807,12 +1000,14 @@ async function main() {
     console.error("  --dry-run               Preview changes without modifying files");
     console.error("  --verbose               Show detailed output");
     console.error("  --skip-tests            Skip test generation");
+    console.error("  --skip-lint             Skip linting during migration");
     console.error("  --skip-migration        Skip v1 to v2 migration");
     console.error("  --skip-pr               Skip PR creation");
     console.error("  --pr-title <title>      Custom PR title");
     console.error("  --pr-branch <name>      Custom branch name");
     console.error("  --local-api             Auto-start local Flask API server (patched erc7730)");
     console.error("  --local-api-port <port> Port for the local API server (default: 5000)");
+    console.error("  --include-external-deps Also migrate included files outside target folder");
     console.error("\nTest generation options (cascaded to generate-tests.js):");
     console.error("  --depth <n>             Max transactions to search (default: 100)");
     console.error("  --max-tests <n>         Max tests per function (default: 3)");
@@ -861,9 +1056,36 @@ async function main() {
   // Initialize report
   const report = new Report();
 
-  // Find all ERC-7730 files
-  const files = findErc7730Files(targetFolder);
-  console.log(`Found ${files.length} ERC-7730 files to process\n`);
+  // Build repository-wide dependency graph from all local descriptors
+  const repoDescriptorFiles = findErc7730Files(ROOT_DIR);
+  const dependencyGraph = buildDependencyGraph(repoDescriptorFiles);
+
+  // Target files to process (inside selected folder)
+  const targetFiles = findErc7730Files(targetFolder);
+
+  // Optionally include transitive dependencies outside target folder
+  const filesSet = CONFIG.includeExternalDeps
+    ? collectTransitiveDependencies(targetFiles, dependencyGraph)
+    : new Set(targetFiles);
+  const files = orderFilesByDependencies([...filesSet], dependencyGraph);
+
+  const leafFiles = new Set(
+    files.filter((file) => {
+      const node = dependencyGraph.get(file);
+      return !node || node.dependents.size === 0;
+    })
+  );
+
+  console.log(`Found ${targetFiles.length} target ERC-7730 files`);
+  if (CONFIG.includeExternalDeps) {
+    const outsideTargetCount = files.filter((f) => !f.startsWith(`${targetFolder}${path.sep}`)).length;
+    console.log(
+      `Including ${files.length - targetFiles.length} transitive dependency file(s), ` +
+      `${outsideTargetCount} outside target folder`
+    );
+  }
+  console.log(`Processing ${files.length} file(s) in dependency order`);
+  console.log(`Test generation + final tests will run only on ${leafFiles.size} leaf file(s)\n`);
 
   if (files.length === 0) {
     console.log("No files to process.");
@@ -895,7 +1117,12 @@ async function main() {
     // Process each file
     logSection("Processing Files");
     for (const file of files) {
-      await processFile(file, report);
+      const isLeaf = leafFiles.has(file);
+      await processFile(file, report, {
+        runTestGeneration: isLeaf,
+        runFinalTests: isLeaf,
+        isLeaf,
+      });
     }
 
     // Commit changes and optionally create PR
