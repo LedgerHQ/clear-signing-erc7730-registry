@@ -994,6 +994,96 @@ function abiCanonicalSignature(abiEntry) {
 }
 
 /**
+ * Return true when a value is an http/https URL string.
+ */
+function isHttpUrl(value) {
+  if (typeof value !== "string") return false;
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Normalize different ABI JSON payload shapes into an ABI array.
+ * Accepts:
+ * - ABI array directly
+ * - { abi: [...] }
+ * - { abi: "<json-array-string>" }
+ */
+function extractAbiArray(payload, sourceLabel) {
+  let candidate = payload;
+
+  if (candidate && typeof candidate === "object" && !Array.isArray(candidate) && Object.prototype.hasOwnProperty.call(candidate, "abi")) {
+    candidate = candidate.abi;
+  }
+
+  if (typeof candidate === "string") {
+    try {
+      candidate = JSON.parse(candidate);
+    } catch (error) {
+      throw new Error(`Invalid ABI JSON string from ${sourceLabel}: ${error.message}`);
+    }
+  }
+
+  if (!Array.isArray(candidate)) {
+    throw new Error(`Invalid ABI from ${sourceLabel}: expected an ABI array or an object with "abi" array`);
+  }
+
+  return candidate;
+}
+
+/**
+ * Resolve contract ABI from inline JSON or downloadable URL.
+ */
+function resolveContractAbi(contractContext) {
+  const abiValue = contractContext?.abi;
+  if (abiValue === undefined || abiValue === null) return null;
+
+  if (Array.isArray(abiValue)) {
+    return abiValue;
+  }
+
+  if (isHttpUrl(abiValue)) {
+    const url = abiValue;
+    const curlCheck = spawnSync("curl", ["--version"], { encoding: "utf8", stdio: "pipe" });
+    if (curlCheck.status !== 0) {
+      throw new Error(
+        `Cannot download ABI URL ${url}: "curl" is not available in this environment`
+      );
+    }
+
+    const download = spawnSync(
+      "curl",
+      ["-fsSL", "--max-time", "20", "--connect-timeout", "10", url],
+      { encoding: "utf8", stdio: "pipe", maxBuffer: LINTER_MAX_BUFFER }
+    );
+    if (download.status !== 0) {
+      const details = (download.stderr || download.stdout || "").trim();
+      throw new Error(
+        `Failed to download ABI URL ${url}${details ? `: ${details}` : ""}`
+      );
+    }
+
+    let parsed;
+    try {
+      parsed = JSON.parse(download.stdout);
+    } catch (error) {
+      throw new Error(`Invalid JSON downloaded from ABI URL ${url}: ${error.message}`);
+    }
+    return extractAbiArray(parsed, `URL ${url}`);
+  }
+
+  if (typeof abiValue === "object" || typeof abiValue === "string") {
+    return extractAbiArray(abiValue, "context.contract.abi");
+  }
+
+  throw new Error("Invalid context.contract.abi: expected ABI array or ABI URL string");
+}
+
+/**
  * Try to find matching ABI entry for a format key.
  * Uses exact canonical signature first, then falls back to unique name match.
  */
@@ -1042,8 +1132,8 @@ function transformFormatKeys(json) {
 
   // For contracts, try to build human-readable signatures from ABI
   if (isContract && json.context.contract.abi) {
-    const abi = json.context.contract.abi;
-    if (Array.isArray(abi)) {
+    const abi = resolveContractAbi(json.context.contract);
+    if (abi) {
       for (const oldKey of Object.keys(json.display.formats)) {
         const abiEntry = findAbiEntry(abi, oldKey);
         if (abiEntry) {
