@@ -1007,14 +1007,72 @@ function isHttpUrl(value) {
 }
 
 /**
+ * Normalize known ABI URL providers to fetch the actual JSON payload.
+ * - GitHub blob URLs are rewritten to raw.githubusercontent.com
+ * - Etherscan v1 getabi endpoint is rewritten to v2, with optional API key
+ */
+function normalizeAbiUrl(rawUrl) {
+  const parsed = new URL(rawUrl);
+
+  // github.com/<owner>/<repo>/blob/<ref>/<path> -> raw.githubusercontent.com/<owner>/<repo>/<ref>/<path>
+  if (parsed.hostname === "github.com") {
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    if (parts.length >= 5 && parts[2] === "blob") {
+      const owner = parts[0];
+      const repo = parts[1];
+      const ref = parts[3];
+      const pathParts = parts.slice(4);
+      return `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${pathParts.join("/")}`;
+    }
+  }
+
+  // Etherscan getabi endpoint: v1 -> v2, inject API key if available.
+  if (parsed.hostname === "api.etherscan.io") {
+    const moduleName = parsed.searchParams.get("module");
+    const action = parsed.searchParams.get("action");
+    if (moduleName === "contract" && action === "getabi") {
+      if (parsed.pathname === "/api") {
+        parsed.pathname = "/v2/api";
+      }
+      if (!parsed.searchParams.has("chainid")) {
+        parsed.searchParams.set("chainid", "1");
+      }
+      if (!parsed.searchParams.has("apikey") && process.env.ETHERSCAN_API_KEY) {
+        parsed.searchParams.set("apikey", process.env.ETHERSCAN_API_KEY);
+      }
+      return parsed.toString();
+    }
+  }
+
+  return parsed.toString();
+}
+
+/**
  * Normalize different ABI JSON payload shapes into an ABI array.
  * Accepts:
  * - ABI array directly
  * - { abi: [...] }
  * - { abi: "<json-array-string>" }
+ * - Etherscan envelope: { status, message, result }
  */
 function extractAbiArray(payload, sourceLabel) {
   let candidate = payload;
+
+  // Handle Etherscan envelope payloads.
+  if (
+    candidate &&
+    typeof candidate === "object" &&
+    !Array.isArray(candidate) &&
+    Object.prototype.hasOwnProperty.call(candidate, "status") &&
+    Object.prototype.hasOwnProperty.call(candidate, "result")
+  ) {
+    if (String(candidate.status) !== "1") {
+      const message = String(candidate.message || "NOTOK");
+      const result = String(candidate.result || "").slice(0, 300);
+      throw new Error(`Etherscan ABI response not OK from ${sourceLabel}: ${message}${result ? ` - ${result}` : ""}`);
+    }
+    candidate = candidate.result;
+  }
 
   if (candidate && typeof candidate === "object" && !Array.isArray(candidate) && Object.prototype.hasOwnProperty.call(candidate, "abi")) {
     candidate = candidate.abi;
@@ -1047,11 +1105,12 @@ function resolveContractAbi(contractContext) {
   }
 
   if (isHttpUrl(abiValue)) {
-    const url = abiValue;
+    const originalUrl = abiValue;
+    const url = normalizeAbiUrl(originalUrl);
     const curlCheck = spawnSync("curl", ["--version"], { encoding: "utf8", stdio: "pipe" });
     if (curlCheck.status !== 0) {
       throw new Error(
-        `Cannot download ABI URL ${url}: "curl" is not available in this environment`
+        `Cannot download ABI URL ${originalUrl}: "curl" is not available in this environment`
       );
     }
 
@@ -1063,7 +1122,7 @@ function resolveContractAbi(contractContext) {
     if (download.status !== 0) {
       const details = (download.stderr || download.stdout || "").trim();
       throw new Error(
-        `Failed to download ABI URL ${url}${details ? `: ${details}` : ""}`
+        `Failed to download ABI URL ${originalUrl}${details ? `: ${details}` : ""}`
       );
     }
 
@@ -1071,9 +1130,9 @@ function resolveContractAbi(contractContext) {
     try {
       parsed = JSON.parse(download.stdout);
     } catch (error) {
-      throw new Error(`Invalid JSON downloaded from ABI URL ${url}: ${error.message}`);
+      throw new Error(`Invalid JSON downloaded from ABI URL ${originalUrl}: ${error.message}`);
     }
-    return extractAbiArray(parsed, `URL ${url}`);
+    return extractAbiArray(parsed, `URL ${originalUrl}`);
   }
 
   if (typeof abiValue === "object" || typeof abiValue === "string") {
@@ -1185,7 +1244,21 @@ function migrateFile(filePath) {
       modified = true;
     }
 
-    // 3. Remove legalName from metadata.info
+    // 3. Reconcile owner with legalName, then remove legalName from metadata.info
+    const metadataOwner = json.metadata?.owner;
+    const metadataLegalName = json.metadata?.info?.legalName;
+    if (
+      metadataOwner !== undefined &&
+      metadataLegalName !== undefined &&
+      metadataOwner !== metadataLegalName
+    ) {
+      json.metadata.owner = metadataLegalName;
+      console.warn(
+        `  ⚠️  ${path.relative(ROOT_DIR, filePath)}: metadata.owner differs from metadata.info.legalName; replacing owner with legalName`
+      );
+      modified = true;
+    }
+
     if (json.metadata?.info?.legalName !== undefined) {
       delete json.metadata.info.legalName;
       stats.changes.legalName++;
