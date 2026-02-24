@@ -14,6 +14,8 @@
  *   --chain <id>     Single chain to validate (default: 1)
  *   --all-chains     Validate all deployment chains supported by configured explorers
  *   --verbose        Print debug details
+ *   --log <path>     Enable verbose logging and write to file
+ *   -l               Enable verbose logging to .migrate-verbose.log
  *
  * Environment:
  *   ETHERSCAN_API_KEY (required for supported Etherscan-like chains)
@@ -28,9 +30,12 @@ const { keccak256 } = require("js-sha3");
 const ROOT_DIR = path.join(__dirname, "..", "..");
 const MIN_REQUEST_INTERVAL_MS = 380;
 let _lastExplorerRequestAt = 0;
+const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
-  verbose: process.argv.includes("--verbose"),
+  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  logFile: LOG_FILE_PATH,
   allChains: process.argv.includes("--all-chains"),
   chainExplicit: process.argv.includes("--chain"),
   chainId: getArgValue("--chain", 1),
@@ -53,7 +58,7 @@ const PROVIDERS = {
 
 function getArgValue(flag, defaultValue) {
   const idx = process.argv.indexOf(flag);
-  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith("--")) {
+  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith("-")) {
     const raw = process.argv[idx + 1];
     const asNum = Number(raw);
     return Number.isNaN(asNum) ? raw : asNum;
@@ -61,14 +66,31 @@ function getArgValue(flag, defaultValue) {
   return defaultValue;
 }
 
+function getLogFilePath() {
+  const logFlagIndex = process.argv.indexOf("--log");
+  if (logFlagIndex !== -1) {
+    const provided = process.argv[logFlagIndex + 1];
+    if (!provided || provided.startsWith("-")) {
+      console.error("Missing log file path for --log");
+      process.exit(1);
+    }
+    return path.resolve(provided);
+  }
+  if (process.argv.includes("-l")) {
+    return DEFAULT_LOG_FILE;
+  }
+  return null;
+}
+
 function getFilePathArg() {
   const fileFlag = getArgValue("--file", null);
   if (fileFlag) return fileFlag;
 
-  const knownValueFlags = new Set(["--file", "--chain"]);
+  const knownValueFlags = new Set(["--file", "--chain", "--log"]);
   for (let i = 2; i < process.argv.length; i++) {
     const arg = process.argv[i];
-    if (arg.startsWith("--")) {
+    if (arg === "-l") continue;
+    if (arg.startsWith("-")) {
       if (knownValueFlags.has(arg)) i++;
       continue;
     }
@@ -76,6 +98,50 @@ function getFilePathArg() {
   }
   return null;
 }
+
+function stripAnsi(text) {
+  return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
+}
+
+function appendLogLine(level, message) {
+  if (!CONFIG.logFile) return;
+  try {
+    fs.appendFileSync(CONFIG.logFile, `[${new Date().toISOString()}] [${level}] ${stripAnsi(message)}\n`);
+  } catch {
+    // Logging should not break validation flow.
+  }
+}
+
+function initLogFile() {
+  if (!CONFIG.logFile) return;
+  try {
+    fs.mkdirSync(path.dirname(CONFIG.logFile), { recursive: true });
+    fs.appendFileSync(
+      CONFIG.logFile,
+      `\n[${new Date().toISOString()}] check-contract-functions start: ${process.argv.join(" ")}\n`
+    );
+  } catch (error) {
+    console.error(`Failed to initialize log file ${CONFIG.logFile}: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+const baseConsoleLog = console.log.bind(console);
+const baseConsoleWarn = console.warn.bind(console);
+const baseConsoleError = console.error.bind(console);
+console.log = (...args) => {
+  appendLogLine("INFO", args.join(" "));
+  baseConsoleLog(...args);
+};
+console.warn = (...args) => {
+  appendLogLine("WARN", args.join(" "));
+  baseConsoleWarn(...args);
+};
+console.error = (...args) => {
+  appendLogLine("ERROR", args.join(" "));
+  baseConsoleError(...args);
+};
+initLogFile();
 
 function log(msg) {
   if (CONFIG.verbose) console.log(msg);
@@ -89,6 +155,8 @@ function usageAndExit() {
   console.error("  --chain <id>     Single chain to validate (default: 1)");
   console.error("  --all-chains     Validate all supported deployment chains with API key");
   console.error("  --verbose        Verbose output");
+  console.error("  --log <path>     Enable verbose logging and write to file");
+  console.error("  -l               Enable verbose logging to .migrate-verbose.log");
   console.error("");
   console.error(`Explorer requests are rate-limited to ~${Math.floor(1000 / MIN_REQUEST_INTERVAL_MS)} req/s.`);
   process.exit(1);

@@ -14,6 +14,8 @@
  * Options:
  *   --dry-run               Preview changes without modifying files
  *   --verbose               Show detailed output
+ *   --log <path>            Enable verbose logging and write to file
+ *   -l                      Enable verbose logging to .migrate-verbose.log
  *   --skip-tests            Skip test generation
  *   --skip-lint             Skip linting during migration
  *   --skip-migration        Skip v1 to v2 migration
@@ -54,9 +56,13 @@ const { execSync, spawnSync, spawn } = require("child_process");
 // Configuration
 // =============================================================================
 
+const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOG_FILE_PATH = getLogFilePath();
+
 const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
-  verbose: process.argv.includes("--verbose"),
+  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  logFile: LOG_FILE_PATH,
   skipTests: process.argv.includes("--skip-tests"),
   skipLint: process.argv.includes("--skip-lint"),
   skipMigration: process.argv.includes("--skip-migration"),
@@ -84,10 +90,28 @@ const CONFIG = {
 
 function getArgValue(flag, defaultValue) {
   const idx = process.argv.indexOf(flag);
-  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith("--")) {
+  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith("-")) {
     return process.argv[idx + 1];
   }
   return defaultValue;
+}
+
+function getLogFilePath() {
+  const logFlagIndex = process.argv.indexOf("--log");
+  if (logFlagIndex !== -1) {
+    const provided = process.argv[logFlagIndex + 1];
+    if (!provided || provided.startsWith("-")) {
+      console.error("Missing log file path for --log");
+      process.exit(1);
+    }
+    return path.resolve(provided);
+  }
+
+  if (process.argv.includes("-l")) {
+    return DEFAULT_LOG_FILE;
+  }
+
+  return null;
 }
 
 // Paths
@@ -137,7 +161,9 @@ function log(message, level = "info") {
   };
   if (level === "debug" && !CONFIG.verbose) return;
   ensureProgressLineBreak();
-  console.log(`${prefix[level] || ""}${message}`);
+  const rendered = `${prefix[level] || ""}${message}`;
+  appendLogLine(level.toUpperCase(), rendered);
+  console.log(rendered);
 }
 
 function logSection(title) {
@@ -171,6 +197,33 @@ function printPhaseStart(label, nextIndex, total, relPath) {
 function stripAnsi(text) {
   return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
 }
+
+function initLogFile() {
+  if (!CONFIG.logFile) return;
+  try {
+    fs.mkdirSync(path.dirname(CONFIG.logFile), { recursive: true });
+    fs.appendFileSync(
+      CONFIG.logFile,
+      `\n[${new Date().toISOString()}] batch-process start: ${process.argv.join(" ")}\n`
+    );
+  } catch (error) {
+    console.error(`Failed to initialize log file ${CONFIG.logFile}: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+function appendLogLine(level, message) {
+  if (!CONFIG.logFile) return;
+  const clean = stripAnsi(message);
+  if (!clean) return;
+  try {
+    fs.appendFileSync(CONFIG.logFile, `[${new Date().toISOString()}] [${level}] ${clean}\n`);
+  } catch {
+    // Logging should not break migration flow.
+  }
+}
+
+initLogFile();
 
 function printCommandErrorOutput(label, stdout, stderr, maxLines = 20) {
   if (CONFIG.verbose) return;
@@ -246,6 +299,7 @@ function spawnAndCapture(command, args, options = {}) {
       },
       (text) => {
         stdout += text;
+        appendLogLine("STDOUT", text);
         if (CONFIG.verbose) process.stdout.write(text);
       }
     );
@@ -257,6 +311,7 @@ function spawnAndCapture(command, args, options = {}) {
       },
       (text) => {
         stderr += text;
+        appendLogLine("STDERR", text);
         if (CONFIG.verbose) process.stderr.write(text);
       }
     );
@@ -617,6 +672,7 @@ function migrateFile(filePath, report, options = {}) {
   const args = ["--file", filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  if (CONFIG.logFile) args.push("--log", CONFIG.logFile);
   if (skipLint) args.push("--skip-lint");
 
   log(`Migrating: ${path.relative(ROOT_DIR, filePath)}`, "debug");
@@ -668,6 +724,7 @@ async function generateTests(filePath, report) {
   const args = [filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
+  if (CONFIG.logFile) args.push("--log", CONFIG.logFile);
   if (CONFIG.depth) args.push("--depth", String(CONFIG.depth));
   if (CONFIG.maxTests) args.push("--max-tests", String(CONFIG.maxTests));
   if (CONFIG.chainFilter) args.push("--chain", String(CONFIG.chainFilter));
@@ -1131,9 +1188,11 @@ function startLocalApiServer(port) {
     let stderr = "";
     child.stderr.on("data", (chunk) => {
       stderr += chunk.toString();
+      appendLogLine("STDERR", chunk.toString());
       if (CONFIG.verbose) process.stderr.write(chunk);
     });
     child.stdout.on("data", (chunk) => {
+      appendLogLine("STDOUT", chunk.toString());
       if (CONFIG.verbose) process.stdout.write(chunk);
     });
     child.on("error", (err) => reject(new Error(`Failed to start local API: ${err.message}`)));
@@ -1314,6 +1373,8 @@ async function main() {
     console.error("\nOptions:");
     console.error("  --dry-run               Preview changes without modifying files");
     console.error("  --verbose               Show detailed output");
+    console.error("  --log <path>            Enable verbose logging and write to file");
+    console.error("  -l                      Enable verbose logging to .migrate-verbose.log");
     console.error("  --skip-tests            Skip test generation");
     console.error("  --skip-lint             Skip linting during migration");
     console.error("  --skip-migration        Skip v1 to v2 migration");
