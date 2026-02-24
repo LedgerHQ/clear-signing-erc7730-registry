@@ -22,7 +22,7 @@
  * - Runs calldata validation on both v1 (original) and v2 (migrated) files
  *
  * Usage:
- *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--skip-lint] [--file <path> | <path>]
+ *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--skip-lint] [--log <path> | -l] [--file <path> | <path>]
  */
 
 const fs = require("fs");
@@ -32,8 +32,10 @@ const { spawnSync } = require("child_process");
 // Configuration
 const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
+const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOG_FILE = getLogFilePath();
 const DRY_RUN = process.argv.includes("--dry-run");
-const VERBOSE = process.argv.includes("--verbose");
+const VERBOSE = process.argv.includes("--verbose") || Boolean(LOG_FILE);
 const SKIP_LINT = process.argv.includes("--skip-lint");
 const SINGLE_FILE = (() => {
   // Support --file <path> flag
@@ -41,16 +43,80 @@ const SINGLE_FILE = (() => {
     return process.argv[process.argv.indexOf("--file") + 1];
   }
   // Support bare positional argument (first arg that is not a flag)
-  const FLAGS = new Set(["--dry-run", "--verbose", "--skip-lint", "--file"]);
+  const FLAGS = new Set(["--dry-run", "--verbose", "--skip-lint", "--file", "--log", "-l"]);
   for (let i = 2; i < process.argv.length; i++) {
-    if (!FLAGS.has(process.argv[i]) && !process.argv[i].startsWith("--")) {
+    if (FLAGS.has(process.argv[i]) && (process.argv[i] === "--file" || process.argv[i] === "--log")) {
+      i++;
+      continue;
+    }
+    if (!FLAGS.has(process.argv[i]) && !process.argv[i].startsWith("-")) {
       // Skip if previous arg was --file (already handled above)
-      if (i > 2 && process.argv[i - 1] === "--file") continue;
+      if (i > 2 && (process.argv[i - 1] === "--file" || process.argv[i - 1] === "--log")) continue;
       return process.argv[i];
     }
   }
   return null;
 })();
+
+function getLogFilePath() {
+  const logFlagIndex = process.argv.indexOf("--log");
+  if (logFlagIndex !== -1) {
+    const provided = process.argv[logFlagIndex + 1];
+    if (!provided || provided.startsWith("-")) {
+      console.error("Missing log file path for --log");
+      process.exit(1);
+    }
+    return path.resolve(provided);
+  }
+  if (process.argv.includes("-l")) {
+    return DEFAULT_LOG_FILE;
+  }
+  return null;
+}
+
+function stripAnsi(text) {
+  return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
+}
+
+function appendLogLine(level, message) {
+  if (!LOG_FILE) return;
+  try {
+    fs.appendFileSync(LOG_FILE, `[${new Date().toISOString()}] [${level}] ${stripAnsi(message)}\n`);
+  } catch {
+    // Logging should not break migration flow.
+  }
+}
+
+function initLogFile() {
+  if (!LOG_FILE) return;
+  try {
+    fs.mkdirSync(path.dirname(LOG_FILE), { recursive: true });
+    fs.appendFileSync(
+      LOG_FILE,
+      `\n[${new Date().toISOString()}] migrate-v1-to-v2 start: ${process.argv.join(" ")}\n`
+    );
+  } catch (error) {
+    console.error(`Failed to initialize log file ${LOG_FILE}: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+const baseConsoleLog = console.log.bind(console);
+const baseConsoleWarn = console.warn.bind(console);
+const baseConsoleError = console.error.bind(console);
+console.log = (...args) => {
+  appendLogLine("INFO", args.join(" "));
+  baseConsoleLog(...args);
+};
+console.warn = (...args) => {
+  appendLogLine("WARN", args.join(" "));
+  baseConsoleWarn(...args);
+};
+console.error = (...args) => {
+  appendLogLine("ERROR", args.join(" "));
+  baseConsoleError(...args);
+};
+initLogFile();
 
 // Local linter path
 const LOCAL_LINTER_PATH = path.join(ROOT_DIR, "tools", "linter", ".venv", "bin", "erc7730");

@@ -13,6 +13,8 @@
  * Options:
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
+ *   --log <path>            Enable verbose logging and write to file
+ *   -l                      Enable verbose logging to .migrate-verbose.log
  *   --depth <n>             Max transactions to search (default: 100)
  *   --max-tests <n>         Max tests to generate per function (default: 3, or 1 with --compact)
  *   --chain <id>            Only process specific chain ID
@@ -52,9 +54,13 @@ const { execSync, spawn } = require("child_process");
 // Configuration
 // =============================================================================
 
+const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOG_FILE_PATH = getLogFilePath();
+
 const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
-  verbose: process.argv.includes("--verbose"),
+  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  logFile: LOG_FILE_PATH,
   depth: getArgValue("--depth", 100),
   maxTests: getArgValue("--max-tests", process.argv.includes("--compact") ? 1 : 3),
   chainFilter: getArgValue("--chain", null),
@@ -74,12 +80,97 @@ const CONFIG = {
 
 function getArgValue(flag, defaultValue) {
   const idx = process.argv.indexOf(flag);
-  if (idx !== -1 && process.argv[idx + 1]) {
+  if (idx !== -1 && process.argv[idx + 1] && !process.argv[idx + 1].startsWith("-")) {
     const val = process.argv[idx + 1];
     return isNaN(val) ? val : parseInt(val, 10);
   }
   return defaultValue;
 }
+
+function getLogFilePath() {
+  const logFlagIndex = process.argv.indexOf("--log");
+  if (logFlagIndex !== -1) {
+    const provided = process.argv[logFlagIndex + 1];
+    if (!provided || provided.startsWith("-")) {
+      console.error("Missing log file path for --log");
+      process.exit(1);
+    }
+    return path.resolve(provided);
+  }
+  if (process.argv.includes("-l")) {
+    return DEFAULT_LOG_FILE;
+  }
+  return null;
+}
+
+function getInputFileArg() {
+  const knownValueFlags = new Set([
+    "--depth",
+    "--max-tests",
+    "--chain",
+    "--openai-url",
+    "--openai-key",
+    "--openai-model",
+    "--device",
+    "--test-log-level",
+    "--local-api-port",
+    "--log",
+  ]);
+  for (let i = 2; i < process.argv.length; i++) {
+    const arg = process.argv[i];
+    if (arg === "-l") continue;
+    if (arg.startsWith("-")) {
+      if (knownValueFlags.has(arg)) i++;
+      continue;
+    }
+    if (arg.endsWith(".json")) return arg;
+  }
+  return null;
+}
+
+function stripAnsi(text) {
+  return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
+}
+
+function appendLogLine(level, message) {
+  if (!CONFIG.logFile) return;
+  try {
+    fs.appendFileSync(CONFIG.logFile, `[${new Date().toISOString()}] [${level}] ${stripAnsi(message)}\n`);
+  } catch {
+    // Logging should not break generation flow.
+  }
+}
+
+function initLogFile() {
+  if (!CONFIG.logFile) return;
+  try {
+    fs.mkdirSync(path.dirname(CONFIG.logFile), { recursive: true });
+    fs.appendFileSync(
+      CONFIG.logFile,
+      `\n[${new Date().toISOString()}] generate-tests start: ${process.argv.join(" ")}\n`
+    );
+  } catch (error) {
+    console.error(`Failed to initialize log file ${CONFIG.logFile}: ${error.message}`);
+    process.exit(1);
+  }
+}
+
+const baseConsoleLog = console.log.bind(console);
+const baseConsoleWarn = console.warn.bind(console);
+const baseConsoleError = console.error.bind(console);
+console.log = (...args) => {
+  appendLogLine("INFO", args.join(" "));
+  baseConsoleLog(...args);
+};
+console.warn = (...args) => {
+  appendLogLine("WARN", args.join(" "));
+  baseConsoleWarn(...args);
+};
+console.error = (...args) => {
+  appendLogLine("ERROR", args.join(" "));
+  baseConsoleError(...args);
+};
+initLogFile();
 
 // =============================================================================
 // Block Explorer Providers
@@ -1973,15 +2064,15 @@ async function main() {
   }
 
   // Get input file
-  const inputFile = process.argv.find(
-    (arg) => arg.endsWith(".json") && !arg.includes("--")
-  );
+  const inputFile = getInputFileArg();
 
   if (!inputFile) {
     console.error("Usage: node tools/migrate/generate-tests.js <erc7730-file> [options]");
     console.error("\nOptions:");
     console.error("  --dry-run                Preview without writing files");
     console.error("  --verbose                Show detailed output");
+    console.error("  --log <path>             Enable verbose logging and write to file");
+    console.error("  -l                       Enable verbose logging to .migrate-verbose.log");
     console.error("  --depth <n>              Max transactions to search (default: 100)");
     console.error("  --max-tests <n>          Max tests per function (default: 3, or 1 with --compact)");
     console.error("  --chain <id>             Only process specific chain ID");
