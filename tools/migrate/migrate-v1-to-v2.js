@@ -22,20 +22,91 @@
  * - Runs calldata validation on both v1 (original) and v2 (migrated) files
  *
  * Usage:
- *   node tools/migrate/migrate-v1-to-v2.js [--dry-run] [--verbose] [--skip-lint] [--log <path> | -l] [--file <path> | <path>]
+ *   node tools/migrate/migrate-v1-to-v2.js [options] [--file <path> | <path>]
+ *
+ * Accepted options:
+ *   --help, -h      Show this help message
+ *   --dry-run       Preview changes without modifying files
+ *   --verbose       Show detailed output
+ *   --skip-lint     Skip linting and calldata validation
+ *   --log <path>    Enable verbose logging and write to file
+ *   -l              Enable verbose logging to .migrate-verbose.log
+ *   --file <path>   Process only one JSON file
  */
 
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
 
+const ACCEPTED_OPTIONS = [
+  "  --help, -h      Show this help message",
+  "  --dry-run       Preview changes without modifying files",
+  "  --verbose       Show detailed output",
+  "  --skip-lint     Skip linting and calldata validation",
+  "  --log <path>    Enable verbose logging and write to file",
+  "  -l              Enable verbose logging to .migrate-verbose.log",
+  "  --file <path>   Process only one JSON file",
+];
+
+const FLAG_OPTIONS = new Set(["--help", "-h", "--dry-run", "--verbose", "--skip-lint", "-l"]);
+const VALUE_OPTIONS = new Set(["--file", "--log"]);
+
+function printHelp(exitCode = 0, errorMessage = null) {
+  const write = exitCode === 0 ? console.log : console.error;
+  if (errorMessage) {
+    write(errorMessage);
+    write("");
+  }
+  write("Usage: node tools/migrate/migrate-v1-to-v2.js [options] [--file <path> | <path>]");
+  write("\nAccepted options:");
+  for (const option of ACCEPTED_OPTIONS) {
+    write(option);
+  }
+  write("\nExamples:");
+  write("  node tools/migrate/migrate-v1-to-v2.js --dry-run");
+  write("  node tools/migrate/migrate-v1-to-v2.js --file registry/midas/calldata-MinterVault.json");
+  process.exit(exitCode);
+}
+
+function validateCliArgs(argv) {
+  for (let i = 2; i < argv.length; i++) {
+    const arg = argv[i];
+    if (!arg.startsWith("-")) continue;
+
+    if (FLAG_OPTIONS.has(arg)) continue;
+
+    if (VALUE_OPTIONS.has(arg)) {
+      const value = argv[i + 1];
+      if (!value || value.startsWith("-")) {
+        return `Missing value for ${arg}`;
+      }
+      i++;
+      continue;
+    }
+
+    return `Unknown option: ${arg}`;
+  }
+  return null;
+}
+
+if (process.argv.includes("--help") || process.argv.includes("-h")) {
+  printHelp(0);
+}
+
+const cliError = validateCliArgs(process.argv);
+if (cliError) {
+  printHelp(1, cliError);
+}
+
 // Configuration
 const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
 const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LINTER_MAX_BUFFER = 50 * 1024 * 1024; // 50 MB for large calldata outputs
 const LOG_FILE = getLogFilePath();
 const DRY_RUN = process.argv.includes("--dry-run");
-const VERBOSE = process.argv.includes("--verbose") || Boolean(LOG_FILE);
+const VERBOSE = process.argv.includes("--verbose");
+const LOG_VERBOSE = Boolean(LOG_FILE);
 const SKIP_LINT = process.argv.includes("--skip-lint");
 const SINGLE_FILE = (() => {
   // Support --file <path> flag
@@ -43,7 +114,7 @@ const SINGLE_FILE = (() => {
     return process.argv[process.argv.indexOf("--file") + 1];
   }
   // Support bare positional argument (first arg that is not a flag)
-  const FLAGS = new Set(["--dry-run", "--verbose", "--skip-lint", "--file", "--log", "-l"]);
+  const FLAGS = new Set(["--help", "-h", "--dry-run", "--verbose", "--skip-lint", "--file", "--log", "-l"]);
   for (let i = 2; i < process.argv.length; i++) {
     if (FLAGS.has(process.argv[i]) && (process.argv[i] === "--file" || process.argv[i] === "--log")) {
       i++;
@@ -84,6 +155,14 @@ function appendLogLine(level, message) {
     fs.appendFileSync(LOG_FILE, `[${new Date().toISOString()}] [${level}] ${stripAnsi(message)}\n`);
   } catch {
     // Logging should not break migration flow.
+  }
+}
+
+function verboseLog(message, level = "DEBUG") {
+  if (VERBOSE) {
+    console.log(message);
+  } else if (LOG_VERBOSE) {
+    appendLogLine(level, message);
   }
 }
 
@@ -141,6 +220,7 @@ const stats = {
     formatKeysTransformed: 0,
     domainRedundantRemoved: 0,
     integerStringsConverted: 0,
+    booleanStringsConverted: 0,
   },
   linting: {
     v1Passed: 0,
@@ -195,12 +275,12 @@ function getLinterCommand() {
 function lintFile(filePath, version) {
   const linterCmd = getLinterCommand();
   if (!linterCmd) {
-    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found. Install with: pip install erc7730");
+    verboseLog("  ⚠️  erc7730 CLI not found. Install with: pip install erc7730", "WARN");
     stats.linting.skipped++;
     return true; // Don't fail if CLI not available
   }
 
-  if (VERBOSE) console.log(`  🔍 Linting ${version}: ${path.relative(ROOT_DIR, filePath)}`);
+  verboseLog(`  🔍 Linting ${version}: ${path.relative(ROOT_DIR, filePath)}`);
 
   try {
     const result = spawnSync(linterCmd, ["lint", filePath], {
@@ -275,6 +355,35 @@ function isEmptyJson(value) {
   if (Array.isArray(value) && value.length === 0) return true;
   if (typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 0) return true;
   return false;
+}
+
+/**
+ * Parse command output that may contain non-JSON warning lines before JSON.
+ * Tries full output first, then retries from the first line that starts with
+ * a JSON root token (`[` or `{`).
+ * @param {string} output
+ * @returns {*}
+ */
+function parseJsonFromPossiblyPrefixedOutput(output) {
+  const text = String(output || "");
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    // Some commands print warnings before JSON output; ignore that prelude.
+    const lines = text.split(/\r?\n/);
+    const jsonStartLine = lines.findIndex((line) => {
+      const trimmed = line.trimStart();
+      return trimmed.startsWith("[") || trimmed.startsWith("{");
+    });
+
+    if (jsonStartLine === -1) {
+      throw new Error("No JSON payload found in command output");
+    }
+
+    const jsonOnly = lines.slice(jsonStartLine).join("\n");
+    return JSON.parse(jsonOnly);
+  }
 }
 
 /**
@@ -376,19 +485,19 @@ function recordCalldataSuccess(version) {
 function validateCalldata(filePath, version) {
   const linterCmd = getLinterCommand();
   if (!linterCmd) {
-    if (VERBOSE) console.log("  ⚠️  erc7730 CLI not found for output validation");
+    verboseLog("  ⚠️  erc7730 CLI not found for output validation", "WARN");
     stats.calldata.skipped++;
     return null;
   }
 
   const descriptorType = detectDescriptorType(filePath);
   if (!descriptorType) {
-    if (VERBOSE) console.log(`  ⚠️  Could not detect descriptor type for ${path.relative(ROOT_DIR, filePath)}`);
+    verboseLog(`  ⚠️  Could not detect descriptor type for ${path.relative(ROOT_DIR, filePath)}`, "WARN");
     stats.calldata.skipped++;
     return null;
   }
 
-  if (VERBOSE) console.log(`  📋 Validating ${descriptorType} output ${version}: ${path.relative(ROOT_DIR, filePath)}`);
+  verboseLog(`  📋 Validating ${descriptorType} output ${version}: ${path.relative(ROOT_DIR, filePath)}`);
 
   try {
     let jsonResult;
@@ -399,18 +508,38 @@ function validateCalldata(filePath, version) {
         cwd: ROOT_DIR,
         encoding: "utf8",
         stdio: "pipe",
+        maxBuffer: LINTER_MAX_BUFFER,
       });
 
-      if (result.status !== 0) {
-        const errorMsg = result.stderr || result.stdout || "Calldata command failed";
-        recordCalldataFailure(version, filePath, errorMsg);
-        return null;
+      // Some linter versions may emit warnings and return non-zero even when
+      // calldata JSON is still produced. Prefer parseable JSON over exit code.
+      let parseError = null;
+      const parseCandidates = [
+        result.stdout || "",
+        result.stderr || "",
+        `${result.stdout || ""}\n${result.stderr || ""}`,
+      ];
+      for (const candidate of parseCandidates) {
+        if (!candidate.trim()) continue;
+        try {
+          jsonResult = parseJsonFromPossiblyPrefixedOutput(candidate);
+          parseError = null;
+          break;
+        } catch (e) {
+          parseError = e;
+        }
       }
 
-      try {
-        jsonResult = JSON.parse(result.stdout);
-      } catch (e) {
-        recordCalldataFailure(version, filePath, `Failed to parse calldata output as JSON: ${e.message}\nOutput: ${(result.stdout || "").slice(0, 200)}`);
+      if (jsonResult == null) {
+        const statusHint = result.status !== 0 ? ` (exit ${result.status})` : "";
+        const execHint = result.error ? ` [spawn error: ${result.error.message}]` : "";
+        const combinedOutput = `${result.stderr || ""}\n${result.stdout || ""}`.trim();
+        const parseMsg = parseError ? `: ${parseError.message}` : "";
+        recordCalldataFailure(
+          version,
+          filePath,
+          `Failed to parse calldata output as JSON${parseMsg}${statusHint}${execHint}\nOutput: ${combinedOutput.slice(0, 200)}`
+        );
         return null;
       }
 
@@ -424,6 +553,7 @@ function validateCalldata(filePath, version) {
           cwd: ROOT_DIR,
           encoding: "utf8",
           stdio: "pipe",
+          maxBuffer: LINTER_MAX_BUFFER,
         });
 
         if (result.status !== 0) {
@@ -511,7 +641,7 @@ function validateMigration(filePath, v1Content, wasV1) {
 
   const linterCmd = getLinterCommand();
   if (!linterCmd) {
-    if (VERBOSE) console.log("  ⚠️  Skipping validation - erc7730 CLI not available");
+    verboseLog("  ⚠️  Skipping validation - erc7730 CLI not available", "WARN");
     stats.linting.skipped++;
     stats.calldata.skipped++;
     return;
@@ -521,7 +651,7 @@ function validateMigration(filePath, v1Content, wasV1) {
   // Non-leaf files (e.g. common-*) are shared includes that cannot be validated standalone.
   const isLeaf = isLeafDescriptor(filePath);
   if (!isLeaf) {
-    if (VERBOSE) console.log(`  ℹ️  Non-leaf file — skipping validation for ${path.relative(ROOT_DIR, filePath)}`);
+    verboseLog(`  ℹ️  Non-leaf file — skipping validation for ${path.relative(ROOT_DIR, filePath)}`, "INFO");
     stats.linting.skipped++;
     stats.calldata.skipped++;
     return;
@@ -563,16 +693,16 @@ function validateMigration(filePath, v1Content, wasV1) {
       console.error(`  ❌ ${relPath}: ${errorMsg}`);
       stats.calldata.mismatches.push({ file: relPath, differences });
     } else {
-      if (VERBOSE) console.log(`  ✅ v1/v2 outputs match for ${relPath}`);
+      verboseLog(`  ✅ v1/v2 outputs match for ${relPath}`, "INFO");
     }
-  } else if (VERBOSE) {
+  } else if (VERBOSE || LOG_VERBOSE) {
     const relPath = path.relative(ROOT_DIR, filePath);
     if (v1Result === null && v2Result === null) {
-      console.log(`  ⚠️  Skipping comparison — both v1 and v2 output generation failed for ${relPath}`);
+      verboseLog(`  ⚠️  Skipping comparison — both v1 and v2 output generation failed for ${relPath}`, "WARN");
     } else if (v1Result === null) {
-      console.log(`  ⚠️  Skipping comparison — v1 output generation failed for ${relPath}`);
+      verboseLog(`  ⚠️  Skipping comparison — v1 output generation failed for ${relPath}`, "WARN");
     } else {
-      console.log(`  ⚠️  Skipping comparison — v2 output generation failed for ${relPath}`);
+      verboseLog(`  ⚠️  Skipping comparison — v2 output generation failed for ${relPath}`, "WARN");
     }
   }
 }
@@ -612,6 +742,14 @@ function removeNullValues(obj) {
  */
 function isIntegerString(value) {
   return typeof value === "string" && /^-?\d+$/.test(value);
+}
+
+/**
+ * Return true when value is an exact boolean string representation.
+ * Accepted values are lowercase "true" and "false" only.
+ */
+function isBooleanString(value) {
+  return value === "true" || value === "false";
 }
 
 /**
@@ -661,6 +799,40 @@ function normalizeIntegerLikeFields(json) {
         if (!field || typeof field !== "object" || !field.params || typeof field.params !== "object") continue;
         convertIfIntegerString(field.params, "amount");
         convertIfIntegerString(field.params, "decimals");
+      }
+    }
+  }
+
+  return converted;
+}
+
+/**
+ * Convert targeted string fields to booleans when possible.
+ * Keeps non-boolean strings untouched.
+ */
+function normalizeBooleanLikeFields(json) {
+  let converted = false;
+
+  function convertIfBooleanString(obj, key) {
+    if (!obj || typeof obj !== "object") return;
+    if (!Object.prototype.hasOwnProperty.call(obj, key)) return;
+    const current = obj[key];
+    if (isBooleanString(current)) {
+      obj[key] = current === "true";
+      stats.changes.booleanStringsConverted++;
+      converted = true;
+    }
+  }
+
+  // $format.unitParameters.properties.prefix
+  if (json.display?.formats && typeof json.display.formats === "object") {
+    for (const format of Object.values(json.display.formats)) {
+      if (!format || typeof format !== "object") continue;
+      if (!Array.isArray(format.fields)) continue;
+
+      for (const field of format.fields) {
+        if (!field || typeof field !== "object" || !field.params || typeof field.params !== "object") continue;
+        convertIfBooleanString(field.params, "prefix");
       }
     }
   }
@@ -737,19 +909,111 @@ function buildHumanReadableSignature(abiEntry) {
 }
 
 /**
- * Try to find matching ABI entry for a format key
+ * Split a function params list by top-level commas.
+ */
+function splitTopLevelParams(paramsString) {
+  const parts = [];
+  let current = "";
+  let depthParen = 0;
+  let depthBracket = 0;
+
+  for (const ch of paramsString) {
+    if (ch === "(") depthParen++;
+    if (ch === ")") depthParen = Math.max(0, depthParen - 1);
+    if (ch === "[") depthBracket++;
+    if (ch === "]") depthBracket = Math.max(0, depthBracket - 1);
+
+    if (ch === "," && depthParen === 0 && depthBracket === 0) {
+      parts.push(current.trim());
+      current = "";
+      continue;
+    }
+    current += ch;
+  }
+
+  const tail = current.trim();
+  if (tail) parts.push(tail);
+  return parts;
+}
+
+/**
+ * Extract just the solidity type from one parameter segment.
+ * Examples:
+ * - "address token" -> "address"
+ * - "uint256" -> "uint256"
+ * - "(address,uint256) payload" -> "(address,uint256)"
+ */
+function extractParamType(paramSegment) {
+  const s = String(paramSegment || "").trim();
+  if (!s) return "";
+
+  let depthParen = 0;
+  let depthBracket = 0;
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (ch === "(") depthParen++;
+    if (ch === ")") depthParen = Math.max(0, depthParen - 1);
+    if (ch === "[") depthBracket++;
+    if (ch === "]") depthBracket = Math.max(0, depthBracket - 1);
+    if (ch === " " && depthParen === 0 && depthBracket === 0) {
+      return s.slice(0, i).replace(/\s+/g, "");
+    }
+  }
+
+  return s.replace(/\s+/g, "");
+}
+
+/**
+ * Normalize a function signature-like key to canonical name(types) form.
+ * Accepts both compact and human-readable parameter styles.
+ */
+function canonicalizeSignature(signatureLike) {
+  const text = String(signatureLike || "").trim();
+  const match = text.match(/^([A-Za-z_]\w*)\((.*)\)$/);
+  if (!match) return null;
+
+  const name = match[1];
+  const paramsBody = match[2].trim();
+  if (!paramsBody) return `${name}()`;
+
+  const canonicalTypes = splitTopLevelParams(paramsBody)
+    .map(extractParamType)
+    .filter(Boolean);
+  return `${name}(${canonicalTypes.join(",")})`;
+}
+
+/**
+ * Return canonical name(types) signature for ABI function entry.
+ */
+function abiCanonicalSignature(abiEntry) {
+  if (!abiEntry || abiEntry.type !== "function") return null;
+  const name = abiEntry.name;
+  const inputs = Array.isArray(abiEntry.inputs) ? abiEntry.inputs : [];
+  const types = inputs.map((input) => extractParamType(input?.type || ""));
+  return `${name}(${types.join(",")})`;
+}
+
+/**
+ * Try to find matching ABI entry for a format key.
+ * Uses exact canonical signature first, then falls back to unique name match.
  */
 function findAbiEntry(abi, formatKey) {
   if (!Array.isArray(abi)) return null;
 
-  // Extract function name from format key
-  const match = formatKey.match(/^(\w+)\(/);
+  const canonicalKey = canonicalizeSignature(formatKey);
+  if (canonicalKey) {
+    const exact = abi.find((entry) => abiCanonicalSignature(entry) === canonicalKey);
+    if (exact) return exact;
+  }
+
+  // Fallback: match by function name only when unambiguous.
+  const match = String(formatKey || "").match(/^([A-Za-z_]\w*)\(/);
   if (!match) return null;
 
   const funcName = match[1];
-  return abi.find(
-    (entry) => entry.type === "function" && entry.name === funcName
-  );
+  const candidates = abi.filter((entry) => entry.type === "function" && entry.name === funcName);
+  if (candidates.length === 1) return candidates[0];
+  return null;
 }
 
 /**
@@ -811,7 +1075,7 @@ function migrateFile(filePath) {
     // Skip if not using v1 schema
     if (!json.$schema?.includes("erc7730-v1.schema.json")) {
       stats.skipped++;
-      if (VERBOSE) console.log(`Skipped (not v1): ${filePath}`);
+      verboseLog(`Skipped (not v1): ${filePath}`);
       return false;
     }
 
@@ -853,6 +1117,15 @@ function migrateFile(filePath) {
       const newFormats = {};
       for (const [oldKey, format] of Object.entries(json.display.formats)) {
         const newKey = keyMapping[oldKey] || oldKey;
+        if (Object.prototype.hasOwnProperty.call(newFormats, newKey) && newKey !== oldKey) {
+          // Guard against accidental key collisions (e.g. overload mismatch).
+          verboseLog(
+            `  ⚠️  Format key collision "${oldKey}" -> "${newKey}", keeping original key to avoid data loss`,
+            "WARN"
+          );
+          newFormats[oldKey] = format;
+          continue;
+        }
         newFormats[newKey] = format;
       }
       json.display.formats = newFormats;
@@ -950,12 +1223,17 @@ function migrateFile(filePath) {
       }
     }
 
-    // 10. Normalize integer-capable fields where values are numeric strings
+    // 10. Normalize boolean-capable fields where values are boolean strings
+    if (normalizeBooleanLikeFields(json)) {
+      modified = true;
+    }
+
+    // 11. Normalize integer-capable fields where values are numeric strings
     if (normalizeIntegerLikeFields(json)) {
       modified = true;
     }
 
-    // 11. Clean up null values (do this last)
+    // 12. Clean up null values (do this last)
     const beforeNulls = stats.changes.nullsCleaned;
     json = removeNullValues(json);
     if (stats.changes.nullsCleaned > beforeNulls) {
@@ -971,7 +1249,7 @@ function migrateFile(filePath) {
         validateMigration(filePath, originalV1Content, true);
       }
       stats.migrated++;
-      if (VERBOSE) console.log(`Migrated: ${filePath}`);
+      verboseLog(`Migrated: ${filePath}`, "INFO");
       return true;
     }
 
@@ -1055,6 +1333,7 @@ function main() {
   console.log(`Null values cleaned:    ${stats.changes.nullsCleaned}`);
   console.log(`Format keys transformed:${stats.changes.formatKeysTransformed}`);
   console.log(`Domain redundant removed:${stats.changes.domainRedundantRemoved}`);
+  console.log(`Bool strings converted: ${stats.changes.booleanStringsConverted}`);
   console.log(`Int strings converted:  ${stats.changes.integerStringsConverted}`);
 
   // Print linting summary
