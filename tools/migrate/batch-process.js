@@ -61,7 +61,8 @@ const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
-  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  verbose: process.argv.includes("--verbose"),
+  logVerbose: Boolean(LOG_FILE_PATH),
   logFile: LOG_FILE_PATH,
   skipTests: process.argv.includes("--skip-tests"),
   skipLint: process.argv.includes("--skip-lint"),
@@ -159,11 +160,13 @@ function log(message, level = "info") {
     error: "❌ ",
     debug: "🔍 ",
   };
-  if (level === "debug" && !CONFIG.verbose) return;
+  if (level === "debug" && !CONFIG.verbose && !CONFIG.logVerbose) return;
   ensureProgressLineBreak();
   const rendered = `${prefix[level] || ""}${message}`;
   appendLogLine(level.toUpperCase(), rendered);
-  console.log(rendered);
+  if (level !== "debug" || CONFIG.verbose) {
+    console.log(rendered);
+  }
 }
 
 function logSection(title) {
@@ -1544,6 +1547,8 @@ main().catch((error) => {
   console.error(`\n❌ Fatal error: ${error.message}`);
   if (CONFIG.verbose) {
     console.error(error.stack);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine("ERROR", error.stack);
   }
   process.exit(1);
 });

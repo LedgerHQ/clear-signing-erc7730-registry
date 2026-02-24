@@ -59,7 +59,8 @@ const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
-  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  verbose: process.argv.includes("--verbose"),
+  logVerbose: Boolean(LOG_FILE_PATH),
   logFile: LOG_FILE_PATH,
   depth: getArgValue("--depth", 100),
   maxTests: getArgValue("--max-tests", process.argv.includes("--compact") ? 1 : 3),
@@ -272,9 +273,7 @@ async function fetchTransactions(chainId, address, depth = 100) {
     `&address=${address}&startblock=0&endblock=99999999` +
     `&page=1&offset=${depth}&sort=desc&apikey=${apiKey}`;
 
-  if (CONFIG.verbose) {
-    log(`  📡 Fetching from ${provider.name} (chain ${chainId})...`);
-  }
+  verboseLog(`  📡 Fetching from ${provider.name} (chain ${chainId})...`);
 
   try {
     const response = await httpsGet(url);
@@ -319,18 +318,14 @@ const LEDGER_EXPLORER_CHAINS = {
 async function fetchTransactionFromLedger(chainId, txHash) {
   const coin = LEDGER_EXPLORER_CHAINS[chainId];
   if (!coin) {
-    if (CONFIG.verbose) {
-      log(`   ⚠️  No Ledger explorer mapping for chainId ${chainId}`);
-    }
+    verboseLog(`   ⚠️  No Ledger explorer mapping for chainId ${chainId}`, "WARN");
     return null;
   }
 
   const url =
     `https://explorers.api.vault.ledger.com/blockchain/v4/${coin}/tx/${txHash}?noinput=false`;
 
-  if (CONFIG.verbose) {
-    log(`   📡 Fetching tx details from Ledger explorer (${coin})...`);
-  }
+  verboseLog(`   📡 Fetching tx details from Ledger explorer (${coin})...`);
 
   try {
     const response = await httpsGet(url);
@@ -339,9 +334,7 @@ async function fetchTransactionFromLedger(chainId, txHash) {
     }
     return null;
   } catch (error) {
-    if (CONFIG.verbose) {
-      log(`   ⚠️  Ledger explorer request failed: ${error.message}`);
-    }
+    verboseLog(`   ⚠️  Ledger explorer request failed: ${error.message}`, "WARN");
     return null;
   }
 }
@@ -527,14 +520,10 @@ async function getRawTransaction(chainId, txHash) {
   if (ledgerTx && ledgerTx.input) {
     try {
       const rawTx = buildUnsignedRawTx(ledgerTx, chainId);
-      if (CONFIG.verbose) {
-        log(`   ✅ Built unsigned raw tx from Ledger explorer (type ${ledgerTx.transaction_type || 0})`);
-      }
+      verboseLog(`   ✅ Built unsigned raw tx from Ledger explorer (type ${ledgerTx.transaction_type || 0})`, "INFO");
       return rawTx;
     } catch (error) {
-      if (CONFIG.verbose) {
-        log(`   ⚠️  Failed to build raw tx: ${error.message}`);
-      }
+      verboseLog(`   ⚠️  Failed to build raw tx: ${error.message}`, "WARN");
     }
   }
 
@@ -550,9 +539,7 @@ async function getRawTransaction(chainId, txHash) {
       try {
         const response = await httpsGet(url);
         if (response.result && response.result.startsWith("0x") && response.result.length > 10) {
-          if (CONFIG.verbose) {
-            log(`   ✅ Got signed raw tx from Etherscan`);
-          }
+          verboseLog("   ✅ Got signed raw tx from Etherscan", "INFO");
           return response.result;
         }
       } catch (error) {
@@ -1312,9 +1299,7 @@ async function callLLM(prompt) {
       headers,
     };
 
-    if (CONFIG.verbose) {
-      log(`   📡 Calling LLM: ${url.hostname}${url.pathname} (${useAzure ? "Azure" : "OpenAI"} format)`);
-    }
+    verboseLog(`   📡 Calling LLM: ${url.hostname}${url.pathname} (${useAzure ? "Azure" : "OpenAI"} format)`);
 
     const req = client.request(options, (res) => {
       let body = "";
@@ -1582,6 +1567,24 @@ function printReport(report) {
 function log(message) {
   if (CONFIG.verbose || !message.startsWith("   ")) {
     console.log(message);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine("DEBUG", message);
+  }
+}
+
+function verboseLog(message, level = "DEBUG") {
+  if (CONFIG.verbose) {
+    log(message);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine(level, message);
+  }
+}
+
+function verboseError(message, level = "ERROR") {
+  if (CONFIG.verbose) {
+    console.error(message);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine(level, message);
   }
 }
 
@@ -2220,7 +2223,7 @@ async function main() {
           refineTestFile(testFilePath, logFile, erc7730);
         } catch (err) {
           console.log(`   ⚠️  Refinement failed: ${err.message}`);
-          if (CONFIG.verbose) console.error(err.stack);
+          verboseError(err.stack);
         }
       } else if (!CONFIG.refine) {
         console.log("\nℹ️  Refinement skipped (--no-refine)");
@@ -2230,9 +2233,7 @@ async function main() {
     }
   } catch (error) {
     console.error(`\n❌ Fatal error: ${error.message}`);
-    if (CONFIG.verbose) {
-      console.error(error.stack);
-    }
+    verboseError(error.stack);
     process.exit(1);
   } finally {
     // Clean up local API server if we started one

@@ -34,7 +34,8 @@ const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
 const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
-  verbose: process.argv.includes("--verbose") || Boolean(LOG_FILE_PATH),
+  verbose: process.argv.includes("--verbose"),
+  logVerbose: Boolean(LOG_FILE_PATH),
   logFile: LOG_FILE_PATH,
   allChains: process.argv.includes("--all-chains"),
   chainExplicit: process.argv.includes("--chain"),
@@ -144,7 +145,11 @@ console.error = (...args) => {
 initLogFile();
 
 function log(msg) {
-  if (CONFIG.verbose) console.log(msg);
+  if (CONFIG.verbose) {
+    console.log(msg);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine("DEBUG", msg);
+  }
 }
 
 function usageAndExit() {
@@ -896,6 +901,8 @@ main().catch((err) => {
   console.error(`Fatal error: ${err.message}`);
   if (CONFIG.verbose) {
     console.error(err.stack);
+  } else if (CONFIG.logVerbose) {
+    appendLogLine("ERROR", err.stack);
   }
   process.exit(1);
 });
