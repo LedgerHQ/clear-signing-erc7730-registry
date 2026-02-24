@@ -41,7 +41,7 @@
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
       "fillAmount": {
-        "label": "Fill amount",
+        "label": "Amount to sell",
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },
@@ -239,7 +239,7 @@
       },
       "increaseEpoch(uint96 series)" : {
         "$id": "increaseEpoch",
-        "intent": "Increase Order Epoch",
+        "intent": "Cancel all limit orders",
         "fields": [
           { "path": "@.from", "label": "Orders maker", "format": "raw" }
         ],
