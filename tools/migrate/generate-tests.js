@@ -850,9 +850,26 @@ function computeKeccak256Selector(input) {
 async function generateCalldataTests(erc7730, report, coveredFunctions = new Set()) {
   const tests = [];
   const deploymentsToProcess = selectDeploymentsForGeneration(erc7730.deployments);
+  const txCache = new Map();
+
+  function normalizeChainId(value) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  async function getTransactionsCached(chainId, address) {
+    const key = `${chainId}:${String(address || "").toLowerCase()}`;
+    if (txCache.has(key)) {
+      return txCache.get(key);
+    }
+    const txs = await fetchTransactions(chainId, address, CONFIG.depth);
+    txCache.set(key, txs);
+    return txs;
+  }
 
   for (const deployment of deploymentsToProcess) {
     const { chainId, address } = deployment;
+    const normalizedChainId = normalizeChainId(chainId);
 
     // Apply chain filter if specified
     if (!CONFIG.compact && CONFIG.chainFilter && chainId !== parseInt(CONFIG.chainFilter)) {
@@ -861,7 +878,7 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
 
     log(`\n📍 Processing ${address} on chain ${chainId}`);
 
-    const transactions = await fetchTransactions(chainId, address, CONFIG.depth);
+    const transactions = await getTransactionsCached(chainId, address);
     log(`   Found ${transactions.length} transactions`);
 
     for (const func of erc7730.functions) {
@@ -880,10 +897,47 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
         return txSelector === selector;
       });
 
-      log(`   🔍 ${func.intent || func.signature}: ${matching.length} matches`);
+      let matchingSourceAddress = address;
+      let matchingSourceLabel = `selected deployment ${address}`;
+      let fallbackAttempts = 0;
+      let examples = matching.slice(0, CONFIG.maxTests);
 
-      // Take up to maxTests examples
-      const examples = matching.slice(0, CONFIG.maxTests);
+      // Compact mode fallback:
+      // if no examples on the selected deployment, try other deployments on same chain.
+      if (CONFIG.compact && examples.length === 0 && normalizedChainId !== null) {
+        const sameChainFallbacks = (erc7730.deployments || []).filter((d) => {
+          const dChain = normalizeChainId(d?.chainId);
+          const dAddress = String(d?.address || "").toLowerCase();
+          return (
+            dChain === normalizedChainId &&
+            dAddress &&
+            dAddress !== String(address || "").toLowerCase()
+          );
+        });
+
+        for (const fallback of sameChainFallbacks) {
+          fallbackAttempts++;
+          const fallbackTxs = await getTransactionsCached(chainId, fallback.address);
+          const fallbackMatching = fallbackTxs.filter((tx) => {
+            const txSelector = extractSelector(tx.input);
+            return txSelector === selector;
+          });
+          if (fallbackMatching.length > 0) {
+            matchingSourceAddress = fallback.address;
+            matchingSourceLabel = `fallback deployment ${fallback.address}`;
+            examples = fallbackMatching.slice(0, CONFIG.maxTests);
+            break;
+          }
+        }
+      }
+
+      if (CONFIG.compact && fallbackAttempts > 0) {
+        log(
+          `   🔍 ${func.intent || func.signature}: ${examples.length} matches (${matchingSourceLabel}; ${fallbackAttempts} fallback address(es) tried)`
+        );
+      } else {
+        log(`   🔍 ${func.intent || func.signature}: ${examples.length} matches`);
+      }
 
       for (const tx of examples) {
         // Get unsigned raw transaction (Ledger explorer + RLP reconstruction)
@@ -911,6 +965,7 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
           type: "calldata",
           chainId,
           function: func.signature,
+          address: matchingSourceAddress,
           txHash: tx.hash,
         });
       }
@@ -920,7 +975,9 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
           type: "calldata",
           chainId,
           function: func.signature,
-          reason: "No matching transactions found",
+          reason: CONFIG.compact
+            ? "No matching transactions found on selected deployment or same-chain fallback addresses"
+            : "No matching transactions found",
         });
       }
     }
