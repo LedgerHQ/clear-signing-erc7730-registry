@@ -1,7 +1,6 @@
 {
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
-    "$id": null,
     "contract": {
       "deployments": [{ "chainId": 1, "address": "0x0bb4D3e88243F4A057Db77341e6916B0e449b158" }],
       "abi": [
@@ -216,27 +215,12 @@
   "display": {
     "formats": {
       "mintToken(uint256,uint256,address,uint256,bytes)": {
-        "$id": null,
+        "$id": "mintToken",
         "intent": "Mint POAP",
-        "screens": null,
         "fields": [
-          { "$id": null, "label": "Token Id", "format": "raw", "path": "#.tokenId", "value": null },
-          {
-            "$id": null,
-            "label": "Receiver",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": null },
-            "path": "#.receiver",
-            "value": null
-          },
-          {
-            "$id": null,
-            "label": "Expiration Time",
-            "format": "date",
-            "params": { "encoding": "timestamp" },
-            "path": "#.expirationTime",
-            "value": null
-          },
+          { "label": "Token Id", "format": "raw", "path": "#.tokenId" },
+          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.receiver" },
+          { "label": "Expiration Time", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.expirationTime" },
           { "path": "@.value", "label": "Migration Fee", "format": "amount" }
         ],
         "required": ["#.tokenId", "#.receiver"],

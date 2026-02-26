@@ -31,6 +31,7 @@ jobs:
           files: |
             registry/**/eip712-*.json
             registry/**/calldata-*.json
+          files_ignore: registry/**/tests/**
 
       - name: Setup python
         timeout-minutes: 10
