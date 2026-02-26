@@ -527,7 +527,8 @@
         "intent": "Exit funds",
         "screens": null,
         "fields": [
-          { "$id": null, "label": "Amount to exit", "format": "amount", "params": null, "path": "#.shares", "value": null },
+          { "$id": null, "label": "Shares to exit", "format": "tokenAmount", "params": {
+      "tokenPath": "@.to"}, "path": "#.shares", "value": null },
           {
             "$id": null,
             "label": "Client address",

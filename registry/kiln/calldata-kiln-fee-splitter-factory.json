@@ -184,7 +184,7 @@
         "required": ["#.operator"]
       },
       "createSplitterAndCall(address,bytes32,address,bytes)": {
-        "intent": "Create Splitter and Stake",
+        "intent": "Create and Stake",
         "fields": [
           {
             "label": "Operator",
@@ -199,12 +199,12 @@
             "params": { "types": ["contract"], "sources": ["local", "ens"] },
             "path": "#.callAddress"
           },
-          { "label": "Transaction", "format": "calldata", "params": { "calleePath": "#.callAddress" }, "path": "#.data" }
+          { "label": "Transaction", "format": "calldata", "params": { "calleePath": "#.callAddress", "amountPath": "@.value" }, "path": "#.data" }
         ],
         "required": ["#.operator", "#.data"]
       },
       "transferOwnership(address)": {
-        "intent": "Transfer Ownership",
+        "intent": "Start owner transfer",
         "fields": [
           {
             "label": "New Owner",

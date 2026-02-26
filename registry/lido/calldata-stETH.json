@@ -34,13 +34,13 @@
         "excluded": []
       },
       "submit(address)": {
-        "intent": "stake ETH",
+        "intent": "Stake ETH",
         "fields": [{ "label": "Amount to stake", "format": "amount", "path": "@.value" }],
         "required": [],
         "excluded": ["#._referral"]
       },
       "transfer(address,uint256)": {
-        "intent": "transfer stETH",
+        "intent": "Transfer stETH",
         "fields": [
           {
             "label": "Recipient",

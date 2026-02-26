@@ -64,7 +64,7 @@ jobs:
       - name: Open pull request
         if: ${{ !cancelled() && steps.changes.outputs.changes == 'true' }}
         timeout-minutes: 10
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.CI_BOT_TOKEN }}
           author: ${{ secrets.CI_BOT_USERNAME }} <${{ secrets.CI_BOT_USERNAME }}@users.noreply.github.com>
