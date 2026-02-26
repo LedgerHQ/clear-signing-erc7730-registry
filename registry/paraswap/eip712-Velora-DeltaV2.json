@@ -57,7 +57,7 @@
           { "path": "destAmount", "label": "Minimum to receive", "format": "tokenAmount", "params": { "tokenPath": "destToken" } },
           { "path": "bridge.destinationChainId", "label": "Destination chain ID", "format": "raw" },
           { "path": "beneficiary", "label": "Beneficiary", "format": "raw" },
-          { "path": "deadline", "label": "Expiration time", "format": "raw" }
+          { "path": "deadline", "label": "Expiration time", "format": "date", "params": { "encoding": "timestamp" } }
         ]
       }
     }

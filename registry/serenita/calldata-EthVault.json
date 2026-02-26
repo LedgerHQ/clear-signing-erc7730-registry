@@ -149,7 +149,7 @@
         "excluded": ["#.positionTicket", "#.timestamp", "#.exitQueueIndex"]
       },
       "deposit(address,address)": {
-        "intent": "deposit and stake ETH",
+        "intent": "Stake ETH",
         "fields": [
           {
             "label": "Rewards receiver",
@@ -176,18 +176,18 @@
         "required": ["#.shares", "#.receiver"]
       },
       "multicall(bytes[])": {
-        "intent": "call multiple methods",
+        "intent": "Multicall",
         "fields": [{ "label": "Call", "path": "#.data.[]", "format": "calldata", "params": { "calleePath": "@.to" } }],
         "required": ["#.data.[]"]
       },
       "updateState((bytes32,int160,uint160,bytes32[]))": {
-        "intent": "update vault's internal state",
+        "intent": "Update Vault State",
         "fields": [],
         "required": [],
         "excluded": ["#.harvestParams.rewardsRoot", "#.harvestParams.reward", "#.harvestParams.unlockedMevReward", "#.harvestParams.proof.[]"]
       },
       "updateStateAndDeposit(address,address,(bytes32,int160,uint160,bytes32[]))": {
-        "intent": "deposit and stake ETH",
+        "intent": "Update & Deposit",
         "fields": [
           {
             "label": "Rewards receiver",

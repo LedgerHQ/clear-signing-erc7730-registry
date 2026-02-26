@@ -134,7 +134,7 @@ jobs:
           ref: ${{ env.DMK_REF }}
           path: dmk
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
 
@@ -175,6 +175,12 @@ jobs:
           mkdir -p test-inputs screenshots
           jq '.tests' "registry/${{ matrix.test.test_file }}" > test-inputs/tests.json
 
+      - name: Resolve descriptor includes
+        run: |
+          node "${{ github.workspace }}/registry/.github/scripts/resolve-erc7730-includes.js" \
+            "${{ github.workspace }}/registry/${{ matrix.test.descriptor }}" \
+            "${{ github.workspace }}/test-inputs/resolved-descriptor.json"
+
       - name: Run clear signing tests
         id: run-tests
         working-directory: dmk
@@ -188,7 +194,7 @@ jobs:
           set +e
           pnpm cs-tester cli $CMD "${{ github.workspace }}/test-inputs/tests.json" \
             --device ${{ matrix.device }} \
-            --erc7730-files "${{ github.workspace }}/registry/${{ matrix.test.descriptor }}" \
+            --erc7730-files "${{ github.workspace }}/test-inputs/resolved-descriptor.json" \
             --screenshot-folder-path "${{ github.workspace }}/screenshots" \
             --log-level info 2>&1 | tee test-output.log
           EXIT_CODE=${PIPESTATUS[0]}
@@ -219,7 +225,7 @@ jobs:
         run: |
           # Save exit code for PR comment
           echo "${{ steps.run-tests.outputs.exit_code }}" > screenshots/exit_code.txt
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: screenshots-${{ matrix.device }}-${{ matrix.test.entity }}-${{ matrix.test.descriptor_name }}
@@ -228,7 +234,7 @@ jobs:
 
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: logs-${{ matrix.device }}-${{ matrix.test.entity }}-${{ matrix.test.descriptor_name }}
           path: dmk/test-output.log
@@ -350,7 +356,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const body = `## Clear Signing Tests\n\n> ℹNo test files found for the changed descriptors.\n\nCreate a test file at \`registry/<entity>/tests/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../README.md#testing-your-descriptors) for details.`;
+            const body = `## Clear Signing Tests\n\n> ℹNo test files found for the changed descriptors.\n\nCreate a test file at \`registry/<entity>/tests/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../blob/master/README.md#reference-test-cases) for details.`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number
