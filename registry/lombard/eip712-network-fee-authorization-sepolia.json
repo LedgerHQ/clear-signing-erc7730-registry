@@ -2,12 +2,12 @@
   "$schema": "../../specs/erc7730-v1.schema.json",
   "context": {
     "eip712": {
-      "deployments": [{ "chainId": 17000, "address": "0xED7bfd5C1790576105Af4649817f6d35A75CD818" }],
+      "deployments": [{ "chainId": 11155111, "address": "0x731eFa688F3679688cf60A3993b8658138953ED6" }],
       "domain": {
         "name": "Lombard Staked Bitcoin",
         "version": "1",
-        "chainId": 17000,
-        "verifyingContract": "0xED7bfd5C1790576105Af4649817f6d35A75CD818"
+        "chainId": 11155111,
+        "verifyingContract": "0x731eFa688F3679688cf60A3993b8658138953ED6"
       },
       "schemas": [
         {
