@@ -18,7 +18,7 @@
   "display": {
     "formats": {
       "approve(address,uint256)": {
-        "intent": "authorize wstETH spending",
+        "intent": "Authorize wstETH spending",
         "fields": [
           {
             "label": "Spender",
@@ -37,7 +37,7 @@
         "excluded": []
       },
       "wrap(uint256)": {
-        "intent": "wrap stETH to wstETH",
+        "intent": "Wrap stETH to wstETH",
         "fields": [
           {
             "label": "stETH amount",
@@ -50,7 +50,7 @@
         "excluded": []
       },
       "unwrap(uint256)": {
-        "intent": "unwrap wstETH to stETH",
+        "intent": "Unwrap wstETH to stETH",
         "fields": [
           {
             "label": "wstETH amount",
@@ -63,7 +63,7 @@
         "excluded": []
       },
       "transfer(address,uint256)": {
-        "intent": "transfer wstETH",
+        "intent": "Transfer wstETH",
         "fields": [
           {
             "label": "Recipient",
