@@ -448,6 +448,63 @@ function deepCompare(v1, v2, jsonPath = "$") {
 }
 
 /**
+ * Filter known acceptable v1/v2 output differences for migration comparisons.
+ * When owner is reconciled from legalName, we can ignore creator_name drift.
+ * For a given calldata item, descriptor drift can also be ignored when the only
+ * other drift on that same item is creator_name.
+ */
+function filterComparisonDifferences(differences, options = {}) {
+  const { ignoreCreatorNameDrift = false } = options;
+  if (!ignoreCreatorNameDrift || !Array.isArray(differences) || differences.length === 0) {
+    return differences;
+  }
+
+  const transactionInfoPattern = /^\$\[(\d+)\]\.transaction_info\.(creator_name|descriptor):/;
+  const itemPathPattern = /^\$\[(\d+)\]\./;
+
+  const perItem = new Map();
+  for (const diff of differences) {
+    const txMatch = diff.match(transactionInfoPattern);
+    if (txMatch) {
+      const index = txMatch[1];
+      const field = txMatch[2];
+      const state = perItem.get(index) || { creator: false, descriptor: false, other: false };
+      if (field === "creator_name") state.creator = true;
+      if (field === "descriptor") state.descriptor = true;
+      perItem.set(index, state);
+      continue;
+    }
+
+    const itemMatch = diff.match(itemPathPattern);
+    if (itemMatch) {
+      const index = itemMatch[1];
+      const state = perItem.get(index) || { creator: false, descriptor: false, other: false };
+      state.other = true;
+      perItem.set(index, state);
+    }
+  }
+
+  return differences.filter((diff) => {
+    const txMatch = diff.match(transactionInfoPattern);
+    if (!txMatch) return true;
+
+    const index = txMatch[1];
+    const field = txMatch[2];
+    const state = perItem.get(index) || { creator: false, descriptor: false, other: false };
+
+    if (field === "creator_name") {
+      return false;
+    }
+
+    if (field === "descriptor" && state.creator && !state.other) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+/**
  * Record a calldata/convert validation failure in stats.
  */
 function recordCalldataFailure(version, filePath, errorMsg) {
@@ -631,8 +688,9 @@ function validateCalldata(filePath, version) {
  * @param {string} filePath - Path to the migrated v2 file
  * @param {string} v1Content - Original v1 content string
  * @param {boolean} wasV1 - Whether the file was originally v1
+ * @param {object} [comparisonOptions] - Optional comparison tuning flags
  */
-function validateMigration(filePath, v1Content, wasV1) {
+function validateMigration(filePath, v1Content, wasV1, comparisonOptions = {}) {
   if (SKIP_LINT || DRY_RUN) {
     stats.linting.skipped++;
     stats.calldata.skipped++;
@@ -685,7 +743,8 @@ function validateMigration(filePath, v1Content, wasV1) {
 
   // Compare v1 and v2 outputs — they should be identical
   if (v1Result !== null && v2Result !== null) {
-    const differences = deepCompare(v1Result, v2Result);
+    const rawDifferences = deepCompare(v1Result, v2Result);
+    const differences = filterComparisonDifferences(rawDifferences, comparisonOptions);
     const relPath = path.relative(ROOT_DIR, filePath);
     if (differences.length > 0) {
       const diffSummary = differences.map((d) => `    ${d}`).join("\n");
@@ -1220,6 +1279,7 @@ function migrateFile(filePath) {
     const originalV1Content = content; // Store for validation
     let json = JSON.parse(content);
     let modified = false;
+    let ownerReplacedFromLegalName = false;
 
     // Skip if not using v1 schema
     if (!json.$schema?.includes("erc7730-v1.schema.json")) {
@@ -1257,6 +1317,7 @@ function migrateFile(filePath) {
         `  ⚠️  ${path.relative(ROOT_DIR, filePath)}: metadata.owner differs from metadata.info.legalName; replacing owner with legalName`
       );
       modified = true;
+      ownerReplacedFromLegalName = true;
     }
 
     if (json.metadata?.info?.legalName !== undefined) {
@@ -1409,7 +1470,9 @@ function migrateFile(filePath) {
         fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + "\n");
         
         // Validate the migration (lint v1 and v2, calldata on both)
-        validateMigration(filePath, originalV1Content, true);
+        validateMigration(filePath, originalV1Content, true, {
+          ignoreCreatorNameDrift: ownerReplacedFromLegalName,
+        });
       }
       stats.migrated++;
       verboseLog(`Migrated: ${filePath}`, "INFO");
