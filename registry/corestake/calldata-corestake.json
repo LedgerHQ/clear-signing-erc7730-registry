@@ -31,11 +31,7 @@
       "mint(address)": {
         "intent": "Stake CORE",
         "fields": [
-          {
-              "format": "amount",
-              "label": "Amount to stake",
-              "path": "@.value"
-            },
+          { "format": "amount", "label": "Amount to stake", "path": "@.value" },
           {
             "path": "_validator",
             "label": "Validator Address",

@@ -199,7 +199,12 @@
             "params": { "types": ["contract"], "sources": ["local", "ens"] },
             "path": "#.callAddress"
           },
-          { "label": "Transaction", "format": "calldata", "params": { "calleePath": "#.callAddress", "amountPath": "@.value" }, "path": "#.data" }
+          {
+            "label": "Transaction",
+            "format": "calldata",
+            "params": { "calleePath": "#.callAddress", "amountPath": "@.value" },
+            "path": "#.data"
+          }
         ],
         "required": ["#.operator", "#.data"]
       },

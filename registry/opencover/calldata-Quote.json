@@ -35,7 +35,7 @@
           { "path": "#.quote.coverExpiry", "$ref": "$.display.definitions.coverExpiry" },
           { "path": "#.quote.paymentAssetId", "$ref": "$.display.definitions.paymentAssetId" },
           { "path": "#.quote.premiumAmount", "$ref": "$.display.definitions.premiumAmount" },
-          { "path": "#.quote.feeAmount", "label": "Fee amount", "format": "raw"}
+          { "path": "#.quote.feeAmount", "label": "Fee amount", "format": "raw" }
         ],
         "required": ["#.quote.coverAssetId", "#.quote.coverAmount", "#.quote.coverExpiry", "#.quote.paymentAssetId", "#.quote.premiumAmount"],
         "excluded": ["#.quote.providerId", "#.quote.productId", "#.quote.validUntil", "#.v", "#.r", "#.s"]
@@ -49,8 +49,13 @@
           { "path": "#.quote.coverExpiry", "$ref": "$.display.definitions.coverExpiry" },
           { "path": "#.quote.paymentAssetId", "$ref": "$.display.definitions.paymentAssetId" },
           { "path": "#.quote.premiumAmount", "$ref": "$.display.definitions.premiumAmount" },
-          { "path": "#.quote.feeAmount", "label": "Fee amount", "format": "raw"},
-          { "path": "#.mintTo", "label": "Recipient", "format": "addressName", "params": { "senderAddress": ["0x0000000000000000000000000000000000000000" ] } }
+          { "path": "#.quote.feeAmount", "label": "Fee amount", "format": "raw" },
+          {
+            "path": "#.mintTo",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "senderAddress": ["0x0000000000000000000000000000000000000000"] }
+          }
         ],
         "required": ["#.quote.coverAssetId", "#.quote.coverAmount", "#.quote.coverExpiry", "#.quote.paymentAssetId", "#.quote.premiumAmount"],
         "excluded": [

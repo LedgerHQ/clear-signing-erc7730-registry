@@ -47,11 +47,7 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           },
-          {
-            "format": "amount",
-            "label": "CORE amount",
-            "path": "@.value"
-          }
+          { "format": "amount", "label": "CORE amount", "path": "@.value" }
         ],
         "required": ["candidate"]
       },
