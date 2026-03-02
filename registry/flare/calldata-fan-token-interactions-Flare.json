@@ -1,0 +1,1600 @@
+{
+  "$schema": null,
+  "context": {
+    "$id": "FanBond",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 114,
+          "address": "0xE9ef9aa3a42394015d5591e83059B0855f2b1C5E"
+        }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "BASE_PRICE",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "CURVE_COEFFICIENT",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "MAX_USER_TOKENS",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "currentSeason",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "emergencyWithdraw",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "endSeason",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "fanBondToken",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "contract FanBondToken",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getAllUserTokens",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "tokenIds",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amounts",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getContractBalance",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getGameInfo",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "sold",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "remaining",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "currentPrice",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "liquidityPool",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "circulatingSupply",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "playerAddress",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "hasPlayerClaimed",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getPerformanceMultiplier",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getPrice",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getSeasonInfo",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "season",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "active",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "ended",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getTotalLiquidity",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getUserGameInfo",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "totalTokens",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "playerTokens",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenBalances",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "getUserNullifier",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "nullifier",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "handleTransfer",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "hasMintedPlayer",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "hasPlayerClaimed",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "hasUserClaimed",
+          "inputs": [
+            {
+              "name": "user",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "initializeSeason",
+          "inputs": [
+            {
+              "name": "_playerIds",
+              "type": "uint256[]",
+              "internalType": "uint256[]",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "liquidity",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "mintPlayer",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "nullifier",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "payable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerClaim",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerClaimed",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "playerStatsListAddress",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "processPlayerVerification",
+          "inputs": [
+            {
+              "name": "playerId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "playerAddress",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "firstName",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "lastName",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "dateOfBirth",
+              "type": "string",
+              "internalType": "string",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "renounceOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "seasonActive",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "seasonEnded",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "setPlayerStatsListAddress",
+          "inputs": [
+            {
+              "name": "_playerStatsListAddress",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "tokensSold",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "totalUserTokens",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "newOwner",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "userClaim",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "userClaimed",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "userNullifiers",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "stateMutability": "view",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "withdrawAllLiquidity",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        },
+        {
+          "type": "function",
+          "name": "withdrawLiquidity",
+          "inputs": [
+            {
+              "name": "tokenId",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            },
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256",
+              "components": null,
+              "indexed": null,
+              "unit": null
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "constant": null,
+          "payable": null,
+          "gas": null,
+          "signature": null
+        }
+      ],
+      "addressMatcher": null,
+      "factory": null
+    }
+  },
+  "metadata": {
+    "owner": "Curve League Protocol",
+    "info": {
+      "legalName": "Curve League",
+      "url": "https://github.com/LeoFranklin015/ScoreX"
+    }
+  },
+  "display": {
+    "formats": {
+      "getAllUserTokens(address)": {
+        "$id": null,
+        "intent": "Fetch all token holdings",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "User",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "getGameInfo(uint256)": {
+        "$id": null,
+        "intent": "get details about liquidity and tokenomics.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getPerformanceMultiplier(uint256)": {
+        "$id": null,
+        "intent": "fetch performance metrics of a player token.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getPrice(uint256)": {
+        "$id": null,
+        "intent": "get dynamic price of the fan token.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "getUserGameInfo(address)": {
+        "$id": null,
+        "intent": "get current fan token holdings and their value",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "getUserNullifier(address)": {
+        "$id": null,
+        "intent": "view the proof generated by self protocol.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user"
+        ],
+        "excluded": null
+      },
+      "handleTransfer(address,address,uint256,uint256)": {
+        "$id": null,
+        "intent": "Transfer fan tokens",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Source wallet of tokens",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.from",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Destination wallet of tokens",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": [
+                "ens"
+              ]
+            },
+            "path": "#.to",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "amount in ETH",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.from",
+          "#.to",
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      },
+      "hasPlayerClaimed(uint256)": {
+        "$id": null,
+        "intent": "check if the user has claimed their token holdings.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "hasUserClaimed(address,uint256)": {
+        "$id": null,
+        "intent": "check if the user has claimed the fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of your wallet.",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.user",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.user",
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "initializeSeason(uint256[])": {
+        "$id": null,
+        "intent": "Create a new season (Only do this after end of previous season)",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#._playerIds.[]",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._playerIds.[]"
+        ],
+        "excluded": null
+      },
+      "mintPlayer(uint256,uint256)": {
+        "$id": null,
+        "intent": "Purchase fan token",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Self Protocol proof.",
+            "format": "raw",
+            "params": null,
+            "path": "#.nullifier",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#.nullifier"
+        ],
+        "excluded": null
+      },
+      "playerClaim(uint256)": {
+        "$id": null,
+        "intent": "collect all the seasons earnings.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "processPlayerVerification(uint256,address,string,string,string)": {
+        "$id": null,
+        "intent": "prove player with ZK.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player",
+            "format": "raw",
+            "params": null,
+            "path": "#.playerId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Player Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.playerAddress",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "First Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.firstName",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Last Name",
+            "format": "raw",
+            "params": null,
+            "path": "#.lastName",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Date Of Birth",
+            "format": "raw",
+            "params": null,
+            "path": "#.dateOfBirth",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.playerId",
+          "#.playerAddress",
+          "#.firstName",
+          "#.lastName",
+          "#.dateOfBirth"
+        ],
+        "excluded": null
+      },
+      "setPlayerStatsListAddress(address)": {
+        "$id": null,
+        "intent": "add address to the player stats",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Player Stats List Address",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#._playerStatsListAddress",
+            "value": null
+          }
+        ],
+        "required": [
+          "#._playerStatsListAddress"
+        ],
+        "excluded": null
+      },
+      "transferOwnership(address)": {
+        "$id": null,
+        "intent": "Transfer the ownership of the contract.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Public address of the new owner",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "wallet"
+              ],
+              "sources": null
+            },
+            "path": "#.newOwner",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.newOwner"
+        ],
+        "excluded": null
+      },
+      "userClaim(uint256)": {
+        "$id": null,
+        "intent": "claim all investment funds.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "withdrawAllLiquidity(uint256)": {
+        "$id": null,
+        "intent": "withdraw all liquidity from fan tokens.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId"
+        ],
+        "excluded": null
+      },
+      "withdrawLiquidity(uint256,uint256)": {
+        "$id": null,
+        "intent": "withdraw a specific amount of liquidity from the fan token pool.",
+        "screens": null,
+        "fields": [
+          {
+            "$id": null,
+            "label": "Token Id of the player.",
+            "format": "raw",
+            "params": null,
+            "path": "#.tokenId",
+            "value": null
+          },
+          {
+            "$id": null,
+            "label": "Amount in eth",
+            "format": "amount",
+            "params": null,
+            "path": "#.amount",
+            "value": null
+          }
+        ],
+        "required": [
+          "#.tokenId",
+          "#.amount"
+        ],
+        "excluded": null
+      }
+    }
+  }
+}
