@@ -729,7 +729,7 @@
               {
                 "$id": null,
                 "label": "Voting Period",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "votingPeriodSeconds",
                 "value": null
@@ -737,7 +737,7 @@
               {
                 "$id": null,
                 "label": "Vp Block Period",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "vpBlockPeriodSeconds",
                 "value": null
@@ -745,23 +745,23 @@
               {
                 "$id": null,
                 "label": "Threshold (bps)",
-                "format": "raw",
-                "params": null,
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "thresholdConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
                 "label": "Majority (bps)",
-                "format": "raw",
-                "params": null,
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "majorityConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
                 "label": "Execution Delay",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "executionDelaySeconds",
                 "value": null
@@ -769,7 +769,7 @@
               {
                 "$id": null,
                 "label": "Execution Period",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "executionPeriodSeconds",
                 "value": null
@@ -815,7 +815,7 @@
               {
                 "$id": null,
                 "label": "Voting Period",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "votingPeriodSeconds",
                 "value": null
@@ -823,7 +823,7 @@
               {
                 "$id": null,
                 "label": "Vp Block Period",
-                "format": "raw",
+                "format": "duration",
                 "params": null,
                 "path": "vpBlockPeriodSeconds",
                 "value": null
@@ -831,16 +831,16 @@
               {
                 "$id": null,
                 "label": "Threshold (bps)",
-                "format": "raw",
-                "params": null,
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "thresholdConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
                 "label": "Majority (bps)",
-                "format": "raw",
-                "params": null,
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "majorityConditionBIPS",
                 "value": null
               }
