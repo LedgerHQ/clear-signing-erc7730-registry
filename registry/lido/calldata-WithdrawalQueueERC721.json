@@ -67,9 +67,7 @@
           {
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"], "senderAddress": [
-        "0x0000000000000000000000000000000000000000"
-      ] },
+            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"], "senderAddress": ["0x0000000000000000000000000000000000000000"] },
             "path": "#._owner"
           }
         ],
@@ -148,11 +146,7 @@
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._to"
           },
-          {
-        "label": "Request ID",
-        "format": "raw",
-        "path": "#._requestId"
-      }
+          { "label": "Request ID", "format": "raw", "path": "#._requestId" }
         ],
         "required": ["#._from", "#._to", "#._requestId"],
         "excluded": []
@@ -172,11 +166,7 @@
             "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] },
             "path": "#._to"
           },
-                {
-        "label": "Request ID",
-        "format": "raw",
-        "path": "#._requestId"
-      }
+          { "label": "Request ID", "format": "raw", "path": "#._requestId" }
         ],
         "required": ["#._from", "#._to", "#._requestId"],
         "excluded": []
