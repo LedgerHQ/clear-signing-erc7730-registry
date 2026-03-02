@@ -22,7 +22,7 @@
         "$id": "createProxyWithCallback",
         "intent": "Create Safe",
         "fields": [{ "path": "initializer", "format": "calldata", "label": "Account setup", "params": { "calleePath": "_singleton" } }],
-        "required": ["data"],
+        "required": [],
         "excluded": ["saltNonce", "callback"]
       }
     }
