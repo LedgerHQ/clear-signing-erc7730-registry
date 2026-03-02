@@ -24,19 +24,19 @@ yarn add js-sha3
 
 ```bash
 # Basic usage
-node tools/generate-tests.js <erc7730-file>
+node tools/migrate/generate-tests.js <erc7730-file>
 
 # Dry run (preview without writing)
-node tools/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --dry-run
+node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --dry-run
 
 # Verbose output
-node tools/generate-tests.js registry/ethena/calldata-ethena.json --verbose
+node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --verbose
 
 # Limit search depth and tests
-node tools/generate-tests.js registry/aave/calldata-lpv3.json --depth 50 --max-tests 2
+node tools/migrate/generate-tests.js registry/aave/calldata-lpv3.json --depth 50 --max-tests 2
 
 # Process only specific chain
-node tools/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --chain 1
+node tools/migrate/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --chain 1
 ```
 
 ## Options
@@ -50,8 +50,15 @@ node tools/generate-tests.js registry/1inch/calldata-AggregationRouterV3.json --
 | `--chain <id>` | all | Only process specific chain ID |
 | `--openai-url <url>` | api.openai.com | Custom OpenAI API URL (e.g., Azure endpoint) |
 | `--openai-key <key>` | OPENAI_API_KEY env | OpenAI API key |
-| `--openai-model <model>` | gpt-4 | Model to use for generation |
+| `--openai-model <model>` | gpt-5 | Model to use for generation |
 | `--azure` | false | Use Azure OpenAI API format (api-key header) |
+| `--no-test` | false | Skip running the clear signing tester after generation |
+| `--force-test` | false | Force running tester on existing tests, including 100% coverage cases |
+| `--device <device>` | flex | Tester device: `flex`, `stax`, `nanosp`, `nanox` |
+| `--test-log-level <lvl>` | info | Tester log level: `none`, `error`, `warn`, `info`, `debug` |
+| `--no-refine` | false | Skip refining `expectedTexts` from tester screen output |
+| `--local-api` | false | Auto-start a local Flask API server (patched `erc7730`) |
+| `--local-api-port <port>` | 5000 | Port for local API server started by `--local-api` |
 
 ## Environment Variables
 
@@ -73,19 +80,25 @@ The script uses the unified Etherscan V2 API which supports multiple chains with
 | `LLM_BASE_URL` | Custom LLM endpoint (default: https://api.openai.com) |
 | `AZURE_OPENAI` | Set to `true` to use Azure OpenAI API format |
 
+### Clear Signing Tester
+
+| Variable | Description |
+|----------|-------------|
+| `GATING_TOKEN` | Ledger authentication token (required for tester) |
+
 ### Setting Up Environment Variables
 
 **Option 1: Using the env template (recommended)**
 
 ```bash
 # Copy the template to .env in the project root
-cp tools/env.example .env
+cp tools/migrate/env.example .env
 
 # Edit .env and add your API keys
 nano .env  # or use your preferred editor
 
 # Source the file before running
-source .env && node tools/generate-tests.js registry/file.json
+source .env && node tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 2: Using dotenv package**
@@ -95,17 +108,17 @@ source .env && node tools/generate-tests.js registry/file.json
 npm install dotenv
 
 # Create .env file from template
-cp tools/env.example .env
+cp tools/migrate/env.example .env
 # Edit .env with your keys...
 
 # Run with dotenv preloading
-node -r dotenv/config tools/generate-tests.js registry/file.json
+node -r dotenv/config tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 3: Inline environment variables**
 
 ```bash
-ETHERSCAN_API_KEY="your-key" node tools/generate-tests.js registry/file.json
+ETHERSCAN_API_KEY="your-key" node tools/migrate/generate-tests.js registry/file.json
 ```
 
 **Option 4: Export in your shell**
@@ -113,7 +126,7 @@ ETHERSCAN_API_KEY="your-key" node tools/generate-tests.js registry/file.json
 ```bash
 export ETHERSCAN_API_KEY="your-api-key-here"
 export OPENAI_API_KEY="your-openai-key"
-node tools/generate-tests.js registry/file.json
+node tools/migrate/generate-tests.js registry/file.json
 ```
 
 > ⚠️ **Important**: The `.env` file is in `.gitignore` - never commit files containing real API keys!
@@ -124,7 +137,7 @@ Azure OpenAI uses a different authentication format (`api-key` header instead of
 
 ```bash
 # Using CLI arguments
-node tools/generate-tests.js registry/uniswap/eip712-uniswap.json \
+node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json \
   --azure \
   --openai-url "https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview" \
   --openai-key "YOUR-AZURE-API-KEY"
@@ -133,7 +146,7 @@ node tools/generate-tests.js registry/uniswap/eip712-uniswap.json \
 export AZURE_OPENAI=true
 export LLM_BASE_URL="https://YOUR-RESOURCE.openai.azure.com/openai/deployments/YOUR-DEPLOYMENT/chat/completions?api-version=2024-02-15-preview"
 export OPENAI_API_KEY="YOUR-AZURE-API-KEY"
-node tools/generate-tests.js registry/uniswap/eip712-uniswap.json
+node tools/migrate/generate-tests.js registry/uniswap/eip712-uniswap.json
 ```
 
 **Note**: For Azure, the `--openai-url` should be the full deployment URL including the API version query parameter.
@@ -214,6 +227,47 @@ const PROVIDERS = {
 
 The provider must implement the Etherscan-compatible API format.
 
+## Clear Signing Tester Integration
+
+After generating tests, the script automatically runs the clear signing tester (`tools/tester/run-test.sh`) against the generated test file using a Ledger device emulator (Speculos). This is **enabled by default**.
+
+### Prerequisites for Testing
+
+- Docker running
+- Tester set up: `cd tools/tester && ./setup.sh`
+- Environment variable: `GATING_TOKEN` (Ledger auth token)
+
+### Examples
+
+```bash
+# Generate tests and run tester on Ledger Flex (default)
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json
+
+# Generate tests and run tester on Ledger Stax
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --device stax
+
+# Generate tests and run tester with debug logging
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --test-log-level debug
+
+# Skip the tester entirely
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-test
+
+# Run tester even when tests already exist and coverage is complete
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --force-test
+
+# Use local API server started by the script
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --local-api
+
+# Disable expectedTexts refinement step
+source .env && node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --no-refine
+```
+
+### Notes
+
+- The tester is automatically skipped in `--dry-run` mode or when no tests are generated, unless `--force-test` is set and an existing test file is available.
+- If `tools/tester/run-test.sh` is not found (setup not done), a warning is printed and testing is skipped gracefully.
+- If the tester fails, the script exits with a non-zero exit code but the generated test file is still written.
+
 ## Limitations
 
 - **Raw Transaction Data**: Some block explorers don't provide signed raw transactions via API. In these cases, the script uses calldata instead and logs a warning.
@@ -225,7 +279,7 @@ The provider must implement the Etherscan-compatible API format.
 
 ```bash
 $ ETHERSCAN_API_KEY="your-api-key" \
-  node tools/generate-tests.js registry/ethena/calldata-ethena.json --dry-run --verbose
+  node tools/migrate/generate-tests.js registry/ethena/calldata-ethena.json --dry-run --verbose
 
 ERC-7730 Test Generator
 =======================
