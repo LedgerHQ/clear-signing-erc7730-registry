@@ -585,7 +585,7 @@
     "formats": {
       "claim(address,address,uint256,bool)": {
         "$id": null,
-        "intent": "claim or wrap a reward amount",
+        "intent": "Claim/Wrap Reward",
         "screens": null,
         "fields": [
           {
