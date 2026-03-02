@@ -221,7 +221,6 @@
           { "label": "Amount", "format": "tokenAmount", "path": "amount", "params": { "token": "$.metadata.constants.swellToken" } }
         ]
       },
-      "balanceOf(address)": { "fields": [{ "label": "Account", "format": "addressName", "params": { "types": ["wallet", "eoa", "contract"] }, "path": "#.account" }] },
       "batchAddToWhitelist(address[])": {
         "intent": "Add to whitelist",
         "fields": [
