@@ -114,12 +114,7 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
-          {
-            "path": "amountOutMin",
-            "label": "Minimum to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[-1]" }
-          },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[-1]" } },
           {
             "path": "to",
             "label": "Recipient",
@@ -138,9 +133,11 @@
             "path": "to",
             "label": "Recipient",
             "format": "addressName",
-            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"], "senderAddress": [
-                  "0x0000000000000000000000000000000000000001"
-                ] }
+            "params": {
+              "types": ["eoa", "contract"],
+              "sources": ["local", "ens"],
+              "senderAddress": ["0x0000000000000000000000000000000000000001"]
+            }
           }
         ]
       }
