@@ -220,7 +220,8 @@
         "fields": [
           { "label": "Token Id", "format": "raw", "path": "#.tokenId" },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.receiver" },
-          { "label": "Expiration Time", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.expirationTime" }
+          { "label": "Expiration Time", "format": "date", "params": { "encoding": "timestamp" }, "path": "#.expirationTime" },
+          { "path": "@.value", "label": "Migration Fee", "format": "amount" }
         ],
         "required": ["#.tokenId", "#.receiver"],
         "excluded": ["#.eventId", "#.signature"]
