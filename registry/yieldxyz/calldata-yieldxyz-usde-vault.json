@@ -20,7 +20,11 @@
           "type": "function"
         },
         {
-          "inputs": [{ "name": "_underlying", "type": "uint256" }, { "name": "receiver", "type": "address" }, { "name": "owner", "type": "address" }],
+          "inputs": [
+            { "name": "_underlying", "type": "uint256" },
+            { "name": "receiver", "type": "address" },
+            { "name": "owner", "type": "address" }
+          ],
           "name": "withdraw",
           "type": "function"
         },

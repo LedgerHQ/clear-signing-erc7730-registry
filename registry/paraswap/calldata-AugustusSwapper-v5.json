@@ -386,14 +386,13 @@
       "maxSendAmount": {
         "label": "Maximum to Send",
         "format": "tokenAmount",
-        "params": {"nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
+        "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
       "receiveAmount": {
         "label": "Amount to Receive",
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsEth" }
       },
-      
       "lastPool": { "label": "Last pool", "format": "addressName", "params": { "types": ["contract"] } },
       "beneficiary": { "label": "Beneficiary", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
       "exchange": { "label": "Exchange", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } },

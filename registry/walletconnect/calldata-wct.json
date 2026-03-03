@@ -39,7 +39,6 @@
     },
     "token": { "ticker": "WCT", "name": "WalletConnect Token", "decimals": 18 }
   },
-  
   "display": {
     "formats": {
       "transfer(address,uint256)": {
