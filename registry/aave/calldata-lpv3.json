@@ -621,17 +621,10 @@
       "renouncePositionManagerRole(address user)": {
         "$id": "renouncePositionManagerRole",
         "intent": "Revoke Manager Role",
-        "fields": [       {
-          "path": "@.from",
-          "format": "addressName",
-          "label": "Position manager",
-          "params": {
-            "types": [
-              "eoa"
-            ]
-          }
-        },
-        { "path": "user", "format": "addressName", "label": "User", "params": { "types": ["eoa"] } }],
+        "fields": [
+          { "path": "@.from", "format": "addressName", "label": "Position manager", "params": { "types": ["eoa"] } },
+          { "path": "user", "format": "addressName", "label": "User", "params": { "types": ["eoa"] } }
+        ],
         "required": ["user"],
         "excluded": []
       },

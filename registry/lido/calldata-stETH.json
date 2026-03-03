@@ -15,7 +15,7 @@
   "display": {
     "formats": {
       "approve(address,uint256)": {
-        "intent": "Authorize stETH spending",
+        "intent": "Approve stETH",
         "fields": [
           {
             "label": "Spender",
