@@ -7918,51 +7918,10 @@
       "yesNo": { "0": "No", "1": "Yes" },
       "messengerProtocol": { "0": "None", "1": "Allbridge", "2": "Wormhole", "3": "LayerZero" },
       "feePayment": { "0": "Native", "1": "Token" },
-      "lifiChainId": {
-        "1": "Ethereum",
-        "10": "OP Mainnet",
-        "50": "XDC",
-        "130": "Unichain",
-        "137": "Polygon PoS",
-        "146": "Sonic",
-        "480": "World Chain",
-        "999": "HyperEVM",
-        "1329": "Sei",
-        "8453": "Base",
-        "42161": "Arbitrum",
-        "43114": "Avalanche",
-        "57073": "Ink",
-        "59144": "Linea",
-        "81224": "Codex",
-        "98866": "Plume",
-        "1151111081099710": "Solana"
-      },
       "routeType": { "0": "BridgeCall", "1": "CallBridge", "2": "CallBridgeCall" },
       "expressOption": { "0": "Standard", "1": "Express" },
       "oftTokenType": { "0": "OFT", "1": "OFTV2", "2": "OFTFeeV2", "3": "ProxyOFT", "4": "ProxyOFTV2", "5": "ProxyOFTFeeV2" },
-      "destinationChainId": {
-        "1": "Ethereum",
-        "10": "OP Mainnet",
-        "50": "XDC",
-        "130": "Unichain",
-        "137": "Polygon PoS",
-        "146": "Sonic",
-        "480": "World Chain",
-        "1329": "Sei",
-        "8453": "Base",
-        "59144": "Linea",
-        "81224": "Codex",
-        "42161": "Arbitrum",
-        "43114": "Avalanche",
-        "999": "HyperEVM",
-        "57073": "Ink",
-        "98866": "Plume",
-        "1151111081099710": "Solana"
-      },
-      "chainflipChain": { "1": "Ethereum", "42161": "Arbitrum", "1151111081099710": "Solana", "20000000000001": "Bitcoin" },
-      "tokenType": { "0": "OFT", "1": "OFTV2", "2": "OFTFeeV2", "3": "ProxyOFT", "4": "ProxyOFTV2", "5": "ProxyOFTFeeV2" },
-      "unitDestinationChain": { "1337": "Hypercore" },
-      "chainflipDestinationChainId": { "1": "Ethereum", "42161": "Arbitrum", "1151111081099710": "Solana", "20000000000001": "Bitcoin" }
+      "tokenType": { "0": "OFT", "1": "OFTV2", "2": "OFTFeeV2", "3": "ProxyOFT", "4": "ProxyOFTV2", "5": "ProxyOFTFeeV2" }
     },
     "constants": {
       "addressAsEth": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE",
@@ -7978,7 +7937,7 @@
         "params": { "nativeCurrencyAddress": "$.metadata.constants.addressAsNull", "tokenPath": "_bridgeData.sendingAssetId" }
       },
       "userAddress": { "format": "addressName", "label": "Address", "params": { "types": ["eoa", "wallet", "contract"] } },
-      "unit_985": { "label": "Max Slippage", "format": "unit", "params": { "base": "%", "decimals": 4 } },
+      "maxSlippagePercent": { "label": "Max Slippage", "format": "unit", "params": { "base": "%", "decimals": 4 } },
       "bridgeAmountNative": {
         "label": "Amount to Bridge",
         "format": "tokenAmount",
@@ -8130,7 +8089,7 @@
       "lzFee": { "label": "LZ Fee", "format": "amount" },
       "requestId": { "label": "Request ID", "format": "raw" },
       "orderId": { "label": "Order ID", "format": "raw" },
-      "unitDestChainEnum": { "label": "Destination Chain", "format": "enum", "params": { "$ref": "$.metadata.enums.unitDestinationChain" } },
+      "unitDestChainEnum": { "label": "Destination Chain", "format": "raw" },
       "arbiterFeeNative": {
         "label": "Arbiter Fee",
         "format": "tokenAmount",
@@ -8433,7 +8392,7 @@
           { "path": "_bridgeData.minAmount", "$ref": "$.display.definitions.bridgeAmountNative" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "_bridgeData.destinationChainId", "$ref": "$.display.definitions.destinationChainId" },
-          { "path": "_cBridgeData.maxSlippage", "$ref": "$.display.definitions.unit_985" }
+          { "path": "_cBridgeData.maxSlippage", "$ref": "$.display.definitions.maxSlippagePercent" }
         ],
         "required": ["_bridgeData", "_cBridgeData"],
         "excluded": []
@@ -8445,7 +8404,7 @@
           { "path": "amount", "$ref": "$.display.definitions.bridgeTokenAmount" },
           { "path": "receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "destinationChainId", "$ref": "$.display.definitions.destinationChainId" },
-          { "path": "maxSlippage", "$ref": "$.display.definitions.unit_985" }
+          { "path": "maxSlippage", "$ref": "$.display.definitions.maxSlippagePercent" }
         ],
         "required": ["sendingAssetId", "amount", "receiver", "destinationChainId", "maxSlippage"],
         "excluded": ["transactionId", "nonce"]
@@ -8804,12 +8763,7 @@
             "format": "tokenAmount",
             "params": { "tokenPath": "_bridgeData.sendingAssetId" }
           },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination Chain",
-            "format": "enum",
-            "params": { "$ref": "$.metadata.enums.lifiChainId" }
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination Chain", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.recipientAddress" },
           { "path": "_polymerData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_polymerData.maxCCTPFee", "$ref": "$.display.definitions.maxCctpFee" },
@@ -9479,12 +9433,7 @@
             "params": { "tokenPath": "_bridgeData.sendingAssetId" }
           },
           { "path": "_polymerData.maxCCTPFee", "$ref": "$.display.definitions.maxCctpFee" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination",
-            "format": "enum",
-            "params": { "$ref": "$.metadata.enums.destinationChainId" }
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.recipientAddress" },
           { "path": "_polymerData.nonEVMReceiver", "label": "Non-EVM Rcpt", "format": "raw" },
           { "path": "_polymerData.minFinalityThreshold", "$ref": "$.display.definitions.finalityThreshold" }
@@ -9736,12 +9685,7 @@
         "fields": [
           { "path": "_bridgeData.bridge", "$ref": "$.display.definitions.bridgeName" },
           { "path": "_bridgeData.minAmount", "$ref": "$.display.definitions.bridgeAmountNative" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination Chain",
-            "format": "enum",
-            "params": { "$ref": "$.metadata.enums.chainflipChain" }
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination Chain", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "_chainflipData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_chainflipData.dstToken", "label": "Destination Token", "format": "raw" },
@@ -10413,12 +10357,7 @@
           { "path": "_bridgeData.bridge", "$ref": "$.display.definitions.bridgeName" },
           { "path": "_swapData.[0].fromAmount", "$ref": "$.display.definitions.swapInputAmountAlt" },
           { "path": "_bridgeData.minAmount", "$ref": "$.display.definitions.minBridgeAmountNativeAlt" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination",
-            "format": "enum",
-            "params": { "$ref": "$.metadata.enums.chainflipDestinationChainId" }
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "_chainflipData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_chainflipData.dstToken", "label": "Dst Token ID", "format": "raw" }
