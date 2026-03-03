@@ -53,7 +53,7 @@
             "label": "For asset",
             "params": { "types": ["token"], "sources": ["local", "ens"] }
           },
-          { "path": "useAsCollateral", "format": "raw", "label": "Enable use as collateral" }
+          { "path": "useAsCollateral", "format": "raw", "label": "Enable as collateral" }
         ],
         "required": ["asset", "useAsCollateral"]
       },
@@ -76,7 +76,7 @@
         "required": ["amount", "to"]
       },
       "swapBorrowRateMode(address,uint256)": {
-        "intent": "Swap interest rate mode",
+        "intent": "Swap to variable",
         "fields": [
           {
             "path": "asset",
@@ -87,7 +87,7 @@
           {
             "path": "rateMode",
             "format": "enum",
-            "label": "Set interest rate mode to",
+            "label": "Current rate mode",
             "params": { "$ref": "$.metadata.enums.interestRateMode" }
           }
         ],
