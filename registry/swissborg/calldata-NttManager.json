@@ -730,7 +730,7 @@
           { "$id": "destinationChain", "label": "Destination Chain", "format": "raw", "params": null, "path": "#.recipientChain" },
           {
             "$id": "encodedDestinationAddress",
-            "label": "Encoded Destination Address",
+            "label": "Destination Address",
             "format": "raw",
             "params": null,
             "path": "#.recipient"
@@ -752,7 +752,7 @@
           { "$id": "destinationChain", "label": "Destination Chain", "format": "raw", "params": null, "path": "#.recipientChain" },
           {
             "$id": "encodedDestinationAddress",
-            "label": "Encoded Destination Address",
+            "label": "Destination Address",
             "format": "raw",
             "params": null,
             "path": "#.recipient"
@@ -761,7 +761,7 @@
           { "$id": "shouldQueue", "label": "Should Queue", "format": "raw", "params": null, "path": "#.shouldQueue" },
           {
             "$id": "transceiverInstructions",
-            "label": "Transceiver Instructions",
+            "label": "Instructions",
             "format": "raw",
             "params": null,
             "path": "#.transceiverInstructions"

@@ -54,7 +54,7 @@
         "excluded": []
       },
       "requestUnlock(uint256)": {
-        "intent": "Request unstaking sAVAX",
+        "intent": "Request unstaking",
         "fields": [
           {
             "label": "sAVAX amount",
@@ -73,9 +73,9 @@
         "required": ["#.unlockIndex"],
         "excluded": []
       },
-      "redeemOverdueShares()": { "intent": "Cancel overdue unlock request", "fields": [], "required": [], "excluded": [] },
+      "redeemOverdueShares()": { "intent": "Redeem Overdue", "fields": [], "required": [], "excluded": [] },
       "redeemOverdueShares(uint256)": {
-        "intent": "Cancel overdue unlock request",
+        "intent": "Redeem sAVAX",
         "fields": [{ "label": "Unlock index", "format": "raw", "path": "#.unlockIndex", "params": null }],
         "required": ["#.unlockIndex"],
         "excluded": []
