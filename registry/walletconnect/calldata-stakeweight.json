@@ -124,7 +124,7 @@
   "display": {
     "formats": {
       "createLock(uint256,uint256)": {
-        "intent": "Lock tokens for a period",
+        "intent": "Lock Tokens",
         "fields": [
           {
             "path": "amount",
@@ -137,7 +137,7 @@
         "required": ["amount", "unlockTime"]
       },
       "depositFor(address,uint256)": {
-        "intent": "Deposit tokens for a period for a given address",
+        "intent": "Lock tokens",
         "fields": [
           { "path": "for_", "label": "For", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           {
@@ -167,7 +167,7 @@
         "required": ["newUnlockTime"]
       },
       "updateLock(uint256,uint256)": {
-        "intent": "Update lock amount and unlock time",
+        "intent": "Update Lock",
         "fields": [
           {
             "path": "amount",
