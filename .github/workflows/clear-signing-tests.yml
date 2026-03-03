@@ -134,7 +134,7 @@ jobs:
           ref: ${{ env.DMK_REF }}
           path: dmk
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
 
@@ -225,7 +225,7 @@ jobs:
         run: |
           # Save exit code for PR comment
           echo "${{ steps.run-tests.outputs.exit_code }}" > screenshots/exit_code.txt
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: screenshots-${{ matrix.device }}-${{ matrix.test.entity }}-${{ matrix.test.descriptor_name }}
@@ -234,7 +234,7 @@ jobs:
 
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: logs-${{ matrix.device }}-${{ matrix.test.entity }}-${{ matrix.test.descriptor_name }}
           path: dmk/test-output.log
@@ -246,7 +246,7 @@ jobs:
     if: always() && needs.detect-tests.outputs.has_tests == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           path: artifacts
 
