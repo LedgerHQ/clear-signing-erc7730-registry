@@ -8763,11 +8763,7 @@
             "format": "tokenAmount",
             "params": { "tokenPath": "_bridgeData.sendingAssetId" }
           },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination Chain",
-            "format": "raw"
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination Chain", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.recipientAddress" },
           { "path": "_polymerData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_polymerData.maxCCTPFee", "$ref": "$.display.definitions.maxCctpFee" },
@@ -9437,11 +9433,7 @@
             "params": { "tokenPath": "_bridgeData.sendingAssetId" }
           },
           { "path": "_polymerData.maxCCTPFee", "$ref": "$.display.definitions.maxCctpFee" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination",
-            "format": "raw"
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.recipientAddress" },
           { "path": "_polymerData.nonEVMReceiver", "label": "Non-EVM Rcpt", "format": "raw" },
           { "path": "_polymerData.minFinalityThreshold", "$ref": "$.display.definitions.finalityThreshold" }
@@ -9693,11 +9685,7 @@
         "fields": [
           { "path": "_bridgeData.bridge", "$ref": "$.display.definitions.bridgeName" },
           { "path": "_bridgeData.minAmount", "$ref": "$.display.definitions.bridgeAmountNative" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination Chain",
-            "format": "raw"
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination Chain", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "_chainflipData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_chainflipData.dstToken", "label": "Destination Token", "format": "raw" },
@@ -10369,11 +10357,7 @@
           { "path": "_bridgeData.bridge", "$ref": "$.display.definitions.bridgeName" },
           { "path": "_swapData.[0].fromAmount", "$ref": "$.display.definitions.swapInputAmountAlt" },
           { "path": "_bridgeData.minAmount", "$ref": "$.display.definitions.minBridgeAmountNativeAlt" },
-          {
-            "path": "_bridgeData.destinationChainId",
-            "label": "Destination",
-            "format": "raw"
-          },
+          { "path": "_bridgeData.destinationChainId", "label": "Destination", "format": "raw" },
           { "path": "_bridgeData.receiver", "$ref": "$.display.definitions.receiverAddress" },
           { "path": "_chainflipData.nonEVMReceiver", "$ref": "$.display.definitions.nonEvmReceiver" },
           { "path": "_chainflipData.dstToken", "label": "Dst Token ID", "format": "raw" }
