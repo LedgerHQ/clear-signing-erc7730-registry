@@ -472,6 +472,11 @@
                 "value": {
                     "$ref": "#/$format/value"
                 },
+                "label": {
+                    "title": "Field Label override",
+                    "description": "This value overrides the label in the referenced definition if set.",
+                    "type": "string"
+                },
                 "$ref": {
                     "title": "Internal Definition",
                     "description": "An internal definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME.",
