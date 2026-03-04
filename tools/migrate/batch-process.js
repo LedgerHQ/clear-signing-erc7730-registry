@@ -14,6 +14,7 @@
  * Options:
  *   --dry-run               Preview changes without modifying files
  *   --verbose               Show detailed output
+ *   --verbose-test-summary  Show detailed per-test summary output (implied by --verbose)
  *   --log <path>            Enable verbose logging and write to file
  *   -l                      Enable verbose logging to .migrate-verbose.log
  *   --skip-tests            Skip test generation
@@ -62,6 +63,7 @@ const LOG_FILE_PATH = getLogFilePath();
 const CONFIG = {
   dryRun: process.argv.includes("--dry-run"),
   verbose: process.argv.includes("--verbose"),
+  verboseTestSummary: process.argv.includes("--verbose") || process.argv.includes("--verbose-test-summary"),
   logVerbose: Boolean(LOG_FILE_PATH),
   logFile: LOG_FILE_PATH,
   skipTests: process.argv.includes("--skip-tests"),
@@ -201,6 +203,21 @@ function stripAnsi(text) {
   return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
 }
 
+const TEST_EVENT_PREFIX = "@@TEST_EVENT@@";
+const ANSI = {
+  reset: "\x1b[0m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  red: "\x1b[31m",
+};
+
+function colorStatus(text, tone) {
+  if (!process.stdout.isTTY) return text;
+  const color = tone === "ok" ? ANSI.green : tone === "warn" ? ANSI.yellow : tone === "error" ? ANSI.red : null;
+  if (!color) return text;
+  return `${color}${text}${ANSI.reset}`;
+}
+
 function initLogFile() {
   if (!CONFIG.logFile) return;
   try {
@@ -324,6 +341,66 @@ function spawnAndCapture(command, args, options = {}) {
       resolve({ status: code ?? 1, stdout, stderr });
     });
   });
+}
+
+function parseTestEventLine(line) {
+  const text = String(line || "").trim();
+  if (!text.startsWith(TEST_EVENT_PREFIX)) return null;
+  const payload = text.slice(TEST_EVENT_PREFIX.length);
+  if (!payload) return null;
+  try {
+    return JSON.parse(payload);
+  } catch {
+    return null;
+  }
+}
+
+function initGeneratePhaseMetrics() {
+  return {
+    generationTargets: [],
+    generationSummary: { skippedFunctions: 0, generatedFunctions: 0, totalTestCases: 0 },
+    refinementCases: [],
+    refinementSummary: { refined: 0, failed: 0, total: 0 },
+    testerProgress: { started: false, screenshots: 0, verified: 0, complete: false },
+  };
+}
+
+function shortenText(text, maxLen = 72) {
+  const clean = String(text || "").trim().replace(/\s+/g, " ");
+  if (clean.length <= maxLen) return clean;
+  return `${clean.slice(0, Math.max(0, maxLen - 1))}…`;
+}
+
+function alignWithRightStatus(leftText, statusText, width = 108) {
+  const left = String(leftText || "");
+  const right = String(statusText || "");
+  const pad = Math.max(1, width - stripAnsi(left).length - stripAnsi(right).length);
+  return `${left}${" ".repeat(pad)}${right}`;
+}
+
+function renderStatusTag(tag, tone) {
+  return colorStatus(`[${tag}]`, tone);
+}
+
+function parseFinalTestResultStatus(line) {
+  const clean = stripAnsi(line);
+  const resultMatch = clean.match(/Result:\s*(.+)$/);
+  if (!resultMatch) return null;
+  const text = resultMatch[1].toLowerCase();
+  if (text.includes("clear signed")) return "clear";
+  if (text.includes("partial")) return "partial";
+  if (text.includes("blind")) return "blind";
+  return "failed";
+}
+
+function formatTestCaseLabel(description) {
+  const clean = String(description || "").trim();
+  if (!clean) return "(no description)";
+  const parts = clean.split(" - ");
+  if (parts.length <= 1) return shortenText(clean, 68);
+  const fn = shortenText(parts[0], 28);
+  const rest = shortenText(parts.slice(1).join(" - "), 36);
+  return `${fn} - ${rest}`;
 }
 
 // =============================================================================
@@ -671,6 +748,9 @@ function extractExecutedTestCount(output) {
 function migrateFile(filePath, report, options = {}) {
   const { skipLint = false } = options;
   report.migrations.attempted++;
+  const preMigrationContent = !CONFIG.dryRun && fs.existsSync(filePath)
+    ? fs.readFileSync(filePath, "utf8")
+    : null;
 
   const args = ["--file", filePath];
   if (CONFIG.dryRun) args.push("--dry-run");
@@ -688,14 +768,26 @@ function migrateFile(filePath, report, options = {}) {
     });
 
     if (result.status !== 0) {
+      const fileChanged =
+        !CONFIG.dryRun &&
+        preMigrationContent !== null &&
+        fs.existsSync(filePath) &&
+        fs.readFileSync(filePath, "utf8") !== preMigrationContent;
+
+      if (fileChanged) {
+        // Keep migrated descriptor in the commit even if post-migration validation failed.
+        report.addModifiedFile(filePath);
+      }
+
       printCommandErrorOutput(
         "migrate-v1-to-v2.js error output",
         result.stdout,
         result.stderr
       );
+      const combinedError = `${result.stdout || ""}\n${result.stderr || ""}`.trim();
       report.migrations.failed.push({
         file: path.relative(ROOT_DIR, filePath),
-        error: result.stderr || "Migration script failed",
+        error: combinedError || "Migration script failed",
       });
       return false;
     }
@@ -728,6 +820,7 @@ async function generateTests(filePath, report) {
   if (CONFIG.dryRun) args.push("--dry-run");
   if (CONFIG.verbose) args.push("--verbose");
   if (CONFIG.logFile) args.push("--log", CONFIG.logFile);
+  args.push("--emit-test-events");
   if (CONFIG.depth) args.push("--depth", String(CONFIG.depth));
   if (CONFIG.maxTests) args.push("--max-tests", String(CONFIG.maxTests));
   if (CONFIG.chainFilter) args.push("--chain", String(CONFIG.chainFilter));
@@ -749,19 +842,114 @@ async function generateTests(filePath, report) {
 
   try {
     const relPath = path.relative(ROOT_DIR, filePath);
+    const metrics = initGeneratePhaseMetrics();
     const preTestFilePath = getTestFilePath(filePath);
     const prePlannedTests = getTestCountFromFile(preTestFilePath);
-    let liveExecutedTests = 0;
-    let sawLiveTestMarkers = false;
-    printIndividualTestProgress("generation", relPath, 0, prePlannedTests);
+    let lastProgressLine = "";
+
+    const renderRefinementProgress = () => {
+      if (!CONFIG.verboseTestSummary) return;
+      if (!metrics.testerProgress.started) return;
+      const goal = metrics.refinementSummary.total || prePlannedTests || 0;
+      const done = metrics.testerProgress.verified;
+      const bar = goal > 0 ? `${formatProgressBar(Math.min(done, goal), goal, 16)} ${done}/${goal}` : `${done}/?`;
+      const text = `      refinement progress: ${bar} | screenshots ${metrics.testerProgress.screenshots}`;
+      if (text !== lastProgressLine) {
+        renderInlineProgressLine(text, goal > 0 ? Math.min(done, goal) : done, goal || null);
+        lastProgressLine = text;
+      }
+    };
 
     const onLine = (line) => {
       const clean = stripAnsi(line);
+      const event = parseTestEventLine(clean);
+      if (event) {
+        switch (event.event) {
+          case "generation_target": {
+            metrics.generationTargets.push({
+              label: event.label || event.target || "unknown target",
+              status: event.status || "skipped",
+              testCases: Number(event.testCases || 0),
+              reason: event.reason || null,
+            });
+            if (event.status === "generated") {
+              metrics.generationSummary.generatedFunctions++;
+              metrics.generationSummary.totalTestCases += Number(event.testCases || 0);
+              if (CONFIG.verboseTestSummary) {
+                ensureProgressLineBreak();
+                const left = `      ${shortenText(event.label || event.target, 82)}`;
+                const right = renderStatusTag(`${Number(event.testCases || 0)} test cases`, "ok");
+                console.log(alignWithRightStatus(left, right));
+              }
+            } else {
+              metrics.generationSummary.skippedFunctions++;
+              if (CONFIG.verboseTestSummary) {
+                ensureProgressLineBreak();
+                const left = `      ${shortenText(event.label || event.target, 82)}`;
+                const right = renderStatusTag("Skipped", "warn");
+                console.log(alignWithRightStatus(left, right));
+              }
+            }
+            break;
+          }
+          case "generation_summary":
+            metrics.generationSummary.generatedFunctions = Number(event.generatedTargets || 0);
+            metrics.generationSummary.skippedFunctions = Number(event.skippedTargets || 0);
+            metrics.generationSummary.totalTestCases = Number(event.generatedTestCases || 0);
+            break;
+          case "tester_start":
+            metrics.testerProgress.started = true;
+            renderRefinementProgress();
+            break;
+          case "tester_screenshot":
+            metrics.testerProgress.screenshots = Number(event.count || metrics.testerProgress.screenshots + 1);
+            renderRefinementProgress();
+            break;
+          case "tester_case_result":
+            metrics.testerProgress.verified = Math.max(
+              metrics.testerProgress.verified,
+              Number(event.index || 0) + 1
+            );
+            renderRefinementProgress();
+            break;
+          case "tester_complete":
+            metrics.testerProgress.complete = true;
+            renderRefinementProgress();
+            break;
+          case "refinement_case": {
+            const status = event.status === "refined" ? "refined" : "failed";
+            metrics.refinementCases.push({
+              index: Number(event.index || 0),
+              description: event.description || "",
+              status,
+            });
+            if (status === "refined") metrics.refinementSummary.refined++;
+            else metrics.refinementSummary.failed++;
+            if (CONFIG.verboseTestSummary) {
+              ensureProgressLineBreak();
+              const left = `      ${formatTestCaseLabel(event.description)}`;
+              const right = status === "refined"
+                ? renderStatusTag("Refined", "ok")
+                : renderStatusTag("Failed", "error");
+              console.log(alignWithRightStatus(left, right));
+            }
+            break;
+          }
+          case "refinement_complete":
+            metrics.refinementSummary.refined = Number(event.refined || 0);
+            metrics.refinementSummary.failed = Number(event.failed || 0);
+            metrics.refinementSummary.total = Number(event.total || 0);
+            renderRefinementProgress();
+            break;
+          default:
+            break;
+        }
+        return;
+      }
+
       if (/SCREEN TEXT ANALYSIS/.test(clean)) {
-        sawLiveTestMarkers = true;
-        liveExecutedTests++;
-        const safe = prePlannedTests !== null ? Math.min(liveExecutedTests, prePlannedTests) : liveExecutedTests;
-        printIndividualTestProgress("generation", relPath, safe, prePlannedTests);
+        metrics.testerProgress.verified++;
+        renderRefinementProgress();
       }
     };
 
@@ -772,6 +960,7 @@ async function generateTests(filePath, report) {
       onStderrLine: onLine,
     });
     const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
+    ensureProgressLineBreak();
 
     // Check if the test file was actually written, regardless of exit code.
     // generate-tests.js may exit non-zero because the *tester* step failed
@@ -780,13 +969,9 @@ async function generateTests(filePath, report) {
     const testFilePath = getTestFilePath(filePath);
     const testFileWritten = !CONFIG.dryRun && fs.existsSync(testFilePath);
     const plannedTests = testFileWritten ? getTestCountFromFile(testFilePath) : null;
-    let executedTests = sawLiveTestMarkers ? liveExecutedTests : extractExecutedTestCount(combinedOutput);
-    if (!sawLiveTestMarkers && executedTests === null && plannedTests !== null && result.status === 0) {
+    let executedTests = metrics.testerProgress.verified || extractExecutedTestCount(combinedOutput);
+    if (!metrics.testerProgress.verified && executedTests === null && plannedTests !== null && result.status === 0) {
       executedTests = plannedTests;
-    }
-    if (executedTests !== null) {
-      const safe = plannedTests !== null ? Math.min(executedTests, plannedTests) : executedTests;
-      printIndividualTestProgress("generation", relPath, safe, plannedTests);
     }
 
     if (result.status !== 0) {
@@ -794,7 +979,7 @@ async function generateTests(filePath, report) {
       if (result.stdout?.includes("No tests generated") || result.stderr?.includes("No tests generated")) {
         log(`  → No tests could be generated for ${path.basename(filePath)}`, "warning");
         report.testGeneration.skipped++;
-        return { ok: true, plannedTests, executedTests };
+        return { ok: true, plannedTests, executedTests, metrics };
       }
 
       if (testFileWritten) {
@@ -808,7 +993,7 @@ async function generateTests(filePath, report) {
         );
         report.testGeneration.successful++;
         report.addNewFile(testFilePath);
-        return { ok: true, plannedTests, executedTests };
+        return { ok: true, plannedTests, executedTests, metrics };
       }
 
       printCommandErrorOutput(
@@ -820,7 +1005,7 @@ async function generateTests(filePath, report) {
         file: path.relative(ROOT_DIR, filePath),
         error: result.stderr || "Test generation failed",
       });
-      return { ok: false, plannedTests, executedTests };
+      return { ok: false, plannedTests, executedTests, metrics };
     }
 
     if (testFileWritten) {
@@ -829,13 +1014,13 @@ async function generateTests(filePath, report) {
     } else if (CONFIG.dryRun) {
       report.testGeneration.successful++;
     }
-    return { ok: true, plannedTests, executedTests };
+    return { ok: true, plannedTests, executedTests, metrics };
   } catch (error) {
     report.testGeneration.failed.push({
       file: path.relative(ROOT_DIR, filePath),
       error: error.message,
     });
-    return { ok: false, plannedTests: null, executedTests: null };
+    return { ok: false, plannedTests: null, executedTests: null, metrics: initGeneratePhaseMetrics() };
   }
 }
 
@@ -846,15 +1031,24 @@ async function runTests(filePath) {
   const testFilePath = getTestFilePath(filePath);
   const relPath = path.relative(ROOT_DIR, filePath);
   const plannedTests = getTestCountFromFile(testFilePath);
+  const finalMetrics = {
+    ran: 0,
+    clear: 0,
+    partial: 0,
+    blind: 0,
+    failed: 0,
+    cases: [],
+    screenshots: 0,
+  };
 
   if (!fs.existsSync(testFilePath)) {
     log(`  → Skipping test run (no test file): ${path.relative(ROOT_DIR, testFilePath)}`, "warning");
-    return { ok: false, plannedTests: null, executedTests: null };
+    return { ok: false, plannedTests: null, executedTests: null, metrics: finalMetrics };
   }
 
   if (!fs.existsSync(TESTER_SCRIPT)) {
     log("  → Tester script not found at tools/tester/run-test.sh, skipping test run", "warning");
-    return { ok: false, plannedTests, executedTests: null };
+    return { ok: false, plannedTests, executedTests: null, metrics: finalMetrics };
   }
 
   const device = CONFIG.testDevice || "flex";
@@ -863,19 +1057,59 @@ async function runTests(filePath) {
   log(`Running tests: ${relPath}`, "debug");
 
   try {
-    let liveExecutedTests = 0;
-    let sawLiveTestMarkers = false;
-    printIndividualTestProgress("final run", relPath, 0, plannedTests);
+    const testDescriptions = (() => {
+      try {
+        const content = fs.readFileSync(testFilePath, "utf8");
+        const json = JSON.parse(content);
+        if (!Array.isArray(json.tests)) return [];
+        return json.tests.map((t) => t?.description || "");
+      } catch {
+        return [];
+      }
+    })();
+    let lastProgressLine = "";
+    const renderFinalProgress = () => {
+      if (!CONFIG.verboseTestSummary) return;
+      const goal = plannedTests || 0;
+      const done = finalMetrics.ran;
+      const bar = goal > 0 ? `${formatProgressBar(Math.min(done, goal), goal, 16)} ${done}/${goal}` : `${done}/?`;
+      const text = `      final run progress: ${bar} | screenshots ${finalMetrics.screenshots}`;
+      if (text !== lastProgressLine) {
+        renderInlineProgressLine(text, goal > 0 ? Math.min(done, goal) : done, goal || null);
+        lastProgressLine = text;
+      }
+    };
 
     const onLine = (line) => {
       const clean = stripAnsi(line);
-      if (/SCREEN TEXT ANALYSIS/.test(clean)) {
-        sawLiveTestMarkers = true;
-        liveExecutedTests++;
-        if (plannedTests !== null) {
-          const safe = Math.min(liveExecutedTests, plannedTests);
-          printIndividualTestProgress("final run", relPath, safe, plannedTests);
+      if (/Saved screenshot:/.test(clean)) {
+        finalMetrics.screenshots++;
+        renderFinalProgress();
+      }
+      const resultStatus = parseFinalTestResultStatus(clean);
+      if (resultStatus) {
+        finalMetrics.ran++;
+        if (resultStatus === "clear") finalMetrics.clear++;
+        else if (resultStatus === "partial") finalMetrics.partial++;
+        else if (resultStatus === "blind") finalMetrics.blind++;
+        else finalMetrics.failed++;
+        const index = finalMetrics.ran - 1;
+        const description = testDescriptions[index] || `Test ${index + 1}`;
+        finalMetrics.cases.push({ index, description, status: resultStatus });
+        if (CONFIG.verboseTestSummary) {
+          ensureProgressLineBreak();
+          const left = `      ${formatTestCaseLabel(description)}`;
+          const right =
+            resultStatus === "clear"
+              ? renderStatusTag("Clear", "ok")
+              : resultStatus === "partial"
+                ? renderStatusTag("Partial", "warn")
+                : resultStatus === "blind"
+                  ? renderStatusTag("Blind", "warn")
+                  : renderStatusTag("Failed", "error");
+          console.log(alignWithRightStatus(left, right));
         }
+        renderFinalProgress();
       }
     };
 
@@ -890,7 +1124,8 @@ async function runTests(filePath) {
       }
     );
     const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
-    let executedTests = sawLiveTestMarkers ? liveExecutedTests : extractExecutedTestCount(combinedOutput);
+    ensureProgressLineBreak();
+    let executedTests = finalMetrics.ran || extractExecutedTestCount(combinedOutput);
 
     if (result.status !== 0) {
       log(`  → Test run failed for ${path.basename(filePath)}`, "warning");
@@ -899,7 +1134,7 @@ async function runTests(filePath) {
         result.stdout,
         result.stderr
       );
-      return { ok: false, plannedTests, executedTests };
+      return { ok: false, plannedTests, executedTests, metrics: finalMetrics };
     }
 
     if (executedTests === null && plannedTests !== null) {
@@ -907,10 +1142,10 @@ async function runTests(filePath) {
       executedTests = plannedTests;
     }
     log(`  → Test run passed for ${path.basename(filePath)}`, "success");
-    return { ok: true, plannedTests, executedTests };
+    return { ok: true, plannedTests, executedTests, metrics: finalMetrics };
   } catch (error) {
     log(`  → Test run failed for ${path.basename(filePath)}: ${error.message}`, "warning");
-    return { ok: false, plannedTests, executedTests: null };
+    return { ok: false, plannedTests, executedTests: null, metrics: finalMetrics };
   }
 }
 
@@ -1252,6 +1487,35 @@ process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
 // Main Process
 // =============================================================================
 
+function renderGenerationSummary(relPath, generation) {
+  if (!generation?.metrics) return;
+  const gen = generation.metrics.generationSummary || {
+    skippedFunctions: 0,
+    generatedFunctions: 0,
+    totalTestCases: 0,
+  };
+  const ref = generation.metrics.refinementSummary || { refined: 0, failed: 0, total: 0 };
+
+  ensureProgressLineBreak();
+  console.log(`   Generation summary (${relPath})`);
+  console.log(
+    `      functions: skipped ${colorStatus(String(gen.skippedFunctions), "warn")} | generated ${colorStatus(String(gen.generatedFunctions), "ok")} | test cases ${colorStatus(String(gen.totalTestCases), "ok")}`
+  );
+  console.log(
+    `      refinement: refined ${colorStatus(String(ref.refined), "ok")} | failed ${ref.failed > 0 ? colorStatus(String(ref.failed), "error") : colorStatus("0", "ok")}`
+  );
+}
+
+function renderFinalRunSummary(relPath, testRun) {
+  if (!testRun?.metrics) return;
+  const m = testRun.metrics;
+  ensureProgressLineBreak();
+  console.log(`   Final test summary (${relPath})`);
+  console.log(
+    `      ran ${colorStatus(String(m.ran), "ok")} | clear ${colorStatus(String(m.clear), "ok")} | partial ${m.partial > 0 ? colorStatus(String(m.partial), "warn") : "0"} | blind ${m.blind > 0 ? colorStatus(String(m.blind), "warn") : "0"} | failed ${m.failed > 0 ? colorStatus(String(m.failed), "error") : "0"}`
+  );
+}
+
 /**
  * Process a single file
  */
@@ -1271,31 +1535,10 @@ async function processFile(filePath, report, options = {}) {
   // generate-tests.js handles coverage checks and decides whether generation is needed.
   if (!CONFIG.skipTests && runTestGeneration) {
     log("  → Running test generation/refinement...", "info");
-    if (progress?.testGeneration) {
-      printPhaseProgress(
-        "Test generation progress",
-        progress.testGeneration.done,
-        progress.testGeneration.total
-      );
-      printPhaseStart(
-        "Test generation",
-        progress.testGeneration.done + 1,
-        progress.testGeneration.total,
-        relPath
-      );
-    }
     const generation = await generateTests(filePath, report);
+    renderGenerationSummary(relPath, generation);
     if (progress?.testGeneration) {
       progress.testGeneration.done++;
-      const testsSuffix = generation?.plannedTests !== null && generation?.plannedTests !== undefined
-        ? ` | tests ${generation.executedTests ?? "?"}/${generation.plannedTests}`
-        : "";
-      printPhaseProgress(
-        "Test generation progress",
-        progress.testGeneration.done,
-        progress.testGeneration.total,
-        testsSuffix
-      );
     }
   } else {
     if (!CONFIG.skipTests && !runTestGeneration) {
@@ -1325,31 +1568,10 @@ async function processFile(filePath, report, options = {}) {
   // Run tests after migration step (without generating tests again)
   if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && runFinalTests) {
     log("  → Running tests after migration...", "info");
-    if (progress?.finalTests) {
-      printPhaseProgress(
-        "Final test run progress",
-        progress.finalTests.done,
-        progress.finalTests.total
-      );
-      printPhaseStart(
-        "Final test run",
-        progress.finalTests.done + 1,
-        progress.finalTests.total,
-        relPath
-      );
-    }
     const testRun = await runTests(filePath);
+    renderFinalRunSummary(relPath, testRun);
     if (progress?.finalTests) {
       progress.finalTests.done++;
-      const testsSuffix = testRun?.plannedTests !== null && testRun?.plannedTests !== undefined
-        ? ` | tests ${testRun.executedTests ?? "?"}/${testRun.plannedTests}`
-        : "";
-      printPhaseProgress(
-        "Final test run progress",
-        progress.finalTests.done,
-        progress.finalTests.total,
-        testsSuffix
-      );
     }
   } else if (!CONFIG.skipTests && !CONFIG.noTest && !CONFIG.dryRun && !runFinalTests) {
     log("  → Skipping final test run (only enabled for leaf descriptors)", "debug");
@@ -1376,6 +1598,7 @@ async function main() {
     console.error("\nOptions:");
     console.error("  --dry-run               Preview changes without modifying files");
     console.error("  --verbose               Show detailed output");
+    console.error("  --verbose-test-summary  Show detailed per-test summary output (implied by --verbose)");
     console.error("  --log <path>            Enable verbose logging and write to file");
     console.error("  -l                      Enable verbose logging to .migrate-verbose.log");
     console.error("  --skip-tests            Skip test generation");

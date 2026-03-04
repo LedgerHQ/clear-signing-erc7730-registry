@@ -267,6 +267,29 @@ function getLinterCommand() {
 }
 
 /**
+ * Best-effort detection for linter runs that only reported warnings.
+ * Some erc7730 versions exit non-zero for warnings, which should not fail migration.
+ * @param {string} output
+ * @returns {boolean}
+ */
+function isWarningsOnlyLintOutput(output) {
+  const text = String(output || "").toLowerCase();
+  if (!text.trim()) return false;
+
+  const hasWarningsSummary =
+    text.includes("some warnings found") ||
+    text.includes("warning:");
+
+  if (!hasWarningsSummary) return false;
+
+  // Treat explicit non-zero errors as real failures.
+  if (text.includes("some errors found")) return false;
+  if (/\berror\b/.test(text) && !/\b0 errors?\b/.test(text)) return false;
+
+  return true;
+}
+
+/**
  * Lint a file using erc7730 CLI
  * @param {string} filePath - Path to the file to lint
  * @param {string} version - "v1" or "v2" for tracking stats
@@ -290,6 +313,20 @@ function lintFile(filePath, version) {
     });
 
     if (result.status !== 0) {
+      const combinedOutput = `${result.stdout || ""}\n${result.stderr || ""}`;
+      if (isWarningsOnlyLintOutput(combinedOutput)) {
+        verboseLog(
+          `  ⚠️  Linter returned non-zero on warnings only for ${path.relative(ROOT_DIR, filePath)}; continuing`,
+          "WARN"
+        );
+        if (version === "v1") {
+          stats.linting.v1Passed++;
+        } else {
+          stats.linting.v2Passed++;
+        }
+        return true;
+      }
+
       const errorMsg = result.stderr || result.stdout || "Linting failed";
       if (version === "v1") {
         stats.linting.v1Failed.push({ file: path.relative(ROOT_DIR, filePath), error: errorMsg });

@@ -77,6 +77,7 @@ const CONFIG = {
   refine: !process.argv.includes("--no-refine"),
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
+  emitTestEvents: process.argv.includes("--emit-test-events"),
 };
 
 function getArgValue(flag, defaultValue) {
@@ -131,6 +132,26 @@ function getInputFileArg() {
 
 function stripAnsi(text) {
   return String(text || "").replace(/\x1B\[[0-9;]*m/g, "");
+}
+
+const TEST_EVENT_PREFIX = "@@TEST_EVENT@@";
+
+function emitTestEvent(event, payload = {}) {
+  if (!CONFIG.emitTestEvents) return;
+  const body = { event, ...payload };
+  try {
+    console.log(`${TEST_EVENT_PREFIX}${JSON.stringify(body)}`);
+  } catch {
+    // Event emission should never interrupt generation flow.
+  }
+}
+
+function classifyTesterResultText(resultText) {
+  const text = String(resultText || "").toLowerCase();
+  if (text.includes("clear signed")) return "clear";
+  if (text.includes("partial")) return "partial";
+  if (text.includes("blind")) return "blind";
+  return "failed";
 }
 
 function appendLogLine(level, message) {
@@ -849,6 +870,9 @@ function computeKeccak256Selector(input) {
  */
 async function generateCalldataTests(erc7730, report, coveredFunctions = new Set()) {
   const tests = [];
+  let generatedTargets = 0;
+  let skippedTargets = 0;
+  let generatedTestCases = 0;
   const deploymentsToProcess = selectDeploymentsForGeneration(erc7730.deployments);
   const txCache = new Map();
 
@@ -882,12 +906,33 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
     log(`   Found ${transactions.length} transactions`);
 
     for (const func of erc7730.functions) {
+      const targetLabel = func.intent || func.signature;
       const selector = func.selector?.toLowerCase();
-      if (!selector) continue;
+      if (!selector) {
+        skippedTargets++;
+        emitTestEvent("generation_target", {
+          targetType: "function",
+          target: func.signature,
+          label: targetLabel,
+          status: "skipped",
+          reason: "missing_selector",
+          testCases: 0,
+        });
+        continue;
+      }
 
       // Skip functions already covered by existing tests
       if (coveredFunctions.has(func.signature)) {
-        log(`   ✔️  ${func.intent || func.signature}: already covered — skipping`);
+        log(`   ✔️  ${targetLabel}: already covered — skipping`);
+        skippedTargets++;
+        emitTestEvent("generation_target", {
+          targetType: "function",
+          target: func.signature,
+          label: targetLabel,
+          status: "skipped",
+          reason: "already_covered",
+          testCases: 0,
+        });
         continue;
       }
 
@@ -933,12 +978,13 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
 
       if (CONFIG.compact && fallbackAttempts > 0) {
         log(
-          `   🔍 ${func.intent || func.signature}: ${examples.length} matches (${matchingSourceLabel}; ${fallbackAttempts} fallback address(es) tried)`
+          `   🔍 ${targetLabel}: ${examples.length} matches (${matchingSourceLabel}; ${fallbackAttempts} fallback address(es) tried)`
         );
       } else {
-        log(`   🔍 ${func.intent || func.signature}: ${examples.length} matches`);
+        log(`   🔍 ${targetLabel}: ${examples.length} matches`);
       }
 
+      let generatedForTarget = 0;
       for (const tx of examples) {
         // Get unsigned raw transaction (Ledger explorer + RLP reconstruction)
         let rawTx = await getRawTransaction(chainId, tx.hash);
@@ -961,6 +1007,8 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
         testCase.expectedTexts = inferExpectedTexts(func, erc7730.metadata);
 
         tests.push(testCase);
+        generatedForTarget++;
+        generatedTestCases++;
         report.generated.push({
           type: "calldata",
           chainId,
@@ -980,8 +1028,37 @@ async function generateCalldataTests(erc7730, report, coveredFunctions = new Set
             : "No matching transactions found",
         });
       }
+
+      if (generatedForTarget > 0) {
+        generatedTargets++;
+        emitTestEvent("generation_target", {
+          targetType: "function",
+          target: func.signature,
+          label: targetLabel,
+          status: "generated",
+          reason: null,
+          testCases: generatedForTarget,
+        });
+      } else {
+        skippedTargets++;
+        emitTestEvent("generation_target", {
+          targetType: "function",
+          target: func.signature,
+          label: targetLabel,
+          status: "skipped",
+          reason: examples.length === 0 ? "no_matching_transactions" : "no_usable_transactions",
+          testCases: 0,
+        });
+      }
     }
   }
+
+  emitTestEvent("generation_summary", {
+    targetType: "function",
+    generatedTargets,
+    skippedTargets,
+    generatedTestCases,
+  });
 
   return tests;
 }
@@ -1058,11 +1135,23 @@ function selectDeploymentsForGeneration(deployments) {
  */
 async function generateEip712Tests(erc7730, report, coveredMessageTypes = new Set()) {
   const tests = [];
+  let generatedTargets = 0;
+  let skippedTargets = 0;
+  let generatedTestCases = 0;
 
   for (const msgType of erc7730.messageTypes) {
     // Skip message types already covered by existing tests
     if (coveredMessageTypes.has(msgType.primaryType)) {
       log(`\n✔️  ${msgType.primaryType}: already covered — skipping`);
+      skippedTargets++;
+      emitTestEvent("generation_target", {
+        targetType: "messageType",
+        target: msgType.primaryType,
+        label: msgType.intent || msgType.primaryType,
+        status: "skipped",
+        reason: "already_covered",
+        testCases: 0,
+      });
       continue;
     }
 
@@ -1081,18 +1170,44 @@ async function generateEip712Tests(erc7730, report, coveredMessageTypes = new Se
       testCase.expectedTexts = inferExpectedTextsEip712(msgType, erc7730.metadata);
 
       tests.push(testCase);
+      generatedTargets++;
+      generatedTestCases++;
       report.generated.push({
         type: "eip712",
         messageType: msgType.primaryType,
       });
+      emitTestEvent("generation_target", {
+        targetType: "messageType",
+        target: msgType.primaryType,
+        label: msgType.intent || msgType.primaryType,
+        status: "generated",
+        reason: null,
+        testCases: 1,
+      });
     } else {
+      skippedTargets++;
       report.notFound.push({
         type: "eip712",
         messageType: msgType.primaryType,
         reason: "Could not generate example",
       });
+      emitTestEvent("generation_target", {
+        targetType: "messageType",
+        target: msgType.primaryType,
+        label: msgType.intent || msgType.primaryType,
+        status: "skipped",
+        reason: "generation_failed",
+        testCases: 0,
+      });
     }
   }
+
+  emitTestEvent("generation_summary", {
+    targetType: "messageType",
+    generatedTargets,
+    skippedTargets,
+    generatedTestCases,
+  });
 
   return tests;
 }
@@ -1758,15 +1873,32 @@ process.on("SIGTERM", () => { stopLocalApiServer(); process.exit(143); });
 // Clear Signing Tester Integration
 // =============================================================================
 
+function streamToLines(stream, onLine, onChunk) {
+  let buffer = "";
+  stream.on("data", (chunk) => {
+    const text = chunk.toString();
+    if (onChunk) onChunk(text);
+    buffer += text;
+    const lines = buffer.split(/\r?\n/);
+    buffer = lines.pop() || "";
+    for (const line of lines) {
+      onLine(line);
+    }
+  });
+  stream.on("end", () => {
+    if (buffer) onLine(buffer);
+  });
+}
+
 /**
  * Run the clear signing tester on the generated test file.
  * Invokes tools/tester/run-test.sh with the descriptor and test file.
  *
  * @param {string} descriptorPath - Absolute path to the ERC-7730 descriptor
  * @param {string} testFilePath   - Absolute path to the generated .tests.json
- * @returns {{ passed: boolean, logFile: string|null }} test result and log file path
+ * @returns {Promise<{ passed: boolean, logFile: string|null }>} test result and log file path
  */
-function runTester(descriptorPath, testFilePath) {
+async function runTester(descriptorPath, testFilePath) {
   // Resolve the run-test.sh script relative to the repository root
   const repoRoot = path.resolve(__dirname, "../..");
   const runTestScript = path.join(repoRoot, "tools", "tester", "run-test.sh");
@@ -1774,6 +1906,15 @@ function runTester(descriptorPath, testFilePath) {
   if (!fs.existsSync(runTestScript)) {
     console.log("\n⚠️  Tester script not found at: " + runTestScript);
     console.log("   Skipping test execution. Run setup first: cd tools/tester && ./setup.sh");
+    emitTestEvent("tester_start", { descriptor: descriptorPath, testFile: testFilePath });
+    emitTestEvent("tester_complete", {
+      descriptor: descriptorPath,
+      testFile: testFilePath,
+      passed: false,
+      exitCode: 1,
+      screenshots: 0,
+      verified: 0,
+    });
     return { passed: false, logFile: null };
   }
 
@@ -1788,26 +1929,66 @@ function runTester(descriptorPath, testFilePath) {
   console.log(`   Device:     ${device}`);
   console.log(`   Log level:  ${logLevel}\n`);
 
+  emitTestEvent("tester_start", { descriptor: descriptorPath, testFile: testFilePath });
   let passed = false;
-  try {
-    execSync(
-      `"${runTestScript}" "${descriptorPath}" "${testFilePath}" "${device}" "${logLevel}"`,
-      {
-        stdio: "inherit",
-        cwd: repoRoot,
-        env: { ...process.env },
+  let exitCode = 1;
+  let screenshotCount = 0;
+  let verifiedCount = 0;
+
+  await new Promise((resolve, reject) => {
+    const child = spawn("bash", [runTestScript, descriptorPath, testFilePath, device, logLevel], {
+      cwd: repoRoot,
+      env: { ...process.env },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+
+    const onLine = (line) => {
+      const clean = stripAnsi(line);
+      if (/Saved screenshot:/.test(clean)) {
+        screenshotCount++;
+        emitTestEvent("tester_screenshot", { count: screenshotCount });
       }
-    );
+      const resultMatch = clean.match(/Result:\s*(.+)$/);
+      if (resultMatch) {
+        verifiedCount++;
+        const resultText = resultMatch[1].trim();
+        emitTestEvent("tester_case_result", {
+          index: verifiedCount - 1,
+          status: classifyTesterResultText(resultText),
+          resultText,
+        });
+      }
+    };
+
+    streamToLines(child.stdout, onLine, (text) => process.stdout.write(text));
+    streamToLines(child.stderr, onLine, (text) => process.stderr.write(text));
+
+    child.on("error", reject);
+    child.on("close", (code) => {
+      exitCode = code ?? 1;
+      passed = exitCode === 0;
+      resolve();
+    });
+  });
+
+  if (passed) {
     console.log("\n✅ Clear signing tests passed!");
-    passed = true;
-  } catch (error) {
-    const exitCode = error.status || 1;
+  } else {
     console.log(`\n❌ Clear signing tests failed (exit code: ${exitCode})`);
   }
 
   // Find the most recent test output log
   const logsDir = path.join(repoRoot, "tools", "tester", "output", "logs");
   const logFile = findMostRecentFile(logsDir, "test-output-");
+  emitTestEvent("tester_complete", {
+    descriptor: descriptorPath,
+    testFile: testFilePath,
+    passed,
+    exitCode,
+    screenshots: screenshotCount,
+    verified: verifiedCount,
+    logFile,
+  });
   return { passed, logFile };
 }
 
@@ -2006,23 +2187,42 @@ function refineTestFile(testFilePath, logFile, erc7730) {
 
   if (perTestScreens.length === 0) {
     console.log("   ⚠️  No screen text analysis found in tester log");
-    return false;
+    emitTestEvent("refinement_complete", {
+      testFile: testFilePath,
+      refined: 0,
+      failed: 0,
+      total: 0,
+      reason: "no_screen_analysis",
+    });
+    return { applied: false, refined: 0, failed: 0, total: 0 };
   }
 
   const testFile = JSON.parse(fs.readFileSync(testFilePath, "utf8"));
   const tests = testFile.tests;
+  emitTestEvent("refinement_start", {
+    testFile: testFilePath,
+    totalTests: Array.isArray(tests) ? tests.length : 0,
+  });
 
   if (perTestScreens.length !== tests.length) {
     console.log(
       `   ⚠️  Screen text count (${perTestScreens.length}) doesn't match test count (${tests.length}), skipping refinement`
     );
-    return false;
+    emitTestEvent("refinement_complete", {
+      testFile: testFilePath,
+      refined: 0,
+      failed: tests.length,
+      total: tests.length,
+      reason: "screen_count_mismatch",
+    });
+    return { applied: false, refined: 0, failed: tests.length, total: tests.length };
   }
 
   // Build a map from descriptor labels per function/intent
   const labelsByIntent = buildLabelsByIntent(erc7730);
 
   let refined = 0;
+  let failed = 0;
   let needsWrite = false;
   for (let i = 0; i < tests.length; i++) {
     const test = tests[i];
@@ -2036,10 +2236,28 @@ function refineTestFile(testFilePath, logFile, erc7730) {
     if (newExpectedTexts.length > 0) {
       test.expectedTexts = newExpectedTexts;
       refined++;
+      emitTestEvent("refinement_case", {
+        index: i,
+        description: test.description || "",
+        status: "refined",
+      });
     } else if (!test.expectedTexts) {
       // Ensure expectedTexts field always exists, even if empty
       test.expectedTexts = [];
       needsWrite = true;
+      failed++;
+      emitTestEvent("refinement_case", {
+        index: i,
+        description: test.description || "",
+        status: "failed",
+      });
+    } else {
+      failed++;
+      emitTestEvent("refinement_case", {
+        index: i,
+        description: test.description || "",
+        status: "failed",
+      });
     }
   }
 
@@ -2048,7 +2266,13 @@ function refineTestFile(testFilePath, logFile, erc7730) {
     console.log(`   ✅ Refined expectedTexts for ${refined}/${tests.length} test cases`);
   }
 
-  return refined > 0 || needsWrite;
+  emitTestEvent("refinement_complete", {
+    testFile: testFilePath,
+    refined,
+    failed,
+    total: tests.length,
+  });
+  return { applied: refined > 0 || needsWrite, refined, failed, total: tests.length };
 }
 
 /**
@@ -2148,6 +2372,7 @@ async function main() {
     console.error("  --no-refine              Skip refining expectedTexts from tester screen output");
     console.error("  --local-api              Auto-start local Flask API server (patched erc7730)");
     console.error("  --local-api-port <port>  Port for the local API server (default: 5000)");
+    console.error("  --emit-test-events       Emit machine-readable test event lines for batch tooling");
     console.error("\nEnvironment Variables:");
     console.error("  ETHERSCAN_API_KEY, POLYGONSCAN_API_KEY, BSCSCAN_API_KEY, etc.");
     console.error("  OPENAI_API_KEY      API key for OpenAI (for EIP-712 examples)");
@@ -2265,7 +2490,7 @@ async function main() {
 
     // Run clear signing tester if enabled and tests were written
     if ((CONFIG.runTest || CONFIG.forceTest) && !CONFIG.dryRun && testFilePath) {
-      const { passed, logFile } = runTester(filePath, testFilePath);
+      const { passed, logFile } = await runTester(filePath, testFilePath);
       if (!passed) {
         process.exitCode = 1;
       }
