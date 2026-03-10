@@ -2180,21 +2180,41 @@ const GENERIC_UI_PATTERNS = [
  * (in order). Returns an array of arrays, one per test, each containing the
  * raw screen text strings.
  *
+ * Supports two log formats:
+ *   Legacy:  `Accumulated screen texts from device:\n [0] "text"\n ... Expected texts from test file:`
+ *   Current: `screen-analyzer Accumulated screen texts from device: {\n  data: {\n    accumulatedTexts: [\n      'text',\n ...\n`
+ *
  * @param {string} logContent - Full tester log file content
  * @returns {string[][]} Per-test arrays of screen text strings
  */
 function parseTesterScreenTexts(logContent) {
   const allTests = [];
-  const sectionRegex = /Accumulated screen texts from device:\n([\s\S]*?)Expected texts from test file:/g;
 
+  // Strategy 1: legacy format (bounded by "Expected texts from test file:")
+  const legacyRegex = /Accumulated screen texts from device:\n([\s\S]*?)Expected texts from test file:/g;
   let match;
-  while ((match = sectionRegex.exec(logContent)) !== null) {
+  while ((match = legacyRegex.exec(logContent)) !== null) {
     const block = match[1];
     const texts = [];
     const lineRegex = /\[\d+\]\s+"(.*?)"/g;
     let lineMatch;
     while ((lineMatch = lineRegex.exec(block)) !== null) {
       texts.push(lineMatch[1]);
+    }
+    allTests.push(texts);
+  }
+
+  if (allTests.length > 0) return allTests;
+
+  // Strategy 2: current format — JS object dump with accumulatedTexts array
+  const currentRegex = /Accumulated screen texts from device:\s*\{[\s\S]*?accumulatedTexts:\s*\[([\s\S]*?)\]\s*\n?\s*\}/g;
+  while ((match = currentRegex.exec(logContent)) !== null) {
+    const arrayBlock = match[1];
+    const texts = [];
+    const entryRegex = /'((?:[^'\\]|\\.)*)'/g;
+    let entryMatch;
+    while ((entryMatch = entryRegex.exec(arrayBlock)) !== null) {
+      texts.push(entryMatch[1]);
     }
     allTests.push(texts);
   }
