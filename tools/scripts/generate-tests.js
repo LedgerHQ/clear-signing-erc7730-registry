@@ -98,6 +98,7 @@ const CONFIG = {
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
   emitTestEvents: process.argv.includes("--emit-test-events"),
+  cursorTimeout: getArgValue("--cursor-timeout", 180) * 1000,
 };
 
 // Resolve backend-specific defaults
@@ -1322,7 +1323,7 @@ async function generateEip712Example(msgType, erc7730) {
   try {
     const prompt = buildEip712Prompt(msgType, erc7730);
     const response = await invokeLLM(prompt);
-    return JSON.parse(response);
+    return extractJson(response);
   } catch (error) {
     log(`   ❌ LLM generation failed: ${error.message}`);
     return generatePlaceholderExample(msgType, erc7730.deployments[0]);
@@ -1508,6 +1509,64 @@ function buildEip712Prompt(msgType, erc7730) {
 }
 
 // =============================================================================
+// JSON Extraction
+// =============================================================================
+
+function extractJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    // noop
+  }
+
+  const fenceMatch = text.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  if (fenceMatch) {
+    try {
+      return JSON.parse(fenceMatch[1]);
+    } catch {
+      // noop
+    }
+  }
+
+  const firstBrace = text.indexOf("{");
+  const firstBracket = text.indexOf("[");
+  let start = -1;
+  let end = -1;
+  let openChar, closeChar;
+
+  if (firstBrace >= 0 && (firstBracket < 0 || firstBrace < firstBracket)) {
+    start = firstBrace;
+    openChar = "{";
+    closeChar = "}";
+  } else if (firstBracket >= 0) {
+    start = firstBracket;
+    openChar = "[";
+    closeChar = "]";
+  }
+
+  if (start >= 0) {
+    let depth = 0;
+    for (let i = start; i < text.length; i++) {
+      if (text[i] === openChar) depth++;
+      else if (text[i] === closeChar) depth--;
+      if (depth === 0) {
+        end = i + 1;
+        break;
+      }
+    }
+    if (end > start) {
+      try {
+        return JSON.parse(text.slice(start, end));
+      } catch {
+        // noop
+      }
+    }
+  }
+
+  throw new Error("Could not extract valid JSON from LLM response");
+}
+
+// =============================================================================
 // LLM Backends (shared abstraction matching generate-7730.js)
 // =============================================================================
 
@@ -1618,6 +1677,7 @@ async function invokeCursorAgent(prompt) {
 
   verboseLog(`   Running: cursor ${args.join(" ")}`);
 
+  const timeoutMs = CONFIG.cursorTimeout;
   return new Promise((resolve, reject) => {
     const proc = spawn("cursor", args, {
       stdio: ["ignore", "pipe", "pipe"],
@@ -1625,18 +1685,32 @@ async function invokeCursorAgent(prompt) {
 
     let stdout = "";
     let stderr = "";
+    let killed = false;
+
+    const timer = setTimeout(() => {
+      killed = true;
+      proc.kill("SIGTERM");
+      setTimeout(() => { try { proc.kill("SIGKILL"); } catch { /* noop */ } }, 5000);
+    }, timeoutMs);
 
     proc.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
     proc.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
 
     proc.on("error", (err) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
       reject(new Error(`Failed to start cursor agent: ${err.message}`));
     });
 
     proc.on("close", (code) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
-      if (code !== 0) {
+      if (killed) {
+        reject(new Error(
+          `Cursor agent timed out after ${timeoutMs / 1000}s` +
+          (stdout ? ` (received ${stdout.length} chars)` : " (no output)")
+        ));
+      } else if (code !== 0) {
         reject(new Error(
           `Cursor agent exited with code ${code}` +
           (stderr ? ": " + stderr.slice(0, 500) : "")
