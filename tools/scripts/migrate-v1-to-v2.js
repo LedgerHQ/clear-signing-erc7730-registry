@@ -822,12 +822,15 @@ function validateMigration(filePath, v1Content, wasV1, comparisonOptions = {}) {
   if (v1Result !== null && v2Result !== null) {
     const rawDifferences = deepCompare(v1Result, v2Result);
     const differences = filterComparisonDifferences(rawDifferences, comparisonOptions);
+    const filteredCount = rawDifferences.length - differences.length;
     const relPath = path.relative(ROOT_DIR, filePath);
     if (differences.length > 0) {
       const diffSummary = differences.map((d) => `    ${d}`).join("\n");
       const errorMsg = `v1/v2 output mismatch (${differences.length} difference${differences.length > 1 ? "s" : ""}):\n${diffSummary}`;
       console.error(`  ❌ ${relPath}: ${errorMsg}`);
       stats.calldata.mismatches.push({ file: relPath, differences });
+    } else if (filteredCount > 0) {
+      console.warn(`  ⚠️  ${relPath}: v1/v2 outputs match after filtering ${filteredCount} known acceptable difference${filteredCount > 1 ? "s" : ""}`);
     } else {
       verboseLog(`  ✅ v1/v2 outputs match for ${relPath}`, "INFO");
     }
