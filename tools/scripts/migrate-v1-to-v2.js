@@ -37,6 +37,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
+const { keccak256 } = require("js-sha3");
 
 const ACCEPTED_OPTIONS = [
   "  --help, -h      Show this help message",
@@ -1119,6 +1120,23 @@ function abiCanonicalSignature(abiEntry) {
 }
 
 /**
+ * Return true when a value looks like a 4-byte function selector (e.g. "0x38ed1739").
+ */
+function isHexSelector(value) {
+  return typeof value === "string" && /^0x[0-9a-fA-F]{8}$/i.test(value);
+}
+
+/**
+ * Compute the 4-byte function selector from an ABI entry.
+ * The selector is keccak256 of the canonical signature, truncated to 4 bytes.
+ */
+function computeAbiSelector(abiEntry) {
+  const sig = abiCanonicalSignature(abiEntry);
+  if (!sig) return null;
+  return "0x" + keccak256(sig).slice(0, 8);
+}
+
+/**
  * Return true when a value is an http/https URL string.
  */
 function isHttpUrl(value) {
@@ -1269,10 +1287,22 @@ function resolveContractAbi(contractContext) {
 
 /**
  * Try to find matching ABI entry for a format key.
- * Uses exact canonical signature first, then falls back to unique name match.
+ * Supports three key formats:
+ *   1. Human-readable signature: "swapExactTokensForTokens(uint256, ...)"
+ *   2. Function name prefix: "swapExactTokensForTokens(...)"
+ *   3. Hex selector: "0x38ed1739"
  */
 function findAbiEntry(abi, formatKey) {
   if (!Array.isArray(abi)) return null;
+
+  // Match by hex selector (e.g. "0x38ed1739")
+  if (isHexSelector(formatKey)) {
+    const selectorLower = formatKey.toLowerCase();
+    const match = abi.find(
+      (entry) => entry.type === "function" && computeAbiSelector(entry) === selectorLower
+    );
+    return match || null;
+  }
 
   const canonicalKey = canonicalizeSignature(formatKey);
   if (canonicalKey) {
@@ -1347,18 +1377,34 @@ function migrateFile(filePath) {
     let modified = false;
     let ownerReplacedFromLegalName = false;
 
-    // Skip if not using v1 schema
-    if (!json.$schema?.includes("erc7730-v1.schema.json")) {
+    // Skip if already using v2 schema
+    const hasV2Schema = json.$schema?.includes("erc7730-v2.schema.json");
+    const hasV1Schema = json.$schema?.includes("erc7730-v1.schema.json");
+    const hasNoSchema = !json.$schema;
+
+    if (hasV2Schema) {
       stats.skipped++;
-      verboseLog(`Skipped (not v1): ${filePath}`);
+      verboseLog(`Skipped (already v2): ${filePath}`);
       return false;
     }
 
-    // 1. Update schema reference
-    json.$schema = json.$schema.replace(
-      "erc7730-v1.schema.json",
-      "erc7730-v2.schema.json"
-    );
+    if (!hasV1Schema && !hasNoSchema) {
+      stats.skipped++;
+      verboseLog(`Skipped (unknown schema): ${filePath}`);
+      return false;
+    }
+
+    // 1. Update or set schema reference to v2
+    if (hasV1Schema) {
+      json.$schema = json.$schema.replace(
+        "erc7730-v1.schema.json",
+        "erc7730-v2.schema.json"
+      );
+    } else {
+      const relSchemaPath = path.relative(path.dirname(filePath), path.join(ROOT_DIR, "specs", "erc7730-v2.schema.json"));
+      json.$schema = relSchemaPath;
+      verboseLog(`  ℹ️  No $schema found, assuming v1 — setting to ${relSchemaPath}`, "INFO");
+    }
     stats.changes.schemaRef++;
     modified = true;
 
