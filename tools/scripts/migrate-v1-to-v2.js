@@ -30,7 +30,7 @@
  *   --verbose       Show detailed output
  *   --skip-lint     Skip linting and calldata validation
  *   --log <path>    Enable verbose logging and write to file
- *   -l              Enable verbose logging to .migrate-verbose.log
+ *   -l              Enable verbose logging to tools/scripts/logs/
  *   --file <path>   Process only one JSON file
  */
 
@@ -45,7 +45,7 @@ const ACCEPTED_OPTIONS = [
   "  --verbose       Show detailed output",
   "  --skip-lint     Skip linting and calldata validation",
   "  --log <path>    Enable verbose logging and write to file",
-  "  -l              Enable verbose logging to .migrate-verbose.log",
+  "  -l              Enable verbose logging to tools/scripts/logs/",
   "  --file <path>   Process only one JSON file",
 ];
 
@@ -102,7 +102,8 @@ if (cliError) {
 // Configuration
 const ROOT_DIR = path.join(__dirname, "..", "..");
 const REGISTRY_DIR = path.join(ROOT_DIR, "registry");
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `migrate-v1-to-v2-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LINTER_MAX_BUFFER = 50 * 1024 * 1024; // 50 MB for large calldata outputs
 const LOG_FILE = getLogFilePath();
 const DRY_RUN = process.argv.includes("--dry-run");

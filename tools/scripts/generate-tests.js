@@ -14,7 +14,7 @@
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
  *   --log <path>            Enable verbose logging and write to file
- *   -l                      Enable verbose logging to .migrate-verbose.log
+ *   -l                      Enable verbose logging to tools/scripts/logs/
  *   --depth <n>             Max transactions to search (default: 100)
  *   --max-tests <n>         Max tests to generate per function (default: 3, or 1 with --compact)
  *   --chain <id>            Only process specific chain ID
@@ -55,7 +55,8 @@ const { execSync, spawn } = require("child_process");
 // Configuration
 // =============================================================================
 
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `generate-tests-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const VALID_BACKENDS = ["openai", "anthropic", "cursor"];
@@ -175,7 +176,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --dry-run                Preview without writing files");
   write("  --verbose                Show detailed output");
   write("  --log <path>             Enable verbose logging and write to file");
-  write("  -l                       Enable verbose logging to .migrate-verbose.log");
+  write("  -l                       Enable verbose logging to tools/scripts/logs/");
   write("  --depth <n>              Max transactions to search (default: 100)");
   write("  --max-tests <n>          Max tests per function (default: 3, or 1 with --compact)");
   write("  --chain <id>             Only process specific chain ID");

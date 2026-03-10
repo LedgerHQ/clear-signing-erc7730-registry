@@ -117,7 +117,7 @@ node tools/scripts/generate-7730.js \
 | `--dry-run` | `false` | Preview without writing files |
 | `--verbose` | `false` | Show detailed output |
 | `--log <path>` | - | Enable verbose logging to file |
-| `-l` | - | Enable verbose logging to `.generate-verbose.log` |
+| `-l` | - | Enable verbose logging to `tools/scripts/logs/` |
 | `--backend <name>` | `openai` | LLM backend: `openai`, `anthropic`, `cursor` |
 | `--model <model>` | backend-specific | Model name (see Backends below) |
 | `--api-key <key>` | env var | API key (overrides env var for the selected backend) |

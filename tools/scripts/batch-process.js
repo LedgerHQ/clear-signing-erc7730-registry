@@ -16,7 +16,7 @@
  *   --verbose               Show detailed output
  *   --verbose-test-summary  Show detailed per-test summary output (implied by --verbose)
  *   --log <path>            Enable verbose logging and write to file
- *   -l                      Enable verbose logging to .migrate-verbose.log
+ *   -l                      Enable verbose logging to tools/scripts/logs/
  *   --skip-tests            Skip test generation
  *   --skip-lint             Skip linting during migration
  *   --skip-migration        Skip v1 to v2 migration
@@ -58,7 +58,8 @@ const { execSync, spawnSync, spawn } = require("child_process");
 // Configuration
 // =============================================================================
 
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `batch-process-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
@@ -130,7 +131,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --verbose               Show detailed output");
   write("  --verbose-test-summary  Show detailed per-test summary output (implied by --verbose)");
   write("  --log <path>            Enable verbose logging and write to file");
-  write("  -l                      Enable verbose logging to .migrate-verbose.log");
+  write("  -l                      Enable verbose logging to tools/scripts/logs/");
   write("  --skip-tests            Skip test generation");
   write("  --skip-lint             Skip linting during migration");
   write("  --skip-migration        Skip v1 to v2 migration");

@@ -35,7 +35,7 @@
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
  *   --log <path>            Enable verbose logging to file
- *   -l                      Enable verbose logging to .generate-verbose.log
+ *   -l                      Enable verbose logging to tools/scripts/logs/
  *   --backend <name>        LLM backend: openai, anthropic, cursor (default: openai)
  *   --model <model>         Model name (default depends on backend)
  *   --api-key <key>         API key (overrides env var for the selected backend)
@@ -64,7 +64,8 @@ const { spawn } = require("child_process");
 
 const SCRIPT_DIR = __dirname;
 const ROOT_DIR = path.join(SCRIPT_DIR, "..", "..");
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".generate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `generate-7730-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const VALID_BACKENDS = ["openai", "anthropic", "cursor"];
@@ -134,7 +135,7 @@ const ACCEPTED_OPTIONS = [
   "  --dry-run               Preview without writing files",
   "  --verbose               Show detailed output",
   "  --log <path>            Enable verbose logging to file",
-  "  -l                      Enable verbose logging to .generate-verbose.log",
+  "  -l                      Enable verbose logging to tools/scripts/logs/",
   "  --backend <name>        LLM backend: openai, anthropic, cursor (default: openai)",
   "  --model <model>         Model name (default: backend-specific)",
   "  --api-key <key>         API key (overrides env var for the selected backend)",
