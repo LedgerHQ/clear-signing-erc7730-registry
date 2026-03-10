@@ -20,7 +20,7 @@
  *   --skip-tests            Skip test generation
  *   --skip-lint             Skip linting during migration
  *   --skip-migration        Skip v1 to v2 migration
- *   --skip-pr               Skip PR creation
+ *   --pr                    Create a branch and PR with changes
  *   --pr-title <title>      Custom PR title
  *   --pr-branch <name>      Custom branch name
  *   --local-api             Auto-start local Flask API server for the tester
@@ -44,7 +44,7 @@
  *   --help, -h              Show this help message
  *
  * Environment Variables:
- *   GITHUB_TOKEN        GitHub token for PR creation (required for --create-pr)
+ *   GITHUB_TOKEN        GitHub token for PR creation (required for --pr)
  *   ETHERSCAN_API_KEY   For test generation (fetching transactions)
  *   OPENAI_API_KEY      For EIP-712 test generation
  */
@@ -70,7 +70,7 @@ const CONFIG = {
   skipTests: process.argv.includes("--skip-tests"),
   skipLint: process.argv.includes("--skip-lint"),
   skipMigration: process.argv.includes("--skip-migration"),
-  skipPr: process.argv.includes("--skip-pr"),
+  pr: process.argv.includes("--pr"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
   localApi: process.argv.includes("--local-api"),
@@ -134,7 +134,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --skip-tests            Skip test generation");
   write("  --skip-lint             Skip linting during migration");
   write("  --skip-migration        Skip v1 to v2 migration");
-  write("  --skip-pr               Skip PR creation");
+  write("  --pr                    Create a branch and PR with changes");
   write("  --pr-title <title>      Custom PR title");
   write("  --pr-branch <name>      Custom branch name");
   write("  --local-api             Auto-start local Flask API server (patched erc7730)");
@@ -158,7 +158,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("\nExamples:");
   write("  node tools/scripts/batch-process.js 1inch --dry-run");
   write("  node tools/scripts/batch-process.js registry/ethena --verbose");
-  write("  node tools/scripts/batch-process.js morpho --skip-pr");
+  write("  node tools/scripts/batch-process.js morpho --pr");
   write("  node tools/scripts/batch-process.js figment --local-api --verbose");
   write("  node tools/scripts/batch-process.js ethena --device stax --no-refine");
   process.exit(exitCode);
@@ -1325,36 +1325,24 @@ function commitAndCreatePr(context, targetFolder, report) {
   fs.writeFileSync(prBodyFile, prBody);
   log(`PR summary saved to: ${path.relative(ROOT_DIR, prBodyFile)}`, "info");
 
-  if (!CONFIG.skipPr) {
-    if (!checkGhCli()) {
-      log("GitHub CLI (gh) not installed. Install with: brew install gh", "warning");
-      log("PR will not be created.", "warning");
-      return;
-    }
-
-    log("Pushing branch to remote...", "info");
-    execSync(`git push -u origin "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
-
-    log("Creating PR...", "info");
-    const prResult = execSync(
-      `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"`,
-      { cwd: ROOT_DIR, encoding: "utf8" }
-    );
-
-    report.prCreated = true;
-    report.prUrl = prResult.trim();
-    log(`PR created: ${report.prUrl}`, "success");
-  } else {
-    console.log(`\n${"-".repeat(60)}`);
-    console.log("To create the PR manually, run:");
-    console.log(`${"-".repeat(60)}`);
-    console.log(`git checkout "${branchName}" && \\`);
-    console.log(`  git push -u origin "${branchName}" && \\`);
-    console.log(`  gh pr create \\`);
-    console.log(`    --title "${prTitle}" \\`);
-    console.log(`    --body-file "${prBodyFile}"`);
-    console.log(`${"-".repeat(60)}`);
+  if (!checkGhCli()) {
+    log("GitHub CLI (gh) not installed. Install with: brew install gh", "warning");
+    log("PR will not be created.", "warning");
+    return;
   }
+
+  log("Pushing branch to remote...", "info");
+  execSync(`git push -u origin "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+
+  log("Creating PR...", "info");
+  const prResult = execSync(
+    `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"`,
+    { cwd: ROOT_DIR, encoding: "utf8" }
+  );
+
+  report.prCreated = true;
+  report.prUrl = prResult.trim();
+  log(`PR created: ${report.prUrl}`, "success");
 }
 
 /**
@@ -1720,12 +1708,11 @@ async function main() {
     process.exit(0);
   }
 
-  // Set up working branch (stash + create branch) so changes are isolated.
-  // Branch is always created — even if only tests are generated — so the
-  // user gets a clean PR-ready branch.  If nothing changes, the branch is
-  // deleted in the cleanup step.
+  // When --pr is specified, set up a clean working branch so changes are
+  // isolated and can be pushed as a PR.  Without --pr, changes are made
+  // directly on the current branch without committing.
   let branchContext = null;
-  if (!CONFIG.dryRun && checkGit()) {
+  if (CONFIG.pr && !CONFIG.dryRun && checkGit()) {
     branchContext = setupBranch(path.basename(targetFolder));
   }
 
