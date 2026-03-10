@@ -1,0 +1,172 @@
+{
+  "$schema": "../specs/erc7730-v1.schema.json",
+  "context": {
+    "contract": {
+      "abi": [
+        {
+          "inputs": [
+            { "name": "from", "type": "address" },
+            { "name": "to", "type": "address" },
+            { "name": "id", "type": "uint256" },
+            { "name": "value", "type": "uint256" },
+            { "name": "data", "type": "bytes" }
+          ],
+          "name": "safeTransferFrom",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "name": "from", "type": "address" },
+            { "name": "to", "type": "address" },
+            { "name": "ids", "type": "uint256[]" },
+            { "name": "values", "type": "uint256[]" },
+            { "name": "data", "type": "bytes" }
+          ],
+          "name": "safeBatchTransferFrom",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "name": "operator", "type": "address" },
+            { "name": "approved", "type": "bool" }
+          ],
+          "name": "setApprovalForAll",
+          "type": "function"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "enums": {
+      "rights": {
+        "True": "Grant all",
+        "False": "Deny all"
+      }
+    }
+  },
+  "display": {
+    "definitions": {
+      "from": {
+        "label": "From",
+        "format": "addressName",
+        "params": {
+          "types": ["eoa"],
+          "sources": ["local", "ens"]
+        }
+      },
+      "to": {
+        "label": "To",
+        "format": "addressName",
+        "params": {
+          "types": ["eoa"],
+          "sources": ["local", "ens"]
+        }
+      },
+      "operator": {
+        "label": "Operator",
+        "format": "addressName",
+        "params": {
+          "types": ["contract"],
+          "sources": ["local", "ens"]
+        }
+      },
+      "tokenId": {
+        "label": "Token ID",
+        "format": "tokenId",
+        "params": {
+          "collectionPath": "@.to"
+        }
+      },
+      "tokenAmount": {
+        "label": "Amount",
+        "format": "tokenAmount",
+        "params": {
+          "token": "$.context.contract.deployments.[0].address"
+        }
+      }
+    },
+    "formats": {
+      "safeTransferFrom(address,address,uint256,uint256,bytes)": {
+        "intent": "Send tokens",
+        "fields": [
+          {
+            "path": "from",
+            "$ref": "$.display.definitions.from"
+          },
+          {
+            "path": "to",
+            "$ref": "$.display.definitions.to"
+          },
+          {
+            "path": "id",
+            "$ref": "$.display.definitions.tokenId"
+          },
+          {
+            "path": "value",
+            "$ref": "$.display.definitions.tokenAmount"
+          }
+        ],
+        "required": ["to", "id", "value"]
+      },
+      "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+        "intent": "Send multiple tokens",
+        "fields": [
+          {
+            "path": "from",
+            "$ref": "$.display.definitions.from"
+          },
+          {
+            "path": "to",
+            "$ref": "$.display.definitions.to"
+          },
+          {
+            "path": "ids",
+            "label": "Token IDs",
+            "format": "array",
+            "params": {
+              "itemFormat": "tokenId",
+              "collectionPath": "@.to"
+            }
+          },
+          {
+            "path": "values",
+            "label": "Amounts",
+            "format": "array",
+            "params": {
+              "itemFormat": "tokenAmount",
+              "token": "$.context.contract.deployments.[0].address"
+            }
+          }
+        ],
+        "required": ["to", "ids", "values"]
+      },
+      "setApprovalForAll(address,bool)": {
+        "$id": "setApprovalForAll",
+        "intent": "Manage operator rights for",
+        "fields": [
+          {
+            "path": "@.to",
+            "label": "Collection",
+            "format": "addressName",
+            "params": {
+              "types": ["collection"],
+              "sources": ["local", "ens"]
+            }
+          },
+          {
+            "path": "operator",
+            "$ref": "$.display.definitions.operator"
+          },
+          {
+            "path": "approved",
+            "label": "Access rights",
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.rights"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
