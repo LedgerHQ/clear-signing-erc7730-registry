@@ -527,8 +527,12 @@ function filterComparisonDifferences(differences, options = {}) {
     return differences;
   }
 
+  // Calldata output format: $[n].transaction_info.creator_name / .descriptor
   const transactionInfoPattern = /^\$\[(\d+)\]\.transaction_info\.(creator_name|descriptor):/;
   const itemPathPattern = /^\$\[(\d+)\]\./;
+
+  // EIP-712 convert output format: $.<chainId>.contracts[n].contractName
+  const eip712ContractNamePattern = /^\$\.\d+\.contracts\[\d+\]\.contractName:/;
 
   const perItem = new Map();
   for (const diff of differences) {
@@ -553,6 +557,11 @@ function filterComparisonDifferences(differences, options = {}) {
   }
 
   return differences.filter((diff) => {
+    // Filter EIP-712 contractName diffs caused by owner/legalName reconciliation
+    if (eip712ContractNamePattern.test(diff)) {
+      return false;
+    }
+
     const txMatch = diff.match(transactionInfoPattern);
     if (!txMatch) return true;
 
