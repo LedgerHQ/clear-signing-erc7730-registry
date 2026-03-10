@@ -1627,9 +1627,25 @@ async function main() {
     console.log("🔍 DRY RUN MODE - No files will be modified\n");
   }
 
-  // Get target folder
+  // Get target folder — skip positional args consumed as values by known flags
+  const flagsWithValues = new Set([
+    "--log", "--pr-title", "--pr-branch", "--local-api-port",
+    "--depth", "--max-tests", "--chain", "--backend", "--model",
+    "--api-key", "--api-url", "--device", "--test-log-level",
+  ]);
+  const consumedIndices = new Set();
+  for (let i = 2; i < process.argv.length; i++) {
+    if (flagsWithValues.has(process.argv[i]) && i + 1 < process.argv.length) {
+      consumedIndices.add(i + 1);
+    }
+  }
   const targetArg = process.argv.find(
-    (arg) => !arg.startsWith("-") && !arg.includes("batch-process") && !arg.includes("node")
+    (arg, idx) =>
+      idx >= 2 &&
+      !consumedIndices.has(idx) &&
+      !arg.startsWith("-") &&
+      !arg.includes("batch-process") &&
+      !arg.includes("node")
   );
 
   if (!targetArg) {
