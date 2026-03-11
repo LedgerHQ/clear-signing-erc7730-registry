@@ -365,8 +365,9 @@ function httpsGet(url) {
 }
 
 /**
- * Fetch transactions for an address from a block explorer
+ * Fetch transactions for an address from a block explorer.
  * Uses Etherscan V2 API format: /v2/api?chainid=X
+ * Retries transient failures (NOTOK, network errors) up to 3 times with backoff.
  */
 async function fetchTransactions(chainId, address, depth = 100) {
   const provider = PROVIDERS[chainId];
@@ -381,7 +382,6 @@ async function fetchTransactions(chainId, address, depth = 100) {
     return [];
   }
 
-  // Use V2 API format with chainid parameter
   const url =
     `https://${provider.baseUrl}/v2/api?chainid=${chainId}&module=account&action=txlist` +
     `&address=${address}&startblock=0&endblock=99999999` +
@@ -389,20 +389,37 @@ async function fetchTransactions(chainId, address, depth = 100) {
 
   verboseLog(`  📡 Fetching from ${provider.name} (chain ${chainId})...`);
 
-  try {
-    const response = await httpsGet(url);
-    if (response.status === "1" && Array.isArray(response.result)) {
-      return response.result.filter((tx) => tx.to?.toLowerCase() === address.toLowerCase());
-    }
-    if (response.message === "No transactions found") {
+  const maxRetries = 3;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await httpsGet(url);
+      if (response.status === "1" && Array.isArray(response.result)) {
+        return response.result.filter((tx) => tx.to?.toLowerCase() === address.toLowerCase());
+      }
+      if (response.message === "No transactions found") {
+        return [];
+      }
+      const detail = typeof response.result === "string" ? response.result : "";
+      if (attempt < maxRetries) {
+        const delay = (attempt + 1) * 800;
+        verboseLog(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown"}${detail ? ` – ${detail}` : ""} (retry ${attempt + 1}/${maxRetries} in ${delay}ms)`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+      log(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown error"}${detail ? ` – ${detail}` : ""}`);
+      return [];
+    } catch (error) {
+      if (attempt < maxRetries) {
+        const delay = (attempt + 1) * 800;
+        verboseLog(`  ⚠️  ${provider.name} request failed: ${error.message} (retry ${attempt + 1}/${maxRetries} in ${delay}ms)`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+      log(`  ❌ ${provider.name} request failed: ${error.message}`);
       return [];
     }
-    log(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown error"}`);
-    return [];
-  } catch (error) {
-    log(`  ❌ ${provider.name} request failed: ${error.message}`);
-    return [];
   }
+  return [];
 }
 
 // =============================================================================
