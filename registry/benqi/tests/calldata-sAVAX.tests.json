@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../specs/erc7730-tests.schema.json",
+  "tests": [
+    {
+      "description": "Stake AVAX - chain 43114",
+      "rawTx": "0xf20184063085da82de93942b2c81e08f1af8835a78bb2a90ae924ace0ea4be890692d20f8977de0000845bcb2fc682a86a8080",
+      "txHash": "0x9f793881e8c7eced993fcbd5b598b7ba79f12bb10bd3b5e79b181bd7877c8d38",
+      "expectedTexts": [
+        "Interaction with",
+        "BENQI",
+        "Amount to stake",
+        "121.26 AVAX Network Avalanche C-Chain",
+        "Max fees",
+        "0.00000591688682091 AVAX"
+      ]
+    },
+    {
+      "description": "Request unstaking - chain 43114",
+      "rawTx": "0x02f84d82a86a04830b746c8402725f9083036cf9942b2c81e08f1af8835a78bb2a90ae924ace0ea4be80a4c9d2ff9d000000000000000000000000000000000000000000000000164398622de422acc0",
+      "txHash": "0x2ae8009cfba897ae6fcfe302fcaf6267c22ab6f22e37f671db59bb32249ae27e",
+      "expectedTexts": [
+        "Interaction with",
+        "BENQI",
+        "sAVAX amount",
+        "1.604293439718171 308 sAVAX Network Avalanche C-Chain",
+        "Max fees",
+        "0.00000921593025 AVAX"
+      ]
+    },
+    {
+      "description": "Claim unstaked AVAX - chain 43114",
+      "rawTx": "0xea02840722242b8301f63c942b2c81e08f1af8835a78bb2a90ae924ace0ea4be8084be040fb082a86a8080",
+      "txHash": "0x99f2c2137437e46d32fd907d4e55e44cbb66c3d68ddb5428fdd58440476045de",
+      "expectedTexts": ["Interaction with", "BENQI Network Avalanche C-Chain", "Max fees", "0.00001538723917314 AVAX"]
+    },
+    {
+      "description": "Claim unstaked AVAX - chain 43114",
+      "rawTx": "0x02f85082a86a8208d4843d278480844d8baf40830c3500942b2c81e08f1af8835a78bb2a90ae924ace0ea4be80a4db006a750000000000000000000000000000000000000000000000000000000000000000c0",
+      "txHash": "0x6f257263ceb9ad5bd9eac4bb5d52c15590df8caf2518e6c5f86977ffd801994d",
+      "expectedTexts": ["Interaction with", "BENQI", "Unlock index", "0 Network Avalanche C-Chain", "Max fees", "0.0010408 AVAX"]
+    },
+    {
+      "description": "Redeem Overdue - chain 43114",
+      "rawTx": "0xec8201788401a363f083055548942b2c81e08f1af8835a78bb2a90ae924ace0ea4be80840d10d32c82a86a8080",
+      "txHash": "0x1f38211327411c1036eee60f19df67025bdfb3ac6d9546e61d3760d9b08ef39c",
+      "expectedTexts": ["Interaction with", "BENQI Network Avalanche C-Chain", "Max fees", "0.0000096063960380 16 AVAX"]
+    },
+    {
+      "description": "Redeem sAVAX - chain 43114",
+      "rawTx": "0x02f84e82a86a8201588203e8840215999083025e0f942b2c81e08f1af8835a78bb2a90ae924ace0ea4be80a40f7e20480000000000000000000000000000000000000000000000000000000000000000c0",
+      "txHash": "0x5a8c084ccbe09f701cd6f24d6cdfeab9b706bb6e8f2a3fd35afe5d734d73f98f",
+      "expectedTexts": ["Interaction with", "BENQI", "Unlock index", "0 Network Avalanche C-Chain", "Max fees", "0.00000542563047 AVAX"]
+    }
+  ]
+}
