@@ -15,7 +15,7 @@
  *   --all-chains     Validate all deployment chains supported by configured explorers
  *   --verbose        Print debug details
  *   --log <path>     Enable verbose logging and write to file
- *   -l               Enable verbose logging to .migrate-verbose.log
+ *   -l               Enable verbose logging to tools/scripts/logs/
  *   --help, -h       Show this help message
  *
  * Environment:
@@ -31,7 +31,8 @@ const { keccak256 } = require("js-sha3");
 const ROOT_DIR = path.join(__dirname, "..", "..");
 const MIN_REQUEST_INTERVAL_MS = 380;
 let _lastExplorerRequestAt = 0;
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `check-contract-functions-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const CONFIG = {
@@ -167,7 +168,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --all-chains     Validate all supported deployment chains with API key");
   write("  --verbose        Verbose output");
   write("  --log <path>     Enable verbose logging and write to file");
-  write("  -l               Enable verbose logging to .migrate-verbose.log");
+  write("  -l               Enable verbose logging to tools/scripts/logs/");
   write("  --help, -h       Show this help message");
   write("");
   write(`Explorer requests are rate-limited to ~${Math.floor(1000 / MIN_REQUEST_INTERVAL_MS)} req/s.`);
