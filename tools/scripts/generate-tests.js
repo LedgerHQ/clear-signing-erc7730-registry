@@ -14,7 +14,7 @@
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
  *   --log <path>            Enable verbose logging and write to file
- *   -l                      Enable verbose logging to .migrate-verbose.log
+ *   -l                      Enable verbose logging to tools/scripts/logs/
  *   --depth <n>             Max transactions to search (default: 100)
  *   --max-tests <n>         Max tests to generate per function (default: 3, or 1 with --compact)
  *   --chain <id>            Only process specific chain ID
@@ -55,7 +55,8 @@ const { execSync, spawn } = require("child_process");
 // Configuration
 // =============================================================================
 
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".migrate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `generate-tests-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const VALID_BACKENDS = ["openai", "anthropic", "cursor"];
@@ -97,6 +98,7 @@ const CONFIG = {
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
   emitTestEvents: process.argv.includes("--emit-test-events"),
+  cursorTimeout: getArgValue("--cursor-timeout", 180) * 1000,
 };
 
 // Resolve backend-specific defaults
@@ -175,7 +177,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --dry-run                Preview without writing files");
   write("  --verbose                Show detailed output");
   write("  --log <path>             Enable verbose logging and write to file");
-  write("  -l                       Enable verbose logging to .migrate-verbose.log");
+  write("  -l                       Enable verbose logging to tools/scripts/logs/");
   write("  --depth <n>              Max transactions to search (default: 100)");
   write("  --max-tests <n>          Max tests per function (default: 3, or 1 with --compact)");
   write("  --chain <id>             Only process specific chain ID");
@@ -363,8 +365,9 @@ function httpsGet(url) {
 }
 
 /**
- * Fetch transactions for an address from a block explorer
+ * Fetch transactions for an address from a block explorer.
  * Uses Etherscan V2 API format: /v2/api?chainid=X
+ * Retries transient failures (NOTOK, network errors) up to 3 times with backoff.
  */
 async function fetchTransactions(chainId, address, depth = 100) {
   const provider = PROVIDERS[chainId];
@@ -379,7 +382,6 @@ async function fetchTransactions(chainId, address, depth = 100) {
     return [];
   }
 
-  // Use V2 API format with chainid parameter
   const url =
     `https://${provider.baseUrl}/v2/api?chainid=${chainId}&module=account&action=txlist` +
     `&address=${address}&startblock=0&endblock=99999999` +
@@ -387,20 +389,37 @@ async function fetchTransactions(chainId, address, depth = 100) {
 
   verboseLog(`  📡 Fetching from ${provider.name} (chain ${chainId})...`);
 
-  try {
-    const response = await httpsGet(url);
-    if (response.status === "1" && Array.isArray(response.result)) {
-      return response.result.filter((tx) => tx.to?.toLowerCase() === address.toLowerCase());
-    }
-    if (response.message === "No transactions found") {
+  const maxRetries = 3;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await httpsGet(url);
+      if (response.status === "1" && Array.isArray(response.result)) {
+        return response.result.filter((tx) => tx.to?.toLowerCase() === address.toLowerCase());
+      }
+      if (response.message === "No transactions found") {
+        return [];
+      }
+      const detail = typeof response.result === "string" ? response.result : "";
+      if (attempt < maxRetries) {
+        const delay = (attempt + 1) * 800;
+        verboseLog(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown"}${detail ? ` – ${detail}` : ""} (retry ${attempt + 1}/${maxRetries} in ${delay}ms)`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+      log(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown error"}${detail ? ` – ${detail}` : ""}`);
+      return [];
+    } catch (error) {
+      if (attempt < maxRetries) {
+        const delay = (attempt + 1) * 800;
+        verboseLog(`  ⚠️  ${provider.name} request failed: ${error.message} (retry ${attempt + 1}/${maxRetries} in ${delay}ms)`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+      log(`  ❌ ${provider.name} request failed: ${error.message}`);
       return [];
     }
-    log(`  ⚠️  ${provider.name} API error: ${response.message || "Unknown error"}`);
-    return [];
-  } catch (error) {
-    log(`  ❌ ${provider.name} request failed: ${error.message}`);
-    return [];
   }
+  return [];
 }
 
 // =============================================================================
@@ -1321,7 +1340,7 @@ async function generateEip712Example(msgType, erc7730) {
   try {
     const prompt = buildEip712Prompt(msgType, erc7730);
     const response = await invokeLLM(prompt);
-    return JSON.parse(response);
+    return extractJson(response);
   } catch (error) {
     log(`   ❌ LLM generation failed: ${error.message}`);
     return generatePlaceholderExample(msgType, erc7730.deployments[0]);
@@ -1507,6 +1526,64 @@ function buildEip712Prompt(msgType, erc7730) {
 }
 
 // =============================================================================
+// JSON Extraction
+// =============================================================================
+
+function extractJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    // noop
+  }
+
+  const fenceMatch = text.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  if (fenceMatch) {
+    try {
+      return JSON.parse(fenceMatch[1]);
+    } catch {
+      // noop
+    }
+  }
+
+  const firstBrace = text.indexOf("{");
+  const firstBracket = text.indexOf("[");
+  let start = -1;
+  let end = -1;
+  let openChar, closeChar;
+
+  if (firstBrace >= 0 && (firstBracket < 0 || firstBrace < firstBracket)) {
+    start = firstBrace;
+    openChar = "{";
+    closeChar = "}";
+  } else if (firstBracket >= 0) {
+    start = firstBracket;
+    openChar = "[";
+    closeChar = "]";
+  }
+
+  if (start >= 0) {
+    let depth = 0;
+    for (let i = start; i < text.length; i++) {
+      if (text[i] === openChar) depth++;
+      else if (text[i] === closeChar) depth--;
+      if (depth === 0) {
+        end = i + 1;
+        break;
+      }
+    }
+    if (end > start) {
+      try {
+        return JSON.parse(text.slice(start, end));
+      } catch {
+        // noop
+      }
+    }
+  }
+
+  throw new Error("Could not extract valid JSON from LLM response");
+}
+
+// =============================================================================
 // LLM Backends (shared abstraction matching generate-7730.js)
 // =============================================================================
 
@@ -1617,6 +1694,7 @@ async function invokeCursorAgent(prompt) {
 
   verboseLog(`   Running: cursor ${args.join(" ")}`);
 
+  const timeoutMs = CONFIG.cursorTimeout;
   return new Promise((resolve, reject) => {
     const proc = spawn("cursor", args, {
       stdio: ["ignore", "pipe", "pipe"],
@@ -1624,18 +1702,32 @@ async function invokeCursorAgent(prompt) {
 
     let stdout = "";
     let stderr = "";
+    let killed = false;
+
+    const timer = setTimeout(() => {
+      killed = true;
+      proc.kill("SIGTERM");
+      setTimeout(() => { try { proc.kill("SIGKILL"); } catch { /* noop */ } }, 5000);
+    }, timeoutMs);
 
     proc.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
     proc.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
 
     proc.on("error", (err) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
       reject(new Error(`Failed to start cursor agent: ${err.message}`));
     });
 
     proc.on("close", (code) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
-      if (code !== 0) {
+      if (killed) {
+        reject(new Error(
+          `Cursor agent timed out after ${timeoutMs / 1000}s` +
+          (stdout ? ` (received ${stdout.length} chars)` : " (no output)")
+        ));
+      } else if (code !== 0) {
         reject(new Error(
           `Cursor agent exited with code ${code}` +
           (stderr ? ": " + stderr.slice(0, 500) : "")
@@ -2180,21 +2272,41 @@ const GENERIC_UI_PATTERNS = [
  * (in order). Returns an array of arrays, one per test, each containing the
  * raw screen text strings.
  *
+ * Supports two log formats:
+ *   Legacy:  `Accumulated screen texts from device:\n [0] "text"\n ... Expected texts from test file:`
+ *   Current: `screen-analyzer Accumulated screen texts from device: {\n  data: {\n    accumulatedTexts: [\n      'text',\n ...\n`
+ *
  * @param {string} logContent - Full tester log file content
  * @returns {string[][]} Per-test arrays of screen text strings
  */
 function parseTesterScreenTexts(logContent) {
   const allTests = [];
-  const sectionRegex = /Accumulated screen texts from device:\n([\s\S]*?)Expected texts from test file:/g;
 
+  // Strategy 1: legacy format (bounded by "Expected texts from test file:")
+  const legacyRegex = /Accumulated screen texts from device:\n([\s\S]*?)Expected texts from test file:/g;
   let match;
-  while ((match = sectionRegex.exec(logContent)) !== null) {
+  while ((match = legacyRegex.exec(logContent)) !== null) {
     const block = match[1];
     const texts = [];
     const lineRegex = /\[\d+\]\s+"(.*?)"/g;
     let lineMatch;
     while ((lineMatch = lineRegex.exec(block)) !== null) {
       texts.push(lineMatch[1]);
+    }
+    allTests.push(texts);
+  }
+
+  if (allTests.length > 0) return allTests;
+
+  // Strategy 2: current format — JS object dump with accumulatedTexts array
+  const currentRegex = /Accumulated screen texts from device:\s*\{[\s\S]*?accumulatedTexts:\s*\[([\s\S]*?)\]\s*\n?\s*\}/g;
+  while ((match = currentRegex.exec(logContent)) !== null) {
+    const arrayBlock = match[1];
+    const texts = [];
+    const entryRegex = /'((?:[^'\\]|\\.)*)'/g;
+    let entryMatch;
+    while ((entryMatch = entryRegex.exec(arrayBlock)) !== null) {
+      texts.push(entryMatch[1]);
     }
     allTests.push(texts);
   }
@@ -2488,6 +2600,39 @@ function findLabelsForTest(test, labelsByIntent, erc7730) {
 }
 
 // =============================================================================
+// Formatting — invoke `erc7730 format` to normalize generated test files
+// =============================================================================
+
+/**
+ * Format a test file using the `erc7730 format` CLI command.
+ * Tries the linter venv first, then falls back to a globally installed `erc7730`.
+ *
+ * @param {string} filePath - Absolute path to the file to format
+ */
+function formatTestFile(filePath) {
+  const repoRoot = path.resolve(__dirname, "../..");
+  const venvBin = path.join(repoRoot, "tools", "linter", "python-erc7730", ".venv", "bin", "erc7730");
+
+  const erc7730Bin = fs.existsSync(venvBin) ? venvBin : "erc7730";
+
+  console.log(`\n📐 Formatting test file with erc7730 format...`);
+  verboseLog(`   Using: ${erc7730Bin} format ${filePath}`);
+
+  try {
+    execSync(`"${erc7730Bin}" format "${filePath}"`, {
+      cwd: repoRoot,
+      stdio: CONFIG.verbose ? "inherit" : "pipe",
+      timeout: 30000,
+    });
+    console.log(`   ✅ Formatted: ${filePath}`);
+  } catch (err) {
+    const stderr = err.stderr ? err.stderr.toString().trim() : err.message;
+    console.log(`   ⚠️  Formatting failed (non-fatal): ${stderr}`);
+    verboseError(err.stack || err.message);
+  }
+}
+
+// =============================================================================
 // Main
 // =============================================================================
 
@@ -2620,6 +2765,11 @@ async function main() {
       }
     } else if (!CONFIG.runTest) {
       console.log("\nℹ️  Tester skipped (--no-test)");
+    }
+
+    // Format the generated/refined test file
+    if (!CONFIG.dryRun && testFilePath) {
+      formatTestFile(testFilePath);
     }
   } catch (error) {
     console.error(`\n❌ Fatal error: ${error.message}`);

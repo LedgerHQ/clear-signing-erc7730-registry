@@ -35,7 +35,7 @@
  *   --dry-run               Preview without writing files
  *   --verbose               Show detailed output
  *   --log <path>            Enable verbose logging to file
- *   -l                      Enable verbose logging to .generate-verbose.log
+ *   -l                      Enable verbose logging to tools/scripts/logs/
  *   --backend <name>        LLM backend: openai, anthropic, cursor (default: openai)
  *   --model <model>         Model name (default depends on backend)
  *   --api-key <key>         API key (overrides env var for the selected backend)
@@ -64,7 +64,8 @@ const { spawn } = require("child_process");
 
 const SCRIPT_DIR = __dirname;
 const ROOT_DIR = path.join(SCRIPT_DIR, "..", "..");
-const DEFAULT_LOG_FILE = path.resolve(process.cwd(), ".generate-verbose.log");
+const LOGS_DIR = path.join(__dirname, "logs");
+const DEFAULT_LOG_FILE = path.join(LOGS_DIR, `generate-7730-${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}.verbose.log`);
 const LOG_FILE_PATH = getLogFilePath();
 
 const VALID_BACKENDS = ["openai", "anthropic", "cursor"];
@@ -105,6 +106,7 @@ const CONFIG = {
   apiUrl: getArgValue("--api-url", null),
   rpcUrl: getArgValue("--rpc-url", process.env.RPC_URL || null),
   schemaPath: getArgValue("--schema-path", "../../specs/erc7730-v2.schema.json"),
+  cursorTimeout: getArgValue("--cursor-timeout", 180) * 1000,
 };
 
 // Resolve backend-specific defaults
@@ -134,7 +136,7 @@ const ACCEPTED_OPTIONS = [
   "  --dry-run               Preview without writing files",
   "  --verbose               Show detailed output",
   "  --log <path>            Enable verbose logging to file",
-  "  -l                      Enable verbose logging to .generate-verbose.log",
+  "  -l                      Enable verbose logging to tools/scripts/logs/",
   "  --backend <name>        LLM backend: openai, anthropic, cursor (default: openai)",
   "  --model <model>         Model name (default: backend-specific)",
   "  --api-key <key>         API key (overrides env var for the selected backend)",
@@ -1000,6 +1002,7 @@ async function invokeCursorAgent(systemPrompt, userContent) {
 
   verboseLog(`  Running: cursor ${args.join(" ")}`);
 
+  const timeoutMs = CONFIG.cursorTimeout;
   return new Promise((resolve, reject) => {
     const proc = spawn("cursor", args, {
       stdio: ["ignore", "pipe", "pipe"],
@@ -1007,6 +1010,13 @@ async function invokeCursorAgent(systemPrompt, userContent) {
 
     let stdout = "";
     let stderr = "";
+    let killed = false;
+
+    const timer = setTimeout(() => {
+      killed = true;
+      proc.kill("SIGTERM");
+      setTimeout(() => { try { proc.kill("SIGKILL"); } catch { /* noop */ } }, 5000);
+    }, timeoutMs);
 
     proc.stdout.on("data", (chunk) => {
       const text = chunk.toString();
@@ -1020,13 +1030,20 @@ async function invokeCursorAgent(systemPrompt, userContent) {
     });
 
     proc.on("error", (err) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
       reject(new Error(`Failed to start cursor agent: ${err.message}`));
     });
 
     proc.on("close", (code) => {
+      clearTimeout(timer);
       try { fs.unlinkSync(tmpFile); } catch { /* noop */ }
-      if (code !== 0) {
+      if (killed) {
+        reject(new Error(
+          `Cursor agent timed out after ${timeoutMs / 1000}s` +
+          (stdout ? ` (received ${stdout.length} chars)` : " (no output)")
+        ));
+      } else if (code !== 0) {
         reject(new Error(
           `Cursor agent exited with code ${code}` +
           (stderr ? ": " + stderr.slice(0, 500) : "")
