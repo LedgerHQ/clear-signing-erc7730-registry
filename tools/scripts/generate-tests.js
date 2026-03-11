@@ -2583,6 +2583,39 @@ function findLabelsForTest(test, labelsByIntent, erc7730) {
 }
 
 // =============================================================================
+// Formatting — invoke `erc7730 format` to normalize generated test files
+// =============================================================================
+
+/**
+ * Format a test file using the `erc7730 format` CLI command.
+ * Tries the linter venv first, then falls back to a globally installed `erc7730`.
+ *
+ * @param {string} filePath - Absolute path to the file to format
+ */
+function formatTestFile(filePath) {
+  const repoRoot = path.resolve(__dirname, "../..");
+  const venvBin = path.join(repoRoot, "tools", "linter", "python-erc7730", ".venv", "bin", "erc7730");
+
+  const erc7730Bin = fs.existsSync(venvBin) ? venvBin : "erc7730";
+
+  console.log(`\n📐 Formatting test file with erc7730 format...`);
+  verboseLog(`   Using: ${erc7730Bin} format ${filePath}`);
+
+  try {
+    execSync(`"${erc7730Bin}" format "${filePath}"`, {
+      cwd: repoRoot,
+      stdio: CONFIG.verbose ? "inherit" : "pipe",
+      timeout: 30000,
+    });
+    console.log(`   ✅ Formatted: ${filePath}`);
+  } catch (err) {
+    const stderr = err.stderr ? err.stderr.toString().trim() : err.message;
+    console.log(`   ⚠️  Formatting failed (non-fatal): ${stderr}`);
+    verboseError(err.stack || err.message);
+  }
+}
+
+// =============================================================================
 // Main
 // =============================================================================
 
@@ -2715,6 +2748,11 @@ async function main() {
       }
     } else if (!CONFIG.runTest) {
       console.log("\nℹ️  Tester skipped (--no-test)");
+    }
+
+    // Format the generated/refined test file
+    if (!CONFIG.dryRun && testFilePath) {
+      formatTestFile(testFilePath);
     }
   } catch (error) {
     console.error(`\n❌ Fatal error: ${error.message}`);
