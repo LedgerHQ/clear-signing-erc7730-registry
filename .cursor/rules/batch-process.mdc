@@ -22,7 +22,9 @@ node tools/scripts/batch-process.js <folder-name> [options]
 | `--verbose` | Show detailed output for each operation |
 | `--skip-tests` | Skip test file generation |
 | `--skip-migration` | Skip v1 to v2 schema migration |
-| `--skip-pr` | Skip PR creation (just process files) |
+| `--pr` | Create a branch and PR with changes (targets master) |
+| `--pr-draft` | Create the PR in draft mode |
+| `--pr-strict` | Prevent PR creation if any step fails |
 | `--pr-title <title>` | Custom PR title |
 | `--pr-branch <name>` | Custom branch name |
 | `--local-api` | Auto-start local Flask API server for tester calls |
@@ -58,7 +60,7 @@ node tools/scripts/batch-process.js 1inch --dry-run --verbose
 Full processing with PR:
 
 ```bash
-source .env && node tools/scripts/batch-process.js uniswap
+source .env && node tools/scripts/batch-process.js uniswap --pr
 ```
 
 Migrate only (no tests):
@@ -73,10 +75,10 @@ Generate tests only (no migration):
 source .env && node tools/scripts/batch-process.js protocol --skip-migration
 ```
 
-Force-run tester with local API and skip PR:
+Force-run tester with local API (no PR):
 
 ```bash
-source .env && node tools/scripts/batch-process.js circle --local-api --skip-pr --force-test
+source .env && node tools/scripts/batch-process.js circle --local-api --force-test
 ```
 
 Custom PR settings:
@@ -91,7 +93,7 @@ The script processes each ERC-7730 file in the target folder:
 
 1. **Schema Migration** - Migrates v1 files to v2 format (linting/validation handled by `migrate-v1-to-v2.js`)
 2. **Test Generation** - Creates missing test files from blockchain data
-3. **PR Creation** - Creates a GitHub PR with all changes and a detailed summary
+3. **PR Creation** (with `--pr`) - Creates a clean branch from `<remote>/master`, commits only the files modified by batch-process, and opens a PR targeting `master`
 
 ## Prerequisites
 

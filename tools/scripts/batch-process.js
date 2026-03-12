@@ -25,7 +25,6 @@
  *   --pr-strict             Prevent PR creation if any step fails
  *   --pr-title <title>      Custom PR title
  *   --pr-branch <name>      Custom branch name
- *   --pr-base <branch>      Base branch for the PR (default: repo default branch)
  *   --local-api             Auto-start local Flask API server for the tester
  *   --local-api-port <port> Port for the local API server (default: 5000)
  *   --include-external-deps Also migrate included files outside target folder
@@ -79,7 +78,6 @@ const CONFIG = {
   prStrict: process.argv.includes("--pr-strict"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
-  prBase: getArgValue("--pr-base", null),
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
   includeExternalDeps: process.argv.includes("--include-external-deps"),
@@ -146,7 +144,6 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --pr-strict             Prevent PR creation if any step fails");
   write("  --pr-title <title>      Custom PR title");
   write("  --pr-branch <name>      Custom branch name");
-  write("  --pr-base <branch>      Base branch for the PR (default: repo default branch)");
   write("  --local-api             Auto-start local Flask API server (patched erc7730)");
   write("  --local-api-port <port> Port for the local API server (default: 5000)");
   write("  --include-external-deps Also migrate included files outside target folder");
@@ -1215,6 +1212,20 @@ async function runTests(filePath) {
 // =============================================================================
 
 /**
+ * Detect the git remote name (prefer "upstream", fall back to "origin").
+ */
+function getRemoteName() {
+  try {
+    const remotes = execSync("git remote", { encoding: "utf8", cwd: ROOT_DIR, stdio: "pipe" }).trim().split("\n");
+    if (remotes.includes("upstream")) return "upstream";
+    if (remotes.includes("origin")) return "origin";
+    return remotes[0] || "origin";
+  } catch {
+    return "origin";
+  }
+}
+
+/**
  * Check if git is available and we're in a git repo
  */
 function checkGit() {
@@ -1250,35 +1261,59 @@ function getCurrentBranch() {
 }
 
 /**
- * Set up a clean working branch for the batch process.
+ * Create a PR containing only the files modified by batch-process.
  *
- * Stashes any existing dirty/untracked changes so the working tree is
- * clean, then creates a new branch from the current HEAD.  File
- * processing happens directly on this branch, so changes are isolated
- * from the user's working tree.
+ * This function is called **after** file processing is complete. It:
+ *   1. Captures the content of all modified/new files
+ *   2. Stashes the working tree so we can switch branches cleanly
+ *   3. Creates a new branch from <remote>/master
+ *   4. Writes only the captured files onto that branch
+ *   5. Commits, pushes, and opens a PR targeting master
  *
- * @param {string} folderName - Registry subfolder name (e.g. "ethena")
- * @returns {{ branchName: string, originalBranch: string, stashed: boolean }}
+ * @param {string} targetFolder - Target folder path
+ * @param {Report} report - Processing report
+ * @returns {{ originalBranch: string, stashed: boolean } | null} cleanup context, or null if nothing was done
  */
-function setupBranch(folderName) {
+function createPrFromChanges(targetFolder, report) {
+  const folderName = path.basename(targetFolder);
+  const remote = getRemoteName();
   const branchName = CONFIG.prBranch || `migrate-v1-to-v2/${folderName}`;
+  const allChanges = [...report.modifiedFiles, ...report.newFiles];
+
+  if (allChanges.length === 0) {
+    log("No changes to commit", "info");
+    return null;
+  }
+
+  // 1. Capture file contents before switching branches
+  const fileContents = new Map();
+  for (const filePath of allChanges) {
+    if (fs.existsSync(filePath)) {
+      fileContents.set(filePath, fs.readFileSync(filePath));
+    }
+  }
+
   const originalBranch = getCurrentBranch();
   let stashed = false;
 
-  // Stash any dirty / untracked files so we start clean
+  // 2. Stash working tree (includes batch-process changes + any prior dirty state)
   const statusOutput = execSync("git status --porcelain", {
     cwd: ROOT_DIR,
     encoding: "utf8",
   }).trim();
 
   if (statusOutput) {
-    log("Stashing current changes...", "info");
+    log("Stashing working tree changes...", "info");
     execSync('git stash push --include-untracked -m "batch-process-temp"', {
       cwd: ROOT_DIR,
       stdio: "pipe",
     });
     stashed = true;
   }
+
+  // 3. Fetch latest master from remote
+  log(`Fetching ${remote}/master...`, "info");
+  execSync(`git fetch "${remote}" master`, { cwd: ROOT_DIR, stdio: "pipe" });
 
   // Delete branch if it already exists (stale leftover from a previous run)
   try {
@@ -1289,36 +1324,22 @@ function setupBranch(folderName) {
     // Branch doesn't exist — good
   }
 
-  log(`Creating branch: ${branchName}`, "info");
-  execSync(`git checkout -b "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+  // 4. Create a clean branch from remote/master
+  log(`Creating branch ${branchName} from ${remote}/master...`, "info");
+  execSync(`git checkout -b "${branchName}" "${remote}/master"`, { cwd: ROOT_DIR, stdio: "pipe" });
 
-  return { branchName, originalBranch, stashed };
-}
-
-/**
- * Commit all changes on the working branch and optionally push + create a PR.
- *
- * @param {{ branchName: string }} context - Branch context from setupBranch
- * @param {string} targetFolder - Target folder path
- * @param {Report} report - Processing report
- */
-function commitAndCreatePr(context, targetFolder, report) {
-  const folderName = path.basename(targetFolder);
-  const { branchName } = context;
-  const allChanges = [...report.modifiedFiles, ...report.newFiles];
-
-  if (allChanges.length === 0) {
-    log("No changes to commit", "info");
-    return;
+  // 5. Write captured files onto the clean branch
+  for (const [filePath, content] of fileContents) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    fs.writeFileSync(filePath, content);
   }
 
-  // Stage only the target folder files
+  // 6. Stage and commit
   const relChanges = allChanges.map((f) => path.relative(ROOT_DIR, f));
   for (const rel of relChanges) {
     execSync(`git add "${rel}"`, { cwd: ROOT_DIR, stdio: "pipe" });
   }
 
-  // Create commit
   const commitMessage =
     `chore(${folderName}): batch migration and test generation\n\n` +
     `- Migrated ${report.migrations.successful} files from v1 to v2 schema\n` +
@@ -1327,7 +1348,7 @@ function commitAndCreatePr(context, targetFolder, report) {
   execSync(`git commit -m "${commitMessage}"`, { cwd: ROOT_DIR, stdio: "pipe" });
   log("Changes committed", "success");
 
-  // Build PR body & save to file for reference
+  // 7. Build PR body
   const prBody = buildPrBody(folderName, report);
   const prTitle =
     CONFIG.prTitle || `[V2 migration] ${folderName} - schema migration and test generation`;
@@ -1338,36 +1359,36 @@ function commitAndCreatePr(context, targetFolder, report) {
   if (!checkGhCli()) {
     log("GitHub CLI (gh) not installed. Install with: brew install gh", "warning");
     log("PR will not be created.", "warning");
-    return;
+    return { originalBranch, stashed };
   }
 
+  // 8. Push and create PR (always targeting master)
   log("Pushing branch to remote...", "info");
-  execSync(`git push -u origin "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
+  execSync(`git push -u "${remote}" "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
 
-  log("Creating PR...", "info");
+  log("Creating PR targeting master...", "info");
   const draftFlag = CONFIG.prDraft ? " --draft" : "";
-  const baseFlag = CONFIG.prBase ? ` --base "${CONFIG.prBase}"` : "";
   const prResult = execSync(
-    `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"${draftFlag}${baseFlag}`,
+    `gh pr create --title "${prTitle}" --body-file "${prBodyFile}" --base master${draftFlag}`,
     { cwd: ROOT_DIR, encoding: "utf8" }
   );
 
   report.prCreated = true;
   report.prUrl = prResult.trim();
   log(`PR created: ${report.prUrl}`, "success");
+
+  return { originalBranch, stashed };
 }
 
 /**
- * Clean up after processing: switch back to the original branch, restore
- * stashed changes, and delete the working branch if nothing was committed.
+ * Restore the working tree after PR creation: switch back to the original
+ * branch and pop the stash.
  *
- * @param {{ branchName: string, originalBranch: string, stashed: boolean }} context
- * @param {boolean} hasChanges - Whether any changes were committed on the branch
+ * @param {{ originalBranch: string, stashed: boolean }} context
  */
-function cleanupBranch(context, hasChanges) {
-  const { branchName, originalBranch, stashed } = context;
+function cleanupAfterPr(context) {
+  const { originalBranch, stashed } = context;
 
-  // Switch back to the original branch
   try {
     if (originalBranch && getCurrentBranch() !== originalBranch) {
       execSync(`git checkout "${originalBranch}"`, { cwd: ROOT_DIR, stdio: "pipe" });
@@ -1376,22 +1397,11 @@ function cleanupBranch(context, hasChanges) {
     log(`Warning: could not switch back to ${originalBranch}: ${e.message}`, "warning");
   }
 
-  // Restore stashed changes
   if (stashed) {
     try {
       execSync("git stash pop", { cwd: ROOT_DIR, stdio: "pipe" });
     } catch (e) {
       log("Warning: could not pop stash. Run 'git stash pop' manually.", "warning");
-    }
-  }
-
-  // Delete the branch if there were no changes (nothing committed)
-  if (!hasChanges) {
-    try {
-      execSync(`git branch -D "${branchName}"`, { cwd: ROOT_DIR, stdio: "pipe" });
-      log(`Deleted empty branch: ${branchName}`, "info");
-    } catch (e) {
-      log(`Warning: could not delete branch ${branchName}: ${e.message}`, "warning");
     }
   }
 }
@@ -1641,7 +1651,7 @@ async function main() {
 
   // Get target folder — skip positional args consumed as values by known flags
   const flagsWithValues = new Set([
-    "--log", "--pr-title", "--pr-branch", "--pr-base", "--local-api-port",
+    "--log", "--pr-title", "--pr-branch", "--local-api-port",
     "--depth", "--max-tests", "--chain", "--backend", "--model",
     "--api-key", "--api-url", "--device", "--test-log-level",
   ]);
@@ -1736,13 +1746,7 @@ async function main() {
     process.exit(0);
   }
 
-  // When --pr is specified, set up a clean working branch so changes are
-  // isolated and can be pushed as a PR.  Without --pr, changes are made
-  // directly on the current branch without committing.
-  let branchContext = null;
-  if (CONFIG.pr && !CONFIG.dryRun && checkGit()) {
-    branchContext = setupBranch(path.basename(targetFolder));
-  }
+  let prCleanupContext = null;
 
   try {
     // Start local API server once (shared by all generate-tests invocations)
@@ -1757,7 +1761,7 @@ async function main() {
       }
     }
 
-    // Process each file
+    // Process each file on the current branch
     logSection("Processing Files");
     for (const file of files) {
       const isLeaf = leafFiles.has(file);
@@ -1769,18 +1773,18 @@ async function main() {
       });
     }
 
-    // Commit changes and optionally create PR
+    // Create PR with only the files modified by batch-process
     const hasChanges = report.modifiedFiles.length > 0 || report.newFiles.length > 0;
     const hasFailures =
       report.migrations.failed.length > 0 ||
       report.testGeneration.failed.length > 0;
 
-    if (branchContext && hasChanges) {
+    if (CONFIG.pr && !CONFIG.dryRun && checkGit() && hasChanges) {
       if (CONFIG.prStrict && hasFailures) {
         log("Skipping PR creation: --pr-strict is set and there were failures", "error");
       } else {
-        logSection("Committing Changes");
-        commitAndCreatePr(branchContext, targetFolder, report);
+        logSection("Creating PR");
+        prCleanupContext = createPrFromChanges(targetFolder, report);
       }
     }
 
@@ -1792,9 +1796,8 @@ async function main() {
     }
   } finally {
     stopLocalApiServer();
-    if (branchContext) {
-      const hasChanges = report.modifiedFiles.length > 0 || report.newFiles.length > 0;
-      cleanupBranch(branchContext, hasChanges);
+    if (prCleanupContext) {
+      cleanupAfterPr(prCleanupContext);
     }
   }
 }
