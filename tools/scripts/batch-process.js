@@ -25,6 +25,7 @@
  *   --pr-strict             Prevent PR creation if any step fails
  *   --pr-title <title>      Custom PR title
  *   --pr-branch <name>      Custom branch name
+ *   --pr-base <branch>      Base branch for the PR (default: repo default branch)
  *   --local-api             Auto-start local Flask API server for the tester
  *   --local-api-port <port> Port for the local API server (default: 5000)
  *   --include-external-deps Also migrate included files outside target folder
@@ -78,6 +79,7 @@ const CONFIG = {
   prStrict: process.argv.includes("--pr-strict"),
   prTitle: getArgValue("--pr-title", null),
   prBranch: getArgValue("--pr-branch", null),
+  prBase: getArgValue("--pr-base", null),
   localApi: process.argv.includes("--local-api"),
   localApiPort: getArgValue("--local-api-port", 5000),
   includeExternalDeps: process.argv.includes("--include-external-deps"),
@@ -144,6 +146,7 @@ function printHelp(exitCode = 0, errorMessage = null) {
   write("  --pr-strict             Prevent PR creation if any step fails");
   write("  --pr-title <title>      Custom PR title");
   write("  --pr-branch <name>      Custom branch name");
+  write("  --pr-base <branch>      Base branch for the PR (default: repo default branch)");
   write("  --local-api             Auto-start local Flask API server (patched erc7730)");
   write("  --local-api-port <port> Port for the local API server (default: 5000)");
   write("  --include-external-deps Also migrate included files outside target folder");
@@ -1343,8 +1346,9 @@ function commitAndCreatePr(context, targetFolder, report) {
 
   log("Creating PR...", "info");
   const draftFlag = CONFIG.prDraft ? " --draft" : "";
+  const baseFlag = CONFIG.prBase ? ` --base "${CONFIG.prBase}"` : "";
   const prResult = execSync(
-    `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"${draftFlag}`,
+    `gh pr create --title "${prTitle}" --body-file "${prBodyFile}"${draftFlag}${baseFlag}`,
     { cwd: ROOT_DIR, encoding: "utf8" }
   );
 
@@ -1637,7 +1641,7 @@ async function main() {
 
   // Get target folder — skip positional args consumed as values by known flags
   const flagsWithValues = new Set([
-    "--log", "--pr-title", "--pr-branch", "--local-api-port",
+    "--log", "--pr-title", "--pr-branch", "--pr-base", "--local-api-port",
     "--depth", "--max-tests", "--chain", "--backend", "--model",
     "--api-key", "--api-url", "--device", "--test-log-level",
   ]);
