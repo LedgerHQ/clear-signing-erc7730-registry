@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name was wrong: was 'Permit' with no version. WARNING: The PEPE token (PepeToken contract, Solidity 0.8.0) inherits only Ownable and ERC20 - it does NOT implement ERC20Permit/ERC-2612. The token has no permit(), nonces(), or DOMAIN_SEPARATOR() functions. This file should be removed from the registry.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0x6982508145454Ce325dDbE47a25d4ec3d2311933" }],
-      "domain": { "name": "Permit", "chainId": 1, "verifyingContract": "0x6982508145454Ce325dDbE47a25d4ec3d2311933" }
+      "domain": { "name": "Pepe" }
     }
   },
   "metadata": { "owner": "PEPE" }

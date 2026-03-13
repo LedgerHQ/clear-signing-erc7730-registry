@@ -1,10 +1,11 @@
 {
+  "$comment": "Domain name was wrong: was 'Aave Token', corrected to 'VelodromeV2' based on onchain constructor ERC20Permit('VelodromeV2') at 0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 10, "address": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db" }],
-      "domain": { "name": "Permit", "chainId": 10, "verifyingContract": "0x9560e827aF36c94D2Ac33a39bCE1Fe78631088Db" }
+      "domain": { "name": "VelodromeV2", "version": "1" }
     }
   },
-  "metadata": { "owner": "VelodromV2" }
+  "metadata": { "owner": "VelodromeV2" }
 }

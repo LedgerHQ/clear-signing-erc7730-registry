@@ -1,9 +1,10 @@
 {
+  "$comment": "Fixed domain name from 'Yearn' to 'YetiSwap' and removed version (contract uses EIP712Domain(string name,uint256 chainId,address verifyingContract) with no version field)",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 43114, "address": "0x488f73cddda1de3664775ffd91623637383d6404" }],
-      "domain": { "name": "Permit", "chainId": 43114, "verifyingContract": "0x488f73cddda1de3664775ffd91623637383d6404" }
+      "domain": { "name": "YetiSwap" }
     }
   },
   "metadata": { "owner": "YetiSwap" }
