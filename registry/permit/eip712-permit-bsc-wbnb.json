@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 56, "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }],
-      "domain": { "name": "Permit", "chainId": 56, "verifyingContract": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c" }
+      "domain": { "name": "Wrapped BNB" }
     }
   },
   "metadata": { "owner": "WBNB" }

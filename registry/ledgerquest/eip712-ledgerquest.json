@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 137, "address": "0x33c6eec1723b12c46732f7ab41398de45641fa42" }],
-      "domain": { "name": "LedgerQuest", "chainId": 137, "verifyingContract": "0x33c6eec1723b12c46732f7ab41398de45641fa42" },
+      "domain": { "name": "Ledger Quest", "version": "1" },
       "schemas": [
         {
           "primaryType": "mint",
@@ -24,7 +24,7 @@
       ]
     }
   },
-  "metadata": { "owner": "LedgerQuest" },
+  "metadata": { "owner": "Ledger" },
   "display": {
     "formats": {
       "mint": {

@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name was wrong: was 'Token', corrected to 'Toshi' based on onchain constructor ERC20(\"Toshi\", \"TOSHI\")",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 8453, "address": "0xAC1Bd2486aAf3B5C0fc3Fd868558b082a531B2B4" }],
-      "domain": { "name": "Permit", "chainId": 8453, "verifyingContract": "0xAC1Bd2486aAf3B5C0fc3Fd868558b082a531B2B4" }
+      "domain": { "name": "Toshi", "version": "1" }
     }
   },
   "metadata": { "owner": "Toshi" }

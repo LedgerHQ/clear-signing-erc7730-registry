@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name was wrong: was 'StargateToken', corrected to 'Dai Stablecoin' based on onchain data from implementation contract 0xc0583e2F5930ede5fab9d57bac4169878730B010",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 59144, "address": "0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5" }],
-      "domain": { "name": "Permit", "chainId": 59144, "verifyingContract": "0x4AF15ec2A0BD43Db75dd04E62FAA3B8EF36b00d5" }
+      "domain": { "name": "Dai Stablecoin", "version": "1" }
     }
   },
   "metadata": { "owner": "Dai Stablecoin" }

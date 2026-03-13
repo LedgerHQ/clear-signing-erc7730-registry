@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name was wrong: was 'Aave Token', corrected to 'SAND' per onchain name(). WARNING: PolygonSand contract (0xBbba...5683) does NOT implement EIP-2612 permit or any EIP-712 domain separator - this descriptor may be invalid",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 137, "address": "0xBbba073C31bF03b8ACf7c28EF0738DeCF3695683" }],
-      "domain": { "name": "Permit", "chainId": 137, "verifyingContract": "0xBbba073C31bF03b8ACf7c28EF0738DeCF3695683" }
+      "domain": { "name": "SAND", "version": "1" }
     }
   },
   "metadata": { "owner": "SAND" }

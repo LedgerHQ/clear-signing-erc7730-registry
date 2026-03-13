@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name was wrong: was 'Permit' with no version. Corrected to 'Liquid staked Ether 2.0' version '2' based on Lido EIP712StETH docs and eip712Domain() return values on mainnet",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }],
-      "domain": { "name": "Permit", "chainId": 1, "verifyingContract": "0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84" }
+      "domain": { "name": "Liquid staked Ether 2.0", "version": "2" }
     }
   },
   "metadata": { "owner": "Lido DAO" }
