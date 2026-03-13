@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0x7f268357a8c2552623316e2562d90e642bb538e5" }],
-      "domain": { "name": "OpenSea", "chainId": 1, "verifyingContract": "0x7f268357a8c2552623316e2562d90e642bb538e5" },
+      "domain": { "name": "Wyvern Exchange Contract", "version": "2.3" },
       "schemas": [
         {
           "primaryType": "Order",

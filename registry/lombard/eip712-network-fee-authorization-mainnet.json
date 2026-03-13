@@ -3,12 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0x8236a87084f8B84306f72007F36F2618A5634494" }],
-      "domain": {
-        "name": "Lombard Staked Bitcoin",
-        "version": "1",
-        "chainId": 1,
-        "verifyingContract": "0x8236a87084f8B84306f72007F36F2618A5634494"
-      },
+      "domain": { "name": "Lombard Staked Bitcoin", "version": "1" },
       "schemas": [
         {
           "primaryType": "feeApproval",

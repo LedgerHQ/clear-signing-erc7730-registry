@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xb66a603f4cfe17e3d27b87a8bfcad319856518b8" }],
-      "domain": { "name": "Rarible", "chainId": 1, "verifyingContract": "0xb66a603f4cfe17e3d27b87a8bfcad319856518b8" },
+      "domain": { "name": "Rarible", "version": "2" },
       "schemas": [
         {
           "primaryType": "Mint1155",

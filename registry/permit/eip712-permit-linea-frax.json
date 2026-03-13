@@ -1,9 +1,10 @@
 {
+  "$comment": "Domain name and version were wrong: was 'Aave Token' version '1', corrected to 'Frax USD' version '1.1.0' based on onchain data from implementation contract 0x8612a9fdf219ab6c0e92bdd69e2266572c7d893b (FrxUSDOFTUpgradeable)",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 59144, "address": "0xc7346783f5e645aa998b106ef9e7f499528673d8" }],
-      "domain": { "name": "Permit", "chainId": 59144, "verifyingContract": "0xc7346783f5e645aa998b106ef9e7f499528673d8" }
+      "domain": { "name": "Frax USD", "version": "1.1.0" }
     }
   },
   "metadata": { "owner": "Frax USD" }
