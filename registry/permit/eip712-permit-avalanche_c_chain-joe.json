@@ -1,5 +1,4 @@
 {
-  "$comment": "This contract only uses EIP-712 for delegation (delegateBySig), not ERC-2612 permit. Descriptor may be invalid.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

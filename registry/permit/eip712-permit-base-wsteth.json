@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'USD Base', corrected to 'Wrapped liquid staked Ether 2.0' based on onchain constructor arg name_",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

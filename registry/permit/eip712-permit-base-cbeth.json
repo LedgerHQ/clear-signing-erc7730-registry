@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Degen Base', corrected to 'Coinbase Wrapped Staked ETH' based on onchain token name()",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

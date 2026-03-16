@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'StargateToken', corrected to 'Wrapped BTC' based on onchain data from implementation contract 0xc0583e2F5930ede5fab9d57bac4169878730B010",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

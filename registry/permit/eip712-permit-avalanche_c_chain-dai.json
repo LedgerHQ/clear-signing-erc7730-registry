@@ -1,5 +1,4 @@
 {
-  "$comment": "This contract (BridgeToken) does not implement EIP-2612 permit. Descriptor may be invalid.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

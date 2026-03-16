@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'StargateToken', corrected to 'Axelar Wrapped USDC' based on onchain constructor args at 0xEB466342C4d449BC9f53A865D5Cb90586f405215",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

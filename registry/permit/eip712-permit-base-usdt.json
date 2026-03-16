@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'USDbC', corrected to 'Tether USD' based on onchain constructor L2StandardERC20(..., \"Tether USD\", \"USDT\")",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

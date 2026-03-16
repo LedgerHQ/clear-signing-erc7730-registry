@@ -1,5 +1,4 @@
 {
-  "$comment": "Fixed domain name from 'ChainLink Token' to 'Bitcoin' (the actual token name returned by name()). Note: this contract (BridgeToken) does not implement ERC-2612 permit — DOMAIN_SEPARATOR(), nonces(), and permit() all revert on-chain.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

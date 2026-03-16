@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Radio Caca', corrected to 'PolkastarterToken' based on constructor args of AnyswapV3ERC20 contract on BscScan",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

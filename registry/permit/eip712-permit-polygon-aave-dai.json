@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Dai Stablecoin' (the underlying DAI token name), corrected to 'Aave Matic Market DAI' (the aToken name used in EIP-712 DOMAIN_SEPARATOR, set during initialize())",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

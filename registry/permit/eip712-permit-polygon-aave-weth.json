@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Quickswap', corrected to 'Aave Matic Market WETH' (the aToken name used in EIP-712 DOMAIN_SEPARATOR, set during initialize())",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Permit' with no version. Corrected to 'Liquid staked Ether 2.0' version '2' based on Lido EIP712StETH docs and eip712Domain() return values on mainnet",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

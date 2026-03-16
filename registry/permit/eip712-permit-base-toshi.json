@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Token', corrected to 'Toshi' based on onchain constructor ERC20(\"Toshi\", \"TOSHI\")",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
