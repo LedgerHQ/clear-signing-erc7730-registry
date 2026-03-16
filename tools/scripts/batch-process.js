@@ -470,6 +470,7 @@ class Report {
     this.filesProcessed = 0;
     this.migrations = { attempted: 0, successful: 0, failed: [], skipped: 0 };
     this.testGeneration = { attempted: 0, successful: 0, failed: [], skipped: 0 };
+    this.testRuns = { attempted: 0, passed: 0, failed: [], skipped: 0 };
     this.modifiedFiles = [];
     this.newFiles = [];
     this.prCreated = false;
@@ -511,6 +512,16 @@ class Report {
     if (this.testGeneration.failed.length > 0) {
       console.log(`   Failed:     ${this.testGeneration.failed.length}`);
       this.testGeneration.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
+    }
+
+    if (this.testRuns.attempted > 0) {
+      console.log("\n🔬 Test Runs:");
+      console.log(`   Attempted:  ${this.testRuns.attempted}`);
+      console.log(`   Passed:     ${this.testRuns.passed}`);
+      if (this.testRuns.failed.length > 0) {
+        console.log(`   Failed:     ${this.testRuns.failed.length}`);
+        this.testRuns.failed.forEach((f) => console.log(`     - ${f.file}: ${f.error}`));
+      }
     }
 
     console.log("\n📝 Changes:");
@@ -1051,6 +1062,11 @@ async function generateTests(filePath, report) {
         );
         report.testGeneration.successful++;
         report.addNewFile(testFilePath);
+        report.testRuns.attempted++;
+        report.testRuns.failed.push({
+          file: path.relative(ROOT_DIR, filePath),
+          error: "Tester exited with non-zero status during test generation",
+        });
         return { ok: true, plannedTests, executedTests, metrics };
       }
 
@@ -1433,6 +1449,7 @@ ${report.newFiles.map((f) => `- \`${path.relative(ROOT_DIR, f)}\``).join("\n") |
 |-------|--------|
 | Schema Migration | ${report.migrations.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
 | Test Generation | ${report.testGeneration.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
+| Test Runs | ${report.testRuns.attempted === 0 ? "⏭️ Skipped" : report.testRuns.failed.length === 0 ? "✅ Passed" : "⚠️ Some failures"} |
 
 ### Notes
 
@@ -1631,6 +1648,15 @@ async function processFile(filePath, report, options = {}) {
     log("  → Running tests after migration...", "info");
     const testRun = await runTests(filePath);
     renderFinalRunSummary(relPath, testRun);
+    report.testRuns.attempted++;
+    if (testRun.ok) {
+      report.testRuns.passed++;
+    } else {
+      report.testRuns.failed.push({
+        file: relPath,
+        error: "Test run failed after migration",
+      });
+    }
     if (progress?.finalTests) {
       progress.finalTests.done++;
     }
@@ -1777,11 +1803,17 @@ async function main() {
     const hasChanges = report.modifiedFiles.length > 0 || report.newFiles.length > 0;
     const hasFailures =
       report.migrations.failed.length > 0 ||
-      report.testGeneration.failed.length > 0;
+      report.testGeneration.failed.length > 0 ||
+      report.testRuns.failed.length > 0;
 
     if (CONFIG.pr && !CONFIG.dryRun && checkGit() && hasChanges) {
       if (CONFIG.prStrict && hasFailures) {
-        log("Skipping PR creation: --pr-strict is set and there were failures", "error");
+        const reasons = [
+          report.migrations.failed.length > 0 && `${report.migrations.failed.length} migration(s)`,
+          report.testGeneration.failed.length > 0 && `${report.testGeneration.failed.length} test generation(s)`,
+          report.testRuns.failed.length > 0 && `${report.testRuns.failed.length} test run(s)`,
+        ].filter(Boolean).join(", ");
+        log(`Skipping PR creation: --pr-strict is set and there were failures (${reasons})`, "error");
       } else {
         logSection("Creating PR");
         prCleanupContext = createPrFromChanges(targetFolder, report);
