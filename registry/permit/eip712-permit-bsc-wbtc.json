@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'PancakeSwap Token', but this contract (WBTCOFT at 0x0555E30da8f98308EdB960aa94C0Db47230d2B9c) is a LayerZero OFT with name 'Wrapped BTC'. WARNING: This contract does NOT implement ERC-2612 permit - it only inherits ERC20, not ERC20Permit. This file should be removed from the registry.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

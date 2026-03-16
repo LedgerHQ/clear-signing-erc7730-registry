@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Aave Token', corrected to 'SAND' per onchain name(). WARNING: PolygonSand contract (0xBbba...5683) does NOT implement EIP-2612 permit or any EIP-712 domain separator - this descriptor may be invalid",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

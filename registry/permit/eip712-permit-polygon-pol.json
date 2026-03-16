@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Permit', corrected to 'Polygon Ecosystem Token' per onchain EIP712_DOMAIN_NAME constant. Version '2' was missing, added per EIP712_DOMAIN_VERSION constant. Note: this contract uses TokenTransferOrder, not standard EIP-2612 Permit",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

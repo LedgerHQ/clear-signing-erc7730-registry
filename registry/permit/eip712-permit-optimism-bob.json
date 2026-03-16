@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Sonne', corrected to 'BOB' based on onchain name() at implementation contract 0x82907eaeb25d248dc82033e45b00a3e012ba2d0d (BobToken)",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

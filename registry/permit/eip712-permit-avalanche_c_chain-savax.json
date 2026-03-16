@@ -1,5 +1,4 @@
 {
-  "$comment": "Fixed domain name from 'StargateToken' to 'Staked AVAX' (matching on-chain name() return value)",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

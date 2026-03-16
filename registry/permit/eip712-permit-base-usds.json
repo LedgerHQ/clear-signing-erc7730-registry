@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Aerodrome', corrected to 'USDS Stablecoin' based on onchain source constant name = \"USDS Stablecoin\"",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

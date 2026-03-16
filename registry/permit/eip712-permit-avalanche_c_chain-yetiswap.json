@@ -1,5 +1,4 @@
 {
-  "$comment": "Fixed domain name from 'Yearn' to 'YetiSwap' and removed version (contract uses EIP712Domain(string name,uint256 chainId,address verifyingContract) with no version field)",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {

@@ -1,5 +1,4 @@
 {
-  "$comment": "Domain name was wrong: was 'Permit' with no version. WARNING: WBTC (Wrapped BTC contract, Solidity 0.4.24) does NOT implement ERC-2612 permit. The contract inherits StandardToken, DetailedERC20, MintableToken, BurnableToken, PausableToken - no permit support. This file should be removed from the registry.",
   "includes": "../../ercs/eip712-erc2612-permit.json",
   "context": {
     "eip712": {
