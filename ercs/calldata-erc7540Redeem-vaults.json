@@ -57,7 +57,7 @@
         "fields": [
           {
             "path": "shares",
-            "label": "Redeems exactly",
+            "label": "Amount of shares to finalize redemption for",
             "format": "tokenAmount",
             "params": { "tokenPath": "@.to" }
           },
@@ -80,15 +80,15 @@
         "intent": "Withdraw",
         "fields": [
           {
-            "label": "Claim",
+            "label": "Claim withdrawal",
             "format": "raw",
             "value": "$.metadata.constants.underlyingTicker"
           },
           {
             "path": "assets",
-            "label": "Amount of assets withdrawn",
+            "label": "Amount of assets to receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "$.metadata.constants.underlyingToken" }
+            "params": { "token": "$.metadata.constants.underlyingToken" }
           },
           {
             "path": "receiver",
@@ -110,7 +110,7 @@
         "fields": [
           {
             "path": "shares",
-            "label": "Amount of shares redeemed",
+            "label": "Amount of shares to request redemption for",
             "format": "tokenAmount",
             "params": { "tokenPath": "@.to" }
           },
@@ -136,7 +136,6 @@
             "path": "operator",
             "label": "Operator",
             "format": "addressName",
-
             "params": { "types": ["eoa", "contract"] }
           },
           { "path": "approved", "label": "Approved", "format": "raw" }
