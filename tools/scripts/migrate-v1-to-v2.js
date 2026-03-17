@@ -1122,13 +1122,32 @@ function canonicalizeSignature(signatureLike) {
 }
 
 /**
+ * Recursively expand an ABI parameter type, replacing tuple types with their
+ * component types in parenthesised form (e.g. `tuple[]` with components
+ * becomes `(uint256,address)[]`). Required for correct keccak256 selector
+ * computation.
+ */
+function expandAbiType(param) {
+  if (!param) return "";
+  const type = param.type || "";
+  const isTuple = type === "tuple" || type.startsWith("tuple[");
+  if (isTuple && Array.isArray(param.components)) {
+    const inner = param.components.map(expandAbiType).join(",");
+    const suffix = type.slice("tuple".length);
+    return `(${inner})${suffix}`;
+  }
+  return type;
+}
+
+/**
  * Return canonical name(types) signature for ABI function entry.
+ * Tuple types are expanded to their component types for correct selector computation.
  */
 function abiCanonicalSignature(abiEntry) {
   if (!abiEntry || abiEntry.type !== "function") return null;
   const name = abiEntry.name;
   const inputs = Array.isArray(abiEntry.inputs) ? abiEntry.inputs : [];
-  const types = inputs.map((input) => extractParamType(input?.type || ""));
+  const types = inputs.map((input) => expandAbiType(input));
   return `${name}(${types.join(",")})`;
 }
 
@@ -1460,6 +1479,19 @@ function migrateFile(filePath) {
 
     // 5. Transform format keys before removing abi/schemas
     const keyMapping = transformFormatKeys(json);
+
+    // Fail if any hex selector format keys could not be converted
+    if (json.display?.formats) {
+      const unconvertedSelectors = Object.keys(json.display.formats)
+        .filter((key) => isHexSelector(key) && !keyMapping[key]);
+      if (unconvertedSelectors.length > 0) {
+        const selectorList = unconvertedSelectors.join(", ");
+        throw new Error(
+          `Failed to convert selector(s) to human-readable ABI: ${selectorList}. ` +
+          `Ensure the contract ABI contains matching function entries.`
+        );
+      }
+    }
 
     // Apply key mapping to formats
     if (Object.keys(keyMapping).length > 0 && json.display?.formats) {
