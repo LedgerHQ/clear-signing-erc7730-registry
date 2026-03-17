@@ -1,0 +1,10 @@
+{
+  "includes": "../../ercs/eip712-erc2612-permit.json",
+  "context": {
+    "eip712": {
+      "deployments": [{ "chainId": 137, "address": "0xB5C064F955D8e7F38fE0460C556a72987494eE17" }],
+      "domain": { "name": "Quickswap", "version": "1" }
+    }
+  },
+  "metadata": { "owner": "QuickSwap" }
+}

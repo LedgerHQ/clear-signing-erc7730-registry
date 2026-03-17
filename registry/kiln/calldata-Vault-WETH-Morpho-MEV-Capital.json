@@ -1,0 +1,8 @@
+{
+  "$schema": "../../specs/erc7730-v1.schema.json",
+  "includes": "common-KilnVaults.json",
+  "context": { "contract": { "deployments": [{ "chainId": 1, "address": "0x057e9B54c04B467Ccd9DFB56A84bDD99c17a2A50" }] } },
+  "metadata": {
+    "constants": { "underlyingToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "underlyingTicker": "WETH", "vaultTicker": "kmmWETH" }
+  }
+}

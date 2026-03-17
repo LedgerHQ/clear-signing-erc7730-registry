@@ -25,7 +25,7 @@
           },
           {
             "path": "params.amountOutMinimum",
-            "label": "Minimum amount to Receive",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.path.[-20:]" }
           },
@@ -33,7 +33,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
         "required": ["params.amountIn", "params.amountOutMinimum", "params.recipient"]
@@ -45,7 +45,7 @@
           { "path": "params.amountIn", "label": "Send", "format": "tokenAmount", "params": { "tokenPath": "params.tokenIn" } },
           {
             "path": "params.amountOutMinimum",
-            "label": "Receive Minimum",
+            "label": "Minimum to Receive",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.tokenOut" }
           },
@@ -54,10 +54,10 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
-        "required": ["params.amountIn", "params.amountOutMininimum", "params.fee", "params.recipient"]
+        "required": ["params.amountIn", "params.amountOutMinimum", "params.fee", "params.recipient"]
       },
       "0x09b81346": {
         "$id": "exactOutput",
@@ -65,21 +65,21 @@
         "fields": [
           {
             "path": "params.amountInMaximum",
-            "label": "Maximum Amount to Send",
+            "label": "Maximum Amount In",
             "format": "tokenAmount",
-            "params": { "tokenPath": "params.path.[0:20]" }
+            "params": { "tokenPath": "params.path.[-20:]" }
           },
           {
             "path": "params.amountOut",
             "label": "Amount to Receive",
             "format": "tokenAmount",
-            "params": { "tokenPath": "params.path.[-20:]" }
+            "params": { "tokenPath": "params.path.[0:20]" }
           },
           {
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ],
         "required": ["params.amountInMaximum", "params.amountOut", "params.recipient"]
@@ -90,7 +90,7 @@
         "fields": [
           {
             "path": "params.amountInMaximum",
-            "label": "Maximum Amount to Send",
+            "label": "Maximum Amount In",
             "format": "tokenAmount",
             "params": { "tokenPath": "params.tokenIn" }
           },
@@ -105,7 +105,7 @@
             "path": "params.recipient",
             "label": "Beneficiary",
             "format": "addressName",
-            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ]
       },
@@ -114,11 +114,12 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountIn", "label": "Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
+          { "path": "amountOutMin", "label": "Minimum to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[-1]" } },
           {
-            "path": "amountOutMin",
-            "label": "Minimum amount to Receive",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "path.[-1]" }
+            "path": "to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] }
           }
         ]
       },
@@ -127,7 +128,17 @@
         "intent": "Swap",
         "fields": [
           { "path": "amountOut", "label": "Amount to Receive", "format": "tokenAmount", "params": { "tokenPath": "path.[-1]" } },
-          { "path": "amountInMax", "label": "Maximum Amount to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } }
+          { "path": "amountInMax", "label": "Maximum to Send", "format": "tokenAmount", "params": { "tokenPath": "path.[0]" } },
+          {
+            "path": "to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "contract"],
+              "sources": ["local", "ens"],
+              "senderAddress": ["0x0000000000000000000000000000000000000001"]
+            }
+          }
         ]
       }
     }

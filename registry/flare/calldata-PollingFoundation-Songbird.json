@@ -728,48 +728,48 @@
               },
               {
                 "$id": null,
-                "label": "Voting Period Seconds",
-                "format": "raw",
+                "label": "Voting Period",
+                "format": "duration",
                 "params": null,
                 "path": "votingPeriodSeconds",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Vp Block Period Seconds",
-                "format": "raw",
+                "label": "Vp Block Period",
+                "format": "duration",
                 "params": null,
                 "path": "vpBlockPeriodSeconds",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Threshold Condition BIPS",
-                "format": "raw",
-                "params": null,
+                "label": "Threshold",
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "thresholdConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Majority Condition BIPS",
-                "format": "raw",
-                "params": null,
+                "label": "Majority",
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "majorityConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Execution Delay Seconds",
-                "format": "raw",
+                "label": "Execution Delay",
+                "format": "duration",
                 "params": null,
                 "path": "executionDelaySeconds",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Execution Period Seconds",
-                "format": "raw",
+                "label": "Execution Period",
+                "format": "duration",
                 "params": null,
                 "path": "executionPeriodSeconds",
                 "value": null
@@ -782,14 +782,14 @@
           "#._values.[]",
           "#._calldatas.[]",
           "#._description",
-          "#._settingsaccept",
-          "#._settingsvotingStartTs",
-          "#._settingsvotingPeriodSeconds",
-          "#._settingsvpBlockPeriodSeconds",
-          "#._settingsthresholdConditionBIPS",
-          "#._settingsmajorityConditionBIPS",
-          "#._settingsexecutionDelaySeconds",
-          "#._settingsexecutionPeriodSeconds"
+          "#._settings.accept",
+          "#._settings.votingStartTs",
+          "#._settings.votingPeriodSeconds",
+          "#._settings.vpBlockPeriodSeconds",
+          "#._settings.thresholdConditionBIPS",
+          "#._settings.majorityConditionBIPS",
+          "#._settings.executionDelaySeconds",
+          "#._settings.executionPeriodSeconds"
         ],
         "excluded": null
       },
@@ -814,33 +814,33 @@
               },
               {
                 "$id": null,
-                "label": "Voting Period Seconds",
-                "format": "raw",
+                "label": "Voting Period",
+                "format": "duration",
                 "params": null,
                 "path": "votingPeriodSeconds",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Vp Block Period Seconds",
-                "format": "raw",
+                "label": "Vp Block Period",
+                "format": "duration",
                 "params": null,
                 "path": "vpBlockPeriodSeconds",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Threshold Condition BIPS",
-                "format": "raw",
-                "params": null,
+                "label": "Threshold",
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "thresholdConditionBIPS",
                 "value": null
               },
               {
                 "$id": null,
-                "label": "Majority Condition BIPS",
-                "format": "raw",
-                "params": null,
+                "label": "Majority",
+                "format": "unit",
+                "params": { "base": "bps" },
                 "path": "majorityConditionBIPS",
                 "value": null
               }
@@ -849,12 +849,12 @@
         ],
         "required": [
           "#._description",
-          "#._settingsaccept",
-          "#._settingsvotingStartTs",
-          "#._settingsvotingPeriodSeconds",
-          "#._settingsvpBlockPeriodSeconds",
-          "#._settingsthresholdConditionBIPS",
-          "#._settingsmajorityConditionBIPS"
+          "#._settings.accept",
+          "#._settings.votingStartTs",
+          "#._settings.votingPeriodSeconds",
+          "#._settings.vpBlockPeriodSeconds",
+          "#._settings.thresholdConditionBIPS",
+          "#._settings.majorityConditionBIPS"
         ],
         "excluded": null
       }

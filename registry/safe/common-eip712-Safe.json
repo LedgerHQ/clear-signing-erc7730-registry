@@ -53,6 +53,69 @@
               { "type": "uint256", "name": "totp" }
             ]
           }
+        },
+        {
+          "primaryType": "AddProposer",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "AddProposer": [
+              { "type": "address", "name": "delegateAddress" },
+              { "type": "uint256", "name": "totp" }
+            ]
+          }
+        },
+        {
+          "primaryType": "RemoveProposer",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "RemoveProposer": [
+              { "type": "address", "name": "delegateAddress" },
+              { "type": "uint256", "name": "totp" }
+            ]
+          }
+        },
+        {
+          "primaryType": "AuthentAddressBook",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "AuthentAddressBook": [
+              { "name": "totp", "type": "uint256" }
+            ]
+          }
+        },
+        {
+          "primaryType": "AddAddressBookEntry",
+          "types": {
+            "EIP712Domain": [
+              { "name": "name", "type": "string" },
+              { "name": "version", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
+              { "name": "verifyingContract", "type": "address" }
+            ],
+            "AddressBookEntry": [
+              { "name": "alias", "type": "string" },
+              { "name": "address", "type": "address" }
+            ],
+            "AddAddressBookEntry": [
+              { "name": "entries", "type": "AddressBookEntry[]" },
+              { "name": "totp", "type": "uint256" }
+            ]
+          }
         }
       ]
     }
@@ -108,30 +171,69 @@
             "path": "safeTxHash",
             "label": "Safe TX hash",
             "format": "raw"
-          },
+          }
+        ],
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
+      },
+      "Delegate": {
+        "intent": "Add or remove proposer",
+        "fields": [
           {
-            "path": "totp",
-            "label": "TOTP",
+            "path": "delegateAddress",
+            "label": "Proposer address",
             "format": "raw"
           }
         ],
-        "required": ["safeTxHash", "totp"]
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
       },
-      "Delegate": {
+      "AddProposer": {
         "intent": "Add proposer",
         "fields": [
           {
             "path": "delegateAddress",
             "label": "Proposer address",
             "format": "raw"
-          },
+          }
+        ],
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
+      },
+      "RemoveProposer": {
+        "intent": "Remove proposer",
+        "fields": [
           {
-            "path": "totp",
-            "label": "TOTP",
+            "path": "delegateAddress",
+            "label": "Proposer address",
             "format": "raw"
           }
         ],
-        "required": ["delegateAddress", "totp"]
+        "required": ["safeTxHash"],
+        "excluded": ["totp"]
+      },
+      "AuthentAddressBook": {
+        "intent": "Authenticate address book",
+        "fields": [],
+        "required": [],
+        "excluded": ["totp"]
+      },
+      "AddAddressBookEntry": {
+        "intent": "Add address book entry",
+        "fields": [
+          {
+            "path": "entries.[].alias",
+            "label": "Address book alias",
+            "format": "raw"
+          },
+          {
+            "path": "entries.[].address",
+            "label": "Address book address",
+            "format": "raw"
+          }
+        ],
+        "required": ["entries"],
+        "excluded": ["totp"]
       }
     }
   }
