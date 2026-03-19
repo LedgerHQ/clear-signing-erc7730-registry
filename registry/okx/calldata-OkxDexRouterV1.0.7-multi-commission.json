@@ -511,7 +511,7 @@
           { "path": "baseRequest.deadLine", "$ref": "$.display.definitions.deadline" }
         ],
         "required": ["orderId", "baseRequest.fromToken", "baseRequest.toToken", "baseRequest.fromTokenAmount", "baseRequest.minReturnAmount"],
-        "excluded": ["batches", "batchesAmount", "extraData"]
+        "excluded": ["batches", "batchesAmount"]
       },
       "smartSwapTo(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest,uint256[] batchesAmount,(address[],address[],uint256[],bytes[],uint256)[][] batches,(uint256,address,address,address,uint256,uint256,uint256,uint256,bool,bytes)[] extraData)": {
         "$id": "smartSwapTo",
@@ -539,7 +539,7 @@
           "baseRequest.fromTokenAmount",
           "baseRequest.minReturnAmount"
         ],
-        "excluded": ["batches", "batchesAmount", "extraData"]
+        "excluded": ["batches", "batchesAmount"]
       },
       "swapWrap(uint256 orderId,uint256 rawdata)": {
         "$id": "swapWrap",
@@ -713,7 +713,7 @@
           "to",
           "refundTo"
         ],
-        "excluded": ["batches", "batchesAmount", "extraData"]
+        "excluded": ["batches", "batchesAmount"]
       }
     }
   }
