@@ -3,15 +3,15 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xb3a87172f555ae2a2ab79be60b336d2f7d0187f0" }],
-      "domain": { "name": "Tally", "chainId": 1, "verifyingContract": "0xb3a87172f555ae2a2ab79be60b336d2f7d0187f0" },
+      "domain": { "name": "PoolTogether Governor Alpha" },
       "schemas": [
         {
           "primaryType": "Ballot",
           "types": {
             "Ballot": [{ "name": "proposalId", "type": "uint256" }, { "name": "support", "type": "uint8" }],
             "EIP712Domain": [
-              { "name": "chainId", "type": "uint256" },
               { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
               { "name": "verifyingContract", "type": "address" }
             ]
           }

@@ -3,15 +3,15 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0x0cec1a9154ff802e7934fc916ed7ca50bde6844e" }],
-      "domain": { "name": "Tally", "chainId": 1, "verifyingContract": "0x0cec1a9154ff802e7934fc916ed7ca50bde6844e" },
+      "domain": { "name": "PoolTogether" },
       "schemas": [
         {
           "primaryType": "Delegation",
           "types": {
             "Delegation": [{ "name": "delegatee", "type": "address" }, { "name": "nonce", "type": "uint256" }, { "name": "expiry", "type": "uint256" }],
             "EIP712Domain": [
-              { "name": "chainId", "type": "uint256" },
               { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
               { "name": "verifyingContract", "type": "address" }
             ]
           }

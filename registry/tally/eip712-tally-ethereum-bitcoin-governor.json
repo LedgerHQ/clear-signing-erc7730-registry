@@ -3,15 +3,15 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xdbd27635a534a3d3169ef0498beb56fb9c937489" }],
-      "domain": { "name": "Tally", "chainId": 1, "verifyingContract": "0xdbd27635a534a3d3169ef0498beb56fb9c937489" },
+      "domain": { "name": "GTC Governor Alpha" },
       "schemas": [
         {
           "primaryType": "Ballot",
           "types": {
             "Ballot": [{ "name": "proposalId", "type": "uint256" }, { "name": "support", "type": "uint8" }],
             "EIP712Domain": [
-              { "name": "chainId", "type": "uint256" },
               { "name": "name", "type": "string" },
+              { "name": "chainId", "type": "uint256" },
               { "name": "verifyingContract", "type": "address" }
             ]
           }
