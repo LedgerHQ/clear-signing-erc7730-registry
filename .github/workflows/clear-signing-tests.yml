@@ -54,6 +54,21 @@ jobs:
             echo "can_run_tests=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Save PR metadata for fork notification
+        if: steps.check.outputs.is_fork == 'true' && steps.check.outputs.can_run_tests == 'false'
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          echo "{\"pr_number\": $PR_NUMBER, \"needs_notification\": true}" > pr-metadata.json
+
+      - name: Upload PR metadata
+        if: steps.check.outputs.is_fork == 'true' && steps.check.outputs.can_run_tests == 'false'
+        uses: actions/upload-artifact@v7
+        with:
+          name: pr-metadata
+          path: pr-metadata.json
+          retention-days: 1
+
   detect-tests:
     name: Detect test files
     needs: check-permissions
@@ -68,6 +83,13 @@ jobs:
           # For pull_request_target, checkout the PR head
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - name: Checkout base scripts
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-scripts
+          sparse-checkout: .github/scripts
+
       - name: Get changed descriptor files
         id: changed-files
         uses: tj-actions/changed-files@v47
@@ -81,11 +103,13 @@ jobs:
 
       - name: Detect test files for changed descriptors
         id: detect
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           TEST_ENTRIES=()
           HAS_TESTS="false"
 
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          for file in $CHANGED_FILES; do
             descriptor_name=$(basename "$file" .json)
             descriptor_dir=$(dirname "$file")
             test_file="${descriptor_dir}/tests/${descriptor_name}.tests.json"
@@ -126,6 +150,13 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           path: registry
+
+      - name: Checkout base scripts
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-scripts
+          sparse-checkout: .github/scripts
 
       - name: Checkout device-management-kit
         uses: actions/checkout@v6
@@ -171,14 +202,18 @@ jobs:
         run: docker pull ghcr.io/ledgerhq/speculos
 
       - name: Prepare test inputs
+        env:
+          TEST_FILE: ${{ matrix.test.test_file }}
         run: |
           mkdir -p test-inputs screenshots
-          jq '.tests' "registry/${{ matrix.test.test_file }}" > test-inputs/tests.json
+          jq '.tests' "registry/$TEST_FILE" > test-inputs/tests.json
 
       - name: Resolve descriptor includes
+        env:
+          DESCRIPTOR: ${{ matrix.test.descriptor }}
         run: |
-          node "${{ github.workspace }}/registry/.github/scripts/resolve-erc7730-includes.js" \
-            "${{ github.workspace }}/registry/${{ matrix.test.descriptor }}" \
+          node "${{ github.workspace }}/base-scripts/.github/scripts/resolve-erc7730-includes.js" \
+            "${{ github.workspace }}/registry/$DESCRIPTOR" \
             "${{ github.workspace }}/test-inputs/resolved-descriptor.json"
 
       - name: Run clear signing tests
@@ -295,41 +330,6 @@ jobs:
               await github.rest.issues.updateComment({ ...params, comment_id: existing.id });
             } else {
               await github.rest.issues.createComment({ ...params, issue_number: context.issue.number });
-            }
-
-  notify-fork-pr:
-    name: Notify fork PR
-    needs: check-permissions
-    if: needs.check-permissions.outputs.is_fork == 'true' && needs.check-permissions.outputs.can_run_tests == 'false'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v8
-        env:
-          LABEL_NAME: ${{ env.RUN_TESTS_LABEL }}
-        with:
-          script: |
-            const label = process.env.LABEL_NAME;
-            const body = `## 🧪 Clear Signing Tests
-
-            > ⏳ **Waiting for maintainer approval to run tests.**
-
-            This PR is from a fork. A maintainer needs to add the \`${label}\` label to trigger the clear signing tests.
-
-            Once approved, the tests will run automatically and post screenshots here.
-
-            ---
-            *This is required for security reasons - fork PRs don't have access to secrets needed for device emulation.*`;
-
-            const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number
-            });
-            const existing = comments.find(c => c.user.type === 'Bot' && c.body.includes('Clear Signing Tests'));
-
-            if (!existing) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner, repo: context.repo.repo,
-                issue_number: context.issue.number, body
-              });
             }
 
   notify-missing-tests:
