@@ -543,7 +543,7 @@
       },
       "swapWrap(uint256 orderId,uint256 rawdata)": {
         "$id": "swapWrap",
-        "intent": "Swap",
+        "intent": "Wrap/Unwrap",
         "fields": [
           { "path": "orderId", "$ref": "$.display.definitions.orderId" },
           { "path": "rawdata.[0:1]", "label": "Direction", "format": "enum", "params": { "$ref": "$.metadata.enums.swapDirection" } },
@@ -557,20 +557,19 @@
         "required": ["orderId", "rawdata"]
       },
       "swapWrapToWithBaseRequest(uint256 orderId,address receiver,(uint256,address,uint256,uint256,uint256) baseRequest)": {
-        "$id": "swapWrapToWithBaseRequest",
+        "$id": "Wrap/Unwrap",
         "intent": "Swap",
         "fields": [
           { "path": "orderId", "$ref": "$.display.definitions.orderId" },
           { "path": "receiver", "$ref": "$.display.definitions.beneficiary" },
           {
             "path": "baseRequest.fromTokenAmount",
-            "$ref": "$.display.definitions.sendAmount",
-            "params": { "tokenPath": "baseRequest.fromToken.[-20:]" }
-          },
-          {
-            "path": "baseRequest.minReturnAmount",
-            "$ref": "$.display.definitions.minReceiveAmount",
-            "params": { "tokenPath": "baseRequest.toToken" }
+            "label": "Wrap/Unwrap Amount",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "baseRequest.fromToken.[-20:]",
+              "nativeCurrencyAddress": ["0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE", "0x0000000000000000000000000000000000000000"]
+            }
           },
           { "path": "baseRequest.deadLine", "$ref": "$.display.definitions.deadline" }
         ],
