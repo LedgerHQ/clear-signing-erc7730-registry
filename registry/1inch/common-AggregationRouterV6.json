@@ -21,7 +21,7 @@
   "display": {
     "definitions": {
       "sendAmount": {
-        "label": "Amount to Send",
+        "label": "Test",
         "format": "tokenAmount",
         "params": { "nativeCurrencyAddress": ["$.metadata.constants.addressAsEth", "$.metadata.constants.addressAsNull"] }
       },

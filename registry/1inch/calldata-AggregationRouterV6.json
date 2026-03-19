@@ -431,7 +431,7 @@
       },
       "clipperSwapTo(address clipperExchange, address recipient, uint256 srcToken, address dstToken, uint256 inputAmount, uint256 outputAmount, uint256 goodUntil, bytes32 r, bytes32 vs)": {
         "$id": "clipperSwapTo",
-        "intent": "Swap",
+        "intent": "test",
         "fields": [
           { "path": "inputAmount", "$ref": "$.display.definitions.sendAmount", "params": { "tokenPath": "srcToken.[-20:]" } },
           { "path": "outputAmount", "$ref": "$.display.definitions.minReceiveAmount", "params": { "tokenPath": "dstToken" } },
