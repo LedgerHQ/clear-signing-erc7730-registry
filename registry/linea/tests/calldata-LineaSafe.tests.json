@@ -7,12 +7,18 @@
       "txHash": "0xac24732952f9eea514ba28030218267575bb42dd5f713dab7c29f3d330086d8f",
       "expectedTexts": [
         "Operation type",
+        "Delegate Call",
         "From Safe",
+        "0x892bb7EeD71efB060ab90140e7825d8127991DD3",
         "Execution signer",
+        "0xd1cBF7e301b64e9d694F730aE27785902937eDD1",
         "Transaction",
         "Gas amount",
+        "0",
         "Gas price",
-        "Gas receiver"
+        "0 ETH",
+        "Gas receiver",
+        "0x0000000000000000000000000000000000000000"
       ]
     },
     {
@@ -21,12 +27,18 @@
       "txHash": "0xf995e98d75d16511762b5b68f3d45347e183c91aac4fabdbbb9df22880987450",
       "expectedTexts": [
         "Operation type",
+        "Delegate Call",
         "From Safe",
+        "0x892bb7EeD71efB060ab90140e7825d8127991DD3",
         "Execution signer",
+        "0x535dE1e2A961529AA84EF208981f8cF4e7dcbdF5",
         "Transaction",
         "Gas amount",
+        "0",
         "Gas price",
-        "Gas receiver"
+        "0 ETH",
+        "Gas receiver",
+        "0x0000000000000000000000000000000000000000"
       ]
     },
     {
