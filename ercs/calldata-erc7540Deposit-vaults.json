@@ -22,25 +22,12 @@
           "type": "function"
         },
         {
-          "inputs": [
-            { "name": "assets", "type": "uint256" },
-            {
-              "name": "controller",
-              "type": "address"
-            },
-            { "name": "owner", "type": "address" }
-          ],
+          "inputs": [{ "name": "assets", "type": "uint256" }, { "name": "controller", "type": "address" }, { "name": "owner", "type": "address" }],
           "type": "function",
           "name": "requestDeposit"
         },
         {
-          "inputs": [
-            {
-              "name": "operator",
-              "type": "address"
-            },
-            { "name": "approved", "type": "bool" }
-          ],
+          "inputs": [{ "name": "operator", "type": "address" }, { "name": "approved", "type": "bool" }],
           "stateMutability": "nonpayable",
           "outputs": [{ "name": "success", "type": "bool" }],
           "type": "function",
@@ -61,17 +48,8 @@
             "format": "tokenAmount",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           },
-          {
-            "label": "Receive shares",
-            "format": "raw",
-            "value": "$.metadata.constants.vaultTicker"
-          },
-          {
-            "path": "receiver",
-            "label": "Send shares to",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "label": "Receive shares", "format": "raw", "value": "$.metadata.constants.vaultTicker" },
+          { "path": "receiver", "label": "Send shares to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           {
             "path": "controller",
             "label": "Controller of the request",
@@ -84,23 +62,9 @@
       "mint(uint256 shares, address receiver, address controller)": {
         "intent": "Mint",
         "fields": [
-          {
-            "label": "Claim deposit",
-            "format": "raw",
-            "value": "$.metadata.constants.underlyingTicker"
-          },
-          {
-            "path": "shares",
-            "label": "Amount of shares to mint",
-            "format": "tokenAmount",
-            "params": { "tokenPath": "@.to" }
-          },
-          {
-            "path": "receiver",
-            "label": "Send shares to",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "label": "Claim deposit", "format": "raw", "value": "$.metadata.constants.underlyingTicker" },
+          { "path": "shares", "label": "Amount of shares to mint", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
+          { "path": "receiver", "label": "Send shares to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           {
             "path": "controller",
             "label": "Controller of the request",
@@ -125,24 +89,14 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"] }
           },
-          {
-            "path": "owner",
-            "label": "Owner of the shares",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          }
+          { "path": "owner", "label": "Owner of the shares", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["assets", "controller", "owner"]
       },
       "setOperator(address operator, bool approved)": {
         "intent": "Set operator",
         "fields": [
-          {
-            "path": "operator",
-            "label": "Operator",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "path": "operator", "label": "Operator", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "approved", "label": "Approved", "format": "raw" }
         ],
         "required": ["operator", "approved"]
