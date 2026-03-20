@@ -295,7 +295,7 @@
           { "path": "_fee", "label": "Fee", "format": "amount" },
           { "path": "@.value", "label": "Value", "format": "amount" }
         ],
-        "required": ["_to", "_fee"],
+        "required": ["_to", "_fee", "@.value"],
         "excluded": ["_calldata"]
       },
       "claimMessage(address _from, address _to, uint256 _fee, uint256 _value, address _feeRecipient, bytes _calldata, uint256 _nonce)": {
@@ -337,7 +337,7 @@
           { "path": "_params.feeRecipient", "$ref": "$.display.definitions.addressNameFeeRecipient" },
           { "path": "_yieldProvider", "$ref": "$.display.definitions.addressNameYieldProvider" }
         ],
-        "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_yieldProvider"],
+        "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_params.feeRecipient", "_yieldProvider"],
         "excluded": ["_params.proof", "_params.leafIndex", "_params.merkleRoot", "_params.data", "_params.messageNumber"]
       },
       "fund()": {
@@ -346,7 +346,7 @@
         "fields": [
           { "path": "@.value", "label": "Amount", "format": "amount" }
         ],
-        "required": [],
+        "required": ["@.value"],
         "excluded": []
       },
       "pauseByType(uint8 _pauseType)": {
