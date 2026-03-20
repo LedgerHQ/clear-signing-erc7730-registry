@@ -364,6 +364,12 @@
     }
   },
   "display": {
+    "definitions": {
+      "addressNameEoaWalletContractEns": {
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+      }
+    },
     "formats": {
       "cancel(bytes32 id)": {
         "$id": "cancel",
@@ -384,22 +390,7 @@
         "$id": "execute",
         "intent": "Execute timelock operation",
         "fields": [
-          {
-            "path": "target",
-            "label": "Target",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          },
+          { "path": "target", "label": "Target", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           {
             "path": "value",
             "label": "Value",
@@ -444,22 +435,7 @@
         "$id": "executeBatch",
         "intent": "Execute timelock batch",
         "fields": [
-          {
-            "path": "targets.[]",
-            "label": "Target",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          },
+          { "path": "targets.[]", "label": "Target", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           {
             "path": "values.[]",
             "label": "Value",
@@ -512,22 +488,7 @@
               "$ref": "$.metadata.enums.timelockRoles"
             }
           },
-          {
-            "path": "account",
-            "label": "Account",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          }
+          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
         "required": [
           "role",
@@ -547,22 +508,7 @@
               "$ref": "$.metadata.enums.timelockRoles"
             }
           },
-          {
-            "path": "account",
-            "label": "Account",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          }
+          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
         "required": [
           "role",
@@ -582,21 +528,7 @@
               "$ref": "$.metadata.enums.timelockRoles"
             }
           },
-          {
-            "path": "account",
-            "label": "Account",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          }
+          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
         "required": [
           "role",
@@ -608,22 +540,7 @@
         "$id": "schedule",
         "intent": "Schedule timelock operation",
         "fields": [
-          {
-            "path": "target",
-            "label": "Target",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          },
+          { "path": "target", "label": "Target", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           {
             "path": "value",
             "label": "Value",
@@ -669,22 +586,7 @@
         "$id": "scheduleBatch",
         "intent": "Schedule timelock batch",
         "fields": [
-          {
-            "path": "targets.[]",
-            "label": "Target",
-            "format": "addressName",
-            "params": {
-              "types": [
-                "eoa",
-                "wallet",
-                "contract"
-              ],
-              "sources": [
-                "local",
-                "ens"
-              ]
-            }
-          },
+          { "path": "targets.[]", "label": "Target", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           {
             "path": "values.[]",
             "label": "Value",
