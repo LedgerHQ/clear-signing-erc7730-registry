@@ -245,15 +245,43 @@
   },
   "display": {
     "definitions": {
-      "addressNameEoaWalletContractEns": {
+      "addressNameRecipient": {
+        "label": "Recipient",
         "format": "addressName",
         "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
       },
-      "addressNameEoaWalletEns": {
+      "addressNameSender": {
+        "label": "Sender",
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+      },
+      "addressNameAccount": {
+        "label": "Account",
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+      },
+      "addressNameL2YieldRecipient": {
+        "label": "L2 Yield Recipient",
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+      },
+      "addressNameFeeRecipient": {
+        "label": "Fee Recipient",
         "format": "addressName",
         "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
       },
-      "addressNameContractLocal": {
+      "addressNameYieldProvider": {
+        "label": "Yield Provider",
+        "format": "addressName",
+        "params": { "types": ["contract"], "sources": ["local"] }
+      },
+      "addressNameVerifierAddress": {
+        "label": "Verifier Address",
+        "format": "addressName",
+        "params": { "types": ["contract"], "sources": ["local"] }
+      },
+      "addressNameYieldManager": {
+        "label": "Yield Manager",
         "format": "addressName",
         "params": { "types": ["contract"], "sources": ["local"] }
       }
@@ -263,7 +291,7 @@
         "$id": "sendMessage",
         "intent": "Send Message to L2",
         "fields": [
-          { "path": "_to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_to", "$ref": "$.display.definitions.addressNameRecipient" },
           { "path": "_fee", "label": "Fee", "format": "amount" },
           { "path": "@.value", "label": "Value", "format": "amount" }
         ],
@@ -274,11 +302,11 @@
         "$id": "claimMessage",
         "intent": "Claim Message",
         "fields": [
-          { "path": "_from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
-          { "path": "_to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_from", "$ref": "$.display.definitions.addressNameSender" },
+          { "path": "_to", "$ref": "$.display.definitions.addressNameRecipient" },
           { "path": "_fee", "label": "Fee", "format": "amount" },
           { "path": "_value", "label": "Value", "format": "amount" },
-          { "path": "_feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
+          { "path": "_feeRecipient", "$ref": "$.display.definitions.addressNameFeeRecipient" },
           { "path": "_nonce", "label": "Nonce", "format": "raw" }
         ],
         "required": ["_from", "_to", "_fee", "_value", "_feeRecipient", "_nonce"],
@@ -288,11 +316,11 @@
         "$id": "claimMessageWithProof",
         "intent": "Claim Message With Proof",
         "fields": [
-          { "path": "_params.from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
-          { "path": "_params.to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_params.from", "$ref": "$.display.definitions.addressNameSender" },
+          { "path": "_params.to", "$ref": "$.display.definitions.addressNameRecipient" },
           { "path": "_params.fee", "label": "Fee", "format": "amount" },
           { "path": "_params.value", "label": "Value", "format": "amount" },
-          { "path": "_params.feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
+          { "path": "_params.feeRecipient", "$ref": "$.display.definitions.addressNameFeeRecipient" },
           { "path": "_params.messageNumber", "label": "Message Number", "format": "raw" }
         ],
         "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_params.feeRecipient"],
@@ -302,12 +330,12 @@
         "$id": "claimProofAndWithdrawLST",
         "intent": "Claim and Withdraw LST",
         "fields": [
-          { "path": "_params.from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
-          { "path": "_params.to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_params.from", "$ref": "$.display.definitions.addressNameSender" },
+          { "path": "_params.to", "$ref": "$.display.definitions.addressNameRecipient" },
           { "path": "_params.fee", "label": "Fee", "format": "amount" },
           { "path": "_params.value", "label": "Value", "format": "amount" },
-          { "path": "_params.feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
-          { "path": "_yieldProvider", "label": "Yield Provider", "$ref": "$.display.definitions.addressNameContractLocal" }
+          { "path": "_params.feeRecipient", "$ref": "$.display.definitions.addressNameFeeRecipient" },
+          { "path": "_yieldProvider", "$ref": "$.display.definitions.addressNameYieldProvider" }
         ],
         "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_yieldProvider"],
         "excluded": ["_params.proof", "_params.leafIndex", "_params.merkleRoot", "_params.data", "_params.messageNumber"]
@@ -353,7 +381,7 @@
         "$id": "setVerifierAddress",
         "intent": "Set Verifier",
         "fields": [
-          { "path": "_newVerifierAddress", "label": "Verifier Address", "$ref": "$.display.definitions.addressNameContractLocal" },
+          { "path": "_newVerifierAddress", "$ref": "$.display.definitions.addressNameVerifierAddress" },
           { "path": "_proofType", "label": "Proof Type", "format": "raw" }
         ],
         "required": ["_newVerifierAddress", "_proofType"],
@@ -373,7 +401,7 @@
         "intent": "Grant Role",
         "fields": [
           { "path": "role", "label": "Role", "format": "raw" },
-          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
+          { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
         "required": ["role", "account"],
         "excluded": []
@@ -383,7 +411,7 @@
         "intent": "Revoke Role",
         "fields": [
           { "path": "role", "label": "Role", "format": "raw" },
-          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
+          { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
         "required": ["role", "account"],
         "excluded": []
@@ -393,7 +421,7 @@
         "intent": "Renounce Role",
         "fields": [
           { "path": "_role", "label": "Role", "format": "raw" },
-          { "path": "_account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
+          { "path": "_account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
         "required": ["_role", "_account"],
         "excluded": []
@@ -427,7 +455,7 @@
         "$id": "setYieldManager",
         "intent": "Set Yield Manager",
         "fields": [
-          { "path": "_newYieldManager", "label": "Yield Manager", "$ref": "$.display.definitions.addressNameContractLocal" }
+          { "path": "_newYieldManager", "$ref": "$.display.definitions.addressNameYieldManager" }
         ],
         "required": ["_newYieldManager"],
         "excluded": []
@@ -437,7 +465,7 @@
         "intent": "Report Native Yield",
         "fields": [
           { "path": "_amount", "label": "Amount", "format": "amount" },
-          { "path": "_l2YieldRecipient", "label": "L2 Yield Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
+          { "path": "_l2YieldRecipient", "$ref": "$.display.definitions.addressNameL2YieldRecipient" }
         ],
         "required": ["_amount", "_l2YieldRecipient"],
         "excluded": []
