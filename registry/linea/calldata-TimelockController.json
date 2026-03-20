@@ -352,15 +352,6 @@
     "info": {
       "url": "https://linea.build",
       "legalName": "Linea"
-    },
-    "enums": {
-      "timelockRoles": {
-        "0x0000000000000000000000000000000000000000000000000000000000000000": "DEFAULT_ADMIN_ROLE",
-        "0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1": "PROPOSER_ROLE",
-        "0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63": "EXECUTOR_ROLE",
-        "0xfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f783": "CANCELLER_ROLE",
-        "0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5": "TIMELOCK_ADMIN_ROLE"
-      }
     }
   },
   "display": {
@@ -403,7 +394,7 @@
             "format": "amount"
           },
           {
-            "path": "payload",
+            "path": "payload.[]",
             "label": "Transaction",
             "format": "calldata",
             "params": {
@@ -431,11 +422,11 @@
         "required": [
           "target",
           "value",
-          "payload",
+          "payload.[]",
           "predecessor",
           "salt"
         ],
-        "excluded": []
+        "excluded": ["payload"]
       },
       "executeBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt)": {
         "$id": "executeBatch",
@@ -474,9 +465,9 @@
           }
         ],
         "required": [
-          "targets",
-          "values",
-          "payloads",
+          "targets.[]",
+          "values.[]",
+          "payloads.[]",
           "predecessor",
           "salt"
         ],
@@ -489,10 +480,7 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "enum",
-            "params": {
-              "$ref": "$.metadata.enums.timelockRoles"
-            }
+            "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
@@ -509,10 +497,7 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "enum",
-            "params": {
-              "$ref": "$.metadata.enums.timelockRoles"
-            }
+            "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
@@ -529,10 +514,7 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "enum",
-            "params": {
-              "$ref": "$.metadata.enums.timelockRoles"
-            }
+            "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
         ],
@@ -553,7 +535,7 @@
             "format": "amount"
           },
           {
-            "path": "data",
+            "path": "data.[]",
             "label": "Transaction",
             "format": "calldata",
             "params": {
@@ -581,12 +563,12 @@
         "required": [
           "target",
           "value",
-          "data",
+          "data.[]",
           "predecessor",
           "salt",
           "delay"
         ],
-        "excluded": []
+        "excluded": ["data"]
       },
       "scheduleBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "scheduleBatch",
@@ -625,9 +607,9 @@
           }
         ],
         "required": [
-          "targets",
-          "values",
-          "payloads",
+          "targets.[]",
+          "values.[]",
+          "payloads.[]",
           "predecessor",
           "salt",
           "delay"
