@@ -352,6 +352,15 @@
     "info": {
       "url": "https://linea.build",
       "legalName": "Linea"
+    },
+    "enums": {
+      "timelockRoles": {
+        "0x0000000000000000000000000000000000000000000000000000000000000000": "DEFAULT_ADMIN_ROLE",
+        "0xb09aa5aeb3702cfd50b6b62bc4532604938f21248a27a1d5ca736082b6819cc1": "PROPOSER_ROLE",
+        "0xd8aa0f3194971a2a116679f7c2090f6939c8d4e01a2a8d7e41d55e5351469e63": "EXECUTOR_ROLE",
+        "0xfd643c72710c63c0180259aba6b2d05451e3591a24e58b62239378085726f783": "CANCELLER_ROLE",
+        "0x5f58e3a2316349923ce3780f8d587db2d72378aed66a8261c916544fa6846ca5": "TIMELOCK_ADMIN_ROLE"
+      }
     }
   },
   "display": {
@@ -368,7 +377,8 @@
         ],
         "required": [
           "id"
-        ]
+        ],
+        "excluded": []
       },
       "execute(address target, uint256 value, bytes payload, bytes32 predecessor, bytes32 salt)": {
         "$id": "execute",
@@ -401,7 +411,8 @@
             "format": "calldata",
             "params": {
               "calleePath": "target",
-              "amountPath": "value"
+              "amountPath": "value",
+              "spenderPath": "@.to"
             }
           },
           {
@@ -423,21 +434,45 @@
         "required": [
           "target",
           "value",
+          "payload",
           "predecessor",
           "salt"
-        ]
+        ],
+        "excluded": []
       },
       "executeBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt)": {
         "$id": "executeBatch",
         "intent": "Execute timelock batch",
         "fields": [
           {
+            "path": "targets.[]",
+            "label": "Target",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
+          },
+          {
+            "path": "values.[]",
+            "label": "Value",
+            "format": "amount"
+          },
+          {
             "path": "payloads.[]",
             "label": "Transaction",
             "format": "calldata",
             "params": {
               "calleePath": "targets.[]",
-              "amountPath": "values.[]"
+              "amountPath": "values.[]",
+              "spenderPath": "@.to"
             }
           },
           {
@@ -462,7 +497,8 @@
           "payloads",
           "predecessor",
           "salt"
-        ]
+        ],
+        "excluded": []
       },
       "grantRole(bytes32 role, address account)": {
         "$id": "grantRole",
@@ -471,7 +507,10 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "raw"
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.timelockRoles"
+            }
           },
           {
             "path": "account",
@@ -493,7 +532,8 @@
         "required": [
           "role",
           "account"
-        ]
+        ],
+        "excluded": []
       },
       "revokeRole(bytes32 role, address account)": {
         "$id": "revokeRole",
@@ -502,7 +542,10 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "raw"
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.timelockRoles"
+            }
           },
           {
             "path": "account",
@@ -524,7 +567,8 @@
         "required": [
           "role",
           "account"
-        ]
+        ],
+        "excluded": []
       },
       "renounceRole(bytes32 role, address account)": {
         "$id": "renounceRole",
@@ -533,7 +577,10 @@
           {
             "path": "role",
             "label": "Role",
-            "format": "raw"
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.timelockRoles"
+            }
           },
           {
             "path": "account",
@@ -554,7 +601,8 @@
         "required": [
           "role",
           "account"
-        ]
+        ],
+        "excluded": []
       },
       "schedule(address target, uint256 value, bytes data, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "schedule",
@@ -587,7 +635,8 @@
             "format": "calldata",
             "params": {
               "calleePath": "target",
-              "amountPath": "value"
+              "amountPath": "value",
+              "spenderPath": "@.to"
             }
           },
           {
@@ -603,28 +652,52 @@
           {
             "path": "delay",
             "label": "Delay",
-            "format": "raw"
+            "format": "duration"
           }
         ],
         "required": [
           "target",
           "value",
+          "data",
           "predecessor",
           "salt",
           "delay"
-        ]
+        ],
+        "excluded": []
       },
       "scheduleBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "scheduleBatch",
         "intent": "Schedule timelock batch",
         "fields": [
           {
+            "path": "targets.[]",
+            "label": "Target",
+            "format": "addressName",
+            "params": {
+              "types": [
+                "eoa",
+                "wallet",
+                "contract"
+              ],
+              "sources": [
+                "local",
+                "ens"
+              ]
+            }
+          },
+          {
+            "path": "values.[]",
+            "label": "Value",
+            "format": "amount"
+          },
+          {
             "path": "payloads.[]",
             "label": "Transaction",
             "format": "calldata",
             "params": {
               "calleePath": "targets.[]",
-              "amountPath": "values.[]"
+              "amountPath": "values.[]",
+              "spenderPath": "@.to"
             }
           },
           {
@@ -640,7 +713,7 @@
           {
             "path": "delay",
             "label": "Delay",
-            "format": "raw"
+            "format": "duration"
           }
         ],
         "required": [
@@ -650,7 +723,8 @@
           "predecessor",
           "salt",
           "delay"
-        ]
+        ],
+        "excluded": []
       },
       "updateDelay(uint256 newDelay)": {
         "$id": "updateDelay",
@@ -659,12 +733,13 @@
           {
             "path": "newDelay",
             "label": "New delay",
-            "format": "raw"
+            "format": "duration"
           }
         ],
         "required": [
           "newDelay"
-        ]
+        ],
+        "excluded": []
       }
     }
   }
