@@ -425,9 +425,6 @@
           "value",
           "predecessor",
           "salt"
-        ],
-        "excluded": [
-          "#.payload.[]"
         ]
       },
       "executeBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt)": {
@@ -465,10 +462,6 @@
           "payloads",
           "predecessor",
           "salt"
-        ],
-        "excluded": [
-          "#.targets.[]",
-          "#.values.[]"
         ]
       },
       "grantRole(bytes32 role, address account)": {
@@ -619,9 +612,6 @@
           "predecessor",
           "salt",
           "delay"
-        ],
-        "excluded": [
-          "#.data.[]"
         ]
       },
       "scheduleBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt, uint256 delay)": {
@@ -660,10 +650,6 @@
           "predecessor",
           "salt",
           "delay"
-        ],
-        "excluded": [
-          "#.targets.[]",
-          "#.values.[]"
         ]
       },
       "updateDelay(uint256 newDelay)": {
