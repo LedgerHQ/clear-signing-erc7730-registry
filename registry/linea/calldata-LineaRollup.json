@@ -224,20 +224,46 @@
   },
   "metadata": {
     "owner": "Linea",
-    "info": { "url": "https://linea.build", "legalName": "Linea" }
+    "info": { "url": "https://linea.build", "legalName": "Linea" },
+    "enums": {
+      "pauseType": {
+        "1": "General",
+        "2": "L1 to L2",
+        "3": "L2 to L1",
+        "4": "Blob submission",
+        "5": "Calldata submission",
+        "6": "Finalization",
+        "7": "Initiate token bridging",
+        "8": "Complete token bridging",
+        "9": "Native yield staking",
+        "10": "Native yield unstaking",
+        "11": "Native yield permissionless actions",
+        "12": "Native yield reporting",
+        "13": "State data submission"
+      }
+    }
   },
   "display": {
+    "definitions": {
+      "addressNameEoaWalletContractEns": {
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+      },
+      "addressNameEoaWalletEns": {
+        "format": "addressName",
+        "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
+      },
+      "addressNameContractLocal": {
+        "format": "addressName",
+        "params": { "types": ["contract"], "sources": ["local"] }
+      }
+    },
     "formats": {
       "sendMessage(address _to, uint256 _fee, bytes _calldata)": {
         "$id": "sendMessage",
         "intent": "Send Message to L2",
         "fields": [
-          {
-            "path": "_to",
-            "label": "Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "_to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           { "path": "_fee", "label": "Fee", "format": "amount" },
           { "path": "@.value", "label": "Value", "format": "amount" }
         ],
@@ -248,26 +274,11 @@
         "$id": "claimMessage",
         "intent": "Claim Message",
         "fields": [
-          {
-            "path": "_from",
-            "label": "Sender",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "_to",
-            "label": "Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "_from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           { "path": "_fee", "label": "Fee", "format": "amount" },
           { "path": "_value", "label": "Value", "format": "amount" },
-          {
-            "path": "_feeRecipient",
-            "label": "Fee Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
-          },
+          { "path": "_feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
           { "path": "_nonce", "label": "Nonce", "format": "raw" }
         ],
         "required": ["_from", "_to", "_fee", "_value", "_feeRecipient", "_nonce"],
@@ -277,26 +288,11 @@
         "$id": "claimMessageWithProof",
         "intent": "Claim Message With Proof",
         "fields": [
-          {
-            "path": "_params.from",
-            "label": "Sender",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "_params.to",
-            "label": "Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "_params.from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_params.to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           { "path": "_params.fee", "label": "Fee", "format": "amount" },
           { "path": "_params.value", "label": "Value", "format": "amount" },
-          {
-            "path": "_params.feeRecipient",
-            "label": "Fee Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
-          },
+          { "path": "_params.feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
           { "path": "_params.messageNumber", "label": "Message Number", "format": "raw" }
         ],
         "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_params.feeRecipient"],
@@ -306,32 +302,12 @@
         "$id": "claimProofAndWithdrawLST",
         "intent": "Claim and Withdraw LST",
         "fields": [
-          {
-            "path": "_params.from",
-            "label": "Sender",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "_params.to",
-            "label": "Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          },
+          { "path": "_params.from", "label": "Sender", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
+          { "path": "_params.to", "label": "Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" },
           { "path": "_params.fee", "label": "Fee", "format": "amount" },
           { "path": "_params.value", "label": "Value", "format": "amount" },
-          {
-            "path": "_params.feeRecipient",
-            "label": "Fee Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
-          },
-          {
-            "path": "_yieldProvider",
-            "label": "Yield Provider",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local"] }
-          }
+          { "path": "_params.feeRecipient", "label": "Fee Recipient", "$ref": "$.display.definitions.addressNameEoaWalletEns" },
+          { "path": "_yieldProvider", "label": "Yield Provider", "$ref": "$.display.definitions.addressNameContractLocal" }
         ],
         "required": ["_params.from", "_params.to", "_params.fee", "_params.value", "_yieldProvider"],
         "excluded": ["_params.proof", "_params.leafIndex", "_params.merkleRoot", "_params.data", "_params.messageNumber"]
@@ -342,37 +318,46 @@
         "fields": [
           { "path": "@.value", "label": "Amount", "format": "amount" }
         ],
-        "required": []
+        "required": [],
+        "excluded": []
       },
       "pauseByType(uint8 _pauseType)": {
         "$id": "pauseByType",
         "intent": "Pause",
         "fields": [
-          { "path": "_pauseType", "label": "Pause Type", "format": "raw" }
+          {
+            "path": "_pauseType",
+            "label": "Pause Type",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.pauseType" }
+          }
         ],
-        "required": ["_pauseType"]
+        "required": ["_pauseType"],
+        "excluded": []
       },
       "unPauseByType(uint8 _pauseType)": {
         "$id": "unPauseByType",
         "intent": "Unpause",
         "fields": [
-          { "path": "_pauseType", "label": "Pause Type", "format": "raw" }
+          {
+            "path": "_pauseType",
+            "label": "Pause Type",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.pauseType" }
+          }
         ],
-        "required": ["_pauseType"]
+        "required": ["_pauseType"],
+        "excluded": []
       },
       "setVerifierAddress(address _newVerifierAddress, uint256 _proofType)": {
         "$id": "setVerifierAddress",
         "intent": "Set Verifier",
         "fields": [
-          {
-            "path": "_newVerifierAddress",
-            "label": "Verifier Address",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local"] }
-          },
+          { "path": "_newVerifierAddress", "label": "Verifier Address", "$ref": "$.display.definitions.addressNameContractLocal" },
           { "path": "_proofType", "label": "Proof Type", "format": "raw" }
         ],
-        "required": ["_newVerifierAddress", "_proofType"]
+        "required": ["_newVerifierAddress", "_proofType"],
+        "excluded": []
       },
       "resetRateLimitAmount(uint256 _amount)": {
         "$id": "resetRateLimitAmount",
@@ -380,49 +365,38 @@
         "fields": [
           { "path": "_amount", "label": "New Limit", "format": "amount" }
         ],
-        "required": ["_amount"]
+        "required": ["_amount"],
+        "excluded": []
       },
       "grantRole(bytes32 role, address account)": {
         "$id": "grantRole",
         "intent": "Grant Role",
         "fields": [
           { "path": "role", "label": "Role", "format": "raw" },
-          {
-            "path": "account",
-            "label": "Account",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          }
+          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
-        "required": ["role", "account"]
+        "required": ["role", "account"],
+        "excluded": []
       },
       "revokeRole(bytes32 role, address account)": {
         "$id": "revokeRole",
         "intent": "Revoke Role",
         "fields": [
           { "path": "role", "label": "Role", "format": "raw" },
-          {
-            "path": "account",
-            "label": "Account",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          }
+          { "path": "account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
-        "required": ["role", "account"]
+        "required": ["role", "account"],
+        "excluded": []
       },
       "renounceRole(bytes32 _role, address _account)": {
         "$id": "renounceRole",
         "intent": "Renounce Role",
         "fields": [
           { "path": "_role", "label": "Role", "format": "raw" },
-          {
-            "path": "_account",
-            "label": "Account",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet"], "sources": ["local", "ens"] }
-          }
+          { "path": "_account", "label": "Account", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
-        "required": ["_role", "_account"]
+        "required": ["_role", "_account"],
+        "excluded": []
       },
       "setFallbackOperator(uint256 _messageNumber, bytes32 _rollingHash, uint256 _lastFinalizedTimestamp)": {
         "$id": "setFallbackOperator",
@@ -437,7 +411,8 @@
             "params": { "encoding": "timestamp" }
           }
         ],
-        "required": ["_messageNumber", "_rollingHash", "_lastFinalizedTimestamp"]
+        "required": ["_messageNumber", "_rollingHash", "_lastFinalizedTimestamp"],
+        "excluded": []
       },
       "unsetVerifierAddress(uint256 _proofType)": {
         "$id": "unsetVerifierAddress",
@@ -445,40 +420,34 @@
         "fields": [
           { "path": "_proofType", "label": "Proof Type", "format": "raw" }
         ],
-        "required": ["_proofType"]
+        "required": ["_proofType"],
+        "excluded": []
       },
       "setYieldManager(address _newYieldManager)": {
         "$id": "setYieldManager",
         "intent": "Set Yield Manager",
         "fields": [
-          {
-            "path": "_newYieldManager",
-            "label": "Yield Manager",
-            "format": "addressName",
-            "params": { "types": ["contract"], "sources": ["local"] }
-          }
+          { "path": "_newYieldManager", "label": "Yield Manager", "$ref": "$.display.definitions.addressNameContractLocal" }
         ],
-        "required": ["_newYieldManager"]
+        "required": ["_newYieldManager"],
+        "excluded": []
       },
       "reportNativeYield(uint256 _amount, address _l2YieldRecipient)": {
         "$id": "reportNativeYield",
         "intent": "Report Native Yield",
         "fields": [
           { "path": "_amount", "label": "Amount", "format": "amount" },
-          {
-            "path": "_l2YieldRecipient",
-            "label": "L2 Yield Recipient",
-            "format": "addressName",
-            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
-          }
+          { "path": "_l2YieldRecipient", "label": "L2 Yield Recipient", "$ref": "$.display.definitions.addressNameEoaWalletContractEns" }
         ],
-        "required": ["_amount", "_l2YieldRecipient"]
+        "required": ["_amount", "_l2YieldRecipient"],
+        "excluded": []
       },
       "resetAmountUsedInPeriod()": {
         "$id": "resetAmountUsedInPeriod",
         "intent": "Reset Period Usage",
         "fields": [],
-        "required": []
+        "required": [],
+        "excluded": []
       },
       "transferFundsForNativeYield(uint256 _amount)": {
         "$id": "transferFundsForYield",
@@ -486,25 +455,38 @@
         "fields": [
           { "path": "_amount", "label": "Amount", "format": "amount" }
         ],
-        "required": ["_amount"]
+        "required": ["_amount"],
+        "excluded": []
       },
       "updatePauseTypeRole(uint8 _pauseType, bytes32 _newRole)": {
         "$id": "updatePauseTypeRole",
         "intent": "Update Pause Role",
         "fields": [
-          { "path": "_pauseType", "label": "Pause Type", "format": "raw" },
+          {
+            "path": "_pauseType",
+            "label": "Pause Type",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.pauseType" }
+          },
           { "path": "_newRole", "label": "New Role", "format": "raw" }
         ],
-        "required": ["_pauseType", "_newRole"]
+        "required": ["_pauseType", "_newRole"],
+        "excluded": []
       },
       "updateUnpauseTypeRole(uint8 _pauseType, bytes32 _newRole)": {
         "$id": "updateUnpauseTypeRole",
         "intent": "Update Unpause Role",
         "fields": [
-          { "path": "_pauseType", "label": "Pause Type", "format": "raw" },
+          {
+            "path": "_pauseType",
+            "label": "Pause Type",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.pauseType" }
+          },
           { "path": "_newRole", "label": "New Role", "format": "raw" }
         ],
-        "required": ["_pauseType", "_newRole"]
+        "required": ["_pauseType", "_newRole"],
+        "excluded": []
       }
     }
   }
