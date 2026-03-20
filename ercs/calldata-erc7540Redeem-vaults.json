@@ -24,25 +24,12 @@
         {
           "name": "requestRedeem",
           "type": "function",
-          "inputs": [
-            { "name": "shares", "type": "uint256" },
-            {
-              "name": "controller",
-              "type": "address"
-            },
-            { "name": "owner", "type": "address" }
-          ]
+          "inputs": [{ "name": "shares", "type": "uint256" }, { "name": "controller", "type": "address" }, { "name": "owner", "type": "address" }]
         },
         {
           "name": "setOperator",
           "type": "function",
-          "inputs": [
-            {
-              "name": "operator",
-              "type": "address"
-            },
-            { "name": "approved", "type": "bool" }
-          ],
+          "inputs": [{ "name": "operator", "type": "address" }, { "name": "approved", "type": "bool" }],
           "stateMutability": "nonpayable",
           "outputs": [{ "name": "success", "type": "bool" }]
         }
@@ -61,12 +48,7 @@
             "format": "tokenAmount",
             "params": { "tokenPath": "@.to" }
           },
-          {
-            "path": "receiver",
-            "label": "Send assets to",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "path": "receiver", "label": "Send assets to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           {
             "path": "controller",
             "label": "Controller of the request",
@@ -79,23 +61,14 @@
       "withdraw(uint256 assets, address receiver, address controller)": {
         "intent": "Withdraw",
         "fields": [
-          {
-            "label": "Claim withdrawal",
-            "format": "raw",
-            "value": "$.metadata.constants.underlyingTicker"
-          },
+          { "label": "Claim withdrawal", "format": "raw", "value": "$.metadata.constants.underlyingTicker" },
           {
             "path": "assets",
             "label": "Amount of assets to receive",
             "format": "tokenAmount",
             "params": { "token": "$.metadata.constants.underlyingToken" }
           },
-          {
-            "path": "receiver",
-            "label": "Send assets to",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "path": "receiver", "label": "Send assets to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           {
             "path": "controller",
             "label": "Controller of the request",
@@ -120,24 +93,14 @@
             "format": "addressName",
             "params": { "types": ["eoa", "contract"] }
           },
-          {
-            "path": "owner",
-            "label": "Owner of the shares",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          }
+          { "path": "owner", "label": "Owner of the shares", "format": "addressName", "params": { "types": ["eoa", "contract"] } }
         ],
         "required": ["shares", "controller", "owner"]
       },
       "setOperator(address operator, bool approved)": {
         "intent": "Set operator",
         "fields": [
-          {
-            "path": "operator",
-            "label": "Operator",
-            "format": "addressName",
-            "params": { "types": ["eoa", "contract"] }
-          },
+          { "path": "operator", "label": "Operator", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "approved", "label": "Approved", "format": "raw" }
         ],
         "required": ["operator", "approved"]

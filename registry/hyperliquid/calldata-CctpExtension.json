@@ -48,15 +48,7 @@
     "owner": "Circle",
     "info": { "legalName": "Circle Internet Financial", "url": "https://www.circle.com/" },
     "constants": { "usdcToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831" },
-    "enums": {
-      "cctpDomains": {
-        "19": "HyperEVM"
-      },
-      "destinationDex": {
-        "0": "Perp",
-        "255": "Spot"
-      }
-    }
+    "enums": { "cctpDomains": { "19": "HyperEVM" }, "destinationDex": { "0": "Perp", "255": "Spot" } }
   },
   "display": {
     "formats": {
@@ -69,17 +61,42 @@
             "format": "tokenAmount",
             "params": { "token": "$.metadata.constants.usdcToken" }
           },
-          { "path": "_depositForBurnData.destinationDomain", "label": "Destination chain", "format": "enum", "params": { "$ref": "$.metadata.enums.cctpDomains" } },
-          { "path": "_depositForBurnData.mintRecipient.[-20:]", "label": "Mint recipient", "format": "addressName", "params": { "types": ["contract"], "sources": ["local"] } },
-          { "path": "_depositForBurnData.destinationCaller.[-20:]", "label": "Destination caller", "format": "addressName", "params": { "types": ["contract"], "sources": ["local"] } },
+          {
+            "path": "_depositForBurnData.destinationDomain",
+            "label": "Destination chain",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.cctpDomains" }
+          },
+          {
+            "path": "_depositForBurnData.mintRecipient.[-20:]",
+            "label": "Mint recipient",
+            "format": "addressName",
+            "params": { "types": ["contract"], "sources": ["local"] }
+          },
+          {
+            "path": "_depositForBurnData.destinationCaller.[-20:]",
+            "label": "Destination caller",
+            "format": "addressName",
+            "params": { "types": ["contract"], "sources": ["local"] }
+          },
           {
             "path": "_depositForBurnData.maxFee",
             "label": "Max fee",
             "format": "tokenAmount",
             "params": { "token": "$.metadata.constants.usdcToken" }
           },
-          { "path": "_depositForBurnData.hookData.[32:52]", "label": "HyperEVM recipient", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
-          { "path": "_depositForBurnData.hookData.[52:53]", "label": "Destination DEX", "format": "enum", "params": { "$ref": "$.metadata.enums.destinationDex" } }
+          {
+            "path": "_depositForBurnData.hookData.[32:52]",
+            "label": "HyperEVM recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "_depositForBurnData.hookData.[52:53]",
+            "label": "Destination DEX",
+            "format": "enum",
+            "params": { "$ref": "$.metadata.enums.destinationDex" }
+          }
         ],
         "required": [
           "_depositForBurnData.amount",
