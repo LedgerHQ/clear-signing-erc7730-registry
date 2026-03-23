@@ -394,7 +394,7 @@
             "format": "amount"
           },
           {
-            "path": "payload.[]",
+            "path": "payload",
             "label": "Transaction",
             "format": "calldata",
             "params": {
@@ -422,11 +422,11 @@
         "required": [
           "target",
           "value",
-          "payload.[]",
+          "payload",
           "predecessor",
           "salt"
         ],
-        "excluded": ["payload"]
+        "excluded": []
       },
       "executeBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt)": {
         "$id": "executeBatch",
@@ -535,7 +535,7 @@
             "format": "amount"
           },
           {
-            "path": "data.[]",
+            "path": "data",
             "label": "Transaction",
             "format": "calldata",
             "params": {
@@ -563,12 +563,12 @@
         "required": [
           "target",
           "value",
-          "data.[]",
+          "data",
           "predecessor",
           "salt",
           "delay"
         ],
-        "excluded": ["data"]
+        "excluded": []
       },
       "scheduleBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "scheduleBatch",
