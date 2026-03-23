@@ -73,7 +73,8 @@
         }
       ],
       "deployments": [
-        { "chainId": 1, "address": "0x892bb7EeD71efB060ab90140e7825d8127991DD3" }
+        { "chainId": 1, "address": "0x892bb7EeD71efB060ab90140e7825d8127991DD3" },
+        { "chainId": 1, "address": "0xb8f5524d73f549cf14a0587a3c7810723f9c0051" }
       ]
     }
   }
