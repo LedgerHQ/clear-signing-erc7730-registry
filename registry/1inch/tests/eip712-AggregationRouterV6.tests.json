@@ -2,7 +2,7 @@
   "$schema": "../../../specs/erc7730-tests.schema.json",
   "tests": [
     {
-      "description": "1inch limit order - swap DAI for USDC",
+      "description": "1inch Order",
       "data": {
         "types": {
           "EIP712Domain": [
@@ -11,7 +11,7 @@
             { "name": "chainId", "type": "uint256" },
             { "name": "verifyingContract", "type": "address" }
           ],
-          "OrderStructure": [
+          "Order": [
             { "name": "salt", "type": "uint256" },
             { "name": "maker", "type": "address" },
             { "name": "receiver", "type": "address" },
@@ -22,28 +22,33 @@
             { "name": "makerTraits", "type": "uint256" }
           ]
         },
-        "primaryType": "OrderStructure",
-        "domain": { "name": "1inch", "version": "4", "chainId": 1, "verifyingContract": "0x119c71d3bbac22029622cbaec24854d3d32d2828" },
+        "primaryType": "Order",
+        "domain": {
+          "name": "1inch Aggregation Router",
+          "version": "6",
+          "chainId": 1,
+          "verifyingContract": "0x111111125421cA6dc452d289314280a0f8842A65"
+        },
         "message": {
-          "salt": "12345678901234567890123456789012345678901234567890123456789012345678",
-          "maker": "0x1234567890123456789012345678901234567890",
-          "receiver": "0x0987654321098765432109876543210987654321",
-          "makerAsset": "0x6b175474e89094c44da98b954eedeac495271d0f",
-          "takerAsset": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-          "makingAmount": "1000000000000000000000",
-          "takingAmount": "999000000",
-          "makerTraits": "0"
+          "salt": "1777600000123",
+          "maker": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+          "receiver": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+          "makerAsset": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "takerAsset": "0xC02aaA39b223FE8D0A0E5C4F27eAD9083C756Cc2",
+          "makingAmount": "2500000000",
+          "takingAmount": "1000000000000000000",
+          "makerTraits": "562949953421312"
         }
       },
       "expectedTexts": [
         "From",
-        "0x12345678901234567 890123456789012345 67890",
+        "0xd8dA6BF26964aF9D 7eEd9e03E53415D37a A96045",
         "To",
-        "0x0987654321098765 432109876543210987 654321",
+        "0xE592427A0AEce92D e3Edee1F18E0157C058 61564",
         "Send",
-        "1000 DAI",
+        "2500 USDC",
         "Receive minimum",
-        "999 USDC"
+        "1 WETH"
       ]
     }
   ]
