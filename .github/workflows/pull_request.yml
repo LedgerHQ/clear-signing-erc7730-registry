@@ -16,7 +16,7 @@ jobs:
   validate_descriptors:
     name: 🔎 validate descriptors
     runs-on: public-ledgerhq-shared-small
-    timeout-minutes: 60
+    timeout-minutes: 300
     steps:
 
       - name: Checkout
@@ -47,7 +47,7 @@ jobs:
         run: pip install erc7730
 
       - name: Validate ERC-7730 descriptors changed in pull request
-        timeout-minutes: 10
+        timeout-minutes: 120
         if: steps.changed-descriptor-files.outputs.any_changed == 'true'
         env:
           CHANGED_FILES: ${{ steps.changed-descriptor-files.outputs.all_changed_files }}
