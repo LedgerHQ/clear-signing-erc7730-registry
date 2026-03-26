@@ -1,100 +1,29 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
+  "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
     "eip712": {
       "deployments": [
-        {
-          "chainId": 1,
-          "address": "0x0000000000000000000000000000000000000000"
-        },
-        {
-          "chainId": 42161,
-          "address": "0x0000000000000000000000000000000000000000"
-        }
+        { "chainId": 1, "address": "0x0000000000000000000000000000000000000000" },
+        { "chainId": 42161, "address": "0x0000000000000000000000000000000000000000" }
       ],
-      "domain": {
-        "name": "HyperliquidSignTransaction",
-        "version": "1"
-      },
-      "schemas": [
-        {
-          "types": {
-            "EIP712Domain": [
-              {
-                "name": "name",
-                "type": "string"
-              },
-              {
-                "name": "version",
-                "type": "string"
-              },
-              {
-                "name": "chainId",
-                "type": "uint256"
-              },
-              {
-                "name": "verifyingContract",
-                "type": "address"
-              }
-            ],
-            "HyperliquidTransaction:Withdraw": [
-              {
-                "name": "hyperliquidChain",
-                "type": "string"
-              },
-              {
-                "name": "destination",
-                "type": "string"
-              },
-              {
-                "name": "amount",
-                "type": "string"
-              },
-              {
-                "name": "time",
-                "type": "uint64"
-              }
-            ]
-          },
-          "primaryType": "HyperliquidTransaction:Withdraw"
-        }
-      ]
+      "domain": { "name": "HyperliquidSignTransaction", "version": "1" }
     }
   },
   "metadata": {
-    "owner": "Hyperliquid",
-    "info": {
-      "legalName": "Hyperliquid Labs",
-      "url": "https://hyperliquid.xyz"
-    },
+    "owner": "Hyperliquid Labs",
+    "info": { "url": "https://hyperliquid.xyz" },
     "constants": { "usdcToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831" }
   },
   "display": {
     "formats": {
-      "HyperliquidTransaction:Withdraw": {
+      "HyperliquidTransaction:Withdraw(string hyperliquidChain,string destination,string amount,uint64 time)": {
         "intent": "Withdraw from Hyperliquid",
-        "required": [
-          "destination",
-          "amount"
-        ],
         "fields": [
-          {
-            "path": "destination",
-            "label": "Recipient",
-            "format": "raw"
-          },
-          {
-            "path": "amount",
-            "label": "USDC amount",
-            "format": "raw"
-          },
-          {
-            "path": "hyperliquidChain",
-            "label": "Chain",
-            "format": "raw"
-          }
-        ],
-        "excluded": ["time"]
+          { "path": "destination", "label": "Recipient", "format": "raw", "visible": "always" },
+          { "path": "amount", "label": "USDC amount", "format": "raw", "visible": "always" },
+          { "path": "hyperliquidChain", "label": "Chain", "format": "raw" },
+          { "label": "Time", "path": "time", "visible": "never" }
+        ]
       }
     }
   }
