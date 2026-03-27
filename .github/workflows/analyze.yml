@@ -208,6 +208,9 @@ jobs:
       - name: Add reports to job summary
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
+          MAX_KB=900
+          SUMMARY=$(mktemp)
+
           {
             echo "## 📊 ERC-7730 Analysis Results"
             echo ""
@@ -220,15 +223,32 @@ jobs:
               [ -f "$f" ] || continue
               echo "---"
               echo ""
-              # Remove base64 <img> tags to stay under the 1024 KB GITHUB_STEP_SUMMARY limit
-              sed -E '/<img src="data:image\/[^"]*"/d' "$f"
+              # Strip any line containing base64 image data (both <img> and markdown ![])
+              grep -v 'data:image/' "$f" || true
               echo ""
             done
 
             echo "---"
             echo ""
             echo "📸 **Screenshots are included in the full reports — download from the Artifacts section below.**"
-          } >> "$GITHUB_STEP_SUMMARY"
+          } > "$SUMMARY"
+
+          # Truncate if still over the limit
+          SIZE_KB=$(( $(wc -c < "$SUMMARY") / 1024 ))
+          if [ "$SIZE_KB" -gt "$MAX_KB" ]; then
+            head -c $(( MAX_KB * 1024 )) "$SUMMARY" > "${SUMMARY}.trunc"
+            {
+              cat "${SUMMARY}.trunc"
+              echo ""
+              echo ""
+              echo "---"
+              echo "⚠️ *Report truncated (${SIZE_KB}KB exceeded ${MAX_KB}KB limit). Download full reports from Artifacts.*"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            cat "$SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          rm -f "$SUMMARY" "${SUMMARY}.trunc"
 
       - name: Post summary to PR
         if: always() && steps.changed-files.outputs.any_changed == 'true'
