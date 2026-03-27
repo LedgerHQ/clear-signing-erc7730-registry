@@ -466,6 +466,9 @@
             "title": "Reference",
             "description": "A reference to a shared definition that should be used as the field formatting definition. The value is the key in the display definitions section, as a path expression $.display.definitions.DEFINITION_NAME. It is used to share definitions between multiple messages / functions.",
             "properties": {
+                "$id": {
+                    "$ref": "#/$definitions/id"
+                },
                 "path": {
                     "$ref": "#/$format/path"
                 },
