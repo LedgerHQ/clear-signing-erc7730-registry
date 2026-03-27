@@ -220,13 +220,14 @@ jobs:
               [ -f "$f" ] || continue
               echo "---"
               echo ""
-              cat "$f"
+              # Remove base64 <img> tags to stay under the 1024 KB GITHUB_STEP_SUMMARY limit
+              sed -E '/<img src="data:image\/[^"]*"/d' "$f"
               echo ""
             done
 
             echo "---"
             echo ""
-            echo "📥 **Full reports available in the Artifacts section at the bottom of this page.**"
+            echo "📸 **Screenshots are included in the full reports — download from the Artifacts section below.**"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Post summary to PR
