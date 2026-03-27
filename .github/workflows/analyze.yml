@@ -2,6 +2,7 @@ name: Analyze
 
 on:
   pull_request:
+    types: [ready_for_review]
     paths:
       - 'registry/**/calldata-*.json'
 
@@ -17,154 +18,166 @@ concurrency:
 
 jobs:
   analyze:
+    name: ERC-7730 Analysis
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.draft == false
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 360
 
     steps:
-      - name: Checkout PR branch
+      - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: Get changed calldata files
+        if: github.event_name != 'workflow_dispatch'
         id: changed-files
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c # v46.0.5
         with:
           files: |
             registry/**/calldata-*.json
 
+      - name: Resolve files to analyze
+        id: resolve-files
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            INPUT="${{ inputs.descriptor }}"
+            if [ -z "$INPUT" ]; then
+              echo "::error::No descriptor provided for manual run."
+              exit 1
+            fi
+            if [ ! -f "$INPUT" ]; then
+              echo "::error::Descriptor not found: $INPUT"
+              exit 1
+            fi
+            echo "files=$INPUT" >> "$GITHUB_OUTPUT"
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+          else
+            FILES="${{ steps.changed-files.outputs.all_changed_files }}"
+            CHANGED="${{ steps.changed-files.outputs.any_changed }}"
+            echo "files=$FILES" >> "$GITHUB_OUTPUT"
+            echo "has_files=$CHANGED" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up uv
+        if: steps.resolve-files.outputs.has_files == 'true'
+        uses: astral-sh/setup-uv@803947b9bd8e9f986429fa0c5a41c367cd732b41 # v7.2.1
+
       - name: Analyze descriptors via API
-        if: steps.changed-files.outputs.any_changed == 'true'
-        id: run-analyzer
+        if: steps.resolve-files.outputs.has_files == 'true'
+        id: analyze
         env:
-          ANALYZER_URL: ${{ vars.ANALYZER_SERVICE_URL }}
+          SERVICE_URL: ${{ vars.ANALYZER_SERVICE_URL }}
         run: |
           set -euo pipefail
 
-          # --- Acquire GitHub OIDC token ---
-          OIDC_TOKEN=$(curl -sSf \
-            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=erc7730-analyzer" \
-            | python3 -c "import sys,json; print(json.load(sys.stdin)['value'])")
+          if [ -z "$SERVICE_URL" ]; then
+            echo "::error::ANALYZER_SERVICE_URL variable is not set. Configure it under Settings → Variables."
+            exit 1
+          fi
+
+          case "$SERVICE_URL" in
+            https://*) ;;
+            http://*)  SERVICE_URL="${SERVICE_URL/http:/https:}" ;;
+            *)         SERVICE_URL="https://${SERVICE_URL}" ;;
+          esac
 
           mkdir -p output
-          HAS_CRITICALS=false
+          TOTAL=0
+          CRITICALS=0
+          FAILURES=0
 
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "::group::Analyzing $file"
+          for file in ${{ steps.resolve-files.outputs.files }}; do
+            echo "::group::📋 Analyzing $file"
+            TOTAL=$((TOTAL + 1))
 
-            python3 - "$file" "$ANALYZER_URL" "$OIDC_TOKEN" <<'PYEOF'
-          import json, os, sys, urllib.request, ssl
+            BASENAME=$(basename "$file" .json)
+            OUTDIR="output/${BASENAME}"
+            mkdir -p "$OUTDIR"
 
-          descriptor_path = sys.argv[1]
-          service_url = sys.argv[2].rstrip("/")
-          token = sys.argv[3]
-
-          with open(descriptor_path) as f:
-              descriptor = json.load(f)
-
-          payload = json.dumps({
-              "descriptor": descriptor,
-              "descriptor_filename": os.path.basename(descriptor_path),
-          }).encode()
-
-          req = urllib.request.Request(
-              f"{service_url}/analyze",
-              data=payload,
-              headers={
-                  "Content-Type": "application/json",
-                  "Authorization": f"Bearer {token}",
-                  "Accept": "text/event-stream",
-              },
-              method="POST",
-          )
-
-          ctx = ssl.create_default_context()
-          report_payload = None
-          error_msg = None
-
-          with urllib.request.urlopen(req, timeout=600, context=ctx) as resp:
-              if resp.status != 200:
-                  print(f"HTTP {resp.status}", file=sys.stderr)
-                  sys.exit(1)
-
-              buf = ""
-              current_event = "message"
-              for raw_line in resp:
-                  line = raw_line.decode("utf-8", errors="replace").rstrip("\r\n")
-
-                  if line.startswith("event:"):
-                      current_event = line[len("event:"):].strip()
-                  elif line.startswith("data:"):
-                      data = line[len("data:"):].strip()
-
-                      if current_event == "log":
-                          print(data, file=sys.stderr)
-                      elif current_event == "status":
-                          print(f"[STATUS] {data}", file=sys.stderr)
-                      elif current_event == "error":
-                          print(f"[ERROR] {data}", file=sys.stderr)
-                          error_msg = data
-                      elif current_event == "report":
-                          try:
-                              report_payload = json.loads(data)
-                          except json.JSONDecodeError:
-                              pass
-
-                      current_event = "message"
-                  elif line == "":
-                      current_event = "message"
-
-          if error_msg:
-              print(f"Service error: {error_msg}", file=sys.stderr)
-              sys.exit(1)
-
-          if not report_payload:
-              print("Stream ended without a report event", file=sys.stderr)
-              sys.exit(1)
-
-          protocol = report_payload.get("protocol", "unknown")
-          out = "output"
-
-          if report_payload.get("summary_report"):
-              path = os.path.join(out, f"FULL_REPORT_{protocol}.md")
-              with open(path, "w") as f:
-                  f.write(report_payload["summary_report"])
-              print(f"Wrote {path}", file=sys.stderr)
-
-          if report_payload.get("criticals_report"):
-              path = os.path.join(out, f"CRITICALS_{protocol}.md")
-              with open(path, "w") as f:
-                  f.write(report_payload["criticals_report"])
-              print(f"Wrote {path}", file=sys.stderr)
-
-          if report_payload.get("results_json"):
-              path = os.path.join(out, f"results_{protocol}.json")
-              with open(path, "w") as f:
-                  json.dump(report_payload["results_json"], f, indent=2, default=str)
-
-          if report_payload.get("has_criticals"):
-              # Signal to the shell wrapper
-              with open(os.environ.get("GITHUB_OUTPUT", "/dev/null"), "a") as gh:
-                  gh.write("file_has_criticals=true\n")
-              sys.exit(1)
-          PYEOF
-
-            EXIT=$?
-            if [ $EXIT -ne 0 ]; then
-              echo "❌ Critical issues found in $file"
-              HAS_CRITICALS=true
+            if uvx --from "erc7730-analyzer @ git+https://github.com/Ledger-Donjon/erc7730-analyzer@main" \
+              erc7730-client \
+                --service-url "$SERVICE_URL" \
+                --descriptor "$file" \
+                --output-dir "$OUTDIR" \
+                --analysis-mode "multi" \
+                --model "gpt-5.4-nano" \
+                --reasoning-effort "high" \
+                --enable-screenshots \
+                --screenshot-device "stax" \
+                --verbose; then
+              echo "✅ No critical issues in $file"
+            else
+              EXIT_CODE=$?
+              if [ $EXIT_CODE -eq 1 ]; then
+                echo "❌ Critical issues found in $file"
+                CRITICALS=$((CRITICALS + 1))
+              else
+                echo "⚠️ Analysis failed for $file (exit code $EXIT_CODE)"
+                FAILURES=$((FAILURES + 1))
+              fi
             fi
 
             echo "::endgroup::"
           done
 
-          echo "has_criticals=$HAS_CRITICALS" >> "$GITHUB_OUTPUT"
-          if [ "$HAS_CRITICALS" = "true" ]; then
-            exit 1
-          fi
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "criticals=$CRITICALS" >> "$GITHUB_OUTPUT"
+          echo "failures=$FAILURES" >> "$GITHUB_OUTPUT"
 
-      - name: Upload analysis reports as artifacts
+      - name: Aggregate results and create annotations
+        if: always() && steps.changed-files.outputs.any_changed == 'true'
+        id: aggregate
+        run: |
+          HAS_CRITICALS=false
+          RESULTS=""
+
+          for status_file in output/*/analysis_status.json; do
+            [ -f "$status_file" ] || continue
+
+            SUBDIR=$(dirname "$status_file")
+            PROTOCOL=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('protocol','unknown'))" "$status_file")
+            STATUS=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('status','unknown'))" "$status_file")
+            HAS_CRIT=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('has_criticals',False))" "$status_file")
+
+            if [ "$HAS_CRIT" = "True" ]; then
+              HAS_CRITICALS=true
+              RESULTS="${RESULTS}❌ **${PROTOCOL}** — Critical issues found\n"
+
+              CRITICALS_MD=$(ls "$SUBDIR"/CRITICALS_*.md 2>/dev/null | head -1)
+              CALLDATA_FILE=$(find registry -name "calldata-*.json" 2>/dev/null | grep -i "$(echo "$PROTOCOL" | tr '_' '-')" | head -1 || true)
+
+              if [ -f "$CRITICALS_MD" ]; then
+                while IFS='|' read -r _ col1 col2 col3 _; do
+                  echo "$col3" | grep -q "🔴" || continue
+                  FUNC=$(echo "$col1" | sed 's/`//g;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                  SEL=$(echo "$col2" | sed 's/`//g;s/^[[:space:]]*//;s/[[:space:]]*$//')
+                  [ -z "$FUNC" ] || [ "$FUNC" = "Function" ] && continue
+                  if [ -n "$CALLDATA_FILE" ]; then
+                    echo "::error file=${CALLDATA_FILE},title=🔴 Critical: ${FUNC} (${SEL})::Review the analysis report for details"
+                  else
+                    echo "::error title=🔴 Critical: ${PROTOCOL} / ${FUNC} (${SEL})::Review the analysis report for details"
+                  fi
+                done < "$CRITICALS_MD"
+              fi
+            elif [ "$STATUS" = "succeeded" ]; then
+              RESULTS="${RESULTS}✅ **${PROTOCOL}** — No critical issues\n"
+            else
+              ERROR=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('error',''))" "$status_file")
+              RESULTS="${RESULTS}⚠️ **${PROTOCOL}** — ${STATUS}: ${ERROR}\n"
+            fi
+          done
+
+          echo "has_criticals=$HAS_CRITICALS" >> "$GITHUB_OUTPUT"
+          {
+            echo "results<<EOFRESULTS"
+            echo -e "$RESULTS"
+            echo "EOFRESULTS"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload analysis reports
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
@@ -172,56 +185,29 @@ jobs:
           path: output/
           retention-days: 30
 
-      - name: Create annotations for critical issues
-        if: always() && steps.changed-files.outputs.any_changed == 'true'
-        run: |
-          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
-
-          if [ -f "$CRITICALS_FILE" ]; then
-            CONTRACT_NAME=$(basename "$CRITICALS_FILE" | sed 's/CRITICALS_\(.*\)_[0-9]*.md/\1/')
-            CALLDATA_FILE=$(find . -name "calldata-${CONTRACT_NAME}.json" 2>/dev/null | head -1)
-
-            while IFS='|' read -r col1 col2 col3 col4 col5; do
-              if [[ "$col4" == *"🔴"* ]]; then
-                FUNCTION=$(echo "$col1" | sed 's/`//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-                SELECTOR=$(echo "$col2" | sed 's/`//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-                ISSUE=$(echo "$col4" | sed 's/🔴 Critical//g' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-
-                if [ -n "$FUNCTION" ] && [ "$FUNCTION" != "Function" ]; then
-                  if [ -n "$CALLDATA_FILE" ]; then
-                    echo "::error file=${CALLDATA_FILE},title=🔴 Critical Issue in ${FUNCTION} (${SELECTOR})::${ISSUE}"
-                  else
-                    echo "::error title=🔴 Critical Issue in ${FUNCTION} (${SELECTOR})::${ISSUE}"
-                  fi
-                fi
-              fi
-            done < "$CRITICALS_FILE"
-
-            echo "::notice title=📊 ERC-7730 Analysis Complete::Critical issues detected. View full report at ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          else
-            echo "::notice title=📊 ERC-7730 Analysis Complete::No critical issues detected."
-          fi
-
       - name: Add reports to job summary
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo "## 📊 ERC-7730 Analysis Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
+          {
+            echo "## 📊 ERC-7730 Analysis Results"
+            echo ""
+            echo "**Descriptors analyzed:** ${{ steps.analyze.outputs.total || '0' }}"
+            echo ""
+            echo -e "${{ steps.aggregate.outputs.results }}"
+            echo ""
 
-          CRITICALS_FILE=$(ls output/CRITICALS_*.md 2>/dev/null | head -1)
-          if [ -f "$CRITICALS_FILE" ]; then
-            echo "### 🔴 Critical Issues Report" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            cat "$CRITICALS_FILE" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ No critical issues found." >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-          fi
+            for f in output/*/CRITICALS_*.md; do
+              [ -f "$f" ] || continue
+              echo "---"
+              echo ""
+              cat "$f"
+              echo ""
+            done
 
-          echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📥 **Full reports available in the Artifacts section at the bottom of this page.**" >> $GITHUB_STEP_SUMMARY
+            echo "---"
+            echo ""
+            echo "📥 **Full reports available in the Artifacts section at the bottom of this page.**"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Post summary to PR
         if: always() && steps.changed-files.outputs.any_changed == 'true'
@@ -230,59 +216,76 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
+            const hasCriticals = '${{ steps.aggregate.outputs.has_criticals }}' === 'true';
+            const total = '${{ steps.analyze.outputs.total }}' || '0';
+            const failures = '${{ steps.analyze.outputs.failures }}' || '0';
+            const results = `${{ steps.aggregate.outputs.results }}`.trim();
 
-            const reportsDir = 'output';
-            if (!fs.existsSync(reportsDir)) {
-              console.log('No reports directory found');
-              return;
+            const marker = '<!-- erc7730-analysis-bot -->';
+            let body = `${marker}\n`;
+            body += `## 🔍 ERC-7730 Analysis Complete\n\n`;
+            body += `📊 **${total} descriptor(s) analyzed**\n\n`;
+
+            if (results) {
+              body += `${results}\n\n`;
             }
 
-            const files = fs.readdirSync(reportsDir).filter(f => f.endsWith('.md'));
+            body += `📥 **[View workflow run & download reports](${context.payload.repository.html_url}/actions/runs/${context.runId})**\n\n`;
 
-            let body = '## 🔍 ERC-7730 Analysis Complete\n\n';
-            body += `📊 **Reports generated:** ${files.length}\n\n`;
-            body += `📥 **[View workflow run](${context.payload.repository.html_url}/actions/runs/${context.runId})** (download reports from Artifacts section)\n\n`;
-
-            const hasCriticals = '${{ steps.run-analyzer.outputs.has_criticals }}' === 'true';
             if (hasCriticals) {
-              body += '\n## ❌ Status: CRITICAL ISSUES FOUND\n\n';
-              body += '**This PR cannot be merged until critical issues are resolved.**\n';
-              body += 'Please review the reports above and fix the identified issues.\n';
+              body += `---\n\n`;
+              body += `## ❌ Status: CRITICAL ISSUES FOUND\n\n`;
+              body += `**This PR cannot be merged until critical issues are resolved.**\n`;
+              body += `Review the analysis reports above and fix the identified issues.\n`;
+            } else if (parseInt(failures) > 0) {
+              body += `---\n\n`;
+              body += `## ⚠️ Status: ${failures} ANALYSIS FAILURE(S)\n\n`;
+              body += `Some analyses failed to complete. Check the workflow logs for details.\n`;
             } else {
-              body += '\n## ✅ Status: NO CRITICAL ISSUES\n\n';
-              body += '**This PR is safe to merge** (based on automated analysis).\n';
+              body += `---\n\n`;
+              body += `## ✅ Status: ALL CLEAR\n\n`;
+              body += `**No critical issues detected** — this PR is safe to merge (based on automated analysis).\n`;
             }
 
-            if (!context.issue || !context.issue.number) {
-              core.notice('No PR issue number found; skipping PR comment.');
+            if (!context.issue?.number) {
+              core.notice('No PR number found; skipping PR comment.');
               return;
             }
 
-            const maxAttempts = 3;
-            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+
+            const existing = comments.find(c => c.body?.includes(marker));
+
+            for (let attempt = 1; attempt <= 3; attempt++) {
               try {
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.issue.number,
-                  body: body
-                });
-                core.info(`Posted PR summary comment on attempt ${attempt}.`);
+                if (existing) {
+                  await github.rest.issues.updateComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    comment_id: existing.id,
+                    body,
+                  });
+                  core.info(`Updated existing PR comment on attempt ${attempt}.`);
+                } else {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    body,
+                  });
+                  core.info(`Created PR comment on attempt ${attempt}.`);
+                }
                 break;
               } catch (error) {
-                const status = error.status || 'unknown';
-                const msg = error.message || String(error);
-                if (attempt === maxAttempts) {
-                  core.warning(
-                    `Failed to post PR summary comment after ${maxAttempts} attempts (status=${status}): ${msg}`
-                  );
+                if (attempt === 3) {
+                  core.warning(`Failed to post PR comment after 3 attempts: ${error.message}`);
                 } else {
-                  const waitMs = attempt * 2000;
-                  core.warning(
-                    `PR comment attempt ${attempt}/${maxAttempts} failed (status=${status}): ${msg}. Retrying in ${waitMs}ms...`
-                  );
-                  await new Promise(r => setTimeout(r, waitMs));
+                  await new Promise(r => setTimeout(r, attempt * 2000));
                 }
               }
             }
@@ -290,10 +293,8 @@ jobs:
       - name: Block merge if critical issues found
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
-          if [ "${{ steps.run-analyzer.outputs.has_criticals }}" = "true" ]; then
-            echo "::error::❌ BLOCKING MERGE - Critical issues found in analysis"
+          if [ "${{ steps.aggregate.outputs.has_criticals }}" = "true" ]; then
+            echo "::error::❌ BLOCKING MERGE — Critical issues detected in one or more descriptors"
             exit 1
-          else
-            echo "✅ No critical issues - merge allowed"
-            exit 0
           fi
+          echo "✅ No critical issues — merge allowed"
