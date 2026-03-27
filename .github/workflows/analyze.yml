@@ -222,7 +222,7 @@ jobs:
               echo "---"
               echo ""
               # Extract header + summary table only (stop before detailed analysis)
-              sed -n '1,/^## 📋 Detailed Analysis/{ /^## 📋 Detailed Analysis/d; p; }' "$f"
+              sed -n '1,/^## .*Detailed Analysis/{ /^## .*Detailed Analysis/d; p; }' "$f"
             done
 
             echo ""
