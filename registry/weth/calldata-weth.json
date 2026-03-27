@@ -1,5 +1,5 @@
 {
-  "$schema": "../../specs/erc7730-v2.schema.json",
+  "$schema": "../../specs/erc7730-v2.schema.json", 
   "context": {
     "$id": "WETH",
     "contract": {
