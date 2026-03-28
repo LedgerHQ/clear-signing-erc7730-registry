@@ -126,19 +126,41 @@ jobs:
               ARGS+=(--no-screenshots)
             fi
 
-            if uvx --from "erc7730-analyzer @ git+https://github.com/LedgerHQ/erc7730-analyzer@main" \
-              erc7730-client "${ARGS[@]}"; then
-              echo "✅ No critical issues in $file"
-            else
+            MAX_RETRIES=3
+            RETRY_DELAY=10
+            ATTEMPT=0
+            SUCCESS=false
+
+            while [ $ATTEMPT -lt $((MAX_RETRIES + 1)) ]; do
+              ATTEMPT=$((ATTEMPT + 1))
+
+              set +e
+              uvx --from "erc7730-analyzer @ git+https://github.com/LedgerHQ/erc7730-analyzer@main" \
+                erc7730-client "${ARGS[@]}"
               EXIT_CODE=$?
-              if [ $EXIT_CODE -eq 1 ]; then
+              set -e
+
+              if [ $EXIT_CODE -eq 0 ]; then
+                echo "✅ No critical issues in $file"
+                SUCCESS=true
+                break
+              elif [ $EXIT_CODE -eq 1 ]; then
                 echo "❌ Critical issues found in $file"
                 CRITICALS=$((CRITICALS + 1))
+                SUCCESS=true
+                break
               else
-                echo "⚠️ Analysis failed for $file (exit code $EXIT_CODE)"
-                FAILURES=$((FAILURES + 1))
+                if [ $ATTEMPT -le $MAX_RETRIES ]; then
+                  echo "⚠️ Attempt $ATTEMPT failed for $file (exit code $EXIT_CODE) — retrying in ${RETRY_DELAY}s..."
+                  sleep $RETRY_DELAY
+                  rm -rf "$OUTDIR"
+                  mkdir -p "$OUTDIR"
+                else
+                  echo "⚠️ Analysis failed for $file after $ATTEMPT attempts (exit code $EXIT_CODE)"
+                  FAILURES=$((FAILURES + 1))
+                fi
               fi
-            fi
+            done
 
             echo "::endgroup::"
           done
