@@ -49,8 +49,8 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: erc7730-analysis
+  cancel-in-progress: false
 
 jobs:
   analyze:
