@@ -149,6 +149,10 @@ jobs:
                 CRITICALS=$((CRITICALS + 1))
                 SUCCESS=true
                 break
+              elif [ $EXIT_CODE -eq 3 ]; then
+                echo "⚠️ Analysis lost in-flight job state for $file — not retrying the same descriptor"
+                FAILURES=$((FAILURES + 1))
+                break
               else
                 if [ $ATTEMPT -le $MAX_RETRIES ]; then
                   echo "⚠️ Attempt $ATTEMPT failed for $file (exit code $EXIT_CODE) — retrying in ${RETRY_DELAY}s..."
