@@ -1,0 +1,124 @@
+{
+  "$schema": "https://github.com/LedgerHQ/clear-signing-erc7730-registry/blob/master/specs/erc7730-v2.schema.json",
+  "context": {
+    "$id": "Curve Router",
+    "contract": {
+      "deployments": [
+        {
+          "chainId": 1,
+          "address": "0x45312ea0eff7e09c83cbe249fa1d7598c4c8cd4e"
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "owner": "Curve Finance",
+    "info": {
+      "url": "https://curve.fi/"
+    },
+    "contractName": "Curve Router"
+  },
+  "display": {
+    "formats": {
+      "exchange(address[11] _route, uint256[5][5] _swap_params, uint256 _amount, uint256 _min_dy)": {
+        "$id": "exchange",
+        "intent": "Swap",
+        "fields": [
+          {
+            "path": "_amount",
+            "label": "Amount to Send",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_route.[0]",
+              "nativeCurrencyAddress": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+            }
+          },
+          {
+            "path": "_min_dy",
+            "label": "Min to Receive",
+            "format": "raw"
+          },
+          {
+            "path": "@.from",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"]
+            }
+          },
+          {
+            "path": "_route.[]",
+            "label": "Route",
+            "format": "raw"
+          }
+        ]
+      },
+      "exchange(address[11] _route, uint256[5][5] _swap_params, uint256 _amount, uint256 _min_dy, address[5] _pools)": {
+        "$id": "exchange",
+        "intent": "Swap",
+        "fields": [
+          {
+            "path": "_amount",
+            "label": "Amount to Send",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_route.[0]",
+              "nativeCurrencyAddress": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+            }
+          },
+          {
+            "path": "_min_dy",
+            "label": "Min to Receive",
+            "format": "raw"
+          },
+          {
+            "path": "@.from",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"]
+            }
+          },
+          {
+            "path": "_route.[1]",
+            "label": "Route",
+            "format": "raw"
+          }
+        ]
+      },
+      "exchange(address[11] _route, uint256[5][5] _swap_params, uint256 _amount, uint256 _min_dy, address[5] _pools, address _receiver)": {
+        "$id": "exchange",
+        "intent": "Swap",
+        "fields": [
+          {
+            "path": "_amount",
+            "label": "Amount to Send",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "_route.[0]",
+              "nativeCurrencyAddress": "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+            }
+          },
+          {
+            "path": "_min_dy",
+            "label": "Min to Receive",
+            "format": "raw"
+          },
+          {
+            "path": "_receiver",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"]
+            }
+          },
+          {
+            "path": "_route.[1]",
+            "label": "Route",
+            "format": "raw"
+          }
+        ]
+      }
+    }
+  }
+}
