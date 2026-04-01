@@ -86,7 +86,7 @@
       "txHash": "0xd0cc8e6abc3f19b277ae2f537020cd87de96880da0f300497b56700761b49bb4",
       "expectedTexts": [
         "Pause Type",
-        "1"
+        "General"
       ]
     },
     {
@@ -95,7 +95,7 @@
       "txHash": "0xda01e9797b1be7d108ffba919ca08acd4331563c212391dd6d84d07fcd12bfc6",
       "expectedTexts": [
         "Pause Type",
-        "1"
+        "General"
       ]
     },
     {
@@ -214,7 +214,7 @@
       "txHash": "0x77e12bfdc1c6cffb0db82709f260727281d3aa40c2ae480c4fd3f8649106456c",
       "expectedTexts": [
         "Pause Type",
-        "1",
+        "General",
         "New Role",
         "0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929"
       ]
@@ -225,7 +225,7 @@
       "txHash": "0x399e04a21bd32e32b3cc49865cdb30ae7b2d2913db911d75f84d30944718cac2",
       "expectedTexts": [
         "Pause Type",
-        "1",
+        "General",
         "New Role",
         "0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929"
       ]
