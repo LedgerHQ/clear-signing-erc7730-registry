@@ -16,10 +16,9 @@
           "outputs": [], "stateMutability": "nonpayable"
         }
       ],
-      "factory": {
-        "address": "0xa0c8008d8f15fc5b2849af61d0b926c16dd1ac96",
-        "event": "AgreementCreated"
-      }
+      "deployments": [
+        { "chainId": 11142220, "address": "0x62877deddd09350f8b571e3bc91342fd062fddf2" }
+      ]
     }
   },
   "metadata": {
