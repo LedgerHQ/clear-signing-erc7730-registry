@@ -86,128 +86,55 @@
         {
           "type": "function",
           "name": "redeemFiatRequest",
-          "inputs": [
-            {
-              "name": "amountMTokenIn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "inputs": [{ "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" }],
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "redeemInstant",
           "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "amountMTokenIn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "minReceiveAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenOut", "type": "address", "internalType": "address" },
+            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
+            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
+            { "name": "recipient", "type": "address", "internalType": "address" }
           ],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "redeemInstant",
           "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "amountMTokenIn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "minReceiveAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "tokenOut", "type": "address", "internalType": "address" },
+            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
+            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" }
           ],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "redeemRequest",
           "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "amountMTokenIn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenOut", "type": "address", "internalType": "address" },
+            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
+            { "name": "recipient", "type": "address", "internalType": "address" }
           ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "redeemRequest",
           "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "amountMTokenIn",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
+            { "name": "tokenOut", "type": "address", "internalType": "address" },
+            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" }
           ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
         }
-      ],
-      "addressMatcher": null,
-      "factory": null
+      ]
     }
   },
   "metadata": { "owner": "Midas", "info": { "legalName": "Midas", "url": "https://midas.app" } },
@@ -220,13 +147,13 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -240,13 +167,13 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn"
           },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount"
           }
         ],
@@ -259,7 +186,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -273,7 +200,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn"
           }
         ],
@@ -285,7 +212,7 @@
           {
             "label": "Amount to redeem",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn"
           }
         ],

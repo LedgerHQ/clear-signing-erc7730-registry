@@ -711,7 +711,7 @@
           "type": "event"
         }
       ],
-      "deployments": [{ "chainId": "11155111", "address": "0x731eFa688F3679688cf60A3993b8658138953ED6" }]
+      "deployments": [{ "chainId": 11155111, "address": "0x731eFa688F3679688cf60A3993b8658138953ED6" }]
     }
   },
   "metadata": { "owner": "Lombard", "info": { "legalName": "Lombard Finance", "url": "https://www.lombard.finance/" } },

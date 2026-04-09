@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xe63602a9b3dfe983187525ac985fec4f57b24ed5" }],
-      "domain": { "name": "DeGate", "chainId": 1, "verifyingContract": "0xe63602a9b3dfe983187525ac985fec4f57b24ed5" },
+      "domain": { "name": "DeGate Protocol", "version": "3.0.1" },
       "schemas": [
         {
           "primaryType": "AccountUpdate",

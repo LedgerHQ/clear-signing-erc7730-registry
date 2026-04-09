@@ -3,7 +3,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7" }],
-      "domain": { "name": "Permit", "chainId": 1, "verifyingContract": "0xdAC17F958D2ee523a2206206994597C13D831ec7" }
+      "domain": { "name": "Tether USD" }
     }
   },
   "metadata": { "owner": "USDT" }

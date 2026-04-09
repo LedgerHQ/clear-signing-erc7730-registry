@@ -1246,34 +1246,27 @@
             "value": null
           },
           { "$id": null, "label": "Amount to deposit", "format": "amount", "params": null, "path": "@.value", "value": null },
-             {
-          "path": "#._clientConfig.recipient",
-          "label": "Client recipient",
-          "format": "addressName",
-          "params": {
-            "senderAddress": [
-              "0x0000000000000000000000000000000000000000"
-            ]
+          {
+            "path": "#._clientConfig.recipient",
+            "label": "Client recipient",
+            "format": "addressName",
+            "params": { "senderAddress": ["0x0000000000000000000000000000000000000000"] }
+          },
+          {
+            "path": "#._clientConfig.basisPoints",
+            "label": "Client fee (bps)",
+            "format": "unit",
+            "params": { "base": "bps", "decimals": 0 }
           }
-        },
-        {
-        "path": "#._clientConfig.basisPoints",
-        "label": "Client fee (bps)",
-        "format": "unit",
-        "params": {
-          "base": "bps",
-          "decimals": 0
-        }
-      }
         ],
-        "required": ["#._eth2WithdrawalCredentials", "#._ethAmountPerValidatorInWei", "@.value", "#._clientConfig.basisPoints","#._clientConfig.recipient"],
-        "excluded": [
-          "#._clientConfig",
-          "#._referrerConfig",
-          "#._referrerConfig.basisPoints",
-          "#._referrerConfig.recipient",
-          "#._extraData"
-        ]
+        "required": [
+          "#._eth2WithdrawalCredentials",
+          "#._ethAmountPerValidatorInWei",
+          "@.value",
+          "#._clientConfig.basisPoints",
+          "#._clientConfig.recipient"
+        ],
+        "excluded": ["#._clientConfig", "#._referrerConfig", "#._referrerConfig.basisPoints", "#._referrerConfig.recipient", "#._extraData"]
       }
     }
   }

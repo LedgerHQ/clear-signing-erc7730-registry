@@ -8,136 +8,52 @@
         { "chainId": 560048, "address": "0x1A76bc69922744807E86375f8B8AB8A7cf18Eb7a" }
       ],
       "abi": [
-        {
-          "type": "function",
-          "name": "acceptOwnership",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
+        { "type": "function", "name": "acceptOwnership", "inputs": [], "outputs": [], "stateMutability": "nonpayable" },
         {
           "type": "function",
           "name": "createOperator",
           "inputs": [
-            { "name": "_owner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "_name", "type": "string", "internalType": "string", "components": null, "indexed": null, "unit": null },
-            { "name": "_operatorFee", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "_maximumOperatorFee",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            {
-              "name": "_recipients",
-              "type": "address[]",
-              "internalType": "address[]",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "_percents", "type": "uint256[]", "internalType": "uint256[]", "components": null, "indexed": null, "unit": null }
+            { "name": "_owner", "type": "address", "internalType": "address" },
+            { "name": "_name", "type": "string", "internalType": "string" },
+            { "name": "_operatorFee", "type": "uint256", "internalType": "uint256" },
+            { "name": "_maximumOperatorFee", "type": "uint256", "internalType": "uint256" },
+            { "name": "_recipients", "type": "address[]", "internalType": "address[]" },
+            { "name": "_percents", "type": "uint256[]", "internalType": "uint256[]" }
           ],
-          "outputs": [
-            {
-              "name": "newOperator",
-              "type": "address",
-              "internalType": "contract Operator",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "newOperator", "type": "address", "internalType": "contract Operator" }],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "createSplitter",
           "inputs": [
-            {
-              "name": "operator",
-              "type": "address",
-              "internalType": "contract Operator",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "salt", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }
+            { "name": "operator", "type": "address", "internalType": "contract Operator" },
+            { "name": "salt", "type": "bytes32", "internalType": "bytes32" }
           ],
-          "outputs": [{ "name": "", "type": "address", "internalType": "contract Splitter", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "", "type": "address", "internalType": "contract Splitter" }],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "createSplitterAndCall",
           "inputs": [
-            {
-              "name": "operator",
-              "type": "address",
-              "internalType": "contract Operator",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "salt", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
-            { "name": "callAddress", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "data", "type": "bytes", "internalType": "bytes", "components": null, "indexed": null, "unit": null }
+            { "name": "operator", "type": "address", "internalType": "contract Operator" },
+            { "name": "salt", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "callAddress", "type": "address", "internalType": "address" },
+            { "name": "data", "type": "bytes", "internalType": "bytes" }
           ],
-          "outputs": [
-            {
-              "name": "newSplitter",
-              "type": "address",
-              "internalType": "contract Splitter",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            }
-          ],
-          "stateMutability": "payable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "newSplitter", "type": "address", "internalType": "contract Splitter" }],
+          "stateMutability": "payable"
         },
-        {
-          "type": "function",
-          "name": "renounceOwnership",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
-        },
+        { "type": "function", "name": "renounceOwnership", "inputs": [], "outputs": [], "stateMutability": "nonpayable" },
         {
           "type": "function",
           "name": "transferOwnership",
-          "inputs": [{ "name": "newOwner", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }],
+          "inputs": [{ "name": "newOwner", "type": "address", "internalType": "address" }],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         }
-      ],
-      "addressMatcher": null,
-      "factory": null
+      ]
     }
   },
   "metadata": { "owner": "Kiln", "info": { "legalName": "Kiln", "url": "https://kiln.fi" } },
@@ -153,11 +69,11 @@
             "path": "#._owner"
           },
           { "label": "Name", "format": "raw", "path": "#._name" },
-          { "label": "Operator Fee", "format": "unit", "params": { "base": "%", "decimals": "2" }, "path": "#._operatorFee" },
+          { "label": "Operator Fee", "format": "unit", "params": { "base": "%", "decimals": 2 }, "path": "#._operatorFee" },
           {
             "label": "Maximum Operator Fee",
             "format": "unit",
-            "params": { "base": "%", "decimals": "2" },
+            "params": { "base": "%", "decimals": 2 },
             "path": "#._maximumOperatorFee"
           },
           {
@@ -166,7 +82,7 @@
             "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] },
             "path": "#._recipients.[]"
           },
-          { "label": "Percentages", "format": "unit", "params": { "base": "%", "decimals": "2" }, "path": "#._percents.[]" }
+          { "label": "Percentages", "format": "unit", "params": { "base": "%", "decimals": 2 }, "path": "#._percents.[]" }
         ],
         "required": ["#._owner", "#._name", "#._operatorFee", "#._maximumOperatorFee", "#._recipients.[]", "#._percents.[]"]
       },
@@ -184,7 +100,7 @@
         "required": ["#.operator"]
       },
       "createSplitterAndCall(address,bytes32,address,bytes)": {
-        "intent": "Create Splitter and Stake",
+        "intent": "Create and Stake",
         "fields": [
           {
             "label": "Operator",
@@ -199,12 +115,17 @@
             "params": { "types": ["contract"], "sources": ["local", "ens"] },
             "path": "#.callAddress"
           },
-          { "label": "Transaction", "format": "calldata", "params": { "calleePath": "#.callAddress" }, "path": "#.data" }
+          {
+            "label": "Transaction",
+            "format": "calldata",
+            "params": { "calleePath": "#.callAddress", "amountPath": "@.value" },
+            "path": "#.data"
+          }
         ],
         "required": ["#.operator", "#.data"]
       },
       "transferOwnership(address)": {
-        "intent": "Transfer Ownership",
+        "intent": "Start owner transfer",
         "fields": [
           {
             "label": "New Owner",

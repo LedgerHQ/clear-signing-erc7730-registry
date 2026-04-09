@@ -85,83 +85,51 @@
           "type": "function",
           "name": "depositInstant",
           "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "minReceiveAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
-            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenIn", "type": "address", "internalType": "address" },
+            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
+            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
+            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "recipient", "type": "address", "internalType": "address" }
           ],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "depositInstant",
           "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
-            {
-              "name": "minReceiveAmount",
-              "type": "uint256",
-              "internalType": "uint256",
-              "components": null,
-              "indexed": null,
-              "unit": null
-            },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenIn", "type": "address", "internalType": "address" },
+            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
+            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
+            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" }
           ],
           "outputs": [],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "depositRequest",
           "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenIn", "type": "address", "internalType": "address" },
+            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
+            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" }
           ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "depositRequest",
           "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32", "components": null, "indexed": null, "unit": null },
-            { "name": "recipient", "type": "address", "internalType": "address", "components": null, "indexed": null, "unit": null }
+            { "name": "tokenIn", "type": "address", "internalType": "address" },
+            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
+            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" },
+            { "name": "recipient", "type": "address", "internalType": "address" }
           ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256", "components": null, "indexed": null, "unit": null }],
-          "stateMutability": "nonpayable",
-          "constant": null,
-          "payable": null,
-          "gas": null,
-          "signature": null
+          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+          "stateMutability": "nonpayable"
         }
-      ],
-      "addressMatcher": null,
-      "factory": null
+      ]
     }
   },
   "metadata": { "owner": "Midas", "info": { "legalName": "Midas", "url": "https://midas.app" } },
@@ -171,16 +139,11 @@
         "intent": "instantly buy",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          {
-            "label": "Amount",
-            "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
-            "path": "#.amountToken"
-          },
+          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount"
           },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
@@ -192,16 +155,11 @@
         "intent": "instantly buy",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          {
-            "label": "Amount",
-            "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
-            "path": "#.amountToken"
-          },
+          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
           {
             "label": "Slippage",
             "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
+            "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount"
           }
         ],
@@ -212,12 +170,7 @@
         "intent": "request buying",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          {
-            "label": "Amount",
-            "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
-            "path": "#.amountToken"
-          }
+          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" }
         ],
         "required": ["#.tokenIn", "#.amountToken"],
         "excluded": ["#.referrerId"]
@@ -226,12 +179,7 @@
         "intent": "request buying",
         "fields": [
           { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          {
-            "label": "Amount",
-            "format": "unit",
-            "params": { "base": " ", "decimals": "18", "prefix": "false" },
-            "path": "#.amountToken"
-          },
+          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
           { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
         ],
         "required": ["#.tokenIn", "#.amountToken", "#.recipient"],
