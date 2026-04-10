@@ -91,7 +91,7 @@
         "intent": "instantly redeem",
         "fields": [
           {
-            "label": "You receive",
+            "label": "Receive token",
             "format": "addressName",
             "params": { "types": ["token"] },
             "path": "#.tokenOut",
@@ -105,7 +105,7 @@
             "visible": "always"
           },
           {
-            "label": "Slippage",
+            "label": "Min receive amount",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount",
@@ -124,7 +124,7 @@
         "intent": "instantly redeem",
         "fields": [
           {
-            "label": "You receive",
+            "label": "Receive token",
             "format": "addressName",
             "params": { "types": ["token"] },
             "path": "#.tokenOut",
@@ -138,7 +138,7 @@
             "visible": "always"
           },
           {
-            "label": "Slippage",
+            "label": "Min receive amount",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount",
@@ -150,14 +150,14 @@
         "intent": "request a redemption",
         "fields": [
           {
-            "label": "You will receive",
+            "label": "Receive token",
             "format": "addressName",
             "params": { "types": ["token"] },
             "path": "#.tokenOut",
             "visible": "always"
           },
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn",
@@ -176,14 +176,14 @@
         "intent": "request a redemption",
         "fields": [
           {
-            "label": "You will receive",
+            "label": "Receive token",
             "format": "addressName",
             "params": { "types": ["token"] },
             "path": "#.tokenOut",
             "visible": "always"
           },
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn",
@@ -195,7 +195,7 @@
         "intent": "request a redemption",
         "fields": [
           {
-            "label": "Amount to redeem",
+            "label": "mToken Amount In",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.amountMTokenIn",
