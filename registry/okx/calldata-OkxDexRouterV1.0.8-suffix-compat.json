@@ -7,7 +7,7 @@
     "contractName": "OKX DEX Router v1.0.7-multi-commission"
   },
   "context": {
-    "$id": "OKX DEX Router v1.0.7-multi-commission",
+    "$id": "OKX DEX Router v1.0.8-suffix-compat",
     "contract": {
       "deployments": [
         { "chainId": 1, "address": "0x5E1f62Dac767b0491e3CE72469C217365D5B48cC" },
