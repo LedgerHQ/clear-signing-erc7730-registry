@@ -1,5 +1,5 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
+  "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
     "$id": "Redemption Vault",
     "contract": {
@@ -81,142 +81,127 @@
         { "chainId": 747474, "address": "0xE93E6Cf151588d63bB669138277D20f28C2E7cdA" },
         { "chainId": 747474, "address": "0x8E3865B9d2d8e562d8bb3b15D9B4941AeE6f67f1" },
         { "chainId": 1440000, "address": "0xDaC1b058cE42b67Ba33DbfDBA972d76C83C085D6" }
-      ],
-      "abi": [
-        {
-          "type": "function",
-          "name": "redeemFiatRequest",
-          "inputs": [{ "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" }],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "redeemInstant",
-          "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address" },
-            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
-            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
-            { "name": "recipient", "type": "address", "internalType": "address" }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "redeemInstant",
-          "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address" },
-            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
-            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "redeemRequest",
-          "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address" },
-            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" },
-            { "name": "recipient", "type": "address", "internalType": "address" }
-          ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "redeemRequest",
-          "inputs": [
-            { "name": "tokenOut", "type": "address", "internalType": "address" },
-            { "name": "amountMTokenIn", "type": "uint256", "internalType": "uint256" }
-          ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-          "stateMutability": "nonpayable"
-        }
       ]
     }
   },
-  "metadata": { "owner": "Midas", "info": { "legalName": "Midas", "url": "https://midas.app" } },
+  "metadata": { "owner": "Midas", "info": { "url": "https://midas.app" }, "contractName": "Redemption Vault" },
   "display": {
     "formats": {
-      "redeemInstant(address,uint256,uint256,address)": {
+      "redeemInstant(address tokenOut, uint256 amountMTokenIn, uint256 minReceiveAmount, address recipient)": {
         "intent": "instantly redeem",
         "fields": [
-          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "You receive",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenOut",
+            "visible": "always"
+          },
           {
             "label": "Amount to redeem",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.amountMTokenIn"
+            "path": "#.amountMTokenIn",
+            "visible": "always"
           },
           {
             "label": "Slippage",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.minReceiveAmount"
+            "path": "#.minReceiveAmount",
+            "visible": "always"
           },
-          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
-        ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount", "#.recipient"]
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.recipient",
+            "visible": "always"
+          }
+        ]
       },
-      "redeemInstant(address,uint256,uint256)": {
+      "redeemInstant(address tokenOut, uint256 amountMTokenIn, uint256 minReceiveAmount)": {
         "intent": "instantly redeem",
         "fields": [
-          { "label": "You receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
+          {
+            "label": "You receive",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenOut",
+            "visible": "always"
+          },
           {
             "label": "Amount to redeem",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.amountMTokenIn"
+            "path": "#.amountMTokenIn",
+            "visible": "always"
           },
           {
             "label": "Slippage",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.minReceiveAmount"
+            "path": "#.minReceiveAmount",
+            "visible": "always"
           }
-        ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.minReceiveAmount"]
+        ]
       },
-      "redeemRequest(address,uint256,address)": {
+      "redeemRequest(address tokenOut, uint256 amountMTokenIn, address recipient)": {
         "intent": "request a redemption",
         "fields": [
-          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
-            "label": "Amount to redeem",
-            "format": "unit",
-            "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.amountMTokenIn"
+            "label": "You will receive",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenOut",
+            "visible": "always"
           },
-          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
-        ],
-        "required": ["#.tokenOut", "#.amountMTokenIn", "#.recipient"]
-      },
-      "redeemRequest(address,uint256)": {
-        "intent": "request a redemption",
-        "fields": [
-          { "label": "You will receive", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenOut" },
           {
             "label": "Amount to redeem",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.amountMTokenIn"
+            "path": "#.amountMTokenIn",
+            "visible": "always"
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.recipient",
+            "visible": "always"
           }
-        ],
-        "required": ["#.tokenOut", "#.amountMTokenIn"]
+        ]
       },
-      "redeemFiatRequest(uint256)": {
+      "redeemRequest(address tokenOut, uint256 amountMTokenIn)": {
+        "intent": "request a redemption",
+        "fields": [
+          {
+            "label": "You will receive",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenOut",
+            "visible": "always"
+          },
+          {
+            "label": "Amount to redeem",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.amountMTokenIn",
+            "visible": "always"
+          }
+        ]
+      },
+      "redeemFiatRequest(uint256 amountMTokenIn)": {
         "intent": "request a redemption",
         "fields": [
           {
             "label": "Amount to redeem",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.amountMTokenIn"
+            "path": "#.amountMTokenIn",
+            "visible": "always"
           }
-        ],
-        "required": ["#.amountMTokenIn"]
+        ]
       }
     }
   }
