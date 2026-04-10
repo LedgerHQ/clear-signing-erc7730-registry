@@ -1304,7 +1304,7 @@ function extractParamType(paramSegment) {
  */
 function canonicalizeSignature(signatureLike) {
   const text = String(signatureLike || "").trim();
-  const match = text.match(/^([A-Za-z_]\w*)\((.*)\)$/);
+  const match = text.match(/^([A-Za-z_][\w:]*)\((.*)\)$/);
   if (!match) return null;
 
   const name = match[1];
@@ -1572,7 +1572,7 @@ function findAbiEntry(abi, formatKey) {
   }
 
   // Fallback: match by function name only when unambiguous.
-  const match = String(formatKey || "").match(/^([A-Za-z_]\w*)\(/);
+  const match = String(formatKey || "").match(/^([A-Za-z_][\w:]*)\(/);
   if (!match) return null;
 
   const funcName = match[1];

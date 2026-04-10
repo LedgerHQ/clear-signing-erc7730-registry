@@ -1122,7 +1122,7 @@ function parseErc7730(filePath) {
  * Extract primary type from encodeType string
  */
 function extractPrimaryType(encodeType) {
-  const match = encodeType.match(/^(\w+)\(/);
+  const match = encodeType.match(/^([\w:]+)\(/);
   return match ? match[1] : encodeType;
 }
 
@@ -1678,7 +1678,7 @@ function generatePlaceholderExample(msgType, deployment) {
  * Parse encodeType string to extract fields
  */
 function parseEncodeType(encodeType) {
-  const match = encodeType.match(/^\w+\(([^)]*)\)/);
+  const match = encodeType.match(/^[\w:]+\(([^)]*)\)/);
   if (!match) return [];
 
   const fieldsStr = match[1];
