@@ -1,5 +1,5 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
+  "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
     "$id": "Minter Vault",
     "contract": {
@@ -79,111 +79,119 @@
         { "chainId": 747474, "address": "0x175A9b122bf22ac2b193a0A775D7370D5A75268E" },
         { "chainId": 747474, "address": "0xcb7d9A25F7b9bdd0Eee77B1cEb2894D39deBca1C" },
         { "chainId": 1440000, "address": "0x30FBc82A72CA674AA250cd6c27BCca1Fe602f1Bb" }
-      ],
-      "abi": [
-        {
-          "type": "function",
-          "name": "depositInstant",
-          "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address" },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
-            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "recipient", "type": "address", "internalType": "address" }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "depositInstant",
-          "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address" },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
-            { "name": "minReceiveAmount", "type": "uint256", "internalType": "uint256" },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "depositRequest",
-          "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address" },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" }
-          ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "depositRequest",
-          "inputs": [
-            { "name": "tokenIn", "type": "address", "internalType": "address" },
-            { "name": "amountToken", "type": "uint256", "internalType": "uint256" },
-            { "name": "referrerId", "type": "bytes32", "internalType": "bytes32" },
-            { "name": "recipient", "type": "address", "internalType": "address" }
-          ],
-          "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
-          "stateMutability": "nonpayable"
-        }
       ]
     }
   },
-  "metadata": { "owner": "Midas", "info": { "legalName": "Midas", "url": "https://midas.app" } },
+  "metadata": { "owner": "Midas", "info": { "url": "https://midas.app" }, "contractName": "Minter Vault" },
   "display": {
     "formats": {
-      "depositInstant(address,uint256,uint256,bytes32,address)": {
+      "depositInstant(address tokenIn, uint256 amountToken, uint256 minReceiveAmount, bytes32 referrerId, address recipient)": {
         "intent": "instantly buy",
         "fields": [
-          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
           {
-            "label": "Slippage",
-            "format": "unit",
-            "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.minReceiveAmount"
+            "label": "You pay with",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenIn",
+            "visible": "always"
           },
-          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
-        ],
-        "required": ["#.tokenIn", "#.amountToken", "#.minReceiveAmount", "#.recipient"],
-        "excluded": ["#.referrerId"]
-      },
-      "depositInstant(address,uint256,uint256,bytes32)": {
-        "intent": "instantly buy",
-        "fields": [
-          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
           {
-            "label": "Slippage",
+            "label": "Amount",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
-            "path": "#.minReceiveAmount"
-          }
-        ],
-        "required": ["#.tokenIn", "#.amountToken", "#.minReceiveAmount"],
-        "excluded": ["#.referrerId"]
+            "path": "#.amountToken",
+            "visible": "always"
+          },
+          {
+            "label": "Minimum to Receive",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.minReceiveAmount",
+            "visible": "always"
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.recipient",
+            "visible": "always"
+          },
+          { "label": "Referrer Id", "path": "#.referrerId", "visible": "never" }
+        ]
       },
-      "depositRequest(address,uint256,bytes32)": {
-        "intent": "request buying",
+      "depositInstant(address tokenIn, uint256 amountToken, uint256 minReceiveAmount, bytes32 referrerId)": {
+        "intent": "instantly buy",
         "fields": [
-          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" }
-        ],
-        "required": ["#.tokenIn", "#.amountToken"],
-        "excluded": ["#.referrerId"]
+          {
+            "label": "You pay with",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenIn",
+            "visible": "always"
+          },
+          {
+            "label": "Amount",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.amountToken",
+            "visible": "always"
+          },
+          {
+            "label": "Minimum to Receive",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.minReceiveAmount",
+            "visible": "always"
+          },
+          { "label": "Referrer Id", "path": "#.referrerId", "visible": "never" }
+        ]
       },
-      "depositRequest(address,uint256,bytes32,address)": {
-        "intent": "request buying",
+      "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId)": {
+        "intent": "Deposit Request",
         "fields": [
-          { "label": "You pay with", "format": "addressName", "params": { "types": ["token"] }, "path": "#.tokenIn" },
-          { "label": "Amount", "format": "unit", "params": { "base": " ", "decimals": 18, "prefix": false }, "path": "#.amountToken" },
-          { "label": "Receiver", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.recipient" }
-        ],
-        "required": ["#.tokenIn", "#.amountToken", "#.recipient"],
-        "excluded": ["#.referrerId"]
+          {
+            "label": "You pay with",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenIn",
+            "visible": "always"
+          },
+          {
+            "label": "Amount",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.amountToken",
+            "visible": "always"
+          },
+          { "label": "Referrer Id", "path": "#.referrerId", "visible": "never" }
+        ]
+      },
+      "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId, address recipient)": {
+        "intent": "Deposit Request",
+        "fields": [
+          {
+            "label": "You pay with",
+            "format": "addressName",
+            "params": { "types": ["token"] },
+            "path": "#.tokenIn",
+            "visible": "always"
+          },
+          {
+            "label": "Amount",
+            "format": "unit",
+            "params": { "base": " ", "decimals": 18, "prefix": false },
+            "path": "#.amountToken",
+            "visible": "always"
+          },
+          {
+            "label": "Receiver",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet"] },
+            "path": "#.recipient",
+            "visible": "always"
+          },
+          { "label": "Referrer Id", "path": "#.referrerId", "visible": "never" }
+        ]
       }
     }
   }
