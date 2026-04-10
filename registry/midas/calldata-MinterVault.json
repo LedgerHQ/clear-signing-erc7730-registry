@@ -103,7 +103,7 @@
             "visible": "always"
           },
           {
-            "label": "Slippage",
+            "label": "Minimum to Receive",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount",
@@ -137,7 +137,7 @@
             "visible": "always"
           },
           {
-            "label": "Slippage",
+            "label": "Minimum to Receive",
             "format": "unit",
             "params": { "base": " ", "decimals": 18, "prefix": false },
             "path": "#.minReceiveAmount",
@@ -147,7 +147,7 @@
         ]
       },
       "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId)": {
-        "intent": "request buying",
+        "intent": "Deposit Request",
         "fields": [
           {
             "label": "You pay with",
@@ -167,7 +167,7 @@
         ]
       },
       "depositRequest(address tokenIn, uint256 amountToken, bytes32 referrerId, address recipient)": {
-        "intent": "request buying",
+        "intent": "Deposit Request",
         "fields": [
           {
             "label": "You pay with",
