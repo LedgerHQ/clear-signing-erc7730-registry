@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
 
       - name: Get all changed descriptor files
         timeout-minutes: 5
@@ -62,7 +62,7 @@ jobs:
     steps:
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.0.2
 
       - name: Get all changed JSON files
         timeout-minutes: 5
