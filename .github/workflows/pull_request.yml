@@ -99,15 +99,15 @@ jobs:
 
           for file in $CHANGED_FILES; do
             # Extract $schema value from the JSON file
-            SCHEMA_REF=$(python3 -c "
+            SCHEMA_REF=$(python3 -c '
           import json, sys
           try:
-              with open('$file') as f:
+              with open(sys.argv[1]) as f:
                   data = json.load(f)
-              print(data.get('\$schema', ''))
+              print(data.get("$schema", ""))
           except Exception:
-              print('')
-          ")
+              print("")
+          ' "$file")
 
             # Resolve schema path
             if [ -z "$SCHEMA_REF" ]; then
