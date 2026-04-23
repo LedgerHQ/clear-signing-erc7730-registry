@@ -211,10 +211,11 @@ jobs:
       - name: Resolve descriptor includes
         env:
           DESCRIPTOR: ${{ matrix.test.descriptor }}
+          WORKSPACE: ${{ github.workspace }}
         run: |
-          node "${{ github.workspace }}/base-scripts/.github/scripts/resolve-erc7730-includes.js" \
-            "${{ github.workspace }}/registry/$DESCRIPTOR" \
-            "${{ github.workspace }}/test-inputs/resolved-descriptor.json"
+          node "$WORKSPACE/base-scripts/.github/scripts/resolve-erc7730-includes.js" \
+            "$WORKSPACE/registry/$DESCRIPTOR" \
+            "$WORKSPACE/test-inputs/resolved-descriptor.json"
 
       - name: Run clear signing tests
         id: run-tests
@@ -223,14 +224,17 @@ jobs:
           FORCE_COLOR: "0"
           GATING_TOKEN: ${{ secrets.GATING_TOKEN }}
           COIN_APPS_PATH: "${{ github.workspace }}/coin-apps"
+          WORKSPACE: ${{ github.workspace }}
+          TEST_TYPE: ${{ matrix.test.test_type }}
+          DEVICE: ${{ matrix.device }}
         run: |
-          CMD=$([[ "${{ matrix.test.test_type }}" == "calldata" ]] && echo "raw-file" || echo "typed-data-file")
+          CMD=$([[ "$TEST_TYPE" == "calldata" ]] && echo "raw-file" || echo "typed-data-file")
 
           set +e
-          pnpm cs-tester cli $CMD "${{ github.workspace }}/test-inputs/tests.json" \
-            --device ${{ matrix.device }} \
-            --erc7730-files "${{ github.workspace }}/test-inputs/resolved-descriptor.json" \
-            --screenshot-folder-path "${{ github.workspace }}/screenshots" \
+          pnpm cs-tester cli $CMD "$WORKSPACE/test-inputs/tests.json" \
+            --device "$DEVICE" \
+            --erc7730-files "$WORKSPACE/test-inputs/resolved-descriptor.json" \
+            --screenshot-folder-path "$WORKSPACE/screenshots" \
             --log-level info 2>&1 | tee test-output.log
           EXIT_CODE=${PIPESTATUS[0]}
           echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
@@ -238,11 +242,15 @@ jobs:
       - name: Write job summary
         if: always()
         working-directory: dmk
+        env:
+          ENTITY: ${{ matrix.test.entity }}
+          DESCRIPTOR_NAME: ${{ matrix.test.descriptor_name }}
+          DEVICE: ${{ matrix.device }}
+          EXIT_CODE: ${{ steps.run-tests.outputs.exit_code }}
         run: |
-          echo "## ${{ matrix.test.entity }} / ${{ matrix.test.descriptor_name }} (${{ matrix.device }})" >> $GITHUB_STEP_SUMMARY
+          echo "## $ENTITY / $DESCRIPTOR_NAME ($DEVICE)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
 
-          EXIT_CODE="${{ steps.run-tests.outputs.exit_code }}"
           if [ "$EXIT_CODE" == "0" ]; then
             echo "✅ **All tests passed (clear signed)**" >> $GITHUB_STEP_SUMMARY
           else
@@ -257,9 +265,11 @@ jobs:
 
       - name: Upload screenshots
         if: always()
+        env:
+          EXIT_CODE: ${{ steps.run-tests.outputs.exit_code }}
         run: |
           # Save exit code for PR comment
-          echo "${{ steps.run-tests.outputs.exit_code }}" > screenshots/exit_code.txt
+          echo "$EXIT_CODE" > screenshots/exit_code.txt
       - uses: actions/upload-artifact@v7
         if: always()
         with:
