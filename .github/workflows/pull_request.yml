@@ -12,8 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  ETHERSCAN_API_HOST: proxyetherscan-ci.api.live.ledger.com
+#env:
+#  ETHERSCAN_API_HOST: <set this secret to define a custom Etherscan API host>
+#  ETHERSCAN_API_KEY: <set this secret to inject Etherscan API key>
 
 jobs:
   validate_descriptors:
@@ -98,15 +99,15 @@ jobs:
 
           for file in $CHANGED_FILES; do
             # Extract $schema value from the JSON file
-            SCHEMA_REF=$(python3 -c "
+            SCHEMA_REF=$(python3 -c '
           import json, sys
           try:
-              with open('$file') as f:
+              with open(sys.argv[1]) as f:
                   data = json.load(f)
-              print(data.get('\$schema', ''))
+              print(data.get("$schema", ""))
           except Exception:
-              print('')
-          ")
+              print("")
+          ' "$file")
 
             # Resolve schema path
             if [ -z "$SCHEMA_REF" ]; then
