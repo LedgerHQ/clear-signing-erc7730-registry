@@ -6,7 +6,7 @@
 
 ## What you're committing to
 
-- Review assigned descriptors within **7 days** of being tagged
+- Review descriptors regularly, e.g. by adding this repo to your [Watch list](https://github.com/watching) and setting up [Notifications](https://github.com/settings/notifications)
 - Publish a signed attestation (or open an issue) for each descriptor reviewed
 - Maintain your attestation as descriptors evolve — new version = new attestation required
 
@@ -48,16 +48,12 @@ After a full review passes, create an **EAS offchain attestation** (ERC-8176 sch
   "signature": "0x..."
 }
 ```
+- Calculate the descriptor hash
 
 `descriptorHash = keccak256(RFC 8785 JCS-canonicalized descriptor JSON)` — do not hash raw file bytes.
 
-**Publish:** Download the attestation `.json` from EAS and submit it via PR to the registry at:
+- Go to [Ethereum Attestation Service](https://easscan.org/schema/view/0xe023eef113c1670774801c34b377fdf612dd8a4d2fa92fe382e15bd91fafb5c2), select 'Attest with schema' and use 'Offchain'
 
-```
-registry/<project>/sigs/<descriptor-name>/eip155-1-0xYourAddress.json
-```
-
-Note: filenames use dashes (`eip155-1-0x...`) since colons are not valid in file paths.
 
 ---
 
@@ -68,6 +64,7 @@ Note: filenames use dashes (`eip155-1-0x...`) since colons are not valid in file
 - Never modify an existing attestation — issue a new one
 - If issues are found: **do not sign** — open a GitHub issue instead
 - If your key is compromised or you retract an attestation: submit a revocation on-chain via EAS
+- If you have explicitly shared your key with wallets, notify them of the compromise
 
 ---
 
