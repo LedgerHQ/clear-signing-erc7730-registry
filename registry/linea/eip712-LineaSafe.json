@@ -1,5 +1,5 @@
 {
-  "$schema": "../../specs/erc7730-v1.schema.json",
+  "$schema": "../../specs/erc7730-v2.schema.json",
   "includes": "../safe/common-eip712-Safe.json",
   "metadata": { "owner": "Linea" },
   "context": {

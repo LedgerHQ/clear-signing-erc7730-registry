@@ -377,11 +377,7 @@
             "label": "Operation ID",
             "format": "raw"
           }
-        ],
-        "required": [
-          "id"
-        ],
-        "excluded": []
+        ]
       },
       "execute(address target, uint256 value, bytes payload, bytes32 predecessor, bytes32 salt)": {
         "$id": "execute",
@@ -403,6 +399,7 @@
               "spenderPath": "@.to"
             }
           },
+          { "path": "payload.[]", "label": "Payload", "visible": "never" },
           {
             "path": "predecessor",
             "label": "Predecessor",
@@ -418,15 +415,7 @@
             "label": "ETH sent",
             "format": "amount"
           }
-        ],
-        "required": [
-          "target",
-          "value",
-          "payload",
-          "predecessor",
-          "salt"
-        ],
-        "excluded": []
+        ]
       },
       "executeBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt)": {
         "$id": "executeBatch",
@@ -463,15 +452,7 @@
             "label": "ETH sent",
             "format": "amount"
           }
-        ],
-        "required": [
-          "targets.[]",
-          "values.[]",
-          "payloads.[]",
-          "predecessor",
-          "salt"
-        ],
-        "excluded": []
+        ]
       },
       "grantRole(bytes32 role, address account)": {
         "$id": "grantRole",
@@ -483,12 +464,7 @@
             "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
-        ],
-        "required": [
-          "role",
-          "account"
-        ],
-        "excluded": []
+        ]
       },
       "revokeRole(bytes32 role, address account)": {
         "$id": "revokeRole",
@@ -500,12 +476,7 @@
             "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
-        ],
-        "required": [
-          "role",
-          "account"
-        ],
-        "excluded": []
+        ]
       },
       "renounceRole(bytes32 role, address account)": {
         "$id": "renounceRole",
@@ -517,12 +488,7 @@
             "format": "raw"
           },
           { "path": "account", "$ref": "$.display.definitions.addressNameAccount" }
-        ],
-        "required": [
-          "role",
-          "account"
-        ],
-        "excluded": []
+        ]
       },
       "schedule(address target, uint256 value, bytes data, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "schedule",
@@ -544,6 +510,7 @@
               "spenderPath": "@.to"
             }
           },
+          { "path": "data.[]", "label": "Data", "visible": "never" },
           {
             "path": "predecessor",
             "label": "Predecessor",
@@ -559,16 +526,7 @@
             "label": "Delay",
             "format": "duration"
           }
-        ],
-        "required": [
-          "target",
-          "value",
-          "data",
-          "predecessor",
-          "salt",
-          "delay"
-        ],
-        "excluded": []
+        ]
       },
       "scheduleBatch(address[] targets, uint256[] values, bytes[] payloads, bytes32 predecessor, bytes32 salt, uint256 delay)": {
         "$id": "scheduleBatch",
@@ -605,16 +563,7 @@
             "label": "Delay",
             "format": "duration"
           }
-        ],
-        "required": [
-          "targets.[]",
-          "values.[]",
-          "payloads.[]",
-          "predecessor",
-          "salt",
-          "delay"
-        ],
-        "excluded": []
+        ]
       },
       "updateDelay(uint256 newDelay)": {
         "$id": "updateDelay",
@@ -625,11 +574,7 @@
             "label": "New delay",
             "format": "duration"
           }
-        ],
-        "required": [
-          "newDelay"
-        ],
-        "excluded": []
+        ]
       }
     }
   }
