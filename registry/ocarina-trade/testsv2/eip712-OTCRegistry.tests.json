@@ -178,6 +178,7 @@
       },
       "expected": {
         "intent": "Authorize tip",
+        "interpolatedIntent": "Authorize 1 USDC tip",
         "owner": "Ocarina",
         "fields": [
           {
@@ -293,6 +294,7 @@
       },
       "expected": {
         "intent": "Authorize tip",
+        "interpolatedIntent": "Authorize 0.01 ETH and 2 USDC tip",
         "owner": "Ocarina",
         "fields": [
           {
