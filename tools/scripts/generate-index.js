@@ -83,8 +83,19 @@ function indexDescriptor(descriptor, descriptorPath, index) {
       const { chainId, address } = deployment;
       if (chainId === undefined || !address) continue;
       const key = caip(chainId, address);
-      // First descriptor wins; findDescriptors() sorts, so this is stable.
-      if (!index.calldata[key]) index.calldata[key] = descriptorPath;
+      // Each (chainId, address) must map to exactly one calldata descriptor.
+      // Surface a genuine collision (two different descriptors) rather than
+      // silently dropping one; the same descriptor listing a deployment twice
+      // is idempotent and allowed.
+      const existing = index.calldata[key];
+      if (existing && existing !== descriptorPath) {
+        throw new Error(
+          `Duplicate calldata deployment ${key}: declared by both ${existing} ` +
+            `and ${descriptorPath}. Each (chainId, address) may map to only one ` +
+            `calldata descriptor.`,
+        );
+      }
+      index.calldata[key] = descriptorPath;
     }
     return;
   }
@@ -110,12 +121,27 @@ function indexDescriptor(descriptor, descriptorPath, index) {
   for (const deployment of deployments) {
     const { chainId, address } = deployment;
     if (chainId === undefined || !address) continue;
-    const byPrimaryType = (index.eip712[caip(chainId, address)] ??= {});
+    const key = caip(chainId, address);
+    const byPrimaryType = (index.eip712[key] ??= {});
     for (const [primaryType, encodeTypeHashes] of hashesByPrimaryType) {
-      (byPrimaryType[primaryType] ??= []).push({
-        path: descriptorPath,
-        encodeTypeHashes,
-      });
+      const entries = (byPrimaryType[primaryType] ??= []);
+      // Multiple descriptors may share one (address, primaryType) — consumers
+      // disambiguate by the encodeType hash. But if two different descriptors
+      // register the *same* hash, a consumer cannot tell them apart, so surface
+      // that ambiguity instead of storing an indistinguishable duplicate.
+      for (const hash of encodeTypeHashes) {
+        const clash = entries.find(
+          (e) => e.path !== descriptorPath && e.encodeTypeHashes.includes(hash),
+        );
+        if (clash) {
+          throw new Error(
+            `Duplicate eip712 encodeType ${hash} for ${key} (${primaryType}): ` +
+              `declared by both ${clash.path} and ${descriptorPath}. Two ` +
+              `descriptors cannot map the same encodeType at one address.`,
+          );
+        }
+      }
+      entries.push({ path: descriptorPath, encodeTypeHashes });
     }
   }
 }
