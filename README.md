@@ -54,8 +54,8 @@ pip install erc7730
 # Validate a specific file
 erc7730 lint registry/uniswap/calldata-UniswapV3Router02.json
 
-# Validate all descriptors (exclude the *.tests.json fixtures, which are not descriptors)
-erc7730 lint $(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) -not -name '*.tests.json')
+# Validate all descriptors (exclude the tests/ and testsv2/ fixtures, which are not descriptors)
+erc7730 lint $(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) -not -path '*/tests/*' -not -path '*/testsv2/*' -not -name '*.tests.json')
 
 # Format all descriptors
 erc7730 format

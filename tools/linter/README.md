@@ -62,10 +62,11 @@ erc7730 lint registry/uniswap/calldata-UniswapV3Router02.json
 
 Validate all descriptor files in the registry. The CLI treats any file named
 `calldata-*`/`eip712-*` as a descriptor, so pointing it at `registry/` also picks
-up the `*.tests.json` fixtures, which fail validation — exclude them explicitly:
+up the test fixtures under `tests/`/`testsv2/`, which fail validation — exclude
+them explicitly:
 
 ```bash
-erc7730 lint $(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) -not -name '*.tests.json')
+erc7730 lint $(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) -not -path '*/tests/*' -not -path '*/testsv2/*' -not -name '*.tests.json')
 ```
 
 ### Other commands
