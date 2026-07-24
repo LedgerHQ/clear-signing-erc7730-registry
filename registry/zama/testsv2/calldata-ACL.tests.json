@@ -41,6 +41,30 @@
       }
     },
     {
+      "description": "Revoke user-decryption delegation across all contracts (wildcard)",
+      "rawTx": "0x02f8b10104843b9aca008506fc23ac008303d09094ca2e8f1f656cd25c01f05d0b243ab1ecd4a8ffb680b844669e631600000000000000000000000090f79bf6eb2c4f870365e785982e1f101e93b906000000000000000000000000ffffffffffffffffffffffffffffffffffffffffc080a0498cb0912d809c81f979b2a3d1270c9fadab3670778c1c8dbb2cdf9ce91bc68da01c9366f00cbf324ab80aeb455ebcb095ff89b97e719eeb14caad7059eda55586",
+      "expected": {
+        "intent": "Revoke decryption delegation",
+        "interpolatedIntent": "Revoke decryption delegation from 0x90F79bf6EB2c4f870365E785982E1f101E93b906 for 0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF",
+        "fields": [
+          { "label": "Delegate to", "value": "0x90F79bf6EB2c4f870365E785982E1f101E93b906" },
+          { "label": "For contract", "value": "0xFFfFfFffFFfffFFfFFfFFFFFffFFFffffFfFFFfF" }
+        ]
+      }
+    },
+    {
+      "description": "Revoke user-decryption delegation on Sepolia (testnet deployment, chainId 11155111)",
+      "rawTx": "0x02f8b483aa36a705843b9aca008506fc23ac008303d09094f0ffdc93b7e186bc2f8cb3daa75d86d1930a433d80b844669e631600000000000000000000000090f79bf6eb2c4f870365e785982e1f101e93b9060000000000000000000000003c44cdddb6a900fa2b585dd299e03d12fa4293bcc001a01a6d753c7ad25e4d0ea82b90f31a89ded8a6bd9ad6f33b095c36a4a942ac4bd9a013ced9a7af67beb4e636b5bda5e8cb1e58996dc2875ecacad9a7ef73b0675c39",
+      "expected": {
+        "intent": "Revoke decryption delegation",
+        "interpolatedIntent": "Revoke decryption delegation from 0x90F79bf6EB2c4f870365E785982E1f101E93b906 for 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
+        "fields": [
+          { "label": "Delegate to", "value": "0x90F79bf6EB2c4f870365E785982E1f101E93b906" },
+          { "label": "For contract", "value": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC" }
+        ]
+      }
+    },
+    {
       "description": "Delegate user-decryption on Sepolia (testnet deployment, chainId 11155111)",
       "rawTx": "0x02f8d483aa36a703843b9aca008506fc23ac008303d09094f0ffdc93b7e186bc2f8cb3daa75d86d1930a433d80b86404f61a9500000000000000000000000090f79bf6eb2c4f870365e785982e1f101e93b9060000000000000000000000003c44cdddb6a900fa2b585dd299e03d12fa4293bc0000000000000000000000000000000000000000000000000000000070dbd880c001a08061c0062d5feb9125928b845bd3c8e5f4cc7ead390cbf9baf21fc28ffcb23baa0274ba5761b2141d97443837e93b784c2af6232720a29583ae41f41f508f88e4f",
       "expected": {
