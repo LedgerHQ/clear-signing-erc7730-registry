@@ -8,6 +8,8 @@ This repository maintains records of past and current metadata files in the `reg
 
 ```
 README.md                                    # top-level README file with submission process
+index.calldata.json                          # index of calldata descriptors (see "Index files")
+index.eip712.json                            # index of EIP-712 descriptors (see "Index files")
 specs/
   erc-7730.md                                # most advanced version of the spec but reference should be the ERC
   erc7730-v1.schema.json                     # the json schema of the latest version of the extension
@@ -42,6 +44,7 @@ ercs/
 - All ERC-7730 compatible files are prefixed with either `calldata` for smart contracts or `eip712` for EIP-712 messages.
 - All ERC-7730 compatible files are correctly validated against the schema file located at `specs/erc7730-v2.schema.json`.
 - Do not use the `calldata` or `eip712` prefixes for common files which are included by the ERC-7730 files and placed at the top level of the entity folder.
+- Each descriptor added or changed is accompanied by a test file so descriptors can be verified against the formatter implementations. See [Reference test cases](#reference-test-cases).
 
 ## How to validate
 
@@ -51,11 +54,11 @@ The `erc7730` Python package is available for validating and formatting ERC-7730
 # Install the erc7730 package (requires Python 3.12+)
 pip install erc7730
 
-# Validate all descriptors
-erc7730 lint registry/**/eip712-*.json registry/**/calldata-*.json
-
 # Validate a specific file
-erc7730 lint registry/entity/calldata-Contract.json
+erc7730 lint registry/uniswap/calldata-UniswapV3Router02.json
+
+# Validate all descriptors (exclude the tests/ and testsv2/ fixtures, which are not descriptors)
+erc7730 lint $(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) -not -path '*/tests/*' -not -path '*/testsv2/*' -not -name '*.tests.json')
 
 # Format all descriptors
 erc7730 format
@@ -70,7 +73,7 @@ If you have [uv](https://docs.astral.sh/uv/) installed, you can skip the install
 
 ```bash
 # Run any erc7730 command without installing it first
-uvx erc7730 lint registry/**/eip712-*.json registry/**/calldata-*.json
+uvx erc7730 lint registry/uniswap/calldata-UniswapV3Router02.json
 uvx erc7730 format
 ```
 
@@ -78,7 +81,7 @@ Or install it as a persistent uv-managed tool:
 
 ```bash
 uv tool install erc7730
-erc7730 lint registry/
+erc7730 lint registry/uniswap/calldata-UniswapV3Router02.json
 ```
 
 For more information about the ERC-7730 tools, visit the [erc7730 package on PyPI](https://pypi.org/project/erc7730/).
@@ -189,3 +192,12 @@ Test files should be placed in a `testsv2/` folder within your entity directory 
 2. **Use real transactions** when possible - they provide the most realistic test cases
 3. **Add descriptive labels** to help reviewers understand what each test validates
 4. **Test edge cases** like maximum values, zero values, and special addresses
+
+## Index files
+
+`index.calldata.json` and `index.eip712.json` at the repository root let wallets and libraries find the right descriptor for a transaction without downloading the whole registry. Both are keyed by [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)-style `eip155:$chainId:$address` identifiers:
+
+- `index.calldata.json` maps each identifier to the path of the descriptor for that contract.
+- `index.eip712.json` maps each identifier to its EIP-712 primary types, and each primary type to the descriptors defining it. Every entry also carries the keccak256 hashes of the `encodeType` strings it covers, so consumers can pick the right descriptor when several define the same primary type for the same contract.
+
+Both files are **generated** from the descriptors under `registry/` — do not edit them by hand. A CI job regenerates them on every change to `master` and opens a pull request when they change, so contributors do not need to update them. To regenerate locally, run `npm ci && npm run generate-index`.
