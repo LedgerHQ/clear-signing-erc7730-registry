@@ -37,7 +37,7 @@
       "expectedTexts": [
         "Spender",
         "0x7a250d5630B4cF53 9739dF2C5dAcb4c659 F2488D",
-        "Allow unlimited spending",
+        "Unlimited spending",
         "true",
         "Valid until",
         "2027-01-01 12:00:00 AM UTC"

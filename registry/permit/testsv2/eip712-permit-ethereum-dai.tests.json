@@ -40,7 +40,7 @@
         "owner": "Dai Stablecoin v2.0",
         "fields": [
           { "label": "Spender", "value": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D" },
-          { "label": "Allow unlimited spending", "value": "true" },
+          { "label": "Unlimited spending", "value": "true" },
           { "label": "Valid until", "value": "2027-01-01 00:00:00Z" }
         ]
       }

@@ -37,7 +37,7 @@
       "expectedTexts": [
         "Spender",
         "0x1111111254EEB25477 B68fb85Ed929f73A960 582",
-        "Allow unlimited spending",
+        "Unlimited spending",
         "true",
         "Valid until",
         "2026-09-18 02:40:00 AM UTC"
