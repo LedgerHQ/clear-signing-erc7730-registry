@@ -1,12 +1,6 @@
 name: Analyze
 
 on:
-  pull_request:
-    types: [ready_for_review, synchronize]
-    paths:
-      - 'registry/**/calldata-*.json'
-      # Auditor attestations share the descriptor name prefix — never analyze them.
-      - '!registry/**/sigs/**'
   workflow_dispatch:
     inputs:
       analysis_mode:
@@ -57,7 +51,8 @@ concurrency:
 jobs:
   analyze:
     name: ERC-7730 Analysis
-    if: github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch'
+    # Restore alongside the pull_request trigger if the workflow is re-enabled.
+    # if: github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch'
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 360
 
