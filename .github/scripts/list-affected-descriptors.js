@@ -33,11 +33,16 @@ const path = require('path');
 
 const repoRoot = process.cwd();
 
+const EXCLUDED_DIRS = new Set(['tests', 'testsv2', 'sigs']);
+
 function isDescriptorBasename(name) {
   return /^(calldata|eip712)-.*\.json$/.test(name) && !name.endsWith('.tests.json');
 }
 
-/** Recursively collect descriptor files under a directory, skipping test dirs. */
+/**
+ * Recursively collect descriptor files under a directory, skipping the test
+ * fixtures and the auditor attestations.
+ */
 function collectDescriptors(dir, out) {
   let entries;
   try {
@@ -48,7 +53,7 @@ function collectDescriptors(dir, out) {
   for (const entry of entries) {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name === 'tests' || entry.name === 'testsv2') continue;
+      if (EXCLUDED_DIRS.has(entry.name)) continue;
       collectDescriptors(full, out);
     } else if (entry.isFile() && isDescriptorBasename(entry.name)) {
       out.push(full);
