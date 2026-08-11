@@ -144,3 +144,47 @@ jobs:
             echo "::error::One or more files failed JSON schema validation"
             exit 1
           fi
+
+  validate_index:
+    name: 🔎 validate index
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Get all changed descriptor files
+        timeout-minutes: 5
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
+        with:
+          files: |
+            registry/**/*.json
+            ercs/**/*.json
+          files_ignore: |
+            registry/**/tests/**
+            registry/**/testsv2/**
+
+      - name: Setup node
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: npm ci
+
+      - name: Check that the index can still be built
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        # Each (chainId, address) maps to exactly one calldata descriptor, and
+        # two descriptors cannot register the same EIP-712 encodeType at one
+        # address. A pull request that breaks either would leave the index
+        # ungeneratable, which only surfaces after the merge, in the
+        # sync-indexes workflow — by then the conflict is already on master.
+        run: node tools/scripts/generate-index.js --validate
