@@ -5,6 +5,8 @@ on:
     types: [ready_for_review, synchronize]
     paths:
       - 'registry/**/calldata-*.json'
+      # Auditor attestations share the descriptor name prefix — never analyze them.
+      - '!registry/**/sigs/**'
   workflow_dispatch:
     inputs:
       analysis_mode:
@@ -71,6 +73,8 @@ jobs:
         with:
           files: |
             registry/**/calldata-*.json
+          files_ignore: |
+            registry/**/sigs/**
 
       - name: Set up uv
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -199,7 +203,7 @@ jobs:
               RESULTS="${RESULTS}❌ **${PROTOCOL}** — Critical issues found\n"
 
               CRITICALS_MD=$(ls "$SUBDIR"/CRITICALS_*.md 2>/dev/null | head -1)
-              CALLDATA_FILE=$(find registry -name "calldata-*.json" 2>/dev/null | grep -i "$(echo "$PROTOCOL" | tr '_' '-')" | head -1 || true)
+              CALLDATA_FILE=$(find registry -name "calldata-*.json" -not -path '*/sigs/*' 2>/dev/null | grep -i "$(echo "$PROTOCOL" | tr '_' '-')" | head -1 || true)
 
               if [ -f "$CRITICALS_MD" ]; then
                 while IFS='|' read -r _ col1 col2 col3 _; do
