@@ -20,7 +20,7 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: sourcifyeth/clear-signing-test-runner
-        ref: 3006d68e79c34278008000dff95a439d2b7c7665 # main @ 2026-06-08
+        ref: dae3cdabd0eab26173d7f7a31a2ca7e75bf07daf # v0.2.2 main @ 2026-08-06 
         path: sourcify-test-runner
         persist-credentials: false
 

@@ -280,6 +280,7 @@ jobs:
             registry/**/eip712-*.json
           files_ignore: |
             registry/**/tests/**
+            registry/**/sigs/**
 
       - name: Detect testsv2 files for changed descriptors
         id: detect
@@ -601,6 +602,7 @@ jobs:
           files_ignore: |
             registry/**/tests/**
             registry/**/testsv2/**
+            registry/**/sigs/**
 
       - name: Post comment
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0

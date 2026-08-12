@@ -35,6 +35,7 @@ jobs:
           files_ignore: |
             registry/**/tests/**
             registry/**/testsv2/**
+            registry/**/sigs/**
             registry/**/*.tests.json
 
       - name: Setup python
@@ -100,6 +101,11 @@ jobs:
           FAILED=0
 
           for file in $CHANGED_FILES; do
+            if echo "$file" | grep -qE '/sigs/'; then
+              echo "Skipping $file (auditor attestation, no schema yet)"
+              continue
+            fi
+
             # Resolve schema — folder-based dispatch for test files takes precedence,
             # since legacy test files do not carry a $schema field.
             if echo "$file" | grep -qE '/testsv2/.*\.tests\.json$'; then

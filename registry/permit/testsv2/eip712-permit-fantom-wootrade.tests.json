@@ -22,7 +22,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Geist Finance",
+          "name": "Wootrade Network",
           "version": "1",
           "chainId": 250,
           "verifyingContract": "0x6626c47c00f1d87902fc13eecfac3ed06d5e8d8a"

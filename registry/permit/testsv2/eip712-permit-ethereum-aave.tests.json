@@ -21,7 +21,7 @@
           ]
         },
         "primaryType": "Permit",
-        "domain": { "name": "Aave Token", "version": "1", "chainId": 1, "verifyingContract": "0x7Fc66500c84A76Ad7e9C93437bFc5Ac33E2DdAe9" },
+        "domain": { "name": "Aave token V3", "version": "2", "chainId": 1, "verifyingContract": "0x7Fc66500c84A76Ad7e9C93437bFc5Ac33E2DdAe9" },
         "message": {
           "owner": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
           "spender": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
