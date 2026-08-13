@@ -42,7 +42,7 @@
             "format": "tokenAmount",
             "params": {
               "tokenPath": "limits.[].token",
-              "threshold": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "threshold": "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe",
               "message": "Unlimited"
             },
             "visible": "always"
