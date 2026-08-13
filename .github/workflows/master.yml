@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-      - demo
-    paths-ignore:
-      - "developer-preview/**"
 
 permissions:
   id-token: write
@@ -14,10 +11,6 @@ permissions:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
-#env:
-#  ETHERSCAN_API_HOST: <set this secret to define a custom Etherscan API host>
-#  ETHERSCAN_API_KEY: <set this secret to inject Etherscan API key>
 
 jobs:
   validate_descriptors:
@@ -27,11 +20,11 @@ jobs:
     steps:
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Setup python
         timeout-minutes: 10
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: "3.12"
           cache: "pip"
@@ -42,28 +35,14 @@ jobs:
 
       - name: Validate ERC-7730 descriptors
         timeout-minutes: 10
-        run: erc7730 lint registry --gha
-
-  # TODO: To be removed once the registry ownership is transferred
-  update_cal:
-    name: 🔁 trigger updates
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    steps:
-      - name: Trigger update on LedgerHQ/crypto-assets
-        if: ${{ !cancelled() }}
-        timeout-minutes: 60
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          token: ${{ secrets.CI_BOT_TOKEN }}
-          repository: LedgerHQ/crypto-assets
-          event-type: submodules
-
-      - name: Trigger update on LedgerHQ/python-erc7730
-        if: ${{ !cancelled() }}
-        timeout-minutes: 60
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          token: ${{ secrets.CI_BOT_TOKEN }}
-          repository: LedgerHQ/python-erc7730
-          event-type: submodules
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+        run: |
+          # Lint only root descriptors. Exclude the test fixtures under tests/ and
+          # testsv2/ and the auditor attestations under sigs/ (same set as
+          # pull_request.yml's files_ignore) — they are not ERC-7730 descriptors
+          # and fail descriptor validation.
+          FILES=$(find registry -type f \( -name 'calldata-*.json' -o -name 'eip712-*.json' \) \
+            -not -path '*/tests/*' -not -path '*/testsv2/*' -not -path '*/sigs/*' \
+            -not -name '*.tests.json')
+          erc7730 lint $FILES --gha
