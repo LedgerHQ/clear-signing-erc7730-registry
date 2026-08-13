@@ -21,7 +21,7 @@ runs:
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: llbartekll/clear-signing
-        ref: 7aea31da1a5a0363fcbe1e0ea089c7294e29229f # main @ 2026-06-22
+        ref: 10605ba78f3d6f3f13102e0f3a3ecbc44ac500dc # main @ 2026-08-13
         path: cs-runner
         persist-credentials: false
 
