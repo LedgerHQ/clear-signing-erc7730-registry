@@ -4,7 +4,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 1, "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9" }],
-      "domain": { "name": "Aave Token", "version": "1" }
+      "domain": { "name": "Aave token V3", "version": "2" }
     }
   },
   "metadata": { "owner": "Aave" }

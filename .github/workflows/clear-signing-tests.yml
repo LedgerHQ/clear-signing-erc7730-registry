@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "registry/**/*.json"
+      - "ercs/**/*.json"
 
   pull_request_target:
     types: [labeled]
@@ -265,70 +266,50 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       has_tests: ${{ steps.detect.outputs.has_tests }}
+      has_affected: ${{ steps.detect.outputs.has_affected }}
       test_matrix: ${{ steps.detect.outputs.test_matrix }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Get changed descriptors and testsv2 files
+      - name: Checkout base scripts
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-scripts
+          sparse-checkout: .github/scripts
+
+      - name: Get changed descriptor, shared and testsv2 files
         id: changed-files
         uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
         with:
           files: |
-            registry/**/calldata-*.json
-            registry/**/eip712-*.json
+            registry/**/*.json
+            ercs/**/*.json
           files_ignore: |
             registry/**/tests/**
+            registry/**/sigs/**
 
-      - name: Detect testsv2 files for changed descriptors
+      - name: Detect testsv2 files for affected descriptors
         id: detect
         env:
           CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          DELETED_FILES: ${{ steps.changed-files.outputs.deleted_files }}
         run: |
-          TEST_ENTRIES=()
-          HAS_TESTS="false"
-          declare -A SEEN
-
-          for file in $CHANGED_FILES; do
-            # Map either a changed descriptor or a changed shared-test file to (descriptor, test_file)
-            if [[ "$file" == */testsv2/*.tests.json ]]; then
-              test_file="$file"
-              descriptor_name=$(basename "$file" .tests.json)
-              entity_dir=$(dirname "$(dirname "$file")")
-              descriptor="${entity_dir}/${descriptor_name}.json"
-            else
-              descriptor="$file"
-              descriptor_name=$(basename "$file" .json)
-              entity_dir=$(dirname "$file")
-              test_file="${entity_dir}/testsv2/${descriptor_name}.tests.json"
-            fi
-
-            # Filter on descriptor prefix
-            case "$descriptor_name" in
-              calldata-*|eip712-*) ;;
-              *) continue ;;
-            esac
-
-            # Dedupe (PR may change both descriptor and test file)
-            [[ -n "${SEEN[$descriptor]:-}" ]] && continue
-            SEEN[$descriptor]=1
-
-            # Skip if either file is missing on disk
-            [[ -f "$descriptor" && -f "$test_file" ]] || continue
-
-            HAS_TESTS="true"
-            entity=$(echo "$entity_dir" | sed 's|registry/||' | cut -d'/' -f1)
-            TEST_ENTRIES+=("{\"descriptor\":\"$descriptor\",\"test_file\":\"$test_file\",\"entity\":\"$entity\",\"descriptor_name\":\"$descriptor_name\"}")
-          done
-
-          if [ "$HAS_TESTS" == "true" ]; then
-            MATRIX_JSON=$(printf '%s\n' "${TEST_ENTRIES[@]}" | jq -sc '.')
-            echo "test_matrix=$MATRIX_JSON" >> $GITHUB_OUTPUT
-          else
-            echo "test_matrix=[]" >> $GITHUB_OUTPUT
-          fi
-          echo "has_tests=$HAS_TESTS" >> $GITHUB_OUTPUT
+          # Expand changed files to affected descriptors, following "includes"
+          # references transitively: a change to a shared file (ercs/*.json or
+          # an entity-local common file) must run the tests of every descriptor
+          # that includes it. Deleted files are passed too, so removing a
+          # shared file still runs (and fails) its includers' tests.
+          # The script is taken from the base ref: under pull_request_target,
+          # only base-controlled code may execute.
+          RESULT=$(CHANGED_FILES="$CHANGED_FILES $DELETED_FILES" \
+            node base-scripts/.github/scripts/list-affected-descriptors.js)
+          echo "$RESULT" | jq .
+          echo "test_matrix=$(echo "$RESULT" | jq -c '.matrix')" >> $GITHUB_OUTPUT
+          echo "has_tests=$(echo "$RESULT" | jq -r '.has_tests')" >> $GITHUB_OUTPUT
+          echo "has_affected=$(echo "$RESULT" | jq -r '.has_affected')" >> $GITHUB_OUTPUT
 
   sourcify-tests:
     name: Sourcify tests for ${{ matrix.test.entity }}/${{ matrix.test.descriptor_name }}
@@ -587,28 +568,15 @@ jobs:
     if: needs.check-permissions.outputs.can_run_tests == 'true' && needs.detect-testsv2.outputs.has_tests == 'false'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Check for changed descriptors
-        id: check
-        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
-        with:
-          files: |
-            registry/**/calldata-*.json
-            registry/**/eip712-*.json
-          files_ignore: |
-            registry/**/tests/**
-            registry/**/testsv2/**
-
       - name: Post comment
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          ANY_CHANGED: ${{ steps.check.outputs.any_changed }}
+          # Affected descriptors = directly changed ones, plus descriptors
+          # whose transitive "includes" chain contains a changed shared file.
+          ANY_AFFECTED: ${{ needs.detect-testsv2.outputs.has_affected }}
         with:
           script: |
-            const anyChanged = process.env.ANY_CHANGED === 'true';
+            const anyAffected = process.env.ANY_AFFECTED === 'true';
 
             // Same comment as post-implementation-results — exactly one
             // "## Clear Signing Tests" comment per PR, in either warning or
@@ -618,18 +586,18 @@ jobs:
             });
             const existing = comments.find(c => c.user.type === 'Bot' && c.body.startsWith('## Clear Signing Tests'));
 
-            if (anyChanged) {
-              const body = `## Clear Signing Tests\n\nNo testsv2 files found for the changed descriptors.\n\nCreate a test file at \`registry/<entity>/testsv2/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../blob/master/README.md#reference-test-cases) for details.`;
+            if (anyAffected) {
+              const body = `## Clear Signing Tests\n\nNo testsv2 files found for the affected descriptors (directly changed, or including a changed shared file).\n\nCreate a test file at \`registry/<entity>/testsv2/<descriptor-name>.tests.json\`\n\nSee [testing documentation](../blob/master/README.md#reference-test-cases) for details.`;
               const params = { owner: context.repo.owner, repo: context.repo.repo, body };
               if (existing) {
                 await github.rest.issues.updateComment({ ...params, comment_id: existing.id });
               } else {
                 await github.rest.issues.createComment({ ...params, issue_number: context.issue.number });
               }
-              // Block the PR — descriptor changed without a matching testsv2 file.
-              core.setFailed('Missing testsv2 file(s) for changed descriptors.');
+              // Block the PR — descriptor affected without a matching testsv2 file.
+              core.setFailed('Missing testsv2 file(s) for affected descriptors.');
             } else if (existing) {
-              // No descriptors changed and no testsv2 either — nothing to say. Clear any stale comment.
+              // No descriptors affected and no testsv2 either — nothing to say. Clear any stale comment.
               await github.rest.issues.deleteComment({
                 owner: context.repo.owner, repo: context.repo.repo, comment_id: existing.id
               });

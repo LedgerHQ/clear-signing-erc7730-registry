@@ -22,7 +22,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Tether USD",
+          "name": "TetherToken",
           "version": "1",
           "chainId": 43114,
           "verifyingContract": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7"

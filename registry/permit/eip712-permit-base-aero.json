@@ -4,7 +4,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 8453, "address": "0x940181a94A35A4569E4529A3CDfB74e38FD98631" }],
-      "domain": { "name": "Aero", "version": "1" }
+      "domain": { "name": "Aerodrome", "version": "1" }
     }
   },
   "metadata": { "owner": "AERO" }
