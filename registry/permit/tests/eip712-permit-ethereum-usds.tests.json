@@ -21,7 +21,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Clear Signing Token",
+          "name": "USDS Stablecoin",
           "version": "1",
           "chainId": 1,
           "verifyingContract": "0xdC035D45d973E3EC169d2276DDab16f1e407384F"

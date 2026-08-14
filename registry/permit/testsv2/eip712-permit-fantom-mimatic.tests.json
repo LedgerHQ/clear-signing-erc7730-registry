@@ -21,7 +21,7 @@
           ]
         },
         "primaryType": "Permit",
-        "domain": { "name": "Beefy", "version": "1", "chainId": 250, "verifyingContract": "0xfb98b335551a418cd0737375a2ea0ded62ea213b" },
+        "domain": { "name": "miMATIC", "version": "1", "chainId": 250, "verifyingContract": "0xfb98b335551a418cd0737375a2ea0ded62ea213b" },
         "message": {
           "owner": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
           "spender": "0x1111111254EEB25477B68fb85Ed929f73A960582",

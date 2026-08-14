@@ -22,7 +22,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Wrapped stETH",
+          "name": "Axelar Wrapped wstETH",
           "version": "1",
           "chainId": 42161,
           "verifyingContract": "0x9cfB13E6c11054ac9fcB92BA89644F30775436e4"
