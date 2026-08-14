@@ -22,7 +22,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Tether USD",
+          "name": "USD₮0",
           "version": "1",
           "chainId": 42161,
           "verifyingContract": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"

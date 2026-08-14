@@ -21,7 +21,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Clear Signing ERC20",
+          "name": "QuickSwap",
           "version": "1",
           "chainId": 137,
           "verifyingContract": "0xB5C064F955D8e7F38fE0460C556a72987494eE17"

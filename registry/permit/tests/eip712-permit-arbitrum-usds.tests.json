@@ -21,7 +21,7 @@
         },
         "primaryType": "Permit",
         "domain": {
-          "name": "Gains Network",
+          "name": "USDS Stablecoin",
           "version": "1",
           "chainId": 42161,
           "verifyingContract": "0x6491c05A82219b8D1479057361ff1654749b876b"

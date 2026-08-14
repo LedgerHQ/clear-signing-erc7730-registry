@@ -20,7 +20,7 @@
           ]
         },
         "primaryType": "Permit",
-        "domain": { "name": "USD Coin", "version": "1", "chainId": 59144, "verifyingContract": "0x176211869cA2b568f2A7D4EE941E073a821EE1ff" },
+        "domain": { "name": "USDC", "version": "2", "chainId": 59144, "verifyingContract": "0x176211869cA2b568f2A7D4EE941E073a821EE1ff" },
         "message": {
           "owner": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
           "spender": "0x8617E340B3D01FA5F11F306F4090FD50E238070D",
