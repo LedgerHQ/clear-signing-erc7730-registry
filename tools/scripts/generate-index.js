@@ -9,9 +9,15 @@
  * downstream libraries, so a stale index silently breaks clear signing for the
  * affected contracts.
  *
- * Usage: node tools/scripts/generate-index.js [--check]
- *   default   rewrites both index files in place
- *   --check   exits 1 if the committed files differ from the generated ones
+ * Usage: node tools/scripts/generate-index.js [--check|--validate]
+ *   default     rewrites both index files in place
+ *   --check     exits 1 if the committed files differ from the generated ones
+ *   --validate  builds the indexes in memory and exits 1 if that is not
+ *               possible — two descriptors claiming one index key, or a
+ *               descriptor whose "includes" cannot be resolved. Writes and
+ *               compares nothing, so it can run on a pull request, where the
+ *               committed index files are still the pre-merge ones (they are
+ *               regenerated on master by the sync-indexes workflow).
  */
 
 const fs = require('fs');
@@ -40,8 +46,8 @@ const EXCLUDED_DIRS = new Set(['tests', 'testsv2', 'sigs']);
  * prefix and are therefore never indexed in their own right — they only
  * contribute through the descriptors that include them.
  *
- * Sorting matters: it makes the "first descriptor wins" tie-break below
- * deterministic when two descriptors claim the same chain and address.
+ * Sorting matters: it keeps the generated arrays, and the collision messages
+ * below, identical from one run to the next.
  */
 function findDescriptors(dir, found = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -197,11 +203,32 @@ function serialize(index) {
 
 function main() {
   const check = process.argv.includes('--check');
-  const { calldata, eip712, errors } = generateIndexes();
+  const validate = process.argv.includes('--validate');
+
+  // indexDescriptor() throws when two descriptors claim one index key. Report
+  // that as a plain message rather than a stack trace — it is a registry
+  // problem for a contributor to fix, not a bug in this script.
+  let calldata;
+  let eip712;
+  let errors;
+  try {
+    ({ calldata, eip712, errors } = generateIndexes());
+  } catch (error) {
+    process.stderr.write(`${error.message}\n`);
+    process.exit(1);
+  }
 
   if (errors.length) {
     for (const error of errors) process.stderr.write(`Failed to resolve ${error}\n`);
     process.exit(1);
+  }
+
+  if (validate) {
+    process.stdout.write(
+      `Index is buildable (${Object.keys(calldata).length} calldata, ` +
+        `${Object.keys(eip712).length} eip712 entries).\n`,
+    );
+    return;
   }
 
   let stale = false;
