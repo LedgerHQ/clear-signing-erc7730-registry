@@ -14,7 +14,7 @@
     "formats": {
       "deposit(uint256 amount_)": {
         "$id": "deposit",
-        "intent": "Supply to Surge Earn",
+        "intent": "Supply to Surge",
         "fields": [{ "path": "amount_", "label": "Amount", "format": "tokenAmount", "params": { "token": "$.metadata.constants.usdc" } }]
       },
       "withdraw(uint256 amount_)": {
