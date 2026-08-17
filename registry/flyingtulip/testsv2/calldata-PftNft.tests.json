@@ -25,7 +25,7 @@
         "owner": "Flying Tulip",
         "fields": [
           { "label": "Operator", "value": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045" },
-          { "label": "Access rights", "value": "true" }
+          { "label": "Access rights", "value": "Grant all" }
         ],
         "interpolatedIntent": "Set operator 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
       }

@@ -4,7 +4,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 42161, "address": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8" }],
-      "domain": { "name": "USD Coin", "version": "2" }
+      "domain": { "name": "USD Coin (Arb1)", "version": "1" }
     }
   },
   "metadata": { "owner": "USDC (bridged)" }
