@@ -24,8 +24,13 @@ const REGISTRY_DIR = path.join(REPO_ROOT, 'registry');
 const CALLDATA_INDEX = 'index.calldata.json';
 const EIP712_INDEX = 'index.eip712.json';
 
-/** Test fixtures live alongside descriptors but must never be indexed. */
-const EXCLUDED_DIRS = new Set(['tests', 'testsv2']);
+/**
+ * Test fixtures and auditor attestations live alongside descriptors but must
+ * never be indexed. Attestation filenames under sigs/ start with the descriptor
+ * name they attest (calldata-stETH.eip155-1-0xAbc….json), so they match the
+ * descriptor pattern below and would otherwise be parsed as descriptors.
+ */
+const EXCLUDED_DIRS = new Set(['tests', 'testsv2', 'sigs']);
 
 /**
  * Collects descriptor paths under registry/, repo-relative and sorted.
