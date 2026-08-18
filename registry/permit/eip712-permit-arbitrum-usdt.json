@@ -4,7 +4,7 @@
   "context": {
     "eip712": {
       "deployments": [{ "chainId": 42161, "address": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9" }],
-      "domain": { "name": "USD₮0", "version": "1" }
+      "domain": { "name": "USD\u20ae0", "version": "1" }
     }
   },
   "metadata": { "owner": "USDT" }
