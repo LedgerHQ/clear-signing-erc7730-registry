@@ -21,7 +21,12 @@
           ]
         },
         "primaryType": "Permit",
-        "domain": { "name": "Wrapped liquid staked Ether 2.0", "version": "1", "chainId": 1, "verifyingContract": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0" },
+        "domain": {
+          "name": "Wrapped liquid staked Ether 2.0",
+          "version": "1",
+          "chainId": 1,
+          "verifyingContract": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0"
+        },
         "message": {
           "owner": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
           "spender": "0x111111125421cA6dc452d289314280a0f8842A65",
