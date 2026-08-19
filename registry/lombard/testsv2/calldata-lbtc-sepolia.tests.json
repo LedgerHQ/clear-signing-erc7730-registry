@@ -1,0 +1,35 @@
+{
+  "$schema": "../../../specs/erc7730-tests-v2.schema.json",
+  "descriptor": "../calldata-lbtc-sepolia.json",
+  "dataProvider": {
+    "tokens": { "0x731efa688f3679688cf60a3993b8658138953ed6": { "symbol": "LBTC", "decimals": 8, "name": "Lombard Staked Bitcoin" } }
+  },
+  "tests": [
+    {
+      "description": "Approve - unlimited allowance - chain 11155111",
+      "rawTx": "0x02f86f83aa36a7038405f5e1008408890f0082cb2294731efa688f3679688cf60a3993b8658138953ed680b844095ea7b30000000000000000000000006a000f20005980200259b80c5102003040001068ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0",
+      "expected": {
+        "intent": "Approve",
+        "owner": "Lombard Finance",
+        "fields": [
+          { "label": "Amount to Approve", "value": "Unlimited LBTC" },
+          { "label": "Spender", "value": "0x6A000F20005980200259B80c5102003040001068" }
+        ]
+      }
+    },
+    {
+      "description": "Permit - unlimited allowance - chain 11155111",
+      "rawTx": "0x02f9011083aa36a7048405f5e1008408890f0083015f9094731efa688f3679688cf60a3993b8658138953ed680b8e4d505accf000000000000000000000000e57f3834700e9fe0166c97be35e97a053d1ac5f80000000000000000000000006a000f20005980200259b80c5102003040001068ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000006a445880000000000000000000000000000000000000000000000000000000000000001b11111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222c0",
+      "expected": {
+        "intent": "Permit",
+        "owner": "Lombard Finance",
+        "fields": [
+          { "label": "Owner", "value": "0xe57f3834700E9Fe0166c97Be35E97a053d1AC5f8" },
+          { "label": "Spender", "value": "0x6A000F20005980200259B80c5102003040001068" },
+          { "label": "Allowance", "value": "Unlimited LBTC" },
+          { "label": "Valid Until", "value": "2026-07-01 00:00:00Z" }
+        ]
+      }
+    }
+  ]
+}

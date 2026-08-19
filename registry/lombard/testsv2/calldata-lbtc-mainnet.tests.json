@@ -60,6 +60,32 @@
         "owner": "Lombard Finance",
         "fields": [{ "label": "Amount to Send", "value": "0.10935535 LBTC" }, { "label": "Recipient", "value": "ldzx-001.eth" }]
       }
+    },
+    {
+      "description": "Approve - unlimited allowance - chain 1",
+      "rawTx": "0x02f86d01819e8405f5e1008408890f0082cb22948236a87084f8b84306f72007f36f2618a563449480b844095ea7b30000000000000000000000006a000f20005980200259b80c5102003040001068ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0",
+      "expected": {
+        "intent": "Approve",
+        "owner": "Lombard Finance",
+        "fields": [
+          { "label": "Amount to Approve", "value": "Unlimited LBTC" },
+          { "label": "Spender", "value": "0x6A000F20005980200259B80c5102003040001068" }
+        ]
+      }
+    },
+    {
+      "description": "Permit - unlimited allowance - chain 1",
+      "rawTx": "0x02f9010e01819f8405f5e1008408890f0083015f90948236a87084f8b84306f72007f36f2618a563449480b8e4d505accf000000000000000000000000e57f3834700e9fe0166c97be35e97a053d1ac5f80000000000000000000000006a000f20005980200259b80c5102003040001068ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000006a445880000000000000000000000000000000000000000000000000000000000000001b11111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222c0",
+      "expected": {
+        "intent": "Permit",
+        "owner": "Lombard Finance",
+        "fields": [
+          { "label": "Owner", "value": "ldzx-001.eth" },
+          { "label": "Spender", "value": "0x6A000F20005980200259B80c5102003040001068" },
+          { "label": "Allowance", "value": "Unlimited LBTC" },
+          { "label": "Valid Until", "value": "2026-07-01 00:00:00Z" }
+        ]
+      }
     }
   ]
 }
