@@ -12,7 +12,11 @@
             "path": "details.amount",
             "label": "Amount allowance",
             "format": "tokenAmount",
-            "params": { "tokenPath": "details.token" },
+            "params": {
+              "tokenPath": "details.token",
+              "threshold": "0xffffffffffffffffffffffffffffffffffffffff",
+              "message": "Unlimited"
+            },
             "visible": "always"
           },
           { "path": "details.expiration", "label": "Approval expires", "format": "date", "params": { "encoding": "timestamp" } },
@@ -28,7 +32,11 @@
             "path": "details.[].amount",
             "label": "Amount allowance",
             "format": "tokenAmount",
-            "params": { "tokenPath": "details.[].token" }
+            "params": {
+              "tokenPath": "details.[].token",
+              "threshold": "0xffffffffffffffffffffffffffffffffffffffff",
+              "message": "Unlimited"
+            }
           },
           { "path": "details.[].expiration", "label": "Approval expires", "format": "date", "params": { "encoding": "timestamp" } },
           { "label": "Sig Deadline", "path": "sigDeadline", "visible": "never" }
@@ -49,7 +57,11 @@
             "path": "permitted.amount",
             "label": "Amount",
             "format": "tokenAmount",
-            "params": { "tokenPath": "permitted.token" },
+            "params": {
+              "tokenPath": "permitted.token",
+              "threshold": "0x8000000000000000000000000000000000000000000000000000000000000000",
+              "message": "Any amount"
+            },
             "visible": "always"
           },
           { "path": "deadline", "label": "Deadline", "format": "date", "params": { "encoding": "timestamp" }, "visible": "always" }
