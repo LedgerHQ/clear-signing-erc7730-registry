@@ -22,7 +22,8 @@
             "label": "Amount",
             "value": "25000 USDC"
           }
-        ]
+        ],
+        "interpolatedIntent": "Supply 25000 USDC to Surge"
       }
     },
     {
@@ -36,7 +37,8 @@
             "label": "Amount",
             "value": "25000 USDC"
           }
-        ]
+        ],
+        "interpolatedIntent": "Supply 25000 USDC to Surge"
       }
     },
     {
@@ -50,7 +52,8 @@
             "label": "Amount",
             "value": "1000 USDC"
           }
-        ]
+        ],
+        "interpolatedIntent": "Withdraw 1000 USDC from Surge"
       }
     },
     {
@@ -68,7 +71,8 @@
             "label": "Fixed market",
             "value": "11"
           }
-        ]
+        ],
+        "interpolatedIntent": "Request 20 USDC withdrawal"
       }
     },
     {
@@ -86,7 +90,8 @@
             "label": "Exposure",
             "value": "100%"
           }
-        ]
+        ],
+        "interpolatedIntent": "Set exposure 100%"
       }
     },
     {
@@ -112,7 +117,8 @@
             "label": "Exposure",
             "value": "40%"
           }
-        ]
+        ],
+        "interpolatedIntent": "Set exposures 60% and 40%"
       }
     },
     {
@@ -138,7 +144,8 @@
             "label": "Exposure",
             "value": "40%"
           }
-        ]
+        ],
+        "interpolatedIntent": "Set exposures 60% and 40%"
       }
     }
   ]
