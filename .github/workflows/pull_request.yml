@@ -2,8 +2,6 @@ name: ✨ pull request
 
 on:
   pull_request:
-    paths-ignore:
-      - "developer-preview/**"
 
 permissions:
   contents: read
@@ -24,37 +22,60 @@ jobs:
     steps:
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Get all changed descriptor files
+      - name: Get all changed descriptor and shared files
         timeout-minutes: 5
         id: changed-descriptor-files
-        uses: tj-actions/changed-files@v47.0.5
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
         with:
           files: |
-            registry/**/eip712-*.json
-            registry/**/calldata-*.json
-          files_ignore: registry/**/tests/**
+            registry/**/*.json
+            ercs/**/*.json
+          files_ignore: |
+            registry/**/tests/**
+            registry/**/testsv2/**
+            registry/**/sigs/**
+            registry/**/*.tests.json
+
+      - name: Resolve affected descriptors
+        timeout-minutes: 5
+        id: affected-descriptors
+        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed-descriptor-files.outputs.all_changed_files }}
+          DELETED_FILES: ${{ steps.changed-descriptor-files.outputs.deleted_files }}
+        run: |
+          # A changed shared file (ercs/*.json or an entity-local common file)
+          # affects every descriptor whose "includes" chain contains it, so
+          # those descriptors must be linted too. Shared files are not linted
+          # standalone — they are partial descriptors, validated through their
+          # includers.
+          RESULT=$(CHANGED_FILES="$CHANGED_FILES $DELETED_FILES" \
+            node .github/scripts/list-affected-descriptors.js)
+          echo "$RESULT" | jq .
+          echo "descriptors=$(echo "$RESULT" | jq -r '.affected_descriptors | join(" ")')" >> $GITHUB_OUTPUT
+          echo "any_affected=$(echo "$RESULT" | jq -r '.has_affected')" >> $GITHUB_OUTPUT
 
       - name: Setup python
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
-        uses: actions/setup-python@v6
+        if: steps.affected-descriptors.outputs.any_affected == 'true'
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: "3.12"
           cache: "pip"
 
       - name: Install ERC-7730 library
         timeout-minutes: 10
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
+        if: steps.affected-descriptors.outputs.any_affected == 'true'
         run: pip install erc7730
 
-      - name: Validate ERC-7730 descriptors changed in pull request
+      - name: Validate ERC-7730 descriptors affected by pull request
         timeout-minutes: 120
-        if: steps.changed-descriptor-files.outputs.any_changed == 'true'
+        if: steps.affected-descriptors.outputs.any_affected == 'true'
         env:
-          CHANGED_FILES: ${{ steps.changed-descriptor-files.outputs.all_changed_files }}
-        run: erc7730 lint $CHANGED_FILES --gha
+          AFFECTED_FILES: ${{ steps.affected-descriptors.outputs.descriptors }}
+        run: erc7730 lint $AFFECTED_FILES --gha
 
   validate_schemas:
     name: 🔎 validate JSON schemas
@@ -63,22 +84,21 @@ jobs:
     steps:
       - name: Checkout
         timeout-minutes: 10
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Get all changed JSON files
         timeout-minutes: 5
         id: changed-json-files
-        uses: tj-actions/changed-files@v47.0.5
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
         with:
           files: |
             registry/**/*.json
             ercs/**/*.json
-          files_ignore: registry/**/tests/**
 
       - name: Setup python
         timeout-minutes: 10
         if: steps.changed-json-files.outputs.any_changed == 'true'
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: "3.12"
           cache: "pip"
@@ -95,11 +115,25 @@ jobs:
           CHANGED_FILES: ${{ steps.changed-json-files.outputs.all_changed_files }}
         run: |
           DEFAULT_SCHEMA="specs/erc7730-v2.schema.json"
+          TESTS_V1_SCHEMA="specs/erc7730-tests.schema.json"
+          TESTS_V2_SCHEMA="specs/erc7730-tests-v2.schema.json"
           FAILED=0
 
           for file in $CHANGED_FILES; do
-            # Extract $schema value from the JSON file
-            SCHEMA_REF=$(python3 -c '
+            if echo "$file" | grep -qE '/sigs/'; then
+              echo "Skipping $file (auditor attestation, no schema yet)"
+              continue
+            fi
+
+            # Resolve schema — folder-based dispatch for test files takes precedence,
+            # since legacy test files do not carry a $schema field.
+            if echo "$file" | grep -qE '/testsv2/.*\.tests\.json$'; then
+              SCHEMA_PATH="$TESTS_V2_SCHEMA"
+            elif echo "$file" | grep -qE '/tests/.*\.tests\.json$'; then
+              SCHEMA_PATH="$TESTS_V1_SCHEMA"
+            else
+              # Descriptor / shared / ercs file — read its $schema field if present.
+              SCHEMA_REF=$(python3 -c '
           import json, sys
           try:
               with open(sys.argv[1]) as f:
@@ -109,18 +143,18 @@ jobs:
               print("")
           ' "$file")
 
-            # Resolve schema path
-            if [ -z "$SCHEMA_REF" ]; then
-              SCHEMA_PATH="$DEFAULT_SCHEMA"
-            elif echo "$SCHEMA_REF" | grep -qE '^https?://'; then
-              SCHEMA_PATH="$DEFAULT_SCHEMA"
-            else
-              FILE_DIR=$(dirname "$file")
-              RESOLVED=$(cd "$FILE_DIR" && realpath -m "$SCHEMA_REF" 2>/dev/null || echo "")
-              if [ -n "$RESOLVED" ] && [ -f "$RESOLVED" ]; then
-                SCHEMA_PATH="$RESOLVED"
-              else
+              if [ -z "$SCHEMA_REF" ]; then
                 SCHEMA_PATH="$DEFAULT_SCHEMA"
+              elif echo "$SCHEMA_REF" | grep -qE '^https?://'; then
+                SCHEMA_PATH="$DEFAULT_SCHEMA"
+              else
+                FILE_DIR=$(dirname "$file")
+                RESOLVED=$(cd "$FILE_DIR" && realpath -m "$SCHEMA_REF" 2>/dev/null || echo "")
+                if [ -n "$RESOLVED" ] && [ -f "$RESOLVED" ]; then
+                  SCHEMA_PATH="$RESOLVED"
+                else
+                  SCHEMA_PATH="$DEFAULT_SCHEMA"
+                fi
               fi
             fi
 
@@ -135,3 +169,47 @@ jobs:
             echo "::error::One or more files failed JSON schema validation"
             exit 1
           fi
+
+  validate_index:
+    name: 🔎 validate index
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Get all changed descriptor files
+        timeout-minutes: 5
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
+        with:
+          files: |
+            registry/**/*.json
+            ercs/**/*.json
+          files_ignore: |
+            registry/**/tests/**
+            registry/**/testsv2/**
+
+      - name: Setup node
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: npm ci
+
+      - name: Check that the index can still be built
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        # Each (chainId, address) maps to exactly one calldata descriptor, and
+        # two descriptors cannot register the same EIP-712 encodeType at one
+        # address. A pull request that breaks either would leave the index
+        # ungeneratable, which only surfaces after the merge, in the
+        # sync-indexes workflow — by then the conflict is already on master.
+        run: node tools/scripts/generate-index.js --validate

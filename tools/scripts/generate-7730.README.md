@@ -252,7 +252,7 @@ After generating descriptors:
 2. **Fill in TODOs** (deployment addresses if not provided)
 3. **Lint** the files:
    ```bash
-   source .env && source tools/linter/.venv/bin/activate && erc7730 lint registry/myprotocol/
+   source .env && source tools/linter/.venv/bin/activate && erc7730 lint registry/myprotocol/calldata-MyContract.json
    ```
 4. **Generate tests**:
    ```bash

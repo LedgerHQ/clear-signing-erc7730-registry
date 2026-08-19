@@ -27,7 +27,7 @@
     "owner": "Aave DAO",
     "info": { "url": "https://aave.com", "deploymentDate": "2024-10-09T21:46:47Z" },
     "enums": { "interestRateMode": { "0": "none", "1": "deprecated", "2": "variable" } },
-    "constants": { "max": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff" },
+    "constants": { "max": "0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe" },
     "contractName": "PoolInstance"
   },
   "display": {
