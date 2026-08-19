@@ -5,7 +5,11 @@
  * keys "context.contract.abi" and "context.eip712.schemas". None is an error.
  *
  * Reads the changed files from CHANGED_FILES and from the arguments. Writes a
- * Markdown comment body to stdout, or nothing. Does not resolve "includes".
+ * Markdown comment body to stdout, or nothing.
+ *
+ * It reads a shared file as well, but it does not resolve "includes". A format
+ * belongs to the file that declares it, so the report names the file that the
+ * author must edit, and not the descriptors that inherit the format.
  */
 
 const fs = require('fs');
@@ -29,7 +33,13 @@ function section(title, note, items) {
 function main() {
   const changed = [...process.argv.slice(2), ...(process.env.CHANGED_FILES || '').split(/\s+/)]
     .map((f) => f.trim())
-    .filter((f) => /^registry\/[^/]+\/(calldata|eip712)-.*\.json$/.test(f));
+    // A descriptor or a shared file, at any depth, as the other tools accept
+    // one. The second test keeps out a fixture and an attestation.
+    .filter(
+      (f) =>
+        /^(registry|ercs)\/(.+\/)?(calldata|eip712|common)-[^/]*\.json$/.test(f) &&
+        !/\/(tests|testsv2|sigs)\//.test(f),
+    );
 
   const noIntent = [];
   const deprecated = [];
