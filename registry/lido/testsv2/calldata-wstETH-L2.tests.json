@@ -44,10 +44,7 @@
       "expected": {
         "intent": "Increase allowance",
         "owner": "Lido DAO",
-        "fields": [
-          { "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" },
-          { "label": "Amount", "value": "1.5 wstETH" }
-        ]
+        "fields": [{ "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" }, { "label": "Amount", "value": "1.5 wstETH" }]
       }
     },
     {
@@ -56,10 +53,7 @@
       "expected": {
         "intent": "Decrease allowance",
         "owner": "Lido DAO",
-        "fields": [
-          { "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" },
-          { "label": "Amount", "value": "0.25 wstETH" }
-        ]
+        "fields": [{ "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" }, { "label": "Amount", "value": "0.25 wstETH" }]
       }
     },
     {

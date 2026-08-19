@@ -14,10 +14,7 @@
       "expected": {
         "intent": "Approve stETH",
         "owner": "Lido DAO",
-        "fields": [
-          { "label": "Spender", "value": "0x8E01013243a96601a86eb3153F0d9Fa4fbFb6957" },
-          { "label": "Amount", "value": "100 stETH" }
-        ],
+        "fields": [{ "label": "Spender", "value": "0x8E01013243a96601a86eb3153F0d9Fa4fbFb6957" }, { "label": "Amount", "value": "100 stETH" }],
         "interpolatedIntent": "Allow to spend 100 stETH"
       }
     },
