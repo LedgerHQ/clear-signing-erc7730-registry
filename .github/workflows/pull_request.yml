@@ -213,3 +213,30 @@ jobs:
         # ungeneratable, which only surfaces after the merge, in the
         # sync-indexes workflow — by then the conflict is already on master.
         run: node tools/scripts/generate-index.js --validate
+
+  validate_file_names:
+    name: 🔎 validate file names
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Check the file names in each entity folder
+        timeout-minutes: 5
+        run: |
+          # The prefix says what a file is, and the three subfolders below have
+          # their own names.
+          FAILED=0
+          while IFS= read -r file; do
+            echo "::error file=${file},line=1::Unexpected name. A file in an entity folder must be calldata-*.json, eip712-*.json or common-*.json — see the \"Registry structure\" section of README.md."
+            FAILED=1
+          done < <(find registry -mindepth 2 \
+                     \( -type d \( -name tests -o -name testsv2 -o -name sigs \) -prune \) -o \
+                     \( -type f \
+                        ! -name 'calldata-*.json' \
+                        ! -name 'eip712-*.json' \
+                        ! -name 'common-*.json' -print \))
+
+          [ "$FAILED" -eq 0 ] || exit 1
