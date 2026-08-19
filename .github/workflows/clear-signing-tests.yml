@@ -294,6 +294,17 @@ jobs:
 
           cat pr-context/context.json
 
+      - name: Collect the recommendations
+        # The hashFiles test lets the pull request that adds the script pass.
+        # The base ref does not hold the script yet, and the step starts to
+        # work by itself after the merge.
+        if: always() && hashFiles('base-scripts/.github/scripts/check-recommended-fields.js') != ''
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        # An advisory comment, so the results workflow posts it. This run has a
+        # read-only token when the pull request comes from a fork.
+        run: node base-scripts/.github/scripts/check-recommended-fields.js > pr-context/recommendations.md
+
       - name: Upload the pull request context
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

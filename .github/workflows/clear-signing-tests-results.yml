@@ -138,13 +138,15 @@ jobs:
                 ? 'an unknown time'
                 : `${new Date(value).toISOString().slice(0, 16).replace('T', ' ')} UTC`;
 
-            // Writes, replaces or removes the one comment this workflow owns.
-            const upsert = async (text) => {
+            // Writes, replaces or removes one comment. An empty text removes it.
+            const RESULTS = '## Clear Signing Tests';
+            const RECOMMENDATIONS = '<!-- erc7730-recommended-fields -->';
+            const upsert = async (text, marker = RESULTS) => {
               const comments = await github.paginate(github.rest.issues.listComments, {
                 owner, repo, issue_number, per_page: 100,
               });
               const existing = comments.find(
-                (c) => c.user.type === 'Bot' && c.body.startsWith('## Clear Signing Tests'),
+                (c) => c.user.type === 'Bot' && c.body.startsWith(marker),
               );
               if (text === '') {
                 if (existing) await github.rest.issues.deleteComment({ owner, repo, comment_id: existing.id });
@@ -156,6 +158,17 @@ jobs:
                 await github.rest.issues.createComment({ owner, repo, issue_number, body: text });
               }
             };
+
+            // A separate comment, and not part of the results, because it never
+            // blocks the pull request. It is written before the branches below,
+            // which return early.
+            let recommendations = '';
+            try {
+              recommendations = fs.readFileSync(path.join(contextRoot, 'recommendations.md'), 'utf8').trim();
+            } catch {
+              // The test run failed before it could collect them.
+            }
+            await upsert(recommendations, RECOMMENDATIONS);
 
             let body = '## Clear Signing Tests\n\n';
             body += `Tested [\`${testedSha.slice(0, 7)}\`](${context.serverUrl}/${owner}/${repo}/commit/${testedSha})`;
