@@ -1,14 +1,40 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
+  "metadata": {
+    "enums": {
+      "operation": {
+        "0": "Call",
+        "1": "Delegate Call"
+      }
+    }
+  },
   "display": {
     "formats": {
       "SafeTx(address to,uint256 value,bytes data,uint8 operation,uint256 safeTxGas,uint256 baseGas,uint256 gasPrice,address gasToken,address refundReceiver,uint256 nonce)": {
         "intent": "Safe",
         "fields": [
           {
+            "path": "to",
+            "label": "To",
+            "format": "addressName",
+            "params": {
+              "types": ["eoa", "wallet", "contract"]
+            },
+            "visible": "always"
+          },
+          {
+            "path": "value",
+            "label": "Value",
+            "format": "amount",
+            "visible": "always"
+          },
+          {
             "path": "operation",
             "label": "Operation type",
-            "format": "raw",
+            "format": "enum",
+            "params": {
+              "$ref": "$.metadata.enums.operation"
+            },
             "visible": "always"
           },
           {

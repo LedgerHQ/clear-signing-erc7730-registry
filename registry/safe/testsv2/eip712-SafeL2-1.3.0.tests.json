@@ -1,0 +1,108 @@
+{
+  "$schema": "../../../specs/erc7730-tests-v2.schema.json",
+  "descriptor": "../eip712-SafeL2-1.3.0.json",
+  "tests": [
+    {
+      "description": "Plain ETH transfer on Arbitrum - empty calldata, operation Call",
+      "data": {
+        "types": {
+          "EIP712Domain": [
+            { "name": "chainId", "type": "uint256" },
+            { "name": "verifyingContract", "type": "address" }
+          ],
+          "SafeTx": [
+            { "name": "to", "type": "address" },
+            { "name": "value", "type": "uint256" },
+            { "name": "data", "type": "bytes" },
+            { "name": "operation", "type": "uint8" },
+            { "name": "safeTxGas", "type": "uint256" },
+            { "name": "baseGas", "type": "uint256" },
+            { "name": "gasPrice", "type": "uint256" },
+            { "name": "gasToken", "type": "address" },
+            { "name": "refundReceiver", "type": "address" },
+            { "name": "nonce", "type": "uint256" }
+          ]
+        },
+        "primaryType": "SafeTx",
+        "domain": { "chainId": 42161, "verifyingContract": "0x3E5c63644E683549055b9Be8653de26E0B4CD36E" },
+        "message": {
+          "to": "0xe57f3834700E9Fe0166c97Be35E97a053d1AC5f8",
+          "value": "750000000000000000",
+          "data": "0x",
+          "operation": 0,
+          "safeTxGas": "0",
+          "baseGas": "0",
+          "gasPrice": "0",
+          "gasToken": "0x0000000000000000000000000000000000000000",
+          "refundReceiver": "0x0000000000000000000000000000000000000000",
+          "nonce": "21"
+        }
+      },
+      "expected": {
+        "intent": "Safe",
+        "owner": "Safe L2 1.3.0",
+        "fields": [
+          { "label": "To", "value": "0xe57f3834700E9Fe0166c97Be35E97a053d1AC5f8" },
+          { "label": "Value", "value": "0.75 ETH" },
+          { "label": "Operation type", "value": "Call" },
+          { "label": "Transaction", "value": "0x" },
+          { "label": "Gas amount", "value": "0" },
+          { "label": "Gas price", "value": "0" },
+          { "label": "Gas token", "value": "0x0000000000000000000000000000000000000000" },
+          { "label": "Gas receiver", "value": "0x0000000000000000000000000000000000000000" }
+        ]
+      }
+    },
+    {
+      "description": "Plain ETH transfer on Base, second listed singleton - empty calldata, operation Call",
+      "data": {
+        "types": {
+          "EIP712Domain": [
+            { "name": "chainId", "type": "uint256" },
+            { "name": "verifyingContract", "type": "address" }
+          ],
+          "SafeTx": [
+            { "name": "to", "type": "address" },
+            { "name": "value", "type": "uint256" },
+            { "name": "data", "type": "bytes" },
+            { "name": "operation", "type": "uint8" },
+            { "name": "safeTxGas", "type": "uint256" },
+            { "name": "baseGas", "type": "uint256" },
+            { "name": "gasPrice", "type": "uint256" },
+            { "name": "gasToken", "type": "address" },
+            { "name": "refundReceiver", "type": "address" },
+            { "name": "nonce", "type": "uint256" }
+          ]
+        },
+        "primaryType": "SafeTx",
+        "domain": { "chainId": 8453, "verifyingContract": "0xfb1bffC9d739B8D520DaF37dF666da4C687191EA" },
+        "message": {
+          "to": "0xe57f3834700E9Fe0166c97Be35E97a053d1AC5f8",
+          "value": "5000000000000000",
+          "data": "0x",
+          "operation": 0,
+          "safeTxGas": "0",
+          "baseGas": "0",
+          "gasPrice": "0",
+          "gasToken": "0x0000000000000000000000000000000000000000",
+          "refundReceiver": "0x0000000000000000000000000000000000000000",
+          "nonce": "22"
+        }
+      },
+      "expected": {
+        "intent": "Safe",
+        "owner": "Safe L2 1.3.0",
+        "fields": [
+          { "label": "To", "value": "0xe57f3834700E9Fe0166c97Be35E97a053d1AC5f8" },
+          { "label": "Value", "value": "0.005 ETH" },
+          { "label": "Operation type", "value": "Call" },
+          { "label": "Transaction", "value": "0x" },
+          { "label": "Gas amount", "value": "0" },
+          { "label": "Gas price", "value": "0" },
+          { "label": "Gas token", "value": "0x0000000000000000000000000000000000000000" },
+          { "label": "Gas receiver", "value": "0x0000000000000000000000000000000000000000" }
+        ]
+      }
+    }
+  ]
+}
