@@ -250,7 +250,7 @@ jobs:
           echo "has_tests=$(echo "$RESULT" | jq -r '.has_tests')" >> $GITHUB_OUTPUT
           echo "has_affected=$(echo "$RESULT" | jq -r '.has_affected')" >> $GITHUB_OUTPUT
           echo "affected_descriptors=$(echo "$RESULT" | jq -c '.affected_descriptors')" >> $GITHUB_OUTPUT
-          echo "missing_tests=$(echo "$RESULT" | jq -c '.missing_tests')" >> $GITHUB_OUTPUT
+          echo "missing_tests=$(echo "$RESULT" | jq -c '.missing_tests // []')" >> $GITHUB_OUTPUT
 
       # clear-signing-tests-results.yml runs after this workflow and posts the
       # comment that a fork run cannot write. It learns the pull request and the
