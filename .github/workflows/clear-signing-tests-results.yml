@@ -169,20 +169,26 @@ jobs:
               return;
             }
 
+            // Nothing was affected, so there is nothing to report.
+            if (!ctx.has_affected) {
+              await upsert('');
+              return;
+            }
+
+            // require-testsv2 already failed the run, but the annotations do
+            // not explain how to fix it.
+            const missing = ctx.missing_tests ?? [];
+            if (missing.length > 0) {
+              body += `❌ ${missing.length} affected descriptor(s) have no test file:\n\n`;
+              for (const descriptor of missing) body += `- \`${cell(descriptor)}\`\n`;
+              body +=
+                '\nCreate a test file at `registry/<entity>/testsv2/<descriptor-name>.tests.json`. ' +
+                'See [testing documentation](../blob/master/README.md#reference-test-cases) for details.\n\n';
+            }
+
+            // No descriptor had a test file, so no runner produced anything.
             if (!ctx.has_tests) {
-              if (ctx.has_affected) {
-                // require-testsv2 already failed the run. Say why, because the
-                // annotations alone do not explain how to fix it.
-                body +=
-                  'No testsv2 files found for the affected descriptors (directly changed, ' +
-                  'or including a changed shared file).\n\n' +
-                  'Create a test file at `registry/<entity>/testsv2/<descriptor-name>.tests.json`\n\n' +
-                  'See [testing documentation](../blob/master/README.md#reference-test-cases) for details.\n';
-                await upsert(body);
-              } else {
-                // Nothing was affected, so there is nothing to report.
-                await upsert('');
-              }
+              await upsert(body);
               return;
             }
 

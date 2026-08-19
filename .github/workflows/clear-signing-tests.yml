@@ -210,6 +210,7 @@ jobs:
       has_tests: ${{ steps.detect.outputs.has_tests }}
       has_affected: ${{ steps.detect.outputs.has_affected }}
       affected_descriptors: ${{ steps.detect.outputs.affected_descriptors }}
+      missing_tests: ${{ steps.detect.outputs.missing_tests }}
       test_matrix: ${{ steps.detect.outputs.test_matrix }}
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -249,6 +250,7 @@ jobs:
           echo "has_tests=$(echo "$RESULT" | jq -r '.has_tests')" >> $GITHUB_OUTPUT
           echo "has_affected=$(echo "$RESULT" | jq -r '.has_affected')" >> $GITHUB_OUTPUT
           echo "affected_descriptors=$(echo "$RESULT" | jq -c '.affected_descriptors')" >> $GITHUB_OUTPUT
+          echo "missing_tests=$(echo "$RESULT" | jq -c '.missing_tests')" >> $GITHUB_OUTPUT
 
       # clear-signing-tests-results.yml runs after this workflow and posts the
       # comment that a fork run cannot write. It learns the pull request and the
@@ -263,10 +265,12 @@ jobs:
           HAS_TESTS: ${{ steps.detect.outputs.has_tests }}
           HAS_AFFECTED: ${{ steps.detect.outputs.has_affected }}
           TEST_MATRIX: ${{ steps.detect.outputs.test_matrix }}
+          MISSING_TESTS: ${{ steps.detect.outputs.missing_tests }}
         run: |
           # This step also runs after a failure, so the detect outputs can be
           # empty. jq needs valid JSON for --argjson.
           TEST_MATRIX="${TEST_MATRIX:-[]}"
+          MISSING_TESTS="${MISSING_TESTS:-[]}"
 
           mkdir -p pr-context/tests
           jq -n \
@@ -276,9 +280,11 @@ jobs:
             --arg has_tests "$HAS_TESTS" \
             --arg has_affected "$HAS_AFFECTED" \
             --argjson matrix "$TEST_MATRIX" \
+            --argjson missing "$MISSING_TESTS" \
             '{pr_number: $pr_number, head_sha: $head_sha, head_repo: $head_repo,
               has_tests: ($has_tests == "true"),
-              has_affected: ($has_affected == "true"), matrix: $matrix}' \
+              has_affected: ($has_affected == "true"),
+              matrix: $matrix, missing_tests: $missing}' \
             > pr-context/context.json
 
           echo "$TEST_MATRIX" | jq -r '.[] | "\(.entity)\t\(.descriptor_name)\t\(.test_file)"' |
@@ -377,7 +383,9 @@ jobs:
   require-testsv2:
     name: Require testsv2 files
     needs: detect-testsv2
-    if: needs.detect-testsv2.outputs.has_affected == 'true' && needs.detect-testsv2.outputs.has_tests == 'false'
+    # Every affected descriptor needs its own test file. One descriptor with a
+    # test file must not hide another without one.
+    if: needs.detect-testsv2.outputs.missing_tests != '[]'
     runs-on: ubuntu-latest
     steps:
       # An annotation, not a comment: a fork run has a read-only token.
@@ -385,11 +393,11 @@ jobs:
         env:
           # Affected descriptors = directly changed ones, plus descriptors
           # whose transitive "includes" chain contains a changed shared file.
-          AFFECTED: ${{ needs.detect-testsv2.outputs.affected_descriptors }}
+          MISSING: ${{ needs.detect-testsv2.outputs.missing_tests }}
         run: |
           # A JSON array, so a path that holds a space stays one path.
-          echo "$AFFECTED" | jq -r '.[]' | while IFS= read -r descriptor; do
+          echo "$MISSING" | jq -r '.[]' | while IFS= read -r descriptor; do
             echo "::error file=${descriptor},line=1::No testsv2 file for this descriptor. Create registry/<entity>/testsv2/<descriptor-name>.tests.json — see the \"Reference test cases\" section of README.md."
           done
-          echo "::error::No testsv2 files found for the affected descriptors"
+          echo "::error::$(echo "$MISSING" | jq 'length') descriptor(s) have no testsv2 file"
           exit 1
