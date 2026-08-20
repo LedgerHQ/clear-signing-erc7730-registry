@@ -39,24 +39,6 @@
       }
     },
     {
-      "description": "Increase allowance - chain 8453",
-      "rawTx": "0x02f86f82210501843b9aca0084773594008301d4c094c1cba3fcea344f92d9239c08c0568f6f2f0ee45280b84439509351000000000000000000000000e66aa98b55c5a55c9af9da12fe39b8868af9a34600000000000000000000000000000000000000000000000014d1120d7b160000c0",
-      "expected": {
-        "intent": "Increase allowance",
-        "owner": "Lido DAO",
-        "fields": [{ "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" }, { "label": "Amount", "value": "1.5 wstETH" }]
-      }
-    },
-    {
-      "description": "Decrease allowance - chain 59144",
-      "rawTx": "0x02f86f82e70801843b9aca0084773594008301d4c094b5bedd42000b71fdde22d3ee8a79bd49a568fc8f80b844a457c2d7000000000000000000000000e66aa98b55c5a55c9af9da12fe39b8868af9a34600000000000000000000000000000000000000000000000003782dace9d90000c0",
-      "expected": {
-        "intent": "Decrease allowance",
-        "owner": "Lido DAO",
-        "fields": [{ "label": "Spender", "value": "0xE66AA98B55C5A55c9Af9da12FE39B8868af9a346" }, { "label": "Amount", "value": "0.25 wstETH" }]
-      }
-    },
-    {
       "description": "Transfer wstETH - chain 56",
       "rawTx": "0x02f86d3801843b9aca0084773594008301d4c09426c5e01524d2e6280a48f2c50ff6de7e52e9611c80b844a9059cbb0000000000000000000000002aed99855fed0259e5774b50a9f589d2bc1e1597000000000000000000000000000000000000000000000000ab407c9eb0520000c0",
       "expected": {
@@ -67,6 +49,19 @@
           { "label": "Amount", "value": "12.34 wstETH" }
         ],
         "interpolatedIntent": "Send 12.34 wstETH to 0x2aeD99855FED0259e5774B50a9f589D2BC1E1597"
+      }
+    },
+    {
+      "description": "Transfer wstETH - chain 59144",
+      "rawTx": "0x02f86f82e70801843b9aca0084773594008301d4c094b5bedd42000b71fdde22d3ee8a79bd49a568fc8f80b844a9059cbb0000000000000000000000002aed99855fed0259e5774b50a9f589d2bc1e159700000000000000000000000000000000000000000000000003782dace9d90000c0",
+      "expected": {
+        "intent": "Transfer wstETH",
+        "owner": "Lido DAO",
+        "fields": [
+          { "label": "Recipient", "value": "0x2aeD99855FED0259e5774B50a9f589D2BC1E1597" },
+          { "label": "Amount", "value": "0.25 wstETH" }
+        ],
+        "interpolatedIntent": "Send 0.25 wstETH to 0x2aeD99855FED0259e5774B50a9f589D2BC1E1597"
       }
     },
     {
