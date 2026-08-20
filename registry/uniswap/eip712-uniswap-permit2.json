@@ -1,6 +1,6 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
-  "includes": "uniswap-common-eip712.json",
+  "includes": "common-eip712-uniswap.json",
   "display": {
     "formats": {
       "PermitSingle(PermitDetails details,address spender,uint256 sigDeadline)PermitDetails(address token,uint160 amount,uint48 expiration,uint48 nonce)": {
