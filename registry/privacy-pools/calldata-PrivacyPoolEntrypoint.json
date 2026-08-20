@@ -56,7 +56,7 @@
           }
         ]
       },
-      "deposit(address _asset, uint256 _value, uint256 _precommitment)": {
+      "deposit(address _asset,uint256 _value,uint256 _precommitment)": {
         "intent": "Deposit token",
         "interpolatedIntent": "Deposit {_value}",
         "fields": [
