@@ -1,40 +1,40 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
-    "$id": "ERC1155SinglePortal",
+    "$id": "Erc1155SinglePortal",
     "contract": {
       "deployments": [
         {
           "chainId": 1,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 10,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 8453,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 42161,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 11155111,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 11155420,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 421614,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         },
         {
           "chainId": 84532,
-          "address": "0x13663E193673756a02e84b724B8a3422A9a7aab4"
+          "address": "0xC72de7fD54FcD316b6d8914a7347328fc81198A7"
         }
       ]
     }
@@ -44,11 +44,11 @@
     "info": {
       "url": "https://cartesi.io"
     },
-    "contractName": "ERC1155SinglePortal"
+    "contractName": "Erc1155SinglePortal"
   },
   "display": {
     "formats": {
-      "depositSingleERC1155Token(address token, address appContract, uint256 tokenId, uint256 value, bytes baseLayerData, bytes execLayerData)": {
+      "depositSingleErc1155Token(address token, address appContract, uint256 tokenId, uint256 value, bytes baseLayerData, bytes execLayerData)": {
         "intent": "Deposit ERC-1155",
         "fields": [
           {

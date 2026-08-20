@@ -1,40 +1,40 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
-    "$id": "ERC1155BatchPortal",
+    "$id": "Erc1155BatchPortal",
     "contract": {
       "deployments": [
         {
           "chainId": 1,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 10,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 8453,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 42161,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 11155111,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 11155420,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 421614,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         },
         {
           "chainId": 84532,
-          "address": "0x3649c5E2De91C69a7Bb80D864f0039da5E511096"
+          "address": "0x14E017B634D6CeAAC24a211c37129431aCd419B7"
         }
       ]
     }
@@ -44,11 +44,11 @@
     "info": {
       "url": "https://cartesi.io"
     },
-    "contractName": "ERC1155BatchPortal"
+    "contractName": "Erc1155BatchPortal"
   },
   "display": {
     "formats": {
-      "depositBatchERC1155Token(address token, address appContract, uint256[] tokenIds, uint256[] values, bytes baseLayerData, bytes execLayerData)": {
+      "depositBatchErc1155Token(address token, address appContract, uint256[] tokenIds, uint256[] values, bytes baseLayerData, bytes execLayerData)": {
         "intent": "Deposit ERC-1155 batch",
         "fields": [
           {

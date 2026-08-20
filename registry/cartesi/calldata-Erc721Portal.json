@@ -1,40 +1,40 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
-    "$id": "ERC721Portal",
+    "$id": "Erc721Portal",
     "contract": {
       "deployments": [
         {
           "chainId": 1,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 10,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 8453,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 42161,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 11155111,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 11155420,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 421614,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         },
         {
           "chainId": 84532,
-          "address": "0xcA3a0a47915C12F020CF70B938aCC8e744414cb8"
+          "address": "0x1ae895eEBdE9c000C648fDF69Ab7ff4b3F71c009"
         }
       ]
     }
@@ -44,11 +44,11 @@
     "info": {
       "url": "https://cartesi.io"
     },
-    "contractName": "ERC721Portal"
+    "contractName": "Erc721Portal"
   },
   "display": {
     "formats": {
-      "depositERC721Token(address token, address appContract, uint256 tokenId, bytes baseLayerData, bytes execLayerData)": {
+      "depositErc721Token(address token, address appContract, uint256 tokenId, bytes baseLayerData, bytes execLayerData)": {
         "intent": "Deposit NFT to application",
         "fields": [
           {

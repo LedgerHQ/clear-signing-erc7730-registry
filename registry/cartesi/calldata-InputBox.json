@@ -6,35 +6,35 @@
       "deployments": [
         {
           "chainId": 1,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 10,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 8453,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 42161,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 11155111,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 11155420,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 421614,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         },
         {
           "chainId": 84532,
-          "address": "0x346B3df038FE9f8380071eC6514D5a83aD143939"
+          "address": "0x45DAf6f9Aa5FC563Ab59481Fda36a281e5Db3812"
         }
       ]
     }
