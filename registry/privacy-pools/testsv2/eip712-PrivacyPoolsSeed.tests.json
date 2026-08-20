@@ -1,8 +1,9 @@
 {
-  "$schema": "../../../specs/erc7730-tests.schema.json",
+  "$schema": "../../../specs/erc7730-tests-v2.schema.json",
+  "descriptor": "../eip712-PrivacyPoolsSeed.json",
   "tests": [
     {
-      "description": "Derive Privacy Pools seed",
+      "description": "Derive Privacy Pools seed - chain 1",
       "data": {
         "types": {
           "EIP712Domain": [
@@ -51,13 +52,21 @@
           "addressHash": "0x1111111111111111111111111111111111111111111111111111111111111111"
         }
       },
-      "expectedTexts": [
-        "Derive account seed",
-        "Action",
-        "Derive Account Seed",
-        "Context",
-        "privacy-pools/wallet-seed:v2"
-      ]
+      "expected": {
+        "intent": "Derive account seed",
+        "owner": "Privacy Pools",
+        "fields": [
+          {
+            "label": "Action",
+            "value": "Derive Account Seed"
+          },
+          {
+            "label": "Context",
+            "value": "privacy-pools/wallet-seed:v2"
+          }
+        ],
+        "interpolatedIntent": "Derive seed"
+      }
     }
   ]
 }
