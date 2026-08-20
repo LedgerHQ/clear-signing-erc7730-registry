@@ -50,6 +50,7 @@
     "formats": {
       "depositSingleErc1155Token(address token, address appContract, uint256 tokenId, uint256 value, bytes baseLayerData, bytes execLayerData)": {
         "intent": "Deposit ERC-1155",
+        "interpolatedIntent": "Deposit {value} of token {tokenId} to {appContract}",
         "fields": [
           {
             "path": "token",

@@ -50,6 +50,7 @@
     "formats": {
       "depositErc721Token(address token, address appContract, uint256 tokenId, bytes baseLayerData, bytes execLayerData)": {
         "intent": "Deposit NFT to application",
+        "interpolatedIntent": "Deposit {tokenId} to {appContract}",
         "fields": [
           {
             "path": "tokenId",

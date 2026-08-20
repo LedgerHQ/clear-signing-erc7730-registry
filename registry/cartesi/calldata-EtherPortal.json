@@ -50,6 +50,7 @@
     "formats": {
       "depositEther(address appContract, bytes execLayerData)": {
         "intent": "Deposit ETH to application",
+        "interpolatedIntent": "Deposit {@.value} to {appContract}",
         "fields": [
           {
             "path": "@.value",

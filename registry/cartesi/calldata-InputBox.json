@@ -50,6 +50,7 @@
     "formats": {
       "addInput(address appContract, bytes payload)": {
         "intent": "Send input to application",
+        "interpolatedIntent": "Send input to {appContract}",
         "fields": [
           {
             "path": "appContract",

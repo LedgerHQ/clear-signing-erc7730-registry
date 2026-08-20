@@ -50,6 +50,7 @@
     "formats": {
       "depositErc20Tokens(address token, address appContract, uint256 value, bytes execLayerData)": {
         "intent": "Deposit ERC-20 to application",
+        "interpolatedIntent": "Deposit {value} to {appContract}",
         "fields": [
           {
             "path": "value",
