@@ -159,7 +159,7 @@
         "interpolatedIntent": "Exit deposit",
         "fields": [
           {
-            "path": "_proof.pubSignals",
+            "path": "_proof.pubSignals.[]",
             "label": "Public signal",
             "format": "raw",
             "visible": "optional"
@@ -203,7 +203,7 @@
             "visible": "optional"
           },
           {
-            "path": "_proof.pubSignals",
+            "path": "_proof.pubSignals.[]",
             "label": "Public signals",
             "format": "raw",
             "visible": "optional"
