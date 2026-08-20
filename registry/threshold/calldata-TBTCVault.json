@@ -6,6 +6,18 @@
       "deployments": [
         { "chainId": 1, "address": "0x9C070027cdC9dc8F82416B2e5314E11DFb4FE3CD" },
         { "chainId": 11155111, "address": "0xB5679dE944A79732A75CE556191DF11F489448d5" }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "requestOptimisticMint",
+          "stateMutability": "nonpayable",
+          "inputs": [
+            { "name": "fundingTxHash", "type": "bytes32" },
+            { "name": "fundingOutputIndex", "type": "uint32" }
+          ],
+          "outputs": []
+        }
       ]
     }
   },

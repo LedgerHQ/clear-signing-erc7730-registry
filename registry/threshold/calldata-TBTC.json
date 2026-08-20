@@ -6,6 +6,19 @@
       "deployments": [
         { "chainId": 1, "address": "0x18084fbA666a33d37592fA2633fD49a74DD93a88" },
         { "chainId": 11155111, "address": "0x517f2982701695D4E52f1ECFBEf3ba31Df470161" }
+      ],
+      "abi": [
+        {
+          "type": "function",
+          "name": "approveAndCall",
+          "stateMutability": "nonpayable",
+          "inputs": [
+            { "name": "spender", "type": "address" },
+            { "name": "amount", "type": "uint256" },
+            { "name": "extraData", "type": "bytes" }
+          ],
+          "outputs": [{ "name": "", "type": "bool" }]
+        }
       ]
     }
   },
