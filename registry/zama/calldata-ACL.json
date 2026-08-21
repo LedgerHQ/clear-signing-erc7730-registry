@@ -12,7 +12,6 @@
   "metadata": { "contractName": "ACL" },
   "display": {
     "definitions": {
-      "delegate": { "label": "Delegate to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
       "delegationContract": { "label": "For contract", "format": "addressName", "params": { "types": ["contract"] } }
     },
     "formats": {
@@ -21,7 +20,7 @@
         "intent": "Delegate decryption rights",
         "interpolatedIntent": "Delegate decryption to {delegate} for {contractAddress} until {expirationDate}",
         "fields": [
-          { "path": "delegate", "$ref": "$.display.definitions.delegate" },
+          { "path": "delegate", "label": "Delegate to", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "contractAddress", "$ref": "$.display.definitions.delegationContract" },
           { "path": "expirationDate", "label": "Delegated until", "format": "date", "params": { "encoding": "timestamp" } }
         ]
@@ -31,7 +30,7 @@
         "intent": "Revoke decryption delegation",
         "interpolatedIntent": "Revoke decryption delegation from {delegate} for {contractAddress}",
         "fields": [
-          { "path": "delegate", "$ref": "$.display.definitions.delegate" },
+          { "path": "delegate", "label": "Revoke from", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "contractAddress", "$ref": "$.display.definitions.delegationContract" }
         ]
       }

@@ -44,13 +44,16 @@
       "wrap(address to, uint256 amount)": {
         "$id": "wrap",
         "intent": "Shield",
-        "interpolatedIntent": "Shield {amount} to {to}",
-        "fields": [{ "path": "amount", "label": "Amount", "format": "raw" }, { "path": "to", "$ref": "$.display.definitions.receiver" }]
+        "interpolatedIntent": "Shield {amount} underlying units to {to}",
+        "fields": [
+          { "path": "amount", "label": "Amount (underlying units)", "format": "raw" },
+          { "path": "to", "$ref": "$.display.definitions.receiver" }
+        ]
       },
       "unwrap(address from, address to, bytes32 amount)": {
         "$id": "unwrap",
         "intent": "Request to unshield",
-        "interpolatedIntent": "Request to unshield from {from} to {to}",
+        "interpolatedIntent": "Request to unshield {amount} from {from} to {to}",
         "fields": [
           { "path": "from", "$ref": "$.display.definitions.holder" },
           { "path": "to", "$ref": "$.display.definitions.receiver" },
@@ -60,7 +63,7 @@
       "unwrap(address from, address to, bytes32 encryptedAmount, bytes inputProof)": {
         "$id": "unwrapWithProof",
         "intent": "Request to unshield",
-        "interpolatedIntent": "Request to unshield from {from} to {to}",
+        "interpolatedIntent": "Request to unshield {encryptedAmount} from {from} to {to}",
         "fields": [
           { "path": "from", "$ref": "$.display.definitions.holder" },
           { "path": "to", "$ref": "$.display.definitions.receiver" },
@@ -164,10 +167,10 @@
       },
       "setOperator(address operator, uint48 until)": {
         "$id": "setOperator",
-        "intent": "Authorize operator",
-        "interpolatedIntent": "Authorize operator {operator} until {until}",
+        "intent": "Set operator authorization",
+        "interpolatedIntent": "Set {operator} authorization to expire on {until}",
         "fields": [
-          { "path": "operator", "label": "Authorize operator", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
+          { "path": "operator", "label": "Operator", "format": "addressName", "params": { "types": ["eoa", "contract"] } },
           { "path": "until", "label": "Authorized until", "format": "date", "params": { "encoding": "timestamp" } }
         ]
       },
@@ -179,11 +182,17 @@
       },
       "discloseEncryptedAmount(bytes32 encryptedAmount, uint64 cleartextAmount, bytes decryptionProof)": {
         "$id": "discloseEncryptedAmount",
-        "intent": "Disclose amount publicly",
-        "interpolatedIntent": "Disclose {cleartextAmount} publicly",
+        "intent": "Disclose encrypted amount publicly",
+        "interpolatedIntent": "Disclose {encryptedAmount} publicly as {cleartextAmount}",
         "fields": [
+          {
+            "path": "encryptedAmount",
+            "label": "Encrypted amount reference",
+            "format": "tokenAmount",
+            "params": { "tokenPath": "@.to" },
+            "encryption": { "scheme": "fhevm", "plaintextType": "uint64", "fallbackLabel": "[Encrypted Amount]" }
+          },
           { "path": "cleartextAmount", "label": "Amount", "format": "tokenAmount", "params": { "tokenPath": "@.to" } },
-          { "path": "encryptedAmount", "$ref": "$.display.definitions.encryptedAmount" },
           { "path": "decryptionProof", "$ref": "$.display.definitions.decryptionProof", "visible": "never" }
         ]
       }
