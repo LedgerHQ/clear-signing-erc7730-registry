@@ -101,7 +101,12 @@
             "label": "Offer items",
             "iteration": "bundled",
             "fields": [
-              { "path": "#.reg.components.offer.[].itemType", "label": "Offer type", "visible": { "mustBe": ["1", "2", "3", "4", "5"] } },
+              {
+                "path": "#.reg.components.offer.[].itemType",
+                "label": "Offer type",
+                "format": "raw",
+                "visible": { "mustMatch": ["1", "2", "3", "4", "5"] }
+              },
               {
                 "path": "#.reg.components.offer.[].token",
                 "label": "Offer token",
@@ -134,7 +139,8 @@
               {
                 "path": "#.reg.components.consideration.[].itemType",
                 "label": "Receive type",
-                "visible": { "mustBe": ["0", "1", "2", "3", "4", "5"] }
+                "format": "raw",
+                "visible": { "mustMatch": ["0", "1", "2", "3", "4", "5"] }
               },
               {
                 "path": "#.reg.components.consideration.[].token",
@@ -164,7 +170,7 @@
               { "path": "#.reg.components.consideration.[].endAmount", "label": "Receive end amount", "visible": "never" }
             ]
           },
-          { "path": "#.reg.components.orderType", "label": "Order type", "visible": { "mustBe": ["2"] } },
+          { "path": "#.reg.components.orderType", "label": "Order type", "format": "raw", "visible": { "mustMatch": ["2"] } },
           { "path": "#.reg.components.startTime", "label": "Valid from", "visible": "never" },
           {
             "path": "#.reg.components.endTime",
@@ -177,8 +183,9 @@
           {
             "path": "#.reg.components.zone",
             "label": "Registry",
+            "format": "raw",
             "visible": {
-              "mustBe": [
+              "mustMatch": [
                 "0x07C0000007b4B558e2fCd47F47A573413B0Caf7C",
                 "0xfc9E05BF732FB5Aeee7e270928F349Ed3FA3cc0D",
                 "0x07C00000057b66A84004adD3B0f9164E744354CB",
@@ -190,7 +197,8 @@
           {
             "path": "#.reg.components.conduitKey",
             "label": "Conduit key",
-            "visible": { "mustBe": ["0x0000000000000000000000000000000000000000000000000000000000000000"] }
+            "format": "raw",
+            "visible": { "mustMatch": ["0x0000000000000000000000000000000000000000000000000000000000000000"] }
           },
           { "path": "#.reg.components.salt", "label": "Salt", "visible": "never" },
           { "path": "#.reg.components.counter", "label": "Seaport counter", "visible": "never" },

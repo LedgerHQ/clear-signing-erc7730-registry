@@ -80,7 +80,7 @@
             "label": "Tips",
             "iteration": "bundled",
             "fields": [
-              { "path": "tips.[].itemType", "label": "Tip type", "visible": { "mustBe": ["0", "1"] } },
+              { "path": "tips.[].itemType", "label": "Tip type", "format": "raw", "visible": { "mustMatch": ["0", "1"] } },
               {
                 "path": "tips.[].amount",
                 "label": "Tip amount",
@@ -97,7 +97,7 @@
                 "visible": "always"
               },
               { "path": "tips.[].token", "label": "Tip token", "visible": "never" },
-              { "path": "tips.[].identifier", "label": "Tip identifier", "visible": { "mustBe": ["0"] } }
+              { "path": "tips.[].identifier", "label": "Tip identifier", "format": "raw", "visible": { "mustMatch": ["0"] } }
             ]
           },
           {
