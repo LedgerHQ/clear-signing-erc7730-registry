@@ -32,6 +32,7 @@
       "setBaseURI(string newBaseURI)": {
         "$id": "setBaseURI",
         "intent": "Update NFT metadata URL",
+        "interpolatedIntent": "Set base URI to {#.newBaseURI}",
         "fields": [
           { "label": "New base URI", "format": "raw", "path": "#.newBaseURI" }
         ]
@@ -39,6 +40,7 @@
       "setSigner(address newSigner)": {
         "$id": "setSigner",
         "intent": "Rotate score signer key",
+        "interpolatedIntent": "Set signer to {#.newSigner}",
         "fields": [
           { "label": "New signer", "format": "addressName", "params": { "types": ["eoa"] }, "path": "#.newSigner" }
         ]
@@ -46,6 +48,7 @@
       "transferOwnership(address newOwner)": {
         "$id": "transferOwnership",
         "intent": "Propose ownership transfer",
+        "interpolatedIntent": "Propose new owner {#.newOwner}",
         "fields": [
           { "label": "New owner", "format": "addressName", "params": { "types": ["eoa", "wallet"] }, "path": "#.newOwner" }
         ]
@@ -53,11 +56,13 @@
       "acceptOwnership()": {
         "$id": "acceptOwnership",
         "intent": "Accept ownership transfer",
+        "interpolatedIntent": "Accept ownership transfer",
         "fields": []
       },
       "renounceOwnership()": {
         "$id": "renounceOwnership",
         "intent": "Renounce contract ownership",
+        "interpolatedIntent": "Renounce ownership forever",
         "fields": []
       }
     }
