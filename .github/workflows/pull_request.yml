@@ -169,3 +169,151 @@ jobs:
             echo "::error::One or more files failed JSON schema validation"
             exit 1
           fi
+
+  validate_index:
+    name: 🔎 validate index
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Get all changed descriptor files
+        timeout-minutes: 5
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
+        with:
+          files: |
+            registry/**/*.json
+            ercs/**/*.json
+          files_ignore: |
+            registry/**/tests/**
+            registry/**/testsv2/**
+
+      - name: Setup node
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: npm ci
+
+      - name: Check that the index can still be built
+        timeout-minutes: 10
+        if: steps.changed-files.outputs.any_changed == 'true'
+        # Each (chainId, address) maps to exactly one calldata descriptor, and
+        # two descriptors cannot register the same EIP-712 encodeType at one
+        # address. A pull request that breaks either would leave the index
+        # ungeneratable, which only surfaces after the merge, in the
+        # sync-indexes workflow — by then the conflict is already on master.
+        run: node tools/scripts/generate-index.js --validate
+
+  validate_file_names:
+    name: 🔎 validate file names
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Check the file names in each entity folder
+        timeout-minutes: 5
+        run: |
+          # The prefix says what a file is, and the three subfolders below have
+          # their own names.
+          FAILED=0
+          while IFS= read -r file; do
+            echo "::error file=${file},line=1::Unexpected name. A file in an entity folder must be calldata-*.json, eip712-*.json or common-*.json — see the \"Registry structure\" section of README.md."
+            FAILED=1
+          done < <(find registry -mindepth 2 \
+                     \( -type d \( -name tests -o -name testsv2 -o -name sigs \) -prune \) -o \
+                     \( -type f \
+                        ! -name 'calldata-*.json' \
+                        ! -name 'eip712-*.json' \
+                        ! -name 'common-*.json' -print \))
+
+          [ "$FAILED" -eq 0 ] || exit 1
+
+  validate_attested_descriptors:
+    name: 🔎 validate attested descriptors
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        timeout-minutes: 10
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Get all changed descriptor and shared files
+        timeout-minutes: 5
+        id: changed-files
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
+        with:
+          files: |
+            registry/**/*.json
+            ercs/**/*.json
+          files_ignore: |
+            registry/**/tests/**
+            registry/**/testsv2/**
+            registry/**/sigs/**
+            registry/**/*.tests.json
+
+      - name: Check that no attested descriptor changed
+        timeout-minutes: 5
+        if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          DELETED_FILES: ${{ steps.changed-files.outputs.deleted_files }}
+        run: |
+          # Without this, jq hides a failure of the script and the check passes.
+          set -o pipefail
+
+          # A shared file is inlined through "includes", so it also changes
+          # every descriptor that includes it.
+          AFFECTED=$(CHANGED_FILES="$CHANGED_FILES $DELETED_FILES" \
+            node .github/scripts/list-affected-descriptors.js | jq -r '.affected_descriptors[]')
+
+          FOUND=0
+          while IFS= read -r descriptor; do
+            [ -n "$descriptor" ] || continue
+            name=$(basename "$descriptor" .json)
+            for sig in "$(dirname "$descriptor")"/sigs/"$name".eip155-*.json; do
+              [ -e "$sig" ] || continue
+              echo "::error file=${descriptor},line=1::An auditor attested this descriptor in ${sig}, and this pull request changes it. Add a new descriptor file instead — the file name carries the version. The attestation then stays valid for the old descriptor, and an auditor can attest the new one later."
+              FOUND=$((FOUND + 1))
+            done
+          done <<< "$AFFECTED"
+
+          [ "$FOUND" -eq 0 ] && exit 0
+
+          # GitHub shows 10 annotations per step, so give the total as well.
+          echo "${FOUND} attested descriptor(s) are affected. See the log for the full list." \
+            >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
+      - name: Check that no attested descriptor was deleted or renamed
+        timeout-minutes: 5
+        run: |
+          # A rename looks the same as a delete, because the name is the only
+          # bond between an attestation and its descriptor.
+          FOUND=0
+          while IFS= read -r sig; do
+            name=$(basename "$sig" | sed -E 's/\.eip155-[0-9]+-0x[0-9a-fA-F]+\.json$//')
+            descriptor="$(dirname "$(dirname "$sig")")/${name}.json"
+            [ -e "$descriptor" ] && continue
+            echo "::error file=${sig},line=1::An auditor attested ${name}, but that descriptor is no longer here. Do not delete or rename an attested descriptor. Add a new descriptor file instead, and keep the attested one."
+            FOUND=$((FOUND + 1))
+          done < <(find registry -path '*/sigs/*.json')
+
+          [ "$FOUND" -eq 0 ] && exit 0
+
+          # GitHub shows 10 annotations per step, so give the total as well.
+          echo "${FOUND} attestation(s) have no descriptor. See the log for the full list." \
+            >> "$GITHUB_STEP_SUMMARY"
+          exit 1

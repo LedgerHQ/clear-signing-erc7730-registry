@@ -1,6 +1,6 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
-  "includes": "uniswap-common-eip712.json",
+  "includes": "common-eip712-uniswap.json",
   "display": {
     "formats": {
       "PermitWitnessTransferFrom(TokenPermissions permitted,address spender,uint256 nonce,uint256 deadline,LimitOrder witness)LimitOrder(OrderInfo info,address inputToken,uint256 inputAmount,OutputToken[] outputs)OrderInfo(address reactor,address swapper,uint256 nonce,uint256 deadline,address additionalValidationContract,bytes additionalValidationData)OutputToken(address token,uint256 amount,address recipient)TokenPermissions(address token,uint256 amount)": {

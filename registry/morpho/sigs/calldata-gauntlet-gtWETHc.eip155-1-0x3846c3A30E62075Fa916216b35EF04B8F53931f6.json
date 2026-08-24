@@ -1,0 +1,70 @@
+{
+  "sig": {
+    "version": 2,
+    "uid": "0xf6657847c8164b10f7e72915ec412a7d469bbf28dcb36f1cda8383f5856bb844",
+    "domain": {
+      "name": "EAS Attestation",
+      "version": "0.26",
+      "chainId": "1",
+      "verifyingContract": "0xA1207F3BBa224E2c9c3c6D5aF63D0eb1582Ce587"
+    },
+    "primaryType": "Attest",
+    "message": {
+      "version": 2,
+      "schema": "0xe023eef113c1670774801c34b377fdf612dd8a4d2fa92fe382e15bd91fafb5c2",
+      "recipient": "0x0000000000000000000000000000000000000000",
+      "time": "1785288536",
+      "expirationTime": "0",
+      "revocable": true,
+      "refUID": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "data": "0x19c8551780f8b04d9fe40ef2caae04f149b2cd925e8cf3109e4c44070623d2da",
+      "salt": "0xcab29b388b31a4f07548acf9337922da637be330c54484924cf8057d4a6aab44"
+    },
+    "types": {
+      "Attest": [
+        {
+          "name": "version",
+          "type": "uint16"
+        },
+        {
+          "name": "schema",
+          "type": "bytes32"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "time",
+          "type": "uint64"
+        },
+        {
+          "name": "expirationTime",
+          "type": "uint64"
+        },
+        {
+          "name": "revocable",
+          "type": "bool"
+        },
+        {
+          "name": "refUID",
+          "type": "bytes32"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "name": "salt",
+          "type": "bytes32"
+        }
+      ]
+    },
+    "signature": {
+      "v": 27,
+      "r": "0xc94bace8e435b8c64f40156e54b8be4a98acdb075cdc50bf3c3fc8ce0bc1c791",
+      "s": "0x02e9431fdea4e0fe9ede86c0543e4e17a0c6643cd4cbf124b869373e27bfc2e8"
+    }
+  },
+  "signer": "0x3846c3A30E62075Fa916216b35EF04B8F53931f6"
+}

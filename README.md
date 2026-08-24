@@ -12,7 +12,8 @@ index.calldata.json                          # index of calldata descriptors (se
 index.eip712.json                            # index of EIP-712 descriptors (see "Index files")
 specs/
   erc-7730.md                                # most advanced version of the spec but reference should be the ERC
-  erc7730-v1.schema.json                     # the json schema of the latest version of the extension
+  erc7730-v2.schema.json                     # the json schema of the latest version of the extension
+  erc7730-v1.schema.json                     # legacy json schema, kept for reference
   erc7730-tests.schema.json                  # legacy json schema for test files (tests/)
   erc7730-tests-v2.schema.json               # json schema for test files (testsv2/)
 registry/
@@ -20,15 +21,19 @@ registry/
     calldata-$contractName1.json             # metadata for contract $contractName1, including the contract version in name
     calldata-$contractName2.json
     eip712-$messageName.json                 # metadata for EIP712 message $messageName
-    common-$sharedDefinition.json            # common definitions shared between descriptors (without prefix)
+    common-$sharedDefinition.json            # common definitions shared between descriptors
     testsv2/
        calldata-$contractName1.tests.json    # test cases for calldata-$contractName1.json
        calldata-$contractName2.tests.json
        eip712-$messageName.tests.json        # test cases for eip712-$messageName.json
+    tests/                                   # legacy test cases
+       calldata-$contractName1.tests.json
+    sigs/                                    # auditor attestations (see auditors/README.md)
+       calldata-$contractName1.eip155-1-0x$auditorAddress.json
 ercs/
-  erc20.json                                 # standard ERC token metadata files
-  erc721.json
-  erc4626.json
+  calldata-erc20-tokens.json                 # standard ERC token metadata files
+  calldata-erc721-nfts.json
+  eip712-erc2612-permit.json
   ...
 ```
 
@@ -43,7 +48,7 @@ ercs/
 - Each entity folder includes **at least one file that is compatible with ERC-7730**, located at the root of the entity's folder.
 - All ERC-7730 compatible files are prefixed with either `calldata` for smart contracts or `eip712` for EIP-712 messages.
 - All ERC-7730 compatible files are correctly validated against the schema file located at `specs/erc7730-v2.schema.json`.
-- Do not use the `calldata` or `eip712` prefixes for common files which are included by the ERC-7730 files and placed at the top level of the entity folder.
+- Do not use the `calldata` or `eip712` prefixes for common files which are included by the ERC-7730 files and placed at the top level of the entity folder. Name them `common-*.json` instead.
 - Each descriptor added or changed is accompanied by a test file so descriptors can be verified against the formatter implementations. See [Reference test cases](#reference-test-cases).
 
 ## How to validate
