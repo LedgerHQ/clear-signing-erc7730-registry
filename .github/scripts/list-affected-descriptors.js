@@ -20,6 +20,7 @@
  *   {
  *     "affected_descriptors": [...],  // repo-relative descriptor paths, sorted
  *     "matrix": [{"descriptor", "test_file", "entity", "descriptor_name"}, ...],
+ *     "missing_tests": [...],         // affected descriptors with no test file
  *     "has_affected": true|false,     // at least one affected descriptor
  *     "has_tests": true|false         // at least one matrix entry
  *   }
@@ -145,10 +146,14 @@ function main() {
 
   const affectedSorted = [...affected].sort();
   const matrix = [];
+  const missingTests = [];
   for (const descriptor of affectedSorted) {
     const descriptorName = path.posix.basename(descriptor, '.json');
     const testFile = `${path.posix.dirname(descriptor)}/testsv2/${descriptorName}.tests.json`;
-    if (!fs.existsSync(path.join(repoRoot, testFile))) continue;
+    if (!fs.existsSync(path.join(repoRoot, testFile))) {
+      missingTests.push(descriptor);
+      continue;
+    }
     matrix.push({
       descriptor,
       test_file: testFile,
@@ -161,6 +166,7 @@ function main() {
     JSON.stringify({
       affected_descriptors: affectedSorted,
       matrix,
+      missing_tests: missingTests,
       has_affected: affectedSorted.length > 0,
       has_tests: matrix.length > 0,
     })
