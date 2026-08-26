@@ -7,6 +7,7 @@
   "metadata": {
     "owner": "StarkWare",
     "info": { "url": "https://starkgate.starknet.io/", "deploymentDate": "2024-10-01T00:00:00Z" },
+    "constants": { "ethTokenAddress": "0x0000000000000000000000000000000000455448" },
     "contractName": "L1StarkGateETHBridge"
   },
   "display": {
@@ -14,16 +15,20 @@
       "deposit(address token, uint256 amount, uint256 l2Recipient)": {
         "$id": "deposit",
         "intent": "Bridge",
+        "interpolatedIntent": "Bridge {amount} to {l2Recipient}",
         "fields": [
           {
             "path": "amount",
             "label": "Amount to deposit",
             "format": "tokenAmount",
-            "params": { "tokenPath": "token" },
+            "params": {
+              "tokenPath": "token",
+              "nativeCurrencyAddress": "$.metadata.constants.ethTokenAddress"
+            },
             "visible": "always"
           },
           { "path": "l2Recipient", "label": "Recipient", "format": "raw", "visible": "always" },
-          { "path": "@.value", "label": "Deposit fee", "format": "amount" }
+          { "path": "@.value", "label": "Total ETH sent", "format": "amount" }
         ]
       }
     }
