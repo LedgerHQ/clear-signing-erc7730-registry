@@ -16,7 +16,11 @@ Do not edit these files directly — changes should be made upstream and will be
 
 ## Other files
 
+These are maintained in this repository and are not synced from upstream.
+
 | File | Description |
 |---|---|
-| `erc7730-tests.schema.json` | JSON schema for device test files (`*.tests.json`) |
+| `erc7730-tests-v2.schema.json` | JSON schema for test files in `registry/$entity/testsv2/` |
+| `erc7730-tests.schema.json` | Legacy JSON schema for test files in `registry/$entity/tests/` |
 | `templates/` | Descriptor templates for new contributions |
+
