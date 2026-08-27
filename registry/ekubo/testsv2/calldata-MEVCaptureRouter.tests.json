@@ -20,7 +20,7 @@
         "fields": [
           { "label": "Pool token 0", "value": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" },
           { "label": "Pool token 1", "value": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2" },
-          { "label": "Specified pool token", "value": "false" },
+          { "label": "Specified pool token", "value": "Token 0" },
           { "label": "Specified amount", "value": "1000000" },
           { "label": "Amount threshold", "value": "1" },
           { "label": "Price limit", "value": "0" },
