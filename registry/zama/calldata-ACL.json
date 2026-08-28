@@ -15,7 +15,7 @@
       "delegationContract": { "label": "For contract", "format": "addressName", "params": { "types": ["contract"] } }
     },
     "formats": {
-      "delegateForUserDecryption(address delegate, address contractAddress, uint64 expirationDate)": {
+      "delegateForUserDecryption(address delegate,address contractAddress,uint64 expirationDate)": {
         "$id": "delegateForUserDecryption",
         "intent": "Delegate decryption rights",
         "interpolatedIntent": "Delegate decryption to {delegate} for {contractAddress} until {expirationDate}",
@@ -25,7 +25,7 @@
           { "path": "expirationDate", "label": "Delegated until", "format": "date", "params": { "encoding": "timestamp" } }
         ]
       },
-      "revokeDelegationForUserDecryption(address delegate, address contractAddress)": {
+      "revokeDelegationForUserDecryption(address delegate,address contractAddress)": {
         "$id": "revokeUserDecryptDelegation",
         "intent": "Revoke decryption delegation",
         "interpolatedIntent": "Revoke decryption delegation from {delegate} for {contractAddress}",

@@ -41,7 +41,7 @@
       "callbackData": { "label": "Callback data", "format": "raw" }
     },
     "formats": {
-      "wrap(address to, uint256 amount)": {
+      "wrap(address to,uint256 amount)": {
         "$id": "wrap",
         "intent": "Shield",
         "interpolatedIntent": "Shield {amount} underlying units to {to}",
@@ -50,7 +50,7 @@
           { "path": "to", "$ref": "$.display.definitions.receiver" }
         ]
       },
-      "unwrap(address from, address to, bytes32 amount)": {
+      "unwrap(address from,address to,bytes32 amount)": {
         "$id": "unwrap",
         "intent": "Request to unshield",
         "interpolatedIntent": "Request to unshield {amount} from {from} to {to}",
@@ -60,7 +60,7 @@
           { "path": "amount", "$ref": "$.display.definitions.encryptedAmount" }
         ]
       },
-      "unwrap(address from, address to, bytes32 encryptedAmount, bytes inputProof)": {
+      "unwrap(address from,address to,bytes32 encryptedAmount,bytes inputProof)": {
         "$id": "unwrapWithProof",
         "intent": "Request to unshield",
         "interpolatedIntent": "Request to unshield {encryptedAmount} from {from} to {to}",
@@ -71,7 +71,7 @@
           { "path": "inputProof", "$ref": "$.display.definitions.inputProof", "visible": "never" }
         ]
       },
-      "finalizeUnwrap(bytes32 unwrapRequestId, uint64 unwrapAmountCleartext, bytes decryptionProof)": {
+      "finalizeUnwrap(bytes32 unwrapRequestId,uint64 unwrapAmountCleartext,bytes decryptionProof)": {
         "$id": "finalizeUnwrap",
         "intent": "Finalize unshield",
         "interpolatedIntent": "Finalize unshield of {unwrapAmountCleartext}",
@@ -81,7 +81,7 @@
           { "path": "decryptionProof", "$ref": "$.display.definitions.decryptionProof", "visible": "never" }
         ]
       },
-      "confidentialTransfer(address to, bytes32 amount)": {
+      "confidentialTransfer(address to,bytes32 amount)": {
         "$id": "cTransfer",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {amount} to {to}",
@@ -90,7 +90,7 @@
           { "path": "to", "$ref": "$.display.definitions.receiver" }
         ]
       },
-      "confidentialTransfer(address to, bytes32 encryptedAmount, bytes inputProof)": {
+      "confidentialTransfer(address to,bytes32 encryptedAmount,bytes inputProof)": {
         "$id": "cTransferWithProof",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {encryptedAmount} to {to}",
@@ -100,7 +100,7 @@
           { "path": "inputProof", "$ref": "$.display.definitions.inputProof", "visible": "never" }
         ]
       },
-      "confidentialTransferFrom(address from, address to, bytes32 amount)": {
+      "confidentialTransferFrom(address from,address to,bytes32 amount)": {
         "$id": "cTransferFrom",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {amount} from {from} to {to}",
@@ -110,7 +110,7 @@
           { "path": "to", "$ref": "$.display.definitions.receiver" }
         ]
       },
-      "confidentialTransferFrom(address from, address to, bytes32 encryptedAmount, bytes inputProof)": {
+      "confidentialTransferFrom(address from,address to,bytes32 encryptedAmount,bytes inputProof)": {
         "$id": "cTransferFromWithProof",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {encryptedAmount} from {from} to {to}",
@@ -121,7 +121,7 @@
           { "path": "inputProof", "$ref": "$.display.definitions.inputProof", "visible": "never" }
         ]
       },
-      "confidentialTransferAndCall(address to, bytes32 amount, bytes data)": {
+      "confidentialTransferAndCall(address to,bytes32 amount,bytes data)": {
         "$id": "cTransferAndCall",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {amount} to {to}",
@@ -131,7 +131,7 @@
           { "path": "data", "$ref": "$.display.definitions.callbackData", "visible": "never" }
         ]
       },
-      "confidentialTransferAndCall(address to, bytes32 encryptedAmount, bytes inputProof, bytes data)": {
+      "confidentialTransferAndCall(address to,bytes32 encryptedAmount,bytes inputProof,bytes data)": {
         "$id": "cTransferAndCallWithProof",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {encryptedAmount} to {to}",
@@ -142,7 +142,7 @@
           { "path": "data", "$ref": "$.display.definitions.callbackData", "visible": "never" }
         ]
       },
-      "confidentialTransferFromAndCall(address from, address to, bytes32 amount, bytes data)": {
+      "confidentialTransferFromAndCall(address from,address to,bytes32 amount,bytes data)": {
         "$id": "cTransferFromAndCall",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {amount} from {from} to {to}",
@@ -153,7 +153,7 @@
           { "path": "data", "$ref": "$.display.definitions.callbackData", "visible": "never" }
         ]
       },
-      "confidentialTransferFromAndCall(address from, address to, bytes32 encryptedAmount, bytes inputProof, bytes data)": {
+      "confidentialTransferFromAndCall(address from,address to,bytes32 encryptedAmount,bytes inputProof,bytes data)": {
         "$id": "cTransferFromAndCallWithProof",
         "intent": "Confidential transfer",
         "interpolatedIntent": "Confidential transfer of {encryptedAmount} from {from} to {to}",
@@ -165,7 +165,7 @@
           { "path": "data", "$ref": "$.display.definitions.callbackData", "visible": "never" }
         ]
       },
-      "setOperator(address operator, uint48 until)": {
+      "setOperator(address operator,uint48 until)": {
         "$id": "setOperator",
         "intent": "Set operator authorization",
         "interpolatedIntent": "Set {operator} authorization to expire on {until}",
@@ -180,7 +180,7 @@
         "interpolatedIntent": "Request public disclosure of {encryptedAmount}",
         "fields": [{ "path": "encryptedAmount", "$ref": "$.display.definitions.encryptedAmount" }]
       },
-      "discloseEncryptedAmount(bytes32 encryptedAmount, uint64 cleartextAmount, bytes decryptionProof)": {
+      "discloseEncryptedAmount(bytes32 encryptedAmount,uint64 cleartextAmount,bytes decryptionProof)": {
         "$id": "discloseEncryptedAmount",
         "intent": "Disclose encrypted amount publicly",
         "interpolatedIntent": "Disclose {encryptedAmount} publicly as {cleartextAmount}",
