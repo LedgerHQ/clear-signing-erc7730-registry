@@ -3,39 +3,6 @@
   "context": {
     "$id": "3F Facility",
     "contract": {
-      "abi": [
-        {
-          "type": "function",
-          "name": "deposit",
-          "stateMutability": "nonpayable",
-          "inputs": [{ "name": "id", "type": "uint256" }, { "name": "amount", "type": "uint256" }],
-          "outputs": []
-        },
-        {
-          "type": "function",
-          "name": "withdraw",
-          "stateMutability": "nonpayable",
-          "inputs": [
-            { "name": "id", "type": "uint256" },
-            { "name": "from", "type": "address" },
-            { "name": "receiver", "type": "address" },
-            { "name": "amount", "type": "uint256" }
-          ],
-          "outputs": []
-        },
-        {
-          "type": "function",
-          "name": "claim",
-          "stateMutability": "nonpayable",
-          "inputs": [
-            { "name": "id", "type": "uint256" },
-            { "name": "from", "type": "address" },
-            { "name": "receiver", "type": "address" },
-            { "name": "shares", "type": "uint256" }
-          ],
-          "outputs": []
-        }
-      ],
       "deployments": [{ "chainId": 1, "address": "0x4e013ca8ff612a58f53c822904cdd0ec538a4a4f" }]
     }
   },
