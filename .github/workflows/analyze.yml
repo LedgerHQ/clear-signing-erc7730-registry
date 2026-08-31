@@ -1,10 +1,6 @@
 name: Analyze
 
 on:
-  pull_request:
-    types: [ready_for_review, synchronize]
-    paths:
-      - 'registry/**/calldata-*.json'
   workflow_dispatch:
     inputs:
       analysis_mode:
@@ -55,7 +51,8 @@ concurrency:
 jobs:
   analyze:
     name: ERC-7730 Analysis
-    if: github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch'
+    # Restore alongside the pull_request trigger if the workflow is re-enabled.
+    # if: github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch'
     runs-on: public-ledgerhq-shared-small
     timeout-minutes: 360
 
@@ -71,6 +68,8 @@ jobs:
         with:
           files: |
             registry/**/calldata-*.json
+          files_ignore: |
+            registry/**/sigs/**
 
       - name: Set up uv
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -199,7 +198,7 @@ jobs:
               RESULTS="${RESULTS}❌ **${PROTOCOL}** — Critical issues found\n"
 
               CRITICALS_MD=$(ls "$SUBDIR"/CRITICALS_*.md 2>/dev/null | head -1)
-              CALLDATA_FILE=$(find registry -name "calldata-*.json" 2>/dev/null | grep -i "$(echo "$PROTOCOL" | tr '_' '-')" | head -1 || true)
+              CALLDATA_FILE=$(find registry -name "calldata-*.json" -not -path '*/sigs/*' 2>/dev/null | grep -i "$(echo "$PROTOCOL" | tr '_' '-')" | head -1 || true)
 
               if [ -f "$CRITICALS_MD" ]; then
                 while IFS='|' read -r _ col1 col2 col3 _; do

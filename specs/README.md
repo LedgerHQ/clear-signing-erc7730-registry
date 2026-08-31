@@ -8,7 +8,7 @@ The following files are automatically synced from the [ethereum/ERCs](https://gi
 
 | Local file | Upstream source |
 |---|---|
-| `erc-7730.md` | [ERCS/erc-7734.md](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-7734.md) |
+| `erc-7730.md` | [ERCS/erc-7730.md](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-7730.md) |
 | `erc7730-v2.schema.json` | [assets/erc-7730/erc7730-v2.schema.json](https://github.com/ethereum/ERCs/blob/master/assets/erc-7730/erc7730-v2.schema.json) |
 | `erc7730-v1.schema.json` | [assets/erc-7730/erc7730-v1.schema.json](https://github.com/ethereum/ERCs/blob/master/assets/erc-7730/erc7730-v1.schema.json) |
 
@@ -16,7 +16,11 @@ Do not edit these files directly — changes should be made upstream and will be
 
 ## Other files
 
+These are maintained in this repository and are not synced from upstream.
+
 | File | Description |
 |---|---|
-| `erc7730-tests.schema.json` | JSON schema for device test files (`*.tests.json`) |
+| `erc7730-tests-v2.schema.json` | JSON schema for test files in `registry/$entity/testsv2/` |
+| `erc7730-tests.schema.json` | Legacy JSON schema for test files in `registry/$entity/tests/` |
 | `templates/` | Descriptor templates for new contributions |
+

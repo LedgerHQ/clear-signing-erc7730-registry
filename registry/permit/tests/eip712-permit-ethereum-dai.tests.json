@@ -12,11 +12,11 @@
             { "name": "verifyingContract", "type": "address" }
           ],
           "Permit": [
-            { "name": "owner", "type": "address" },
+            { "name": "holder", "type": "address" },
             { "name": "spender", "type": "address" },
-            { "name": "value", "type": "uint256" },
             { "name": "nonce", "type": "uint256" },
-            { "name": "deadline", "type": "uint256" }
+            { "name": "expiry", "type": "uint256" },
+            { "name": "allowed", "type": "bool" }
           ]
         },
         "primaryType": "Permit",
@@ -27,18 +27,18 @@
           "verifyingContract": "0x6B175474E89094C44Da98b954EedeAC495271d0F"
         },
         "message": {
-          "owner": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+          "holder": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
           "spender": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
-          "value": "2500000000000000000000",
           "nonce": "12",
-          "deadline": "1798761600"
+          "expiry": "1798761600",
+          "allowed": true
         }
       },
       "expectedTexts": [
         "Spender",
         "0x7a250d5630B4cF53 9739dF2C5dAcb4c659 F2488D",
-        "Max spending amount",
-        "2500 DAI",
+        "Unlimited spending",
+        "true",
         "Valid until",
         "2027-01-01 12:00:00 AM UTC"
       ]
