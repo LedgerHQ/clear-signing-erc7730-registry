@@ -1,12 +1,12 @@
 {
   "$schema": "../../specs/erc7730-v2.schema.json",
   "context": {
-    "$id": "L1StarkGateUSDCBridge",
+    "$id": "L1StarkGateEURCBridge",
     "contract": {
       "deployments": [
         {
           "chainId": 1,
-          "address": "0xF6080D9fbEEbcd44D89aFfBFd42F098cbFf92816"
+          "address": "0x00b0466f8dC04B0782DbF1A1DfdCe333F0Dd082B"
         }
       ]
     }
@@ -15,12 +15,9 @@
     "owner": "StarkWare",
     "info": {
       "url": "https://starkgate.starknet.io/",
-      "deploymentDate": "2022-07-06T00:00:00Z"
+      "deploymentDate": "2026-03-02T00:00:00Z"
     },
-    "contractName": "L1StarkGateUSDCBridge",
-    "constants": {
-      "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-    }
+    "contractName": "L1StarkGateEURCBridge"
   },
   "display": {
     "formats": {
@@ -35,33 +32,6 @@
             "format": "tokenAmount",
             "params": {
               "tokenPath": "token"
-            },
-            "visible": "always"
-          },
-          {
-            "path": "l2Recipient",
-            "label": "Recipient",
-            "format": "raw",
-            "visible": "always"
-          },
-          {
-            "path": "@.value",
-            "label": "Deposit fee",
-            "format": "amount"
-          }
-        ]
-      },
-      "deposit(uint256 amount, uint256 l2Recipient)": {
-        "$id": "depositLegacy",
-        "intent": "Bridge",
-        "interpolatedIntent": "Bridge {amount} to {l2Recipient}",
-        "fields": [
-          {
-            "path": "amount",
-            "label": "Amount to deposit",
-            "format": "tokenAmount",
-            "params": {
-              "token": "$.metadata.constants.tokenAddress"
             },
             "visible": "always"
           },
