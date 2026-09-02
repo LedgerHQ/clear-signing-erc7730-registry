@@ -207,6 +207,8 @@ Test files should be placed in a `testsv2/` folder within your entity directory 
 - `index.calldata.json` maps each identifier to the path of the descriptor for that contract.
 - `index.eip712.json` maps each identifier to its EIP-712 primary types, and each primary type to the descriptors defining it. Every entry also carries the keccak256 hashes of the `encodeType` strings it covers, so consumers can pick the right descriptor when several define the same primary type for the same contract.
 
+A salt-based EIP-712 domain carries the chain id in a `salt` member and has no `chainId` member, so a descriptor for one cannot declare `eip712.deployments` and has no `eip155:` identifier. Those descriptors bind through `eip712.domainSeparator`, and `index.eip712.json` keys them by `eip712-domain-separator:$separator` instead. The prefix keeps the two kinds of key disjoint, so a consumer that resolves only by deployment skips them rather than mis-resolving.
+
 Both files are **generated** from the descriptors under `registry/` — do not edit them by hand. A CI job regenerates them on every change to `master` and opens a pull request when they change, so contributors do not need to update them. To regenerate locally, run `npm ci && npm run generate-index`.
 
 ## Disclaimer
