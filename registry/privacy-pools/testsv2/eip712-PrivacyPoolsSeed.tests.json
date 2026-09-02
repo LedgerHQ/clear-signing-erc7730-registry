@@ -65,7 +65,7 @@
             "value": "privacy-pools/wallet-seed:v2"
           }
         ],
-        "interpolatedIntent": "Derive seed"
+        "interpolatedIntent": "Derive seed for privacy-pools/wallet-seed:v2"
       }
     }
   ]

@@ -41,7 +41,7 @@
     "formats": {
       "deposit(uint256 _precommitment)": {
         "intent": "Deposit native asset",
-        "interpolatedIntent": "Deposit native",
+        "interpolatedIntent": "Deposit {@.value}",
         "fields": [
           {
             "path": "@.value",

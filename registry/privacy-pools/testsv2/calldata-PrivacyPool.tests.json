@@ -22,7 +22,7 @@
             "value": "0.1 ETH"
           }
         ],
-        "interpolatedIntent": "Deposit into pool"
+        "interpolatedIntent": "Deposit 100000000000000000 and 0.1 ETH into pool from 0x1563915e194D8CfBA1943570603F7606A3115508"
       }
     },
     {
@@ -100,7 +100,7 @@
             "value": "16"
           }
         ],
-        "interpolatedIntent": "Withdraw from pool"
+        "interpolatedIntent": "Withdraw from pool via 0x0000000000000000000000000000000000000001"
       }
     },
     {

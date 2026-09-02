@@ -45,7 +45,7 @@
     "formats": {
       "DeriveSeed(string action,string context,bytes32 addressHash)": {
         "intent": "Derive account seed",
-        "interpolatedIntent": "Derive seed",
+        "interpolatedIntent": "Derive seed for {context}",
         "fields": [
           {
             "path": "action",

@@ -117,7 +117,7 @@
     "formats": {
       "deposit(address _depositor,uint256 _value,uint256 _precommitmentHash)": {
         "intent": "Deposit into pool",
-        "interpolatedIntent": "Deposit into pool",
+        "interpolatedIntent": "Deposit {_value} and {@.value} into pool from {_depositor}",
         "fields": [
           {
             "path": "_depositor",
@@ -138,14 +138,14 @@
           {
             "path": "_value",
             "label": "Amount",
-            "format": "raw",
+            "format": "tokenAmount",
             "visible": "always"
           },
           {
             "path": "@.value",
             "label": "Native amount",
             "format": "amount",
-            "visible": "optional"
+            "visible": "always"
           },
           {
             "path": "_precommitmentHash",
@@ -183,7 +183,7 @@
       },
       "withdraw((address processooor,bytes data) _withdrawal,(uint256[2] pA,uint256[2][2] pB,uint256[2] pC,uint256[8] pubSignals) _proof)": {
         "intent": "Withdraw from pool",
-        "interpolatedIntent": "Withdraw from pool",
+        "interpolatedIntent": "Withdraw from pool via {_withdrawal.processooor}",
         "fields": [
           {
             "path": "_withdrawal.processooor",
