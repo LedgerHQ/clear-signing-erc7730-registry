@@ -20,6 +20,7 @@
     "formats": {
       "placeBid(uint256 tokenId)": {
         "intent": "Place bid on artwork",
+        "interpolatedIntent": "Bid {@.value} on artwork {tokenId}",
         "fields": [
           { "path": "tokenId", "label": "Artwork (tokenId)", "format": "raw" },
           { "path": "@.value", "label": "Bid amount", "format": "amount" }
@@ -27,12 +28,14 @@
       },
       "settleAuction(uint256 tokenId)": {
         "intent": "Settle auction",
+        "interpolatedIntent": "Settle auction for artwork {tokenId}",
         "fields": [
           { "path": "tokenId", "label": "Artwork (tokenId)", "format": "raw" }
         ]
       },
       "startAuction(uint256 tokenId,uint256 reservePrice,uint256 duration)": {
         "intent": "Start auction",
+        "interpolatedIntent": "Start auction for artwork {tokenId}, reserve {reservePrice}, duration {duration}",
         "fields": [
           { "path": "tokenId", "label": "Artwork (tokenId)", "format": "raw" },
           { "path": "reservePrice", "label": "Reserve price", "format": "amount" },
@@ -41,6 +44,7 @@
       },
       "setAgentWhitelist(address agent,bool allowed)": {
         "intent": "Whitelist bidding agent",
+        "interpolatedIntent": "{allowed} bidding access for agent {agent}",
         "fields": [
           { "path": "agent", "label": "Agent address", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "allowed", "label": "Access", "format": "enum", "params": { "$ref": "$.metadata.enums.whitelist" } }
@@ -48,6 +52,7 @@
       },
       "mintWork(address creator,string uri,uint96 royaltyBps)": {
         "intent": "Mint artwork",
+        "interpolatedIntent": "Mint artwork {uri} for creator {creator} with {royaltyBps} royalty",
         "fields": [
           { "path": "creator", "label": "Creator (royalty)", "format": "addressName", "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] } },
           { "path": "uri", "label": "Metadata URI", "format": "raw" },
@@ -56,28 +61,33 @@
       },
       "setCuratorRecipient(address newCurator)": {
         "intent": "Set curator wallet",
+        "interpolatedIntent": "Set curator wallet to {newCurator}",
         "fields": [
           { "path": "newCurator", "label": "New curator address", "format": "addressName", "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] } }
         ]
       },
       "setPlatformRecipient(address newPlatform)": {
         "intent": "Set platform wallet",
+        "interpolatedIntent": "Set platform wallet to {newPlatform}",
         "fields": [
           { "path": "newPlatform", "label": "New platform address", "format": "addressName", "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] } }
         ]
       },
       "transferOwnership(address newOwner)": {
         "intent": "Transfer ownership",
+        "interpolatedIntent": "Transfer contract ownership to {newOwner}",
         "fields": [
           { "path": "newOwner", "label": "New owner address", "format": "addressName", "params": { "types": ["eoa", "contract"], "sources": ["local", "ens"] } }
         ]
       },
       "renounceOwnership()": {
         "intent": "Renounce ownership FOREVER",
+        "interpolatedIntent": "Renounce ownership of this contract FOREVER",
         "fields": []
       },
       "setApprovalForAll(address operator,bool approved)": {
         "intent": "Approve ALL artworks",
+        "interpolatedIntent": "{approved}: operator {operator} on ALL artworks of {@.to}",
         "fields": [
           { "path": "@.to", "label": "Collection", "format": "addressName", "params": { "types": ["collection"], "sources": ["local", "ens"] } },
           { "path": "operator", "label": "Operator address", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } },
@@ -86,6 +96,7 @@
       },
       "approve(address to,uint256 tokenId)": {
         "intent": "Approve one artwork",
+        "interpolatedIntent": "Approve {to} to transfer artwork {tokenId}",
         "fields": [
           { "path": "to", "label": "Operator address", "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } },
           { "path": "tokenId", "label": "Artwork (tokenId)", "format": "raw" }
@@ -93,6 +104,7 @@
       },
       "transferFrom(address from,address to,uint256 tokenId)": {
         "intent": "Transfer artwork",
+        "interpolatedIntent": "Transfer artwork {tokenId} from {from} to {to}",
         "fields": [
           { "path": "from", "label": "From", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "to", "label": "To", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
@@ -101,6 +113,7 @@
       },
       "safeTransferFrom(address from,address to,uint256 tokenId)": {
         "intent": "Transfer artwork",
+        "interpolatedIntent": "Transfer artwork {tokenId} from {from} to {to}",
         "fields": [
           { "path": "from", "label": "From", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "to", "label": "To", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
@@ -109,6 +122,7 @@
       },
       "safeTransferFrom(address from,address to,uint256 tokenId,bytes data)": {
         "intent": "Transfer artwork",
+        "interpolatedIntent": "Transfer artwork {tokenId} from {from} to {to}",
         "fields": [
           { "path": "from", "label": "From", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
           { "path": "to", "label": "To", "format": "addressName", "params": { "types": ["eoa"], "sources": ["local", "ens"] } },
