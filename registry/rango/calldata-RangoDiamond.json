@@ -185,7 +185,9 @@
   },
   "metadata": {
     "owner": "Rango Exchange",
-    "info": { "url": "https://rango.exchange" },
+    "info": {
+      "url": "https://rango.exchange"
+    },
     "constants": {
       "addressAsNull": "0x0000000000000000000000000000000000000000"
     },
@@ -249,21 +251,31 @@
             "visible": "never"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain",
             "path": "request.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Total Relay Fee Amount",
+            "label": "Relay Fee",
             "path": "request.totalRelayFeeAmount",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Quote Timestamp",
             "path": "request.quoteTimestamp",
             "visible": "never"
           },
-          { "label": "Message", "path": "request.message", "visible": "never" },
+          {
+            "label": "Message",
+            "path": "request.message",
+            "visible": "never"
+          },
           {
             "label": "Request Id",
             "path": "bridgeRequest.requestId",
@@ -277,12 +289,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -290,9 +312,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -359,17 +386,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -396,7 +426,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -412,7 +446,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -449,14 +487,16 @@
             "visible": "never"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain",
             "path": "bridgeRequest.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Total Relay Fee Amount",
+            "label": "Relay Fee",
             "path": "bridgeRequest.totalRelayFeeAmount",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Quote Timestamp",
@@ -488,19 +528,25 @@
           {
             "label": "Recipient",
             "path": "request.recipient",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain ID",
             "path": "request.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Receive Token Address",
             "path": "request.receiveTokenAddress",
             "visible": "never"
           },
-          { "label": "Nonce", "path": "request.nonce", "visible": "never" },
+          {
+            "label": "Nonce",
+            "path": "request.nonce",
+            "visible": "never"
+          },
           {
             "label": "Messenger",
             "path": "request.messenger",
@@ -509,12 +555,14 @@
           {
             "label": "Transfer Fee",
             "path": "request.transferFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Fee Token Amount",
             "path": "request.feeTokenAmount",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Request Id",
@@ -529,12 +577,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -542,9 +600,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -601,17 +664,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -638,7 +704,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -654,7 +724,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -663,12 +737,14 @@
           {
             "label": "Recipient",
             "path": "bridgeRequest.recipient",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain ID",
             "path": "bridgeRequest.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Receive Token Address",
@@ -688,12 +764,14 @@
           {
             "label": "Transfer Fee",
             "path": "bridgeRequest.transferFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Fee Token Amount",
             "path": "bridgeRequest.feeTokenAmount",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           }
         ]
       },
@@ -758,9 +836,10 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain",
             "path": "bridgeRequest.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
             "label": "Has Interchain Message",
@@ -787,7 +866,11 @@
             "path": "request.requestId",
             "visible": "never"
           },
-          { "label": "Token", "path": "request.token", "visible": "never" },
+          {
+            "label": "Token",
+            "path": "request.token",
+            "visible": "never"
+          },
           {
             "label": "Affiliator Address",
             "path": "request.affiliateFees.[].affiliatorAddress",
@@ -804,9 +887,14 @@
             "visible": "never"
           },
           {
-            "label": "Total Affiliate Fee",
+            "label": "Affiliate Fee",
             "path": "request.totalAffiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "request.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -886,9 +974,10 @@
             "visible": "never"
           },
           {
-            "label": "Total Affiliate Fee",
+            "label": "Affiliate Fee",
             "path": "request.totalAffiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Fee From Input Token",
@@ -910,7 +999,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -926,7 +1019,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -968,9 +1065,10 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain",
             "path": "bridgeRequest.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
             "label": "Has Interchain Message",
@@ -1060,9 +1158,10 @@
             "visible": "never"
           },
           {
-            "label": "Total Affiliate Fee",
+            "label": "Affiliate Fee",
             "path": "request.totalAffiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Fee From Input Token",
@@ -1084,7 +1183,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -1100,7 +1203,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -1139,15 +1246,21 @@
             "visible": "never"
           },
           {
-            "label": "To Chain",
+            "label": "Destination Chain",
             "path": "request.toChain",
+            "visible": "always",
+            "format": "raw"
+          },
+          {
+            "label": "Symbol",
+            "path": "request.symbol",
             "visible": "never"
           },
-          { "label": "Symbol", "path": "request.symbol", "visible": "never" },
           {
             "label": "Relayer Gas",
             "path": "request.relayerGas",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Src Gas Refund Address",
@@ -1172,12 +1285,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -1185,9 +1308,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -1249,17 +1377,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -1286,7 +1417,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -1302,7 +1437,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -1319,9 +1458,10 @@
             "visible": "never"
           },
           {
-            "label": "To Chain",
+            "label": "Destination Chain",
             "path": "bridgeRequest.toChain",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Symbol",
@@ -1331,7 +1471,8 @@
           {
             "label": "Relayer Gas",
             "path": "bridgeRequest.relayerGas",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Src Gas Refund Address",
@@ -1366,9 +1507,10 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain ID",
             "path": "stargateRequest.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Src Pool Id",
@@ -1405,11 +1547,17 @@
             "path": "stargateRequest.dstNativeAddr",
             "visible": "never"
           },
-          { "label": "To", "path": "stargateRequest.to", "visible": "never" },
           {
-            "label": "Stg Fee",
+            "label": "Recipient",
+            "path": "stargateRequest.to",
+            "visible": "always",
+            "format": "raw"
+          },
+          {
+            "label": "Stargate Fee",
             "path": "stargateRequest.stgFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Im Message",
@@ -1429,12 +1577,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -1442,9 +1600,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -1501,17 +1664,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -1538,7 +1704,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -1554,7 +1724,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -1566,9 +1740,10 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain ID",
             "path": "stargateRequest.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Src Pool Id",
@@ -1605,11 +1780,17 @@
             "path": "stargateRequest.dstNativeAddr",
             "visible": "never"
           },
-          { "label": "To", "path": "stargateRequest.to", "visible": "never" },
           {
-            "label": "Stg Fee",
+            "label": "Recipient",
+            "path": "stargateRequest.to",
+            "visible": "always",
+            "format": "raw"
+          },
+          {
+            "label": "Stargate Fee",
             "path": "stargateRequest.stgFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Im Message",
@@ -1644,14 +1825,16 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain",
             "path": "stargateRequest.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Recipient Address",
+            "label": "Recipient",
             "path": "stargateRequest.recipientAddress",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Min Amount LD",
@@ -1666,7 +1849,8 @@
           {
             "label": "Native Fee",
             "path": "stargateRequest.nativeFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Extra Options",
@@ -1696,12 +1880,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -1709,9 +1903,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -1768,17 +1967,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -1805,7 +2007,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -1821,7 +2027,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -1838,14 +2048,16 @@
             "visible": "never"
           },
           {
-            "label": "Dst Chain Id",
+            "label": "Destination Chain",
             "path": "stargateV2Request.dstChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Recipient Address",
+            "label": "Recipient",
             "path": "stargateV2Request.recipientAddress",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Min Amount LD",
@@ -1860,7 +2072,8 @@
           {
             "label": "Native Fee",
             "path": "stargateV2Request.nativeFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Extra Options",
@@ -1932,17 +2145,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -1969,7 +2185,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -1985,7 +2205,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -2069,9 +2293,10 @@
             "visible": "never"
           },
           {
-            "label": "To Chain Id",
+            "label": "Destination Chain",
             "path": "symbiosisRequest.toChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
             "label": "Request Id",
@@ -2086,12 +2311,22 @@
           {
             "label": "Platform Fee",
             "path": "bridgeRequest.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliate Fee",
             "path": "bridgeRequest.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "Affiliator Address",
@@ -2099,9 +2334,14 @@
             "visible": "never"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "bridgeRequest.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -2168,17 +2408,20 @@
           {
             "label": "Platform Fee",
             "path": "request.platformFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
-            "label": "Destination Executor Fee",
+            "label": "Executor Fee",
             "path": "request.destinationExecutorFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliate Fee",
             "path": "request.affiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Affiliator Address",
@@ -2205,7 +2448,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -2221,7 +2468,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -2278,9 +2529,10 @@
             "visible": "never"
           },
           {
-            "label": "To Chain Id",
+            "label": "Destination Chain",
             "path": "bridgeRequest.toChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           }
         ]
       },
@@ -2340,21 +2592,27 @@
             "visible": "never"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain",
             "path": "request.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Decimals Adjusted Total Relay Fee Pct",
+            "label": "Relay Fee %",
             "path": "request.decimalsAdjustedTotalRelayFeePct",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Quote Timestamp",
             "path": "request.quoteTimestamp",
             "visible": "never"
           },
-          { "label": "Message", "path": "request.message", "visible": "never" },
+          {
+            "label": "Message",
+            "path": "request.message",
+            "visible": "never"
+          },
           {
             "label": "Request Id",
             "path": "bridgeRequest.requestId",
@@ -2381,9 +2639,14 @@
             "visible": "never"
           },
           {
-            "label": "Total Affiliate Fee",
+            "label": "Affiliate Fee",
             "path": "bridgeRequest.totalAffiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "tokenAmount",
+            "params": {
+              "tokenPath": "bridgeRequest.token",
+              "nativeCurrencyAddress": ["$.metadata.constants.addressAsNull"]
+            }
           },
           {
             "label": "D App Tag",
@@ -2463,9 +2726,10 @@
             "visible": "never"
           },
           {
-            "label": "Total Affiliate Fee",
+            "label": "Affiliate Fee",
             "path": "request.totalAffiliateFee",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Fee From Input Token",
@@ -2487,7 +2751,11 @@
             "path": "calls.[].spender",
             "visible": "never"
           },
-          { "label": "Target", "path": "calls.[].target", "visible": "never" },
+          {
+            "label": "Target",
+            "path": "calls.[].target",
+            "visible": "never"
+          },
           {
             "label": "Swap From Token",
             "path": "calls.[].swapFromToken",
@@ -2503,7 +2771,11 @@
             "path": "calls.[].needsTransferFromUser",
             "visible": "never"
           },
-          { "label": "Amount", "path": "calls.[].amount", "visible": "never" },
+          {
+            "label": "Amount",
+            "path": "calls.[].amount",
+            "visible": "never"
+          },
           {
             "label": "Call Data",
             "path": "calls.[].callData",
@@ -2540,14 +2812,16 @@
             "visible": "never"
           },
           {
-            "label": "Destination Chain Id",
+            "label": "Destination Chain",
             "path": "bridgeRequest.destinationChainId",
-            "visible": "never"
+            "visible": "always",
+            "format": "chainId"
           },
           {
-            "label": "Decimals Adjusted Total Relay Fee Pct",
+            "label": "Relay Fee %",
             "path": "bridgeRequest.decimalsAdjustedTotalRelayFeePct",
-            "visible": "never"
+            "visible": "always",
+            "format": "raw"
           },
           {
             "label": "Quote Timestamp",
