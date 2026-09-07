@@ -19,6 +19,7 @@
       "txHash": "0x6cf0a5130b01feea85621148b7a6193c775d8516b1aa3628f37828bc5c12a5c8",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 500000 XPR for at least 93522914967.046437151086561198 XEN to 0x78b59874BF0Fb404D88D9e688fdC56eE3E085e6b",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to Send", "value": "500000 XPR" },
@@ -33,11 +34,12 @@
       "txHash": "0xdd05df1178e2c9becfa70eb62d8524b6940b3c3e5d478e40b41323370ff24e1d",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 56 TRX for at least 0.007538051138939978 ETH to 0xA368825594237F98cD05803027E841Aeca7e8F52",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to Send", "value": "56 TRX" },
-          { "label": "Minimum Amount to receive", "value": "7538051138939978" },
-          { "label": "Receiver", "value": "0xA368825594237F98cD05803027E841Aeca7e8F52" }
+          { "label": "Minimum to Receive", "value": "0.007538051138939978 ETH" },
+          { "label": "Recipient", "value": "0xA368825594237F98cD05803027E841Aeca7e8F52" }
         ]
       }
     },
@@ -47,6 +49,7 @@
       "txHash": "0xf681e1ea9b4e9a0b7597f825ae1c2cb9f7256d5e1d5caa791ae37c18ca7e063f",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 0.004691322694977235 ETH for at least 327.952248630648498422 DEVVE to 0x9db61e60E1F1Cc3e03952F8E19CC7705DCE8581b",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to send", "value": "0.004691322694977235 ETH" },
@@ -61,6 +64,7 @@
       "txHash": "0x77640203938a2789ed6acb4cbcab24d152b0076848823800190341cb7974590e",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 2995 USDT for at least 2904.541564 USDC to 0x2D7d7d61978fF0b82164CC201Ec532a68f10F9c2",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to Send", "value": "2995 USDT" },
@@ -75,11 +79,12 @@
       "txHash": "0xd4a8263ff90910c298d65160242551a9360b30737717ba7a06c390a75c56bae1",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 0.00136 WETH for at least 0.0013464 ETH to 0xa78456D70bed1938Fb26E6106922b2F370960b61",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to Send", "value": "0.00136 WETH" },
-          { "label": "Minimum Amount to receive", "value": "1346400000000000" },
-          { "label": "Receiver", "value": "0xa78456D70bed1938Fb26E6106922b2F370960b61" }
+          { "label": "Minimum to Receive", "value": "0.0013464 ETH" },
+          { "label": "Recipient", "value": "0xa78456D70bed1938Fb26E6106922b2F370960b61" }
         ]
       }
     },
@@ -89,6 +94,7 @@
       "txHash": "0xf853e035367ab9e89d58e0aea73a00d50489d5b0827e748bfa8dd81d7150e7e0",
       "expected": {
         "intent": "Swap",
+        "interpolatedIntent": "Swap 0.002098039615199859 ETH for at least 4.508934 USDC to 0x49d74da14765d2Dc73d73884bF2d1E7A49B38F18",
         "owner": "LI.FI",
         "fields": [
           { "label": "Amount to send", "value": "0.002098039615199859 ETH" },
