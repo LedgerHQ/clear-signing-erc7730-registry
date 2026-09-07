@@ -9,8 +9,8 @@
           "EIP712Domain": [
             { "name": "name", "type": "string" },
             { "name": "version", "type": "string" },
-            { "name": "verifyingContract", "type": "address" },
-            { "name": "salt", "type": "bytes32" }
+            { "name": "chainId", "type": "uint256" },
+            { "name": "verifyingContract", "type": "address" }
           ],
           "Permit": [
             { "name": "owner", "type": "address" },
@@ -21,12 +21,7 @@
           ]
         },
         "primaryType": "Permit",
-        "domain": {
-          "name": "USD Coin (PoS)",
-          "version": "1",
-          "verifyingContract": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-          "salt": "0x0000000000000000000000000000000000000000000000000000000000000089"
-        },
+        "domain": { "name": "USD Coin", "version": "2", "chainId": 137, "verifyingContract": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174" },
         "message": {
           "owner": "0x52908400098527886E0F7030069857D2E4169EE7",
           "spender": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
