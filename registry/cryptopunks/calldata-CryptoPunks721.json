@@ -1,0 +1,81 @@
+{
+  "$schema": "../../specs/erc7730-v2.schema.json",
+  "context": {
+    "$id": "CryptoPunks721",
+    "contract": { "deployments": [{ "chainId": 1, "address": "0x000000000000003607fce1aC9e043a86675C5C2F" }] }
+  },
+  "metadata": {
+    "owner": "CryptoPunks",
+    "contractName": "CryptoPunks 721",
+    "info": { "url": "https://cryptopunks.app", "deploymentDate": "2024-01-17T22:48:35Z" }
+  },
+  "display": {
+    "definitions": {
+      "punk": { "label": "Punk", "format": "raw" },
+      "account": { "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] } }
+    },
+    "formats": {
+      "wrapPunk(uint256 punkIndex)": {
+        "intent": "Wrap Punk",
+        "interpolatedIntent": "Wrap Punk #{#.punkIndex}",
+        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+      },
+      "wrapPunkBatch(uint256[] punkIndexes)": { "intent": "Wrap Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
+      "unwrapPunk(uint256 punkIndex)": {
+        "intent": "Unwrap Punk",
+        "interpolatedIntent": "Unwrap Punk #{#.punkIndex}",
+        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+      },
+      "unwrapPunkBatch(uint256[] punkIndexes)": { "intent": "Unwrap Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
+      "migrateLegacyWrappedPunks(uint256[] punkIndexes)": { "intent": "Migrate Legacy Wrapped Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
+      "rescuePunk(uint256 punkIndex)": {
+        "intent": "Rescue Punk",
+        "interpolatedIntent": "Rescue Punk #{#.punkIndex}",
+        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+      },
+      "approve(address account, uint256 id)": {
+        "intent": "Approve Punk Transfer",
+        "interpolatedIntent": "Approve Punk #{#.id}",
+        "fields": [
+          { "path": "#.id", "$ref": "$.display.definitions.punk" },
+          { "path": "#.account", "label": "Approved Address", "$ref": "$.display.definitions.account" }
+        ]
+      },
+      "setApprovalForAll(address operator, bool isApproved)": {
+        "intent": "Set Operator Approval",
+        "fields": [
+          { "path": "#.operator", "label": "Operator", "$ref": "$.display.definitions.account" },
+          { "path": "#.isApproved", "label": "Approved", "format": "raw" }
+        ]
+      },
+      "transferFrom(address from, address to, uint256 id)": {
+        "intent": "Transfer Wrapped Punk",
+        "interpolatedIntent": "Transfer Punk #{#.id}",
+        "fields": [
+          { "path": "#.id", "$ref": "$.display.definitions.punk" },
+          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
+          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
+        ]
+      },
+      "safeTransferFrom(address from, address to, uint256 id)": {
+        "intent": "Transfer Wrapped Punk",
+        "interpolatedIntent": "Transfer Punk #{#.id}",
+        "fields": [
+          { "path": "#.id", "$ref": "$.display.definitions.punk" },
+          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
+          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
+        ]
+      },
+      "safeTransferFrom(address from, address to, uint256 id, bytes data)": {
+        "intent": "Transfer Wrapped Punk",
+        "interpolatedIntent": "Transfer Punk #{#.id}",
+        "fields": [
+          { "path": "#.id", "$ref": "$.display.definitions.punk" },
+          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
+          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" },
+          { "path": "#.data", "label": "Data", "format": "raw", "visible": "never" }
+        ]
+      }
+    }
+  }
+}

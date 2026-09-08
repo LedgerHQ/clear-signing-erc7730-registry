@@ -1,0 +1,63 @@
+{
+  "$schema": "../../specs/erc7730-v2.schema.json",
+  "context": {
+    "$id": "StashFactory",
+    "contract": { "deployments": [{ "chainId": 1, "address": "0x000000000000A6fA31F5fC51c1640aAc76866750" }] }
+  },
+  "metadata": {
+    "owner": "CryptoPunks",
+    "contractName": "Stash Factory",
+    "info": { "url": "https://cryptopunks.app", "deploymentDate": "2024-01-17T22:48:35Z" }
+  },
+  "display": {
+    "definitions": {
+      "account": { "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] } },
+      "contractAddress": { "format": "addressName", "params": { "types": ["contract"], "sources": ["local", "ens"] } }
+    },
+    "formats": {
+      "deployStash(address _owner)": {
+        "intent": "Create Stash",
+        "interpolatedIntent": "Create Stash for {#._owner}",
+        "fields": [{ "path": "#._owner", "label": "Stash Owner", "$ref": "$.display.definitions.account" }]
+      },
+      "upgradeStash()": { "intent": "Upgrade Stash", "fields": [] },
+      "setAuction(address auction, bool _isAuction)": {
+        "intent": "Set Marketplace Status",
+        "fields": [
+          { "path": "#.auction", "label": "Marketplace", "$ref": "$.display.definitions.contractAddress" },
+          { "path": "#._isAuction", "label": "Enabled", "format": "raw" }
+        ]
+      },
+      "addVersion(address implementation)": {
+        "intent": "Add Stash Implementation",
+        "fields": [{ "path": "#.implementation", "label": "Implementation", "$ref": "$.display.definitions.contractAddress" }]
+      },
+      "transferOwnership(address newOwner)": {
+        "intent": "Transfer Factory Ownership",
+        "fields": [{ "path": "#.newOwner", "label": "New Owner", "$ref": "$.display.definitions.account" }]
+      },
+      "renounceOwnership()": { "intent": "Renounce Factory Ownership", "fields": [] },
+      "requestOwnershipHandover()": { "intent": "Request Ownership Handover", "fields": [] },
+      "completeOwnershipHandover(address pendingOwner)": {
+        "intent": "Complete Ownership Handover",
+        "fields": [{ "path": "#.pendingOwner", "label": "New Owner", "$ref": "$.display.definitions.account" }]
+      },
+      "cancelOwnershipHandover()": { "intent": "Cancel Ownership Handover", "fields": [] },
+      "grantRoles(address user, uint256 roles)": {
+        "intent": "Grant Roles",
+        "fields": [
+          { "path": "#.user", "label": "Account", "$ref": "$.display.definitions.account" },
+          { "path": "#.roles", "label": "Roles", "format": "raw" }
+        ]
+      },
+      "revokeRoles(address user, uint256 roles)": {
+        "intent": "Revoke Roles",
+        "fields": [
+          { "path": "#.user", "label": "Account", "$ref": "$.display.definitions.account" },
+          { "path": "#.roles", "label": "Roles", "format": "raw" }
+        ]
+      },
+      "renounceRoles(uint256 roles)": { "intent": "Renounce Roles", "fields": [{ "path": "#.roles", "label": "Roles", "format": "raw" }] }
+    }
+  }
+}
