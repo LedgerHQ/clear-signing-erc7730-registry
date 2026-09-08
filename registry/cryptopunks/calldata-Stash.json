@@ -16,15 +16,6 @@
     "info": { "url": "https://cryptopunks.app", "deploymentDate": "2024-01-17T22:48:47Z" }
   },
   "display": {
-    "definitions": {
-      "punk": { "label": "Punk", "format": "raw" },
-      "account": { "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] } },
-      "collection": {
-        "label": "Collection",
-        "format": "addressName",
-        "params": { "types": ["collection", "contract"], "sources": ["local", "ens"] }
-      }
-    },
     "formats": {
       "withdraw(address tokenAddress, uint256 amount)": {
         "intent": "Withdraw from Stash",
@@ -41,13 +32,18 @@
       "withdrawPunks(uint256[] tokenIds)": {
         "intent": "Withdraw Punks from Stash",
         "interpolatedIntent": "Withdraw Punks #{#.tokenIds.[]} from your Stash",
-        "fields": [{ "path": "#.tokenIds.[]", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.tokenIds.[]", "label": "Punk", "format": "raw" }]
       },
       "withdrawERC721(address tokenAddress, uint256[] tokenIds)": {
         "intent": "Withdraw NFTs from Stash",
         "interpolatedIntent": "Withdraw {#.tokenIds.[]} from your Stash",
         "fields": [
-          { "path": "#.tokenAddress", "$ref": "$.display.definitions.collection" },
+          {
+            "path": "#.tokenAddress",
+            "label": "Collection",
+            "format": "addressName",
+            "params": { "types": ["collection", "contract"], "sources": ["local", "ens"] }
+          },
           { "path": "#.tokenIds.[]", "label": "Token", "format": "nftName", "params": { "collectionPath": "#.tokenAddress" } }
         ]
       },
@@ -55,7 +51,12 @@
         "intent": "Withdraw ERC-1155 Tokens",
         "interpolatedIntent": "Withdraw {#.amounts.[]} of token {#.tokenIds.[]} from {#.tokenAddress} out of your Stash",
         "fields": [
-          { "path": "#.tokenAddress", "$ref": "$.display.definitions.collection" },
+          {
+            "path": "#.tokenAddress",
+            "label": "Collection",
+            "format": "addressName",
+            "params": { "types": ["collection", "contract"], "sources": ["local", "ens"] }
+          },
           { "path": "#.tokenIds.[]", "label": "Token ID", "format": "raw" },
           { "path": "#.amounts.[]", "label": "Amount", "format": "raw" }
         ]
@@ -70,7 +71,7 @@
         "intent": "Accept Punk Bid",
         "interpolatedIntent": "Sell Punk #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
           { "path": "#.bid.order.pricePerUnit", "label": "Sale Price", "format": "amount" },
           { "path": "#.bid.expiration", "label": "Bid Expiration", "format": "date", "params": { "encoding": "timestamp" } },
           {
@@ -107,12 +108,19 @@
       "wrapPunk(uint256 punkIndex)": {
         "intent": "Wrap Punk from Stash",
         "interpolatedIntent": "Wrap Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "initialize(address _owner)": {
         "intent": "Initialize Stash",
         "interpolatedIntent": "Initialize this Stash with {#._owner} as owner",
-        "fields": [{ "path": "#._owner", "label": "Stash Owner", "$ref": "$.display.definitions.account" }]
+        "fields": [
+          {
+            "path": "#._owner",
+            "label": "Stash Owner",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
+        ]
       }
     }
   }

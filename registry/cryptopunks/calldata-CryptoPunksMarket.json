@@ -10,34 +10,30 @@
     "info": { "url": "https://cryptopunks.app", "deploymentDate": "2017-06-22T19:40:00Z" }
   },
   "display": {
-    "definitions": {
-      "punk": { "label": "Punk", "format": "raw" },
-      "account": { "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] } }
-    },
     "formats": {
       "buyPunk(uint256 punkIndex)": {
         "intent": "Buy Punk",
         "interpolatedIntent": "Buy Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }, { "path": "@.value", "label": "Price", "format": "amount" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }, { "path": "@.value", "label": "Price", "format": "amount" }]
       },
       "enterBidForPunk(uint256 punkIndex)": {
         "intent": "Bid on Punk",
         "interpolatedIntent": "Bid on Punk #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
           { "path": "@.value", "label": "Bid Amount", "format": "amount" }
         ]
       },
       "withdrawBidForPunk(uint256 punkIndex)": {
         "intent": "Withdraw Bid",
         "interpolatedIntent": "Withdraw Bid on #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "acceptBidForPunk(uint256 punkIndex, uint256 minPrice)": {
         "intent": "Accept Bid",
         "interpolatedIntent": "Accept Bid on #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
           { "path": "#.minPrice", "label": "Minimum Price", "format": "amount" }
         ]
       },
@@ -45,7 +41,7 @@
         "intent": "List Punk for Sale",
         "interpolatedIntent": "List Punk #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
           { "path": "#.minSalePriceInWei", "label": "Price", "format": "amount" }
         ]
       },
@@ -53,22 +49,32 @@
         "intent": "List Punk for Private Sale",
         "interpolatedIntent": "Offer Punk #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
           { "path": "#.minSalePriceInWei", "label": "Price", "format": "amount" },
-          { "path": "#.toAddress", "label": "Buyer", "$ref": "$.display.definitions.account" }
+          {
+            "path": "#.toAddress",
+            "label": "Buyer",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
         ]
       },
       "punkNoLongerForSale(uint256 punkIndex)": {
         "intent": "Remove Punk Listing",
         "interpolatedIntent": "Delist Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "transferPunk(address to, uint256 punkIndex)": {
         "intent": "Transfer Punk",
         "interpolatedIntent": "Transfer Punk #{#.punkIndex}",
         "fields": [
-          { "path": "#.punkIndex", "$ref": "$.display.definitions.punk" },
-          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
+          { "path": "#.punkIndex", "label": "Punk", "format": "raw" },
+          {
+            "path": "#.to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
         ]
       },
       "withdraw()": {
@@ -79,7 +85,7 @@
       "getPunk(uint256 punkIndex)": {
         "intent": "Claim Punk",
         "interpolatedIntent": "Claim Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       }
     }
   }

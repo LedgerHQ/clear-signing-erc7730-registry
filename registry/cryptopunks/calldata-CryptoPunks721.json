@@ -10,54 +10,60 @@
     "info": { "url": "https://cryptopunks.app", "deploymentDate": "2024-01-17T22:48:35Z" }
   },
   "display": {
-    "definitions": {
-      "punk": { "label": "Punk", "format": "raw" },
-      "account": { "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] } }
-    },
     "formats": {
       "wrapPunk(uint256 punkIndex)": {
         "intent": "Wrap Punk",
         "interpolatedIntent": "Wrap Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "wrapPunkBatch(uint256[] punkIndexes)": {
         "intent": "Wrap Punks",
         "interpolatedIntent": "Wrap Punks #{#.punkIndexes.[]} as ERC-721s",
-        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "unwrapPunk(uint256 punkIndex)": {
         "intent": "Unwrap Punk",
         "interpolatedIntent": "Unwrap Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "unwrapPunkBatch(uint256[] punkIndexes)": {
         "intent": "Unwrap Punks",
         "interpolatedIntent": "Unwrap Punks #{#.punkIndexes.[]} back to the original contract",
-        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "migrateLegacyWrappedPunks(uint256[] punkIndexes)": {
         "intent": "Migrate Legacy Wrapped Punks",
         "interpolatedIntent": "Migrate legacy wrapped Punks #{#.punkIndexes.[]} to CryptoPunks 721",
-        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "rescuePunk(uint256 punkIndex)": {
         "intent": "Rescue Punk",
         "interpolatedIntent": "Rescue Punk #{#.punkIndex}",
-        "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
+        "fields": [{ "path": "#.punkIndex", "label": "Punk", "format": "raw" }]
       },
       "approve(address account, uint256 id)": {
         "intent": "Approve Punk Transfer",
         "interpolatedIntent": "Approve Punk #{#.id}",
         "fields": [
-          { "path": "#.id", "$ref": "$.display.definitions.punk" },
-          { "path": "#.account", "label": "Approved Address", "$ref": "$.display.definitions.account" }
+          { "path": "#.id", "label": "Punk", "format": "raw" },
+          {
+            "path": "#.account",
+            "label": "Approved Address",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
         ]
       },
       "setApprovalForAll(address operator, bool isApproved)": {
         "intent": "Set Operator Approval",
         "interpolatedIntent": "Set {#.operator} as operator for all your wrapped Punks: {#.isApproved}",
         "fields": [
-          { "path": "#.operator", "label": "Operator", "$ref": "$.display.definitions.account" },
+          {
+            "path": "#.operator",
+            "label": "Operator",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          },
           { "path": "#.isApproved", "label": "Approved", "format": "raw" }
         ]
       },
@@ -65,27 +71,57 @@
         "intent": "Transfer Wrapped Punk",
         "interpolatedIntent": "Transfer Punk #{#.id}",
         "fields": [
-          { "path": "#.id", "$ref": "$.display.definitions.punk" },
-          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
-          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
+          { "path": "#.id", "label": "Punk", "format": "raw" },
+          {
+            "path": "#.from",
+            "label": "From",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "#.to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
         ]
       },
       "safeTransferFrom(address from, address to, uint256 id)": {
         "intent": "Transfer Wrapped Punk",
         "interpolatedIntent": "Transfer Punk #{#.id}",
         "fields": [
-          { "path": "#.id", "$ref": "$.display.definitions.punk" },
-          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
-          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
+          { "path": "#.id", "label": "Punk", "format": "raw" },
+          {
+            "path": "#.from",
+            "label": "From",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "#.to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          }
         ]
       },
       "safeTransferFrom(address from, address to, uint256 id, bytes data)": {
         "intent": "Transfer Wrapped Punk",
         "interpolatedIntent": "Transfer Punk #{#.id}",
         "fields": [
-          { "path": "#.id", "$ref": "$.display.definitions.punk" },
-          { "path": "#.from", "label": "From", "$ref": "$.display.definitions.account" },
-          { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" },
+          { "path": "#.id", "label": "Punk", "format": "raw" },
+          {
+            "path": "#.from",
+            "label": "From",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          },
+          {
+            "path": "#.to",
+            "label": "Recipient",
+            "format": "addressName",
+            "params": { "types": ["eoa", "wallet", "contract"], "sources": ["local", "ens"] }
+          },
           { "path": "#.data", "label": "Data", "format": "raw", "visible": "never" }
         ]
       }
