@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../specs/erc7730-tests-v2.schema.json",
+  "descriptor": "../calldata-weETH.json",
+  "dataProvider": {
+    "tokens": {
+      "0xcd5fe23c85820f7b72d0926fc9b05b43e359b7ee": {
+        "symbol": "weETH",
+        "decimals": 18,
+        "name": "Wrapped eETH"
+      },
+      "0x35fa164735182de50811e8e2e824cfb9b6118ac2": {
+        "symbol": "eETH",
+        "decimals": 18,
+        "name": "ether.fi ETH"
+      }
+    }
+  },
+  "tests": [
+    {
+      "description": "Approve weETH - chain 1",
+      "rawTx": "0x02f86d0173847735940084989931f483012e4694cd5fe23c85820f7b72d0926fc9b05b43e359b7ee80b844095ea7b3000000000000000000000000fbfe6b9cee0e555bad7e2e7309effc75200cbe38000000000000000000000000000000000000000000000000000e7320e4b9a735c0",
+      "txHash": "0xa9bed257240d0e383fef5fb66d5110c070240debaf6d1314424d9e45bc331f6d",
+      "expected": {
+        "intent": "Approve weETH",
+        "owner": "Ether.fi",
+        "fields": [
+          {
+            "label": "Spender",
+            "value": "0xFbfe6b9cEe0E555Bad7e2E7309EFFC75200cBE38"
+          },
+          {
+            "label": "Amount",
+            "value": "0.004067234787469109 weETH"
+          }
+        ],
+        "interpolatedIntent": "Allow to spend 0.004067234787469109 weETH"
+      }
+    },
+    {
+      "description": "Transfer weETH - chain 1",
+      "rawTx": "0x02f86e0182070f830f42408404c4b4008301c46194cd5fe23c85820f7b72d0926fc9b05b43e359b7ee80b844a9059cbb00000000000000000000000029f4aacd77b76a55b8145aa22bd58ed72a2e488a000000000000000000000000000000000000000000000008670e9ec6598c0000c0",
+      "txHash": "0xd638de20c68158e138fed2ab24c1739d25362cd3f64369563e57ad8c078e1e52",
+      "expected": {
+        "intent": "Transfer weETH",
+        "owner": "Ether.fi",
+        "fields": [
+          {
+            "label": "Recipient",
+            "value": "0x29F4aAcD77B76a55B8145AA22bd58Ed72a2E488a"
+          },
+          {
+            "label": "Amount",
+            "value": "155 weETH"
+          }
+        ],
+        "interpolatedIntent": "Send 155 weETH to 0x29F4aAcD77B76a55B8145AA22bd58Ed72a2E488a"
+      }
+    },
+    {
+      "description": "Wrap eETH - chain 1",
+      "rawTx": "0x02f84c0181df8301b58084035bf0038303222394cd5fe23c85820f7b72d0926fc9b05b43e359b7ee80a4ea598cb00000000000000000000000000000000000000000000000001e7747025c4b7f50c0",
+      "txHash": "0x70c00388fa514001d6cf51e54959486af8388faa74e7e8c2324ae3d619f709bd",
+      "expected": {
+        "intent": "Wrap eETH",
+        "owner": "Ether.fi",
+        "fields": [
+          {
+            "label": "Amount",
+            "value": "2.195301418830364496 eETH"
+          }
+        ],
+        "interpolatedIntent": "Wrap 2.195301418830364496 eETH"
+      }
+    },
+    {
+      "description": "Unwrap weETH - chain 1",
+      "rawTx": "0x02f84c01118408f0d180841241c4608302fca294cd5fe23c85820f7b72d0926fc9b05b43e359b7ee80a4de0e9a3e000000000000000000000000000000000000000000000003b00e1e8a1be17000c0",
+      "txHash": "0x66465205b0753d917a21e1cd364461ed6480c10575a81b9587bbe7a64e7026e5",
+      "expected": {
+        "intent": "Unwrap weETH",
+        "owner": "Ether.fi",
+        "fields": [
+          {
+            "label": "Amount",
+            "value": "68.026343 weETH"
+          }
+        ],
+        "interpolatedIntent": "Unwrap 68.026343 weETH"
+      }
+    }
+  ]
+}
