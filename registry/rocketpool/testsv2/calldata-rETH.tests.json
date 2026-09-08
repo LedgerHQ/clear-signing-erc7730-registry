@@ -25,10 +25,10 @@
           },
           {
             "label": "Amount",
-            "value": "Unlimited"
+            "value": "Unlimited rETH"
           }
         ],
-        "interpolatedIntent": "Allow to spend Unlimited"
+        "interpolatedIntent": "Allow to spend Unlimited rETH"
       }
     },
     {
