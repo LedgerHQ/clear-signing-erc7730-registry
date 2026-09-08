@@ -18,7 +18,8 @@
           { "label": "Punk", "value": "3797" },
           { "label": "Sale Price", "value": "30.5 ETH" },
           { "label": "Bid Expiration", "value": "2026-09-06 20:44:21Z" },
-          { "label": "Marketplace", "value": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB" }
+          { "label": "Marketplace", "value": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB" },
+          { "label": "Quantity", "value": "1" }
         ],
         "interpolatedIntent": "Sell Punk #3797"
       }

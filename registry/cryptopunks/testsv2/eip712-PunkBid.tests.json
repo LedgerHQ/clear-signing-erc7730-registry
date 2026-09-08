@@ -38,12 +38,13 @@
           { "label": "Bid Amount", "value": "30.5 ETH" },
           { "label": "Expires", "value": "2026-09-06 20:44:21Z" },
           { "label": "Marketplace", "value": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB" },
+          { "label": "Quantity", "value": "1" },
           { "label": "Punk Set Root", "value": "0xf05f250ff27e143e3a85f413a12177f65e92cbe53204a6aed1a14ae9830c1566" }
         ]
       }
     },
     {
-      "description": "Collection-wide bid (zero root hidden) - chain 1",
+      "description": "Collection-wide bid (zero root) - chain 1",
       "data": {
         "types": {
           "EIP712Domain": [{ "name": "chainId", "type": "uint256" }, { "name": "verifyingContract", "type": "address" }],
@@ -77,7 +78,9 @@
         "fields": [
           { "label": "Bid Amount", "value": "30.5 ETH" },
           { "label": "Expires", "value": "2026-09-06 20:44:21Z" },
-          { "label": "Marketplace", "value": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB" }
+          { "label": "Marketplace", "value": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB" },
+          { "label": "Quantity", "value": "1" },
+          { "label": "Punk Set Root", "value": "0x0000000000000000000000000000000000000000000000000000000000000000" }
         ]
       }
     }

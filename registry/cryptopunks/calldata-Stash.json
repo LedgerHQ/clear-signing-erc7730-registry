@@ -31,12 +31,12 @@
       },
       "withdrawPunks(uint256[] tokenIds)": {
         "intent": "Withdraw Punks from Stash",
-        "interpolatedIntent": "Withdraw Punks #{#.tokenIds.[]} from your Stash",
+        "interpolatedIntent": "Withdraw the selected Punks from your Stash",
         "fields": [{ "path": "#.tokenIds.[]", "label": "Punk", "format": "raw" }]
       },
       "withdrawERC721(address tokenAddress, uint256[] tokenIds)": {
         "intent": "Withdraw NFTs from Stash",
-        "interpolatedIntent": "Withdraw {#.tokenIds.[]} from your Stash",
+        "interpolatedIntent": "Withdraw NFTs from {#.tokenAddress} out of your Stash",
         "fields": [
           {
             "path": "#.tokenAddress",
@@ -49,7 +49,7 @@
       },
       "withdrawERC1155(address tokenAddress, uint256[] tokenIds, uint256[] amounts)": {
         "intent": "Withdraw ERC-1155 Tokens",
-        "interpolatedIntent": "Withdraw {#.amounts.[]} of token {#.tokenIds.[]} from {#.tokenAddress} out of your Stash",
+        "interpolatedIntent": "Withdraw ERC-1155 tokens from {#.tokenAddress} out of your Stash",
         "fields": [
           {
             "path": "#.tokenAddress",
@@ -80,7 +80,7 @@
             "format": "addressName",
             "params": { "types": ["contract"], "sources": ["local", "ens"] }
           },
-          { "path": "#.bid.order.numberOfUnits", "label": "Quantity", "format": "raw", "visible": { "ifNotIn": [1] } },
+          { "path": "#.bid.order.numberOfUnits", "label": "Quantity", "format": "raw" },
           { "path": "#.bid.accountNonce", "label": "Account Nonce", "format": "raw", "visible": "never" },
           { "path": "#.bid.bidNonce", "label": "Bid ID", "format": "raw", "visible": "never" },
           { "path": "#.bid.root", "label": "Punk Set Root", "format": "raw", "visible": "never" },

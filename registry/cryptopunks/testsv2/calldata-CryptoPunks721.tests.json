@@ -45,7 +45,8 @@
       "expected": {
         "intent": "Wrap Punks",
         "owner": "CryptoPunks",
-        "fields": [{ "label": "Punk", "value": "1" }, { "label": "Punk", "value": "2" }, { "label": "Punk", "value": "3" }]
+        "fields": [{ "label": "Punk", "value": "1" }, { "label": "Punk", "value": "2" }, { "label": "Punk", "value": "3" }],
+        "interpolatedIntent": "Wrap the selected Punks as ERC-721s"
       }
     }
   ]

@@ -21,13 +21,8 @@
             "format": "addressName",
             "params": { "types": ["contract"], "sources": ["local", "ens"] }
           },
-          { "path": "order.numberOfUnits", "label": "Quantity", "format": "raw", "visible": { "ifNotIn": [1] } },
-          {
-            "path": "root",
-            "label": "Punk Set Root",
-            "format": "raw",
-            "visible": { "ifNotIn": ["0x0000000000000000000000000000000000000000000000000000000000000000"] }
-          },
+          { "path": "order.numberOfUnits", "label": "Quantity", "format": "raw" },
+          { "path": "root", "label": "Punk Set Root", "format": "raw" },
           { "path": "accountNonce", "label": "Account Nonce", "format": "raw", "visible": "never" },
           { "path": "bidNonce", "label": "Bid ID", "format": "raw", "visible": "never" }
         ]

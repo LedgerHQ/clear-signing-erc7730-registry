@@ -18,7 +18,7 @@
       },
       "wrapPunkBatch(uint256[] punkIndexes)": {
         "intent": "Wrap Punks",
-        "interpolatedIntent": "Wrap Punks #{#.punkIndexes.[]} as ERC-721s",
+        "interpolatedIntent": "Wrap the selected Punks as ERC-721s",
         "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "unwrapPunk(uint256 punkIndex)": {
@@ -28,12 +28,12 @@
       },
       "unwrapPunkBatch(uint256[] punkIndexes)": {
         "intent": "Unwrap Punks",
-        "interpolatedIntent": "Unwrap Punks #{#.punkIndexes.[]} back to the original contract",
+        "interpolatedIntent": "Unwrap the selected Punks back to the original contract",
         "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "migrateLegacyWrappedPunks(uint256[] punkIndexes)": {
         "intent": "Migrate Legacy Wrapped Punks",
-        "interpolatedIntent": "Migrate legacy wrapped Punks #{#.punkIndexes.[]} to CryptoPunks 721",
+        "interpolatedIntent": "Migrate the selected legacy wrapped Punks to CryptoPunks 721",
         "fields": [{ "path": "#.punkIndexes.[]", "label": "Punk", "format": "raw" }]
       },
       "rescuePunk(uint256 punkIndex)": {
