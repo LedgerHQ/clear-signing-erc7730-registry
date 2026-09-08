@@ -236,11 +236,13 @@
       },
       "depositExcess()": {
         "intent": "Deposit excess ETH",
-        "fields": []
+        "fields": [],
+        "interpolatedIntent": "Deposit excess ETH"
       },
       "depositExcessCollateral()": {
         "intent": "Deposit excess collateral",
-        "fields": []
+        "fields": [],
+        "interpolatedIntent": "Deposit excess collateral"
       }
     }
   }
