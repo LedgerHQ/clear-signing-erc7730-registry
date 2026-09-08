@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../specs/erc7730-tests-v2.schema.json",
+  "descriptor": "../calldata-rETH.json",
+  "dataProvider": {
+    "tokens": {
+      "0xae78736cd615f374d3085123a210448e74fc6393": {
+        "symbol": "rETH",
+        "decimals": 18,
+        "name": "Rocket Pool ETH"
+      }
+    }
+  },
+  "tests": [
+    {
+      "description": "Approve rETH - chain 1",
+      "rawTx": "0x02f86d01128423c34600842d4079008301129a94ae78736cd615f374d3085123a210448e74fc639380b844095ea7b3000000000000000000000000c92e8bdf79f0507f65a392b0ab4667716bfe0110ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc0",
+      "txHash": "0x63586db7a6f4ac9f3e8a95080987b06fda43e7b1f564aa11197686a4269ba4b0",
+      "expected": {
+        "intent": "Approve rETH",
+        "owner": "Rocket Pool",
+        "fields": [
+          {
+            "label": "Spender",
+            "value": "0xC92E8bdf79f0507f65a392b0ab4667716BFE0110"
+          },
+          {
+            "label": "Amount",
+            "value": "Unlimited"
+          }
+        ],
+        "interpolatedIntent": "Allow to spend Unlimited"
+      }
+    },
+    {
+      "description": "Transfer rETH - chain 1",
+      "rawTx": "0x02f86d010d84773594008480228feb83015dfb94ae78736cd615f374d3085123a210448e74fc639380b844a9059cbb00000000000000000000000030cb8b8136523d49b465e13da4e52fc6a6c84f0b0000000000000000000000000000000000000000000000005e7e8b40fa6a81c7c0",
+      "txHash": "0x7b697e38eecefb9920e69581202091f40c0e150d3bd456b1771cf088fc492be7",
+      "expected": {
+        "intent": "Transfer rETH",
+        "owner": "Rocket Pool",
+        "fields": [
+          {
+            "label": "Recipient",
+            "value": "0x30CB8B8136523D49b465E13Da4e52FC6A6C84F0B"
+          },
+          {
+            "label": "Amount",
+            "value": "6.809032797826220487 rETH"
+          }
+        ],
+        "interpolatedIntent": "Send 6.809032797826220487 rETH to 0x30CB8B8136523D49b465E13Da4e52FC6A6C84F0B"
+      }
+    },
+    {
+      "description": "Unstake rETH - chain 1",
+      "rawTx": "0x02f84c010d8477359400847ec928988302ded494ae78736cd615f374d3085123a210448e74fc639380a442966c680000000000000000000000000000000000000000000000000000d399bd911700c0",
+      "txHash": "0x7f379d504be98272341cd183a6175e46d5698c8e6241595399ea78bcb277926b",
+      "expected": {
+        "intent": "Unstake rETH",
+        "owner": "Rocket Pool",
+        "fields": [
+          {
+            "label": "Amount",
+            "value": "0.000232657263859456 rETH"
+          }
+        ],
+        "interpolatedIntent": "Unstake 0.000232657263859456 rETH"
+      }
+    }
+  ]
+}
