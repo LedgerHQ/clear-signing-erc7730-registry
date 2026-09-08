@@ -20,14 +20,26 @@
         "interpolatedIntent": "Wrap Punk #{#.punkIndex}",
         "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
       },
-      "wrapPunkBatch(uint256[] punkIndexes)": { "intent": "Wrap Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
+      "wrapPunkBatch(uint256[] punkIndexes)": {
+        "intent": "Wrap Punks",
+        "interpolatedIntent": "Wrap Punks #{#.punkIndexes.[]} as ERC-721s",
+        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+      },
       "unwrapPunk(uint256 punkIndex)": {
         "intent": "Unwrap Punk",
         "interpolatedIntent": "Unwrap Punk #{#.punkIndex}",
         "fields": [{ "path": "#.punkIndex", "$ref": "$.display.definitions.punk" }]
       },
-      "unwrapPunkBatch(uint256[] punkIndexes)": { "intent": "Unwrap Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
-      "migrateLegacyWrappedPunks(uint256[] punkIndexes)": { "intent": "Migrate Legacy Wrapped Punks", "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }] },
+      "unwrapPunkBatch(uint256[] punkIndexes)": {
+        "intent": "Unwrap Punks",
+        "interpolatedIntent": "Unwrap Punks #{#.punkIndexes.[]} back to the original contract",
+        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+      },
+      "migrateLegacyWrappedPunks(uint256[] punkIndexes)": {
+        "intent": "Migrate Legacy Wrapped Punks",
+        "interpolatedIntent": "Migrate legacy wrapped Punks #{#.punkIndexes.[]} to CryptoPunks 721",
+        "fields": [{ "path": "#.punkIndexes.[]", "$ref": "$.display.definitions.punk" }]
+      },
       "rescuePunk(uint256 punkIndex)": {
         "intent": "Rescue Punk",
         "interpolatedIntent": "Rescue Punk #{#.punkIndex}",
@@ -43,6 +55,7 @@
       },
       "setApprovalForAll(address operator, bool isApproved)": {
         "intent": "Set Operator Approval",
+        "interpolatedIntent": "Set {#.operator} as operator for all your wrapped Punks: {#.isApproved}",
         "fields": [
           { "path": "#.operator", "label": "Operator", "$ref": "$.display.definitions.account" },
           { "path": "#.isApproved", "label": "Approved", "format": "raw" }

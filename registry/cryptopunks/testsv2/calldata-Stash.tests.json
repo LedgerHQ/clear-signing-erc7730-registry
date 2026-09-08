@@ -26,12 +26,22 @@
     {
       "description": "Cancel Punk Bid (calldata from 0xe7fc5e7f) - chain 1",
       "rawTx": "0x02f84d018202ed8405f5e100840d60b8a482f4fa9400000000000060d035a8002956b5fb02e3968eec80a44cce45e7000000000000000000000000000000000000000000000000000001a082ca5944c0",
-      "expected": { "intent": "Cancel Punk Bid", "owner": "CryptoPunks", "fields": [{ "label": "Bid ID", "value": "1788900694340" }] }
+      "expected": {
+        "intent": "Cancel Punk Bid",
+        "owner": "CryptoPunks",
+        "fields": [{ "label": "Bid ID", "value": "1788900694340" }],
+        "interpolatedIntent": "Cancel Punk bid 1788900694340"
+      }
     },
     {
       "description": "Cancel All Punk Bids (calldata from 0x488b5a91) - chain 1",
       "rawTx": "0x02ed018202b28405f5e100840ad6d9828297b69400000000000060d035a8002956b5fb02e3968eec8084b68463b9c0",
-      "expected": { "intent": "Cancel All Punk Bids", "owner": "CryptoPunks", "fields": [] }
+      "expected": {
+        "intent": "Cancel All Punk Bids",
+        "owner": "CryptoPunks",
+        "fields": [],
+        "interpolatedIntent": "Cancel every open Punk bid from your Stash"
+      }
     },
     {
       "description": "Withdraw ETH from Stash (synthetic) - chain 1",

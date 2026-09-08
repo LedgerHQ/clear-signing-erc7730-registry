@@ -71,7 +71,11 @@
           { "path": "#.to", "label": "Recipient", "$ref": "$.display.definitions.account" }
         ]
       },
-      "withdraw()": { "intent": "Withdraw ETH Balance", "fields": [] },
+      "withdraw()": {
+        "intent": "Withdraw ETH Balance",
+        "interpolatedIntent": "Withdraw your ETH balance from the CryptoPunks market",
+        "fields": []
+      },
       "getPunk(uint256 punkIndex)": {
         "intent": "Claim Punk",
         "interpolatedIntent": "Claim Punk #{#.punkIndex}",

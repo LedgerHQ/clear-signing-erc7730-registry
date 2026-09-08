@@ -95,7 +95,12 @@
     {
       "description": "Withdraw ETH Balance (synthetic) - chain 1",
       "rawTx": "0x02ed0107843b9aca008506fc23ac0083030d4094b47e3cd837ddf8e4c57f05d70ab865de6e193bbb80843ccfd60bc0",
-      "expected": { "intent": "Withdraw ETH Balance", "owner": "CryptoPunks", "fields": [] }
+      "expected": {
+        "intent": "Withdraw ETH Balance",
+        "owner": "CryptoPunks",
+        "fields": [],
+        "interpolatedIntent": "Withdraw your ETH balance from the CryptoPunks market"
+      }
     }
   ]
 }
